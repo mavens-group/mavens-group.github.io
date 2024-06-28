@@ -52,7 +52,6 @@ social:
     link: https://orcid.org/0000-0003-4868-7035
 user_groups:
   - Researchers
-  - Visitors
 ---
 
 Greeshma R is a Research Scholar in the department of Physics and Nanotechnology at SRM Institute of Science and Technology. She is exploring the electronic and magnetic properties and ultrafast dynamics of solids, molecules and oxides using DFT and rt-TDDFT.

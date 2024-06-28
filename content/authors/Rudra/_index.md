@@ -27,15 +27,15 @@ interests:
 
 education:
   courses:
-    - course: PhD in Artificial Intelligence
-      institution: Stanford University
-      year: 2012
-    - course: MEng in Artificial Intelligence
-      institution: Massachusetts Institute of Technology
-      year: 2009
-    - course: BSc in Artificial Intelligence
-      institution: Massachusetts Institute of Technology
-      year: 2008
+    - course: Guest Scientist
+      institution: Harish-chandra Research Institute
+      year: 2017-2019
+    - course: Pos Doc Experience
+      institution: Warwick University,Uppsala University
+      year: 2012-2017
+    - course: PhD in Physics
+      institution: University of Calcutta/S. N. Bose National Centre for Basic Sciences
+      year: 2013
 
 # Social/Academic Networking
 # For available icons, see: https://docs.hugoblox.com/getting-started/page-builder/#icons
