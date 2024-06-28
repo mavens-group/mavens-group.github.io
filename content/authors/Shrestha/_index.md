@@ -1,0 +1,58 @@
+﻿---
+# Display name
+title: Shrestha Dutta
+
+# Full name (for SEO)
+first_name: Shrestha
+last_name: Dutta
+
+# Username (this should match the folder name)
+authors:
+  - Shrestha
+
+# Is this the primary user of the site?
+superuser: false
+
+# Role/position
+role: Research Scholar
+
+# Organizations/Affiliations
+organizations:
+  - name: SRM Institute of Science and Technology
+    url: ''
+
+# Short bio (displayed in user profile at end of posts)
+bio: My research interest covers the study of 2D energy materials like halides and carbides.
+
+interests:
+  - Metal halides
+  - Carbides and Nitrides
+  - Catalytic activity in hydrogen evolution
+
+education:
+  courses:
+    - course: PhD in Physics
+      institution: SRM Institute of Science and Technology
+      year: on going
+    - course: MSc in Physics
+      institution: Gurudas College, University of Calcutta
+      year: 2019
+    - course: BSc in Physics
+      institution: Jogamaya Devi College, University of Calcutta
+      year: 2017
+
+social:
+  - icon: envelope
+    icon_pack: fas
+    link: 'mailto:sd6190@srmist.edu.in'
+  - icon: ResearchGate
+    icon_pack: ai
+    link: https://www.researchgate.net/profile/Shrestha-Dutta
+  - icon: orcid
+    icon_pack: fab
+    link: https://orcid.org/0009-0005-3267-7096
+user_groups:
+  - Researchers
+---
+
+Shrestha Dutta is a Research Scholar in the department of Physics and Nanotechnology at SRM Institute of Science and Technology. She is studying the electronic and magnetic properties and HER catalytic activity of 2D materials, like metal carbides and nitrides using DFT.
