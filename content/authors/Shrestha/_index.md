@@ -5,6 +5,7 @@ title: Shrestha Dutta
 # Full name (for SEO)
 first_name: Shrestha
 last_name: Dutta
+join: 2022
 
 # Username (this should match the folder name)
 authors:
@@ -55,4 +56,4 @@ user_groups:
   - Researchers
 ---
 
-Shrestha Dutta is a Research Scholar in the department of Physics and Nanotechnology at SRM Institute of Science and Technology. She is studying the electronic and magnetic properties and HER catalytic activity of 2D materials, like metal carbides and nitrides using DFT.
+  Shrestha Dutta is a Research Scholar in the department of Physics and Nanotechnology at SRM Institute of Science and Technology. She is studying the electronic and magnetic properties and HER catalytic activity of 2D materials, like metal carbides and nitrides using DFT.

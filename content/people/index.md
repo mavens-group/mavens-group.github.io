@@ -16,7 +16,7 @@ sections:
           - Grad Students
           - Visitors
           - Alumni
-      sort_by: Params.first_name
+      sort_by: Params.join
       sort_ascending: true
     design:
       show_interests: false

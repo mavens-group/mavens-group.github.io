@@ -4,6 +4,9 @@ date: 2022-10-24
 
 type: landing
 
+cover:
+    image: group.png
+
 sections:
   - block: contact
     content:

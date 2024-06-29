@@ -5,6 +5,7 @@ title: Greeshma R
 # Full name (for SEO)
 first_name: Greeshma
 last_name: R
+join: 06/2021
 
 # Username (this should match the folder name)
 authors:
@@ -25,6 +26,7 @@ organizations:
 bio: My research interest includes the study of alloys, molecules and oxides.
 
 interests:
+  - Magnetic Properties
   - Single Molecular Magnets
   - Ultrafast lattice dynamics
 
@@ -32,7 +34,7 @@ education:
   courses:
     - course: PhD in Physics
       institution: SRM Institute of Science and Technology
-      year: on going
+      year: (2021-)
     - course: MSc in Physics
       institution: Mangalore University
       year: 2019
@@ -54,4 +56,6 @@ user_groups:
   - Researchers
 ---
 
-Greeshma R is a Research Scholar in the department of Physics and Nanotechnology at SRM Institute of Science and Technology. She is exploring the electronic and magnetic properties and ultrafast dynamics of solids, molecules and oxides using DFT and rt-TDDFT.
+Greeshma R is a Research Scholar in the department of Physics and Nanotechnology at SRM Institute of Science and Technology.
+<br>
+She is exploring the electronic and magnetic properties and ultrafast dynamics of solids, molecules and oxides using DFT and rt-TDDFT.

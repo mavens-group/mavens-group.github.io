@@ -1,20 +1,21 @@
----
+﻿---
 # Display name
-title: Gopika R
+title: Gopika
 
 # Full name (for SEO)
 first_name: Gopika
-last_name: R
+last_name: Sreelekha
+join: 2023
 
 # Username (this should match the folder name)
 authors:
-  - Greeshma
+  - Gopika
 
 # Is this the primary user of the site?
 superuser: false
 
 # Role/position
-role: Research Scholar
+role: MSc (Physics)
 
 # Organizations/Affiliations
 organizations:
@@ -22,36 +23,24 @@ organizations:
     url: ''
 
 # Short bio (displayed in user profile at end of posts)
-bio: My research interest includes the study of alloys, molecules and oxides.
+bio: My research interest covers the study of 2D energy materials like halides and carbides.
 
 interests:
-  - Single Molecular Magnets
-  - Ultrafast lattice dynamics
+  - Materials Science
+  - MXenes
+  - Computational Physics
+
 
 education:
   courses:
-    - course: PhD in Physics
-      institution: SRM Institute of Science and Technology
-      year: on going
     - course: MSc in Physics
-      institution: Mangalore University
-      year: 2019
-    - course: BSc (PCM)
-      institution: Sahyadri Science College
-      year: 2017
-
-social:
-  - icon: envelope
-    icon_pack: fas
-    link: 'mailto:gr6613@srmist.edu.in'
-  - icon: ResearchGate
-    icon_pack: ai
-    link: https://www.researchgate.net/profile/Greeshma-Rajaram
-  - icon: orcid
-    icon_pack: fab
-    link: https://orcid.org/0000-0003-4868-7035
+      institution: SRM Institute of Science and Technology
+      year: (2023 -)
+    - course: BSc in Physics
+      institution: KSMDB College, University of Kerala
+      year: 2023
 user_groups:
   - Grad Students
 ---
 
-Greeshma R is a Research Scholar in the department of Physics and Nanotechnology at SRM Institute of Science and Technology. She is exploring the electronic and magnetic properties and ultrafast dynamics of solids, molecules and oxides using DFT and rt-TDDFT.
+  Gopika is a MSc (Physics) student in the Department of Physics and Nanotechnology at SRMIST.<br>She is studying the electronic and magnetic properties of 2D materials, like MXenes using DFT.
