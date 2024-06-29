@@ -51,7 +51,7 @@ social:
   - icon: Linkedin
     icon_pack: ai
     link: https://www.linkedin.com/in/karunakaran-m-51907924a/
-  - icon: orcid-id
+  - icon: orcid
     icon_pack: fab
     link: https://orcid.org/0000-0003-4868-7035
 user_groups:
