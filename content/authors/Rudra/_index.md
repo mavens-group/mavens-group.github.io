@@ -69,11 +69,6 @@ user_groups:
   - Group Head
 ---
 
-
-I am an assistant professor at the Department of Physics and Nanotechnology, SRM Institute of Science and Technology. I am the group leader of Impact Group.
-
+I am an assistant professor at the [Department of Physics and Nanotechnology](https://www.srmist.edu.in/department/department-of-physics-and-nanotechnology/) at [SRMIST](https://www.srmist.edu.in). I am the group leader of Impact Group.
+<br>
 My research deals with computational material science, specifically developing and applying Monte Carlo and ab-initio DFT code and CPA to study magnetism in disordered alloys and molecules.
-
-Please visit our group webpage for more details about my research and work.
-
-My research group values our team members' creativity, critical thinking, and independence. If you share our passion for innovation, check out the open positions in our group.

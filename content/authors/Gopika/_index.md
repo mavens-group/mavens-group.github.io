@@ -20,7 +20,7 @@ role: MSc (Physics)
 # Organizations/Affiliations
 organizations:
   - name: SRM Institute of Science and Technology
-    url: ''
+    url: 'https://www.srmist.edu.in/'
 
 # Short bio (displayed in user profile at end of posts)
 bio: My research interest covers the study of 2D energy materials like halides and carbides.
@@ -43,4 +43,4 @@ user_groups:
   - Grad Students
 ---
 
-  Gopika is a MSc (Physics) student in the Department of Physics and Nanotechnology at SRMIST.<br>She is studying the electronic and magnetic properties of 2D materials, like MXenes using DFT.
+Gopika is a MSc (Physics) student in the [Department of Physics and Nanotechnology](https://www.srmist.edu.in/department/department-of-physics-and-nanotechnology/) at [SRMIST](https://www.srmist.edu.in).<br>She is studying the electronic and magnetic properties of 2D materials, like MXenes using DFT.

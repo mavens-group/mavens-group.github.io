@@ -20,7 +20,7 @@ role: Research Scholar
 # Organizations/Affiliations
 organizations:
   - name: SRM Institute of Science and Technology
-    url: ''
+    url: 'https://www.srmist.edu.in'
 
 # Short bio (displayed in user profile at end of posts)
 bio: My research interest includes the study of alloys, molecules and oxides.
@@ -56,6 +56,6 @@ user_groups:
   - Researchers
 ---
 
-Greeshma R is a Research Scholar in the department of Physics and Nanotechnology at SRM Institute of Science and Technology.
+Greeshma R is a Research Scholar in the [Department of Physics and Nanotechnology](https://www.srmist.edu.in/department/department-of-physics-and-nanotechnology/) at [SRMIST](https://www.srmist.edu.in).
 <br>
 She is exploring the electronic and magnetic properties and ultrafast dynamics of solids, molecules and oxides using DFT and rt-TDDFT.
