@@ -5,13 +5,13 @@ date: 2022-10-24
 type: landing
 
 cover:
-    image: group.png
+  image: group.png
 
 sections:
   - block: contact
     content:
       title: Contact
-      email: rudrab<at>srmist<dot>edu<dot>in
+      email: rudrab@srmist.edu.in
       phone: +91 96744 48326
       address:
         street: UB-619, SRMIST
@@ -22,7 +22,7 @@ sections:
         country_code: IN
 
       # Automatically link email and phone or display as text?
-      autolink: flase
+      autolink: true
 
       # Email form provider
       form:
