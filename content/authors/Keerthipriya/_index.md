@@ -43,4 +43,4 @@ user_groups:
   - Grad Students
 ---
 
-Keerthipriya is a post graduate student in the [Department of Applied Data Science](https://www.srmist.edu.in/department/department-of-computer-applications/) at [SRMIST](https://www.srmist.edu.in). She is studying Data Science concepts and many more model predictivity using Machine learning and invoke the tuning of model using many more algorithms using python and ready to apply this knowledge in the field of physics.
+Keerthipriya is a post graduate student in the [Department of Computer Applications](https://www.srmist.edu.in/department/department-of-computer-applications/) at [SRMIST](https://www.srmist.edu.in). She is studying Data Science concepts and many more model predictivity using Machine learning and invoke the tuning of model using many more algorithms using python and ready to apply this knowledge in the field of physics.
