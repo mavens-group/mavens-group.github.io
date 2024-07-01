@@ -18,7 +18,7 @@ marketing:
     site_type: Organization
     local_business_type: ''
     org_name: ''
-    description: 'Computational Materials Science research.'
+    description: 'Computational Materials Science.'
   analytics:
     google_analytics: ''
     baidu_tongji: ''
@@ -35,7 +35,7 @@ header:
     enable: true
     align: r
     fixed_to_top: true
-    show_logo: false
+    show_logo: true
     show_language: false
     show_day_night: false
     show_search: false

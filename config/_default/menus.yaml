@@ -15,6 +15,9 @@ main:
     weight: 30
   - name: Publications
     url: publication
+    weight: 40
+  - name: Position
+    url: position
     weight: 50
   - name: Contact
     url: contact

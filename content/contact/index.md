@@ -4,7 +4,7 @@ date: 2022-10-24
 
 type: landing
 
-cover:
+banner:
   image: group.png
 
 sections:
@@ -20,18 +20,4 @@ sections:
         postcode: '603203'
         country: India
         country_code: IN
-
-      # Automatically link email and phone or display as text?
-      autolink: true
-
-      # Email form provider
-      form:
-        provider: netlify
-        formspree:
-          id:
-        netlify:
-          # Enable CAPTCHA challenge to reduce spam?
-          captcha: true
-    design:
-      columns: '1'
 ---
