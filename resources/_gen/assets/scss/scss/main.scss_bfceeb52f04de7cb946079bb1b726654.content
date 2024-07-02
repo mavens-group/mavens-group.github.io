@@ -9735,3 +9735,10 @@ div.chart {
 
 .cta-group {
   justify-content: center; }
+
+h1, h2, h3, h4, body {
+  font-family: Roboto;
+  font-weight: 300; }
+
+.carousel-control-prev, .carousel-control-next {
+  display: none; }
