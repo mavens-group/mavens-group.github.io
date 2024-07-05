@@ -12,7 +12,7 @@ banner:
 Our group has two broad research area with a single goal.
 
 ## Materials Design
-The IMPACT group utilizes a potent fusion of Monte Carlo and Density Functional Theory (DFT)
+The MAVENs utilizes a potent fusion of Monte Carlo and Density Functional Theory (DFT)
 techniques to advance the field of materials design. By employing this synergistic methodology, we
 are able to conduct an in-depth analysis of the fundamental properties of matter, including the
 atomic-level electronic structure, energies, and thermodynamics of substances.
@@ -30,8 +30,8 @@ atomic scale. This customization would specifically concentrate on functionaliti
 effects, hydrogen evolution reactions, and qubit materials.
 
 ## Materials Discovery using ML
-By capitalizing on the advantages of both the DFT and the MC method, IMPACT Group accelerates and
-improves material discovery through the application of machine learning (ML).Despite the provision
+By capitalizing on the advantages of both the DFT and the MC method, MAVENs accelerates and
+improves material discovery through the application of machine learning (ML). Despite the provision
 of precise electronic structure data by DFT, the prohibitive computational expense impedes
 extensive material investigation. MC simulations are remarkable for examining large configuration
 spaces, except from the limitation imposed by the configuration space's size.. By incorporating ML

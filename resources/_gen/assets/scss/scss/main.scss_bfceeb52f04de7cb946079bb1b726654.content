@@ -9731,7 +9731,8 @@ div.chart {
   overflow-x: auto; }
 
 .universal-wrapper h1 {
-  text-align: center; }
+  text-align: center;
+  vertical-align: baseline; }
 
 .cta-group {
   justify-content: center; }

@@ -1,6 +1,6 @@
 ---
 # Leave the homepage title empty to use the site title
-title: IMPACT Group
+title: MAVENs
 date: 2022-10-24
 type: landing
 
@@ -8,8 +8,7 @@ sections:
   - block: slider
     content:
       slides:
-      - title: Integrated Materials & high PerformAnce CompuTation<br>(IMPACT)<br>Group
-        <!-- content: Take a look at what we're working on... -->
+      - title: Materials Advancing a Viable ENergy future<br>(MAVEN)<br>Group
         align: center
         background:
           image:
@@ -54,9 +53,9 @@ sections:
   - block: markdown
     content:
       title: |
-        IMPACT Group
+        MAVENs
       text: |
-        The IMPACT Group, led by Dr. Rudra Banerjee within the Department of Physics and Nanotechnology at SRM Institute of Science and Technology, stands at the forefront of computational materials science, driven by a shared vision: a sustainable future through cutting-edge materials exploration.
+        The MAVENs, led by Dr. Rudra Banerjee within the Department of Physics and Nanotechnology at SRM Institute of Science and Technology, stands at the forefront of computational materials science, driven by a shared vision: a sustainable future through cutting-edge materials exploration.
 
         Our research tackles critical challenges in green energy and related domains. We design novel catalysts for the hydrogen evolution reaction (HER), engineer magnetocaloric materials for energy-efficient cooling, and push the boundaries of qubits materials.
 

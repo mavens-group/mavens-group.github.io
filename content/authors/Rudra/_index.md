@@ -14,8 +14,8 @@ role: Assistant Professor, Computational Condensed Matter
 
 # Organizations/Affiliations
 organizations:
-  - name: SRMIST
-    url: ''
+  - name: SRM Institute of Science and Technology
+    url: 'https://www.srmist.edu.in/'
 
 # Short bio (displayed in user profile at end of posts)
 bio: My research interests include Computational Physics, disordered materials and thermodynamics.
@@ -36,7 +36,6 @@ education:
     - course: PhD in Physics
       institution: University of Calcutta/S. N. Bose National Centre for Basic Sciences
       year: 2013
-
 # Social/Academic Networking
 # For available icons, see: https://docs.hugoblox.com/getting-started/page-builder/#icons
 #   For an email link, use "fas" icon pack, "envelope" icon, and a link in the
@@ -59,7 +58,6 @@ social:
   - icon: cv
     icon_pack: ai
     link: files/cvRB.pdf
-
 # Enter email to display Gravatar (if Gravatar enabled in Config)
 email: ''
 
@@ -71,7 +69,6 @@ highlight_name: false
 user_groups:
   - Group Head
 ---
-
-I am an assistant professor at the [Department of Physics and Nanotechnology](https://www.srmist.edu.in/department/department-of-physics-and-nanotechnology/) at [SRMIST](https://www.srmist.edu.in). I am the group leader of Impact Group.
+  I am an assistant professor at the [Department of Physics and Nanotechnology](https://www.srmist.edu.in/department/department-of-physics-and-nanotechnology/) at [SRMIST](https://www.srmist.edu.in). I am the group leader of the MAVENs.
 <br>
-My research deals with computational material science, specifically developing and applying Monte Carlo and ab-initio DFT code and CPA to study magnetism in disordered alloys and molecules.
+My research deals with computational material science, specifically developing and applying Monte Carlo and _ab-initio_ DFT and KKR-CPA method to study magnetism in disordered alloys and molecules.
