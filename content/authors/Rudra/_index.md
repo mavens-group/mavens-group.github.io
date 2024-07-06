@@ -70,6 +70,6 @@ highlight_name: false
 user_groups:
   - Group Head
 ---
-**Dr Rudra Banerjee** is an assistant professor of Physics at the [Department of Physics and Nanotechnology](https://www.srmist.edu.in/department/department-of-physics-and-nanotechnology/) at [SRMIST](https://www.srmist.edu.in). He is the group leader of the MAVENs.
+  **Dr Rudra Banerjee** is an assistant professor of Physics at the [Department of Physics and Nanotechnology](https://www.srmist.edu.in/department/department-of-physics-and-nanotechnology/) at [SRMIST](https://www.srmist.edu.in). He is the group leader of the MAVENs.
 <br>
 His research deals with computational material science, specifically developing and applying Monte Carlo and _ab-initio_ DFT and KKR-CPA method to study magnetism in disordered alloys and molecules.

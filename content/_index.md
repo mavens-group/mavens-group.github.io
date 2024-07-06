@@ -50,6 +50,7 @@ sections:
       loop: true
       # Duration of transition between slides (in ms)
       interval: 5000
+
   - block: markdown
     content:
       title: |
@@ -62,4 +63,26 @@ sections:
         Fuelled by a deep understanding of materials, we employ advanced research methods like density functional theory (DFT) and Monte Carlo simulations, coupled with cutting-edge high-throughput computation and machine learning. This integrated approach fosters groundbreaking exploration and discovery.
 
         If you are a talented M.Sc. student in Physics, Chemistry, or Materials Science, and share our passion for innovation, we invite you to join our journey. Explore our open positions and contribute to shaping a sustainable future alongside our vibrant research community.
+
+# - block: collection
+#   content:
+#     title: Latest Preprints
+#     text: ""
+#     count: 5
+#     filters:
+#       folders:
+#         - publication
+#       publication_type: 'article'
+#   design:
+#     view: citation
+#     columns: '1'
+
+# - block: markdown
+#   content:
+#     title:
+#     subtitle:
+#     text: |
+#       {{% cta cta_link="./people/" cta_text="Meet the team →" %}}
+#   design:
+#     columns: '1'
 ---
