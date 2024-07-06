@@ -36,6 +36,7 @@ education:
     - course: PhD in Physics
       institution: University of Calcutta/S. N. Bose National Centre for Basic Sciences
       year: 2013
+
 # Social/Academic Networking
 # For available icons, see: https://docs.hugoblox.com/getting-started/page-builder/#icons
 #   For an email link, use "fas" icon pack, "envelope" icon, and a link in the
@@ -69,6 +70,6 @@ highlight_name: false
 user_groups:
   - Group Head
 ---
-  I am an assistant professor at the [Department of Physics and Nanotechnology](https://www.srmist.edu.in/department/department-of-physics-and-nanotechnology/) at [SRMIST](https://www.srmist.edu.in). I am the group leader of the MAVENs.
+**Dr Rudra Banerjee** is an assistant professor of Physics at the [Department of Physics and Nanotechnology](https://www.srmist.edu.in/department/department-of-physics-and-nanotechnology/) at [SRMIST](https://www.srmist.edu.in). He is the group leader of the MAVENs.
 <br>
-My research deals with computational material science, specifically developing and applying Monte Carlo and _ab-initio_ DFT and KKR-CPA method to study magnetism in disordered alloys and molecules.
+His research deals with computational material science, specifically developing and applying Monte Carlo and _ab-initio_ DFT and KKR-CPA method to study magnetism in disordered alloys and molecules.

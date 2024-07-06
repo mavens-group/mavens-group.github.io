@@ -55,5 +55,4 @@ social:
 user_groups:
   - Researchers
 ---
-
-Shrestha Dutta is a Research Scholar in the [Department of Physics and Nanotechnology](https://www.srmist.edu.in/department/department-of-physics-and-nanotechnology/) at [SRMIST](https://www.srmist.edu.in).<br> She is studying the electronic and magnetic properties and HER catalytic activity of 2D materials, like metal carbides and nitrides using DFT.
+  Shrestha Dutta is a Research Scholar in the [Department of Physics and Nanotechnology](https://www.srmist.edu.in/department/department-of-physics-and-nanotechnology/) at [SRMIST](https://www.srmist.edu.in).<br> She is studying the electronic and magnetic properties and HER catalytic activity of 2D materials, like metal carbides and nitrides using DFT.

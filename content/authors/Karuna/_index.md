@@ -48,8 +48,8 @@ social:
   - icon: ResearchGate
     icon_pack: ai
     link: https://www.researchgate.net/profile/Karuna-Karan-7
-  - icon: Linkedin
-    icon_pack: ai
+  - icon: linkedin
+    icon_pack: fab
     link: https://www.linkedin.com/in/karunakaran-m-51907924a/
   - icon: orcid
     icon_pack: fab
