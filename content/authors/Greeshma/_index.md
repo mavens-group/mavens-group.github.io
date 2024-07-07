@@ -46,9 +46,9 @@ social:
   - icon: envelope
     icon_pack: fas
     link: 'mailto:gr6613@srmist.edu.in'
-  - icon: ResearchGate
-    icon_pack: ai
-    link: https://www.researchgate.net/profile/Greeshma-Rajaram
+  - icon: linkedin
+    icon_pack: fab
+    link: https://www.linkedin.com/in/greeshmaayana/
   - icon: orcid
     icon_pack: fab
     link: https://orcid.org/0000-0003-4868-7035
