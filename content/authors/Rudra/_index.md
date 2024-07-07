@@ -37,10 +37,17 @@ education:
       institution: University of Calcutta/S. N. Bose National Centre for Basic Sciences
       year: 2013
 
+teaching:
+  courses:
+    - course: Classical Mechanics
+      institution: Harish-chandra Research Institute
+      year: MSc
+
 # Social/Academic Networking
 # For available icons, see: https://docs.hugoblox.com/getting-started/page-builder/#icons
 #   For an email link, use "fas" icon pack, "envelope" icon, and a link in the
 #   form "mailto:your-email@example.com" or "#contact" for contact widget.
+
 social:
   - icon: envelope
     icon_pack: fas
@@ -54,8 +61,6 @@ social:
   - icon: github
     icon_pack: fab
     link: https://github.com/rudrab
-# Link to a PDF of your resume/CV from the About widget.
-# To enable, copy your resume/CV to `static/files/cv.pdf` and uncomment the lines below.
   - icon: cv
     icon_pack: ai
     link: files/cvRB.pdf
@@ -65,11 +70,21 @@ email: ''
 # Highlight the author in author lists? (true/false)
 highlight_name: false
 
-# Organizational groups that you belong to (for People widget)
-#   Set this to `[]` or comment out if you are not using People widget.
 user_groups:
   - Group Head
 ---
-  **Dr Rudra Banerjee** is an assistant professor of Physics at the [Department of Physics and Nanotechnology](https://www.srmist.edu.in/department/department-of-physics-and-nanotechnology/) at [SRMIST](https://www.srmist.edu.in). He is the group leader of the MAVENs.
-<br>
-His research deals with computational material science, specifically developing and applying Monte Carlo and _ab-initio_ DFT and KKR-CPA method to study magnetism in disordered alloys and molecules.
+
+**Dr Rudra Banerjee** is an assistant professor of Physics at the [Department of Physics and
+ Nanotechnology](https://www.srmist.edu.in/department/department-of-physics-and-nanotechnology/) at
+ [SRMIST](https://www.srmist.edu.in). He is the group leader of the **M**aterials **A**dvancing a
+ **V**iable **EN**ergy future (MAVENs) Group.
+ <br>
+Dr. Banerjee boasts over a decade of experience in the field of 2D and disordered materials,
+resulting in a rich and varied portfolio.  His research deals with computational material science,
+specifically designing new materials for green-energy and qubits. Dr. Banerjee implements Monte
+Carlo and _ab-initio_ DFT and KKR-CPA methods along with Machine Learning model to analyse and
+predict the properties of materials numerically.  His collaborative spirit extends to leading
+experimentalists, fostering a deep understanding of materials behaviour.
+ <br>
+Dr. Banerjee's contributions extend beyond research, playing an instrumental role in developing
+multiple courses and curriculums at SRMIST. He is a life-time member of Indian Physics association.

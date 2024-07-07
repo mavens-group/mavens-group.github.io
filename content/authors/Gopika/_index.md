@@ -39,6 +39,10 @@ education:
     - course: BSc in Physics
       institution: KSMDB College, University of Kerala
       year: 2023
+social:
+  - icon: envelope
+    icon_pack: fas
+    link: 'mailto:gs7261@srmist.edu.in'
 user_groups:
   - Grad Students
 ---

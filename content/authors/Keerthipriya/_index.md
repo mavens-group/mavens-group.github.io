@@ -39,6 +39,10 @@ education:
     - course: BSc in Statistics
       institution: St. Joseph college (Affiliated with Bharathidasan University)
       year: 2023
+social:
+  - icon: envelope
+    icon_pack: fas
+    link: 'mailto:kt9756@srmist.edu.in'
 user_groups:
   - Grad Students
 ---
