@@ -126,6 +126,7 @@
 
       {{ with $person.teaching }}
       <div class="col-md-7">
+        <h2>Teaching</h2>
         <div class="section-subheading">{{ i18n "teaching" | markdownify }}</div>
         <ul class="ul-edu fa-ul mb-0">
           {{ range .courses }}
@@ -143,6 +144,7 @@
 
       {{ with $person.accolade }}
       <div class="col-md-5">
+        <h2>Accolade</h2>
         <div class="section-subheading">{{ i18n "accolade" | markdownify }}</div>
         <ul class="ul-edu fa-ul mb-0">
           {{ range .courses }}

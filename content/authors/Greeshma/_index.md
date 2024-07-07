@@ -57,5 +57,5 @@ user_groups:
 ---
 
 Greeshma R is a Research Scholar in the [Department of Physics and Nanotechnology](https://www.srmist.edu.in/department/department-of-physics-and-nanotechnology/) at [SRMIST](https://www.srmist.edu.in).
-<br>
+
 She is exploring the electronic and magnetic properties and ultrafast dynamics of solids, molecules and oxides using DFT and rt-TDDFT.

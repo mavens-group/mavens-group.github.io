@@ -55,5 +55,6 @@ user_groups:
   - Researchers
 ---
 
-Mohammed Mahshook is a Research Scholar in the [Department of Physics and Nanotechnology](https://www.srmist.edu.in/department/department-of-physics-and-nanotechnology/) at [SRMIST](https://www.srmist.edu.in). <br>
-  He is investigating the application of machine learning techniques to elucidate complex structure-activity relationships in materials for Quantum Information Processing. His research aims to accelerate the materials discovery process through these machine learning techniques.
+Mohammed Mahshook is a Research Scholar in the [Department of Physics and Nanotechnology](https://www.srmist.edu.in/department/department-of-physics-and-nanotechnology/) at [SRMIST](https://www.srmist.edu.in).
+
+He is investigating the application of machine learning techniques to elucidate complex structure-activity relationships in materials for Quantum Information Processing. His research aims to accelerate the materials discovery process through these machine learning techniques.

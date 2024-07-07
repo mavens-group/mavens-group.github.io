@@ -58,4 +58,6 @@ user_groups:
   - Researchers
 ---
 
-Karunakaran M is a Research Scholar in the [Department of Physics and Nanotechnology](https://www.srmist.edu.in/department/department-of-physics-and-nanotechnology/) at [SRMIST](https://www.srmist.edu.in).<br> He is exploring the electronic and magnetic properties of disordered Heusler alloys using DFT and Monte Carlo.
+Karunakaran M is a Research Scholar in the [Department of Physics and Nanotechnology](https://www.srmist.edu.in/department/department-of-physics-and-nanotechnology/) at [SRMIST](https://www.srmist.edu.in).
+
+He is exploring the electronic and magnetic properties of disordered Heusler alloys using DFT and Monte Carlo.

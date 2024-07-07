@@ -64,9 +64,9 @@ social:
   - icon: github
     icon_pack: fab
     link: https://github.com/rudrab
-  - icon: cv
-    icon_pack: ai
-    link: files/cvRB.pdf
+# - icon: cv
+#   icon_pack: ai
+#   link: files/cvRB.pdf
 
 # Enter email to display Gravatar (if Gravatar enabled in Config)
 email: ''
@@ -80,17 +80,17 @@ user_groups:
  Nanotechnology](https://www.srmist.edu.in/department/department-of-physics-and-nanotechnology/) at
  [SRMIST](https://www.srmist.edu.in). He is the group leader of the **M**aterials **A**dvancing a
  **V**iable **EN**ergy future (MAVENs) Group.
- <br>
+
 Dr. Banerjee boasts over a decade of experience in the field of 2D and disordered materials,
 resulting in a rich and varied portfolio.  His research deals with computational material science,
 specifically designing new materials for green-energy and qubits. Dr. Banerjee implements Monte
 Carlo and _ab-initio_ DFT and KKR-CPA methods along with Machine Learning model to analyse and
 predict the properties of materials numerically.  His collaborative spirit extends to leading
 experimentalists, fostering a deep understanding of materials behaviour.
- <br>
+
 Dr. Banerjee's contributions extend beyond research. He takes core courses like classical mechanics
 and computational physics regularly to BSc and MSc students and the computational methods to PhD
 students. He is playing an instrumental role in developing multiple courses and curriculums at
 SRMIST.
- <br>
+
 Dr. Banerjee is a life-time member of Indian Physics Association.
