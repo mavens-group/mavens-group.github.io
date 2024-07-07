@@ -40,8 +40,11 @@ education:
 teaching:
   courses:
     - course: Classical Mechanics
-      institution: Harish-chandra Research Institute
-      year: MSc
+      institution: MSc
+    - course: Computational Physics
+      institution: MSc, BSc
+    - course: Computational Materials Science
+      institution: PhD Coursework
 
 # Social/Academic Networking
 # For available icons, see: https://docs.hugoblox.com/getting-started/page-builder/#icons
@@ -64,17 +67,16 @@ social:
   - icon: cv
     icon_pack: ai
     link: files/cvRB.pdf
+
 # Enter email to display Gravatar (if Gravatar enabled in Config)
 email: ''
 
 # Highlight the author in author lists? (true/false)
 highlight_name: false
-
 user_groups:
   - Group Head
 ---
-
-**Dr Rudra Banerjee** is an assistant professor of Physics at the [Department of Physics and
+ **Dr Rudra Banerjee** is an assistant professor of Physics at the [Department of Physics and
  Nanotechnology](https://www.srmist.edu.in/department/department-of-physics-and-nanotechnology/) at
  [SRMIST](https://www.srmist.edu.in). He is the group leader of the **M**aterials **A**dvancing a
  **V**iable **EN**ergy future (MAVENs) Group.
@@ -86,5 +88,9 @@ Carlo and _ab-initio_ DFT and KKR-CPA methods along with Machine Learning model 
 predict the properties of materials numerically.  His collaborative spirit extends to leading
 experimentalists, fostering a deep understanding of materials behaviour.
  <br>
-Dr. Banerjee's contributions extend beyond research, playing an instrumental role in developing
-multiple courses and curriculums at SRMIST. He is a life-time member of Indian Physics association.
+Dr. Banerjee's contributions extend beyond research. He takes core courses like classical mechanics
+and computational physics regularly to BSc and MSc students and the computational methods to PhD
+students. He is playing an instrumental role in developing multiple courses and curriculums at
+SRMIST.
+ <br>
+Dr. Banerjee is a life-time member of Indian Physics Association.
