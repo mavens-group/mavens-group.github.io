@@ -17,7 +17,7 @@ techniques to advance the field of materials design. By employing this synergist
 are able to conduct an in-depth analysis of the fundamental properties of matter, including the
 atomic-level electronic structure, energies, and thermodynamics of substances.
 
-We employ the accuracy of Density Functional Theory (DFT) to forecast the behavior of materials
+We employ the accuracy of Density Functional Theory (DFT) to forecast the behaviour of materials
 under various circumstances, whereas Monte Carlo (MC) simulations provide a statistical perspective
 on the intricate interaction of variables in complex systems. By harnessing this capability, we
 explore the domain of disorder effects and unveil labyrinthine pathways to materials possessing
@@ -34,7 +34,7 @@ By capitalizing on the advantages of both the DFT and the MC method, MAVENs acce
 improves material discovery through the application of machine learning (ML). Despite the provision
 of precise electronic structure data by DFT, the prohibitive computational expense impedes
 extensive material investigation. MC simulations are remarkable for examining large configuration
-spaces, except from the limitation imposed by the configuration space's size.. By incorporating ML
+spaces, except from the limitation imposed by the configuration space's size. By incorporating ML
 into this framework, a material discovery pipeline that is both robust and efficient is
 established.
 
