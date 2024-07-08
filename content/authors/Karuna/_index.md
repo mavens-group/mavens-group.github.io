@@ -26,18 +26,19 @@ organizations:
 bio: My research focuses on exploring the electronic and magnetic properties of disordered Heusler alloys.
 
 interests:
-  - Electronic properties of disordered alloys
+  - Electronic and magnetic properties
   - Phase transitions
+  - Disordered alloys
 
 education:
   courses:
     - course: PhD in Physics
       institution: SRM Institute of Science and Technology
       year: on going
-    - course: MSc in Physics
+    - course: M.Sc in Physics
       institution: NMS S.Vellaichamy Nadar College
       year: 2018-2020
-    - course: BSc (PCM)
+    - course: B.Sc in Physics
       institution: NMS S.Vellaichamy Nadar College
       year: 2015-2018
 
@@ -45,6 +46,9 @@ social:
   - icon: envelope
     icon_pack: fas
     link: 'mailto:km0207@srmist.edu.in'
+  - icon: google-scholar
+    icon_pack: ai
+    link: https://scholar.google.com/citations?user=f61SxgYAAAAJ&hl=en
   - icon: ResearchGate
     icon_pack: ai
     link: https://www.researchgate.net/profile/Karuna-Karan-7
@@ -53,7 +57,7 @@ social:
     link: https://www.linkedin.com/in/karunakaran-m-51907924a/
   - icon: orcid
     icon_pack: fab
-    link: https://orcid.org/0000-0003-4868-7035
+    link: https://orcid.org/0000-0002-5401-7823
 user_groups:
   - Researchers
 ---

@@ -1,6 +1,5 @@
 ---
-title: 'Controlling the electronic and magnetic properties of $\mathrm{Mn_2CoAl}$ by
-  $d$ metal doping: A DFT study'
+title: 'Controlling the electronic and magnetic properties of Mn$_2$CoAl by $d$ metal doping: A DFT study'
 authors:
 - Karuna
 - Desigan Ravi
