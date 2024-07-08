@@ -76,7 +76,7 @@ highlight_name: false
 user_groups:
   - Group Head
 ---
- **Dr Rudra Banerjee** is an assistant professor of Physics at the [Department of Physics and
+**Dr Rudra Banerjee** is an assistant professor of Physics at the [Department of Physics and
  Nanotechnology](https://www.srmist.edu.in/department/department-of-physics-and-nanotechnology/) at
  [SRMIST](https://www.srmist.edu.in). He is the group leader of the **M**aterials **A**dvancing a
  **V**iable **EN**ergy future (MAVENs) Group.
