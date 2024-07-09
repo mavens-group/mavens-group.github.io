@@ -49,9 +49,6 @@ social:
   - icon: google-scholar
     icon_pack: ai
     link: https://scholar.google.com/citations?user=f61SxgYAAAAJ&hl=en
-  - icon: ResearchGate
-    icon_pack: ai
-    link: https://www.researchgate.net/profile/Karuna-Karan-7
   - icon: linkedin
     icon_pack: fab
     link: https://www.linkedin.com/in/karunakaran-m-51907924a/

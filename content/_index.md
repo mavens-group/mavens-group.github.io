@@ -1,6 +1,6 @@
 ---
 # Leave the homepage title empty to use the site title
-title: MAVENs
+title:
 date: 2022-10-24
 type: landing
 
@@ -51,11 +51,9 @@ sections:
       loop: true
       # Duration of transition between slides (in ms)
       interval: 5000
-
   - block: markdown
     content:
-      title: |
-        MAVENs
+      title: Innovating for Sustainability
       text: |
         The MAVENs, led by Dr. Rudra Banerjee within the Department of Physics and Nanotechnology at SRM Institute of Science and Technology, stands at the forefront of computational materials science, driven by a shared vision: a sustainable future through cutting-edge materials exploration.
 

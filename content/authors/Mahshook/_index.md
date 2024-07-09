@@ -45,9 +45,9 @@ social:
   - icon: envelope
     icon_pack: fas
     link: 'mailto:mm8684@srmist.edu.in'
-  - icon: ResearchGate
-    icon_pack: ai
-    link: https://www.researchgate.net/profile/Mohammed-Mahshook
+  - icon: linkedin
+    icon_pack: fab
+    link: https://www.linkedin.com/in/mohammed-mahshook/
   - icon: orcid
     icon_pack: fab
     link: https://orcid.org/0009-0005-9118-2595

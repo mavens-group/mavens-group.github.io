@@ -48,6 +48,4 @@ Hence, by employing this integrated methodology, one can effectively and harmoni
 extensive domain of prospective materials while expediting the identification of materials
 possessing specific functionalities.
 
-
-
 Our exploration spans various material landscapes, including 2D molecules, disordered alloys, Heusler alloys, and MXenes.

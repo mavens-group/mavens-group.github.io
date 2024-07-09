@@ -52,9 +52,9 @@ social:
   - icon: envelope
     icon_pack: fas
     link: 'mailto:sd6190@srmist.edu.in'
-  - icon: ResearchGate
-    icon_pack: ai
-    link: https://www.researchgate.net/profile/Shrestha-Dutta
+  - icon: linkedin
+    icon_pack: fab
+    link: https://www.linkedin.com/in/shrestha-dutta-5b6207195
   - icon: orcid
     icon_pack: fab
     link: https://orcid.org/0009-0005-3267-7096
