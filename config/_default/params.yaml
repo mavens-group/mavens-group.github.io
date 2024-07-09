@@ -18,14 +18,14 @@ marketing:
     site_type: Organization
     local_business_type: ''
     org_name: ''
-    description: 'Computational Materials Science.'
+    description: 'Computational Materials Science research group at SRMIST lead by Dr Rudra Banerjee'
   analytics:
     google_analytics: ''
     baidu_tongji: ''
     google_tag_manager: ''
     microsoft_clarity: ''
   verification:
-    google: ''
+    google: 'google1641d8943c4b9324'
     baidu: ''
 
 # Site header
