@@ -2,7 +2,7 @@
 title: $\textit{Ab}$-initio study of tuning the electronic and magnetic properties of Ni$_2$MnGa Heusler
   alloy by Co and Mn compound doping
 authors:
-- Karuna
+- Karunakaran
 - Rudra
 date: '2023-02-01'
 publishDate: '2024-06-27T16:20:24.408158Z'

@@ -1,7 +1,7 @@
 ---
 title: 'Controlling the electronic and magnetic properties of Mn$_2$CoAl by $d$ metal doping: A DFT study'
 authors:
-- Karuna
+- Karunakaran
 - Desigan Ravi
 - Payel Bandyopadhyay
 - Rudra

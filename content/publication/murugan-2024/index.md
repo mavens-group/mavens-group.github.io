@@ -3,7 +3,7 @@ title: 'Unconventional critical behavior in room temperature magnetocaloric mate
   Fe$_{30}$Cr$_{45}$V$_{25}$ all $d$-metal Heusler alloy'
 authors:
 - Kowsalya Murugan
-- Karuna
+- Karunakaran
 - Srikanti Kavita
 - S. Paulraj
 - Rudra
