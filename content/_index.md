@@ -14,10 +14,8 @@ sections:
         background:
           image:
             filename: group.jpg
-            filters:
-              brightness: 0.6
-          position: center
-          color: '#666'
+#         position: center
+#         color: '#666'
 #     - title: Lunch & Learn ☕️
 #       content: 'Share your knowledge with the group and explore exciting new topics together!'
 #       align: left

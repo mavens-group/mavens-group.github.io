@@ -7,7 +7,7 @@ view: compact
 # Optional banner image (relative to `assets/media/` folder).
 banner:
   caption: ''
-  image: 'group.png'
+  image: 'group.jpg'
 ---
 Our group has two broad research area with a single goal.
 

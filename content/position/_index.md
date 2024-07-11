@@ -7,6 +7,6 @@ view: compact
 # Optional banner image (relative to `assets/media/` folder).
 banner:
   caption: ''
-  image: 'group.png'
+  image: 'group.jpg'
   title: "Open Positions"
 ---
