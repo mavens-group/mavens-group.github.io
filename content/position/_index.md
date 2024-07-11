@@ -8,4 +8,5 @@ view: compact
 banner:
   caption: ''
   image: 'group.png'
+  title: "Open Positions"
 ---

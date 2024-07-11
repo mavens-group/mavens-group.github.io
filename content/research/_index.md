@@ -8,6 +8,7 @@ view: compact
 banner:
   caption: ''
   image: 'group.png'
+  title: Research
 ---
 Our group has two broad research area with a single goal.
 
