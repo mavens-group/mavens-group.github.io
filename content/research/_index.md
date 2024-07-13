@@ -9,7 +9,18 @@ banner:
   caption: ''
   image: 'group.jpg'
 ---
-Our group has two broad research area with a single goal.
+ The research at MAVENs focuses on understanding and manipulating the properties of complex materials, such
+ as alloys and molecules, with a particular emphasis on energy and caloric materials.
+
+By employing advanced computational techniques like density functional theory (DFT) and Monte Carlo
+simulations, we investigate the intricate relationship between electronic structure, magnetism,
+thermodynamics, and symmetry in disordered systems. Our goal is to uncover the fundamental
+principles governing these interactions and to leverage this knowledge to design materials with
+tailored properties.
+
+Specifically, we aim to optimize parameters such as critical temperature ($T_C$), Gibbs free energy
+($\Delta G_H$), and magnetic anisotropy to develop superior catalysts for green hydrogen production and
+highly efficient magnetocaloric materials.
 
 ## Materials Design
 The MAVENs utilizes a potent fusion of Monte Carlo and Density Functional Theory (DFT)

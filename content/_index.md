@@ -16,16 +16,18 @@ sections:
             filename: group.jpg
 #         position: center
 #         color: '#666'
-#     - title: Lunch & Learn ☕️
-#       content: 'Share your knowledge with the group and explore exciting new topics together!'
-#       align: left
-#       background:
-#         image:
-#           filename: contact.jpg
-#           filters:
-#             brightness: 0.7
-#         position: center
-#         color: '#555'
+      - title: Tuning the properties of materials
+        content: 'Doping of 3d material changes the magnetic interaction $J_{ij}$ considerably in
+        Heusler alloy. The change in $J_{ij}$ affects the Curie temperature of the materials,
+        giving high magnetocalric effect around room temperature.'
+        align: left
+        background:
+          image:
+            filename: heusler.jpg
+            filters:
+              brightness: 0.5
+          position: center
+          color: '#555'
 #     - title: World-Class Semiconductor Lab
 #       content: 'Just opened last month!'
 #       align: right
@@ -53,24 +55,26 @@ sections:
     content:
       title: Innovating for Sustainability
       text: |
-        The MAVENs, led by Dr. Rudra Banerjee within the Department of Physics and Nanotechnology
-        at SRM Institute of Science and Technology, stands at the forefront of computational
-        materials science, driven by a shared vision: a sustainable future through cutting-edge
-        materials exploration.
+        The MAVENs group, based within the Department of Physics and Nanotechnology at SRM Institute of
+        Science and Technology, is at the forefront of computational materials science research. Our
+        mission is to develop innovative materials solutions for a sustainable future.
 
-        Our research tackles critical challenges in green energy and related domains. We design
-        novel catalysts for the hydrogen evolution reaction (HER), engineer magnetocaloric
-        materials for energy-efficient cooling, and push the boundaries of qubits materials.
+        With a focus on green energy technologies, the MAVENs team is actively engaged in the design of
+        novel catalysts for the hydrogen evolution reaction (HER), the engineering of magnetocaloric
+        materials for energy-efficient cooling, and the exploration of qubit materials for quantum
+        computing applications.
 
-        Fuelled by a deep understanding of materials, we employ advanced research methods like
-        density functional theory (DFT) and Monte Carlo simulations, coupled with cutting-edge
-        high-throughput computation and machine learning. This integrated approach fosters
-        groundbreaking exploration and discovery.
+        Our research methodology combines advanced computational techniques, including density functional
+        theory (DFT) and Monte Carlo simulations, with high-throughput computing and machine learning. This
+        interdisciplinary approach enables us to accelerate the discovery of promising materials and
+        optimize their properties.
 
-        If you are a talented M.Sc. student in Physics, Chemistry, or Materials Science, and share
-        our passion for innovation, we invite you to join our journey. Explore our open positions
-        and contribute to shaping a sustainable future alongside our vibrant research community.
+        We invite talented MSc students with a passion for physics, chemistry, or materials science to join
+        our dynamic research group. By working alongside our experienced researchers, you will have the
+        opportunity to contribute to cutting-edge research and develop the skills necessary for a
+        successful career in academia or industry.
 
+        To learn more about our research and available positions, continue to our website.
 # - block: collection
 #   content:
 #     title: Latest Preprints
