@@ -25,4 +25,4 @@ highly efficient magnetocaloric materials.
 Our exploration spans various material landscapes, including 2D molecules, disordered alloys, Heusler alloys, and MXenes.
 
 We work on two different paths to achieve the goal:
-<br><br><br>
+<br>

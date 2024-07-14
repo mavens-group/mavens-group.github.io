@@ -5,7 +5,7 @@ title: Dwarakesh Kannan R
 # Full name (for SEO)
 first_name: Dwarakesh Kannan
 last_name: R
-join: 12/2021
+join: -2021
 
 # Username (this should match the folder name)
 authors:
@@ -15,7 +15,7 @@ authors:
 superuser: false
 
 # Role/position
-role:
+role: Under Grad. Project
 
 # Organizations/Affiliations
 organizations:

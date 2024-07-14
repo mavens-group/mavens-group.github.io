@@ -5,6 +5,7 @@ title: Thulluri Sandhya
 # Full name (for SEO)
 first_name: Sandhya
 last_name: Thulluri
+join: -2022
 
 # Username (this should match the folder name)
 authors:
@@ -14,7 +15,7 @@ authors:
 superuser: false
 
 # Role/position
-role:
+role: Masters Project
 
 # Organizations/Affiliations
 organizations:
