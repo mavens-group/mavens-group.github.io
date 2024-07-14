@@ -19,7 +19,8 @@ sections:
       - title: Tuning the properties of materials
         content: 'Doping of 3d material changes the magnetic interaction $J_{ij}$ considerably in
         Heusler alloy. The change in $J_{ij}$ affects the Curie temperature of the materials,
-        giving high magnetocalric effect around room temperature.'
+        giving high magnetocalric effect around room temperature.
+        [https://doi.org/10.1016/j.jpcs.2024.111914](https://doi.org/10.1016/j.jpcs.2024.111914)'
         align: left
         background:
           image:
@@ -28,12 +29,12 @@ sections:
               brightness: 0.5
           position: center
           color: '#555'
-#     - title: World-Class Semiconductor Lab
-#       content: 'Just opened last month!'
+#     - title: Machine Learning for Materials Discovery
+#       content:
 #       align: right
 #       background:
 #         image:
-#           filename: welcome.jpg
+#           filename: slide3.png
 #           filters:
 #             brightness: 0.5
 #         position: center

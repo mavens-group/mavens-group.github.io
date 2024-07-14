@@ -22,6 +22,7 @@ Specifically, we aim to optimize parameters such as critical temperature ($T_C$)
 ($\Delta G_H$), and magnetic anisotropy to develop superior catalysts for green hydrogen production and
 highly efficient magnetocaloric materials.
 
+
 ## Materials Design
 The MAVENs utilizes a potent fusion of Monte Carlo and Density Functional Theory (DFT)
 techniques to advance the field of materials design. By employing this synergistic methodology, we
