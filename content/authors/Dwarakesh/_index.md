@@ -15,7 +15,7 @@ authors:
 superuser: false
 
 # Role/position
-role: Under Grad. Project
+role: UG Project
 
 # Organizations/Affiliations
 organizations:

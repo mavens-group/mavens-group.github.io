@@ -33,15 +33,6 @@ education:
     - course: MSc in Physics
       institution: SRMIST, Kattankulathur
       year: 2024
-
-social:
-  - icon: envelope
-    icon_pack: fas
-    link: ''
-  - icon: linkedin
-    icon_pack: fab
-    link:
-
 user_groups:
   - Alumni
 ---
