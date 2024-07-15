@@ -2,7 +2,7 @@
 title: Will there be a third COVID-19 wave? A SVEIRD model based study of India's situation
 authors:
 - Dwarakesh
-- R Gurusriram
+- Guru
 - Rudra
 - Srijit Bhattacharjee
 - Pritish Kumar Varadwaj
