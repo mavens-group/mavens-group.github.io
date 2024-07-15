@@ -41,12 +41,12 @@ education:
       year: 2019
 
 social:
-  - icon: linkedin
-    icon_pack: fab
-    link: https://www.linkedin.com/in/vivek-karunakaran98
   - icon: envelope
     icon_pack: fas
     link: 'mailto:vivekpallipamadathil@gmail.com'
+  - icon: linkedin
+    icon_pack: fab
+    link: https://www.linkedin.com/in/vivek-karunakaran98
 
 user_groups:
   - Alumni
