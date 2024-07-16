@@ -5,7 +5,7 @@ title: Yashdeep
 # Full name (for SEO)
 first_name: Yashdeep
 last_name: Podder
-join: -2024
+join: -2023
 
 # Username (this should match the folder name)
 authors:

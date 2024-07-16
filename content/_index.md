@@ -54,12 +54,12 @@ sections:
       interval: 5000
   - block: markdown
     content:
-      title: _YOU MAY SAY **WE** ARE A DREAMER_
+      title: _You may say **we** are a dreamer_
       text: |
         The MAVENs group, based within the Department of Physics and Nanotechnology at SRM
-        Institute of Science and Technology, is at the forefront of computational materials science
-        research. We dream a cleaner environment to breath for the next generations by developing
-        innovative materials solutions for green energy.
+        Institute of Science and Technology, dreams a cleaner environment to breath for the next
+        generations by developing innovative materials solutions for green energy using computational
+        modelling.
 
         With a focus on green energy technologies, the MAVENs team is actively engaged in the design of
         novel catalysts for the hydrogen evolution reaction (HER), the engineering of magnetocaloric
