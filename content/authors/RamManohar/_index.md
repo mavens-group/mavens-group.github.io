@@ -46,5 +46,6 @@ social:
 user_groups:
   - Alumni
 ---
-Ram was a master’s student in the Department of Physics and Nanotechnology at SRM Institute of Science and Technology. He worked on the ab initio DFT study of PMMA/TiO
- nanocomposite.
+Ram was a master’s student in the Department of Physics and Nanotechnology at SRM Institute of Science and Technology.
+
+He worked on the _ab-initio_ DFT study of PMMA/TiO$_\mathsf{2}$ nanocomposite.
