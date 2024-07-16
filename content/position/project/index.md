@@ -4,7 +4,7 @@ date: 2024-07-01
 profile: false
 
 banner:
-  image: group.png
+  image: group.jpg
 ---
 BSc/MSc semester project in Computational Physics and Machine Learning
 

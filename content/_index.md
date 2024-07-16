@@ -14,8 +14,8 @@ sections:
         background:
           image:
             filename: group.jpg
-#         position: center
-#         color: '#666'
+          position: center
+          color: '#666'
       - title: Tuning the properties of materials
         content: 'Doping of 3d material changes the magnetic interaction $J_{ij}$ considerably in
         Heusler alloy. The change in $J_{ij}$ affects the Curie temperature of the materials,
