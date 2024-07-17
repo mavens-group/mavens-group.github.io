@@ -17,8 +17,8 @@ sections:
           position: center
           color: '#666'
       - title: Tuning the properties of materials
-        content: 'Doping of 3d material changes the magnetic interaction $J_{ij}$ considerably in
-        Heusler alloy. The change in $J_{ij}$ affects the Curie temperature of the materials,
+        content: 'Doping of 3d material changes the magnetic interaction $\mathsf{J_{ij}}$ considerably in
+        Heusler alloy. The change in $\mathsf{J_{ij}}$ affects the Curie temperature of the materials,
         giving high magnetocalric effect around room temperature.
         [https://doi.org/10.1016/j.jpcs.2024.111914](https://doi.org/10.1016/j.jpcs.2024.111914)'
         align: left
@@ -55,6 +55,7 @@ sections:
   - block: markdown
     content:
       title: _You may say **we** are a dreamer_
+      subtitle: _- John Lennon (Imagine, slight modification)_
       text: |
         The MAVENs group, based within the Department of Physics and Nanotechnology at SRM
         Institute of Science and Technology, dreams a cleaner environment to breath for the next
