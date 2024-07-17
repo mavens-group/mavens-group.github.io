@@ -13,7 +13,7 @@ sections:
         align: center
         background:
           image:
-            filename: group.jpg
+            filename: group.webp
           position: center
           color: '#666'
       - title: Tuning the properties of materials
@@ -24,7 +24,7 @@ sections:
         align: left
         background:
           image:
-            filename: heusler.jpg
+            filename: heusler.webp
             filters:
               brightness: 0.5
           position: center
@@ -52,6 +52,7 @@ sections:
       loop: true
       # Duration of transition between slides (in ms)
       interval: 5000
+
   - block: markdown
     content:
       title: _You may say **we** are a dreamer_

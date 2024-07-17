@@ -4,7 +4,7 @@ date: 2024-07-01
 profile: false
 
 banner:
-  image: group.jpg
+  image: group.webp
 ---
 1 PhD position to start from January, 2025
 <!--more-->

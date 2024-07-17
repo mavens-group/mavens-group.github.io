@@ -7,7 +7,7 @@ view: card
 # Optional banner image (relative to `assets/media/` folder).
 banner:
   caption: ''
-  image: 'group.jpg'
+  image: 'group.webp'
 ---
 MAVENs investigates complex materials, including alloys and molecules, with a focus on energy and
 caloric applications.

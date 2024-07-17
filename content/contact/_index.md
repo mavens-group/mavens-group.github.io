@@ -8,7 +8,7 @@ view: card
 # Optional banner image (relative to `assets/media/` folder).
 banner:
   caption: ''
-  image: 'group.jpg'
+  image: 'group.webp'
 ---
 <ul class="fa-ul">
   <li><span class="fa-li"><i class="fa-solid fa-envelope"></i></span><a
