@@ -56,7 +56,7 @@ sections:
   - block: markdown
     content:
       title: _You may say **we** are a dreamer_
-      subtitle: _- John Lennon (Imagine, slight modification)_
+      subtitle: _- John Lennon (Imagine, slightly modified)_
       text: |
         The MAVENs group, based within the Department of Physics and Nanotechnology at SRM
         Institute of Science and Technology, dreams a cleaner environment to breath for the next
