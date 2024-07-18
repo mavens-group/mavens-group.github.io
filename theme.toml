@@ -2,13 +2,16 @@ name = "MAVEN Research Group"
 license = "MIT"
 licenselink = "https://github.com/wowchemy/starter-hugo-research-group/blob/main/LICENSE.md"
 description = "Computational Materials Science research group at SRMIST lead by Dr Rudra Banerjee"
-homepage = "https://github.com/mavens-group"
+homepage = "https://mavens-group.github.io"
 #demosite = "https://research-group.netlify.app/"
 tags = ["Rudra Banerjee",
      "SRMIST",
      "Computation",
      "Materials Science",
      "Density Functional Theory",
+     "Theoratical Physics",
+     "Physics",
+     "Computational Physics",
      "PhD Position"
 ]
 #features = []
