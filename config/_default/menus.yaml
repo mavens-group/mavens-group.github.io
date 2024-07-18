@@ -23,6 +23,9 @@ main:
 #   parent: Leisure
 #   url: leisure/photos
 #   weight: 46
+  - name: News
+    url: news
+    weight: 43
   - name: Position
     url: position
     weight: 50

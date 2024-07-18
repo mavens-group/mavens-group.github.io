@@ -1,10 +1,10 @@
 ---
 title: A study of electronic and magnetic properties of transition metal trihalides
 authors:
-- Shrestha Dutta
+- Shrestha
 - Sachin Varma
 - Payel Bandyopadhyay
-- Rudra Banerjee
+- Rudra
 date: '2024-06-01'
 publishDate: '2024-06-27T16:20:24.552795Z'
 publication_types:
