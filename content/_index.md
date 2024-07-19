@@ -55,9 +55,10 @@ sections:
 
   - block: markdown
     content:
-      title: _You may say **we** are a dreamer_
-      subtitle: _- John Lennon (Imagine, slightly modified)_
       text: |
+        <p style="text-align:center; font-size: 2rem;"><i>You may say <b>we</b> are a dreamer <sub><small>- John Lennon (Imagine, slightly modified)</i></small></sub></p>
+
+
         The MAVENs group, based within the Department of Physics and Nanotechnology at SRM
         Institute of Science and Technology, dreams a cleaner environment to breath for the next
         generations by developing innovative materials solutions for green energy using computational
@@ -78,7 +79,8 @@ sections:
         opportunity to contribute to cutting-edge research and develop the skills necessary for a
         successful career in academia or industry.
 
-        To learn more about our research and available positions, continue to our website.
+        To find more about our current research Interests, check:
+
 # - block: collection
 #   content:
 #     title: Latest Preprints
@@ -92,12 +94,14 @@ sections:
 #     view: citation
 #     columns: '1'
 
-# - block: markdown
-#   content:
-#     title:
-#     subtitle:
-#     text: |
-#       {{% cta cta_link="./people/" cta_text="Meet the team →" %}}
-#   design:
-#     columns: '1'
+  - block: markdown
+    content:
+      title:
+      subtitle:
+      text: |
+        {{% cta cta_link="./research/" cta_text="Research Interests" %}} To find about available
+        positions in our group, check
+        {{% cta cta_link="./position/" cta_text="  Open Positions  " %}}
+    design:
+      columns: '1'
 ---
