@@ -56,7 +56,8 @@ sections:
   - block: markdown
     content:
       text: |
-        <p style="text-align:center; font-size: 2rem;"><i>You may say <b>we</b> are a dreamer <sub><small>- John Lennon (Imagine, slightly modified)</i></small></sub></p>
+        <p style="text-align:center; font-size: 2rem;"><i>You may say <b>we</b> are a dreamer<br>
+        <sub><small>- John Lennon (Imagine, slightly modified)</i></small></sub></p>
 
 
         The MAVENs group, based within the Department of Physics and Nanotechnology at SRM
@@ -79,8 +80,13 @@ sections:
         opportunity to contribute to cutting-edge research and develop the skills necessary for a
         successful career in academia or industry.
 
-        To find more about our current research Interests, check:
 
+        To find more about our current research Interests, check:
+        {{% cta cta_link="./research/" cta_text="Research Interests" %}} To find about available
+        positions in our group, check
+        {{% cta cta_link="./position/" cta_text="  Open Positions  " %}}
+    design:
+      columns: '1'
 # - block: collection
 #   content:
 #     title: Latest Preprints
@@ -93,15 +99,4 @@ sections:
 #   design:
 #     view: citation
 #     columns: '1'
-
-  - block: markdown
-    content:
-      title:
-      subtitle:
-      text: |
-        {{% cta cta_link="./research/" cta_text="Research Interests" %}} To find about available
-        positions in our group, check
-        {{% cta cta_link="./position/" cta_text="  Open Positions  " %}}
-    design:
-      columns: '1'
 ---
