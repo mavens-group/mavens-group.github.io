@@ -6,7 +6,7 @@ profile: false
 banner:
   image: group.webp
 ---
-1 PhD position to start from January, 2025
+1 PhD position in computational materials science to start from January, 2025
 <!--more-->
 ### Research Topic
 - First Principles and DFT based study of 2D materials.
@@ -20,6 +20,7 @@ banner:
 ### Application Process
 - Apply to the group using the [form](https://forms.gle/8pKkCSKB65SwgHdB6) before September 30,
     2024.
+- Group level interview will be done online by October, 2024.
 - Once selected in the interview, you will be invited for written + viva exam in SRMIST. Follow [this page](https://admissions.srmist.edu.in/srmistonline/phdapplication) for detailed instruction.
 - Selected candidate will be offered the position by the end of December, 2024.
 ### Responsibilities

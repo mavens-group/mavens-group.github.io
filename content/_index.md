@@ -80,7 +80,6 @@ sections:
         opportunity to contribute to cutting-edge research and develop the skills necessary for a
         successful career in academia or industry.
 
-
         To find more about our current research Interests, check:
         {{% cta cta_link="./research/" cta_text="Research Interests" %}} To find about available
         positions in our group, check
