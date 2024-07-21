@@ -1,6 +1,6 @@
 ---
 title: Research
-
+summary: Research interest of Rudra Banerjee and MAVEN's Group.
 # Listing view
 view: card
 show_date: false
@@ -21,6 +21,6 @@ catalysis and magnetocaloric cooling.
 Our research encompasses 2D molecules, disordered alloys, Heusler alloys, and MXenes.
 
 
-For our recent publications, go to {{% cta cta_link="../publication/" cta_text="Publications" %}}
+<!-- For our recent publications, go to {{% cta cta_link="../publication/" cta_text="Publications" %}} -->
 
 Discover more about the paths we take to achieve our goal below:

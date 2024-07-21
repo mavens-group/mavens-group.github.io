@@ -1,6 +1,6 @@
 
 ---
-title: PBS job submission in cluster
+title: PBS job submission in clusters and supercomputers
 date: 2024-07-21
 Summary: A PBS job submission tutorial.
 image:
@@ -17,7 +17,8 @@ why, there are a need to implement a *fairshare* method. This *fairshare* in tur
 *Job scheduler* is nothing exclusive to clusters only. Our day-to-day computers use them as well,
 like `at` or `cron` for UNIX or `Windows Task Scheduler` for windows. But, for clusters, there are
 many dedicated schedulers, most famous of them are [SLURM](https://slurm.schedmd.com/) and
-[PBS](https://www.openpbs.org/).  In this document, I will discuss mostly about PBS.
+[PBS](https://www.openpbs.org/).  In this tutorial, I will discuss mostly about PBS. We will
+follow-up with a similar tutorial with SLURM soon.
 
 ## What is PBS
 

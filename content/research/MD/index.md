@@ -7,7 +7,7 @@ profile: false
 The MAVENs utilizes a potent fusion of Monte Carlo and Density Functional Theory (DFT)
 techniques to advance the field of materials design. By employing this synergistic methodology, we
 are able to conduct an in-depth analysis of the fundamental properties of matter, including the
-atomic-level electronic structure, energies, and thermodynamics of substances.
+atomic-level electronic structure, energies, and thermodynamics of the materials.
 
 We employ the accuracy of Density Functional Theory (DFT) to forecast the behaviour of materials
 under various circumstances, whereas Monte Carlo (MC) simulations provide a statistical perspective
