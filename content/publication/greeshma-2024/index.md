@@ -11,7 +11,7 @@ authors:
 - Greeshma
 - Pritha Dutta
 - Indrajit Mondal
-- Rudra Banerjee
+- Rudra
 - Ashutosh K. Singh
 
 # Author notes (such as 'Equal Contribution')

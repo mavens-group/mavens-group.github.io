@@ -16,19 +16,19 @@ main:
   - name: Publications
     url: publication
     weight: 40
-# - name: Leisure
-#   url: leisure
-#   weight: 45
+  - name: Blogs
+    url: blog
+    weight: 50
 # - name: photos
 #   parent: Leisure
 #   url: leisure/photos
 #   weight: 46
   - name: News
     url: news
-    weight: 43
+    weight: 60
   - name: Position
     url: position
-    weight: 50
+    weight: 70
   - name: Contact
     url: contact
-    weight: 70
+    weight: 80
