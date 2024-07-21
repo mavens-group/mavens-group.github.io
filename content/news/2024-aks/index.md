@@ -22,5 +22,5 @@ performance context, of a standard anhydrous $\mathsf{WO_3}$ (AWO).
 MAVENs deployed a DFT study to unravel that the underlying reason of such behaviour is driven by
 Jahn-Teller distortion of the crystal structure due to intercalated water molecule.
 
-MAVENs are very happy and congratulate Mr Rahul (from AKS) and [Greeshma](../../authors/Greeshma)
-to not only carrying out the work, but led the project from the front.
+MAVENs are very happy and congratulates Mr Rahul (from AKS) and [Greeshma](../../authors/Greeshma)
+for not only carrying out the work, but led the project from the front.
