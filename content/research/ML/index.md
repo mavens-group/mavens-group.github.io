@@ -1,6 +1,6 @@
 ---
 title: Materials Discovery using Machine Learning
-date:
+show_date: false
 profile: false
 ---
 

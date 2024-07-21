@@ -20,6 +20,7 @@ catalysis and magnetocaloric cooling.
 
 Our research encompasses 2D molecules, disordered alloys, Heusler alloys, and MXenes.
 
+
 For our recent publications, go to {{% cta cta_link="../publication/" cta_text="Publications" %}}
 
 Discover more about the paths we take to achieve our goal below:

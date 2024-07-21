@@ -1,6 +1,6 @@
 ---
 title: Materials Design
-date:
+show_date: false
 profile: false
 ---
 
