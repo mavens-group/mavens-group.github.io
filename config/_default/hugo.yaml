@@ -4,7 +4,7 @@
 # This file is formatted using YAML syntax - learn more at https://learnxinyminutes.com/docs/yaml/
 
 title: MAVENs # Website name
-baseURL: 'https://mavens-group@gitlab.io' # Website URL
+baseURL: 'https://mavens-group.gitlab.io' # Website URL
 
 ############################
 ## LANGUAGE

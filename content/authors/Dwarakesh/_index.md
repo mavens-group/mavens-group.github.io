@@ -1,4 +1,7 @@
 ---
+_build:
+  render: always
+  list: always
 # Display name
 title: Dwarakesh Kannan R
 

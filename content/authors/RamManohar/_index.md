@@ -1,4 +1,9 @@
 ﻿---
+
+_build:
+  render: always
+  list: always
+
 # Display name
 title: Ram Manohar T K
 
