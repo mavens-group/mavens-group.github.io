@@ -1,7 +1,7 @@
 ---
 _build:
   render: always
-  list: always
+  list: never
 cascade:
   _build:
     render: always
