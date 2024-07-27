@@ -10,6 +10,4 @@ publication_types:
 - article-journal
 publication: '*Pramana*'
 doi: 10.1007/s12043-023-02567-4
-tags:
-- peer
 ---

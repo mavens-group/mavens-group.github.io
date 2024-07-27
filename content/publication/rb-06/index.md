@@ -4,7 +4,7 @@ title: Electronic structure of Co-phthalocyanine calculated by GGA+U and hybrid 
 authors:
 - Satadeep Bhattacharjee
 - Barbara Brena
-- Rudra Banerjee
+- Rudra
 - Heiko Wende
 - Olle Eriksson
 - Biplab Sanyal
@@ -14,6 +14,6 @@ publication_types:
 - article-journal
 publication: '*Chemical Physics*'
 doi: 10.1016/j.chemphys.2010.08.020
-tags:
-- peer
+
+
 ---

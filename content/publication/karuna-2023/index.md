@@ -10,6 +10,6 @@ publication_types:
 - article-journal
 publication: '*J Magn Magn Materials*'
 doi: 10.1016/j.jmmm.2023.170419
-tags:
-- peer
+
+
 ---

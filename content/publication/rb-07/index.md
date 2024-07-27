@@ -8,7 +8,7 @@ authors:
 - Marcello Coreno
 - Kartick Tarafder
 - Vitaly Feyer
-- Rudra Banerjee
+- Rudra
 - Emmanuelle Göthelid
 - Biplab Sanyal
 - Peter M. Oppeneer
@@ -19,6 +19,6 @@ publication_types:
 - article-journal
 publication: '*The Journal of Chemical Physics*'
 doi: 10.1063/1.3554212
-tags:
-- peer
+
+
 ---

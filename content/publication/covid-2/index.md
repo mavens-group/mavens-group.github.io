@@ -12,6 +12,4 @@ publication_types:
 - article-journal
 publication: '*Indian J Phys*'
 doi: 10.1007/s12648-021-02196-w
-tags:
-- peer
 ---

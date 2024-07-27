@@ -1,6 +1,6 @@
 ---
 title: Local probe of irradiation-induced structural changes and orbital magnetism
-  in $mathrmFe_60mathrmAl_40$ thin films via an order-disorder phase transition
+  in $\mathsf{Fe_{60}Al_{40}}$ thin films via an order-disorder phase transition
 authors:
 - Enrico La Torre
 - Alevtina Smekhova
@@ -13,7 +13,7 @@ authors:
 - Andrei Rogalev
 - J̈̊gen Lindner
 - Rantej Bali
-- Rudra Banerjee
+- Rudra
 - Biplab Sanyal
 - Heiko Wende
 date: '2018-07-01'
@@ -22,6 +22,4 @@ publication_types:
 - article-journal
 publication: '*Phys. Rev. B*'
 doi: 10.1103/PhysRevB.98.024101
-tags:
-- peer
 ---

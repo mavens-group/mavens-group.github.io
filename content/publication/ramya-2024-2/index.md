@@ -6,8 +6,8 @@ authors:
 - T K Ram Monohar
 - R Greeshma
 - S Vijith
-- ' PayelBandyopadhyay'
-- Rudra Banerjee
+- Payel Bandyopadhyay
+- Rudra
 date: '2024-05-01'
 publishDate: '2024-06-27T16:20:24.546941Z'
 publication_types:

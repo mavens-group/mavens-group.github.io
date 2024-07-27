@@ -5,7 +5,7 @@ authors:
 - J. Zemen
 - E. Mendive-Tapia
 - Z. Gercsi
-- R. Banerjee
+- Rudra
 - J. B. Staunton
 - K. G. Sandeman
 date: '2017-05-01'
@@ -14,6 +14,6 @@ publication_types:
 - article-journal
 publication: '*Phys. Rev. B*'
 doi: 10.1103/PhysRevB.95.184438
-tags:
-- peer
+
+
 ---

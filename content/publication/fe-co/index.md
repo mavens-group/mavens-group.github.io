@@ -6,7 +6,7 @@ authors:
 - Ankit Kumar
 - Vijayaharan A. Venugopal
 - Raquel Esteban-Puyuelo
-- Rudra Banerjee
+- Rudra
 - Carmine Autieri
 - Rimantas Brucas
 - Nilamani Behera
@@ -22,6 +22,4 @@ publication_types:
 - article-journal
 publication: '*Phys. Rev. B*'
 doi: 10.1103/PhysRevB.99.174408
-tags:
-- peer
 ---

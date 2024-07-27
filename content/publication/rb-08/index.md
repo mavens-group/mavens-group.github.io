@@ -2,7 +2,7 @@
 title: 'Fe$_3.3$Ni$_83.2$Mo$_13.5$ : a likely candidate to show spin-glass behaviour
   at low temperatures.'
 authors:
-- Rudra Banerjee
+- Rudra
 - Mitali Banerjee
 - Abhijit Mookerjee
 - A. K. Majumdar
@@ -16,6 +16,6 @@ publication_types:
 - article-journal
 publication: '*JPCM*'
 doi: 10.1088/0953-8984
-tags:
-- peer
+
+
 ---

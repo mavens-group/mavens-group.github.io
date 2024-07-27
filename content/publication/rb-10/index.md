@@ -3,7 +3,7 @@ title: 'Magnetic ordering in Ni-rich NiMn alloys around the multicritical point:
   and theory'
 authors:
 - Pampa Pal
-- Rudra Banerjee
+- Rudra
 - Radheshyam Banerjee
 - Abhijit Mookerjee
 - Gopi Chandra Kaphle
@@ -19,6 +19,6 @@ publication_types:
 - article-journal
 publication: '*Phys. Rev. B*'
 doi: 10.1103/PhysRevB.85.174405
-tags:
-- peer
+
+
 ---

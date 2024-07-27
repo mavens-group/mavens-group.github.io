@@ -3,7 +3,7 @@ title: 'Fluctuating local moments, itinerant electrons, and the magnetocaloric e
   hypersensitivity of FeRh'
 authors:
 - J. B. Staunton
-- R. Banerjee
+- Rudra
 - M. dos Santos Dias
 - A. Deak
 - L. Szunyogh
@@ -13,6 +13,4 @@ publication_types:
 - article-journal
 publication: '*Phys. Rev. B*'
 doi: 10.1103/PhysRevB.89.054427
-tags:
-- peer
 ---

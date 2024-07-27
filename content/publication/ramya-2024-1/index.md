@@ -5,7 +5,7 @@ authors:
 - Ramya Ravichandran
 - Tathagata Ghosh
 - R. Greeshma
-- Rudra Banerjee
+- Rudra
 - Anoop Kumar Mukhopadhyay
 - Payel Bandyopadhyay
 date: '2024-01-01'

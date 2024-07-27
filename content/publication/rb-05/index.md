@@ -4,7 +4,7 @@ authors:
 - Mitali Banerjee
 - Abhijit Mookerjee
 - A. K. Majumdar
-- Rudra Banerjee
+- Rudra
 - Biplab Sanyal
 - A.K. Nigam
 date: '2010-01-01'
@@ -13,6 +13,6 @@ publication_types:
 - article-journal
 publication: '*J Magn Magn Materials*'
 doi: 10.1016/j.jmmm.2010.07.007
-tags:
-- peer
+
+
 ---
