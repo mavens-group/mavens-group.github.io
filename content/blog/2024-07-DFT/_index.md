@@ -1,7 +1,7 @@
 ---
 _build:
   render: always
-  list: never
+  list: always
 cascade:
   _build:
     render: always
@@ -32,9 +32,9 @@ aims to equip participants with the theoretical foundation and practical skills 
 perform DFT calculations and analyze their results.
 <!-- {{< list_children >}} -->
 
-### Meet your instructor
+## Meet your instructor
 {{< mention "rudra" >}}
-
+<br>
 
 {{< spoiler text="Prerequisites" >}}
  - Basic Thermodynamics

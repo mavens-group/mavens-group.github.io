@@ -1,6 +1,7 @@
 ---
+
 title: Introduction
-date: '2021-01-01'
+date: '2024-07-27'
 type: book
 weight: 01
 summary: Introduction to DFT
@@ -19,8 +20,8 @@ a functional of charge density.
 ## Schrödinger's Equation: revisit
 The Schrödinger equation is the driver equation for quantum mechanical system
 \begin{equation}
- \left[\frac{\hbar^2}{2m}\nabla^2+V(r)\right]\psi(r)=E\psi(r)
- \end{equation}
+ \left[\frac{\hbar^2}{2m}\nabla^2+V(r)\right]\Psi(r)=E\Psi(r)
+\end{equation}
 
 The problem arises when there is many particles in the system. In this case, The manybody
 Hamiltonian for N nucleus and n electrons is:
@@ -60,7 +61,9 @@ So, the Hamiltonian is
    & +v_0(r) & \mbox{PE of e due to nucleus}
 \end{align*}
 
-## Mean Field or Hartree Approximation
+## Mean Field Approximation
+
+### Hartree Approximation
 After the BO, we are still leaving with the fact that the main problematic variable, i.e. PE(e) is
 still there. We now approximate the variable.
 
@@ -83,5 +86,25 @@ So, we have the final Hamiltonian:
 \hat{H}=-\frac{\hbar^2}{2m}\sum_{i}^n\nabla^2_i + \int dr \frac{\rho(r,r')}{|r_i-r'|} +v_0(r)
 \end{align*}
 
-Hartree is not perfect, as he did not take into account that $e$ has spin and obeys Pauli's
+### Hartree-Fock Approximation
+Hartree approximation is not perfect, as it did not take into account that $e$ has spin and obeys Pauli's
 exclusion. Fock incorporated that, resulting the Hartree-Fock approximation.
+
+HF method anti-symmetrizes the $\Psi$
+
+{{< math >}}
+$$
+\Psi(r_1,r_2\cdots r_N)= \frac{1}{\sqrt{N}}\begin{bmatrix}
+\psi_1(r_1) &\cdots &\psi_1(r_N)\\
+\vdots & \ddots & \vdots\\
+\psi_N(r_1) &\cdots &\psi_N(r_N)\\
+\end{bmatrix}
+$$
+{{< /math >}}
+and solve it using variational method:
+
+{{< math >}}
+$$
+\frac{\delta}{\delta \psi_j^*(r)}\left[\bra{\Psi}H\ket{\Psi}-\sum_i^N\epsilon_i\int d^3r |\psi_i(r)|^2\right]=0
+$$
+{{< /math >}}
