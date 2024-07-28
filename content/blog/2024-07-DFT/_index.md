@@ -1,11 +1,11 @@
 ---
 _build:
   render: always
-  list: never
+  list: always
 cascade:
   _build:
     render: always
-    list: never
+    list: always
 title: Introduction to Density functional theory
 linkTitle: Density Functional Theory
 date: 2024-07-26
@@ -56,4 +56,4 @@ By the end of this course, participants will:
     related fields
 {{< /spoiler >}}
 
-{{< cta cta_text="Begin the course" cta_link="_01-basics/" >}}
+{{< cta cta_text="Begin the course" cta_link="01-basics/" >}}

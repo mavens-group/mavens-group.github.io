@@ -1,5 +1,4 @@
 ---
-
 title: Introduction
 date: '2024-07-27'
 type: book
@@ -17,7 +16,8 @@ energy gives us the equilibrium density.
 
 The DFT for electronic structure calculation takes the eigen value of the Schrödinger's equation as
 a functional of charge density.
-## Schrödinger's Equation: revisit
+
+## Schrödinger's Equation: revisit for multi-particles system
 The Schrödinger equation is the driver equation for quantum mechanical system
 \begin{equation}
  \left[\frac{\hbar^2}{2m}\nabla^2+V(r)\right]\Psi(r)=E\Psi(r)
@@ -26,12 +26,16 @@ The Schrödinger equation is the driver equation for quantum mechanical system
 The problem arises when there is many particles in the system. In this case, The manybody
 Hamiltonian for N nucleus and n electrons is:
 
+{{< math >}}
+$$
 \begin{align*}
-	\hat{H}  =&-\frac{\hbar^2}{2m}\sum_{i}^n\nabla^2_i+ \frac{1}{2}\sum_{i\neq j}\frac{1}{|\mathbf{r}_i-\mathbf{r}_j|}       &
+	\hat{H} =&-\frac{\hbar^2}{2m}\sum_{i}^n\nabla^2_i+ \frac{1}{2}\sum_{i\neq j}\frac{1}{|\mathbf{r}_i-\mathbf{r}_j|}       &
 	\qquad \mbox{Electron} \newline
-   & -\frac{\hbar}{2M_j}\sum_j^N\nabla^2_j + \frac{1}{2}\sum\frac{Z_iZ_j}{|{R_i-R_j}|} & \mbox{Nuclei}\newline
+   & -\frac{\hbar}{2M_j}\sum_j^N\nabla^2_j + \frac{1}{2}\sum_{i\neq j}\frac{Z_iZ_j}{|{R_i-R_j}|} & \mbox{Nuclei}\newline
    &  -\sum\frac{Z_i}{|\mathbf{r}_i-\mathbf{R}_j|} & \mbox{Electron-Nucleus}
 \end{align*}
+$$
+{{< /math >}}
 
 Now, the time independent Hamiltonian $\hat{H}=H(p,q)$ is function of two vectors $p,q$ the
 solution of the problem becomes increasingly difficult when we deal with more than one-electron
