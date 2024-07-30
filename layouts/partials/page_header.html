@@ -90,6 +90,12 @@
   {{ if $page.IsNode }}
     {{ $ctnr = "universal-wrapper" }}
   {{end}}
+
+{{ if not .Params.banner }}
+<div class="{{$ctnr}} pt-3">
+  <h2>{{ $title }}</h2>
+  {{end}}
+
 <div class="{{$ctnr}} pt-3">
   {{ if not .IsNode }}
     {{ partial "page_metadata" (dict "page" $page "is_list" 0 "share" true) }}
