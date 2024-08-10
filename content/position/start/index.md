@@ -154,11 +154,18 @@ In the first week:
 -   Copy and paste in an email addressed to me the following text:
 
 > <—BEGIN EMAIL TEXT—>
-
-> I hereby declare that I will protect the confidential nature of private MAVENs' repositories at github/gitlab. In more general terms, I will not share with third parties any research materials that have been authored by MAVENs members including me without prior consultation with Dr Banerjee.
-
+>
+> I hereby declare that, besides and on top of SRMIST's standard code of conduct, I will
+> - maintain the confidentiality of all methods, data, results, and intellectual property.
+> - dedicate a
+>   - (_For the project students:_) minimum of ten hours per week to the project prior to the final semester, and forty hours per week during the final semester.
+>   - (_For the phd students:_) dedicate a minimum of forty hours per week towards my project.
+> - Adhere to the project timelines and milestones
+>
+> Failure to adhere to this commitment may result in the withdrawal of supervisory support by Dr Banerjee.
+>
 > – signed, your name and date
-
+>
 > <—END EMAIL TEXT—>
 
 - Send me your CV and transcript by email
