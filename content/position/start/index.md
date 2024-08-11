@@ -155,11 +155,11 @@ In the first week:
 
 > <—BEGIN EMAIL TEXT—>
 >
-> I hereby declare that, besides and on top of SRMIST's standard code of conduct, I will
+> I hereby declare that, besides and on top of SRMIST's standard codes of conduct and rules, I will
 > - maintain the confidentiality of all methods, data, results, and intellectual property.
-> - dedicate a
+> - dedicate
 >   - (_For the project students:_) minimum of ten hours per week to the project prior to the final semester, and forty hours per week during the final semester.
->   - (_For the phd students:_) dedicate a minimum of forty hours per week towards my project.
+>   - (_For the phd students:_) minimum of forty hours per week towards my project.
 > - Adhere to the project timelines and milestones
 >
 > Failure to adhere to this commitment may result in the withdrawal of supervisory support by Dr Banerjee.
