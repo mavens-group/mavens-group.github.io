@@ -10,8 +10,7 @@ Storage Materials.
 <!--more-->
 
 This study, titled "[Self-rechargeable aqueous Zn2+/K+ electrochromic energy storage device via
-scalable spray-coating integrated with Marangoni flow]
-(https://authors.elsevier.com/c/1jYJ08Z1RY5kB7)", is a big step toward making aqueous zinc-ion
+scalable spray-coating integrated with Marangoni flow](https://authors.elsevier.com/c/1jYJ08Z1RY5kB7)", is a big step toward making aqueous zinc-ion
 batteries that work well and are useful.
 
 Through our collaborative efforts, [Greeshma R](https://mavens-group.github.io/author/greeshma-r)
