@@ -5,7 +5,7 @@ date: 2024-08-11
 profile: false
 ---
 We are excited to announce the publication of our latest research, conducted in collaboration with
-the [AKS group led by Dr Ashutosh Singh](https://lnkd.in/ggNzUqWS) at CeNS, Bangalore, in the Energy
+the [AKS group led by Dr Ashutosh Singh](https://sites.google.com/view/ashutoshksingh-cens) at CeNS, Bangalore, in the Energy
 Storage Materials.
 <!--more-->
 
