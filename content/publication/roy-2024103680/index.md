@@ -33,7 +33,18 @@ publication_short: ''
 
 doi: https://doi.org/10.1016/j.ensm.2024.103680
 
-abstract: ''
+abstract: 'Electrochromic batteries (ECBs) represent a novel integration of energy storage and
+optical modulation technologies, offering versatile applications from smart windows to portable
+electronics. This work explores the potential of zinc-ion (Zn2+) electrochromic batteries utilizing
+tungsten trioxide (WO3) as an active material. To address research gaps, the study focuses on
+coating techniques and hybrid ion electrolytes to enhance performance and sustainability. Spray
+coating with ethanol solvent demonstrates superior uniformity and film quality compared to
+de-ionized water, attributed to Marangoni flow effects. Moreover, hybrid Zn-K electrolytes show
+enhanced electrochromic and electrochemical performance, offering higher ΔT (50 %) modulation and
+cyclic stability (10000 s). Theoretical analysis confirms the favorable interaction of K+ ions with
+WO3. Prototype ECB devices exhibit exceptional cyclic stability (3000 cycles), rapid self-charging
+capabilities (10 min), and reversible optical modulation (40 %), showcasing the potential for
+sustainable energy storage solutions in smart electronics.'
 
 # Summary. An optional shortened abstract.
 summary: ''
