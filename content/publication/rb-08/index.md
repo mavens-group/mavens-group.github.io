@@ -16,6 +16,9 @@ publication_types:
 - article-journal
 publication: '*JPCM*'
 doi: 10.1088/0953-8984
-
-
+abstract: "Unlike other transition metals alloyed with a non-magnetic metal, alloys of Ni behave
+rather differently. This is because of the fragility of the local magnetic moment on Ni. NiMo and
+NiW do not show any spin-glass phase. However, addition of Fe can bolster the moment on Ni. We wish
+to study whether the alloy Fe3.3Ni83.2Mo13.5, chosen near a composition where mean-field estimates
+suggest there could be a spin-glass phase, shows such a phase or not."
 ---

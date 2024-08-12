@@ -11,6 +11,6 @@ publication_types:
 - article-journal
 publication: '*Phys. Rev. B*'
 doi: 10.1103/PhysRevB.90.054421
-
+abstract: "Temperature dependence of the magnetocrystalline anisotropy energy and magnetization of the prototypical rare-earth magnet YCo5 is calculated from first principles, utilizing the relativistic disordered local-moment approach. We discuss a strategy to enhance the finite-temperature anisotropy field by hole doping, paving the way for an improvement of the coercivity near room temperature or higher."
 
 ---
