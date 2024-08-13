@@ -1,6 +1,6 @@
 ---
 title: 'Improvement of magnetic hardness at finite temperatures: Ab initio disordered
-  local-moment approach for $mathrmYCo_5$'
+  local-moment approach for YCo$\mathsf{_5}$'
 authors:
 - Munehisa Matsumoto
 - Rudra

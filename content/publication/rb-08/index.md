@@ -1,5 +1,5 @@
 ---
-title: 'Fe$_3.3$Ni$_83.2$Mo$_13.5$ : a likely candidate to show spin-glass behaviour
+title: 'Fe$_{3.3}$Ni$_{83.2}$Mo$_{13.5}$ : a likely candidate to show spin-glass behaviour
   at low temperatures.'
 authors:
 - Rudra
