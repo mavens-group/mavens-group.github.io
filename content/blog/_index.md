@@ -1,5 +1,6 @@
 ---
-title: Tutorials and Lecture Notes
+title: Blogs
+subtitle: Tutorials and Lecture Notes
 
 # Listing view
 view: compact
