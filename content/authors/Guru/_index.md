@@ -19,11 +19,12 @@ authors: Gurusriram
 superuser: false
 
 # Role/position
-role: UG Project
+role: UG Project (2020-2021)
+mrole: SRMIST
 
 # Organizations/Affiliations
 organizations:
-  - name:
+  - name: MSc (Physics)
     url: ''
 
 # Short bio (displayed in user profile at end of posts)

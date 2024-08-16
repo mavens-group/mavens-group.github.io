@@ -20,7 +20,7 @@ authors:
 superuser: false
 
 # Role/position
-role: Masters Project
+role: Masters Project (2020-21)
 
 # Organizations/Affiliations
 organizations:

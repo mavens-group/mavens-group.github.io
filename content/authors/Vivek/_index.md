@@ -20,8 +20,8 @@ authors:
 superuser: false
 
 # Role/position
-mrole: Masters Project (2023-24)
-role: Accenture
+role: Masters Project (2023-24)
+mrole: Accenture
 # Organizations/Affiliations
 organizations:
   - name: Packaged Application Developer

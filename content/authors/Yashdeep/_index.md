@@ -19,8 +19,8 @@ authors:
 superuser: false
 
 # Role/position
-mrole: UG Project
-role: Institute of Science, Nagpur
+role: UG Project (2023-24)
+mrole: Institute of Science, Nagpur
 
 # Organizations/Affiliations
 organizations:

@@ -18,8 +18,8 @@ authors:
 superuser: false
 
 # Role/position
-mrole: UG Project(2020-2021)
-role: Vellore Institute of Technology
+role: UG Project (2020-2021)
+mrole: Vellore Institute of Technology
 
 # Organizations/Affiliations
 organizations:

@@ -49,9 +49,9 @@
           {{- end -}}
         </h2>
 
-        {{ with $person.mrole }}<h3>{{ . | markdownify | emojify }}</h3>{{ end }}
+        {{ with $person.role }}<h3>{{ . | markdownify | emojify }}</h3>{{ end }}
         {{ with $person.mrole }} <h2><b><small>Next Position</small></b></h2>
-          {{ with $person.role }}<h3>{{ . | markdownify | emojify }}</h3>{{ end }}
+          {{ with $person.mrole }}<h3>{{ . | markdownify | emojify }}</h3>{{ end }}
         {{ end }}
         {{ range $person.organizations }}
         <h3>
