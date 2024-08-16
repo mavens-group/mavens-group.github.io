@@ -19,12 +19,13 @@ authors:
 superuser: false
 
 # Role/position
-role: UG Project
+mrole: UG Project
+role: Institute of Science, Nagpur
 
 # Organizations/Affiliations
 organizations:
-  - name: SRM Institute of Science and Technology
-    url: 'https://www.srmist.edu.in'
+  - name: MSc (Physics)
+    url: ''
 
 # Short bio (displayed in user profile at end of posts)
 bio:

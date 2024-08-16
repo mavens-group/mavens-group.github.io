@@ -44,7 +44,7 @@ education:
       year: 2019
 
 social:
-  - icon: envelope
+  - icon: envelope-square
     icon_pack: fas
     link: 'mailto:rammanohartk@gmail.com'
 

@@ -47,14 +47,14 @@ education:
       year: 2017
 
 social:
-  - icon: envelope
+  - icon: envelope-square
     icon_pack: fas
     link: 'mailto:gr6613@srmist.edu.in'
   - icon: linkedin
     icon_pack: fab
     link: https://www.linkedin.com/in/greeshmaayana/
-  - icon: orcid
-    icon_pack: fab
+  - icon: orcid-square
+    icon_pack: ai
     link: https://orcid.org/0000-0003-4868-7035
 user_groups:
   - Researchers

@@ -55,17 +55,17 @@ skills:
     skill: Python
 
 social:
-  - icon: envelope
+  - icon: envelope-square
     icon_pack: fas
     link: 'mailto:km0207@srmist.edu.in'
-  - icon: google-scholar
+  - icon: google-scholar-square
     icon_pack: ai
     link: https://scholar.google.com/citations?user=f61SxgYAAAAJ&hl=en
   - icon: linkedin
     icon_pack: fab
     link: https://www.linkedin.com/in/karunakaran-m-51907924a/
-  - icon: orcid
-    icon_pack: fab
+  - icon: orcid-square
+    icon_pack: ai
     link: https://orcid.org/0000-0002-5401-7823
 user_groups:
   - Researchers

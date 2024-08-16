@@ -47,14 +47,14 @@ education:
       year: 2018
 
 social:
-  - icon: envelope
+  - icon: envelope-square
     icon_pack: fas
     link: 'mailto:mm8684@srmist.edu.in'
   - icon: linkedin
     icon_pack: fab
     link: https://www.linkedin.com/in/mohammed-mahshook/
-  - icon: orcid
-    icon_pack: fab
+  - icon: orcid-square
+    icon_pack: ai
     link: https://orcid.org/0009-0005-9118-2595
 user_groups:
   - Researchers

@@ -20,12 +20,12 @@ authors:
 superuser: false
 
 # Role/position
-role: Masters Project
-
+mrole: Masters Project (2023-24)
+role: Accenture
 # Organizations/Affiliations
 organizations:
-  - name: SRM Institute of Science and Technology
-    url: 'https://www.srmist.edu.in'
+  - name: Packaged Application Developer
+    url: ''
 
 # Short bio (displayed in user profile at end of posts)
 bio: My research interest covers the study of 2D energy materials like halides and carbides.
@@ -46,7 +46,7 @@ education:
       year: 2019
 
 social:
-  - icon: envelope
+  - icon: envelope-square
     icon_pack: fas
     link: 'mailto:vivekpallipamadathil@gmail.com'
   - icon: linkedin

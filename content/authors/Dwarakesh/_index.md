@@ -18,11 +18,12 @@ authors:
 superuser: false
 
 # Role/position
-role: UG Project
+mrole: UG Project(2020-2021)
+role: Vellore Institute of Technology
 
 # Organizations/Affiliations
 organizations:
-  - name:
+  - name: MSc (Physics)
     url: ''
 
 # Short bio (displayed in user profile at end of posts)

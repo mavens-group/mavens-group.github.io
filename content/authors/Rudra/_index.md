@@ -56,21 +56,21 @@ teaching:
 #   form "mailto:your-email@example.com" or "#contact" for contact widget.
 
 social:
-  - icon: envelope
+  - icon: envelope-square
     icon_pack: fas
     link: "contact"
-  - icon: google-scholar
+  - icon: google-scholar-square
     icon_pack: ai
     link: https://scholar.google.com/citations?user=FU6cIKAAAAAJ
   - icon: linkedin
     icon_pack: fab
     link: https://www.linkedin.com/in/rudra-banerjee-a6bb99b7
-  - icon: github
+  - icon: orcid-square
+    icon_pack: ai
+    link: https://orcid.org/0000-0002-5028-4844
+  - icon: github-square
     icon_pack: fab
     link: https://github.com/rudrab
-  - icon: orcid
-    icon_pack: fab
-    link: https://orcid.org/0000-0002-5028-4844
 # - icon: cv
 #   icon_pack: ai
 #   link: files/cvRB.pdf

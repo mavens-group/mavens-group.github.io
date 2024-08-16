@@ -46,7 +46,7 @@ education:
       year: 2017-2020
 
 social:
-  - icon: envelope
+  - icon: envelope-square
     icon_pack: fas
     link: 'mailto:sandhyathulluri60@gmail.com'
 user_groups:
