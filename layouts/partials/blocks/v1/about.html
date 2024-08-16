@@ -160,6 +160,52 @@
       </div>
       {{ end }}
 
+      {{/* {{ with $person.skills }} */}}
+      {{/* <div class="col-md-5"> */}}
+        {{/* <h2>Skills</h2> */}}
+        {{/* <div class="section-subheading">{{ i18n "Skills" | markdownify }}</div> */}}
+        {{/* <ul class="ul-edu fa-ul mb-0"> */}}
+          {{/* {{ range .courses }} */}}
+          {{/* <li> */}}
+            {{/* <i class="fa-li fas fa-award"></i> */}}
+            {{/* <div class="description"> */}}
+              {{/* <p class="course">{{ .course }}</p> */}}
+            {{/* </div> */}}
+          {{/* </li> */}}
+          {{/* {{ end }} */}}
+        {{/* </ul> */}}
+      {{/* </div> */}}
+      {{/* {{ end }} */}}
+
+      <ul class="col-md-5" aria-hidden="true">
+        <h2>Skills</h2>
+        <ul class="ul-edu fa-ul mb-0">
+        {{ range $person.skills }}
+        {{ $pack := or .icon_pack "fas" }}
+        {{ $pack_prefix := $pack }}
+        {{ if in (slice "fab" "fas" "far" "fal") $pack }}
+          {{ $pack_prefix = "fa" }}
+        {{ end }}
+          <li>
+            <i class="fa-li fas {{ $pack }} {{ $pack_prefix }}-{{ .icon }} medium-icon{{ .icon}}"></i>
+            <div class="description">
+              <p class="course">{{ .skill }}</p>
+            </div>
+          </li>
+        {{/* {{ $link := .skill }} */}}
+        {{/* {{ $scheme := (urls.Parse $link).Scheme }} */}}
+        {{/* {{ $target := "" }} */}}
+        {{/* {{ if not $scheme }} */}}
+          {{/* {{ $link = .link | relLangURL }} */}}
+        {{/* {{ else if in (slice "http" "https") $scheme }} */}}
+          {{/* {{ $target = "target=\"_blank\" rel=\"noopener\"" }} */}}
+        {{/* {{ end }} */}}
+        {{/* <li> */}}
+            {{/* <i class="{{ $pack }} {{ $pack_prefix }}-{{ .icon }} medium-icon">{{ " " }}</i>{{ .skill }} */}}
+        {{/* </li> */}}
+      {{ end }}
+      </ul>
+
     </div>
   </div>
 </div>

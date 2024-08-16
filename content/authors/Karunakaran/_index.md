@@ -46,6 +46,14 @@ education:
       institution: NMS S.Vellaichamy Nadar College
       year: 2015-2018
 
+skills:
+  - icon: linux
+    icon_pack: fab
+    skill: Linux
+  - icon: python
+    icon_pack: fab
+    skill: Python
+
 social:
   - icon: envelope
     icon_pack: fas
