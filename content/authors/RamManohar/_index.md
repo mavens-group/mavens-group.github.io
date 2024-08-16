@@ -25,7 +25,7 @@ role: Masters project
 # Organizations/Affiliations
 organizations:
   - name: SRM Institute of Science and Technology
-    url: ''
+    url: 'https://www.srmist.edu.in'
 
 # Short bio (displayed in user profile at end of posts)
 bio: Project in  topic the ab initio DFT study of PMMA/TiO

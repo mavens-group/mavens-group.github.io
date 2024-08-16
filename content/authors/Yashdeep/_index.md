@@ -24,13 +24,10 @@ role: UG Project
 # Organizations/Affiliations
 organizations:
   - name: SRM Institute of Science and Technology
-    url: 'www.srmist.edu.in'
+    url: 'https://www.srmist.edu.in'
 
 # Short bio (displayed in user profile at end of posts)
 bio:
-
-interests:
-  -
 
 education:
   courses:
@@ -44,5 +41,4 @@ user_groups:
 
 Yashdeep was a UG student in the Department of Physics and Nanotechnology at SRM Institute of Science and Technology.
 
-He worked on finding materials finger-print and structure-property relations using machine
-learning.
+Yashdeep worked on materials finger-print and structure-property relations using machine learning.

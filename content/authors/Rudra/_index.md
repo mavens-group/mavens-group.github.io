@@ -68,6 +68,9 @@ social:
   - icon: github
     icon_pack: fab
     link: https://github.com/rudrab
+  - icon: orcid
+    icon_pack: fab
+    link: https://orcid.org/0000-0002-5028-4844
 # - icon: cv
 #   icon_pack: ai
 #   link: files/cvRB.pdf

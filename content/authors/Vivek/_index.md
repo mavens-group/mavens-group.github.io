@@ -25,7 +25,7 @@ role: Masters Project
 # Organizations/Affiliations
 organizations:
   - name: SRM Institute of Science and Technology
-    url: ''
+    url: 'https://www.srmist.edu.in'
 
 # Short bio (displayed in user profile at end of posts)
 bio: My research interest covers the study of 2D energy materials like halides and carbides.
