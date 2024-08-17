@@ -5,7 +5,7 @@ _build:
   list: always
 
 # Display name
-title: Keerthipriya
+title: Keerthipriya T
 
 # Full name (for SEO)
 first_name: Keerthirpriya
@@ -48,6 +48,9 @@ social:
   - icon: envelope-square
     icon_pack: fas
     link: 'mailto:kt9756@srmist.edu.in'
+  - icon: linkedin
+    icon_pack: fab
+    link: https://www.linkedin.com/in/keerthipriya-t-12062725b
 user_groups:
   - Grad Students
 ---
