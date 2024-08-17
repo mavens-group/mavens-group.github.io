@@ -57,7 +57,7 @@ sections:
     content:
       text: |
         <p style="text-align:center; font-size: 2rem;"><i>You may say <b>we</b> are a dreamer<br>
-        <sub><small>- John Lennon (Imagine, slightly modified)</i></small></sub></p>
+        <small><small>- John Lennon (Imagine, slightly modified)</i></small></small></p>
 
 
         The MAVENs group, based within the Department of Physics and Nanotechnology at SRM

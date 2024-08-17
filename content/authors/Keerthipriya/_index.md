@@ -51,5 +51,12 @@ social:
 user_groups:
   - Grad Students
 ---
+Keerthipriya is a post graduate student at [Department of Computer
+Applications](https://www.srmist.edu.in/department/department-of-computer-applications/) at
+[SRMIST](https://www.srmist.edu.in) with a specialization in data science.
 
-Keerthipriya is a post graduate student in the [Department of Computer Applications](https://www.srmist.edu.in/department/department-of-computer-applications/) at [SRMIST](https://www.srmist.edu.in). She is studying Data Science concepts and many more model predictivity using Machine learning and invoke the tuning of model using many more algorithms using python and ready to apply this knowledge in the field of physics.
+Her academic focus is on the development and refinement of predictive models through the
+application of machine learning methodologies. Utilizing Python as a primary tool, she delves into
+various algorithmic approaches for model optimization. Her research involves a rigorous exploration
+of theoretical foundations and their practical implementation within the field of materials
+science.
