@@ -71,6 +71,15 @@ user_groups:
   - Researchers
 ---
 
-Karunakaran M is a Research Scholar in the [Department of Physics and Nanotechnology](https://www.srmist.edu.in/department/department-of-physics-and-nanotechnology/) at [SRMIST](https://www.srmist.edu.in).
+**Karunakaran M** is a Research Scholar in the [Department of Physics and
+Nanotechnology](https://www.srmist.edu.in/department/department-of-physics-and-nanotechnology/)
+at [SRMIST, KTR](https://www.srmist.edu.in).
+He is one of the members of the **M**aterials **A**dvancing a **V**iable **EN**ergy future (MAVENs) Group.
 
-He is exploring the electronic and magnetic properties of disordered Heusler alloys using DFT and Monte Carlo.
+Karunakaran applies _ab-initio_ density functional theory, KKR-CPA, and Monte Carlo methods to
+investigate the system properties. His research is dedicated to exploring the electronic, magnetic,
+and thermodynamic characteristics of systems for green-energy applications such as magnetocalorics
+and spintronics. He is deeply passionate about enhancing and controlling the systems'
+properties, performance, and efficiency through doping. With over three and a half years of active
+involvement in the field of Heusler alloys, his current research focuses on controlling the
+electronic and magnetic properties of disordered Heusler alloys.
