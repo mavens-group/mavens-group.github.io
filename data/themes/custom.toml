@@ -1,0 +1,20 @@
+# Theme metadata
+name = "Custom Theme"
+
+[light]
+  # Primary
+  primary = "#990000"
+
+  # Links
+  link = "#990000"
+  link_hover = "#990000"
+
+  # Menu
+  menu_primary = "#ffffff"
+  menu_text = "#990000"
+  menu_text_active = "#990000"
+  menu_title = "#990000"
+
+  # Home sections
+  home_section_odd = "rgb(255, 255, 255)"
+  home_section_even = "rgb(255, 255, 255)"
