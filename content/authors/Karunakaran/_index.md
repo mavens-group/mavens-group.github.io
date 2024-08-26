@@ -87,5 +87,5 @@ of research experience in Heusler alloys, his current work focuses on modulating
 magnetic properties of disordered Heusler alloys, thereby contributing to the development of
 advanced materials for sustainable energy technologies.
 
-Besides publishing his work in peer reviewed journals, Mr. Karunakaran has also presents his work in
+Besides publishing his work in peer reviewed journals, Mr. Karunakaran also presents his work in
 various national and international conferences.
