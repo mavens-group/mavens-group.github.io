@@ -29,17 +29,17 @@ interests:
   - Magnetocaloric Properties
   - Spintronics
 
-education:
+experience:
   courses:
     - course: Guest Scientist
       institution: Harish-chandra Research Institute
-      year: 2017-2019
-    - course: Pos Doc Experience
-      institution: Warwick University,Uppsala University
-      year: 2012-2017
-    - course: PhD in Physics
-      institution: University of Calcutta/S. N. Bose National Centre for Basic Sciences
-      year: 2013
+      year: 2017-19
+    - course: Pos Doc
+      institution: Uppsala University
+      year: 2015-17
+    - course: Research Associate
+      institution: Warwick University
+      year: 2012-15
 
 teaching:
   courses:
