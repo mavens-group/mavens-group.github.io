@@ -59,26 +59,27 @@ sections:
         <p style="text-align:center; font-size: 2rem;"><i>You may say <b>we</b> are a dreamer<br>
         <small><small>- John Lennon (Imagine, slightly modified)</i></small></small></p>
 
+        The MAVENs (**M**aterials **A**dvancing a **V**iable **EN**ergy future) group, led by [Dr
+        Rudra Banerjee](https://mavens-group.github.io/author/rudra-banerjee/) is based in
+        the [Department of Physics and Nanotechnology](https://www.srmist.edu.in/department/department-of-physics-and-nanotechnology/)
+        at [SRM Institute of Science and Technology](https://srmist.edu.in). The MAVENs dreams a cleaner
+        environment to breath for the next generations by developing innovative materials solutions
+        for green energy using computational modelling.
 
-        The MAVENs group, based within the Department of Physics and Nanotechnology at SRM
-        Institute of Science and Technology, dreams a cleaner environment to breath for the next
-        generations by developing innovative materials solutions for green energy using computational
-        modelling.
+        Focusing on green energy technologies, the MAVENs team is actively designing novel catalysts for
+        the hydrogen evolution reaction (HER), engineering magnetocaloric materials for energy-efficient
+        cooling, and exploring qubit materials for quantum computing applications.
 
-        With a focus on green energy technologies, the MAVENs team is actively engaged in the design of
-        novel catalysts for the hydrogen evolution reaction (HER), the engineering of magnetocaloric
-        materials for energy-efficient cooling, and the exploration of qubit materials for quantum
-        computing applications.
+        The group's research methodology combines advanced computational techniques, including density
+        functional theory (DFT) and Monte Carlo simulations, with high-throughput computing and machine
+        learning. This interdisciplinary approach enablesthe rapid discovery and optimization of promising materials.
 
-        Our research methodology combines advanced computational techniques, including density functional
-        theory (DFT) and Monte Carlo simulations, with high-throughput computing and machine learning. This
-        interdisciplinary approach enables us to accelerate the discovery of promising materials and
-        optimize their properties.
+        Furthermore, we actively collaborate with leading experimentalists and theoreticians, fostering a
+        synergistic environment that accelerates material discovery and enhances the reliability of our
+        computational predictions.
 
         We invite talented MSc students with a passion for physics, chemistry, or materials science to join
-        our dynamic research group. By working alongside our experienced researchers, you will have the
-        opportunity to contribute to cutting-edge research and develop the skills necessary for a
-        successful career in academia or industry.
+        our dynamic research group.
 
         To find more about our current research Interests, check:
         {{% cta cta_link="./research/" cta_text="Research Interests" %}} To find about available

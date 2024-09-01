@@ -2,13 +2,13 @@
 title: Beginner's Guide
 show_date: false
 profile: true
+summary: Beginner's guide for students who are interested in project (BSc/MSc) or PhD
+ with [me](https://mavens-group.github.io/author/rudra-banerjee/).
 ---
 ## Read before you Leap
-This document is a starter’s guide for students who are interested in project (BSc/MSc) or PhD
- with [me](https://mavens-group.github.io/author/rudra-banerjee/). For the duration of your
-project you will become part of our [**MAVENs** team of graduate
-students](http://mavens-group.github.io). I discuss here our research mission, our way of working,
-the tools we use and provide some links to key scientific papers that relate to our research. This
+For the duration of your project you will become part of the [**MAVENs**
+group](http://mavens-group.github.io). I discuss here our research mission, our way of working, the
+tools we use and provide some links to key scientific papers that relate to our research. This
 guide is always a work in progress and each project will have its own goals and dynamics. Still,
 generally speaking, I would appreciate if you have a look at the links and think about the issues
 that I raise here. Talk to me when you have questions or ideas to improve this document.

@@ -1,12 +1,13 @@
 ---
 title: Project Position
+summary: Multiple project positions available in the group.
 date: 2024-07-01
 profile: false
-
+show_date: false
 banner:
   image: group.webp
 ---
-BSc/MSc semester project in Computational Physics and Machine Learning
+## BSc/MSc semester project in Computational Physics and Machine Learning
 
 <!--more-->
 ### Project Topics

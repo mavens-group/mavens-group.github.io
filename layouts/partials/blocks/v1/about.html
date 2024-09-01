@@ -144,7 +144,7 @@
       {{ end }}
 
       {{ with $person.teaching }}
-      <div class="col-md-5">
+      <div class="col-md-6">
         <div class="section-subheading">{{ "Teaching" | markdownify }}</div>
         <ul class="ul-edu fa-ul mb-0">
           {{ range .courses }}
@@ -161,7 +161,7 @@
       {{ end }}
 
       {{ with $person.accolade }}
-      <div class="col-md-5">
+      <div class="col-md-6">
         <div class="section-subheading">{{ "Accolade" | markdownify }}</div>
         <ul class="ul-edu fa-ul mb-0">
           {{ range .courses }}
@@ -178,7 +178,7 @@
       {{ end }}
 
       {{ with $person.skills }}
-      <ul class="col-md-5" aria-hidden="true">
+      <ul class="col-md-6" aria-hidden="true">
         <div class="section-subheading">{{ "Skills" | markdownify }}</div>
         <ul class="ul-edu fa-ul mb-0">
         {{ range $person.skills }}
