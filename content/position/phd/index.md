@@ -1,6 +1,6 @@
 ---
 title: PhD Position
-summary: Join the MAVENs group at SRMIST for a PhD position in computational materials science.
+summary: Join the MAVENs Group at SRMIST for a PhD Position in Computational Condensed Matter Physics
 profile: false
 date: 2024-09-01
 show_date: false
@@ -8,13 +8,15 @@ show_date: false
 banner:
   image: group.webp
 ---
-## Join the MAVENs group at SRMIST for a PhD position in computational materials science.
+## Join the MAVENs group at SRMIST for a PhD position in Computational Condensed Matter Physics
 
 We're seeking motivated candidates to explore 2D materials using DFT and machine learning for green energy applications. Apply now and contribute to cutting-edge research.
 
 ### Research Topic:
 
 - First Principles and DFT-based study of 2D materials
+- Applications in green hydrogen production and caloric and qubit materials
+
 
 ### PhD Position Details
 
@@ -22,7 +24,7 @@ We're seeking motivated candidates to explore 2D materials using DFT and machine
 - Eligibility:
   - Minimum 70% in the last university exam,
   - Recent Bachelor's or Master's degree in relevant field,
-  - strong background in materials science or numerical methods,
+  - strong background in condensed matter physics and numerical methods,
   - Python/Fortran programming experience preferred
 
 ### Responsibilities
