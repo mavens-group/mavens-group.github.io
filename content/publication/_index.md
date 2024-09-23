@@ -1,4 +1,12 @@
 ---
+_build:
+  render: always
+  list: always
+cascade:
+  _build:
+    render: always
+    list: always
+
 title: Publications
 
 # View.
