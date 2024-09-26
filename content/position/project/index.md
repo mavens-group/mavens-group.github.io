@@ -27,4 +27,6 @@ banner:
 - First principle calculations on 2D materials and molecules for applications like  green hydrogen and magnetocaloric materials.
 
 ### Application
-Interested candidates should fill out [this form](https://forms.gle/oKHCcX8RGuG3u4pD9) before June 30, 2024
+Interested candidates should fill out [this form](https://forms.gle/oKHCcX8RGuG3u4pD9).
+### Last date of application
+For project submission on 2026, apply for the position before January 30, 2025
