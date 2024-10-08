@@ -70,9 +70,9 @@ social:
 user_groups:
   - Researchers
 ---
-Mr. Karunakaran M is a Research Scholar in the [Department of Physics and
-Nanotechnology](https://www.srmist.edu.in/department/department-of-physics-and-nanotechnology/)
-at [SRMIST, KTR](https://www.srmist.edu.in).
+Mr. Karunakaran M is a Research Scholar in the [Department of Physics and Nanotechnology]
+(https://www.srmist.edu.in/department/department-of-physics-and-nanotechnology/) at [SRMIST,
+KTR](https://www.srmist.edu.in).
 
 His research employs sophisticated computational methodologies, including _ab initio_ density
 functional theory (DFT), the Korringa-Kohn-Rostoker Coherent Potential Approximation (KKR-CPA), and
