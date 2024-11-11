@@ -1,4 +1,8 @@
 ---
+_build:
+  render: always
+  list: never
+
 title: PhD Position
 summary: Join the MAVENs Group at SRMIST for a PhD Position in Computational Condensed Matter Physics
 profile: false
