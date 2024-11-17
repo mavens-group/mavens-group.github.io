@@ -13,7 +13,7 @@ This study, titled "[Self-rechargeable aqueous Zn2+/K+ electrochromic energy sto
 scalable spray-coating integrated with Marangoni flow](https://authors.elsevier.com/c/1jYJ08Z1RY5kB7)", is a big step toward making aqueous zinc-ion
 batteries that work well and are useful.
 
-Through our collaborative efforts, [Greeshma R](https://mavens-group.github.io/author/greeshma-r)
+Through our collaborative efforts, [Greeshma R](../../author/greeshma-r)
 from the MAVENs group has contributed essential theoretical insights, while the experimental
 validation and device fabrication were expertly executed by our colleagues at CeNS. This marks our
 second successful collaboration with AKS group, building upon the foundation laid in our previous
