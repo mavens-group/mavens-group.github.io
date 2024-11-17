@@ -140,10 +140,10 @@ and **giving a talk** ([video](http://research.microsoft.com/apps/video/default.
 [slides](http://research.microsoft.com/en-us/um/people/simonpj/papers/giving-a-talk/giving-a-talk-slides.pdf)).
 
 In general, if you work on a MSc thesis project or higher, I’d like you to make a (final) report
-update at least once a month. The final report should be in the form of a publishable IEEE journal
-paper. So, working on a project implies a monthly refinement of the paper until it’s ready for
-submission (or project time runs out). Use the process of incremental report refinement as a tool
-to discover what you need to work on next.
+update at least once a month. The final report should be in the form of a LaTeX article,
+publishable in a peer reviewed journal. So, working on a project implies a monthly refinement of
+the paper until it’s ready for submission (or project time runs out). Use the process of
+incremental report refinement as a tool to discover what you need to work on next.
 
 ## Your First Month
 
@@ -175,13 +175,13 @@ Then, start your project:
 
 - You need to get your project goals sharp. Therefore, I suggest that you write your first draft for the project’s final report by the end of the first month, with **focus on the conclusions** (see previously mentioned reporting advice by Magnusson). This first-draft edition of the final paper may find dual use as your project proposal. We are well-aware that the actual project plan may change as the project unrolls due to unforeseen obstacles. Your final evaluation will therefore be based on balancing the realization of project goals versus your creativity in coping with difficult spots.
 
-- Next to the final goals, you need to understand your starting point. Please **get familiar with our existing code base** (at github) that you will be working with. You should be able to understand (y)our code enough to make a change confidently. This also means that you’ll have to start training yourself how to code in Julia and how to work with git (and github). Working with Julia, git and github is a process that you will gradually improve upon, but don’t postpone training yourself on these tools. If you have no experience with version control software, this may feel like a burden in the beginning, but it will become a major asset (for the rest of your career) once you make it a habit to record changes by version control.
+- Next to the final goals, you need to understand your starting point. Please **get familiar with our existing code base** (at github) that you will be working with. You should be able to understand (y)our code enough to make a change confidently. This also means that you’ll have to start training yourself how to code in fortran/python and how to work with git (and github). Working with fortran/python, git and github is a process that you will gradually improve upon, but don’t postpone training yourself on these tools. If you have no experience with version control software, this may feel like a burden in the beginning, but it will become a major asset (for the rest of your career) once you make it a habit to record changes by version control.
 
 
 Once you got your final goals and starting point clear, you can make an attempt at a project plan. The project plan is basically a list of intermediate goals (called: _milestones_) that you intend to complete on your way from starting point to final goals.
 
 
-- Finally, I will give you some literature specifically tailored for your project. You should start training yourself in Bayesian modeling and how to do Bayesian inference through message passing in graphical models.
+- Finally, I will give you some initial literature specifically tailored for your project. You should start training yourself on the _aimd, DFT and monte carlo_, based on the requirement of your project.
 
 
 Let me know if this guide helps you and feel free to suggest updates. Good luck and welcome to the team! We look much forward to working with you.
