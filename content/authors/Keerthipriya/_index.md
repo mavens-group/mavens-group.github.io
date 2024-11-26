@@ -20,7 +20,7 @@ authors:
 superuser: false
 
 # Role/position
-role: MSc (Applied Data Science)
+role: Masters Project (2024-25) 
 
 # Organizations/Affiliations
 organizations:
