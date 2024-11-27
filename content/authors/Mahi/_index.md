@@ -4,7 +4,7 @@ _build:
   list: always
 
 # Display name
-title: Maahi Singh Chouhan
+title: Mahi Singh Chouhan
 
 # Full name (for SEO)
 first_name: Mahi
