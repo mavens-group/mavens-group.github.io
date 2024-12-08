@@ -4,7 +4,7 @@ _build:
   list: always
 
 # Display name
-title: Harshaa
+title: Harshaa V
 
 # Full name (for SEO)
 first_name: Harshaa
