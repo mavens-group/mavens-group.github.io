@@ -46,6 +46,17 @@ education:
       institution: Government Arts College (Autonomous), Coimbatore
       year: 2018
 
+skills:
+  - icon: linux
+    icon_pack: fab
+    skill: Linux
+  - icon: python
+    icon_pack: fab
+    skill: Python
+  - icon: microchip
+    icon_pack: fas
+    skill: Machine Learning
+
 social:
   - icon: envelope-square
     icon_pack: fas
@@ -62,4 +73,6 @@ user_groups:
 
 Mohammed Mahshook is a Research Scholar in the [Department of Physics and Nanotechnology](https://www.srmist.edu.in/department/department-of-physics-and-nanotechnology/) at [SRMIST](https://www.srmist.edu.in).
 
-He is investigating the application of machine learning techniques to elucidate complex structure-activity relationships in materials for Quantum Information Processing. His research aims to accelerate the materials discovery process through these machine learning techniques.
+He is investigating the application of machine learning techniques to elucidate complex structure-activity relationships in materials for quantum information processing. His research focuses on accelerating the materials discovery process by developing predictive models that substantially narrow the search space for candidate materials while offering statistically significant insights into their structures and emergent properties.
+
+Mahshook's research aims to identify materials capable of hosting deep-level centers, a class of point defects that introduce isolated bound electronic states within the bandgap of a material. These defects are foundational to semiconductor-based quantum technologies, including applications in quantum computing, communication, and sensing. Given that the physics underlying these defects remains poorly understood, Mahshook employs machine learning models to predict host-defect candidates that are compatible with quantum requirements. His research lies at the intersection of data science and condensed matter physics, contributing to advancements in quantum-compatible materials.
