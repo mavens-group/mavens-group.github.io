@@ -104,9 +104,10 @@ such as getting newcomers in the team up to speed.
 <img style="float: left; margin: 10px 10px 0px 0px;" src="./git.svg" width="15%">
 
 We use the [git](http://git-scm.com) version control system to track the various developments of
-our code base and we organize our projects in repositories at [github](http://github.com). It is
-important to become a smooth user of both git and github. We use git and github also to track all
-documents that we write ourselves, including your thesis report.
+our code base and we organize our projects in repositories at
+[gitlab](https://gitlab.com/impact-group/). It is important to become a smooth user of both git and
+gitlab. We use git and gitlab also to track all documents that we write ourselves, including your
+thesis report.
 
 ### LaTeX
 <img style="float: right; margin: 10px 10px 0px 0px;" src="./LaTeX_logo.svg" width="20%">
