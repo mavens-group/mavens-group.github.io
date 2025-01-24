@@ -36,7 +36,7 @@ interests:
 education:
   courses:
     - course: BSc in Physics
-      institution:
+      institution: SRM Institute of Science and Technology
       year: (2022 - )
 social:
   - icon: envelope-square

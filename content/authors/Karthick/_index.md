@@ -35,6 +35,9 @@ interests:
 
 education:
   courses:
+    - course: BTech in Nanotechnology
+      institution: SRM Institute of Science and Technology
+      year: (2022 - )
 social:
   - icon: envelope-square
     icon_pack: fas
