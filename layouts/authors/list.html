@@ -3,32 +3,35 @@
 {{/* Author profile page. */}}
 
 {{/* If an account has not been created for this user, just display their name as the title. */}}
-{{ if not .File }}
-<div class="universal-wrapper pt-3">
-  <h1>{{ .Title }}</h1>
-</div>
-{{ end }}
+{{/* {{ if not .File }} */}}
+{{/* <div class="universal-wrapper pt-3"> */}}
+  {{/* <h1>{{ .Title }}</h1> */}}
+{{/* </div> */}}
+{{/* {{ end }} */}}
 
 <section id="profile-page" class="pt-5">
   <div class="container">
-    {{/* Show the About block if an account exists for this user. */}}
-    {{/* TODO: remove dependency on v1 blocks. Either migrate to v2 blocks(?) or directly implement layout here. */}}
     {{ if .File }}
       {{ $widget := "blocks/v1/about.html" }}
-      {{ $username := (path.Base .File.Dir) }}{{/* Alternatively, use `index .Params.authors 0` */}}
+      {{ $username := (path.Base .File.Dir) }}
       {{ $params := dict "wcPage" $ "wcBlock" . "author" $username }}
       {{ partial $widget $params }}
-    {{end}}
+    {{ end }}
 
     {{ $query := where .Pages ".IsNode" false }}
-    {{ $count := len $query }}
+    {{ $sortedQuery := sort $query "Params.date" "desc" }}
+    {{ $limitedQuery := first 10 $sortedQuery }}
+    {{ $totalPublications := len $query }}
+    {{ $count := len $limitedQuery }}
+
     {{ if $count }}
     <div class="article-widget content-widget-hr">
-      <h3>{{ i18n "user_profile_latest" | default "Latest" }}</h3>
+      <h3>{{ if gt $totalPublications (len $limitedQuery) }} Publications <small>(Latest: Check
+          <a href="../../publication/">Publications</a> for complete list)</small>{{ else }}Publications{{ end }}</h3>
       <ul>
-        {{ range $query }}
+        {{ range $limitedQuery }}
         <li>
-          {{ index .Params.authors 0 }} et. al., {{ .Params.publication | markdownify }}, {{ .Params.date.Format " 2006" }}, <a href="{{ .RelPermalink }}">{{ .Params.doi }}</a>
+          {{ index .Params.authors 0 }} et. al., {{ .Params.publication | markdownify }}, {{ .Params.date.Format "2006" }}, <a href="{{ .RelPermalink }}">{{ .Params.doi }}</a>
         </li>
         {{ end }}
       </ul>
