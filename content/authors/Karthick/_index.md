@@ -35,7 +35,7 @@ interests:
 
 education:
   courses:
-    - course: BTech in Nanotechnology
+    - course: B.Tech. in Nanotechnology
       institution: SRM Institute of Science and Technology
       year: (2022 - )
 social:

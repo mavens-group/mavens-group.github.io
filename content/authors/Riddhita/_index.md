@@ -34,12 +34,9 @@ interests:
 
 education:
   courses:
-    - course: MSc in Physics
+    - course: B. Tech. (Computer Science (Core))
       institution: SRM Institute of Science and Technology
-      year: (2024 -)
-    - course: BSc in Physics
-      institution: Dwaraka Doss Goverdhan Doss Vaishnav college
-      year: 2024
+      year: (2023 -)
 social:
   - icon: envelope-square
     icon_pack: fas

@@ -37,7 +37,7 @@ interests:
 
 education:
   courses:
-    - course: Btech. in Mechanical Engineering (AIML)
+    - course: B. Tech. in Mechanical Engineering (AIML)
       institution: SRM Institute of Science and Technology
       year: (2022 - )
 social:
