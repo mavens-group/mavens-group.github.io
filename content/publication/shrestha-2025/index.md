@@ -28,14 +28,14 @@ publication_types:
 publication: '*Physica B: Condensed Matter*'
 publication_short: ''
 
-doi: ''
+doi: '10.1016/j.physb.2025.417148'
 
 abstract: 'Hydrogen production via the Hydrogen Evolution Reaction (HER) is crucial for sustainable
 energy, but its reliance on expensive Pt-based catalysts limits scalability. Here, we investigate
 the catalytic performance of Zr-doped $Ti_3C_2$ and $Ti_3CN$ MXenes using first-principles density
 functional theory (DFT). Our results show that Zr doping at 3% and 7% significantly enhances HER
 activity by reducing the work function to the optimal range of 3.5–4.5 eV and achieving near-zero
-Gibbs free energy (
+Gibbs free energy ($\Delta G_H$
 = 0.18–0.16 eV), ideal for efficient hydrogen adsorption and desorption. Bader charge analysis
 reveals substantial electron accumulation at Zr and N sites, facilitating charge transfer and
 improving catalytic performance. These findings establish Zr-doped MXenes as cost-effective,
