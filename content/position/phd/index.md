@@ -18,8 +18,7 @@ We're seeking motivated candidates to explore 2D materials using DFT and machine
 
 ### Research Topic:
 
-- First Principles and DFT-based study of 2D materials
-- Applications in green hydrogen production and caloric and qubit materials
+- First Principles and DFT-based study of 2D qubit materials for quantum computation
 
 
 ### PhD Position Details
@@ -27,7 +26,7 @@ We're seeking motivated candidates to explore 2D materials using DFT and machine
 - Eligibility:
   - Minimum 70% in the last university exam,
   - Recent Bachelor's or Master's degree in relevant field,
-  - strong background in condensed matter physics and numerical methods,
+  - Strong background in condensed matter physics and numerical methods,
   - Python/Fortran programming experience preferred
 
 ### Responsibilities
@@ -42,10 +41,9 @@ We're seeking motivated candidates to explore 2D materials using DFT and machine
 ### Application Process
 
 - Application Deadline: April 15, 2025. Group interview will be held in April
-- Start Date: July 2025
 - Apply [online](https://forms.gle/8pKkCSKB65SwgHdB6)
 
- <small>Official written + viva exam will be held at SRMIST, KTR campus. Follow [this page](https://admissions.srmist.edu.in/srmistonline/phdapplication) for detailed instruction.</small>
+- <small>Official written + viva exam will be held at SRMIST, KTR campus. Follow [this page](https://admissions.srmist.edu.in/srmistonline/phdapplication) for detailed instruction.</small>
 
 ### Fellowship
 
