@@ -1,7 +1,7 @@
 ---
 _build:
   render: always
-  list: never
+  list: always
 
 title: PhD Position
 summary: Join the MAVENs Group at SRMIST for a PhD Position in Computational Condensed Matter Physics
@@ -24,7 +24,6 @@ We're seeking motivated candidates to explore 2D materials using DFT and machine
 
 ### PhD Position Details
 
-- Start Date: January 2025
 - Eligibility:
   - Minimum 70% in the last university exam,
   - Recent Bachelor's or Master's degree in relevant field,
@@ -42,8 +41,9 @@ We're seeking motivated candidates to explore 2D materials using DFT and machine
 
 ### Application Process
 
-- Apply [online](https://forms.gle/8pKkCSKB65SwgHdB6), group interview will be held in October
-- Application Deadline: September 30, 2024
+- Application Deadline: April 15, 2024. Group interview will be held in April
+- Start Date: July 2025
+- Apply [online](https://forms.gle/8pKkCSKB65SwgHdB6)
 
  <small>Official written + viva exam will be held at SRMIST, KTR campus. Follow [this page](https://admissions.srmist.edu.in/srmistonline/phdapplication) for detailed instruction.</small>
 
