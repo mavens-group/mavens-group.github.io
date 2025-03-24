@@ -41,7 +41,7 @@ We're seeking motivated candidates to explore 2D materials using DFT and machine
 
 ### Application Process
 
-- Application Deadline: April 15, 2024. Group interview will be held in April
+- Application Deadline: April 15, 2025. Group interview will be held in April
 - Start Date: July 2025
 - Apply [online](https://forms.gle/8pKkCSKB65SwgHdB6)
 
