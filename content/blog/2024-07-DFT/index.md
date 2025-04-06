@@ -53,7 +53,7 @@ By the end of this course, participants will:
 {{< /spoiler >}}
 {{< spoiler text="Target Audience" >}}
 - graduate students, researchers, and professionals in physics, chemistry, materials science, and
-    related fields
+    related fields as a first step to the world of DFT.
 {{< /spoiler >}}
 
 {{< cta cta_text="Begin the course" cta_link="01-basics/" >}}
