@@ -17,7 +17,7 @@ banner:
 Are you passionate about cutting-edge research in quantum materials and sustainable energy? The MAVENs group at SRM Institute of Science and Technology (SRMIST) is inviting applications for a fully-funded PhD position in Computational Condensed Matter Physics.
 
 ### Research Focus:
-First-principles and DFT-based investigation of 2D qubit materials for quantum computation
+First-principles and DFT-based investigation of 2D qubit materials for quantum computation.
 
 ### Who We're Looking For
 Highly motivated individuals with:
@@ -25,7 +25,7 @@ Highly motivated individuals with:
 - A recent Bachelor’s or Master’s degree in Physics, Materials Science, or a related field
 - Minimum 70% marks in the most recent qualifying exam
 - A solid foundation in condensed matter physics and numerical methods
-- Programming experience in Python or Fortran (preferred)### Responsibilities
+- Programming experience in Python or Fortran (preferred)
 
 
 ### Application Process
