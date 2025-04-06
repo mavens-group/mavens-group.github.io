@@ -9,7 +9,7 @@ cascade:
 title: Introduction to Density functional theory
 linkTitle: Density Functional Theory
 date: 2024-07-26
-Summary:
+Summary: Density Functional Theory in nutshell for the beginners
 image:
   focal_point: 'top'
 type: book
