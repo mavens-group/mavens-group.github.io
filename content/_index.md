@@ -29,6 +29,19 @@ sections:
               brightness: 0.5
           position: center
           color: '#555'
+      - title: Functionalize MXene for green hydrogen
+        content: '$\mathsf{Ti_3C_2}$ MXene is a cheap material, easy to synthesis in production scale. We
+        have shown that this can be used as a catalyst for Hudrgen Evolution Reaction(HER) by means
+        of doping Zr to Ti cite.
+        [https://doi.org/10.1016/j.physb.2025.417148](https://doi.org/10.1016/j.physb.2025.417148)'
+        align: left
+        background:
+          image:
+            filename: mxene.webp
+            filters:
+              brightness: 0.5
+          position: center
+          color: '#555'
 #     - title: Machine Learning for Materials Discovery
 #       content:
 #       align: right
