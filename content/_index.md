@@ -8,7 +8,7 @@ sections:
   - block: slider
     content:
       slides:
-      - title: MAVENs
+      - title: <br><br><br><br><br><br>MAVENs
         content: Materials Advancing a Viable ENergy future
         align: center
         background:
