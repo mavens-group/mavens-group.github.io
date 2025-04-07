@@ -19,8 +19,9 @@ sections:
       - title: Tuning the properties of materials
         content: 'Doping of 3d material changes the magnetic interaction $\mathsf{J_{ij}}$ considerably in
         Heusler alloy. The change in $\mathsf{J_{ij}}$ affects the Curie temperature of the materials,
-        giving high magnetocalric effect around room temperature.
-        [https://doi.org/10.1016/j.jpcs.2024.111914](https://doi.org/10.1016/j.jpcs.2024.111914)'
+        giving high magnetocalric effect around room temperature.<br>
+        doi: [10.1016/j.jpcs.2024.111914](https://doi.org/10.1016/j.jpcs.2024.111914)<br>
+        doi: [10.1063/5.0238199](https://doi.org/10.1063/5.0238199)'
         align: left
         background:
           image:
@@ -32,8 +33,8 @@ sections:
       - title: Functionalize MXene for green hydrogen
         content: '$\mathsf{Ti_3C_2}$ MXene is a cheap material, easy to synthesis in production scale. We
         have shown that this can be used as a catalyst for Hydrgen Evolution Reaction(HER) by means
-        of doping Zr to Ti cite.
-        [https://doi.org/10.1016/j.physb.2025.417148](https://doi.org/10.1016/j.physb.2025.417148)'
+        of doping Zr to Ti cite.<br>
+        doi: [10.1016/j.physb.2025.417148](https://doi.org/10.1016/j.physb.2025.417148)'
         align: left
         background:
           image:
