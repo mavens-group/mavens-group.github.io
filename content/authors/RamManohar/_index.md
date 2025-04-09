@@ -49,7 +49,7 @@ social:
     link: 'mailto:rammanohartk@gmail.com'
 
 user_groups:
-  - Alumni
+  - Alumni (Grad)
 ---
 Ram was a master’s student in the Department of Physics and Nanotechnology at SRM Institute of Science and Technology.
 

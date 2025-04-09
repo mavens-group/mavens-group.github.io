@@ -54,7 +54,7 @@ social:
     link: https://www.linkedin.com/in/vivek-karunakaran98
 
 user_groups:
-  - Alumni
+  - Alumni (Grad)
 ---
 
 Vivek is a master's student in the Department of Physics and Nanotechnology at SRM Institute of Science and Technology. He is investigating the properties and applications of metal-free perovskites. 

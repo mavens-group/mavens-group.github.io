@@ -50,7 +50,7 @@ social:
     icon_pack: fas
     link: 'mailto:sandhyathulluri60@gmail.com'
 user_groups:
-  - Alumni
+  - Alumni (Grad)
 ---
  Thulluri Sandhya was a Master student in the department of Physics and Nanotechnology at SRM Institute of Science and Technology.
 <br>

@@ -14,9 +14,11 @@ sections:
       user_groups:
           - Group Head
           - Researchers
+          - Alumni (Scholars)
           - Grad Students
           - Visitors
           - Alumni
+          - Alumni (Grad)
       sort_by: Params.join
       sort_ascending: true
     design:

@@ -37,7 +37,7 @@ education:
       year: 2024
 
 user_groups:
-  - Alumni
+  - Alumni (Grad)
 ---
 
 Yashdeep was a UG student in the Department of Physics and Nanotechnology at SRM Institute of Science and Technology.
