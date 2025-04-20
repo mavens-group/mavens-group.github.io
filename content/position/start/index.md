@@ -67,7 +67,7 @@ maintained.
 1. Execution
     - This issue is about professionalism. You need to adhere to strict principles of academic honesty and contribute to technical discussions in the team. Your technical opinion is always appreciated but play the ball, not the person.
 1. Reporting
-    - All your ideas are worth nothing to society if they remain locked up inside your head. As an engineer, you must communicate your ideas well, both to technical and more general audiences.
+    - All your ideas are worth nothing to society if they remain locked up inside your head. As a physicist, you must communicate your ideas well, both to technical and more general audiences.
 
 <!-- Aside from the aforementioned deliverables that are imposed by the Examination Committee, I place a **high value on the quality of your (software) code**. Consider this as a fifth examination criterion. The software that you produce in your project is the sharpest description of your ideas, so make it readable and understandable for others. If you want to read some more on this, consult [Aruliah](http://arxiv.org/abs/1210.0530 "Aruliah et al, Best Practices for Scientific Computing, 2012") (2012) and/or [Cannam](http://soundsoftware.ac.uk/icassp-2012-paper "Cannam et al., Sound Software: Towards Software Reuse in Audio and Music Research, 2012") (2012). Generally, there are many ways to improve your coding skills, e.g., the [lectures by Sandi Metz](https://www.youtube.com/watch?v=8bZh5LMaSmE) are nearly always interesting. -->
 

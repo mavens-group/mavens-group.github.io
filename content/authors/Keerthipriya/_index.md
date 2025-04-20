@@ -10,7 +10,7 @@ title: Keerthipriya T
 # Full name (for SEO)
 first_name: Keerthirpriya
 last_name: Thirunavukkarasu
-join: 2023
+join: -2024
 
 # Username (this should match the folder name)
 authors:
@@ -52,7 +52,7 @@ social:
     icon_pack: fab
     link: https://www.linkedin.com/in/keerthipriya-t-12062725b
 user_groups:
-  - Grad Students
+  - Alumni (Grad)
 ---
 Keerthipriya is a post graduate student at [Department of Computer
 Applications](https://www.srmist.edu.in/department/department-of-computer-applications/) at

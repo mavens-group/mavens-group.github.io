@@ -9,7 +9,7 @@ title: Anoushka Sharma
 # Full name (for SEO)
 first_name: Anoushka
 last_name: Sharma
-join: 2024
+join: -2024
 
 # Username (this should match the folder name)
 authors:
@@ -43,7 +43,7 @@ social:
     icon_pack: fas
     link: 'mailto:av6441@srmist.edu.in'
 user_groups:
-  - Grad Students
+  - Alumni (Grad)
 ---
 Anoushka is a bachelor's  student in the [Department of Physics and
 Nanotechnology](https://www.srmist.edu.in/department/department-of-physics-and-nanotechnology/) at
