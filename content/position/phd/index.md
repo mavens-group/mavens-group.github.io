@@ -1,7 +1,7 @@
 ---
 _build:
-  render: always
-  list: always
+  render: never
+  list: never
 
 title: PhD Position
 summary: Join the MAVENs Research Group at SRMIST

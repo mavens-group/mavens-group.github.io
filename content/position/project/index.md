@@ -1,4 +1,8 @@
 ---
+_build:
+  render: never
+  list: never
+
 title: Project Position
 summary: Multiple project positions available in the group.
 date: 2024-07-01
