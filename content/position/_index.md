@@ -10,5 +10,5 @@ banner:
   image: 'group.webp'
   title: "Open Positions"
 ---
-## No position available in the group now.
-The page will be updated when we have any new position.
+## No Open Positions at the Moment
+Thank you for your interest in joining our group! While we don't have any open positions right now, we’re always growing and evolving. Please check back soon — this page will be updated as soon as new opportunities become available.<br> You can check the beginner's guide below to find out what is expected from you in our group.
