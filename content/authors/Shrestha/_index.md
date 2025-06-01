@@ -10,7 +10,7 @@ title: Shrestha Dutta
 # Full name (for SEO)
 first_name: Shrestha
 last_name: Dutta
-join: 2022
+join: 2022 Jun
 
 # Username (this should match the folder name)
 authors:

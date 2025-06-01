@@ -1,0 +1,10 @@
+params:
+  analytics:
+    google:
+      id: ""
+
+font:
+  heading: "Roboto"
+  body: "Roboto"
+  monospace: "Roboto Mono"
+  google_fonts: true

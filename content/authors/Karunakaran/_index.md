@@ -9,7 +9,7 @@ title: Karunakaran M
 # Full name (for SEO)
 first_name: Karunakaran
 last_name: M
-join: 01/2021
+join: 2021 Jan
 
 # Username (this should match the folder name)
 authors:

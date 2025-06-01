@@ -9,7 +9,7 @@ title: Greeshma R
 # Full name (for SEO)
 first_name: Greeshma
 last_name: R
-join: 06/2021
+join: 2021 Jun
 
 # Username (this should match the folder name)
 authors:

@@ -10,7 +10,7 @@ title: Md Mahshook A
 # Full name (for SEO)
 first_name: Mohammed
 last_name: Mahshook
-join: 2024
+join: 2024 Jan
 # Username (this should match the folder name)
 authors:
   - Mahshook
