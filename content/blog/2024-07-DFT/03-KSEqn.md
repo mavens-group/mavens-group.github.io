@@ -62,8 +62,12 @@ Here,
 * $V_{\mathrm{xc}}(\mathbf{r}) = \frac{\delta E_{\mathrm{xc}}[\rho]}{\delta \rho(\mathbf{r})}$ is the exchange-correlation potential.
 
 ### Self-Consistent Solution Procedure
+Now, we can see that $V_{eff}(r)$ depends on $\rho(r)$. But, $\rho(r)$ depends on the Kohn-Sham
+orbital, $\psi(r)$, which depend on $V_{eff}(r)$, which creates a circular dependency. We solve
+this using _self consistent field (SCF)_ method.
 
-{{< figure src="scf.webp" id="fig:scf" caption="SCF cycle" numbered="true">}}
+<!-- {{< figure src="scf.webp" id="fig:scf" caption="SCF cycle" numbered="true">}} -->
+![SCF Cycle](/uploads/dft/scf.jpg)
 
 The Kohn--Sham equations are solved self-consistently using the following iterative loop:
 1. Start with an initial guess for the electron density $\rho^{(0)}(\mathbf{r})$.
