@@ -67,7 +67,7 @@ orbital, $\psi(r)$, which depend on $V_{eff}(r)$, which creates a circular depen
 this using _self consistent field (SCF)_ method.
 
 <!-- {{< figure src="scf.webp" id="fig:scf" caption="SCF cycle" numbered="true">}} -->
-![SCF Cycle](/uploads/dft/scf.jpg)
+![SCF Cycle](/uploads/dft/scf.webp)
 
 The Kohn--Sham equations are solved self-consistently using the following iterative loop:
 1. Start with an initial guess for the electron density $\rho^{(0)}(\mathbf{r})$.
