@@ -4,6 +4,8 @@ date: '2025-06-01'
 type: book
 weight: 03
 summary: Kohn-Sham Equation
+image:
+  focal_point: 'top'
 ---
 <!--more-->
 The Kohn--Sham formalism provides a practical framework for implementing Density Functional Theory (DFT) by introducing a fictitious system of non-interacting electrons that yields the same ground-state electron density as the true interacting system.
@@ -61,6 +63,8 @@ Here,
 
 ### Self-Consistent Solution Procedure
 
+{{< figure src="scf.webp" id="fig:scf" caption="SCF cycle" numbered="true">}}
+
 The Kohn--Sham equations are solved self-consistently using the following iterative loop:
 1. Start with an initial guess for the electron density $\rho^{(0)}(\mathbf{r})$.
 1. Construct the effective potential $V_{\mathrm{eff}}^{(n)}(\mathbf{r})$.
@@ -70,6 +74,7 @@ The Kohn--Sham equations are solved self-consistently using the following iterat
         \rho^{(n+1)}(\mathbf{r}) = \sum_{i=1}^N |\phi_i^{(n)}(\mathbf{r})|^2.
     \end{equation}
 1. Check for convergence. If not converged, return to step 2.
+
 
 ### Remarks
 
