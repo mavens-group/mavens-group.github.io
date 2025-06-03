@@ -18,8 +18,8 @@ marketing:
     site_type: Person
     local_business_type: ''
     org_name: ''
-    description: 'Computational Materials Science research group at SRMIST, led by Dr. Rudra Banerjee. We use density functional theory, Monte Carlo methods, and machine learning for Energy and Qubit materials.'
-    keywords: ["Density Functional Theory", "Monte Carlo", "Computational Materials Science", "SRMIST", "Rudra Banerjee"]
+    description: 'MAVENs Group at SRMIST, led by Dr. Rudra Banerjee, specializes in Computational Materials Science. Our research integrates Density Functional Theory (DFT), Monte Carlo simulations, and Machine Learning to explore energy materials and quantum materials for qubit applications.'
+    keywords: ["Computational Materials Science", "Density Functional Theory", "Monte Carlo Methods", "Machine Learning", "Quantum Materials", "Energy Materials", "Qubit Materials", "SRMIST", "Rudra Banerjee", "MAVENs Group"]
   analytics:
     google_analytics: ''
     baidu_tongji: ''
