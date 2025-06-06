@@ -27,23 +27,12 @@ sections:
       # Choose a listing view
       view: card
 ---
-We, the MAVENs, are a computational physics group focused on exploring, understanding, and predicting the fundamental and utilitarian properties of diverse materials such as MXenes, Heusler alloys, and 2D materials. Utilising advanced techniques like Density Functional Theory (DFT), Monte Carlo methods, and machine learning (ML), we explore electronic structures and uncover the governing principles to engineer materials for various applications. Our integration of ML enhances material discovery, enabling us to optimise properties and accelerate innovation. Through this interdisciplinary approach, we contribute to the development of advanced materials with transformative potential for cutting-edge technologies, positioning our research at the forefront of computational materials science.<!-- At **MAVENs**, we work in **Computational Condensed Matter Physics**, leveraging -->
-<!-- **Density Functional Theory (DFT)** and _ab-initio methods_ to explore the electronic and -->
-<!-- magnetic properties of advanced materials. Our mission is to contribute to the development of -->
-<!-- materials for **green energy applications** through a combination of computational techniques and -->
-<!-- data-driven approaches, i.e. Machine Learning. -->
+At MAVENs, we harness _first-principles modeling_, _Monte Carlo simulations_, and _machine learning_ to unlock the properties of materials for next-generation technologies in energy, magnetism, and quantum applications.
 
-<!-- MAVENs investigates complex materials, including alloys and molecules, with a focus on energy and -->
-<!-- caloric applications. -->
+Our research is rooted in a simple question:
+### How can we computationally design materials that power a sustainable and quantum-enabled future?
 
-<!-- Employing DFT and Monte Carlo simulations, we unravel the interplay between -->
-<!-- electronic structure, magnetism, thermodynamics, and symmetry in disordered systems. Our aim is to -->
-<!-- engineer materials with optimized properties, such as critical temperature ($\mathsf{T_C}$), Gibbs -->
-<!-- free energy ($\mathsf{\Delta G_H}$), and magnetic anisotropy, for applications in green hydrogen -->
-<!-- catalysis and magnetocaloric cooling. -->
-
-<!-- Our research encompasses 2D molecules, disordered alloys, Heusler alloys, and MXenes. -->
-
+From the quantum spin textures of disordered Heusler alloys to the catalytic activity of doped MXenes, our work bridges fundamental theory with high-impact applications. We explore the structure-property relationships of complex systems using tools from density functional theory (DFT), statistical mechanics, and AI-driven discovery.
 
 <!-- For our recent publications, go to {{% cta cta_link="../publication/" cta_text="Publications" %}} -->
 
