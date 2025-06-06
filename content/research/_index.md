@@ -27,10 +27,11 @@ sections:
       # Choose a listing view
       view: card
 ---
-At MAVENs, we harness _first-principles modeling_, _Monte Carlo simulations_, and _machine learning_ to unlock the properties of materials for next-generation technologies in energy, magnetism, and quantum applications.
+At MAVENs, we harness *first-principles modeling*, *Monte Carlo simulations*, and *machine learning* to unlock the properties of materials for next-generation technologies in energy, magnetism, and quantum applications.
 
 Our research is rooted in a simple question:
-### How can we computationally design materials that power a sustainable and quantum-enabled future?
+
+*How can we computationally design materials that power a sustainable and quantum-enabled future?*
 
 From the quantum spin textures of disordered Heusler alloys to the catalytic activity of doped MXenes, our work bridges fundamental theory with high-impact applications. We explore the structure-property relationships of complex systems using tools from density functional theory (DFT), statistical mechanics, and AI-driven discovery.
 
