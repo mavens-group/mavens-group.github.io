@@ -4,17 +4,30 @@ title: Karunakaran submitted his doctoral thesis
 date: 2025-05-27
 profile: false
 ---
-We are proud to announce that [Karunakaran M](../../author/karunakaran-m), the first doctoral researcher from the MAVENs Group, has successfully submitted his PhD thesis at SRMIST.
+We are delighted to share that [Karunakaran M](../../authors/karunakaran-m), the first PhD scholar from the MAVENs Group, has successfully submitted his doctoral thesis titled:
 <!--more-->
-Karunakaran’s work is a significant contribution to the field of computational magnetism, with a focused investigation on Heusler alloys. His research explored:
 
-- Doping-induced enhancement of Curie temperature in Zn₂Ru₁₋ₓAₓMn Heusler systems
-- Electronic structure and magnetic phase transitions in disordered alloys
-- First-principles calculations combined with Monte Carlo simulations to estimate magnetic transition temperatures
-- The role of chemical substitution in tuning magnetism for spintronic applications
+> "Electronic and Magnetic Properties of Disordered Heusler Alloys"
 
-His publications in Journal of Magnetism and Magnetic Materials, Journal of Physics and Chemistry of Solids, and Applied Physics Letters reflect the depth and novelty of his work.
+Karunakaran’s research has made substantial contributions to the field of computational magnetism,
+with a strong focus on disordered Heusler alloys. His work systematically investigates the effect
+of chemical disorder and elemental doping on the Curie temperature, magnetic phase transitions, and
+electronic structure of these materials using first-principles calculations and Monte Carlo
+simulations.
 
-Karunakaran’s journey has laid the foundation for MAVENs' computational magnetism efforts, and we look forward to seeing his continued contributions to the field.
+Some of his key outcomes include:
 
-Congratulations, Karunakaran!
+- Identification of doping strategies to enhance magnetic ordering
+- Understanding the role of structural disorder on magnetic interactions
+- Proposals for novel Heusler compositions for spintronic applications
+
+Karunakaran has published his findings in reputed journals such as:
+
+- Applied Physics Letters (2025)
+- Journal of Magnetism and Magnetic Materials (2023)
+- Journal of Physics and Chemistry of Solids (2024)
+- Journal of Solid State Chemistry (2024)
+
+
+His work marks a significant milestone in MAVENs' vision of computationally driven discovery of
+magnetic materials. We extend our heartfelt congratulations to Karunakaran on this achievement!
