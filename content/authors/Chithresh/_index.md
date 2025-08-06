@@ -30,9 +30,8 @@ organizations:
 bio: My research focuses on computational simulations including Density Functional Theory (DFT) and Machine Learning (ML) applications in materials science
 
 interests:
-  - Data driven materials discovery
-  - Magnetic properties
-  - DFT code development
+  - Quantum Materials
+  - DFT-peripherial code development
 
 education:
   courses:
@@ -64,4 +63,8 @@ social:
 user_groups:
   - Researchers
 ---
-Mr. Chithresh T M is a Research Scholar in the [Department of Physics and Nanotechnology](https://www.srmist.edu.in/department/department-of-physics-and-nanotechnology/) at [SRMIST, KTR](https://www.srmist.edu.in).
+Mr. Chithresh T M is is currently pursuing his doctoral research in the [Department of Physics and Nanotechnology](https://www.srmist.edu.in/department/department-of-physics-and-nanotechnology/) at [SRMIST, KTR](https://www.srmist.edu.in).
+
+His research focuses on the computational investigation of quantum materials with particular emphasis on evaluating and optimizing the spin coherence time ($\mathsf{T_2}$), a critical parameter that determines the suitability of materials for qubit applications. To this end, he employs first principles techniques, primarily density functional theory (DFT) and density functional perturbation theory (DFPT), to understand and tailor the electronic and vibrational properties that influence $\mathsf{T_2}$.
+
+His work contributes to the broader effort of identifying and designing materials with enhanced quantum coherence for emerging quantum technologies.
