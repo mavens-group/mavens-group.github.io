@@ -28,13 +28,7 @@ machine learning methods."
 interests:
   - Density Functional Theory
   - Monte Carlo Simulations
-  - Machine Learning for Materials
-  - Spin Gapless Semiconductors
-  - Magnetocaloric and Energy Materials
-  - Qubit-Compatible Materials
-  - Disordered Alloys
-  - Heusler Alloys
-  - 2D Materials
+  - Machine Learning
 
 experience:
   courses:
@@ -55,12 +49,14 @@ teaching:
   courses:
     - course: Classical Mechanics
       institution: MSc
-    - course: Nuclear and Particle Physics
-      institution: MSc
+    - course: Mathematical Methods
+      institution: BSc
     - course: Computational Physics
       institution: MSc, BSc
     - course: Computational Materials Science
       institution: PhD Coursework
+    - course: Nuclear and Particle Physics
+      institution: MSc
 
 # Social/Academic Networking
 # For available icons, see: https://docs.hugoblox.com/getting-started/page-builder/#icons
@@ -102,35 +98,12 @@ seo:
   description: "Dr. Rudra Banerjee is a computational physicist leading the MAVENs group at SRMIST. His research uses DFT, Monte Carlo, and machine learning to design materials for quantum, energy, and magnetic applications."
   keywords: ["Computational Materials Science", "DFT", "Quantum Materials", "Spintronics", "Machine Learning", "Heusler Alloys", "Green Energy", "Qubit Materials", "Monte Carlo", "Magnetocaloric Materials", "SRMIST"]
 ---
-<!-- Dr. Rudra Banerjee is an assistant professor of Physics at [Department of Physics and -->
-<!-- Nanotechnology](https://www.srmist.edu.in/department/department-of-physics-and-nanotechnology/), -->
-<!-- [SRMIST](https://www.srmist.edu.in). He leads the MAVENs Group, which focuses on computational -->
-<!-- materials science aimed at enabling next-generation energy and quantum technologies. His research -->
-<!-- leverages first-principles calculations, Monte Carlo simulations, and machine learning to uncover -->
-<!-- and design functional materials—ranging from qubit-compatible systems and spin-gapless -->
-<!-- semiconductors to magnetocaloric compounds and 2D materials for clean energy applications. -->
+Dr Rudra Banerjee is an Assistant Professor of Physics at the [Department of Physics and Nanotechnology](https://www.srmist.edu.in/department/department-of-physics-and-nanotechnology/) at [SRMIST, KTR Campus](https://www.srmist.edu.in). He is the group leader of the **M**aterials **A**dvancing a **V**iable **EN**ergy future (MAVENs) Group.
 
-<!-- With a career rooted in theoretical and computational physics, Dr. Banerjee brings a deep expertise in density functional theory (DFT) and a sharp focus on materials discovery for sustainability and quantum information science. His group routinely integrates electronic structure theory with data-driven approaches, pushing the frontiers of both fundamental understanding and application-oriented design. -->
+Dr Banerjee boasts over a decade of experience in the field of 2D and disordered materials, resulting in a rich and varied portfolio. His research focuses on computational materials science, specifically designing new materials for green energy and quantum applications. He employs Monte Carlo simulations, *ab initio* DFT, and KKR-CPA methods, alongside machine learning models, to analyse and predict the properties of materials from first principles. His collaborative spirit extends to leading experimentalists, fostering a deep understanding of material behaviour through joint efforts.
 
-<!-- As an academic mentor, Dr. Banerjee fosters a vibrant research environment that values rigor, curiosity, and collaboration. He actively mentors PhD and Master's students across interdisciplinary projects and is committed to building a platform that blends scientific excellence with translational impact. -->
+He actively mentors MSc and PhD students within the MAVENs group, nurturing the next generation of researchers in computational physics and materials design.
 
-<!-- He is also deeply involved in scientific outreach, curriculum development, and open-source dissemination of tools and tutorials to democratize access to computational materials science. -->
+Dr Banerjee’s contributions extend beyond research. He regularly teaches core courses such as classical mechanics, mathematical physics, and computational physics to BSc and MSc students, as well as computational methods to PhD scholars. He also plays an instrumental role in developing new courses and curricula at SRMIST.
 
-Dr Rudra Banerjee is an assistant professor of Physics at the [Department of Physics and
- Nanotechnology](https://www.srmist.edu.in/department/department-of-physics-and-nanotechnology/) at
- [SRMIST](https://www.srmist.edu.in). He is the group leader of the **M**aterials **A**dvancing a
- **V**iable **EN**ergy future (MAVENs) Group.
-
-Dr. Banerjee boasts over a decade of experience in the field of 2D and disordered materials,
-resulting in a rich and varied portfolio.  His research deals with computational material science,
-specifically designing new materials for green-energy and qubits. Dr. Banerjee implements Monte
-Carlo and _ab-initio_ DFT and KKR-CPA methods along with Machine Learning model to analyse and
-predict the properties of materials numerically.  His collaborative spirit extends to leading
-experimentalists, fostering a deep understanding of materials behaviour.
-
-Dr. Banerjee's contributions extend beyond research. He takes core courses like classical mechanics
-and computational physics regularly to BSc and MSc students and the computational methods to PhD
-students. He is playing an instrumental role in developing multiple courses and curriculums at
-SRMIST.
-
-Dr. Banerjee is a life-time member of Indian Physics Association.
+He is a lifetime member of the Indian Physics Association.

@@ -59,40 +59,37 @@ sections:
       title:
       text: |
 
-       <p style="text-align:center; font-size: 2rem;"><i>You may say <b>we</b> are a dreamer<br>
-        <small><small>- John Lennon (Imagine, slightly modified)</i></small></small></p>
 
-       The **MAVENs** (Materials Advancing a Viable ENergy future) group, led by [Dr. Rudra Banerjee](https://mavens-group.github.io/author/rudra-banerjee/), is based in the [Department of Physics and Nanotechnology](https://www.srmist.edu.in/department/department-of-physics-and-nanotechnology/) at [SRM Institute of Science and Technology](https://srmist.edu.in).  We dream of a cleaner environment to breathe for the next generations by developing innovative materials solutions for green energy using computational modeling.
+        <p style="text-align:center; font-size: 2rem;">
+          <i>You may say <b>we</b> are a dreamer<br>
+          <small><small>- John Lennon (Imagine, slightly modified)</small></small></i>
+        </p>
 
-       ### Mission & Approach
-       We harness the power of Density Functional Theory (DFT), Monte Carlo simulations, and Machine Learning to unlock material properties from first principles. This powerful combination of quantum mechanics, statistical physics, and artificial intelligence enables us to predict, design, and optimise materials before they are synthesised in the laboratory.
+        The **MAVENs** (Materials Advancing a Viable ENergy future) group, led by [Dr Rudra Banerjee](https://mavens-group.github.io/author/rudra-banerjee/), is based in the [Department of Physics and Nanotechnology](https://www.srmist.edu.in/department/department-of-physics-and-nanotechnology/) at [SRM Institute of Science and Technology](https://srmist.edu.in).
+        We dream of a cleaner environment for future generations by developing innovative materials solutions for green energy through computational modelling.
 
-       Through these cutting-edge computational methods, we design materials that will power tomorrow's sustainable technologies. Our interdisciplinary research bridges fundamental physics with practical applications, creating solutions for pressing energy challenges.
+        ### Mission & Approach
 
-       The MAVENs team focuses on four transformative areas:
-       - **Novel catalysts for hydrogen evolution** as green energy
-       - **Magnetocaloric materials** for energy-efficient cooling
-       - **Disordered Alloys** for tuning functional properties
-       - **Qubit materials** for quantum computing applications
+        We harness the power of Density Functional Theory (DFT), Monte Carlo simulations, and Machine Learning to uncover material properties from first principles. This powerful combination of quantum mechanics, statistical physics, and artificial intelligence enables us to predict, design, and optimise materials before they are synthesised in the laboratory.
 
-       {{% cta cta_link="./research/" cta_text="View Research Details" %}}
+        Through these cutting-edge computational methods, we design materials that will power tomorrow’s sustainable technologies. Our interdisciplinary research bridges fundamental physics with practical applications, creating solutions for pressing energy challenges.
+
+        The MAVENs team focuses on four transformative areas:
+        - **Disordered alloys** for tuning functional properties
+        - **Quantum materials** for quantum computing applications
+        - **ML** aided material discovery
+
+        {{% cta cta_link="./research/" cta_text="View Research Details" %}}
 
         We actively collaborate with leading experimentalists and theoreticians worldwide, fostering a synergistic environment that accelerates material discovery and enhances the reliability of our computational predictions.
-
-        <!-- ## Recent Highlights -->
-
-        <!-- Our computational predictions have led to breakthrough insights in: -->
-        <!-- - High-entropy alloys for sustainable applications -->
-        <!-- - 2D materials for quantum information processing -->
-        <!-- - Catalytic mechanisms in clean energy conversion -->
 
         ### Join Our Team
 
         We invite talented MSc students with a passion for physics, chemistry, or materials science to join our dynamic research group.
 
-        If you're excited about using computational tools to solve real-world problems and contribute to a sustainable future, we'd love to hear from you.
-        {{% cta cta_link="./position/" cta_text="View Open Positions" %}}
+        If you are excited about using computational tools to solve real-world problems and contribute to a sustainable future, we would love to hear from you.
 
+        {{% cta cta_link="./position/" cta_text="View Open Positions" %}}
 
     design:
       columns: '1'
