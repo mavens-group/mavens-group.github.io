@@ -1,6 +1,6 @@
 ---
 title: Research
-type: features
+type: research
 view: 3
 banner:
     image: 'group.webp'
@@ -33,6 +33,10 @@ At MAVENs, we harness first-principles modeling, Monte Carlo simulations, and ma
 
 Our research is rooted in a fundamental question:
 
-___How can we computationally design materials that power a sustainable and quantum-enabled future?___
+> ___How can we computationally design materials that power a sustainable and quantum-enabled future?___
 
-From the quantum spin textures of disordered Heusler alloys to the catalytic activity of doped MXenes, our work bridges fundamental theory with high-impact applications. We explore the structure-property relationships of complex systems using tools from density functional theory (DFT), statistical mechanics, and AI-driven discovery.
+We address this question by bridging fundamental theory with high-impact applications—ranging from the catalytic activity of doped MXenes and the quantum spin textures of disordered Heusler alloys to the classification of NV-defect host sites using machine learning. By uncovering structure–property relationships in complex materials, we harness tools such as density functional theory (DFT), the Monte Carlo method, and AI-driven discovery to guide the design of next-generation quantum and energy materials.
+
+Explore our core research themes below to see how these ideas come to life in specific materials systems.
+
+### Research Themes

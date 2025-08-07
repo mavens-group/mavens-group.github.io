@@ -1,11 +1,13 @@
 ---
 title: Quantum Materials
+summary: As we enter the quantum age, materials that can store, process, and transmit quantum information become critically important.
 show_date: false
 profile: false
+weight: 2
 ---
 ### The Chellange:
 As we enter the quantum age, materials that can store, process, and transmit quantum information become critically important.
-<!--more-->
+
 Single magnetic molecules, such as organometallic systems, and 2D materials offer immense potential as molecular magnets and qubits for quantum information processing and spintronic devices. Their tunable electronic states and intrinsic magnetic properties make them ideal candidates for quantum computing architectures, ultra-sensitive magnetic sensors, next-generation data storage devices, and quantum communication networks. However, their practical integration is hindered by challenges like spin decoherence, instability of spin-polarised states, and inefficient charge transport, which limit their effectiveness in functional devices.
 ### Our Strategy:
 At MAVENs, we address these challenges using Density Functional Theory (DFT) to study how doping and substrate interactions influence their electronic and magnetic properties. We computationally engineer the electronic and magnetic properties of molecular systems and 2D materials, designing quantum materials with specific functionalities tailored for technological applications. Substrates like graphene and boron nitride (BN) are of particular interest due to their ability to enhance electronic coupling, stabilise reactive states, and improve spin coherence. Our aim is to optimise these molecular systems to function effectively as stable qubits and molecular magnets, bridging the gap between fundamental design and real-world application.

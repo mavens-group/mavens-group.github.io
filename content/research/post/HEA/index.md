@@ -1,11 +1,13 @@
 ---
 title: Disordered Materials
+summary: Traditional materials design relies on ordered crystal structures, but what if disorder is actually beneficial?
 show_date: false
 profile: false
+weight: 1
 ---
 ### The Challenge:
 Traditional materials design relies on ordered crystal structures, but what if disorder is actually beneficial?
-<!--more-->
+
 Disordered systems stand apart due to their lack of long-range atomic order, which often enhances their mechanical, magnetic, and electronic properties. In high-entropy alloys (HEAs), a multi-component, near-equimolar composition creates high configurational entropy, resulting in properties like exceptional strength, corrosion resistance, and thermal stability. This configurational randomness also allows disordered systems to bypass traditional alloying limitations, enabling fine-tuning of properties via compositional adjustments and doping.
 This power comes with the computational challenge that, since the basis set is no longer periodic, Bloch's theorem—one of the cornerstones of computational materials science—is no longer valid. Such tunability has found applications in energy-efficient technologies, including hydrogen evolution reactions and magnetocaloric refrigeration, and advanced devices like spintronic components.
 ### Our Approach:
