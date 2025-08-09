@@ -32,18 +32,18 @@ interests:
 
 experience:
   courses:
+    - course: Assistant Professor
+      institution: SRM Institute of Science and Technology
+      year: 2019 - Present
     - course: Guest Scientist
       institution: Harish-chandra Research Institute
-      year: 2017-19
-    - course: Pos Doc
+      year: 2017 - 2019
+    - course: Postdoctoral Researcher
       institution: Uppsala University
-      year: 2015-17
+      year: 2015 - 2017
     - course: Research Associate
-      institution: Warwick University
-      year: 2012-15
-    - course: PhD
-      institution: SNBNCBS/The University of Calcutta
-      year: 2007-2012
+      institution: University of Warwick
+      year: 2012 - 2015
 
 teaching:
   courses:
@@ -59,10 +59,6 @@ teaching:
       institution: MSc
 
 # Social/Academic Networking
-# For available icons, see: https://docs.hugoblox.com/getting-started/page-builder/#icons
-#   For an email link, use "fas" icon pack, "envelope" icon, and a link in the
-#   form "mailto:your-email@example.com" or "#contact" for contact widget.
-
 social:
   - icon: envelope-square
     icon_pack: fas
@@ -79,12 +75,6 @@ social:
   - icon: github-square
     icon_pack: fab
     link: https://github.com/rudrab
-# - icon: envelope
-#   icon_pack: fas
-#   link: "mailto:rudrab@srmist.edu.in"
-# - icon: cv
-#   icon_pack: ai
-#   link: files/cvRB.pdf
 
 # Enter email to display Gravatar (if Gravatar enabled in Config)
 email: ''
@@ -98,12 +88,10 @@ seo:
   description: "Dr. Rudra Banerjee is a computational physicist leading the MAVENs group at SRMIST. His research uses DFT, Monte Carlo, and machine learning to design materials for quantum, energy, and magnetic applications."
   keywords: ["Computational Materials Science", "DFT", "Quantum Materials", "Spintronics", "Machine Learning", "Heusler Alloys", "Green Energy", "Qubit Materials", "Monte Carlo", "Magnetocaloric Materials", "SRMIST"]
 ---
-Dr Rudra Banerjee is an Assistant Professor of Physics at the [Department of Physics and Nanotechnology](https://www.srmist.edu.in/department/department-of-physics-and-nanotechnology/) at [SRMIST, KTR Campus](https://www.srmist.edu.in). He is the group leader of the **M**aterials **A**dvancing a **V**iable **EN**ergy future (MAVENs) Group.
+Dr Rudra Banerjee, Assistant Professor, leads the **M**aterials **A**dvancing a **V**iable **EN**ergy future (MAVENs) Group in the [Department of Physics and Nanotechnology](https://www.srmist.edu.in/department/department-of-physics-and-nanotechnology/) at [SRMIST, Kattankulathur](https://www.srmist.edu.in). With over a decade of research in 2D materials and disordered systems, he focuses on designing novel materials for green energy and quantum technologies.
 
-Dr Banerjee boasts over a decade of experience in the field of 2D and disordered materials, resulting in a rich and varied portfolio. His research focuses on computational materials science, specifically designing new materials for green energy and quantum applications. He employs Monte Carlo simulations, *ab initio* DFT, and KKR-CPA methods, alongside machine learning models, to analyse and predict the properties of materials from first principles. His collaborative spirit extends to leading experimentalists, fostering a deep understanding of material behaviour through joint efforts.
+His work combines Monte Carlo simulations, *ab initio* density functional theory (DFT), and KKR–CPA methods with machine learning approaches to predict and analyse material properties from first principles. He supervises MSc and PhD researchers in computational physics and materials design, guiding them through projects in quantum materials, energy applications, and computational method development.
 
-He actively mentors MSc and PhD students within the MAVENs group, nurturing the next generation of researchers in computational physics and materials design.
-
-Dr Banerjee’s contributions extend beyond research. He regularly teaches core courses such as classical mechanics, mathematical physics, and computational physics to BSc and MSc students, as well as computational methods to PhD scholars. He also plays an instrumental role in developing new courses and curricula at SRMIST.
+He teaches core physics courses like classical mechanics, mathematical physics, and computational physics to undergraduate and postgraduate students, and computational methods to PhD scholars.
 
 He is a lifetime member of the Indian Physics Association.

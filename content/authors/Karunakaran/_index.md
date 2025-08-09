@@ -70,20 +70,8 @@ social:
 user_groups:
   - Researchers
 ---
-Mr. Karunakaran M is a Research Scholar in the [Department of Physics and Nanotechnology](https://www.srmist.edu.in/department/department-of-physics-and-nanotechnology/) at [SRMIST, KTR](https://www.srmist.edu.in).
+Karunakaran M is a Research Scholar in the MAVENs group at the [Department of Physics and Nanotechnology](https://www.srmist.edu.in/department/department-of-physics-and-nanotechnology/), [SRMIST, KTR](https://www.srmist.edu.in). His research integrates *ab initio* density functional theory (DFT), the Korringa–Kohn–Rostoker coherent potential approximation (KKR–CPA), and Monte Carlo simulations with machine learning approaches to analyse the electronic, magnetic, and thermodynamic properties of functional materials.
 
-His research employs sophisticated computational methodologies, including _ab initio_ density
-functional theory (DFT), the Korringa-Kohn-Rostoker Coherent Potential Approximation (KKR-CPA), and
-Monte Carlo simulations, to investigate the electronic, magnetic, and thermodynamic properties of
-materials.
+Karunakaran focuses on Heusler alloys for sustainable technologies, including magnetocaloric cooling and spintronic applications. He investigates how chemical disorder and strategic doping tune electronic and magnetic behaviour, contributing to advanced materials development for green-energy systems.
 
-Karunakaran's scholarly interests are primarily centred on materials with potential applications in
-green energy, such as magnetocaloric and spintronics properties of Heusler alloys. He is
-particularly committed to advancing the understanding and control of material properties,
-performance, and efficiency through the strategic use of doping. With over three and a half years
-of research experience in Heusler alloys, his current work focuses on modulating the electronic and
-magnetic properties of disordered Heusler alloys, thereby contributing to the development of
-advanced materials for sustainable energy technologies.
-
-Besides publishing his work in peer reviewed journals, Mr. Karunakaran also presents his work in
-various national and international conferences.
+He publishes in peer-reviewed journals and presents at national and international conferences. Karunakaran mentors undergraduate students in scientific computation and communication.

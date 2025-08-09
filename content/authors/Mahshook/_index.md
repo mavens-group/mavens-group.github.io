@@ -70,9 +70,8 @@ social:
 user_groups:
   - Researchers
 ---
+Mohammed Mahshook is a Research Scholar in the MAVENs group at the [Department of Physics and Nanotechnology](https://www.srmist.edu.in/department/department-of-physics-and-nanotechnology/), [SRMIST, KTR](https://www.srmist.edu.in). His research applies machine learning techniques to understand structure–activity relationships in materials for quantum information processing.
 
-Mohammed Mahshook is a Research Scholar in the [Department of Physics and Nanotechnology](https://www.srmist.edu.in/department/department-of-physics-and-nanotechnology/) at [SRMIST](https://www.srmist.edu.in).
+He develops predictive models to identify candidate materials and analyze their structural and emergent properties. Mahshook focuses on materials capable of hosting deep-level centers — point defects that create isolated electronic states within the bandgap, essential for semiconductor-based quantum technologies including quantum computing, secure communication, and precision sensing.
 
-He is investigating the application of machine learning techniques to elucidate complex structure-activity relationships in materials for quantum information processing. His research focuses on accelerating the materials discovery process by developing predictive models that substantially narrow the search space for candidate materials while offering statistically significant insights into their structures and emergent properties.
-
-Mahshook's research aims to identify materials capable of hosting deep-level centers, a class of point defects that introduce isolated bound electronic states within the bandgap of a material. These defects are foundational to semiconductor-based quantum technologies, including applications in quantum computing, communication, and sensing. Given that the physics underlying these defects remains poorly understood, Mahshook employs machine learning models to predict host-defect candidates that are compatible with quantum requirements. His research lies at the intersection of data science and condensed matter physics, contributing to advancements in quantum-compatible materials.
+He uses data-driven models to predict host–defect combinations that meet quantum compatibility requirements, working at the interface of data science and condensed matter physics.
