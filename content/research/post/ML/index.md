@@ -6,8 +6,6 @@ profile: false
 weight: 3
 ---
 ### The Challenge:
-Scientists estimate millions of potential materials exist, but only a tiny fraction have been discovered—what if we could predict the perfect material before ever making it?
-
 The discovery of functional materials drives technological advancement, yet identifying materials with specific properties within vast chemical composition spaces remains challenging. Complex structure-property relationships make this search inherently difficult. Traditional approaches, including trial-and-error experimentation and high-throughput ab initio methods, are time-consuming and resource-intensive, limiting exploration across design spaces.
 
 ### Our Innovation:
