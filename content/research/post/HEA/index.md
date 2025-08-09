@@ -1,6 +1,6 @@
 ---
 title: Disordered Materials
-summary: Traditional materials design relies on ordered crystal structures, but what if disorder is actually beneficial?
+summary: What if the 'defects' in materials are actually their greatest strengths?
 show_date: false
 profile: false
 weight: 1
