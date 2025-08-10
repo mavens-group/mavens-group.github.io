@@ -69,7 +69,7 @@ sections:
 
         The **MAVENs** (*Materials Advancing a Viable ENergy future*) group, led by [Dr. Rudra Banerjee](https://mavens-group.github.io/author/rudra-banerjee/), is based in the [Department of Physics and Nanotechnology](https://www.srmist.edu.in/department/department-of-physics-and-nanotechnology/) at the [SRM Institute of Science and Technology](https://srmist.edu.in).
 
-        We envision materials that could transform our world—from quantum devices operating at room temperature to catalysts that turn sunlight into fuel. Our computational laboratory makes these visions tangible, one atom at a time.
+        We tackle the fundamental challenge of predicting material properties from electronic structure. Through computational modeling, we design materials with unprecedented capabilities like room-temperature quantum devices, efficient photocatalysts, and next-generation energy storage systems.
 
         ### Designing Tomorrow's Materials Today
 
