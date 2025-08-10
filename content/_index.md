@@ -85,7 +85,7 @@ sections:
 
         Every prediction we make connects with experimental reality. Through partnerships with leading experimentalists worldwide, we validate our models and push computational boundaries, ensuring our discoveries translate from silicon to laboratory bench.
 
-        {{% cta cta_link="./publications/" cta_text="View Our Publications" %}}
+        {{% cta cta_link="./publication/" cta_text="View Our Publications" %}}
 
         ### Join the Discovery
 
