@@ -59,37 +59,40 @@ sections:
       title:
       text: |
 
+        <blockquote style="text-align:center; font-size: 2rem; font-style: italic; margin: 0; padding: 0;">
+          You may say <b>we</b> are a dreamer
+          <footer style="text-align:center; font-size: 0.9rem; margin-top: 0.2rem;
+          margin-bottom:.2rem">
+            — <cite>John Lennon</cite>, <em>Imagine</em> (slightly modified)
+          </footer>
+        </blockquote>
 
-        <p style="text-align:center; font-size: 2rem;">
-          <i>You may say <b>we</b> are a dreamer<br>
-          <small><small>- John Lennon (Imagine, slightly modified)</small></small></i>
-        </p>
+        The **MAVENs** (*Materials Advancing a Viable ENergy future*) group, led by [Dr. Rudra Banerjee](https://mavens-group.github.io/author/rudra-banerjee/), is based in the [Department of Physics and Nanotechnology](https://www.srmist.edu.in/department/department-of-physics-and-nanotechnology/) at the [SRM Institute of Science and Technology](https://srmist.edu.in).
 
-        The **MAVENs** (Materials Advancing a Viable ENergy future) group, led by [Dr Rudra Banerjee](https://mavens-group.github.io/author/rudra-banerjee/), is based in the [Department of Physics and Nanotechnology](https://www.srmist.edu.in/department/department-of-physics-and-nanotechnology/) at [SRM Institute of Science and Technology](https://srmist.edu.in).
-        We dream of a cleaner environment for future generations by developing innovative materials solutions for green energy through computational modelling.
+        We envision materials that could transform our world—from quantum devices operating at room temperature to catalysts that turn sunlight into fuel. Our computational laboratory makes these visions tangible, one atom at a time.
 
-        ### Mission & Approach
+        ### Designing Tomorrow's Materials Today
 
-        We harness the power of Density Functional Theory (DFT), Monte Carlo simulations, and Machine Learning to uncover material properties from first principles. This powerful combination of quantum mechanics, statistical physics, and artificial intelligence enables us to predict, design, and optimise materials before they are synthesised in the laboratory.
+        We harness **Density Functional Theory (DFT)**, **Monte Carlo simulations**, and **Machine Learning** — a powerful combination of quantum mechanics, statistical physics, and artificial intelligence that enables us to predict, design, and optimise materials before they are synthesised in the laboratory. From the magnetic complexity of high-entropy alloys to the catalytic potential green hydrogen and quantum materials with long coherence time, we bridge fundamental theory with transformative applications.
 
-        Through these cutting-edge computational methods, we design materials that will power tomorrow’s sustainable technologies. Our interdisciplinary research bridges fundamental physics with practical applications, creating solutions for pressing energy challenges.
+        Our breakthrough research spans three frontiers:
 
-        The MAVENs team focuses on four transformative areas:
-        - **Disordered alloys** for tuning functional properties
-        - **Quantum materials** for quantum computing applications
-        - **ML** aided material discovery
+        - **Disordered alloys** – unlocking exceptional properties through strategic compositional design
+        - **Quantum materials** – engineering the foundation for next-generation quantum technologies
+        - **Machine learning** – accelerating discovery across vast material landscapes
 
-        {{% cta cta_link="./research/" cta_text="View Research Details" %}}
+        {{% cta cta_link="./research/" cta_text="Explore Our Research" %}}
 
-        We actively collaborate with leading experimentalists and theoreticians worldwide, fostering a synergistic environment that accelerates material discovery and enhances the reliability of our computational predictions.
+        Every prediction we make connects with experimental reality. Through partnerships with leading experimentalists worldwide, we validate our models and push computational boundaries, ensuring our discoveries translate from silicon to laboratory bench.
 
-        ### Join Our Team
+        {{% cta cta_link="./publications/" cta_text="View Our Publications" %}}
 
-        We invite talented MSc students with a passion for physics, chemistry, or materials science to join our dynamic research group.
+        ### Join the Discovery
 
-        If you are excited about using computational tools to solve real-world problems and contribute to a sustainable future, we would love to hear from you.
+        We seek **M.Sc. students** in physics, chemistry, or materials science ready to wield computational power against real-world challenges. If you're passionate about designing materials that will define our sustainable future, your next breakthrough awaits here.
 
-        {{% cta cta_link="./position/" cta_text="View Open Positions" %}}
+        {{% cta cta_link="./position/" cta_text="Apply to Join Us" %}}
+
 
     design:
       columns: '1'
