@@ -112,3 +112,30 @@ $$
 \frac{\delta}{\delta \psi_j^*(r)}\left[\bra{\Psi}H\ket{\Psi}-\sum_i^N\epsilon_i\int d^3r |\psi_i(r)|^2\right]=0
 $$
 {{< /math >}}
+
+
+### Example: Hartree–Fock Calculation for the Helium Atom
+
+Let's illustrate the mean-field and exchange concepts with the helium atom (two electrons, one nucleus with charge $Z=2$).
+
+- **Hamiltonian:**
+  $$
+  \hat{H} = -\frac{\hbar^2}{2m} (\nabla_1^2 + \nabla_2^2) - \frac{2e^2}{r_1} - \frac{2e^2}{r_2} + \frac{e^2}{|\mathbf{r}_1 - \mathbf{r}_2|}
+  $$
+
+- **Hartree approximation:** Each electron feels the nuclear attraction and the average repulsion from the other electron. The total wavefunction is a product of single-electron orbitals: $\Psi(r_1, r_2) = \psi(r_1)\psi(r_2)$.
+
+- **Hartree–Fock improvement:** The wavefunction is antisymmetrized to account for the Pauli principle:
+  $$
+  \Psi_{HF}(r_1, r_2) = \frac{1}{\sqrt{2}} [\psi_a(r_1)\psi_b(r_2) - \psi_a(r_2)\psi_b(r_1)]
+  $$
+  For the ground state, both electrons occupy the 1s orbital with opposite spins.
+
+- **Physical consequences:**
+  - The Hartree method overestimates the energy because it ignores exchange.
+  - The Hartree–Fock method lowers the energy by including exchange, but still neglects electron correlation.
+
+- **Numerical values:**
+  - Experimental ground-state energy of helium: $-78.98$ eV
+  - Hartree–Fock result: $-77.5$ eV (slightly higher due to missing correlation)
+  - Hartree result: even higher (less accurate)
