@@ -50,7 +50,6 @@ Our research employs state-of-the-art computational techniques:
 
 Together, these methods allow us to explore and predict the behaviour of materials across length scales and functional regimes.
 
-
 ### Collaborative Research
 We believe the most impactful research happens at the intersection of theory and experiment. Our group actively collaborates with experimental research teams worldwide, ensuring that our computational predictions are both validated and translated into real-world applications.
 
