@@ -1,7 +1,7 @@
 ﻿---
 _build:
-  render: always
-  list: always
+  render: never
+  list: never
 
 # Display name
 title: Karthick L
