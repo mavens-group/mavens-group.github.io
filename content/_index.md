@@ -67,29 +67,45 @@ sections:
           </footer>
         </blockquote>
 
-        The **MAVENs** (*Materials Advancing a Viable ENergy future*) group, led by [Dr. Rudra Banerjee](https://mavens-group.github.io/author/rudra-banerjee/), is based in the [Department of Physics and Nanotechnology](https://www.srmist.edu.in/department/department-of-physics-and-nanotechnology/) at the [SRM Institute of Science and Technology](https://srmist.edu.in).
+        **MAVENs** (*Materials Advancing a Viable ENergy Future*), led by [Dr. Rudra Banerjee](https://mavens-group.github.io/author/rudra-banerjee/), is based in the [Department of Physics and Nanotechnology](https://www.srmist.edu.in/department/department-of-physics-and-nanotechnology/) at the [SRM Institute of Science and Technology](https://srmist.edu.in).
 
-        We tackle the fundamental challenge of predicting material properties from electronic structure. Through computational modeling, we design materials with unprecedented capabilities like room-temperature quantum devices, efficient photocatalysts, and next-generation energy storage systems.
+        We focus on the **fundamental challenge of predicting material properties from electronic structure**, using computational approaches to design materials with targeted capabilities for energy, quantum, and functional technologies. Our research integrates theory, computation, and application-oriented insight to enable predictive understanding and guide experimental validation.
 
-        ### Designing Tomorrow's Materials Today
 
-        We harness **Density Functional Theory (DFT)**, **Monte Carlo simulations**, and **Machine Learning** — a powerful combination of quantum mechanics, statistical physics, and artificial intelligence that enables us to predict, design, and optimise materials before they are synthesised in the laboratory. From the magnetic complexity of high-entropy alloys to the catalytic potential green hydrogen and quantum materials with long coherence time, we bridge fundamental theory with transformative applications.
+        ### Designing Materials with Predictive Insight
 
-        Our breakthrough research spans three frontiers:
+        Our work combines **Density Functional Theory (DFT)**, **Monte Carlo simulations**, and **Machine Learning (ML)**. Together, these methods allow us to:
 
-        - **Disordered alloys** – unlocking exceptional properties through strategic compositional design
-        - **Quantum materials** – engineering the foundation for next-generation quantum technologies
-        - **Machine learning** – accelerating discovery across vast material landscapes
+        - **DFT:** Accurately compute electronic, magnetic, and structural properties for alloys, 2D materials, and molecular systems
+        - **Monte Carlo simulations:** Explore thermodynamic and configurational landscapes in disordered and multi-component systems
+        - **Machine Learning:** Accelerate discovery of functional materials and defects, while maintaining interpretability and scientific insight
+
+        By applying these tools across multiple length scales, we bridge atomic-level structure with macroscopic properties and **predict material behavior before synthesis**.
 
         {{% cta cta_link="./research/" cta_text="Explore Our Research" %}}
 
-        Every prediction we make connects with experimental reality. Through partnerships with leading experimentalists worldwide, we validate our models and push computational boundaries, ensuring our discoveries translate from silicon to laboratory bench.
+
+        ### Research Frontiers
+
+        Our research focuses on three interconnected areas:
+
+        1. **Disordered Alloys** – Understanding how atomic-scale disorder controls mechanical, magnetic, and electronic functionality, with applications in high-entropy alloys and spintronic devices.
+        2. **Quantum and Low-Dimensional Materials** – Engineering 2D materials and hybrid molecular systems for quantum technologies, spintronics, and energy conversion.
+        3. **Interpretable Machine Learning for Materials Discovery** – Developing physics-informed ML models to predict defect-host systems for quantum devices and other functional materials.
+
+        Each frontier links fundamental theory with **experimentally relevant outcomes**, ensuring that predictions are actionable and scientifically robust.
+
+        ### Collaborative Approach
+
+        We actively partner with **experimental groups worldwide** to validate computational predictions and translate insights into practical applications. These collaborations strengthen both the impact and credibility of our research.
 
         {{% cta cta_link="./publication/" cta_text="View Our Publications" %}}
 
         ### Join the Discovery
 
-        We seek **M.Sc. students** in physics, chemistry, or materials science ready to wield computational power against real-world challenges. If you're passionate about designing materials that will define our sustainable future, your next breakthrough awaits here.
+        We welcome **M.Sc. students** in physics, chemistry, or materials science interested in computational materials research.
+        Join us to explore **materials design with predictive insight** and contribute to technologies shaping a sustainable and quantum-enabled future.
+
 
         {{% cta cta_link="./position/" cta_text="Apply to Join Us" %}}
 
