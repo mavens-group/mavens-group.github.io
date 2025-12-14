@@ -4,8 +4,8 @@ _build:
   list: always
 
 # Display name
-title: Karunakaran M
-
+title: Dr Karunakaran M
+display_name_short: Karunakaran M
 # Full name (for SEO)
 first_name: Karunakaran
 last_name: M
