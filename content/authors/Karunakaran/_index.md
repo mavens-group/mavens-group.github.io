@@ -68,7 +68,7 @@ social:
     icon_pack: ai
     link: https://orcid.org/0000-0002-5401-7823
 user_groups:
-  - Alumni (Scholars)
+  - Alumni (Researchers)
 ---
 Karunakaran M is a Research Scholar in the MAVENs group at the [Department of Physics and Nanotechnology](https://www.srmist.edu.in/department/department-of-physics-and-nanotechnology/), [SRMIST, KTR](https://www.srmist.edu.in). His research integrates *ab initio* density functional theory (DFT), the Korringa–Kohn–Rostoker coherent potential approximation (KKR–CPA), and Monte Carlo simulations with machine learning approaches to analyse the electronic, magnetic, and thermodynamic properties of functional materials.
 
