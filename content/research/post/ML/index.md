@@ -5,15 +5,27 @@ show_date: false
 profile: false
 weight: 3
 ---
-### The Challenge:
-The discovery of functional materials drives technological advancement, yet identifying materials with specific properties within vast chemical composition spaces remains challenging. Complex structure-property relationships make this search inherently difficult. Traditional approaches, including trial-and-error experimentation and high-throughput ab initio methods, are time-consuming and resource-intensive, limiting exploration across design spaces.
+### Scientific Challenge
+Discovering functional materials with targeted properties is critical for technological advancement, but the **vast chemical composition space** and complex structure-property relationships make this task extremely challenging.
 
-### Our Innovation:
-We use Machine Learning (ML) to accelerate materials discovery through data-driven approaches that identify patterns within chemical and structural datasets. ML models make rapid, physics-informed predictions about material properties, streamlining the discovery process and reducing computational costs.
+Traditional approaches, including **trial-and-error experiments** and high-throughput ab initio calculations, are time-consuming and resource-intensive, **limiting exploration** and slowing the pace of discovery. Developing methods that efficiently predict material properties while providing scientific insight is therefore a key challenge.
 
-To address interpretability limitations of "black-box" models, we develop hybrid ML approaches that integrate predictive power with physical interpretability. These methods map feature vectors to physical descriptors, ensuring models provide both accurate predictions and meaningful scientific insights.
+---
 
-### Recent Achievements:
-We designed ML models for materials tailored to quantum information processing, focusing on predicting defects analogous to nitrogen-vacancy (NV) centers in diamond—defect systems with electronic levels suitable for physical qubits. Our models achieve F1 scores exceeding 0.98 for classification tasks and Matthews correlation coefficients above 0.90 on imbalanced datasets while preserving interpretability.
+### Our Approach
+We leverage **Machine Learning (ML)** to accelerate materials discovery through **data-driven, physics-informed models**:
 
-These materials address challenges in building qubit arrays with long coherence times at room temperature.
+- Identify patterns and correlations in chemical and structural datasets to predict material properties rapidly
+- Reduce computational cost and exploration time compared to conventional methods
+- Develop **hybrid ML approaches** that combine predictive power with **physical interpretability**, mapping feature vectors to meaningful descriptors
+
+This approach ensures that our models not only make accurate predictions but also generate **actionable scientific insights**, bridging computational efficiency with fundamental understanding.
+
+---
+
+### Key Insights & Achievements
+- Designed ML models targeting materials for **quantum information processing**, specifically defects analogous to nitrogen-vacancy (NV) centers in diamond
+- Achieved **F1 scores > 0.98** and **Matthews correlation coefficients > 0.90** on imbalanced datasets while maintaining model interpretability
+- Predicted materials suitable for building **qubit arrays with long coherence times at room temperature**, providing a roadmap for experimental validation
+
+These results demonstrate that interpretable ML can **accelerate the discovery of quantum-relevant materials**, enabling the design of defect-based qubits and other advanced functional systems.

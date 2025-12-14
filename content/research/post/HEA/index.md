@@ -5,17 +5,24 @@ show_date: false
 profile: false
 weight: 1
 ---
-### The Challenge:
-Disordered systems can enhance mechanical, magnetic, and electronic properties. In high-entropy alloys (HEAs), multi-component, near-equimolar compositions create high configurational entropy, resulting in exceptional strength, corrosion resistance, and thermal stability. This configurational randomness allows fine-tuning of properties through compositional adjustments and doping.
+### Scientific Challenge
+High-entropy alloys (HEAs) are multi-component, near-equimolar alloys where **configurational disorder enhances mechanical, magnetic, and electronic properties**. This randomness allows fine-tuning of strength, corrosion resistance, and thermal stability via compositional adjustments or doping.
 
-The computational challenge arises because disordered systems lack periodicity, making Bloch's theorem invalid. These materials find applications in energy-efficient technologies, including hydrogen evolution reactions and magnetocaloric refrigeration, and in spintronic devices.
+However, **predicting which compositions yield optimal properties is challenging** because disordered systems lack periodicity, invalidating Bloch’s theorem. Understanding how atomic-scale disorder affects macroscopic performance is therefore a **central scientific question** for both fundamental materials science and applications in energy-efficient technologies such as **hydrogen evolution reactions, magnetocaloric refrigeration, and spintronic devices**.
 
-### Our Approach:
-We investigate disordered systems, including Heusler alloys (X₂YZ) and MXenes (Mₙ₊₁Xₙ) for green energy and advanced technologies. We use density functional theory (DFT) with plane-wave based supercell methods and Green's function based coherent potential approximation (CPA) methods to study doping strategies that tune electronic and magnetic properties.
+### Our Approach
+To address this challenge, we combine **first-principles theory with advanced computational techniques**:
 
-### Recent Achievements:
-Our computational work has identified Ni-Mn-based shape memory alloys with extended operating temperature ranges and enhanced magnetocaloric effects in Fe-Cr-V-based systems.
+- **Density Functional Theory (DFT)** with plane-wave supercells to model realistic atomic configurations
+- **Coherent Potential Approximation (CPA)** based Green’s function methods to capture disorder effects
+- **Compositional tuning and doping strategies** to investigate how specific substitutions modify electronic, magnetic, and thermodynamic properties
 
-We investigated site-selective doping effects on Curie temperature (Tc) and spin-glass (SGS) behavior in Mn₂CoAl, providing insights for spintronics applications.
+This framework allows us to **link atomic-level disorder with targeted material functionality**, providing predictive insights for experimental design.
 
-For MXenes, we demonstrated that Zr-doped Ti₃C₂ and Ti₃CN exhibit superior catalytic performance for hydrogen evolution reactions with |ΔGₕ| ≈ 0.1 eV, improving upon pure Ti₃C₂ properties.
+### Key Insights & Achievements
+- Identified **Ni-Mn-based shape memory alloys** with extended operating temperature ranges
+- Demonstrated **enhanced magnetocaloric effects** in Fe-Cr-V-based systems
+- Explored **site-selective doping** in Mn₂CoAl, uncovering mechanisms controlling Curie temperature (Tc) and spin-glass (SGS) behavior for spintronic applications
+- For MXenes, showed that **Zr-doped Ti₃C₂ and Ti₃CN** outperform pure Ti₃C₂ in hydrogen evolution reactions, achieving |ΔGₕ| ≈ 0.1 eV
+
+> These results provide a predictive roadmap for designing disordered alloys and 2D materials with **tailored functional properties** for green energy and advanced technologies.

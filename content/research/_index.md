@@ -27,45 +27,65 @@ sections:
       # Choose a listing view
       view: card
 ---
-At MAVENs, we harness first-principles modeling, Monte Carlo simulations, and machine learning to unlock the properties of materials for next-generation technologies in energy, magnetism, and quantum applications.
+At MAVENs, we harness first-principles modeling, Monte Carlo simulations, and machine learning to **tackle key challenges in materials science**, powering next-generation technologies in energy, magnetism, and quantum applications.
 
 ### Our Research Philosophy
 
-Our research is rooted in a fundamental question:
+Our research is guided by a central question:
 
-_```How can we computationally design materials that power a sustainable and quantum-enabled future?```_
+_**“How can we computationally design materials that solve pressing energy and quantum challenges?”**_
 
-We address this question by bridging fundamental theory with high-impact applications—ranging from the catalytic activity of doped MXenes and the quantum spin textures of disordered Heusler alloys to the classification of NV-defect host sites using machine learning. By uncovering structure–property relationships in complex materials, we harness tools such as density functional theory (DFT), the Monte Carlo method, and AI-driven discovery to guide the design of next-generation quantum and energy materials.
+We address this question by linking **atomic-scale structure to macroscopic properties**, bridging fundamental theory with real-world applications. From the catalytic activity of doped MXenes and the quantum spin textures of disordered Heusler alloys to interpretable machine learning for qubit defect design, our work focuses on **predictive insight rather than trial-and-error experimentation**.
 
-These efforts are enabled by a suite of cutting-edge computational techniques, forming the foundation of our research workflow.
+---
 
 ### Computational Methods & Tools
 
-Our research employs state-of-the-art computational techniques:
+Our computational toolkit includes:
 
-- **Density Functional Theory (DFT):** For accurate prediction of electronic and structural properties
-- **Monte Carlo Simulations:** For statistical sampling of complex configurational spaces
-- **Machine Learning:** For pattern recognition and property prediction
-- **High-throughput Computing:** For systematic materials screening
+- **Density Functional Theory (DFT):** Accurate prediction of electronic, magnetic, and structural properties
+- **Monte Carlo Simulations:** Statistical sampling of complex configurations
+- **Machine Learning:** Accelerated discovery and interpretable property prediction
+- **High-throughput Computing:** Systematic screening of candidate materials
 
-Together, these methods allow us to explore and predict the behaviour of materials across length scales and functional regimes.
+These methods are used as **enablers to answer fundamental scientific questions**, rather than as the sole focus.
+
+---
 
 ### Collaborative Research
-We believe the most impactful research happens at the intersection of theory and experiment. Our group actively collaborates with experimental research teams worldwide, ensuring that our computational predictions are both validated and translated into real-world applications.
 
-These partnerships enhance the practical relevance of our work and accelerate the deployment of advanced materials.
+We actively collaborate with **experimental groups worldwide**, ensuring that our predictions are **validated and applied in real-world settings**. These partnerships enhance both the impact and relevance of our research.
+
+---
 
 ### Research Impact
 
-Our computational insights drive materials innovation by:
-- Reducing experimental trial-and-error
-- Predicting novel materials before synthesis
-- Understanding fundamental mechanisms
-- Accelerating technology development timelines
+Our work contributes to advancing global efforts in **clean energy, quantum technologies, and advanced manufacturing** by:
 
-Our work contributes directly to global efforts in clean energy, quantum information science, and
-advanced manufacturing.
+- Reducing experimental trial-and-error
+- Predicting new materials prior to synthesis
+- Revealing fundamental mechanisms behind complex behaviour
+- Accelerating translation of materials discovery into functional technologies
+
+---
 
 ### Research Themes
 
-Our research spans multiple interconnected themes. Explore them below to see how our philosophy and methods are applied to specific material systems and scientific challenges.
+Our research spans **three interconnected themes**, each addressing a distinct scientific challenge. Click each title to explore detailed subpages.
+
+<!-- #### 1. [High-Entropy Alloys (HEAs)](research/post/hea/) -->
+<!-- - **Challenge:** Designing disordered alloys with tailored mechanical, magnetic, and electronic properties for energy and spintronic applications -->
+<!-- - **Approach:** DFT and CPA-based simulations to link atomic-level disorder with functional properties -->
+<!-- - **Impact:** Predictive roadmap for shape memory alloys, magnetocaloric systems, and spin-glass materials -->
+
+<!-- #### 2. [2D Materials and Molecular Magnets](research/post/2d/) -->
+<!-- - **Challenge:** Stabilizing single magnetic molecules and 2D materials for qubits, sensors, and spintronic devices -->
+<!-- - **Approach:** DFT studies of doping and substrate interactions to enhance spin coherence and electronic coupling -->
+<!-- - **Impact:** Design principles for molecular/2D hybrid systems suitable for quantum applications -->
+
+<!-- #### 3. [Machine Learning for Materials Discovery](research/post/ml/) -->
+<!-- - **Challenge:** Efficiently exploring vast chemical spaces to identify functional materials with targeted properties -->
+<!-- - **Approach:** Interpretable ML models that link structural descriptors to properties and guide qubit-relevant defect design -->
+<!-- - **Impact:** Accelerated discovery of defect-host materials with high coherence and predictive guidance for experiments -->
+
+<!-- > Each theme follows our guiding philosophy: **start with a scientific problem, predictively explore solutions, and extract actionable insights for next-generation technologies.** -->
