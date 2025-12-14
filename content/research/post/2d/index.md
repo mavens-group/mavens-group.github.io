@@ -6,27 +6,27 @@ profile: false
 weight: 2
 ---
 ### Scientific Challenge
-Single magnetic molecules, such as organometallic systems, and 2D materials hold promise as **molecular magnets and qubits** for quantum information processing and spintronic devices. Their tunable electronic states and intrinsic magnetic properties make them candidates for **quantum computing architectures, magnetic sensors, data storage devices, and quantum communication networks**.
+Two-dimensional (2D) materials provide a powerful platform for engineering **electronic and spin-dependent phenomena at reduced dimensionality**, making them attractive for applications in **quantum technologies, spintronics, sensing, and energy conversion**. Their properties are highly tunable through **defects, dopants, strain, and interfacial coupling**, offering opportunities to design materials with targeted functionality.
 
-However, practical integration faces significant challenges, including **spin decoherence, instability of spin-polarized states, and inefficient charge transport**. Addressing these challenges is central to realizing functional quantum devices.
+However, realizing functional devices based on 2D systems remains challenging. Key limitations include **spin decoherence, instability of spin-polarized states, inefficient charge transport, and poor interfacial control**. Understanding how atomic-scale modifications and hybrid interfaces govern these effects is essential for translating 2D materials from idealized models to realistic device architectures.
 
----
 
 ### Our Approach
-We use **Density Functional Theory (DFT)** to investigate how **doping and substrate interactions** influence the electronic and magnetic properties of molecular systems and 2D materials.
+We focus on **2D materials and molecule–2D hybrid interfaces**, where controlled perturbations enable predictive tuning of electronic, magnetic, and catalytic properties.
 
-Key aspects of our approach include:
-- Studying substrates like **graphene and boron nitride (BN)** to enhance electronic coupling and stabilize reactive states
-- Optimizing molecular systems to **improve spin coherence and transmission**
-- Linking atomic-scale modifications to device-relevant performance metrics
+Our approach combines **first-principles Density Functional Theory (DFT)** with systematic materials design strategies to:
 
-This strategy enables us to **predictively design 2D/molecular hybrid systems** with enhanced stability and functionality for quantum technologies.
+- Investigate how **dopants, defects, and adsorbates** modify electronic structure and spin polarization
+- Study **interfacial coupling** between 2D materials and molecular or metallic species to enhance spin transmission and stability
+- Link atomic-scale modifications to **device-relevant performance metrics**, including spin coherence, charge transport, and catalytic activity
 
----
+Within this framework, **spintronic, quantum, and catalytic functionalities are treated as complementary outcomes of electronic structure control in selected 2D material systems**.
+
 
 ### Key Insights & Achievements
-- Demonstrated that **stacking metalloporphyrins on graphene** enhances spin transmission and stabilizes spin-polarized states
-- Showed improved suitability of these hybrid systems for **quantum sensors and molecular spintronic devices**
-- Computational insights guide the **design and optimization of 2D quantum materials**, helping overcome technological barriers in quantum applications
+- Demonstrated that **molecule–2D hybrid interfaces**, such as metalloporphyrins coupled to graphene-based systems, significantly enhance spin transmission and stabilize spin-polarized states
+- Established design principles for **2D-based quantum sensors and molecular spintronic components**, addressing key challenges related to coherence and stability
+- For MXenes, showed that **Zr-doped Ti₃C₂ and Ti₃CN** exhibit superior catalytic performance for hydrogen evolution reactions, achieving |ΔGₕ| ≈ 0.1 eV and outperforming pristine Ti₃C₂
+- Revealed how controlled chemical modifications in 2D systems can simultaneously optimize **electronic, magnetic, and catalytic responses**
 
- These results establish pathways for integrating molecular magnets and 2D materials into functional quantum devices, bridging the gap between atomic-scale design and application.
+These results demonstrate that **rational control of composition and interfaces in 2D materials** provides a viable pathway for designing functional systems bridging quantum technologies and energy applications.
