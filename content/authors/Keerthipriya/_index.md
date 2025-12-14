@@ -51,8 +51,10 @@ social:
   - icon: linkedin
     icon_pack: fab
     link: https://www.linkedin.com/in/keerthipriya-t-12062725b
-user_groups:
-  - Alumni (Grad)
+
+user_groups: ["Alumni (Grad)"]
+params:
+  css_class: alumni-grad
 ---
 Keerthipriya is a post graduate student at [Department of Computer
 Applications](https://www.srmist.edu.in/department/department-of-computer-applications/) at

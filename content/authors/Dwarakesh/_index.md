@@ -45,8 +45,9 @@ education:
       institution: SRM Institute of Science and Technology
       year: 2018-2021
 
-user_groups:
-  - Alumni (Grad)
+user_groups: ["Alumni (Grad)"]
+params:
+  css_class: alumni-grad
 ---
 Dwarakesh Kannan R is a Co-Research Scholar in the [Department of Physics and Nanotechnology] at
 VIT University. He is exploring the synthesis and characterization of solid polymer electrolyte

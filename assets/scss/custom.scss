@@ -1,0 +1,65 @@
+/* Reset counter once per page */
+body {
+  counter-reset: pub-counter;
+}
+
+/* Increment per publication */
+.pub-list-item.view-citation {
+  counter-increment: pub-counter;
+  position: relative;
+  padding-left: 2em;
+}
+
+/* Render number */
+.pub-list-item.view-citation::before {
+  content: counter(pub-counter) ".";
+  position: absolute;
+  left: 0;
+  font-weight: 200;
+}
+
+
+// [> Alumni Researchers - normal size <]
+// .people-person.alumni-researcher {
+  // flex: 0 0 30%;   [> 3 per row on desktop <]
+  // max-width: 30%;
+  // margin-bottom: 1.5rem;
+// }
+
+/* Alumni Grads / Project Students - smaller */
+.people-person.alumni-grad {
+  flex: 0 0 25%;   /* 2 per row on desktop/mobile */
+  max-width: 15%;
+  font-size: 0.85rem;
+}
+
+// [> Mobile responsiveness <]
+// @media (max-width: 768px) {
+  // .people-person.alumni-researcher,
+  // .people-person.alumni-grad {
+    // flex: 0 0 100%;
+    // max-width: 100%;
+  // }
+// }
+
+
+/* Alumni Grads - smaller font */
+.people-person.alumni-grad {
+  /* Optionally shrink the whole card */
+  flex: 0 0 15%;   /* 2 per row on desktop/mobile */
+  max-width: 15%;
+  font-size: 0.85rem; /* smaller text overall */
+
+  /* If you want to target specific elements inside the card: */
+  .portrait-title h2 {
+    font-size: .8rem;  /* Name */
+  }
+
+  .portrait-title h3 {
+    font-size: 0.75rem; /* Role/Project */
+  }
+
+  .people-interests {
+    font-size: 0.75rem; /* Interests, if displayed */
+  }
+}

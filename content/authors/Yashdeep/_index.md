@@ -36,8 +36,9 @@ education:
       institution: SRMIST, Kattankulathur
       year: 2024
 
-user_groups:
-  - Alumni (Grad)
+user_groups: ["Alumni (Grad)"]
+params:
+  css_class: alumni-grad
 ---
 
 Yashdeep was a UG student in the Department of Physics and Nanotechnology at SRM Institute of Science and Technology.

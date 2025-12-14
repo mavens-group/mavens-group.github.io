@@ -48,8 +48,10 @@ social:
     icon_pack: fas
     link: 'mailto:rammanohartk@gmail.com'
 
-user_groups:
-  - Alumni (Grad)
+
+user_groups: ["Alumni (Grad)"]
+params:
+  css_class: alumni-grad
 ---
 Ram was a master’s student in the Department of Physics and Nanotechnology at SRM Institute of Science and Technology.
 
