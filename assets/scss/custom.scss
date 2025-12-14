@@ -26,12 +26,12 @@ body {
   // margin-bottom: 1.5rem;
 // }
 
-/* Alumni Grads / Project Students - smaller */
-.people-person.alumni-grad {
-  flex: 0 0 25%;   /* 2 per row on desktop/mobile */
-  max-width: 15%;
-  font-size: 0.85rem;
-}
+// Alumni Grads / Project Students - smaller
+// .people-person.alumni-grad {
+  // flex: 0 0 25%;   [> 2 per row on desktop/mobile <]
+  // max-width: 15%;
+  // font-size: 0.85rem;
+// }
 
 // [> Mobile responsiveness <]
 // @media (max-width: 768px) {
@@ -61,5 +61,20 @@ body {
 
   .people-interests {
     font-size: 0.75rem; /* Interests, if displayed */
+  }
+}
+
+/* Mobile / small tablets - 3 per row */
+@media (max-width: 768px) {
+  .people-person.alumni-grad {
+    flex: 0 0 22%;   /* roughly 2 per row with some margin */
+    max-width: 48%;
+    font-size: 0.85rem; /* same as desktop */
+    margin-right: 2%;   /* spacing between cards */
+    margin-bottom: 1rem;
+
+    &:nth-child(2n) { /* remove right margin for every 2nd card */
+      margin-right: 0;
+    }
   }
 }
