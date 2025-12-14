@@ -4,7 +4,7 @@ title: Karunakaran defended his thesis
 date: 2025-11-28
 profile: false
 ---
-I am absolutely thrilled and immensely proud to announce that my first PhD student, [Karunakaran M](../../author/karunakaran-m) has successfully defended his doctoral thesis!
+I am absolutely thrilled and immensely proud to announce that my first PhD student, [Karunakaran M](../../author/dr-karunakaran-m) has successfully defended his doctoral thesis!
 <!--more-->
 This is a really significant milestone and a true highlight for the Mavens group. Karunakarn’s research is genuinely interesting, focusing on the electronic, magnetic, and thermodynamic properties of Heusler alloys.
 

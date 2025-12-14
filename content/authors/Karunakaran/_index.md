@@ -38,7 +38,7 @@ education:
   courses:
     - course: PhD in Physics
       institution: SRM Institute of Science and Technology
-      year: on going
+      year: (2021-2025)
     - course: M.Sc in Physics
       institution: NMS S.Vellaichamy Nadar College
       year: 2018-2020
@@ -70,8 +70,8 @@ social:
 user_groups:
   - Alumni (Researchers)
 ---
-Karunakaran M is a Research Scholar in the MAVENs group at the [Department of Physics and Nanotechnology](https://www.srmist.edu.in/department/department-of-physics-and-nanotechnology/), [SRMIST, KTR](https://www.srmist.edu.in). His research integrates *ab initio* density functional theory (DFT), the Korringa–Kohn–Rostoker coherent potential approximation (KKR–CPA), and Monte Carlo simulations with machine learning approaches to analyse the electronic, magnetic, and thermodynamic properties of functional materials.
+Dr Karunakaran M is the **first** PhD graduate of the MAVENs. He successfully defended his doctoral thesis in 2025, following a research programme focused on computational and theoretical materials science for energy- and spin-based applications.
 
-Karunakaran focuses on Heusler alloys for sustainable technologies, including magnetocaloric cooling and spintronic applications. He investigates how chemical disorder and strategic doping tune electronic and magnetic behaviour, contributing to advanced materials development for green-energy systems.
+His doctoral work employed *ab initio* density functional theory alongside advanced techniques such as the Korringa–Kohn–Rostoker coherent potential approximation (KKR–CPA), Monte Carlo simulations, and data-driven analysis to examine the effects of chemical disorder, alloying, and controlled doping on the electronic, magnetic, and thermodynamic properties of functional materials.
 
-He publishes in peer-reviewed journals and presents at national and international conferences. Karunakaran mentors undergraduate students in scientific computation and communication.
+During his PhD, Dr Karunakaran made sustained contributions to the understanding of Heusler and related alloy systems, with particular emphasis on materials relevant to magnetocaloric refrigeration and spintronic technologies. His research demonstrated how compositional tuning under realistic disorder conditions can enhance Curie temperatures, stabilise magnetic phases, and improve functional performance. These findings were reported in peer-reviewed journals spanning applied physics, solid-state chemistry, and magnetism, reflecting a careful balance between fundamental insight and application-oriented materials design. As an alumnus of the MAVENs group, his work exemplifies the group’s interdisciplinary approach to computational materials research and establishes a strong foundation for future doctoral research within the group.
