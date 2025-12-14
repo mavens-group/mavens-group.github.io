@@ -52,7 +52,7 @@ body {
 
   /* If you want to target specific elements inside the card: */
   .portrait-title h2 {
-    font-size: .8rem;  /* Name */
+    font-size: .9rem;  /* Name */
   }
 
   .portrait-title h3 {
@@ -65,9 +65,9 @@ body {
 }
 
 // Mobile / small tablets - 3 per row
-@media (max-width: 768px) {
+@media (max-width: 999px) {
   .people-person.alumni-grad {
-    flex: 0 0 22%;   /* roughly 2 per row with some margin */
+    flex: 0 0 30%;   /* roughly 2 per row with some margin */
     max-width: 48%;
     font-size: 0.85rem; /* same as desktop */
     margin-right: 2%;   /* spacing between cards */
@@ -85,7 +85,7 @@ body {
 /* Mobile / small tablets: hide role and icons for alumni grad */
 @media (max-width: 768px) {
   .people-person.alumni-grad {
-    flex: 0 0 22%;
+    flex: 0 0 30%;
     max-width: 48%;
     margin-right: 2%;
     margin-bottom: 1rem;
