@@ -97,7 +97,7 @@ sections:
 
         ### Join the Discovery
 
-        We welcome **M.Sc. and graduate students** in physics, chemistry, or materials science interested in computational materials research. Develop expertise in VASP/Quantum ESPRESSO workflows and ML-driven materials screening while contributing to technologies shaping a sustainable, quantum-enabled future.
+        We welcome **M.Sc. and graduate students** in physics, chemistry, or materials science interested in computational materials research. Develop expertise in _ab-initio_ [DFT](blog/2024-07-dft) and ML-driven materials screening while contributing to technologies shaping a sustainable, quantum-enabled future.
 
         {{% cta cta_link="./position/" cta_text="See Open Projects" %}}
 

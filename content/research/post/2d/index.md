@@ -1,5 +1,5 @@
 ---
-title: Quantum Materials
+title: 2D Materials
 summary: What if the key to quantum computing lies not in silicon, but in single molecules?
 show_date: false
 profile: false
@@ -12,9 +12,9 @@ However, realizing functional devices based on 2D systems remains challenging. K
 
 
 ### Our Approach
-We focus on **2D materials and molecule–2D hybrid interfaces**, where controlled perturbations enable predictive tuning of electronic, magnetic, and catalytic properties.
+We focus on **2D materials (MXene), monolayers (Transition metal dichalcigenides (TMDC)) and single magnetic molecules (porphyrine)**, where controlled perturbations enable predictive tuning of electronic, magnetic, and catalytic properties.
 
-Our approach combines **first-principles Density Functional Theory (DFT)** with systematic materials design strategies to:
+Our approach combines **DFT** and **MC** with systematic materials design strategies to:
 
 - Investigate how **dopants, defects, and adsorbates** modify electronic structure and spin polarization
 - Study **interfacial coupling** between 2D materials and molecular or metallic species to enhance spin transmission and stability
@@ -24,8 +24,8 @@ Within this framework, **spintronic, quantum, and catalytic functionalities are 
 
 
 ### Key Insights & Achievements
-- Demonstrated that **molecule–2D hybrid interfaces**, such as metalloporphyrins coupled to graphene-based systems, significantly enhance spin transmission and stabilize spin-polarized states
-- Established design principles for **2D-based quantum sensors and molecular spintronic components**, addressing key challenges related to coherence and stability
+- Demonstrated that **2D organometallic molecules**, such as metalloporphyrins, significantly enhance spin transmission and optical properties
+- Established design principles for **TMDC**, addressing key challenges related to coherence and stability
 - For MXenes, showed that **Zr-doped Ti₃C₂ and Ti₃CN** exhibit superior catalytic performance for hydrogen evolution reactions, achieving |ΔGₕ| ≈ 0.1 eV and outperforming pristine Ti₃C₂
 - Revealed how controlled chemical modifications in 2D systems can simultaneously optimize **electronic, magnetic, and catalytic responses**
 
