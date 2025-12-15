@@ -83,7 +83,7 @@ sections:
 
         1. **[Disordered Alloys](/research/post/hea/)** – Understanding how atomic-scale disorder controls mechanical, magnetic, and electronic functionality in Heusler and high-entropy alloys for spintronic applications.
 
-        2. **[Quantum and Low-Dimensional Materials](/research/post/2d/)** – Engineering MXenes, 2D heterostructures, and hybrid molecular systems for quantum technologies, spintronics, and energy conversion.
+        2. **[Quantum and Low-Dimensional Materials](/research/post/2d/)** – Engineering MXenes, monolayers, and single molecules systems for quantum technologies, spintronics, and energy conversion.
 
         3. **[Interpretable Machine Learning](/research/post/ml/)** – Developing physics-informed ML models to predict defect-host systems for spin qubits, catalysts, and other functional materials.
 
