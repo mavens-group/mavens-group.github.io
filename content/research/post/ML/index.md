@@ -1,6 +1,6 @@
 ---
-title: Computational Materials Discovery
-summary: Scientists estimate millions of potential materials exist, but only a tiny fraction have been discovered—what if we could predict the perfect material before ever making it?
+title: Machine Learning driven Materials Discovery
+summary: What if we could predict optimal materials for quantum devices from millions of candidates before synthesis?
 show_date: false
 profile: false
 weight: 3

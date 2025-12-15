@@ -69,46 +69,37 @@ sections:
 
         **MAVENs** (*Materials Advancing a Viable ENergy Future*), led by [Dr. Rudra Banerjee](https://mavens-group.github.io/author/rudra-banerjee/), is based in the [Department of Physics and Nanotechnology](https://www.srmist.edu.in/department/department-of-physics-and-nanotechnology/) at the [SRM Institute of Science and Technology](https://srmist.edu.in).
 
-        We focus on the **fundamental challenge of predicting material properties from electronic structure**, using computational approaches to design materials with targeted capabilities for energy, quantum, and functional technologies. Our research integrates theory, computation, and application-oriented insight to enable predictive understanding and guide experimental validation.
+        We address a fundamental question in materials science:
 
+        _**"How can we computationally design materials that solve pressing energy and quantum challenges?"**_
 
-        ### Designing Materials with Predictive Insight
-
-        Our work combines **Density Functional Theory (DFT)**, **Monte Carlo simulations**, and **Machine Learning (ML)**. Together, these methods allow us to:
-
-        - **DFT:** Accurately compute electronic, magnetic, and structural properties for alloys, 2D materials, and molecular systems
-        - **Monte Carlo simulations:** Explore thermodynamic and configurational landscapes in disordered and multi-component systems
-        - **Machine Learning:** Accelerate discovery of functional materials and defects, while maintaining interpretability and scientific insight
-
-        By applying these tools across multiple length scales, we bridge atomic-level structure with macroscopic properties and **predict material behavior before synthesis**.
+        Our approach combines **Density Functional Theory (DFT)**, **Monte Carlo simulations**, and **Machine Learning (ML)** to predict material properties from electronic structure—bridging atomic-scale behavior with macroscopic functionality. By linking fundamental theory with experimentally relevant outcomes, we **predict material behavior before synthesis**, reducing trial-and-error and accelerating discovery.
 
         {{% cta cta_link="./research/" cta_text="Explore Our Research" %}}
 
+        ### Research Themes
 
-        ### Research Frontiers
+        Our work spans three interconnected areas, each addressing specific scientific challenges:
 
-        Our research focuses on three interconnected areas:
+        1. **[Disordered Alloys](/research/post/hea/)** – Understanding how atomic-scale disorder controls mechanical, magnetic, and electronic functionality in Heusler and high-entropy alloys for spintronic applications.
 
-        1. **Disordered Alloys** – Understanding how atomic-scale disorder controls mechanical, magnetic, and electronic functionality, with applications in high-entropy alloys and spintronic devices.
-        2. **Quantum and Low-Dimensional Materials** – Engineering 2D materials and hybrid molecular systems for quantum technologies, spintronics, and energy conversion.
-        3. **Interpretable Machine Learning for Materials Discovery** – Developing physics-informed ML models to predict defect-host systems for quantum devices and other functional materials.
+        2. **[Quantum and Low-Dimensional Materials](/research/post/2d/)** – Engineering MXenes, 2D heterostructures, and hybrid molecular systems for quantum technologies, spintronics, and energy conversion.
 
-        Each frontier links fundamental theory with **experimentally relevant outcomes**, ensuring that predictions are actionable and scientifically robust.
+        3. **[Interpretable Machine Learning](/research/post/ml/)** – Developing physics-informed ML models to predict defect-host systems for spin qubits, catalysts, and other functional materials.
 
-        ### Collaborative Approach
+        These themes contribute directly to **global efforts in clean energy, quantum technologies, and advanced manufacturing**.
 
-        We actively partner with **experimental groups worldwide** to validate computational predictions and translate insights into practical applications. These collaborations strengthen both the impact and credibility of our research.
+        ### Collaborative Impact
+
+        We collaborate with experimental groups at SRM Institute and worldwide, partnering with researchers in quantum materials and 2D systems to ensure our computational predictions are validated and translated into real-world applications.
 
         {{% cta cta_link="./publication/" cta_text="View Our Publications" %}}
 
         ### Join the Discovery
 
-        We welcome **M.Sc. students** in physics, chemistry, or materials science interested in computational materials research.
-        Join us to explore **materials design with predictive insight** and contribute to technologies shaping a sustainable and quantum-enabled future.
+        We welcome **M.Sc. and graduate students** in physics, chemistry, or materials science interested in computational materials research. Develop expertise in VASP/Quantum ESPRESSO workflows and ML-driven materials screening while contributing to technologies shaping a sustainable, quantum-enabled future.
 
-
-        {{% cta cta_link="./position/" cta_text="Apply to Join Us" %}}
-
+        {{% cta cta_link="./position/" cta_text="See Open Projects" %}}
 
     design:
       columns: '1'
