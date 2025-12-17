@@ -71,7 +71,7 @@ sections:
 
         We address a fundamental question in materials science:
 
-        _**"How can we computationally design materials that solve pressing energy and quantum challenges?"**_
+        ```How can we architect the atomic blueprints for the next generation of energy and quantum technologies?```
 
         Our approach combines **Density Functional Theory (DFT)**, **Monte Carlo simulations**, and **Machine Learning (ML)** to predict material properties from electronic structure—bridging atomic-scale behavior with macroscopic functionality. By linking fundamental theory with experimentally relevant outcomes, we **predict material behavior before synthesis**, reducing trial-and-error and accelerating discovery.
 

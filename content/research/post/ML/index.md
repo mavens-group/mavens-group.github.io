@@ -28,4 +28,4 @@ We explicitly prioritize physical interpretability over marginal gains in predic
 
 Collectively, these results establish a **mechanism-aware approach to ML-driven materials discovery**, where predictive models reveal governing descriptors and guide experimental synthesis rather than replace first-principles understanding.
 
-{{% cta cta_link="./research/" cta_text="← Go back to Research" %}}
+{{% cta cta_link="../../" cta_text="← Go back to Research" %}}
