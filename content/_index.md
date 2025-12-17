@@ -73,7 +73,7 @@ sections:
 
         ```How can we architect the atomic blueprints for the next generation of energy and quantum technologies?```
 
-        Our approach combines **Density Functional Theory (DFT)**, **Monte Carlo simulations**, and **Machine Learning (ML)** to predict material properties from electronic structure—bridging atomic-scale behavior with macroscopic functionality. By linking fundamental theory with experimentally relevant outcomes, we **predict material behavior before synthesis**, reducing trial-and-error and accelerating discovery.
+        Our approach combines **[Density Functional Theory (DFT)](blog/2024-07-dft)**, **Monte Carlo simulations**, and **Machine Learning (ML)** to predict material properties from electronic structure—bridging atomic-scale behavior with macroscopic functionality. By linking fundamental theory with experimentally relevant outcomes, we **predict material behavior before synthesis**, reducing trial-and-error and accelerating discovery.
 
         {{% cta cta_link="./research/" cta_text="Explore Our Research" %}}
 

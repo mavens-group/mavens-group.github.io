@@ -6,7 +6,7 @@ cascade:
   _build:
     render: always
     list: always
-title: Introduction to Density functional theory
+title: Introduction to Density Functional Theory
 linkTitle: Density Functional Theory
 date: 2024-07-26
 Summary: Density Functional Theory in nutshell for the beginners
