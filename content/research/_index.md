@@ -1,7 +1,7 @@
 ---
 title: Research
 type: research
-view: 3
+view: card
 banner:
     image: 'group.webp'
 sections:
