@@ -1,3 +1,38 @@
+/* --- Navbar Logo + Text Fix --- */
+.navbar-brand {
+  display: flex !important;
+  align-items: center;
+  color: inherit; // Ensures the brand link uses the theme text color
+
+  .navbar-logo-svg svg {
+    height: 40px;
+    width: auto;
+    margin-right: 12px;
+    /* The SVG will now automatically change color because of currentColor! */
+  }
+  .navbar-brand-text {
+    display: inline-block !important;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: inherit;
+    white-space: nowrap;
+  }
+}
+
+// [> 1. LIGHT MODE: Apply to body when it DOES NOT have the .dark class <]
+// body:not(.dark) .navbar-brand .navbar-logo-svg {
+  // filter: invert(1) brightness(0.2) !important;
+// }
+
+// [> 2. DARK MODE: Force it to show its natural white color <]
+// body.dark .navbar-brand .navbar-logo-svg {
+  // filter: invert(0) brightness(1) !important;
+// }
+
+/* Mobile Wrapper consistency */
+.navbar-brand-mobile-wrapper .navbar-brand {
+  display: flex !important;
+}
 /* Reset counter once per page */
 body {
   counter-reset: pub-counter;
