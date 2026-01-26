@@ -19,10 +19,9 @@ main:
   - name: Blogs
     url: blog
     weight: 50
-# - name: photos
-#   parent: Leisure
-#   url: leisure/photos
-#   weight: 46
+  - name: Software
+    url: software
+    weight: 46
   - name: News
     url: news
     weight: 60

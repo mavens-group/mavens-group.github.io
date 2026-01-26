@@ -36,6 +36,7 @@ header:
     enable: true
     blox: "navbar"
     align: r
+    logo: 'icon.svg'
     fixed_to_top: true
     show_logo: true
     show_language: false
