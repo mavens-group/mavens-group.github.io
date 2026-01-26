@@ -12,9 +12,7 @@ tags:
 
 # Featured image (Upload a screenshot named 'featured.png' to this folder)
 image:
-  caption: 'Visualizing lattice structures with cview'
-  focal_point: 'Smart'
-
+    preview_only: true
 links:
   - icon: github
     icon_pack: fab
@@ -38,7 +36,8 @@ In computational materials science, visualizing large supercells or complex latt
 
 Get up and running in seconds. Clone the repository and install dependencies:
 ```bash
-git clone [https://github.com/mavensgroup/cview.git](https://github.com/mavensgroup/cview.git)
+git clone https://github.com/mavensgroup/cview.git
 cd cview
-# Install command (verify specific instructions in README)
+# Install command (You mostly need rust and gtk4-devel)
+cargo run --release
 ```

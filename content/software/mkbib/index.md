@@ -11,9 +11,7 @@ tags:
   - Python
 
 image:
-  caption: 'Automated bibliography cleanup'
-  focal_point: 'Smart'
-
+    preview_only: true
 links:
   - icon: github
     icon_pack: fab
