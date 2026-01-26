@@ -1,6 +1,6 @@
 ---
 title: "CView: Crystal Structure Visualization & Analysis"
-summary: "A high-performance CLI tool for visualizing and analyzing complex crystallographic data seamlessly."
+summary: "A high-performance tool for visualizing and analyzing complex crystallographic data seamlessly."
 date: "2026-01-26"
 featured: true
 
@@ -13,6 +13,7 @@ tags:
 # Featured image (Upload a screenshot named 'featured.png' to this folder)
 image:
     preview_only: true
+
 links:
   - icon: github
     icon_pack: fab
