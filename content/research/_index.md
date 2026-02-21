@@ -29,6 +29,14 @@ sections:
 ---
 At [MAVENs](../), we harness **first-principles modelling, Monte Carlo simulations, and machine learning** to predict material properties from electronic structure, advancing the design of **next-generation materials** for energy, magnetism, and quantum applications.
 
+<!-- {{< video src="research.mp4" controls="no" >}} -->
+{{< video src="research.mp4" controls="no" autoplay="yes" loop="yes" muted="yes" >}}
+
+<!-- <video width="100%" height="auto" autoplay loop muted playsinline> -->
+  <!-- <source src="research.mp4" type="video/mp4"> -->
+  <!-- Your browser does not support the video tag. -->
+<!-- </video> -->
+
 ### Our Research Philosophy
 
 Our research is driven by a commitment to **predictive insight rather than trial-and-error experimentation**. We focus on linking atomic-scale structure to macroscopic properties, enabling us to:
