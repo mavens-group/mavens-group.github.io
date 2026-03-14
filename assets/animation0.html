@@ -1,0 +1,1203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Heusler — Hand Drawn v4</title>
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&display=swap');
+</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap" rel="stylesheet">
+  <style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    background: #1a1a1a;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    gap: 14px;
+    font-family: 'Georgia', serif;
+  }
+  .stage {
+    width: 727px; height: 727px;
+    position: relative;
+    border-radius: 4px;
+    overflow: hidden;
+    box-shadow: 0 0 60px rgba(0,0,0,0.9);
+  }
+  canvas { position: absolute; top:0; left:0; }
+  .controls { display:flex; gap:14px; align-items:center; }
+  button {
+    padding: 7px 18px;
+    background: #222; color: #888;
+    border: 1px solid #444; border-radius: 4px;
+    font-family: 'Courier New', monospace; font-size: 11px;
+    cursor: pointer; letter-spacing: 0.5px;
+  }
+  button:hover { background:#2a2a2a; color:#bbb; }
+  #label {
+    color: #666; font-family: 'Courier New', monospace;
+    font-size: 11px; letter-spacing: 1px;
+    min-width: 300px; text-align: center;
+  }
+</style>
+</head>
+<body>
+<div class="stage">
+  <canvas id="c" width="727" height="727"></canvas>
+</div>
+<div class="controls">
+  <button onclick="restart()">&#8635; Replay</button>
+  <div id="label">—</div>
+</div>
+
+<script>
+// ─── Single canvas — composite everything ourselves each frame ───────────────
+const W = 727, H = 727;
+const canvas = document.getElementById('c');
+const ctx    = canvas.getContext('2d');
+
+// Offscreen: permanent paper, permanent accumulation, overlay
+const paperOS = new OffscreenCanvas(W,H);
+const accumOS = new OffscreenCanvas(W,H);
+const chgOS   = new OffscreenCanvas(W,H);
+const dosOS   = new OffscreenCanvas(W,H);
+const pCtx    = paperOS.getContext('2d');
+const aCtx    = accumOS.getContext('2d');
+
+// ─── Seeded RNG ──────────────────────────────────────────────────────────────
+let _s=1;
+const sr  = s  => { _s = (s|0) >>> 0; };
+const rng = () => { _s=(_s*1664525+1013904223)>>>0; return _s/0xFFFFFFFF; };
+const rj  = (v,a)=> v+(rng()-.5)*a;
+
+// ─── Atom + bond data ────────────────────────────────────────────────────────
+const ATOMS = [
+  {cx:75,    cy:75,    r:50, g:'corner'},
+  {cx:651.8, cy:75,    r:50, g:'corner'},
+  {cx:651.8, cy:651.8, r:50, g:'corner'},
+  {cx:75,    cy:651.8, r:50, g:'corner'},
+  {cx:363.4, cy:75,    r:55, g:'face'},
+  {cx:363.4, cy:651.8, r:55, g:'face'},
+  {cx:75,    cy:363.4, r:55, g:'face'},
+  {cx:651.8, cy:363.4, r:55, g:'face'},
+  {cx:363.4, cy:363.4, r:50, g:'face'},
+  {cx:219.2, cy:219.2, r:48, g:'tet'},
+  {cx:507.6, cy:219.2, r:48, g:'tet'},
+  {cx:219.2, cy:507.6, r:48, g:'tet'},
+  {cx:507.6, cy:507.6, r:48, g:'tet'},
+];
+
+const BONDS = [
+  [123,75.8, 309,75.8],[416,75, 602,75],
+  [651.8,123, 651.8,309],[651.8,416, 651.8,603],
+  [75,416, 75,603],[75,123, 75,309],
+  [128,363.4, 314,363.4],[412,363.4, 598,363.4],
+  [412,651.8, 598,651.8],[123,651.8, 309,651.8],
+  [363.4,128, 363.4,314],[363.4,412, 363.4,598],
+  [110.6,110.6, 184.9,184.9],[253.5,253.5, 327.8,327.8],
+  [400.8,112.4, 475.1,186.7],[540.1,251.7, 614.5,326.1],
+  [541.9,541.9, 616.2,616.2],[399.0,399.0, 473.4,473.4],
+  [251.7,540.1, 326.1,614.5],[112.4,400.8, 186.7,475.1],
+  [112.4,326.1, 186.7,251.7],[251.7,186.7, 326.1,112.4],
+  [541.9,184.9, 616.2,110.6],[399.0,327.8, 473.4,253.5],
+  [253.5,473.4, 327.8,399.0],[110.6,616.2, 184.9,541.9],
+  [400.8,616.2, 475.1,541.9],[540.1,475.1, 614.5,400.8],
+];
+
+// ─── Bake paths (subtle wobble — steady hand) ────────────────────────────────
+const NL=28, NC=60;
+
+function bakeLine(x1,y1,x2,y2,seed){
+  sr(seed);
+  const dx=x2-x1, dy=y2-y1, len=Math.hypot(dx,dy)||1;
+  const px=-dy/len, py=dx/len;
+  const pts=[];
+  for(let i=0;i<NL;i++){
+    const t=i/(NL-1);
+    const dev=1.2*Math.sin(t*Math.PI)*(rng()*2-1);
+    pts.push({x:x1+dx*t+px*dev+(rng()-.5)*0.5, y:y1+dy*t+py*dev+(rng()-.5)*0.5});
+  }
+  pts[0]   ={x:x1+(rng()-.5)*0.8, y:y1+(rng()-.5)*0.8};
+  pts[NL-1]={x:x2+(rng()-.5)*0.8, y:y2+(rng()-.5)*0.8};
+  return pts;
+}
+
+function bakeCircle(cx,cy,r,seed){
+  sr(seed);
+  const pts=[];
+  const a0=(rng()-.5)*0.1;
+  const tot=Math.PI*2*(1+rng()*0.03);
+  for(let i=0;i<NC;i++){
+    const t=i/(NC-1);
+    const ang=a0+t*tot;
+    const rr=r*(1+(rng()-.5)*0.015)+(rng()-.5)*0.6;
+    pts.push({x:cx+Math.cos(ang)*rr+(rng()-.5)*0.6, y:cy+Math.sin(ang)*rr+(rng()-.5)*0.6});
+  }
+  return pts;
+}
+
+const bondPts = BONDS.map((b,i)=>bakeLine(b[0],b[1],b[2],b[3],i*113+5));
+ATOMS.forEach((a,i)=>{ a.pts=bakeCircle(a.cx,a.cy,a.r,i*79+11); });
+
+// ─── Crayon strokes ──────────────────────────────────────────────────────────
+function buildCrayon(cx,cy,r,seed){
+  sr(seed);
+  const strokes=[];
+  for(let dy=-r+5; dy<r; dy+=5){
+    const hw=Math.sqrt(Math.max(0,r*r-dy*dy));
+    if(hw<3) continue;
+    const y=cy+dy+(rng()-.5)*1.2;
+    const x1=cx-hw+(rng()-.5)*2.5;
+    const x2=cx+hw+(rng()-.5)*2.5;
+    const nPts=10;
+    const pts=[];
+    for(let j=0;j<nPts;j++){
+      const t=j/(nPts-1);
+      pts.push({x:x1+(x2-x1)*t+(rng()-.5)*1.5, y:y+(rng()-.5)*1.2});
+    }
+    strokes.push(pts);
+  }
+  return strokes;
+}
+ATOMS.forEach((a,i)=>{ a.crayon=buildCrayon(a.cx,a.cy,a.r*0.85,i*333+77); });
+
+function crayonColor(g){
+  if(g==='corner') return '#4a6890';
+  if(g==='face')   return '#5aaae8';
+  return                  '#7090b8';
+}
+
+// ─── Draw helpers ────────────────────────────────────────────────────────────
+function drawStroke(c,pts,frac,lw,color){
+  const n=Math.max(2,Math.round(pts.length*frac));
+  c.beginPath();
+  c.moveTo(pts[0].x,pts[0].y);
+  for(let i=1;i<n;i++){
+    if(i<n-1){
+      const mx=(pts[i].x+pts[i+1].x)/2, my=(pts[i].y+pts[i+1].y)/2;
+      c.quadraticCurveTo(pts[i].x,pts[i].y,mx,my);
+    } else c.lineTo(pts[i].x,pts[i].y);
+  }
+  c.strokeStyle=color; c.lineWidth=lw;
+  c.lineCap='round'; c.lineJoin='round';
+  c.stroke();
+}
+
+function drawCrayon(c,atom,frac){
+  const total=atom.crayon.length;
+  const nFull=Math.floor(total*frac);
+  const partFrac=(total*frac)-nFull;
+  const col=crayonColor(atom.g);
+  c.save();
+  c.beginPath(); c.arc(atom.cx,atom.cy,atom.r*0.85,0,Math.PI*2); c.clip();
+  c.strokeStyle=col; c.lineCap='round'; c.lineJoin='round';
+  for(let i=0;i<nFull;i++){
+    const pts=atom.crayon[i];
+    c.lineWidth=3.2+(i%3)*0.5;
+    c.globalAlpha=0.75+(i%2)*0.08;
+    c.beginPath(); c.moveTo(pts[0].x,pts[0].y);
+    for(let j=1;j<pts.length;j++) c.lineTo(pts[j].x,pts[j].y);
+    c.stroke();
+  }
+  if(nFull<total && partFrac>0.01){
+    const pts=atom.crayon[nFull];
+    const nP=Math.max(2,Math.round(pts.length*partFrac));
+    c.lineWidth=3.2; c.globalAlpha=0.78;
+    c.beginPath(); c.moveTo(pts[0].x,pts[0].y);
+    for(let j=1;j<nP;j++) c.lineTo(pts[j].x,pts[j].y);
+    c.stroke();
+  }
+  c.restore();
+}
+
+// ─── Paper background ────────────────────────────────────────────────────────
+function drawPaper(c){
+  c.fillStyle='#f0ece0'; c.fillRect(0,0,W,H);
+  sr(777);
+  const id=c.createImageData(W,H);
+  for(let i=0;i<id.data.length;i+=4){
+    const n=(rng()-.5)*18;
+    id.data[i]=240+n; id.data[i+1]=236+n; id.data[i+2]=224+n; id.data[i+3]=255;
+  }
+  c.putImageData(id,0,0);
+  const vg=c.createRadialGradient(W/2,H/2,W*.25,W/2,H/2,W*.72);
+  vg.addColorStop(0,'rgba(0,0,0,0)'); vg.addColorStop(1,'rgba(0,0,0,0.07)');
+  c.fillStyle=vg; c.fillRect(0,0,W,H);
+}
+
+// ─── Equations — Caveat handwriting font with parchment cards ─────────────────
+const EQS = [
+  { label:'Hohenberg–Kohn',
+    lines:['E[ρ] = T[ρ] + V[ρ] + Exc[ρ]', 'E₀ = min E[ρ(r)]'],
+    cx:168, cy:200, rot:-0.025, inkColor:'rgba(22,22,88,0.92)' },
+  { label:'Exchange–Correlation',
+    lines:['Exc[ρ] = ∫ ρ(r) εxc(ρ) dr', 'Vxc(r) = δExc / δρ(r)'],
+    cx:480, cy:490, rot:0.018,  inkColor:'rgba(12,72,22,0.92)' },
+  { label:'Variational QMC',
+    lines:['⟨E⟩ = ⟨Ψ|Ĥ|Ψ⟩ / ⟨Ψ|Ψ⟩', 'P(R→R′) = min[1, |Ψ(R′)|²/|Ψ(R)|²]'],
+    cx:500, cy:195, rot:0.015,  inkColor:'rgba(80,18,18,0.92)' },
+];
+
+// Card geometry for each eq (computed once)
+const EQ_FONT_SIZE   = 21;   // px — Caveat looks great at 21px
+const EQ_LABEL_SIZE  = 11;
+const EQ_LINE_H      = 30;
+const EQ_PAD_X       = 18;
+const EQ_PAD_Y       = 14;
+const EQ_LABEL_GAP   = 20;  // space for label above content
+
+// Measure card size — use an offscreen canvas once fonts load
+// We'll compute lazily on first draw
+EQS.forEach(eq=>{
+  eq._ready = false;
+  eq._cardW = 260;  // sensible default
+  eq._cardH = EQ_LABEL_GAP + EQ_PAD_Y + eq.lines.length * EQ_LINE_H + EQ_PAD_Y;
+});
+
+function ensureEqMeasured(c){
+  EQS.forEach(eq=>{
+    if(eq._ready) return;
+    c.font = `600 ${EQ_FONT_SIZE}px 'Caveat', 'Comic Sans MS', cursive`;
+    const maxW = Math.max(...eq.lines.map(l=>c.measureText(l).width));
+    eq._cardW = maxW + EQ_PAD_X * 2;
+    eq._ready = true;
+  });
+}
+
+// Draw one equation card at charFrac [0..1], alpha [0..1]
+function drawEq(c, eq, charFrac, alpha){
+  if(alpha <= 0.01) return;
+  ensureEqMeasured(c);
+  c.save();
+  c.globalAlpha = alpha;
+
+  const cw = eq._cardW, ch = eq._cardH;
+  // Translate to centre of card, apply rotation
+  c.translate(eq.cx, eq.cy);
+  c.rotate(eq.rot);
+  const x0 = -cw/2, y0 = -ch/2;
+
+  // ── Parchment card ──
+  // Drop shadow
+  c.shadowColor = 'rgba(0,0,0,0.28)';
+  c.shadowBlur  = 14;
+  c.shadowOffsetX = 3; c.shadowOffsetY = 4;
+  // Card fill
+  c.fillStyle = 'rgba(255,251,235,0.84)';
+  c.beginPath(); c.roundRect(x0, y0, cw, ch, 5); c.fill();
+  // Card border — faint ink
+  c.shadowColor = 'transparent'; c.shadowBlur = 0;
+  const inkRgb = eq.inkColor.match(/[\d.]+/g);
+  c.strokeStyle = `rgba(${inkRgb[0]},${inkRgb[1]},${inkRgb[2]},0.30)`;
+  c.lineWidth = 1;
+  c.beginPath(); c.roundRect(x0, y0, cw, ch, 5); c.stroke();
+
+  // ── Label (small caps style) ──
+  c.font = `${EQ_LABEL_SIZE}px 'Caveat', cursive`;
+  c.fillStyle = `rgba(${inkRgb[0]},${inkRgb[1]},${inkRgb[2]},0.50)`;
+  c.textAlign = 'left';
+  c.fillText(eq.label.toUpperCase(), x0 + EQ_PAD_X, y0 + EQ_PAD_Y + EQ_LABEL_SIZE);
+
+  // Thin rule under label
+  c.strokeStyle = `rgba(${inkRgb[0]},${inkRgb[1]},${inkRgb[2]},0.15)`;
+  c.lineWidth = 0.6;
+  const ruleY = y0 + EQ_LABEL_GAP;
+  c.beginPath(); c.moveTo(x0+EQ_PAD_X, ruleY); c.lineTo(x0+cw-EQ_PAD_X, ruleY); c.stroke();
+
+  // ── Equation lines — type-in char by char ──
+  // Total chars across all lines
+  const totalChars = eq.lines.reduce((s,l)=>s+l.length, 0);
+  const charsToShow = Math.floor(totalChars * charFrac);
+
+  c.font = `600 ${EQ_FONT_SIZE}px 'Caveat', 'Comic Sans MS', cursive`;
+  c.fillStyle = eq.inkColor;
+  c.textAlign = 'left';
+
+  let drawn = 0;
+  eq.lines.forEach((line, li)=>{
+    const lineY = y0 + EQ_LABEL_GAP + EQ_PAD_Y + EQ_FONT_SIZE + li * EQ_LINE_H;
+    if(drawn >= charsToShow) return;
+    const remaining = charsToShow - drawn;
+    const show = line.substring(0, remaining);
+    c.fillText(show, x0 + EQ_PAD_X, lineY);
+    // blinking cursor on active line
+    if(remaining < line.length && Math.floor(Date.now()/500)%2===0){
+      const tw = c.measureText(show).width;
+      c.fillStyle = eq.inkColor;
+      c.fillRect(x0 + EQ_PAD_X + tw + 1, lineY - EQ_FONT_SIZE + 3, 1.5, EQ_FONT_SIZE - 2);
+      c.fillStyle = eq.inkColor;
+    }
+    drawn += line.length;
+  });
+
+  c.restore();
+}
+
+// getEqState still needed — charFrac maps to character fraction, not stroke fraction
+// No change needed there — just reuse same timeline events
+
+// ─── Photo fallback ──────────────────────────────────────────────────────────
+function drawPhotoFallback(c,alpha){
+  c.save(); c.globalAlpha=alpha;
+  c.lineCap='round';
+  BONDS.forEach(([x1,y1,x2,y2])=>{
+    const g=c.createLinearGradient(x1,y1,x2,y2);
+    g.addColorStop(0,'rgba(28,32,55,0.9)');
+    g.addColorStop(0.3,'rgba(95,110,145,0.9)');
+    g.addColorStop(0.5,'rgba(195,210,235,0.96)');
+    g.addColorStop(0.7,'rgba(95,110,145,0.9)');
+    g.addColorStop(1,'rgba(28,32,55,0.9)');
+    c.strokeStyle=g; c.lineWidth=13;
+    c.beginPath(); c.moveTo(x1,y1); c.lineTo(x2,y2); c.stroke();
+  });
+  function sph(cx,cy,r,base,hi){
+    const bd=c.createRadialGradient(cx-r*.3,cy-r*.3,r*.03,cx+r*.1,cy+r*.1,r);
+    bd.addColorStop(0,hi); bd.addColorStop(.35,base); bd.addColorStop(1,'rgba(10,14,26,.95)');
+    c.fillStyle=bd; c.beginPath(); c.arc(cx,cy,r,0,Math.PI*2); c.fill();
+    const sp=c.createRadialGradient(cx-r*.32,cy-r*.32,0,cx-r*.15,cy-r*.15,r*.48);
+    sp.addColorStop(0,'rgba(255,255,255,.85)');
+    sp.addColorStop(.5,'rgba(255,255,255,.18)');
+    sp.addColorStop(1,'rgba(255,255,255,0)');
+    c.fillStyle=sp; c.beginPath(); c.arc(cx,cy,r,0,Math.PI*2); c.fill();
+    c.strokeStyle='rgba(155,182,255,.28)'; c.lineWidth=1.4;
+    c.beginPath(); c.arc(cx,cy,r-.5,0,Math.PI*2); c.stroke();
+  }
+  ATOMS.forEach(a=>{
+    if(a.g==='corner') sph(a.cx,a.cy,a.r,'rgba(52,72,112,.95)','rgba(125,158,215,1)');
+    else if(a.g==='face') sph(a.cx,a.cy,a.r,'rgba(40,100,190,.95)','rgba(145,208,255,1)');
+    else sph(a.cx,a.cy,a.r,'rgba(68,95,135,.95)','rgba(132,170,218,1)');
+  });
+  c.restore();
+}
+
+let realPNG=null;
+{
+  const img=new Image();
+  img.onload=()=>realPNG=img;
+  img.onerror=()=>realPNG=null;
+  img.src='structure.png';
+}
+
+// ═══════════════════════════════════════════════════════════════════
+// TERMINAL DATA  — authentic Co₂MnSi DFT calculation
+// ═══════════════════════════════════════════════════════════════════
+// Colors follow a dark GitHub-style terminal
+const TC = {
+  bg:     '#0d1117',
+  border: '#30363d',
+  prompt: '#3fb950',   // green
+  kw:     '#ff7b72',   // red  — python keywords
+  fn:     '#d2a8ff',   // purple — function names
+  str:    '#a5d6ff',   // blue — strings
+  num:    '#ffa657',   // orange — numbers
+  cmt:    '#8b949e',   // grey — comments
+  out:    '#e6edf3',   // near-white — stdout
+  warn:   '#f0883e',   // amber — warnings
+  good:   '#3fb950',   // green — converged
+  dim:    '#484f58',   // dark grey
+  hi:     '#f0c674',   // yellow — highlights
+};
+
+// Terminal lines: { text, color, indent, delay }
+// delay = ms to wait after previous line before this one appears
+// Each line streams in character by character
+const TERM_LINES = [
+  {t:'# Co₂MnSi Heusler — PBE+U (Dudarev), VASP 6.3.2',            c:TC.cmt,  d:0},
+  {t:'from ase.calculators.vasp import Vasp',                        c:TC.out,  d:0},
+  {t:'',                                                             c:TC.out,  d:0},
+  {t:'calc = Vasp(xc="PBE", encut=520, kpts=(8,8,8),',              c:TC.out,  d:0},
+  {t:'           ispin=2, ldau=True, ldautype=2,',                   c:TC.out,  d:0},
+  {t:'           ldauu={"Co":3.3,"Mn":4.0,"Si":0.0},',              c:TC.out,  d:0},
+  {t:'           ediff=1e-6, lorbit=11)',                             c:TC.out,  d:0},
+  {t:'atoms.get_potential_energy()',                                  c:TC.out,  d:0},
+  {t:'',                                                             c:TC.out,  d:0},
+  {t:'  N       E (eV)              dE',                             c:TC.dim,  d:0},
+  {t:'  1   -108.431               -108.431',                        c:TC.out,  d:0},
+  {t:'  3   -121.648                 -4.364',                        c:TC.out,  d:0},
+  {t:'  6   -123.618                 -0.096',                        c:TC.out,  d:0},
+  {t:'  9   -123.655              -3.21e-04',                        c:TC.out,  d:0},
+  {t:' 12   -123.6554614          -1.27e-08  ✓ converged',           c:TC.good, d:0},
+  {t:'',                                                             c:TC.out,  d:0},
+  {t:' TOTEN  =  -123.6554614 eV',                                   c:TC.hi,   d:0},
+  {t:' Moments:  Co +1.01 µB | Mn +3.14 µB | total +5.03 µB/f.u.', c:TC.hi,   d:0},
+  {t:'',                                                             c:TC.out,  d:0},
+  {t:' Minority gap  =  0.776 eV  |  Spin polarisation = 100%',     c:TC.good, d:0},
+  {t:' ✓  Half-metallic Heusler ferromagnet confirmed',              c:TC.good, d:0},
+];
+
+// Pre-compute cumulative character counts for streaming
+let TERM_TOTAL_CHARS = 0;
+TERM_LINES.forEach(l => { l._start = TERM_TOTAL_CHARS; TERM_TOTAL_CHARS += l.t.length + 1; });
+
+// ─── Terminal renderer ────────────────────────────────────────────────────────
+const TERM_FONT   = '12.5px "Courier New", monospace';
+const TERM_LH     = 17;   // line height px
+const TERM_PAD    = 14;   // padding inside terminal box
+const TERM_HEADER = 32;   // title bar height
+const TERM_X      = 28;   // terminal box left
+const TERM_Y      = 28;   // terminal box top
+const TERM_W      = W - 56;
+const TERM_MAX_LINES = Math.floor((H - 56 - TERM_HEADER - TERM_PAD*2) / TERM_LH);
+
+function drawTerminal(c, charProgress, alpha){
+  if(alpha <= 0.001) return;
+  c.save();
+  c.globalAlpha = alpha;
+
+  // ── Box ──
+  // Drop shadow
+  c.fillStyle = 'rgba(0,0,0,0.55)';
+  c.beginPath(); c.roundRect(TERM_X+4, TERM_Y+4, TERM_W, H-56, 8); c.fill();
+
+  // Body — semi-transparent dark
+  c.fillStyle = 'rgba(13,17,23,0.72)';
+  c.beginPath(); c.roundRect(TERM_X, TERM_Y, TERM_W, H-56, 8); c.fill();
+  c.strokeStyle = TC.border; c.lineWidth = 1;
+  c.stroke();
+
+  // Title bar
+  c.fillStyle = 'rgba(22,27,34,0.82)';
+  c.beginPath(); c.roundRect(TERM_X, TERM_Y, TERM_W, TERM_HEADER, [8,8,0,0]); c.fill();
+  c.strokeStyle = TC.border; c.lineWidth = 0.5;
+  c.beginPath(); c.moveTo(TERM_X, TERM_Y+TERM_HEADER); c.lineTo(TERM_X+TERM_W, TERM_Y+TERM_HEADER); c.stroke();
+
+  // Title (centred)
+  c.fillStyle = '#484f58'; c.font = '11px "Courier New", monospace';
+  c.textAlign = 'center';
+  c.fillText('vasp_calc.py — bash — 132×40', TERM_X + TERM_W/2, TERM_Y+19);
+  c.textAlign = 'left';
+
+  // Gnome-style window controls — right side, square-ish with rounded corners
+  const btnY = TERM_Y + 10, btnR = 5.5, btnGap = 16;
+  const btnRX = TERM_X + TERM_W - 14; // rightmost button right edge
+  // close (×), maximise (□), minimise (−) — right to left
+  [['#e01b24', btnRX - 0*btnGap],
+   ['#3584e4', btnRX - 1*btnGap],
+   ['#5e5c64', btnRX - 2*btnGap]
+  ].forEach(([col, bx])=>{
+    c.fillStyle = col;
+    c.beginPath(); c.arc(bx, btnY, btnR, 0, Math.PI*2); c.fill();
+  });
+
+  // ── Lines ──
+  const totalChars = Math.floor(TERM_TOTAL_CHARS * charProgress);
+
+  // Figure out which lines are visible (scroll: show last TERM_MAX_LINES)
+  let visibleLines = [];
+  TERM_LINES.forEach((ln,li)=>{
+    if(ln._start > totalChars) return;
+    const charsInLine = Math.min(ln.t.length, totalChars - ln._start);
+    visibleLines.push({text: ln.t.substring(0, charsInLine), color: ln.c, full: charsInLine >= ln.t.length});
+  });
+
+  // Scroll: keep last TERM_MAX_LINES
+  const startLine = Math.max(0, visibleLines.length - TERM_MAX_LINES);
+  const showLines = visibleLines.slice(startLine);
+
+  const textX = TERM_X + TERM_PAD;
+  const textY0 = TERM_Y + TERM_HEADER + TERM_PAD + 12;
+
+  c.font = TERM_FONT;
+  showLines.forEach((ln, i) => {
+    const y = textY0 + i * TERM_LH;
+    if(!ln.text){ return; }
+    c.fillStyle = ln.color;
+    c.fillText(ln.text, textX, y);
+  });
+
+  // Blinking cursor on last partial line
+  const lastLn = showLines[showLines.length-1];
+  if(lastLn && !lastLn.full && charProgress < 1){
+    const li = showLines.length-1;
+    const y  = textY0 + li * TERM_LH;
+    c.font = TERM_FONT;
+    const tw = c.measureText(lastLn.text).width;
+    if(Math.floor(Date.now()/480)%2===0){
+      c.fillStyle = TC.out;
+      c.fillRect(textX + tw + 1, y - 12, 7, 13);
+    }
+  }
+
+  c.restore();
+}
+
+// ═══════════════════════════════════════════════════════════════════
+// CHGCAR — synthetic charge density (sum of Gaussians, jet colormap)
+// ═══════════════════════════════════════════════════════════════════
+
+// Jet colormap: t in [0,1] → [r,g,b]
+function jet(t){
+  const r = Math.max(0,Math.min(1, 1.5-Math.abs(4*t-3)));
+  const g = Math.max(0,Math.min(1, 1.5-Math.abs(4*t-2)));
+  const b = Math.max(0,Math.min(1, 1.5-Math.abs(4*t-1)));
+  return [Math.round(r*255), Math.round(g*255), Math.round(b*255)];
+}
+
+// Atom sites for charge density (same positions, normalized to 0-1)
+// Canvas W=727, H=727
+const CHG_SITES = [
+  // Mn — face center (bright, highest density)
+  {x:363.4/727, y:363.4/727, sig:0.07,  amp:1.0},
+  // Co corners
+  {x:75/727,    y:75/727,    sig:0.048, amp:0.62},
+  {x:651.8/727, y:75/727,    sig:0.048, amp:0.62},
+  {x:651.8/727, y:651.8/727, sig:0.048, amp:0.62},
+  {x:75/727,    y:651.8/727, sig:0.048, amp:0.62},
+  // Co face centers
+  {x:363.4/727, y:75/727,    sig:0.038, amp:0.48},
+  {x:363.4/727, y:651.8/727, sig:0.038, amp:0.48},
+  {x:75/727,    y:363.4/727, sig:0.038, amp:0.48},
+  {x:651.8/727, y:363.4/727, sig:0.038, amp:0.48},
+  // Si tetrahedral
+  {x:219.2/727, y:219.2/727, sig:0.028, amp:0.28},
+  {x:507.6/727, y:219.2/727, sig:0.028, amp:0.28},
+  {x:219.2/727, y:507.6/727, sig:0.028, amp:0.28},
+  {x:507.6/727, y:507.6/727, sig:0.028, amp:0.28},
+];
+
+// Pre-compute charge density on a grid
+const CHG_RES = 400; // higher grid resolution for HD
+let chgGrid = null;
+let chgMax  = 0;
+
+function buildChgGrid(){
+  chgGrid = new Float32Array(CHG_RES * CHG_RES);
+  chgMax  = 0;
+  for(let gy=0; gy<CHG_RES; gy++){
+    for(let gx=0; gx<CHG_RES; gx++){
+      const fx = gx/(CHG_RES-1);
+      const fy = gy/(CHG_RES-1);
+      let val = 0;
+      CHG_SITES.forEach(s=>{
+        for(let dx=-1;dx<=1;dx++) for(let dy=-1;dy<=1;dy++){
+          const ex = fx-(s.x+dx), ey = fy-(s.y+dy);
+          const r2 = (ex*ex+ey*ey)/(s.sig*s.sig);
+          if(r2<20) val += s.amp * Math.exp(-0.5*r2);
+        }
+      });
+      chgGrid[gy*CHG_RES+gx] = val;
+      if(val>chgMax) chgMax=val;
+    }
+  }
+}
+
+// Bilinear sample from chgGrid at normalised coords (fx,fy) in [0,1]
+function chgSample(fx,fy){
+  const gx = fx*(CHG_RES-1), gy = fy*(CHG_RES-1);
+  const x0=Math.floor(gx), y0=Math.floor(gy);
+  const x1=Math.min(x0+1,CHG_RES-1), y1=Math.min(y0+1,CHG_RES-1);
+  const tx=gx-x0, ty=gy-y0;
+  return (chgGrid[y0*CHG_RES+x0]*(1-tx)*(1-ty)
+        + chgGrid[y0*CHG_RES+x1]*tx*(1-ty)
+        + chgGrid[y1*CHG_RES+x0]*(1-tx)*ty
+        + chgGrid[y1*CHG_RES+x1]*tx*ty);
+}
+
+const chgCtx = chgOS.getContext('2d');
+
+// Draw charge density — smooth HD via ImageData
+function drawChgDensity(c, progress, alpha, xOffset=0){
+  if(!chgGrid) buildChgGrid();
+  if(alpha < 0.001) return;
+
+  const revealMin = Math.max(0, 1 - progress * 1.06);
+
+  const id = chgCtx.createImageData(W, H);
+  const dat = id.data;
+
+  for(let py=0; py<H; py++){
+    for(let px=0; px<W; px++){
+      const fx=px/(W-1), fy=py/(H-1);
+      const raw = chgSample(fx,fy);
+      const norm = raw/chgMax;
+
+      let r=0,g=0,b=10, a=255;
+      if(norm >= revealMin){
+        const t = Math.pow(norm, 0.52);
+        [r,g,b] = jet(t);
+        a = 245;
+      } else if(norm > revealMin*0.7){
+        const f=(norm-revealMin*0.7)/(revealMin*0.3+0.0001);
+        const t=Math.pow(norm,0.52);
+        const [jr,jg,jb]=jet(t);
+        r=Math.round(jr*f); g=Math.round(jg*f); b=Math.round(10+jb*f);
+        a = Math.round(200*f + 55);
+      } else {
+        r=0; g=0; b=12; a=210;
+      }
+
+      const idx=(py*W+px)*4;
+      dat[idx]=r; dat[idx+1]=g; dat[idx+2]=b; dat[idx+3]=a;
+    }
+  }
+  chgCtx.putImageData(id, 0, 0);
+
+  // Colorbar into offscreen
+  const cbX=18, cbY=70, cbW=10, cbH=H-140;
+  for(let i=0;i<cbH;i++){
+    const t=1-(i/cbH);
+    const [r,g,b]=jet(Math.pow(t,0.52));
+    chgCtx.fillStyle=`rgb(${r},${g},${b})`;
+    chgCtx.fillRect(cbX,cbY+i,cbW,1.5);
+  }
+  chgCtx.strokeStyle='rgba(200,200,200,0.35)'; chgCtx.lineWidth=0.5;
+  chgCtx.strokeRect(cbX,cbY,cbW,cbH);
+
+  // Composite onto main canvas with alpha + optional x push offset
+  c.save();
+  c.globalAlpha = alpha;
+  c.drawImage(chgOS, xOffset, 0);
+  c.restore();
+}
+
+// ═══════════════════════════════════════════════════════════════════
+// SGS DOS — spin-gapless semiconductor signature
+// Majority (spin-up):   conventional semiconductor gap, E_F in gap
+// Minority (spin-down): valence band touches E_F exactly (zero gap)
+// ═══════════════════════════════════════════════════════════════════
+
+// Energy axis: -6 to +4 eV, E_F=0
+// ═══════════════════════════════════════════════════════════════════
+// SPIN RADAR — element-resolved magnetic moments (Co₂MnSi, DFT+U)
+// Displayed as a glowing polar chart dissolving from CHGCAR
+// ═══════════════════════════════════════════════════════════════════
+
+// Real DFT+U values for Co₂MnSi (μB per atom)
+const RADAR_DATA = [
+  { label:'Co↑',  val:1.56, color:'rgba(120,180,255,1)',  glow:'rgba(80,140,255,0.5)'  },
+  { label:'Mn',   val:3.14, color:'rgba(255,100,120,1)',  glow:'rgba(220,40,60,0.5)'   },
+  { label:'Co↑',  val:1.56, color:'rgba(120,180,255,1)',  glow:'rgba(80,140,255,0.5)'  },
+  { label:'Si',   val:-0.06,color:'rgba(180,220,180,1)',  glow:'rgba(100,180,100,0.4)' },
+  { label:'Co↓',  val:-0.52,color:'rgba(255,180,80,1)',   glow:'rgba(220,120,40,0.4)'  },
+  { label:'Co↓',  val:-0.52,color:'rgba(255,180,80,1)',   glow:'rgba(220,120,40,0.4)'  },
+];
+const RADAR_MAX = 3.5; // scale: outermost ring
+const RADAR_RINGS = [1.0, 2.0, 3.0, 3.5];
+
+// ── dosCtx for offscreen compositing ──
+const dosCtx = dosOS.getContext('2d');
+
+function drawDOS(c, progress, alpha, xOffset=0){
+  if(alpha < 0.001) return;
+  const dc = dosCtx;
+  dc.clearRect(0,0,W,H);
+
+  // ── Warm light background ──
+  dc.fillStyle='#f4efe6'; dc.fillRect(0,0,W,H);
+  const bgG=dc.createRadialGradient(W/2,H/2,0,W/2,H/2,W*0.7);
+  bgG.addColorStop(0,'rgba(255,252,246,0)'); bgG.addColorStop(1,'rgba(195,178,155,0.18)');
+  dc.fillStyle=bgG; dc.fillRect(0,0,W,H);
+
+  const cx=W/2, cy=H/2+15, R=Math.min(W,H)*0.40;
+  const N=RADAR_DATA.length;
+  const p=Math.min(1,progress*1.05);
+
+  // ── Rings ──
+  dc.setLineDash([3,5]);
+  RADAR_RINGS.forEach(rv=>{
+    const rr=(rv/RADAR_MAX)*R;
+    dc.beginPath();
+    for(let i=0;i<=N;i++){
+      const ang=(i/N)*Math.PI*2-Math.PI/2;
+      i===0?dc.moveTo(cx+Math.cos(ang)*rr,cy+Math.sin(ang)*rr)
+           :dc.lineTo(cx+Math.cos(ang)*rr,cy+Math.sin(ang)*rr);
+    }
+    dc.closePath();
+    dc.strokeStyle=`rgba(80,60,40,${rv===RADAR_MAX?0.55:0.28})`; dc.lineWidth=1.1; dc.stroke();
+    if(rv<RADAR_MAX&&p>0.3){
+      const fa=Math.min(1,(p-0.3)*3);
+      dc.save();dc.globalAlpha=fa*0.5;
+      dc.font='9px "Courier New",monospace';dc.fillStyle='rgba(90,70,50,0.7)';dc.textAlign='left';
+      dc.fillText(rv.toFixed(0)+' μ_B',cx+rr+4,cy-3);dc.restore();
+    }
+  });
+  dc.setLineDash([]);
+
+  // ── Spokes ──
+  RADAR_DATA.forEach((_,i)=>{
+    const ang=(i/N)*Math.PI*2-Math.PI/2;
+    dc.strokeStyle='rgba(80,60,40,0.32)';dc.lineWidth=1.0;
+    dc.beginPath();dc.moveTo(cx,cy);
+    dc.lineTo(cx+Math.cos(ang)*R,cy+Math.sin(ang)*R);dc.stroke();
+  });
+
+  // ── Polygon ──
+  const polyPts=RADAR_DATA.map((d,i)=>{
+    const ang=(i/N)*Math.PI*2-Math.PI/2;
+    const r=(Math.abs(d.val)/RADAR_MAX)*R*Math.min(p*1.8,1);
+    return{x:cx+Math.cos(ang)*r,y:cy+Math.sin(ang)*r};
+  });
+  if(p>0.05){
+    dc.beginPath();
+    polyPts.forEach((pt,i)=>i===0?dc.moveTo(pt.x,pt.y):dc.lineTo(pt.x,pt.y));
+    dc.closePath();
+    dc.fillStyle=`rgba(70,110,190,${Math.min(1,(p-0.05)*2)*0.22})`;dc.fill();
+    dc.strokeStyle=`rgba(45,85,160,${Math.min(1,(p-0.05)*2)*0.90})`;
+    dc.lineWidth=2.2;dc.lineJoin='round';dc.stroke();
+  }
+
+  // ── Vertex dots ──
+  RADAR_DATA.forEach((d,i)=>{
+    const pt=polyPts[i];
+    const reveal=Math.min(1,Math.max(0,p*3-i*0.28));
+    if(reveal<0.01)return;
+    // parse rgba to darken for light bg
+    const rgb=d.color.match(/[\d.]+/g);
+    const dr=Math.round(+rgb[0]*0.65),dg=Math.round(+rgb[1]*0.65),db=Math.round(+rgb[2]*0.65);
+    dc.save();dc.globalAlpha=reveal;
+    dc.shadowColor=`rgba(${dr},${dg},${db},0.8)`;dc.shadowBlur=18;
+    dc.fillStyle=`rgba(${dr},${dg},${db},1)`;
+    dc.beginPath();dc.arc(pt.x,pt.y,7,0,Math.PI*2);dc.fill();
+    dc.shadowBlur=0;
+    dc.fillStyle='rgba(255,255,255,0.9)';
+    dc.beginPath();dc.arc(pt.x,pt.y,2,0,Math.PI*2);dc.fill();
+    dc.restore();
+  });
+
+  // ── Labels ──
+  if(p>0.35){
+    const fa=Math.min(1,(p-0.35)*2.5);
+    RADAR_DATA.forEach((d,i)=>{
+      const ang=(i/N)*Math.PI*2-Math.PI/2;
+      const lx=cx+Math.cos(ang)*(R+38),ly=cy+Math.sin(ang)*(R+38);
+      const rgb=d.color.match(/[\d.]+/g);
+      const dr=Math.round(+rgb[0]*0.6),dg=Math.round(+rgb[1]*0.6),db=Math.round(+rgb[2]*0.6);
+      dc.save();dc.globalAlpha=fa;
+      dc.font='bold 15px "Courier New",monospace';dc.textAlign='center';dc.textBaseline='middle';
+      dc.fillStyle=`rgba(${dr},${dg},${db},0.92)`;
+      dc.fillText(d.label,lx,ly);
+      dc.font='11px "Courier New",monospace';dc.fillStyle='rgba(60,45,30,0.90)';
+      dc.fillText((d.val>0?'+':'')+d.val.toFixed(2)+' μ_B',lx,ly+15);
+      dc.restore();
+    });
+  }
+
+  // Title removed per design spec
+
+  c.save();c.globalAlpha=alpha;c.drawImage(dosOS,xOffset,0);c.restore();
+}
+
+// ─── Logo ────────────────────────────────────────────────────────────────────
+// Group logo rendered as a hand-drawn sketch ending
+const logoImg = new Image();
+logoImg.src = 'data:image/svg+xml,%3C%3Fxml%20version%3D%221.0%22%20encoding%3D%22UTF-8%22%20standalone%3D%22no%22%3F%3E%0A%3C%21--%20Created%20with%20Inkscape%20%28http%3A//www.inkscape.org/%29%20--%3E%0A%0A%3Csvg%0A%20%20%20width%3D%22148.86139mm%22%0A%20%20%20height%3D%22136.41652mm%22%0A%20%20%20viewBox%3D%220%200%20148.86139%20136.41652%22%0A%20%20%20version%3D%221.1%22%0A%20%20%20id%3D%22svg1%22%0A%20%20%20inkscape%3Aversion%3D%221.4.3%20%280d15f75042%2C%202025-12-25%29%22%0A%20%20%20sodipodi%3Adocname%3D%22logo.svg%22%0A%20%20%20xmlns%3Ainkscape%3D%22http%3A//www.inkscape.org/namespaces/inkscape%22%0A%20%20%20xmlns%3Asodipodi%3D%22http%3A//sodipodi.sourceforge.net/DTD/sodipodi-0.dtd%22%0A%20%20%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%0A%20%20%20xmlns%3Asvg%3D%22http%3A//www.w3.org/2000/svg%22%3E%0A%20%20%3Csodipodi%3Anamedview%0A%20%20%20%20%20id%3D%22namedview1%22%0A%20%20%20%20%20pagecolor%3D%22%2337474f%22%0A%20%20%20%20%20bordercolor%3D%22%23000000%22%0A%20%20%20%20%20borderopacity%3D%220.25%22%0A%20%20%20%20%20inkscape%3Ashowpageshadow%3D%222%22%0A%20%20%20%20%20inkscape%3Apageopacity%3D%220.0%22%0A%20%20%20%20%20inkscape%3Apagecheckerboard%3D%220%22%0A%20%20%20%20%20inkscape%3Adeskcolor%3D%22%23d1d1d1%22%0A%20%20%20%20%20inkscape%3Adocument-units%3D%22mm%22%0A%20%20%20%20%20inkscape%3Azoom%3D%221.8328518%22%0A%20%20%20%20%20inkscape%3Acx%3D%22281.2557%22%0A%20%20%20%20%20inkscape%3Acy%3D%22257.79499%22%0A%20%20%20%20%20inkscape%3Awindow-width%3D%221920%22%0A%20%20%20%20%20inkscape%3Awindow-height%3D%221168%22%0A%20%20%20%20%20inkscape%3Awindow-x%3D%220%22%0A%20%20%20%20%20inkscape%3Awindow-y%3D%220%22%0A%20%20%20%20%20inkscape%3Awindow-maximized%3D%221%22%0A%20%20%20%20%20inkscape%3Acurrent-layer%3D%22layer1%22%20/%3E%0A%20%20%3Cdefs%0A%20%20%20%20%20id%3D%22defs1%22%20/%3E%0A%20%20%3Cg%0A%20%20%20%20%20inkscape%3Alabel%3D%22Layer%201%22%0A%20%20%20%20%20inkscape%3Agroupmode%3D%22layer%22%0A%20%20%20%20%20id%3D%22layer1%22%0A%20%20%20%20%20transform%3D%22translate%28-33.866583%2C-5.2916674%29%22%3E%0A%20%20%20%20%3Cg%0A%20%20%20%20%20%20%20id%3D%22g78%22%0A%20%20%20%20%20%20%20style%3D%22stroke%3A%231a1a2e%3Bstroke-opacity%3A1%22%3E%0A%20%20%20%20%20%20%3Cpath%0A%20%20%20%20%20%20%20%20%20style%3D%22fill%3Anone%3Bfill-opacity%3A1%3Bstroke%3A%231a1a2e%3Bstroke-width%3A1.45521%3Bstroke-dasharray%3Anone%3Bstroke-opacity%3A1%22%0A%20%20%20%20%20%20%20%20%20d%3D%22M%2052.058863%2C109.29202%2038.61426%2C128.95295%20v%200%22%0A%20%20%20%20%20%20%20%20%20id%3D%22path1006%22%20/%3E%0A%20%20%20%20%20%20%3Cpath%0A%20%20%20%20%20%20%20%20%20style%3D%22fill%3Anone%3Bfill-opacity%3A1%3Bstroke%3A%231a1a2e%3Bstroke-width%3A1.45521%3Bstroke-dasharray%3Anone%3Bstroke-opacity%3A1%22%0A%20%20%20%20%20%20%20%20%20d%3D%22m%2052.49256%2C90.932183%200.144566%2C46.550137%20v%200%22%0A%20%20%20%20%20%20%20%20%20id%3D%22path1005%22%20/%3E%0A%20%20%20%20%20%20%3Cpath%0A%20%20%20%20%20%20%20%20%20style%3D%22fill%3Anone%3Bfill-opacity%3A1%3Bstroke%3A%231a1a2e%3Bstroke-width%3A1.45521%3Bstroke-dasharray%3Anone%3Bstroke-opacity%3A1%22%0A%20%20%20%20%20%20%20%20%20d%3D%22M%2070.129566%2C11.565653%2038.469694%2C10.409129%2038.61426%2C93.823497%2052.926257%2C110.01485%20v%200%22%0A%20%20%20%20%20%20%20%20%20id%3D%22path1004%22%20/%3E%0A%20%20%20%20%20%20%3Cpath%0A%20%20%20%20%20%20%20%20%20style%3D%22fill%3Anone%3Bfill-opacity%3A1%3Bstroke%3A%231a1a2e%3Bstroke-width%3A1.45521%3Bstroke-linejoin%3Around%3Bstroke-dasharray%3Anone%3Bstroke-opacity%3A1%22%0A%20%20%20%20%20%20%20%20%20d%3D%22m%2047.866461%2C104.23222%20-9.252201%2C8.52937%20-0.144566%2C16.62505%2013.733735%2C8.81851%2014.167432%2C-8.24024%200.867394%2C-68.957811%20c%200%2C0%2023.529557%2C43.280261%2030.503346%2C49.586011%206.973789%2C6.30575%2010.553289%2C7.37285%2010.553289%2C7.37285%20v%200%22%0A%20%20%20%20%20%20%20%20%20id%3D%22path1007%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Anodetypes%3D%22cccccczcc%22%20/%3E%0A%20%20%20%20%20%20%3Cpath%0A%20%20%20%20%20%20%20%20%20style%3D%22fill%3Anone%3Bfill-opacity%3A1%3Bstroke%3A%231a1a2e%3Bstroke-width%3A1.45521%3Bstroke-linejoin%3Around%3Bstroke-dasharray%3Anone%3Bstroke-opacity%3A1%22%0A%20%20%20%20%20%20%20%20%20d%3D%22m%2056.974094%2C19.516763%20v%200%20L%2039.62622%2C10.69826%20c%200%2C0%205.096359%2C15.206436%207.083715%2C19.227228%201.987357%2C4.020793%207.467516%2C13.121467%208.240242%2C16.191351%200.772726%2C3.069884%20-4.770668%2C10.842421%20-4.770668%2C10.842421%20l%200.722829%2C15.179392%20-3.903271%2C3.469576%20-7.661979%2C-6.216321%20v%200%22%0A%20%20%20%20%20%20%20%20%20id%3D%22path1012%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Anodetypes%3D%22ccczzccccc%22%20/%3E%0A%20%20%20%20%20%20%3Cpath%0A%20%20%20%20%20%20%20%20%20style%3D%22fill%3Anone%3Bfill-opacity%3A1%3Bstroke%3A%231a1a2e%3Bstroke-width%3A1.45521%3Bstroke-linejoin%3Around%3Bstroke-dasharray%3Anone%3Bstroke-opacity%3A1%22%0A%20%20%20%20%20%20%20%20%20d%3D%22M%2057.11866%2C61.729928%2056.974094%2C76.475623%2044.396885%2C84.282164%2044.107753%2C99.31699%20v%200%22%0A%20%20%20%20%20%20%20%20%20id%3D%22path1013%22%20/%3E%0A%20%20%20%20%20%20%3Cpath%0A%20%20%20%20%20%20%20%20%20style%3D%22fill%3Anone%3Bfill-opacity%3A1%3Bstroke%3A%231a1a2e%3Bstroke-width%3A1.45521%3Bstroke-linejoin%3Around%3Bstroke-dasharray%3Anone%3Bstroke-opacity%3A1%22%0A%20%20%20%20%20%20%20%20%20d%3D%22m%2056.974094%2C77.053883%203.120641%2C8.216979%200.0598%2C13.467866%20v%200%22%0A%20%20%20%20%20%20%20%20%20id%3D%22path1014%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Anodetypes%3D%22cccc%22%20/%3E%0A%20%20%20%20%20%20%3Cpath%0A%20%20%20%20%20%20%20%20%20style%3D%22fill%3Anone%3Bfill-opacity%3A1%3Bstroke%3A%231a1a2e%3Bstroke-width%3A1.45521%3Bstroke-linejoin%3Around%3Bstroke-dasharray%3Anone%3Bstroke-opacity%3A1%22%0A%20%20%20%20%20%20%20%20%20d%3D%22m%2053.183533%2C109.84487%208.527309%2C7.082%204.480449%2C11.85151%20v%200%22%0A%20%20%20%20%20%20%20%20%20id%3D%22path1021%22%20/%3E%0A%20%20%20%20%20%20%3Cpath%0A%20%20%20%20%20%20%20%20%20style%3D%22fill%3Anone%3Bfill-opacity%3A1%3Bstroke%3A%231a1a2e%3Bstroke-width%3A1.45521%3Bstroke-dasharray%3Anone%3Bstroke-opacity%3A1%22%0A%20%20%20%20%20%20%20%20%20d%3D%22m%20164.56385%2C109.29202%2013.44461%2C19.66093%20v%200%22%0A%20%20%20%20%20%20%20%20%20id%3D%22path1022%22%20/%3E%0A%20%20%20%20%20%20%3Cpath%0A%20%20%20%20%20%20%20%20%20style%3D%22fill%3Anone%3Bfill-opacity%3A1%3Bstroke%3A%231a1a2e%3Bstroke-width%3A1.45521%3Bstroke-dasharray%3Anone%3Bstroke-opacity%3A1%22%0A%20%20%20%20%20%20%20%20%20d%3D%22m%20164.13015%2C90.932183%20-0.14456%2C46.550137%20v%200%22%0A%20%20%20%20%20%20%20%20%20id%3D%22path1023%22%20/%3E%0A%20%20%20%20%20%20%3Cpath%0A%20%20%20%20%20%20%20%20%20style%3D%22fill%3Anone%3Bfill-opacity%3A1%3Bstroke%3A%231a1a2e%3Bstroke-width%3A1.45521%3Bstroke-dasharray%3Anone%3Bstroke-opacity%3A1%22%0A%20%20%20%20%20%20%20%20%20d%3D%22m%20146.49315%2C11.565653%2031.65987%2C-1.156524%20-0.14456%2C83.414368%20-14.312%2C16.191353%20v%200%22%0A%20%20%20%20%20%20%20%20%20id%3D%22path1024%22%20/%3E%0A%20%20%20%20%20%20%3Cpath%0A%20%20%20%20%20%20%20%20%20style%3D%22fill%3Anone%3Bfill-opacity%3A1%3Bstroke%3A%231a1a2e%3Bstroke-width%3A1.45521%3Bstroke-linejoin%3Around%3Bstroke-dasharray%3Anone%3Bstroke-opacity%3A1%22%0A%20%20%20%20%20%20%20%20%20d%3D%22m%20168.75625%2C104.23222%209.25221%2C8.52937%200.14456%2C16.62505%20-13.73373%2C8.81851%20-14.16744%2C-8.24024%20-0.86739%2C-68.957811%20c%200%2C0%20-23.52956%2C43.280261%20-30.50335%2C49.586011%20-6.97379%2C6.30575%20-10.55329%2C7.37285%20-10.55329%2C7.37285%20v%200%22%0A%20%20%20%20%20%20%20%20%20id%3D%22path1025%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Anodetypes%3D%22cccccczcc%22%20/%3E%0A%20%20%20%20%20%20%3Cpath%0A%20%20%20%20%20%20%20%20%20style%3D%22fill%3Anone%3Bfill-opacity%3A1%3Bstroke%3A%231a1a2e%3Bstroke-width%3A1.45521%3Bstroke-linejoin%3Around%3Bstroke-dasharray%3Anone%3Bstroke-opacity%3A1%22%0A%20%20%20%20%20%20%20%20%20d%3D%22m%20159.64862%2C19.516763%20v%200%20L%20176.9965%2C10.69826%20c%200%2C0%20-5.09636%2C15.206436%20-7.08372%2C19.227228%20-1.98736%2C4.020793%20-7.46752%2C13.121467%20-8.24024%2C16.191351%20-0.77273%2C3.069884%204.77067%2C10.842421%204.77067%2C10.842421%20l%20-0.72283%2C15.179392%203.90327%2C3.469576%207.66198%2C-6.216321%20v%200%22%0A%20%20%20%20%20%20%20%20%20id%3D%22path1026%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Anodetypes%3D%22ccczzccccc%22%20/%3E%0A%20%20%20%20%20%20%3Cpath%0A%20%20%20%20%20%20%20%20%20style%3D%22fill%3Anone%3Bfill-opacity%3A1%3Bstroke%3A%231a1a2e%3Bstroke-width%3A1.45521%3Bstroke-linejoin%3Around%3Bstroke-dasharray%3Anone%3Bstroke-opacity%3A1%22%0A%20%20%20%20%20%20%20%20%20d%3D%22m%20159.50406%2C61.729928%200.14456%2C14.745695%2012.57721%2C7.806541%200.28913%2C15.034826%20v%200%22%0A%20%20%20%20%20%20%20%20%20id%3D%22path1027%22%20/%3E%0A%20%20%20%20%20%20%3Cpath%0A%20%20%20%20%20%20%20%20%20style%3D%22fill%3Anone%3Bfill-opacity%3A1%3Bstroke%3A%231a1a2e%3Bstroke-width%3A1.45521%3Bstroke-linejoin%3Around%3Bstroke-dasharray%3Anone%3Bstroke-opacity%3A1%22%0A%20%20%20%20%20%20%20%20%20d%3D%22m%20159.64862%2C77.053883%20-3.12064%2C8.216979%20-0.0598%2C13.467866%20v%200%22%0A%20%20%20%20%20%20%20%20%20id%3D%22path1028%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Anodetypes%3D%22cccc%22%20/%3E%0A%20%20%20%20%20%20%3Cpath%0A%20%20%20%20%20%20%20%20%20style%3D%22fill%3Anone%3Bfill-opacity%3A1%3Bstroke%3A%231a1a2e%3Bstroke-width%3A1.45521%3Bstroke-linejoin%3Around%3Bstroke-dasharray%3Anone%3Bstroke-opacity%3A1%22%0A%20%20%20%20%20%20%20%20%20d%3D%22m%20163.43918%2C109.84487%20-8.52731%2C7.082%20-4.48045%2C11.85151%20v%200%22%0A%20%20%20%20%20%20%20%20%20id%3D%22path1029%22%20/%3E%0A%20%20%20%20%20%20%3Cpath%0A%20%20%20%20%20%20%20%20%20sodipodi%3Atype%3D%22star%22%0A%20%20%20%20%20%20%20%20%20style%3D%22fill%3A%231a1a2e%3Bstroke%3A%231a1a2e%3Bstroke-width%3A15%3Bstroke-opacity%3A1%22%0A%20%20%20%20%20%20%20%20%20id%3D%22path960%22%0A%20%20%20%20%20%20%20%20%20inkscape%3Aflatsided%3D%22true%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Asides%3D%226%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Acx%3D%22402.59177%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Acy%3D%2275.38353%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Ar1%3D%228.5502825%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Ar2%3D%227.4047613%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Aarg1%3D%220.46364761%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Aarg2%3D%220.98724638%22%0A%20%20%20%20%20%20%20%20%20inkscape%3Arounded%3D%220%22%0A%20%20%20%20%20%20%20%20%20inkscape%3Arandomized%3D%220%22%0A%20%20%20%20%20%20%20%20%20d%3D%22m%20410.23937%2C79.207332%20-7.13531%2C4.711119%20-7.64761%2C-3.823802%20-0.51229%2C-8.534922%207.13531%2C-4.711119%207.64761%2C3.823803%20z%22%0A%20%20%20%20%20%20%20%20%20transform%3D%22matrix%280.22141131%2C0.01239142%2C-0.01312486%2C0.2090386%2C-43.893094%2C33.848496%29%22%20/%3E%0A%20%20%20%20%20%20%3Cpath%0A%20%20%20%20%20%20%20%20%20sodipodi%3Atype%3D%22star%22%0A%20%20%20%20%20%20%20%20%20style%3D%22fill%3A%231a1a2e%3Bstroke%3A%231a1a2e%3Bstroke-width%3A15%3Bstroke-opacity%3A1%22%0A%20%20%20%20%20%20%20%20%20id%3D%22path984%22%0A%20%20%20%20%20%20%20%20%20inkscape%3Aflatsided%3D%22true%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Asides%3D%226%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Acx%3D%22402.59177%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Acy%3D%2275.38353%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Ar1%3D%228.5502825%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Ar2%3D%227.4047613%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Aarg1%3D%220.46364761%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Aarg2%3D%220.98724638%22%0A%20%20%20%20%20%20%20%20%20inkscape%3Arounded%3D%220%22%0A%20%20%20%20%20%20%20%20%20inkscape%3Arandomized%3D%220%22%0A%20%20%20%20%20%20%20%20%20d%3D%22m%20410.23937%2C79.207332%20-7.13531%2C4.711119%20-7.64761%2C-3.823802%20-0.51229%2C-8.534922%207.13531%2C-4.711119%207.64761%2C3.823803%20z%22%0A%20%20%20%20%20%20%20%20%20transform%3D%22matrix%280.22141131%2C0.01239142%2C-0.01312486%2C0.2090386%2C20.272409%2C96.55691%29%22%0A%20%20%20%20%20%20%20%20%20inkscape%3Atransform-center-x%3D%22-131.64805%22%0A%20%20%20%20%20%20%20%20%20inkscape%3Atransform-center-y%3D%22-54.079491%22%20/%3E%0A%20%20%20%20%20%20%3Cpath%0A%20%20%20%20%20%20%20%20%20sodipodi%3Atype%3D%22star%22%0A%20%20%20%20%20%20%20%20%20style%3D%22fill%3A%231a1a2e%3Bstroke%3A%231a1a2e%3Bstroke-width%3A15%3Bstroke-opacity%3A1%22%0A%20%20%20%20%20%20%20%20%20id%3D%22path955%22%0A%20%20%20%20%20%20%20%20%20inkscape%3Aflatsided%3D%22true%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Asides%3D%226%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Acx%3D%22402.59177%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Acy%3D%2275.38353%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Ar1%3D%228.5502825%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Ar2%3D%227.4047613%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Aarg1%3D%220.46364761%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Aarg2%3D%220.98724638%22%0A%20%20%20%20%20%20%20%20%20inkscape%3Arounded%3D%220%22%0A%20%20%20%20%20%20%20%20%20inkscape%3Arandomized%3D%220%22%0A%20%20%20%20%20%20%20%20%20d%3D%22m%20410.23937%2C79.207332%20-7.13531%2C4.711119%20-7.64761%2C-3.823802%20-0.51229%2C-8.534922%207.13531%2C-4.711119%207.64761%2C3.823803%20z%22%0A%20%20%20%20%20%20%20%20%20transform%3D%22matrix%280.22141131%2C0.01239142%2C-0.01312486%2C0.2090386%2C-18.311172%2C20.090163%29%22%20/%3E%0A%20%20%20%20%20%20%3Cpath%0A%20%20%20%20%20%20%20%20%20sodipodi%3Atype%3D%22star%22%0A%20%20%20%20%20%20%20%20%20style%3D%22fill%3Anone%3Bfill-opacity%3A1%3Bstroke%3A%231a1a2e%3Bstroke-width%3A5.36199%3Bstroke-dasharray%3Anone%3Bstroke-opacity%3A1%22%0A%20%20%20%20%20%20%20%20%20id%3D%22path993%22%0A%20%20%20%20%20%20%20%20%20inkscape%3Aflatsided%3D%22true%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Asides%3D%226%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Acx%3D%22688.9975%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Acy%3D%2242.618404%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Ar1%3D%2254.11742%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Ar2%3D%2246.867062%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Aarg1%3D%221.5405026%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Aarg2%3D%222.0641013%22%0A%20%20%20%20%20%20%20%20%20inkscape%3Arounded%3D%220%22%0A%20%20%20%20%20%20%20%20%20inkscape%3Arandomized%3D%220%22%0A%20%20%20%20%20%20%20%20%20d%3D%22m%20690.63667%2C96.710994%20-47.66515%2C-25.626734%20-1.63916%2C-54.09259%2046.02597%2C-28.465856%2047.66514%2C25.626735%201.63917%2C54.09259%20z%22%0A%20%20%20%20%20%20%20%20%20transform%3D%22matrix%280.27139339%2C0%2C0%2C0.27139339%2C-104.15606%2C36.155118%29%22%20/%3E%0A%20%20%20%20%20%20%3Cpath%0A%20%20%20%20%20%20%20%20%20sodipodi%3Atype%3D%22star%22%0A%20%20%20%20%20%20%20%20%20style%3D%22fill%3A%231a1a2e%3Bstroke%3A%231a1a2e%3Bstroke-width%3A15%3Bstroke-opacity%3A1%22%0A%20%20%20%20%20%20%20%20%20id%3D%22path934%22%0A%20%20%20%20%20%20%20%20%20inkscape%3Aflatsided%3D%22true%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Asides%3D%226%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Acx%3D%22402.59177%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Acy%3D%2275.38353%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Ar1%3D%228.5502825%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Ar2%3D%227.4047613%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Aarg1%3D%220.46364761%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Aarg2%3D%220.98724638%22%0A%20%20%20%20%20%20%20%20%20inkscape%3Arounded%3D%220%22%0A%20%20%20%20%20%20%20%20%20inkscape%3Arandomized%3D%220%22%0A%20%20%20%20%20%20%20%20%20d%3D%22m%20410.23937%2C79.207332%20-7.13531%2C4.711119%20-7.64761%2C-3.823802%20-0.51229%2C-8.534922%207.13531%2C-4.711119%207.64761%2C3.823803%20z%22%0A%20%20%20%20%20%20%20%20%20transform%3D%22matrix%280.3094533%2C0.01731875%2C-0.01834382%2C0.29216072%2C-84.711543%2C-18.667758%29%22%20/%3E%0A%20%20%20%20%20%20%3Cpath%0A%20%20%20%20%20%20%20%20%20sodipodi%3Atype%3D%22star%22%0A%20%20%20%20%20%20%20%20%20style%3D%22fill%3A%231a1a2e%3Bstroke%3A%231a1a2e%3Bstroke-width%3A15%3Bstroke-opacity%3A1%22%0A%20%20%20%20%20%20%20%20%20id%3D%22path935%22%0A%20%20%20%20%20%20%20%20%20inkscape%3Aflatsided%3D%22true%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Asides%3D%226%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Acx%3D%22402.59177%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Acy%3D%2275.38353%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Ar1%3D%228.5502825%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Ar2%3D%227.4047613%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Aarg1%3D%220.46364761%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Aarg2%3D%220.98724638%22%0A%20%20%20%20%20%20%20%20%20inkscape%3Arounded%3D%220%22%0A%20%20%20%20%20%20%20%20%20inkscape%3Arandomized%3D%220%22%0A%20%20%20%20%20%20%20%20%20d%3D%22m%20410.23937%2C79.207332%20-7.13531%2C4.711119%20-7.64761%2C-3.823802%20-0.51229%2C-8.534922%207.13531%2C-4.711119%207.64761%2C3.823803%20z%22%0A%20%20%20%20%20%20%20%20%20transform%3D%22matrix%280.3094533%2C0.01731875%2C-0.01834382%2C0.29216072%2C54.905042%2C-18.667758%29%22%20/%3E%0A%20%20%20%20%20%20%3Cpath%0A%20%20%20%20%20%20%20%20%20sodipodi%3Atype%3D%22star%22%0A%20%20%20%20%20%20%20%20%20style%3D%22fill%3A%231a1a2e%3Bstroke%3A%231a1a2e%3Bstroke-width%3A15%3Bstroke-opacity%3A1%22%0A%20%20%20%20%20%20%20%20%20id%3D%22path941%22%0A%20%20%20%20%20%20%20%20%20inkscape%3Aflatsided%3D%22true%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Asides%3D%226%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Acx%3D%22402.59177%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Acy%3D%2275.38353%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Ar1%3D%228.5502825%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Ar2%3D%227.4047613%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Aarg1%3D%220.46364761%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Aarg2%3D%220.98724638%22%0A%20%20%20%20%20%20%20%20%20inkscape%3Arounded%3D%220%22%0A%20%20%20%20%20%20%20%20%20inkscape%3Arandomized%3D%220%22%0A%20%20%20%20%20%20%20%20%20d%3D%22m%20410.23937%2C79.207332%20-7.13531%2C4.711119%20-7.64761%2C-3.823802%20-0.51229%2C-8.534922%207.13531%2C-4.711119%207.64761%2C3.823803%20z%22%0A%20%20%20%20%20%20%20%20%20transform%3D%22matrix%280.22141131%2C0.01239142%2C-0.01312486%2C0.2090386%2C-31.02987%2C-1.1558387%29%22%20/%3E%0A%20%20%20%20%20%20%3Cpath%0A%20%20%20%20%20%20%20%20%20sodipodi%3Atype%3D%22star%22%0A%20%20%20%20%20%20%20%20%20style%3D%22fill%3A%231a1a2e%3Bstroke%3A%231a1a2e%3Bstroke-width%3A15%3Bstroke-opacity%3A1%22%0A%20%20%20%20%20%20%20%20%20id%3D%22path942%22%0A%20%20%20%20%20%20%20%20%20inkscape%3Aflatsided%3D%22true%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Asides%3D%226%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Acx%3D%22402.59177%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Acy%3D%2275.38353%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Ar1%3D%228.5502825%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Ar2%3D%227.4047613%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Aarg1%3D%220.46364761%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Aarg2%3D%220.98724638%22%0A%20%20%20%20%20%20%20%20%20inkscape%3Arounded%3D%220%22%0A%20%20%20%20%20%20%20%20%20inkscape%3Arandomized%3D%220%22%0A%20%20%20%20%20%20%20%20%20d%3D%22m%20410.23937%2C79.207332%20-7.13531%2C4.711119%20-7.64761%2C-3.823802%20-0.51229%2C-8.534922%207.13531%2C-4.711119%207.64761%2C3.823803%20z%22%0A%20%20%20%20%20%20%20%20%20transform%3D%22matrix%280.22141131%2C0.01239142%2C-0.01312486%2C0.2090386%2C-18.455706%2C-9.0327578%29%22%20/%3E%0A%20%20%20%20%20%20%3Cpath%0A%20%20%20%20%20%20%20%20%20sodipodi%3Atype%3D%22star%22%0A%20%20%20%20%20%20%20%20%20style%3D%22fill%3A%231a1a2e%3Bstroke%3A%231a1a2e%3Bstroke-width%3A15%3Bstroke-opacity%3A1%22%0A%20%20%20%20%20%20%20%20%20id%3D%22path943%22%0A%20%20%20%20%20%20%20%20%20inkscape%3Aflatsided%3D%22true%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Asides%3D%226%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Acx%3D%22402.59177%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Acy%3D%2275.38353%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Ar1%3D%228.5502825%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Ar2%3D%227.4047613%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Aarg1%3D%220.46364761%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Aarg2%3D%220.98724638%22%0A%20%20%20%20%20%20%20%20%20inkscape%3Arounded%3D%220%22%0A%20%20%20%20%20%20%20%20%20inkscape%3Arandomized%3D%220%22%0A%20%20%20%20%20%20%20%20%20d%3D%22m%20410.23937%2C79.207332%20-7.13531%2C4.711119%20-7.64761%2C-3.823802%20-0.51229%2C-8.534922%207.13531%2C-4.711119%207.64761%2C3.823803%20z%22%0A%20%20%20%20%20%20%20%20%20transform%3D%22matrix%280.22141131%2C0.01239142%2C-0.01312486%2C0.2090386%2C-5.5924791%2C-1.3003695%29%22%20/%3E%0A%20%20%20%20%20%20%3Cpath%0A%20%20%20%20%20%20%20%20%20sodipodi%3Atype%3D%22star%22%0A%20%20%20%20%20%20%20%20%20style%3D%22fill%3A%231a1a2e%3Bstroke%3A%231a1a2e%3Bstroke-width%3A15%3Bstroke-opacity%3A1%22%0A%20%20%20%20%20%20%20%20%20id%3D%22path944%22%0A%20%20%20%20%20%20%20%20%20inkscape%3Aflatsided%3D%22true%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Asides%3D%226%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Acx%3D%22402.59177%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Acy%3D%2275.38353%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Ar1%3D%228.5502825%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Ar2%3D%227.4047613%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Aarg1%3D%220.46364761%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Aarg2%3D%220.98724638%22%0A%20%20%20%20%20%20%20%20%20inkscape%3Arounded%3D%220%22%0A%20%20%20%20%20%20%20%20%20inkscape%3Arandomized%3D%220%22%0A%20%20%20%20%20%20%20%20%20d%3D%22m%20410.23937%2C79.207332%20-7.13531%2C4.711119%20-7.64761%2C-3.823802%20-0.51229%2C-8.534922%207.13531%2C-4.711119%207.64761%2C3.823803%20z%22%0A%20%20%20%20%20%20%20%20%20transform%3D%22matrix%280.22141131%2C0.01239142%2C-0.01312486%2C0.2090386%2C58.145526%2C-9.0327578%29%22%20/%3E%0A%20%20%20%20%20%20%3Cpath%0A%20%20%20%20%20%20%20%20%20sodipodi%3Atype%3D%22star%22%0A%20%20%20%20%20%20%20%20%20style%3D%22fill%3A%231a1a2e%3Bstroke%3A%231a1a2e%3Bstroke-width%3A15%3Bstroke-opacity%3A1%22%0A%20%20%20%20%20%20%20%20%20id%3D%22path945%22%0A%20%20%20%20%20%20%20%20%20inkscape%3Aflatsided%3D%22true%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Asides%3D%226%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Acx%3D%22402.59177%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Acy%3D%2275.38353%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Ar1%3D%228.5502825%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Ar2%3D%227.4047613%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Aarg1%3D%220.46364761%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Aarg2%3D%220.98724638%22%0A%20%20%20%20%20%20%20%20%20inkscape%3Arounded%3D%220%22%0A%20%20%20%20%20%20%20%20%20inkscape%3Arandomized%3D%220%22%0A%20%20%20%20%20%20%20%20%20d%3D%22m%20410.23937%2C79.207332%20-7.13531%2C4.711119%20-7.64761%2C-3.823802%20-0.51229%2C-8.534922%207.13531%2C-4.711119%207.64761%2C3.823803%20z%22%0A%20%20%20%20%20%20%20%20%20transform%3D%22matrix%280.22141131%2C0.01239142%2C-0.01312486%2C0.2090386%2C71.370078%2C-1.155839%29%22%20/%3E%0A%20%20%20%20%20%20%3Cpath%0A%20%20%20%20%20%20%20%20%20sodipodi%3Atype%3D%22star%22%0A%20%20%20%20%20%20%20%20%20style%3D%22fill%3A%231a1a2e%3Bstroke%3A%231a1a2e%3Bstroke-width%3A15%3Bstroke-opacity%3A1%22%0A%20%20%20%20%20%20%20%20%20id%3D%22path946%22%0A%20%20%20%20%20%20%20%20%20inkscape%3Aflatsided%3D%22true%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Asides%3D%226%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Acx%3D%22402.59177%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Acy%3D%2275.38353%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Ar1%3D%228.5502825%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Ar2%3D%227.4047613%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Aarg1%3D%220.46364761%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Aarg2%3D%220.98724638%22%0A%20%20%20%20%20%20%20%20%20inkscape%3Arounded%3D%220%22%0A%20%20%20%20%20%20%20%20%20inkscape%3Arandomized%3D%220%22%0A%20%20%20%20%20%20%20%20%20d%3D%22m%20410.23937%2C79.207332%20-7.13531%2C4.711119%20-7.64761%2C-3.823802%20-0.51229%2C-8.534922%207.13531%2C-4.711119%207.64761%2C3.823803%20z%22%0A%20%20%20%20%20%20%20%20%20transform%3D%22matrix%280.22141131%2C0.01239142%2C-0.01312486%2C0.2090386%2C71.370078%2C12.57457%29%22%20/%3E%0A%20%20%20%20%20%20%3Cpath%0A%20%20%20%20%20%20%20%20%20sodipodi%3Atype%3D%22star%22%0A%20%20%20%20%20%20%20%20%20style%3D%22fill%3A%231a1a2e%3Bstroke%3A%231a1a2e%3Bstroke-width%3A15%3Bstroke-opacity%3A1%22%0A%20%20%20%20%20%20%20%20%20id%3D%22path947%22%0A%20%20%20%20%20%20%20%20%20inkscape%3Aflatsided%3D%22true%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Asides%3D%226%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Acx%3D%22402.59177%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Acy%3D%2275.38353%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Ar1%3D%228.5502825%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Ar2%3D%227.4047613%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Aarg1%3D%220.46364761%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Aarg2%3D%220.98724638%22%0A%20%20%20%20%20%20%20%20%20inkscape%3Arounded%3D%220%22%0A%20%20%20%20%20%20%20%20%20inkscape%3Arandomized%3D%220%22%0A%20%20%20%20%20%20%20%20%20d%3D%22m%20410.23937%2C79.207332%20-7.13531%2C4.711119%20-7.64761%2C-3.823802%20-0.51229%2C-8.534922%207.13531%2C-4.711119%207.64761%2C3.823803%20z%22%0A%20%20%20%20%20%20%20%20%20transform%3D%22matrix%280.22141131%2C0.01239142%2C-0.01312486%2C0.2090386%2C58.723649%2C20.090163%29%22%20/%3E%0A%20%20%20%20%20%20%3Cpath%0A%20%20%20%20%20%20%20%20%20sodipodi%3Atype%3D%22star%22%0A%20%20%20%20%20%20%20%20%20style%3D%22fill%3A%231a1a2e%3Bstroke%3A%231a1a2e%3Bstroke-width%3A15%3Bstroke-opacity%3A1%22%0A%20%20%20%20%20%20%20%20%20id%3D%22path948%22%0A%20%20%20%20%20%20%20%20%20inkscape%3Aflatsided%3D%22true%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Asides%3D%226%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Acx%3D%22402.59177%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Acy%3D%2275.38353%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Ar1%3D%228.5502825%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Ar2%3D%227.4047613%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Aarg1%3D%220.46364761%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Aarg2%3D%220.98724638%22%0A%20%20%20%20%20%20%20%20%20inkscape%3Arounded%3D%220%22%0A%20%20%20%20%20%20%20%20%20inkscape%3Arandomized%3D%220%22%0A%20%20%20%20%20%20%20%20%20d%3D%22m%20410.23937%2C79.207332%20-7.13531%2C4.711119%20-7.64761%2C-3.823802%20-0.51229%2C-8.534922%207.13531%2C-4.711119%207.64761%2C3.823803%20z%22%0A%20%20%20%20%20%20%20%20%20transform%3D%22matrix%280.22141131%2C0.01239142%2C-0.01312486%2C0.2090386%2C45.715893%2C-1.155839%29%22%20/%3E%0A%20%20%20%20%20%20%3Cpath%0A%20%20%20%20%20%20%20%20%20sodipodi%3Atype%3D%22star%22%0A%20%20%20%20%20%20%20%20%20style%3D%22fill%3A%231a1a2e%3Bstroke%3A%231a1a2e%3Bstroke-width%3A15%3Bstroke-opacity%3A1%22%0A%20%20%20%20%20%20%20%20%20id%3D%22path949%22%0A%20%20%20%20%20%20%20%20%20inkscape%3Aflatsided%3D%22true%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Asides%3D%226%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Acx%3D%22402.59177%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Acy%3D%2275.38353%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Ar1%3D%228.5502825%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Ar2%3D%227.4047613%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Aarg1%3D%220.46364761%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Aarg2%3D%220.98724638%22%0A%20%20%20%20%20%20%20%20%20inkscape%3Arounded%3D%220%22%0A%20%20%20%20%20%20%20%20%20inkscape%3Arandomized%3D%220%22%0A%20%20%20%20%20%20%20%20%20d%3D%22m%20410.23937%2C79.207332%20-7.13531%2C4.711119%20-7.64761%2C-3.823802%20-0.51229%2C-8.534922%207.13531%2C-4.711119%207.64761%2C3.823803%20z%22%0A%20%20%20%20%20%20%20%20%20transform%3D%22matrix%280.22141131%2C0.01239142%2C-0.01312486%2C0.2090386%2C32.997198%2C20.090163%29%22%20/%3E%0A%20%20%20%20%20%20%3Cpath%0A%20%20%20%20%20%20%20%20%20sodipodi%3Atype%3D%22star%22%0A%20%20%20%20%20%20%20%20%20style%3D%22fill%3A%231a1a2e%3Bstroke%3A%231a1a2e%3Bstroke-width%3A15%3Bstroke-opacity%3A1%22%0A%20%20%20%20%20%20%20%20%20id%3D%22path951%22%0A%20%20%20%20%20%20%20%20%20inkscape%3Aflatsided%3D%22true%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Asides%3D%226%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Acx%3D%22402.59177%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Acy%3D%2275.38353%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Ar1%3D%228.5502825%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Ar2%3D%227.4047613%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Aarg1%3D%220.46364761%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Aarg2%3D%220.98724638%22%0A%20%20%20%20%20%20%20%20%20inkscape%3Arounded%3D%220%22%0A%20%20%20%20%20%20%20%20%20inkscape%3Arandomized%3D%220%22%0A%20%20%20%20%20%20%20%20%20d%3D%22m%20410.23937%2C79.207332%20-7.13531%2C4.711119%20-7.64761%2C-3.823802%20-0.51229%2C-8.534922%207.13531%2C-4.711119%207.64761%2C3.823803%20z%22%0A%20%20%20%20%20%20%20%20%20transform%3D%22matrix%280.22141131%2C0.01239142%2C-0.01312486%2C0.2090386%2C45.860425%2C12.574571%29%22%20/%3E%0A%20%20%20%20%20%20%3Cpath%0A%20%20%20%20%20%20%20%20%20sodipodi%3Atype%3D%22star%22%0A%20%20%20%20%20%20%20%20%20style%3D%22fill%3A%231a1a2e%3Bstroke%3A%231a1a2e%3Bstroke-width%3A15%3Bstroke-opacity%3A1%22%0A%20%20%20%20%20%20%20%20%20id%3D%22path952%22%0A%20%20%20%20%20%20%20%20%20inkscape%3Aflatsided%3D%22true%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Asides%3D%226%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Acx%3D%22402.59177%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Acy%3D%2275.38353%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Ar1%3D%228.5502825%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Ar2%3D%227.4047613%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Aarg1%3D%220.46364761%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Aarg2%3D%220.98724638%22%0A%20%20%20%20%20%20%20%20%20inkscape%3Arounded%3D%220%22%0A%20%20%20%20%20%20%20%20%20inkscape%3Arandomized%3D%220%22%0A%20%20%20%20%20%20%20%20%20d%3D%22m%20410.23937%2C79.207332%20-7.13531%2C4.711119%20-7.64761%2C-3.823802%20-0.51229%2C-8.534922%207.13531%2C-4.711119%207.64761%2C3.823803%20z%22%0A%20%20%20%20%20%20%20%20%20transform%3D%22matrix%280.22141131%2C0.01239142%2C-0.01312486%2C0.2090386%2C-5.5924791%2C12.574571%29%22%20/%3E%0A%20%20%20%20%20%20%3Cpath%0A%20%20%20%20%20%20%20%20%20sodipodi%3Atype%3D%22star%22%0A%20%20%20%20%20%20%20%20%20style%3D%22fill%3A%231a1a2e%3Bstroke%3A%231a1a2e%3Bstroke-width%3A15%3Bstroke-opacity%3A1%22%0A%20%20%20%20%20%20%20%20%20id%3D%22path953%22%0A%20%20%20%20%20%20%20%20%20inkscape%3Aflatsided%3D%22true%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Asides%3D%226%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Acx%3D%22402.59177%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Acy%3D%2275.38353%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Ar1%3D%228.5502825%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Ar2%3D%227.4047613%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Aarg1%3D%220.46364761%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Aarg2%3D%220.98724638%22%0A%20%20%20%20%20%20%20%20%20inkscape%3Arounded%3D%220%22%0A%20%20%20%20%20%20%20%20%20inkscape%3Arandomized%3D%220%22%0A%20%20%20%20%20%20%20%20%20d%3D%22m%20410.23937%2C79.207332%20-7.13531%2C4.711119%20-7.64761%2C-3.823802%20-0.51229%2C-8.534922%207.13531%2C-4.711119%207.64761%2C3.823803%20z%22%0A%20%20%20%20%20%20%20%20%20transform%3D%22matrix%280.22141131%2C0.01239142%2C-0.01312486%2C0.2090386%2C-31.02987%2C12.57457%29%22%20/%3E%0A%20%20%20%20%20%20%3Cpath%0A%20%20%20%20%20%20%20%20%20sodipodi%3Atype%3D%22star%22%0A%20%20%20%20%20%20%20%20%20style%3D%22fill%3A%231a1a2e%3Bstroke%3A%231a1a2e%3Bstroke-width%3A15%3Bstroke-opacity%3A1%22%0A%20%20%20%20%20%20%20%20%20id%3D%22path954%22%0A%20%20%20%20%20%20%20%20%20inkscape%3Aflatsided%3D%22true%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Asides%3D%226%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Acx%3D%22402.59177%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Acy%3D%2275.38353%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Ar1%3D%228.5502825%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Ar2%3D%227.4047613%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Aarg1%3D%220.46364761%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Aarg2%3D%220.98724638%22%0A%20%20%20%20%20%20%20%20%20inkscape%3Arounded%3D%220%22%0A%20%20%20%20%20%20%20%20%20inkscape%3Arandomized%3D%220%22%0A%20%20%20%20%20%20%20%20%20d%3D%22m%20410.23937%2C79.207332%20-7.13531%2C4.711119%20-7.64761%2C-3.823802%20-0.51229%2C-8.534922%207.13531%2C-4.711119%207.64761%2C3.823803%20z%22%0A%20%20%20%20%20%20%20%20%20transform%3D%22matrix%280.22141131%2C0.01239142%2C-0.01312486%2C0.2090386%2C-43.893094%2C20.090163%29%22%20/%3E%0A%20%20%20%20%20%20%3Cpath%0A%20%20%20%20%20%20%20%20%20sodipodi%3Atype%3D%22star%22%0A%20%20%20%20%20%20%20%20%20style%3D%22fill%3A%231a1a2e%3Bstroke%3A%231a1a2e%3Bstroke-width%3A15%3Bstroke-opacity%3A1%22%0A%20%20%20%20%20%20%20%20%20id%3D%22path956%22%0A%20%20%20%20%20%20%20%20%20inkscape%3Aflatsided%3D%22true%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Asides%3D%226%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Acx%3D%22402.59177%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Acy%3D%2275.38353%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Ar1%3D%228.5502825%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Ar2%3D%227.4047613%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Aarg1%3D%220.46364761%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Aarg2%3D%220.98724638%22%0A%20%20%20%20%20%20%20%20%20inkscape%3Arounded%3D%220%22%0A%20%20%20%20%20%20%20%20%20inkscape%3Arandomized%3D%220%22%0A%20%20%20%20%20%20%20%20%20d%3D%22m%20410.23937%2C79.207332%20-7.13531%2C4.711119%20-7.64761%2C-3.823802%20-0.51229%2C-8.534922%207.13531%2C-4.711119%207.64761%2C3.823803%20z%22%0A%20%20%20%20%20%20%20%20%20transform%3D%22matrix%280.22141131%2C0.01239142%2C-0.01312486%2C0.2090386%2C7.4152787%2C20.090163%29%22%20/%3E%0A%20%20%20%20%20%20%3Cpath%0A%20%20%20%20%20%20%20%20%20sodipodi%3Atype%3D%22star%22%0A%20%20%20%20%20%20%20%20%20style%3D%22fill%3A%231a1a2e%3Bstroke%3A%231a1a2e%3Bstroke-width%3A15%3Bstroke-opacity%3A1%22%0A%20%20%20%20%20%20%20%20%20id%3D%22path957%22%0A%20%20%20%20%20%20%20%20%20inkscape%3Aflatsided%3D%22true%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Asides%3D%226%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Acx%3D%22402.59177%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Acy%3D%2275.38353%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Ar1%3D%228.5502825%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Ar2%3D%227.4047613%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Aarg1%3D%220.46364761%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Aarg2%3D%220.98724638%22%0A%20%20%20%20%20%20%20%20%20inkscape%3Arounded%3D%220%22%0A%20%20%20%20%20%20%20%20%20inkscape%3Arandomized%3D%220%22%0A%20%20%20%20%20%20%20%20%20d%3D%22m%20410.23937%2C79.207332%20-7.13531%2C4.711119%20-7.64761%2C-3.823802%20-0.51229%2C-8.534922%207.13531%2C-4.711119%207.64761%2C3.823803%20z%22%0A%20%20%20%20%20%20%20%20%20transform%3D%22matrix%280.22141131%2C0.01239142%2C-0.01312486%2C0.2090386%2C84.30557%2C20.090163%29%22%20/%3E%0A%20%20%20%20%20%20%3Cpath%0A%20%20%20%20%20%20%20%20%20sodipodi%3Atype%3D%22star%22%0A%20%20%20%20%20%20%20%20%20style%3D%22fill%3A%231a1a2e%3Bstroke%3A%231a1a2e%3Bstroke-width%3A15%3Bstroke-opacity%3A1%22%0A%20%20%20%20%20%20%20%20%20id%3D%22path958%22%0A%20%20%20%20%20%20%20%20%20inkscape%3Aflatsided%3D%22true%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Asides%3D%226%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Acx%3D%22402.59177%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Acy%3D%2275.38353%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Ar1%3D%228.5502825%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Ar2%3D%227.4047613%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Aarg1%3D%220.46364761%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Aarg2%3D%220.98724638%22%0A%20%20%20%20%20%20%20%20%20inkscape%3Arounded%3D%220%22%0A%20%20%20%20%20%20%20%20%20inkscape%3Arandomized%3D%220%22%0A%20%20%20%20%20%20%20%20%20d%3D%22m%20410.23937%2C79.207332%20-7.13531%2C4.711119%20-7.64761%2C-3.823802%20-0.51229%2C-8.534922%207.13531%2C-4.711119%207.64761%2C3.823803%20z%22%0A%20%20%20%20%20%20%20%20%20transform%3D%22matrix%280.22141131%2C0.01239142%2C-0.01312486%2C0.2090386%2C58.723649%2C33.848496%29%22%20/%3E%0A%20%20%20%20%20%20%3Cpath%0A%20%20%20%20%20%20%20%20%20sodipodi%3Atype%3D%22star%22%0A%20%20%20%20%20%20%20%20%20style%3D%22fill%3A%231a1a2e%3Bstroke%3A%231a1a2e%3Bstroke-width%3A15%3Bstroke-opacity%3A1%22%0A%20%20%20%20%20%20%20%20%20id%3D%22path959%22%0A%20%20%20%20%20%20%20%20%20inkscape%3Aflatsided%3D%22true%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Asides%3D%226%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Acx%3D%22402.59177%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Acy%3D%2275.38353%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Ar1%3D%228.5502825%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Ar2%3D%227.4047613%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Aarg1%3D%220.46364761%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Aarg2%3D%220.98724638%22%0A%20%20%20%20%20%20%20%20%20inkscape%3Arounded%3D%220%22%0A%20%20%20%20%20%20%20%20%20inkscape%3Arandomized%3D%220%22%0A%20%20%20%20%20%20%20%20%20d%3D%22m%20410.23937%2C79.207332%20-7.13531%2C4.711119%20-7.64761%2C-3.823802%20-0.51229%2C-8.534922%207.13531%2C-4.711119%207.64761%2C3.823803%20z%22%0A%20%20%20%20%20%20%20%20%20transform%3D%22matrix%280.22141131%2C0.01239142%2C-0.01312486%2C0.2090386%2C32.997198%2C33.848496%29%22%20/%3E%0A%20%20%20%20%20%20%3Cpath%0A%20%20%20%20%20%20%20%20%20sodipodi%3Atype%3D%22star%22%0A%20%20%20%20%20%20%20%20%20style%3D%22fill%3A%231a1a2e%3Bstroke%3A%231a1a2e%3Bstroke-width%3A15%3Bstroke-opacity%3A1%22%0A%20%20%20%20%20%20%20%20%20id%3D%22path961%22%0A%20%20%20%20%20%20%20%20%20inkscape%3Aflatsided%3D%22true%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Asides%3D%226%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Acx%3D%22402.59177%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Acy%3D%2275.38353%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Ar1%3D%228.5502825%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Ar2%3D%227.4047613%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Aarg1%3D%220.46364761%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Aarg2%3D%220.98724638%22%0A%20%20%20%20%20%20%20%20%20inkscape%3Arounded%3D%220%22%0A%20%20%20%20%20%20%20%20%20inkscape%3Arandomized%3D%220%22%0A%20%20%20%20%20%20%20%20%20d%3D%22m%20410.23937%2C79.207332%20-7.13531%2C4.711119%20-7.64761%2C-3.823802%20-0.51229%2C-8.534922%207.13531%2C-4.711119%207.64761%2C3.823803%20z%22%0A%20%20%20%20%20%20%20%20%20transform%3D%22matrix%280.22141131%2C0.01239142%2C-0.01312486%2C0.2090386%2C-18.311172%2C33.848496%29%22%20/%3E%0A%20%20%20%20%20%20%3Cpath%0A%20%20%20%20%20%20%20%20%20sodipodi%3Atype%3D%22star%22%0A%20%20%20%20%20%20%20%20%20style%3D%22fill%3A%231a1a2e%3Bstroke%3A%231a1a2e%3Bstroke-width%3A15%3Bstroke-opacity%3A1%22%0A%20%20%20%20%20%20%20%20%20id%3D%22path962%22%0A%20%20%20%20%20%20%20%20%20inkscape%3Aflatsided%3D%22true%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Asides%3D%226%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Acx%3D%22402.59177%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Acy%3D%2275.38353%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Ar1%3D%228.5502825%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Ar2%3D%227.4047613%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Aarg1%3D%220.46364761%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Aarg2%3D%220.98724638%22%0A%20%20%20%20%20%20%20%20%20inkscape%3Arounded%3D%220%22%0A%20%20%20%20%20%20%20%20%20inkscape%3Arandomized%3D%220%22%0A%20%20%20%20%20%20%20%20%20d%3D%22m%20410.23937%2C79.207332%20-7.13531%2C4.711119%20-7.64761%2C-3.823802%20-0.51229%2C-8.534922%207.13531%2C-4.711119%207.64761%2C3.823803%20z%22%0A%20%20%20%20%20%20%20%20%20transform%3D%22matrix%280.22141131%2C0.01239142%2C-0.01312486%2C0.2090386%2C7.4152787%2C33.848496%29%22%20/%3E%0A%20%20%20%20%20%20%3Cpath%0A%20%20%20%20%20%20%20%20%20sodipodi%3Atype%3D%22star%22%0A%20%20%20%20%20%20%20%20%20style%3D%22fill%3A%231a1a2e%3Bstroke%3A%231a1a2e%3Bstroke-width%3A15%3Bstroke-opacity%3A1%22%0A%20%20%20%20%20%20%20%20%20id%3D%22path963%22%0A%20%20%20%20%20%20%20%20%20inkscape%3Aflatsided%3D%22true%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Asides%3D%226%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Acx%3D%22402.59177%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Acy%3D%2275.38353%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Ar1%3D%228.5502825%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Ar2%3D%227.4047613%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Aarg1%3D%220.46364761%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Aarg2%3D%220.98724638%22%0A%20%20%20%20%20%20%20%20%20inkscape%3Arounded%3D%220%22%0A%20%20%20%20%20%20%20%20%20inkscape%3Arandomized%3D%220%22%0A%20%20%20%20%20%20%20%20%20d%3D%22m%20410.23937%2C79.207332%20-7.13531%2C4.711119%20-7.64761%2C-3.823802%20-0.51229%2C-8.534922%207.13531%2C-4.711119%207.64761%2C3.823803%20z%22%0A%20%20%20%20%20%20%20%20%20transform%3D%22matrix%280.22141131%2C0.01239142%2C-0.01312486%2C0.2090386%2C84.30557%2C33.848496%29%22%20/%3E%0A%20%20%20%20%20%20%3Cpath%0A%20%20%20%20%20%20%20%20%20sodipodi%3Atype%3D%22star%22%0A%20%20%20%20%20%20%20%20%20style%3D%22fill%3A%231a1a2e%3Bstroke%3A%231a1a2e%3Bstroke-width%3A15%3Bstroke-opacity%3A1%22%0A%20%20%20%20%20%20%20%20%20id%3D%22path964%22%0A%20%20%20%20%20%20%20%20%20inkscape%3Aflatsided%3D%22true%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Asides%3D%226%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Acx%3D%22402.59177%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Acy%3D%2275.38353%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Ar1%3D%228.5502825%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Ar2%3D%227.4047613%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Aarg1%3D%220.46364761%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Aarg2%3D%220.98724638%22%0A%20%20%20%20%20%20%20%20%20inkscape%3Arounded%3D%220%22%0A%20%20%20%20%20%20%20%20%20inkscape%3Arandomized%3D%220%22%0A%20%20%20%20%20%20%20%20%20d%3D%22m%20410.23937%2C79.207332%20-7.13531%2C4.711119%20-7.64761%2C-3.823802%20-0.51229%2C-8.534922%207.13531%2C-4.711119%207.64761%2C3.823803%20z%22%0A%20%20%20%20%20%20%20%20%20transform%3D%22matrix%280.22141131%2C0.01239142%2C-0.01312486%2C0.2090386%2C71.370078%2C41.14957%29%22%20/%3E%0A%20%20%20%20%20%20%3Cpath%0A%20%20%20%20%20%20%20%20%20sodipodi%3Atype%3D%22star%22%0A%20%20%20%20%20%20%20%20%20style%3D%22fill%3A%231a1a2e%3Bstroke%3A%231a1a2e%3Bstroke-width%3A15%3Bstroke-opacity%3A1%22%0A%20%20%20%20%20%20%20%20%20id%3D%22path965%22%0A%20%20%20%20%20%20%20%20%20inkscape%3Aflatsided%3D%22true%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Asides%3D%226%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Acx%3D%22402.59177%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Acy%3D%2275.38353%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Ar1%3D%228.5502825%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Ar2%3D%227.4047613%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Aarg1%3D%220.46364761%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Aarg2%3D%220.98724638%22%0A%20%20%20%20%20%20%20%20%20inkscape%3Arounded%3D%220%22%0A%20%20%20%20%20%20%20%20%20inkscape%3Arandomized%3D%220%22%0A%20%20%20%20%20%20%20%20%20d%3D%22m%20410.23937%2C79.207332%20-7.13531%2C4.711119%20-7.64761%2C-3.823802%20-0.51229%2C-8.534922%207.13531%2C-4.711119%207.64761%2C3.823803%20z%22%0A%20%20%20%20%20%20%20%20%20transform%3D%22matrix%280.22141131%2C0.01239142%2C-0.01312486%2C0.2090386%2C45.860425%2C41.14957%29%22%20/%3E%0A%20%20%20%20%20%20%3Cpath%0A%20%20%20%20%20%20%20%20%20sodipodi%3Atype%3D%22star%22%0A%20%20%20%20%20%20%20%20%20style%3D%22fill%3A%231a1a2e%3Bstroke%3A%231a1a2e%3Bstroke-width%3A15%3Bstroke-opacity%3A1%22%0A%20%20%20%20%20%20%20%20%20id%3D%22path966%22%0A%20%20%20%20%20%20%20%20%20inkscape%3Aflatsided%3D%22true%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Asides%3D%226%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Acx%3D%22402.59177%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Acy%3D%2275.38353%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Ar1%3D%228.5502825%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Ar2%3D%227.4047613%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Aarg1%3D%220.46364761%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Aarg2%3D%220.98724638%22%0A%20%20%20%20%20%20%20%20%20inkscape%3Arounded%3D%220%22%0A%20%20%20%20%20%20%20%20%20inkscape%3Arandomized%3D%220%22%0A%20%20%20%20%20%20%20%20%20d%3D%22m%20410.23937%2C79.207332%20-7.13531%2C4.711119%20-7.64761%2C-3.823802%20-0.51229%2C-8.534922%207.13531%2C-4.711119%207.64761%2C3.823803%20z%22%0A%20%20%20%20%20%20%20%20%20transform%3D%22matrix%280.22141131%2C0.01239142%2C-0.01312486%2C0.2090386%2C-5.5924791%2C41.14957%29%22%20/%3E%0A%20%20%20%20%20%20%3Cpath%0A%20%20%20%20%20%20%20%20%20sodipodi%3Atype%3D%22star%22%0A%20%20%20%20%20%20%20%20%20style%3D%22fill%3A%231a1a2e%3Bstroke%3A%231a1a2e%3Bstroke-width%3A15%3Bstroke-opacity%3A1%22%0A%20%20%20%20%20%20%20%20%20id%3D%22path967%22%0A%20%20%20%20%20%20%20%20%20inkscape%3Aflatsided%3D%22true%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Asides%3D%226%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Acx%3D%22402.59177%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Acy%3D%2275.38353%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Ar1%3D%228.5502825%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Ar2%3D%227.4047613%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Aarg1%3D%220.46364761%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Aarg2%3D%220.98724638%22%0A%20%20%20%20%20%20%20%20%20inkscape%3Arounded%3D%220%22%0A%20%20%20%20%20%20%20%20%20inkscape%3Arandomized%3D%220%22%0A%20%20%20%20%20%20%20%20%20d%3D%22m%20410.23937%2C79.207332%20-7.13531%2C4.711119%20-7.64761%2C-3.823802%20-0.51229%2C-8.534922%207.13531%2C-4.711119%207.64761%2C3.823803%20z%22%0A%20%20%20%20%20%20%20%20%20transform%3D%22matrix%280.22141131%2C0.01239142%2C-0.01312486%2C0.2090386%2C-31.02987%2C41.14957%29%22%20/%3E%0A%20%20%20%20%20%20%3Cpath%0A%20%20%20%20%20%20%20%20%20sodipodi%3Atype%3D%22star%22%0A%20%20%20%20%20%20%20%20%20style%3D%22fill%3A%231a1a2e%3Bstroke%3A%231a1a2e%3Bstroke-width%3A15%3Bstroke-opacity%3A1%22%0A%20%20%20%20%20%20%20%20%20id%3D%22path968%22%0A%20%20%20%20%20%20%20%20%20inkscape%3Aflatsided%3D%22true%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Asides%3D%226%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Acx%3D%22402.59177%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Acy%3D%2275.38353%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Ar1%3D%228.5502825%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Ar2%3D%227.4047613%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Aarg1%3D%220.46364761%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Aarg2%3D%220.98724638%22%0A%20%20%20%20%20%20%20%20%20inkscape%3Arounded%3D%220%22%0A%20%20%20%20%20%20%20%20%20inkscape%3Arandomized%3D%220%22%0A%20%20%20%20%20%20%20%20%20d%3D%22m%20410.23937%2C79.207332%20-7.13531%2C4.711119%20-7.64761%2C-3.823802%20-0.51229%2C-8.534922%207.13531%2C-4.711119%207.64761%2C3.823803%20z%22%0A%20%20%20%20%20%20%20%20%20transform%3D%22matrix%280.22141131%2C0.01239142%2C-0.01312486%2C0.2090386%2C20.278503%2C39.601797%29%22%20/%3E%0A%20%20%20%20%20%20%3Cpath%0A%20%20%20%20%20%20%20%20%20sodipodi%3Atype%3D%22star%22%0A%20%20%20%20%20%20%20%20%20style%3D%22fill%3A%231a1a2e%3Bstroke%3A%231a1a2e%3Bstroke-width%3A15%3Bstroke-opacity%3A1%22%0A%20%20%20%20%20%20%20%20%20id%3D%22path969%22%0A%20%20%20%20%20%20%20%20%20inkscape%3Aflatsided%3D%22true%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Asides%3D%226%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Acx%3D%22402.59177%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Acy%3D%2275.38353%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Ar1%3D%228.5502825%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Ar2%3D%227.4047613%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Aarg1%3D%220.46364761%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Aarg2%3D%220.98724638%22%0A%20%20%20%20%20%20%20%20%20inkscape%3Arounded%3D%220%22%0A%20%20%20%20%20%20%20%20%20inkscape%3Arandomized%3D%220%22%0A%20%20%20%20%20%20%20%20%20d%3D%22m%20410.23937%2C79.207332%20-7.13531%2C4.711119%20-7.64761%2C-3.823802%20-0.51229%2C-8.534922%207.13531%2C-4.711119%207.64761%2C3.823803%20z%22%0A%20%20%20%20%20%20%20%20%20transform%3D%22matrix%280.22141131%2C0.01239142%2C-0.01312486%2C0.2090386%2C-31.02987%2C55.644697%29%22%0A%20%20%20%20%20%20%20%20%20inkscape%3Atransform-center-x%3D%22-131.64805%22%0A%20%20%20%20%20%20%20%20%20inkscape%3Atransform-center-y%3D%22-54.079491%22%20/%3E%0A%20%20%20%20%20%20%3Cpath%0A%20%20%20%20%20%20%20%20%20sodipodi%3Atype%3D%22star%22%0A%20%20%20%20%20%20%20%20%20style%3D%22fill%3A%231a1a2e%3Bstroke%3A%231a1a2e%3Bstroke-width%3A15%3Bstroke-opacity%3A1%22%0A%20%20%20%20%20%20%20%20%20id%3D%22path970%22%0A%20%20%20%20%20%20%20%20%20inkscape%3Aflatsided%3D%22true%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Asides%3D%226%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Acx%3D%22402.59177%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Acy%3D%2275.38353%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Ar1%3D%228.5502825%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Ar2%3D%227.4047613%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Aarg1%3D%220.46364761%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Aarg2%3D%220.98724638%22%0A%20%20%20%20%20%20%20%20%20inkscape%3Arounded%3D%220%22%0A%20%20%20%20%20%20%20%20%20inkscape%3Arandomized%3D%220%22%0A%20%20%20%20%20%20%20%20%20d%3D%22m%20410.23937%2C79.207332%20-7.13531%2C4.711119%20-7.64761%2C-3.823802%20-0.51229%2C-8.534922%207.13531%2C-4.711119%207.64761%2C3.823803%20z%22%0A%20%20%20%20%20%20%20%20%20transform%3D%22matrix%280.22141131%2C0.01239142%2C-0.01312486%2C0.2090386%2C-44.037628%2C63.015758%29%22%0A%20%20%20%20%20%20%20%20%20inkscape%3Atransform-center-x%3D%22-131.64805%22%0A%20%20%20%20%20%20%20%20%20inkscape%3Atransform-center-y%3D%22-54.079491%22%20/%3E%0A%20%20%20%20%20%20%3Cpath%0A%20%20%20%20%20%20%20%20%20sodipodi%3Atype%3D%22star%22%0A%20%20%20%20%20%20%20%20%20style%3D%22fill%3A%231a1a2e%3Bstroke%3A%231a1a2e%3Bstroke-width%3A15%3Bstroke-opacity%3A1%22%0A%20%20%20%20%20%20%20%20%20id%3D%22path971%22%0A%20%20%20%20%20%20%20%20%20inkscape%3Aflatsided%3D%22true%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Asides%3D%226%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Acx%3D%22402.59177%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Acy%3D%2275.38353%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Ar1%3D%228.5502825%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Ar2%3D%227.4047613%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Aarg1%3D%220.46364761%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Aarg2%3D%220.98724638%22%0A%20%20%20%20%20%20%20%20%20inkscape%3Arounded%3D%220%22%0A%20%20%20%20%20%20%20%20%20inkscape%3Arandomized%3D%220%22%0A%20%20%20%20%20%20%20%20%20d%3D%22m%20410.23937%2C79.207332%20-7.13531%2C4.711119%20-7.64761%2C-3.823802%20-0.51229%2C-8.534922%207.13531%2C-4.711119%207.64761%2C3.823803%20z%22%0A%20%20%20%20%20%20%20%20%20transform%3D%22matrix%280.22141131%2C0.01239142%2C-0.01312486%2C0.2090386%2C-5.5924818%2C55.644697%29%22%0A%20%20%20%20%20%20%20%20%20inkscape%3Atransform-center-x%3D%22-131.64805%22%0A%20%20%20%20%20%20%20%20%20inkscape%3Atransform-center-y%3D%22-54.079491%22%20/%3E%0A%20%20%20%20%20%20%3Cpath%0A%20%20%20%20%20%20%20%20%20sodipodi%3Atype%3D%22star%22%0A%20%20%20%20%20%20%20%20%20style%3D%22fill%3A%231a1a2e%3Bstroke%3A%231a1a2e%3Bstroke-width%3A15%3Bstroke-opacity%3A1%22%0A%20%20%20%20%20%20%20%20%20id%3D%22path972%22%0A%20%20%20%20%20%20%20%20%20inkscape%3Aflatsided%3D%22true%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Asides%3D%226%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Acx%3D%22402.59177%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Acy%3D%2275.38353%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Ar1%3D%228.5502825%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Ar2%3D%227.4047613%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Aarg1%3D%220.46364761%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Aarg2%3D%220.98724638%22%0A%20%20%20%20%20%20%20%20%20inkscape%3Arounded%3D%220%22%0A%20%20%20%20%20%20%20%20%20inkscape%3Arandomized%3D%220%22%0A%20%20%20%20%20%20%20%20%20d%3D%22m%20410.23937%2C79.207332%20-7.13531%2C4.711119%20-7.64761%2C-3.823802%20-0.51229%2C-8.534922%207.13531%2C-4.711119%207.64761%2C3.823803%20z%22%0A%20%20%20%20%20%20%20%20%20transform%3D%22matrix%280.22141131%2C0.01239142%2C-0.01312486%2C0.2090386%2C45.426828%2C55.066574%29%22%0A%20%20%20%20%20%20%20%20%20inkscape%3Atransform-center-x%3D%22-131.64805%22%0A%20%20%20%20%20%20%20%20%20inkscape%3Atransform-center-y%3D%22-54.079491%22%20/%3E%0A%20%20%20%20%20%20%3Cpath%0A%20%20%20%20%20%20%20%20%20sodipodi%3Atype%3D%22star%22%0A%20%20%20%20%20%20%20%20%20style%3D%22fill%3A%231a1a2e%3Bstroke%3A%231a1a2e%3Bstroke-width%3A15%3Bstroke-opacity%3A1%22%0A%20%20%20%20%20%20%20%20%20id%3D%22path973%22%0A%20%20%20%20%20%20%20%20%20inkscape%3Aflatsided%3D%22true%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Asides%3D%226%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Acx%3D%22402.59177%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Acy%3D%2275.38353%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Ar1%3D%228.5502825%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Ar2%3D%227.4047613%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Aarg1%3D%220.46364761%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Aarg2%3D%220.98724638%22%0A%20%20%20%20%20%20%20%20%20inkscape%3Arounded%3D%220%22%0A%20%20%20%20%20%20%20%20%20inkscape%3Arandomized%3D%220%22%0A%20%20%20%20%20%20%20%20%20d%3D%22m%20410.23937%2C79.207332%20-7.13531%2C4.711119%20-7.64761%2C-3.823802%20-0.51229%2C-8.534922%207.13531%2C-4.711119%207.64761%2C3.823803%20z%22%0A%20%20%20%20%20%20%20%20%20transform%3D%22matrix%280.22141131%2C0.01239142%2C-0.01312486%2C0.2090386%2C71.370078%2C55.644697%29%22%0A%20%20%20%20%20%20%20%20%20inkscape%3Atransform-center-x%3D%22-131.64805%22%0A%20%20%20%20%20%20%20%20%20inkscape%3Atransform-center-y%3D%22-54.079491%22%20/%3E%0A%20%20%20%20%20%20%3Cpath%0A%20%20%20%20%20%20%20%20%20sodipodi%3Atype%3D%22star%22%0A%20%20%20%20%20%20%20%20%20style%3D%22fill%3A%231a1a2e%3Bstroke%3A%231a1a2e%3Bstroke-width%3A15%3Bstroke-opacity%3A1%22%0A%20%20%20%20%20%20%20%20%20id%3D%22path974%22%0A%20%20%20%20%20%20%20%20%20inkscape%3Aflatsided%3D%22true%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Asides%3D%226%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Acx%3D%22402.59177%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Acy%3D%2275.38353%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Ar1%3D%228.5502825%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Ar2%3D%227.4047613%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Aarg1%3D%220.46364761%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Aarg2%3D%220.98724638%22%0A%20%20%20%20%20%20%20%20%20inkscape%3Arounded%3D%220%22%0A%20%20%20%20%20%20%20%20%20inkscape%3Arandomized%3D%220%22%0A%20%20%20%20%20%20%20%20%20d%3D%22m%20410.23937%2C79.207332%20-7.13531%2C4.711119%20-7.64761%2C-3.823802%20-0.51229%2C-8.534922%207.13531%2C-4.711119%207.64761%2C3.823803%20z%22%0A%20%20%20%20%20%20%20%20%20transform%3D%22matrix%280.22141131%2C0.01239142%2C-0.01312486%2C0.2090386%2C84.161036%2C63.015758%29%22%0A%20%20%20%20%20%20%20%20%20inkscape%3Atransform-center-x%3D%22-131.64805%22%0A%20%20%20%20%20%20%20%20%20inkscape%3Atransform-center-y%3D%22-54.079491%22%20/%3E%0A%20%20%20%20%20%20%3Cpath%0A%20%20%20%20%20%20%20%20%20sodipodi%3Atype%3D%22star%22%0A%20%20%20%20%20%20%20%20%20style%3D%22fill%3A%231a1a2e%3Bstroke%3A%231a1a2e%3Bstroke-width%3A15%3Bstroke-opacity%3A1%22%0A%20%20%20%20%20%20%20%20%20id%3D%22path975%22%0A%20%20%20%20%20%20%20%20%20inkscape%3Aflatsided%3D%22true%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Asides%3D%226%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Acx%3D%22402.59177%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Acy%3D%2275.38353%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Ar1%3D%228.5502825%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Ar2%3D%227.4047613%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Aarg1%3D%220.46364761%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Aarg2%3D%220.98724638%22%0A%20%20%20%20%20%20%20%20%20inkscape%3Arounded%3D%220%22%0A%20%20%20%20%20%20%20%20%20inkscape%3Arandomized%3D%220%22%0A%20%20%20%20%20%20%20%20%20d%3D%22m%20410.23937%2C79.207332%20-7.13531%2C4.711119%20-7.64761%2C-3.823802%20-0.51229%2C-8.534922%207.13531%2C-4.711119%207.64761%2C3.823803%20z%22%0A%20%20%20%20%20%20%20%20%20transform%3D%22matrix%280.26569357%2C0.01486971%2C-0.01574983%2C0.25084632%2C72.326804%2C104.53619%29%22%0A%20%20%20%20%20%20%20%20%20inkscape%3Atransform-center-x%3D%22-157.97768%22%0A%20%20%20%20%20%20%20%20%20inkscape%3Atransform-center-y%3D%22-64.895391%22%20/%3E%0A%20%20%20%20%20%20%3Cpath%0A%20%20%20%20%20%20%20%20%20sodipodi%3Atype%3D%22star%22%0A%20%20%20%20%20%20%20%20%20style%3D%22fill%3A%231a1a2e%3Bstroke%3A%231a1a2e%3Bstroke-width%3A15%3Bstroke-opacity%3A1%22%0A%20%20%20%20%20%20%20%20%20id%3D%22path976%22%0A%20%20%20%20%20%20%20%20%20inkscape%3Aflatsided%3D%22true%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Asides%3D%226%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Acx%3D%22402.59177%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Acy%3D%2275.38353%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Ar1%3D%228.5502825%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Ar2%3D%227.4047613%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Aarg1%3D%220.46364761%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Aarg2%3D%220.98724638%22%0A%20%20%20%20%20%20%20%20%20inkscape%3Arounded%3D%220%22%0A%20%20%20%20%20%20%20%20%20inkscape%3Arandomized%3D%220%22%0A%20%20%20%20%20%20%20%20%20d%3D%22m%20410.23937%2C79.207332%20-7.13531%2C4.711119%20-7.64761%2C-3.823802%20-0.51229%2C-8.534922%207.13531%2C-4.711119%207.64761%2C3.823803%20z%22%0A%20%20%20%20%20%20%20%20%20transform%3D%22matrix%280.26569357%2C0.01486971%2C-0.01574983%2C0.25084632%2C58.316968%2C112.4873%29%22%0A%20%20%20%20%20%20%20%20%20inkscape%3Atransform-center-x%3D%22-157.97768%22%0A%20%20%20%20%20%20%20%20%20inkscape%3Atransform-center-y%3D%22-64.895391%22%20/%3E%0A%20%20%20%20%20%20%3Cpath%0A%20%20%20%20%20%20%20%20%20sodipodi%3Atype%3D%22star%22%0A%20%20%20%20%20%20%20%20%20style%3D%22fill%3A%231a1a2e%3Bstroke%3A%231a1a2e%3Bstroke-width%3A15%3Bstroke-opacity%3A1%22%0A%20%20%20%20%20%20%20%20%20id%3D%22path977%22%0A%20%20%20%20%20%20%20%20%20inkscape%3Aflatsided%3D%22true%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Asides%3D%226%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Acx%3D%22402.59177%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Acy%3D%2275.38353%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Ar1%3D%228.5502825%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Ar2%3D%227.4047613%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Aarg1%3D%220.46364761%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Aarg2%3D%220.98724638%22%0A%20%20%20%20%20%20%20%20%20inkscape%3Arounded%3D%220%22%0A%20%20%20%20%20%20%20%20%20inkscape%3Arandomized%3D%220%22%0A%20%20%20%20%20%20%20%20%20d%3D%22m%20410.23937%2C79.207332%20-7.13531%2C4.711119%20-7.64761%2C-3.823802%20-0.51229%2C-8.534922%207.13531%2C-4.711119%207.64761%2C3.823803%20z%22%0A%20%20%20%20%20%20%20%20%20transform%3D%22matrix%280.26569357%2C0.01486971%2C-0.01574983%2C0.25084632%2C44.149536%2C104.68076%29%22%0A%20%20%20%20%20%20%20%20%20inkscape%3Atransform-center-x%3D%22-157.97768%22%0A%20%20%20%20%20%20%20%20%20inkscape%3Atransform-center-y%3D%22-64.895391%22%20/%3E%0A%20%20%20%20%20%20%3Cpath%0A%20%20%20%20%20%20%20%20%20sodipodi%3Atype%3D%22star%22%0A%20%20%20%20%20%20%20%20%20style%3D%22fill%3A%231a1a2e%3Bstroke%3A%231a1a2e%3Bstroke-width%3A15%3Bstroke-opacity%3A1%22%0A%20%20%20%20%20%20%20%20%20id%3D%22path978%22%0A%20%20%20%20%20%20%20%20%20inkscape%3Aflatsided%3D%22true%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Asides%3D%226%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Acx%3D%22402.59177%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Acy%3D%2275.38353%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Ar1%3D%228.5502825%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Ar2%3D%227.4047613%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Aarg1%3D%220.46364761%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Aarg2%3D%220.98724638%22%0A%20%20%20%20%20%20%20%20%20inkscape%3Arounded%3D%220%22%0A%20%20%20%20%20%20%20%20%20inkscape%3Arandomized%3D%220%22%0A%20%20%20%20%20%20%20%20%20d%3D%22m%20410.23937%2C79.207332%20-7.13531%2C4.711119%20-7.64761%2C-3.823802%20-0.51229%2C-8.534922%207.13531%2C-4.711119%207.64761%2C3.823803%20z%22%0A%20%20%20%20%20%20%20%20%20transform%3D%22matrix%280.26569357%2C0.01486971%2C-0.01574983%2C0.25084632%2C-39.603462%2C104.53619%29%22%0A%20%20%20%20%20%20%20%20%20inkscape%3Atransform-center-x%3D%22-157.97768%22%0A%20%20%20%20%20%20%20%20%20inkscape%3Atransform-center-y%3D%22-64.895391%22%20/%3E%0A%20%20%20%20%20%20%3Cpath%0A%20%20%20%20%20%20%20%20%20sodipodi%3Atype%3D%22star%22%0A%20%20%20%20%20%20%20%20%20style%3D%22fill%3A%231a1a2e%3Bstroke%3A%231a1a2e%3Bstroke-width%3A15%3Bstroke-opacity%3A1%22%0A%20%20%20%20%20%20%20%20%20id%3D%22path979%22%0A%20%20%20%20%20%20%20%20%20inkscape%3Aflatsided%3D%22true%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Asides%3D%226%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Acx%3D%22402.59177%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Acy%3D%2275.38353%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Ar1%3D%228.5502825%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Ar2%3D%227.4047613%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Aarg1%3D%220.46364761%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Aarg2%3D%220.98724638%22%0A%20%20%20%20%20%20%20%20%20inkscape%3Arounded%3D%220%22%0A%20%20%20%20%20%20%20%20%20inkscape%3Arandomized%3D%220%22%0A%20%20%20%20%20%20%20%20%20d%3D%22m%20410.23937%2C79.207332%20-7.13531%2C4.711119%20-7.64761%2C-3.823802%20-0.51229%2C-8.534922%207.13531%2C-4.711119%207.64761%2C3.823803%20z%22%0A%20%20%20%20%20%20%20%20%20transform%3D%22matrix%280.26569357%2C0.01486971%2C-0.01574983%2C0.25084632%2C-53.337197%2C112.4873%29%22%0A%20%20%20%20%20%20%20%20%20inkscape%3Atransform-center-x%3D%22-157.97768%22%0A%20%20%20%20%20%20%20%20%20inkscape%3Atransform-center-y%3D%22-64.895391%22%20/%3E%0A%20%20%20%20%20%20%3Cpath%0A%20%20%20%20%20%20%20%20%20sodipodi%3Atype%3D%22star%22%0A%20%20%20%20%20%20%20%20%20style%3D%22fill%3A%231a1a2e%3Bstroke%3A%231a1a2e%3Bstroke-width%3A15%3Bstroke-opacity%3A1%22%0A%20%20%20%20%20%20%20%20%20id%3D%22path980%22%0A%20%20%20%20%20%20%20%20%20inkscape%3Aflatsided%3D%22true%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Asides%3D%226%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Acx%3D%22402.59177%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Acy%3D%2275.38353%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Ar1%3D%228.5502825%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Ar2%3D%227.4047613%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Aarg1%3D%220.46364761%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Aarg2%3D%220.98724638%22%0A%20%20%20%20%20%20%20%20%20inkscape%3Arounded%3D%220%22%0A%20%20%20%20%20%20%20%20%20inkscape%3Arandomized%3D%220%22%0A%20%20%20%20%20%20%20%20%20d%3D%22m%20410.23937%2C79.207332%20-7.13531%2C4.711119%20-7.64761%2C-3.823802%20-0.51229%2C-8.534922%207.13531%2C-4.711119%207.64761%2C3.823803%20z%22%0A%20%20%20%20%20%20%20%20%20transform%3D%22matrix%280.26569357%2C0.01486971%2C-0.01574983%2C0.25084632%2C-67.289781%2C104.68076%29%22%0A%20%20%20%20%20%20%20%20%20inkscape%3Atransform-center-x%3D%22-157.97768%22%0A%20%20%20%20%20%20%20%20%20inkscape%3Atransform-center-y%3D%22-64.895391%22%20/%3E%0A%20%20%20%20%20%20%3Cpath%0A%20%20%20%20%20%20%20%20%20sodipodi%3Atype%3D%22star%22%0A%20%20%20%20%20%20%20%20%20style%3D%22fill%3A%231a1a2e%3Bstroke%3A%231a1a2e%3Bstroke-width%3A15%3Bstroke-opacity%3A1%22%0A%20%20%20%20%20%20%20%20%20id%3D%22path981%22%0A%20%20%20%20%20%20%20%20%20inkscape%3Aflatsided%3D%22true%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Asides%3D%226%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Acx%3D%22402.59177%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Acy%3D%2275.38353%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Ar1%3D%228.5502825%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Ar2%3D%227.4047613%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Aarg1%3D%220.46364761%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Aarg2%3D%220.98724638%22%0A%20%20%20%20%20%20%20%20%20inkscape%3Arounded%3D%220%22%0A%20%20%20%20%20%20%20%20%20inkscape%3Arandomized%3D%220%22%0A%20%20%20%20%20%20%20%20%20d%3D%22m%20410.23937%2C79.207332%20-7.13531%2C4.711119%20-7.64761%2C-3.823802%20-0.51229%2C-8.534922%207.13531%2C-4.711119%207.64761%2C3.823803%20z%22%0A%20%20%20%20%20%20%20%20%20transform%3D%22matrix%280.22141131%2C0.01239142%2C-0.01312486%2C0.2090386%2C33.569726%2C78.05251%29%22%0A%20%20%20%20%20%20%20%20%20inkscape%3Atransform-center-x%3D%22-131.64805%22%0A%20%20%20%20%20%20%20%20%20inkscape%3Atransform-center-y%3D%22-54.079491%22%20/%3E%0A%20%20%20%20%20%20%3Cpath%0A%20%20%20%20%20%20%20%20%20sodipodi%3Atype%3D%22star%22%0A%20%20%20%20%20%20%20%20%20style%3D%22fill%3A%231a1a2e%3Bstroke%3A%231a1a2e%3Bstroke-width%3A15%3Bstroke-opacity%3A1%22%0A%20%20%20%20%20%20%20%20%20id%3D%22path982%22%0A%20%20%20%20%20%20%20%20%20inkscape%3Aflatsided%3D%22true%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Asides%3D%226%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Acx%3D%22402.59177%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Acy%3D%2275.38353%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Ar1%3D%228.5502825%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Ar2%3D%227.4047613%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Aarg1%3D%220.46364761%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Aarg2%3D%220.98724638%22%0A%20%20%20%20%20%20%20%20%20inkscape%3Arounded%3D%220%22%0A%20%20%20%20%20%20%20%20%20inkscape%3Arandomized%3D%220%22%0A%20%20%20%20%20%20%20%20%20d%3D%22m%20410.23937%2C79.207332%20-7.13531%2C4.711119%20-7.64761%2C-3.823802%20-0.51229%2C-8.534922%207.13531%2C-4.711119%207.64761%2C3.823803%20z%22%0A%20%20%20%20%20%20%20%20%20transform%3D%22matrix%280.22141131%2C0.01239142%2C-0.01312486%2C0.2090386%2C20.416975%2C86.437317%29%22%0A%20%20%20%20%20%20%20%20%20inkscape%3Atransform-center-x%3D%22-131.64805%22%0A%20%20%20%20%20%20%20%20%20inkscape%3Atransform-center-y%3D%22-54.079491%22%20/%3E%0A%20%20%20%20%20%20%3Cpath%0A%20%20%20%20%20%20%20%20%20sodipodi%3Atype%3D%22star%22%0A%20%20%20%20%20%20%20%20%20style%3D%22fill%3A%231a1a2e%3Bstroke%3A%231a1a2e%3Bstroke-width%3A15%3Bstroke-opacity%3A1%22%0A%20%20%20%20%20%20%20%20%20id%3D%22path983%22%0A%20%20%20%20%20%20%20%20%20inkscape%3Aflatsided%3D%22true%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Asides%3D%226%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Acx%3D%22402.59177%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Acy%3D%2275.38353%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Ar1%3D%228.5502825%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Ar2%3D%227.4047613%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Aarg1%3D%220.46364761%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Aarg2%3D%220.98724638%22%0A%20%20%20%20%20%20%20%20%20inkscape%3Arounded%3D%220%22%0A%20%20%20%20%20%20%20%20%20inkscape%3Arandomized%3D%220%22%0A%20%20%20%20%20%20%20%20%20d%3D%22m%20410.23937%2C79.207332%20-7.13531%2C4.711119%20-7.64761%2C-3.823802%20-0.51229%2C-8.534922%207.13531%2C-4.711119%207.64761%2C3.823803%20z%22%0A%20%20%20%20%20%20%20%20%20transform%3D%22matrix%280.22141131%2C0.01239142%2C-0.01312486%2C0.2090386%2C7.9843313%2C78.486207%29%22%0A%20%20%20%20%20%20%20%20%20inkscape%3Atransform-center-x%3D%22-131.64805%22%0A%20%20%20%20%20%20%20%20%20inkscape%3Atransform-center-y%3D%22-54.079491%22%20/%3E%0A%20%20%20%20%20%20%3Cpath%0A%20%20%20%20%20%20%20%20%20sodipodi%3Atype%3D%22star%22%0A%20%20%20%20%20%20%20%20%20style%3D%22fill%3A%231a1a2e%3Bstroke%3A%231a1a2e%3Bstroke-width%3A15%3Bstroke-opacity%3A1%22%0A%20%20%20%20%20%20%20%20%20id%3D%22path985%22%0A%20%20%20%20%20%20%20%20%20inkscape%3Aflatsided%3D%22true%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Asides%3D%226%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Acx%3D%22402.59177%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Acy%3D%2275.38353%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Ar1%3D%228.5502825%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Ar2%3D%227.4047613%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Aarg1%3D%220.46364761%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Aarg2%3D%220.98724638%22%0A%20%20%20%20%20%20%20%20%20inkscape%3Arounded%3D%220%22%0A%20%20%20%20%20%20%20%20%20inkscape%3Arandomized%3D%220%22%0A%20%20%20%20%20%20%20%20%20d%3D%22m%20410.23937%2C79.207332%20-7.13531%2C4.711119%20-7.64761%2C-3.823802%20-0.51229%2C-8.534922%207.13531%2C-4.711119%207.64761%2C3.823803%20z%22%0A%20%20%20%20%20%20%20%20%20transform%3D%22matrix%280.22141131%2C0.01239142%2C-0.01312486%2C0.2090386%2C76.074743%2C89.111778%29%22%0A%20%20%20%20%20%20%20%20%20inkscape%3Atransform-center-x%3D%22-131.64805%22%0A%20%20%20%20%20%20%20%20%20inkscape%3Atransform-center-y%3D%22-54.079491%22%20/%3E%0A%20%20%20%20%20%20%3Cpath%0A%20%20%20%20%20%20%20%20%20sodipodi%3Atype%3D%22star%22%0A%20%20%20%20%20%20%20%20%20style%3D%22fill%3A%231a1a2e%3Bstroke%3A%231a1a2e%3Bstroke-width%3A15%3Bstroke-opacity%3A1%22%0A%20%20%20%20%20%20%20%20%20id%3D%22path986%22%0A%20%20%20%20%20%20%20%20%20inkscape%3Aflatsided%3D%22true%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Asides%3D%226%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Acx%3D%22402.59177%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Acy%3D%2275.38353%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Ar1%3D%228.5502825%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Ar2%3D%227.4047613%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Aarg1%3D%220.46364761%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Aarg2%3D%220.98724638%22%0A%20%20%20%20%20%20%20%20%20inkscape%3Arounded%3D%220%22%0A%20%20%20%20%20%20%20%20%20inkscape%3Arandomized%3D%220%22%0A%20%20%20%20%20%20%20%20%20d%3D%22m%20410.23937%2C79.207332%20-7.13531%2C4.711119%20-7.64761%2C-3.823802%20-0.51229%2C-8.534922%207.13531%2C-4.711119%207.64761%2C3.823803%20z%22%0A%20%20%20%20%20%20%20%20%20transform%3D%22matrix%280.22141131%2C0.01239142%2C-0.01312486%2C0.2090386%2C-35.240793%2C89.111778%29%22%0A%20%20%20%20%20%20%20%20%20inkscape%3Atransform-center-x%3D%22-131.64805%22%0A%20%20%20%20%20%20%20%20%20inkscape%3Atransform-center-y%3D%22-54.079491%22%20/%3E%0A%20%20%20%20%20%20%3Ccircle%0A%20%20%20%20%20%20%20%20%20style%3D%22fill%3A%23ffffff%3Bfill-opacity%3A1%3Bstroke%3A%231a1a2e%3Bstroke-width%3A1.67436%3Bstroke-dasharray%3Anone%3Bstroke-opacity%3A1%22%0A%20%20%20%20%20%20%20%20%20id%3D%22path987%22%0A%20%20%20%20%20%20%20%20%20cx%3D%22178.10558%22%0A%20%20%20%20%20%20%20%20%20cy%3D%2270.30204%22%0A%20%20%20%20%20%20%20%20%20r%3D%222.4701133%22%20/%3E%0A%20%20%20%20%20%20%3Ccircle%0A%20%20%20%20%20%20%20%20%20style%3D%22fill%3A%23ffffff%3Bfill-opacity%3A1%3Bstroke%3A%231a1a2e%3Bstroke-width%3A1.67436%3Bstroke-dasharray%3Anone%3Bstroke-opacity%3A1%22%0A%20%20%20%20%20%20%20%20%20id%3D%22circle987%22%0A%20%20%20%20%20%20%20%20%20cx%3D%2238.488991%22%0A%20%20%20%20%20%20%20%20%20cy%3D%2270.157471%22%0A%20%20%20%20%20%20%20%20%20r%3D%222.4701133%22%20/%3E%0A%20%20%20%20%20%20%3Ccircle%0A%20%20%20%20%20%20%20%20%20style%3D%22fill%3A%23ffffff%3Bfill-opacity%3A1%3Bstroke%3A%231a1a2e%3Bstroke-width%3A1.67436%3Bstroke-dasharray%3Anone%3Bstroke-opacity%3A1%22%0A%20%20%20%20%20%20%20%20%20id%3D%22circle988%22%0A%20%20%20%20%20%20%20%20%20cx%3D%2252.556187%22%0A%20%20%20%20%20%20%20%20%20cy%3D%2290.235817%22%0A%20%20%20%20%20%20%20%20%20r%3D%222.4701133%22%20/%3E%0A%20%20%20%20%20%20%3Ccircle%0A%20%20%20%20%20%20%20%20%20style%3D%22fill%3A%23ffffff%3Bfill-opacity%3A1%3Bstroke%3A%231a1a2e%3Bstroke-width%3A1.67436%3Bstroke-dasharray%3Anone%3Bstroke-opacity%3A1%22%0A%20%20%20%20%20%20%20%20%20id%3D%22circle989%22%0A%20%20%20%20%20%20%20%20%20cx%3D%2259.929031%22%0A%20%20%20%20%20%20%20%20%20cy%3D%22100.73311%22%0A%20%20%20%20%20%20%20%20%20r%3D%222.4701133%22%20/%3E%0A%20%20%20%20%20%20%3Ccircle%0A%20%20%20%20%20%20%20%20%20style%3D%22fill%3A%23ffffff%3Bfill-opacity%3A1%3Bstroke%3A%231a1a2e%3Bstroke-width%3A1.67436%3Bstroke-dasharray%3Anone%3Bstroke-opacity%3A1%22%0A%20%20%20%20%20%20%20%20%20id%3D%22circle990%22%0A%20%20%20%20%20%20%20%20%20cx%3D%22156.64345%22%0A%20%20%20%20%20%20%20%20%20cy%3D%22100.73311%22%0A%20%20%20%20%20%20%20%20%20r%3D%222.4701133%22%20/%3E%0A%20%20%20%20%20%20%3Ccircle%0A%20%20%20%20%20%20%20%20%20style%3D%22fill%3A%23ffffff%3Bfill-opacity%3A1%3Bstroke%3A%231a1a2e%3Bstroke-width%3A1.67436%3Bstroke-dasharray%3Anone%3Bstroke-opacity%3A1%22%0A%20%20%20%20%20%20%20%20%20id%3D%22circle992%22%0A%20%20%20%20%20%20%20%20%20cx%3D%22163.76431%22%0A%20%20%20%20%20%20%20%20%20cy%3D%2290.235817%22%0A%20%20%20%20%20%20%20%20%20r%3D%222.4701133%22%20/%3E%0A%20%20%20%20%20%20%3Cpath%0A%20%20%20%20%20%20%20%20%20sodipodi%3Atype%3D%22star%22%0A%20%20%20%20%20%20%20%20%20style%3D%22fill%3Anone%3Bfill-opacity%3A1%3Bstroke%3A%231a1a2e%3Bstroke-width%3A5.36199%3Bstroke-dasharray%3Anone%3Bstroke-opacity%3A1%22%0A%20%20%20%20%20%20%20%20%20id%3D%22path992%22%0A%20%20%20%20%20%20%20%20%20inkscape%3Aflatsided%3D%22true%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Asides%3D%226%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Acx%3D%22688.9975%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Acy%3D%2242.618404%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Ar1%3D%2254.11742%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Ar2%3D%2246.867062%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Aarg1%3D%221.5405026%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Aarg2%3D%222.0641013%22%0A%20%20%20%20%20%20%20%20%20inkscape%3Arounded%3D%220%22%0A%20%20%20%20%20%20%20%20%20inkscape%3Arandomized%3D%220%22%0A%20%20%20%20%20%20%20%20%20d%3D%22m%20690.63667%2C96.710994%20-47.66515%2C-25.626734%20-1.63916%2C-54.09259%2046.02597%2C-28.465856%2047.66514%2C25.626735%201.63917%2C54.09259%20z%22%0A%20%20%20%20%20%20%20%20%20transform%3D%22matrix%280.27139339%2C0%2C0%2C0.27139339%2C-117.38522%2C13.930117%29%22%20/%3E%0A%20%20%20%20%20%20%3Cpath%0A%20%20%20%20%20%20%20%20%20sodipodi%3Atype%3D%22star%22%0A%20%20%20%20%20%20%20%20%20style%3D%22fill%3Anone%3Bfill-opacity%3A1%3Bstroke%3A%231a1a2e%3Bstroke-width%3A5.36199%3Bstroke-dasharray%3Anone%3Bstroke-opacity%3A1%22%0A%20%20%20%20%20%20%20%20%20id%3D%22path994%22%0A%20%20%20%20%20%20%20%20%20inkscape%3Aflatsided%3D%22true%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Asides%3D%226%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Acx%3D%22688.9975%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Acy%3D%2242.618404%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Ar1%3D%2254.11742%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Ar2%3D%2246.867062%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Aarg1%3D%221.5405026%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Aarg2%3D%222.0641013%22%0A%20%20%20%20%20%20%20%20%20inkscape%3Arounded%3D%220%22%0A%20%20%20%20%20%20%20%20%20inkscape%3Arandomized%3D%220%22%0A%20%20%20%20%20%20%20%20%20d%3D%22m%20690.63667%2C96.710994%20-47.66515%2C-25.626734%20-1.63916%2C-54.09259%2046.02597%2C-28.465856%2047.66514%2C25.626735%201.63917%2C54.09259%20z%22%0A%20%20%20%20%20%20%20%20%20transform%3D%22matrix%280.27139339%2C0%2C0%2C0.27139339%2C-130.08522%2C36.155118%29%22%20/%3E%0A%20%20%20%20%20%20%3Cpath%0A%20%20%20%20%20%20%20%20%20sodipodi%3Atype%3D%22star%22%0A%20%20%20%20%20%20%20%20%20style%3D%22fill%3Anone%3Bfill-opacity%3A1%3Bstroke%3A%231a1a2e%3Bstroke-width%3A5.36199%3Bstroke-dasharray%3Anone%3Bstroke-opacity%3A1%22%0A%20%20%20%20%20%20%20%20%20id%3D%22path995%22%0A%20%20%20%20%20%20%20%20%20inkscape%3Aflatsided%3D%22true%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Asides%3D%226%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Acx%3D%22688.9975%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Acy%3D%2242.618404%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Ar1%3D%2254.11742%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Ar2%3D%2246.867062%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Aarg1%3D%221.5405026%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Aarg2%3D%222.0641013%22%0A%20%20%20%20%20%20%20%20%20inkscape%3Arounded%3D%220%22%0A%20%20%20%20%20%20%20%20%20inkscape%3Arandomized%3D%220%22%0A%20%20%20%20%20%20%20%20%20d%3D%22m%20690.63667%2C96.710994%20-47.66515%2C-25.626734%20-1.63916%2C-54.09259%2046.02597%2C-28.465856%2047.66514%2C25.626735%201.63917%2C54.09259%20z%22%0A%20%20%20%20%20%20%20%20%20transform%3D%22matrix%280.27139339%2C0%2C0%2C0.27139339%2C-52.82689%2C36.155118%29%22%20/%3E%0A%20%20%20%20%20%20%3Cpath%0A%20%20%20%20%20%20%20%20%20sodipodi%3Atype%3D%22star%22%0A%20%20%20%20%20%20%20%20%20style%3D%22fill%3Anone%3Bfill-opacity%3A1%3Bstroke%3A%231a1a2e%3Bstroke-width%3A5.36199%3Bstroke-dasharray%3Anone%3Bstroke-opacity%3A1%22%0A%20%20%20%20%20%20%20%20%20id%3D%22path996%22%0A%20%20%20%20%20%20%20%20%20inkscape%3Aflatsided%3D%22true%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Asides%3D%226%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Acx%3D%22688.9975%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Acy%3D%2242.618404%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Ar1%3D%2254.11742%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Ar2%3D%2246.867062%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Aarg1%3D%221.5405026%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Aarg2%3D%222.0641013%22%0A%20%20%20%20%20%20%20%20%20inkscape%3Arounded%3D%220%22%0A%20%20%20%20%20%20%20%20%20inkscape%3Arandomized%3D%220%22%0A%20%20%20%20%20%20%20%20%20d%3D%22m%20690.63667%2C96.710994%20-47.66515%2C-25.626734%20-1.63916%2C-54.09259%2046.02597%2C-28.465856%2047.66514%2C25.626735%201.63917%2C54.09259%20z%22%0A%20%20%20%20%20%20%20%20%20transform%3D%22matrix%280.27139339%2C0%2C0%2C0.27139339%2C-27.42689%2C36.155118%29%22%20/%3E%0A%20%20%20%20%20%20%3Cpath%0A%20%20%20%20%20%20%20%20%20sodipodi%3Atype%3D%22star%22%0A%20%20%20%20%20%20%20%20%20style%3D%22fill%3Anone%3Bfill-opacity%3A1%3Bstroke%3A%231a1a2e%3Bstroke-width%3A5.36199%3Bstroke-dasharray%3Anone%3Bstroke-opacity%3A1%22%0A%20%20%20%20%20%20%20%20%20id%3D%22path997%22%0A%20%20%20%20%20%20%20%20%20inkscape%3Aflatsided%3D%22true%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Asides%3D%226%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Acx%3D%22688.9975%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Acy%3D%2242.618404%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Ar1%3D%2254.11742%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Ar2%3D%2246.867062%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Aarg1%3D%221.5405026%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Aarg2%3D%222.0641013%22%0A%20%20%20%20%20%20%20%20%20inkscape%3Arounded%3D%220%22%0A%20%20%20%20%20%20%20%20%20inkscape%3Arandomized%3D%220%22%0A%20%20%20%20%20%20%20%20%20d%3D%22m%20690.63667%2C96.710994%20-47.66515%2C-25.626734%20-1.63916%2C-54.09259%2046.02597%2C-28.465856%2047.66514%2C25.626735%201.63917%2C54.09259%20z%22%0A%20%20%20%20%20%20%20%20%20transform%3D%22matrix%280.27139339%2C0%2C0%2C0.27139339%2C-40.12689%2C13.930117%29%22%20/%3E%0A%20%20%20%20%20%20%3Cpath%0A%20%20%20%20%20%20%20%20%20style%3D%22baseline-shift%3Abaseline%3Bdisplay%3Ainline%3Boverflow%3Avisible%3Bfill%3Anone%3Bstroke%3A%231a1a2e%3Bstroke-width%3A1.45521%3Bstroke-dasharray%3Anone%3Bstroke-opacity%3A1%3Benable-background%3Aaccumulate%3Bstop-color%3A%23000000%22%0A%20%20%20%20%20%20%20%20%20d%3D%22m%2095.062761%2C54.426362%20-13.205514%2C8.167244%200.470168%2C15.52031%20c%200%2C0%203.023089%2C3.304806%207.125382%2C10.042668%204.102293%2C6.737862%206.103984%2C12.182436%206.103984%2C12.182436%20l%2013.676209%2C7.35307%2013.20552%2C-8.167779%20c%200%2C0%201.2082%2C-4.763789%205.78909%2C-11.792518%204.58089%2C-7.028729%206.91074%2C-10.432587%206.91074%2C-10.432587%20l%20-0.47016%2C-15.51978%20-13.67622%2C-7.353064%20-12.24609%2C7.574101%20-0.007%2C-0.221037%20z%22%0A%20%20%20%20%20%20%20%20%20id%3D%22path998%22%0A%20%20%20%20%20%20%20%20%20sodipodi%3Anodetypes%3D%22ccczccczcccccc%22%20/%3E%0A%20%20%20%20%3C/g%3E%0A%20%20%3C/g%3E%0A%3C/svg%3E%0A';
+
+// Logo viewBox: 0 0 148.86 136.42, origin offset 33.87, 5.29
+// We'll draw it centred and scaled onto canvas
+function drawLogo(c, alpha){
+  if(alpha < 0.001 || !logoImg.complete) return;
+
+  // ── Layout constants ──
+  const LOGO_W = 148.86, LOGO_H = 136.42;
+  const scale  = Math.min(W*0.40/LOGO_W, H*0.40/LOGO_H);
+  const dw = LOGO_W*scale, dh = LOGO_H*scale;
+  const MAVEN_SIZE = 60;   // px for MAVENs
+  const SUB_SIZE   = 20;   // px for subtitle
+  const GAP1 = 86;         // logo bottom → MAVENs baseline
+  const GAP2 = 30;         // MAVENs baseline → subtitle baseline
+  const BLOCK_H = dh + GAP1 + MAVEN_SIZE + GAP2 + SUB_SIZE;
+
+  // True vertical+horizontal centre
+  const dx     = (W - dw) / 2;
+  const blockY = (H - BLOCK_H) / 2;   // top of entire block
+  const dy     = blockY;
+  const mavenY = blockY + dh + GAP1;
+  const subY   = mavenY + GAP2;
+
+  // ── Animation phases (alpha 0→1 over LOGO_DRAW_MS) ──
+  // Phase A  0.00–0.50 : logo image fades in
+  // Phase B  0.50–0.78 : MAVENs writes left→right
+  // Phase C  0.78–1.00 : subtitle writes left→right
+  const phA = Math.min(1, alpha / 0.50);          // logo opacity
+  const phB = Math.min(1, Math.max(0, (alpha - 0.50) / 0.28)); // MAVENs progress
+  const phC = Math.min(1, Math.max(0, (alpha - 0.78) / 0.22)); // subtitle progress
+
+  c.save();
+
+  // ── A: Logo image ──
+  if(phA > 0.001){
+    c.globalAlpha = phA;
+    c.drawImage(logoImg, dx, dy, dw, dh);
+    c.globalAlpha = 1;
+  }
+
+  // ── B: MAVENs — clip-reveal left→right (handwriting feel) ──
+  if(phB > 0.001){
+    c.font = `bold ${MAVEN_SIZE}px "Roboto", sans-serif`;
+    c.textAlign  = 'center';
+    c.textBaseline = 'alphabetic';
+    // Measure full text width so clip rect is exact
+    const mw = c.measureText('MAVENs').width;
+    const mLeft  = W/2 - mw/2;
+    const mRight = W/2 + mw/2;
+    c.save();
+    // Clip to a rect that grows from left edge of text to right
+    c.beginPath();
+    c.rect(mLeft - 2, mavenY - MAVEN_SIZE - 4, (mRight - mLeft + 4) * phB, MAVEN_SIZE + 12);
+    c.clip();
+    c.fillStyle = `rgba(26,26,46,1)`;
+    c.fillText('MAVENs', W/2, mavenY);
+    c.restore();
+  }
+
+  // ── C: Subtitle — clip-reveal left→right ──
+  if(phC > 0.001){
+    c.font = `bold ${SUB_SIZE}px "Roboto", sans-serif`;
+    c.textAlign  = 'center';
+    c.textBaseline = 'alphabetic';
+    const SUBTITLE = 'Materials Advancing a Viable ENergy future';
+    const sw = c.measureText(SUBTITLE).width;
+    const sLeft  = W/2 - sw/2;
+    const sRight = W/2 + sw/2;
+    c.save();
+    c.beginPath();
+    c.rect(sLeft - 2, subY - SUB_SIZE - 2, (sRight - sLeft + 4) * phC, SUB_SIZE + 8);
+    c.clip();
+    c.fillStyle = `rgba(55,50,75,0.85)`;
+    c.fillText(SUBTITLE, W/2, subY);
+    c.restore();
+  }
+
+  c.restore();
+}
+
+// ─── Timeline ────────────────────────────────────────────────────────────────
+let TL=[], TOTAL_MS=0;
+
+function buildTimeline(){
+  TL=[]; let t=0;
+
+  // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  // TIMING — change XDUR to adjust all 4 transition speeds equally
+  // T1 sketch→png  : cross dissolve
+  // T2 png→terminal: overlay (terminal fades in over png)
+  // T3 terminal+png→charge: cross dissolve
+  // T4 charge→magnetism: push (charge exits left, mag enters right)
+  //
+  // XDUR = 1400     ← duration of every transition (ms)
+  //
+  // Content hold durations (how long each scene stays fully visible):
+  //   PNG_HOLD_MS    = 1000
+  //   TERM_STREAM_MS = 2500  (terminal typing time)
+  //   TERM_HOLD_MS   = 600
+  //   CHG_HOLD_MS    = 1000
+  //   DOS_HOLD_MS    = 1800
+  //
+  // Sketch drawing (phases 1–3): atom/bond/crayon stagger durations below
+  // Equations (phase 4): EQ_TYPEDUR / EQ_HOLDDUR / eqGap below
+  // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  const XDUR          = 1400;
+  const PNG_HOLD_MS   = 1000;
+  const TERM_STREAM_MS= 2500;
+  const TERM_HOLD_MS  = 600;
+  const CHG_HOLD_MS   = 1000;
+  const DOS_HOLD_MS   = 1800;
+
+  // ── Phase 1–3: sketch ──
+  ATOMS.forEach((_,i)=>{ TL.push({s:t+i*220,e:t+i*220+420,type:'atom_outline',idx:i}); });
+  t+=ATOMS.length*220+420+180;
+  BONDS.slice(0,12).forEach((_,i)=>{ TL.push({s:t+i*160,e:t+i*160+300,type:'bond',idx:i,lw:3.2,col:'rgba(18,18,35,0.86)'}); });
+  t+=12*160+300+40;
+  BONDS.slice(12).forEach((_,i)=>{ TL.push({s:t+i*110,e:t+i*110+240,type:'bond',idx:12+i,lw:2.0,col:'rgba(28,28,50,0.72)'}); });
+  t+=16*110+240+300;
+  ATOMS.forEach((_,i)=>{ TL.push({s:t+i*150,e:t+i*150+600,type:'crayon',idx:i}); });
+  t+=ATOMS.length*150+600+500;
+
+  // ── Phase 4: equations ──
+  const EQ_TYPEDUR=1800, EQ_HOLDDUR=1400, eqGap=1200;
+  EQS.forEach((_,i)=>{
+    const es=t+i*eqGap;
+    TL.push({s:es,              e:es+EQ_TYPEDUR,            type:'eq_type',eqIdx:i});
+    TL.push({s:es+EQ_TYPEDUR,   e:es+EQ_TYPEDUR+EQ_HOLDDUR, type:'eq_hold',eqIdx:i});
+    TL.push({s:es+EQ_TYPEDUR+EQ_HOLDDUR, e:es+EQ_TYPEDUR+EQ_HOLDDUR+XDUR, type:'eq_fade',eqIdx:i});
+  });
+  t+=EQS.length*eqGap+EQ_TYPEDUR+EQ_HOLDDUR+200;
+
+  // ── T1: cross dissolve sketch→PNG ──
+  TL.push({s:t, e:t+XDUR, type:'morph'});
+  t+=XDUR+PNG_HOLD_MS;
+
+  // ── T2: terminal overlays PNG ──
+  TL.push({s:t,           e:t+XDUR,                    type:'term_fadein'});
+  TL.push({s:t+XDUR,      e:t+XDUR+TERM_STREAM_MS,     type:'term_stream'});
+  TL.push({s:t+XDUR+TERM_STREAM_MS, e:t+XDUR+TERM_STREAM_MS+TERM_HOLD_MS, type:'term_hold'});
+  const t3 = t+XDUR+TERM_STREAM_MS+TERM_HOLD_MS;
+
+  // ── T3: cross dissolve terminal+PNG→charge ──
+  // term fades out, PNG fades to 0, chg rises — all over XDUR
+  TL.push({s:t3,       e:t3+XDUR, type:'term_fadeout'});
+  TL.push({s:t3,       e:t3+XDUR, type:'chg_fadein'});
+  TL.push({s:t3+XDUR,  e:t3+XDUR+CHG_HOLD_MS, type:'chg_hold'});
+  const t4 = t3+XDUR+CHG_HOLD_MS;
+
+  // ── T4: push charge→magnetism ──
+  TL.push({s:t4,       e:t4+XDUR,            type:'push'});
+  TL.push({s:t4+XDUR,  e:t4+XDUR+DOS_HOLD_MS,type:'dos_hold'});
+  TL.push({s:t4+XDUR+DOS_HOLD_MS, e:t4+XDUR+DOS_HOLD_MS+XDUR, type:'dos_fade'});
+
+  // ── T5: dos fades to parchment, logo draws in ──
+  const LOGO_DRAW_MS = 2400;
+  const LOGO_HOLD_MS = 9999; // holds indefinitely
+  const logoStart = t4+XDUR+DOS_HOLD_MS+XDUR;
+  TL.push({s:logoStart,              e:logoStart+LOGO_DRAW_MS,              type:'logo_draw'});
+  TL.push({s:logoStart+LOGO_DRAW_MS, e:logoStart+LOGO_DRAW_MS+LOGO_HOLD_MS, type:'logo_hold'});
+
+  TOTAL_MS = logoStart+LOGO_DRAW_MS+LOGO_HOLD_MS; // runs indefinitely (holds on logo)
+}
+
+// ─── Accumulation: permanently baked strokes ─────────────────────────────────
+const baked=new Set();
+
+function bakeEvent(ev){
+  if(baked.has(ev._id)) return;
+  baked.add(ev._id);
+  const a=ev.idx!=null?ATOMS[ev.idx]:null;
+
+  if(ev.type==='atom_outline'){
+    // Draw white fill first to punch through anything behind the circle
+    aCtx.fillStyle='#f0ece0';
+    aCtx.beginPath(); aCtx.arc(a.cx,a.cy,a.r*0.93,0,Math.PI*2); aCtx.fill();
+    drawStroke(aCtx,a.pts,1.0,2.2,'rgba(16,16,34,0.88)');
+  }
+  if(ev.type==='bond'){
+    drawStroke(aCtx,bondPts[ev.idx],1.0,ev.lw,ev.col);
+  }
+  if(ev.type==='crayon'){
+    drawCrayon(aCtx,a,1.0);
+    // Re-stroke outline on top of fill
+    drawStroke(aCtx,a.pts,1.0,2.2,'rgba(16,16,34,0.88)');
+  }
+}
+
+// ─── Equation state ───────────────────────────────────────────────────────────
+function getEqState(eqIdx, el){
+  const te=TL.find(e=>e.type==='eq_type'&&e.eqIdx===eqIdx);
+  const th=TL.find(e=>e.type==='eq_hold'&&e.eqIdx===eqIdx);
+  const tf=TL.find(e=>e.type==='eq_fade'&&e.eqIdx===eqIdx);
+  if(!te||el<te.s) return {charFrac:0,alpha:0};
+  if(el<te.e) return {charFrac:(el-te.s)/(te.e-te.s), alpha:1};
+  if(th&&el<th.e) return {charFrac:1,alpha:1};
+  if(tf&&el<tf.e) return {charFrac:1,alpha:1-(el-tf.s)/(tf.e-tf.s)};
+  return {charFrac:1,alpha:0};
+}
+
+// ─── Scientific-mode sticky flag ─────────────────────────────────────────────
+let scientificStarted = false;
+
+// ─── Main loop ────────────────────────────────────────────────────────────────
+let rafId=null, t0=null;
+const cl=v=>Math.max(0,Math.min(1,v));
+const eio=t=>t<.5?2*t*t:-1+(4-2*t)*t; // ease-in-out
+
+function frame(ts){
+  if(!t0) t0=ts;
+  const el=ts-t0;
+
+  ctx.clearRect(0,0,W,H);
+  ctx.drawImage(paperOS,0,0);
+
+  // ── Gather all event refs once ──
+  const morphEv      = TL.find(e=>e.type==='morph');
+  const termFadeInEv = TL.find(e=>e.type==='term_fadein');
+  const termStreamEv = TL.find(e=>e.type==='term_stream');
+  const termHoldEv   = TL.find(e=>e.type==='term_hold');
+  const termFadeOutEv= TL.find(e=>e.type==='term_fadeout');
+  const chgFadeInEv  = TL.find(e=>e.type==='chg_fadein');
+  const chgHoldEv    = TL.find(e=>e.type==='chg_hold');
+  const pushEv       = TL.find(e=>e.type==='push');
+  const dosHoldEv    = TL.find(e=>e.type==='dos_hold');
+  const dosFadeEv    = TL.find(e=>e.type==='dos_fade');
+  const logoDrawEv   = TL.find(e=>e.type==='logo_draw');
+  const logoHoldEv   = TL.find(e=>e.type==='logo_hold');
+
+  // ── T1: cross dissolve — sketch+eqn → PNG ──
+  // sketchAlpha and pngAlpha are mirror images over XDUR, linear, simultaneous
+  const morphFrac = morphEv && el>=morphEv.s ? cl((el-morphEv.s)/(morphEv.e-morphEv.s)) : 0;
+  const sketchAlpha = Math.max(0, 1-morphFrac);   // 1→0 linear
+  const pngMorphAlpha = Math.min(1, morphFrac);   // 0→1 linear
+
+  // ── T2: terminal overlays PNG ──
+  // PNG stays at 1.0, terminal fades in cleanly on top
+  let termAlpha=0, termCharProgress=0;
+  if(termFadeInEv && el>=termFadeInEv.s)
+    termAlpha = cl((el-termFadeInEv.s)/(termFadeInEv.e-termFadeInEv.s));
+  if(termStreamEv && el>=termStreamEv.s){
+    termAlpha=1;
+    termCharProgress = cl((el-termStreamEv.s)/(termStreamEv.e-termStreamEv.s));
+  }
+  if(termHoldEv && el>=termHoldEv.s){ termAlpha=1; termCharProgress=1; }
+  if(termFadeOutEv && el>=termFadeOutEv.s){
+    termAlpha = 1-cl((el-termFadeOutEv.s)/(termFadeOutEv.e-termFadeOutEv.s));
+    termCharProgress=1;
+  }
+
+  // ── T3: cross dissolve — terminal+PNG → charge ──
+  // chgFrac goes 0→1 over XDUR starting at chgFadeInEv.s
+  // PNG: 1→0, chg: 0→1, term: fades out (handled above via term_fadeout)
+  let chgFrac=0, chgProgress=0;
+  if(chgFadeInEv && el>=chgFadeInEv.s){
+    scientificStarted=true;
+    chgFrac = cl((el-chgFadeInEv.s)/(chgFadeInEv.e-chgFadeInEv.s));
+  }
+  if(chgHoldEv && el>=chgHoldEv.s){ chgFrac=1; }
+  // chgProgress drives the charge density reveal (grows during fadein + hold)
+  if(chgFadeInEv && el>=chgFadeInEv.s){
+    const chgDur = (chgHoldEv?chgHoldEv.e:chgFadeInEv.e) - chgFadeInEv.s;
+    chgProgress = cl((el-chgFadeInEv.s)/chgDur);
+  }
+
+  // ── T4: push — charge exits left, magnetism enters right ──
+  let pushFrac=0;
+  if(pushEv && el>=pushEv.s)
+    pushFrac = eio(cl((el-pushEv.s)/(pushEv.e-pushEv.s)));
+
+  let dosProgress=0, dosAlpha=0;
+  if(pushEv && el>=pushEv.s){ dosProgress=1; dosAlpha=1; }  // radar fully drawn on entry
+  if(dosHoldEv && el>=dosHoldEv.s){ dosProgress=1; dosAlpha=1; }
+  if(dosFadeEv && el>=dosFadeEv.s){
+    dosProgress=1;
+    dosAlpha=1-cl((el-dosFadeEv.s)/(dosFadeEv.e-dosFadeEv.s));
+  }
+
+  // ── Logo: fades in over parchment as DOS fades out, then holds ──
+  let logoAlpha=0;
+  if(logoDrawEv && el>=logoDrawEv.s)
+    logoAlpha = cl((el-logoDrawEv.s)/(logoDrawEv.e-logoDrawEv.s));
+  if(logoHoldEv && el>=logoHoldEv.s) logoAlpha=1;
+
+  // ── PNG alpha across all phases ──
+  // Phase: morph (0→1) | PNG hold (1) | T3 cross-dissolve (1→0) | scientific (0, gone)
+  let pngAlpha = 0;
+  if(!scientificStarted){
+    // During morph: rises 0→1
+    // After morph, before T3: stays at 1
+    pngAlpha = morphFrac>=1 ? 1.0 : pngMorphAlpha;
+  }
+  // During T3 (chg_fadein): PNG fades out simultaneously as chg rises
+  if(chgFadeInEv && el>=chgFadeInEv.s && el<(chgHoldEv?.s??Infinity)){
+    pngAlpha = 1-chgFrac; // 1→0 in sync with chg 0→1
+  }
+
+  // ── Chg alpha: 0→1 during fadein, 1 during hold, 1-pushFrac during push ──
+  let chgAlpha = 0;
+  if(chgFadeInEv && el>=chgFadeInEv.s) chgAlpha = chgFrac;
+  if(pushEv && el>=pushEv.s) chgAlpha = 1-pushFrac;
+
+  // ── Process sketch draw events ──
+  const activeFills=[];
+  TL.forEach((ev,i)=>{
+    ev._id=ev._id??i;
+    const t=ev.type;
+    if(t==='morph'||t.startsWith('eq_')||t.startsWith('term_')||
+       t.startsWith('chg_')||t.startsWith('dos_')||t==='push') return;
+    if(el<ev.s) return;
+    const p=cl((el-ev.s)/(ev.e-ev.s));
+    if(p>=1) bakeEvent(ev);
+    else activeFills.push({ev,p});
+  });
+
+  // ── DRAW ORDER ──
+
+  // 1. Sketch (fades out during T1)
+  if(sketchAlpha>0.001){
+    ctx.save(); ctx.globalAlpha=sketchAlpha;
+    ctx.drawImage(accumOS,0,0);
+    ctx.restore();
+    ctx.save(); ctx.globalAlpha=sketchAlpha;
+    activeFills.forEach(({ev,p})=>{
+      const a=ev.idx!=null?ATOMS[ev.idx]:null;
+      if(ev.type==='atom_outline'){
+        if(p>0.04){ ctx.fillStyle='#f0ece0'; ctx.beginPath(); ctx.arc(a.cx,a.cy,a.r*0.93*Math.min(p*2,1),0,Math.PI*2); ctx.fill(); }
+        drawStroke(ctx,a.pts,p,2.2,'rgba(16,16,34,0.88)');
+      }
+      if(ev.type==='bond') drawStroke(ctx,bondPts[ev.idx],p,ev.lw,ev.col);
+      if(ev.type==='crayon') drawCrayon(ctx,a,p);
+    });
+    ctx.restore();
+  }
+
+  // 2. Equations (bound to sketchAlpha)
+  if(sketchAlpha>0.01){
+    EQS.forEach((_,ei)=>{
+      const {charFrac,alpha}=getEqState(ei,el);
+      if(alpha>0.01) drawEq(ctx,EQS[ei],charFrac,alpha*sketchAlpha);
+    });
+  }
+
+  // 3. PNG (T1: rises, T2: stays full, T3: falls to 0)
+  if(pngAlpha>0.001){
+    ctx.save(); ctx.globalAlpha=pngAlpha;
+    if(realPNG) ctx.drawImage(realPNG,0,0,W,H);
+    else drawPhotoFallback(ctx,1.0);
+    ctx.restore();
+  }
+
+  // 4. Terminal (T2: overlays PNG; T3: fades out simultaneously)
+  if(termAlpha>0.001)
+    drawTerminal(ctx,termCharProgress,termAlpha);
+
+  // 5. Charge density — T3 rises, held, T4 pushed left
+  if(chgAlpha>0.001){
+    const chgX = -pushFrac*W;  // push left during T4
+    drawChgDensity(ctx,chgProgress,chgAlpha,chgX);
+  }
+
+  // 6. Magnetism radar — T4 pushed in from right
+  if(pushFrac>0||dosAlpha>0){
+    const dosX = (1-pushFrac)*W;  // enters from right
+    drawDOS(ctx,dosProgress,dosAlpha,dosX);
+  }
+
+  // 7. Logo ending — DOS fades out, parchment returns, logo draws in
+  if(logoAlpha>0.001){
+    // Parchment fades back in behind the logo
+    ctx.save(); ctx.globalAlpha=logoAlpha;
+    ctx.drawImage(paperOS,0,0);
+    ctx.restore();
+    // Logo centred, fades in
+    drawLogo(ctx, logoAlpha);
+  }
+
+  // ── Label ──
+  const lab=document.getElementById('label');
+  const activeTypes=activeFills.map(f=>f.ev.type);
+  const eqActive=sketchAlpha>0.05&&EQS.some((_,ei)=>getEqState(ei,el).alpha>0.05);
+  const termStreaming=termAlpha>0.05&&el<(termHoldEv?.e??0);
+  if(dosAlpha>0.05||pushFrac>0.05)    lab.textContent='spin moments — element resolved';
+  else if(chgAlpha>0.05)              lab.textContent='charge density — CHGCAR';
+  else if(termStreaming&&termCharProgress<0.45) lab.textContent='setting up DFT+U...';
+  else if(termStreaming&&termCharProgress<0.75) lab.textContent='SCF converging...';
+  else if(termStreaming)               lab.textContent='SGS Heusler confirmed ✓';
+  else if(termAlpha>0.05)             lab.textContent='SGS Heusler confirmed ✓';
+  else if(morphFrac>0.05&&morphFrac<1)lab.textContent='fusing to real structure...';
+  else if(activeTypes.includes('atom_outline')) lab.textContent='sketching atom positions...';
+  else if(activeTypes.includes('bond'))         lab.textContent='drawing bond framework...';
+  else if(activeTypes.includes('crayon'))       lab.textContent='filling atomic species...';
+  else if(eqActive)                   lab.textContent='thinking about the best approach...';
+  else if(logoAlpha>0.05)             lab.textContent='computational materials @ your group';
+  else if(el>=TOTAL_MS)               lab.textContent='Co₂MnSi — spin-gapless Heusler ✓';
+  else                                lab.textContent='—';
+
+  // Stop rAF once logo is fully visible and stable
+  const logoFullyVisible = logoHoldEv && el >= logoHoldEv.s+100;
+  if(!logoFullyVisible) rafId=requestAnimationFrame(frame);
+}
+
+function restart(){
+  if(rafId) cancelAnimationFrame(rafId);
+  t0=null; baked.clear();
+  scientificStarted=false;
+  aCtx.clearRect(0,0,W,H);
+  buildTimeline();
+  rafId=requestAnimationFrame(frame);
+}
+
+drawPaper(pCtx);
+restart();
+</script>
+</body>
+</html>

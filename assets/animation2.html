@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2D TMDC Catalysis & Spintronics Sequence</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&display=swap" rel="stylesheet">
+<style>
+  body {
+    background: #1a1a1a;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    margin: 0;
+    padding: 20px;
+    font-family: 'Georgia', serif;
+    box-sizing: border-box;
+  }
+  .stage {
+    width: 100%;
+    max-width: 800px;
+    aspect-ratio: 1 / 1;
+    position: relative;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.8);
+    background: #f0ece0;
+  }
+  canvas {
+    width: 100%;
+    height: 100%;
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+  .controls {
+    margin-top: 20px;
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  button {
+    padding: 10px 24px;
+    background: #222; color: #aaa;
+    border: 1px solid #444; border-radius: 4px;
+    font-family: 'Courier New', monospace; font-size: 14px;
+    cursor: pointer; letter-spacing: 0.5px;
+    transition: 0.2s;
+  }
+  button:hover { background: #3d85c6; color: #fff; border-color: #3d85c6; }
+  .label { color: #888; font-family: 'Courier New', monospace; font-size: 14px; text-align: center;}
+</style>
+</head>
+<body>
+
+<div class="stage">
+  <canvas id="c" width="1080" height="1080"></canvas>
+</div>
+<div class="controls">
+  <button onclick="restart()">&#8635; Replay Sequence</button>
+  <div class="label">Act I: TMDC Structure &rarr; Act II: Physics &rarr; Act III: Insights</div>
+</div>
+
+<script>
+const W = 1080, H = 1080;
+const canvas = document.getElementById('c');
+const c = canvas.getContext('2d');
+
+const paperOS = document.createElement('canvas');
+paperOS.width = W; paperOS.height = H;
+const pCtx = paperOS.getContext('2d');
+
+// ─── Seeded RNG ──────────────────────────────────────────────────────────────
+let _s=1;
+const sr  = s  => { _s = (s|0) >>> 0; };
+const rng = () => { _s=(_s*1664525+1013904223)>>>0; return _s/0xFFFFFFFF; };
+
+// ─── Math & Hand-Drawn Paths ─────────────────────────────────────────────────
+const NL=35, NC=60;
+
+function bakeLine(x1,y1,x2,y2,seed, wobble=1.5){
+  sr(seed);
+  const dx=x2-x1, dy=y2-y1, len=Math.hypot(dx,dy)||1;
+  const px=-dy/len, py=dx/len;
+  const pts=[];
+  for(let i=0;i<NL;i++){
+    const t=i/(NL-1);
+    const dev=wobble*Math.sin(t*Math.PI)*(rng()*2-1);
+    pts.push({x:x1+dx*t+px*dev+(rng()-.5)*0.5, y:y1+dy*t+py*dev+(rng()-.5)*0.5});
+  }
+  return pts;
+}
+
+function bakeBezier(x1,y1, cx,cy, x2,y2, seed, wobble=2.0){
+  sr(seed);
+  const pts=[];
+  for(let i=0;i<NL;i++){
+    const t=i/(NL-1);
+    const inv = 1-t;
+    const bx = inv*inv*x1 + 2*inv*t*cx + t*t*x2;
+    const by = inv*inv*y1 + 2*inv*t*cy + t*t*y2;
+    pts.push({x: bx + (rng()-.5)*wobble, y: by + (rng()-.5)*wobble});
+  }
+  return pts;
+}
+
+function bakeCircle(cx,cy,r,seed){
+  sr(seed);
+  const pts=[];
+  const a0=(rng()-.5)*0.1;
+  const tot=Math.PI*2*(1+rng()*0.03);
+  for(let i=0;i<NC;i++){
+    const t=i/(NC-1);
+    const ang=a0+t*tot;
+    const rr=r*(1+(rng()-.5)*0.015)+(rng()-.5)*0.6;
+    pts.push({x:cx+Math.cos(ang)*rr+(rng()-.5)*0.6, y:cy+Math.sin(ang)*rr+(rng()-.5)*0.6});
+  }
+  return pts;
+}
+
+function buildCrayon(cx,cy,r,seed){
+  sr(seed);
+  const strokes=[];
+  for(let dy=-r+5; dy<r; dy+=5){
+    const hw=Math.sqrt(Math.max(0,r*r-dy*dy));
+    if(hw<3) continue;
+    const y=cy+dy+(rng()-.5)*1.2;
+    const x1=cx-hw+(rng()-.5)*2.5;
+    const x2=cx+hw+(rng()-.5)*2.5;
+    const nPts=12;
+    const pts=[];
+    for(let j=0;j<nPts;j++){
+      const t=j/(nPts-1);
+      pts.push({x:x1+(x2-x1)*t+(rng()-.5)*1.5, y:y+(rng()-.5)*1.2});
+    }
+    strokes.push(pts);
+  }
+  return strokes;
+}
+
+function drawStroke(ctx,pts,frac,lw,color){
+  const n=Math.max(2,Math.round(pts.length*frac));
+  if (n > pts.length) return;
+  ctx.beginPath();
+  ctx.moveTo(pts[0].x,pts[0].y);
+  for(let i=1;i<n;i++){
+    if(i<n-1){
+      const mx=(pts[i].x+pts[i+1].x)/2, my=(pts[i].y+pts[i+1].y)/2;
+      ctx.quadraticCurveTo(pts[i].x,pts[i].y,mx,my);
+    } else ctx.lineTo(pts[i].x,pts[i].y);
+  }
+  ctx.strokeStyle=color; ctx.lineWidth=lw;
+  ctx.lineCap='round'; ctx.lineJoin='round';
+  ctx.stroke();
+}
+
+function drawCrayon(ctx, crayonSet, cx, cy, r, frac, col){
+  const total=crayonSet.length;
+  const nFull=Math.floor(total*frac);
+  ctx.save();
+  ctx.beginPath(); ctx.arc(cx,cy,r,0,Math.PI*2); ctx.clip();
+  ctx.strokeStyle=col; ctx.lineCap='round'; ctx.lineJoin='round';
+  for(let i=0;i<nFull;i++){
+    const pts=crayonSet[i];
+    ctx.lineWidth=3.5+(i%3)*0.5;
+    ctx.globalAlpha= (ctx.globalAlpha) * (0.8+(i%2)*0.1);
+    ctx.beginPath(); ctx.moveTo(pts[0].x,pts[0].y);
+    for(let j=1;j<pts.length;j++) ctx.lineTo(pts[j].x,pts[j].y);
+    ctx.stroke();
+  }
+  ctx.restore();
+}
+
+// ─── RIGOUROUS 2H-TMDC MONOLAYER GEOMETRY (Z-AXIS PROJECTION) ───────────────
+const spacing = 45;
+const rawAtoms = [];
+for(let r=0; r<10; r++){
+    for(let c=0; c<10; c++){
+        let xOffset = (r%2 === 0) ? 0 : spacing * Math.sqrt(3)/2;
+        let xM = c * spacing * Math.sqrt(3) + xOffset;
+        let yM = r * spacing * 1.5;
+
+        // 1. Transition Metal
+        rawAtoms.push({x: xM, y: yM, type: 'M'});
+        // 2. Chalcogen Pair (Eclipsed top/bottom view)
+        rawAtoms.push({x: xM, y: yM + spacing, type: 'X'});
+    }
+}
+
+let minX = Math.min(...rawAtoms.map(a=>a.x)), maxX = Math.max(...rawAtoms.map(a=>a.x));
+let minY = Math.min(...rawAtoms.map(a=>a.y)), maxY = Math.max(...rawAtoms.map(a=>a.y));
+let cx = (minX + maxX)/2;
+let cy = (minY + maxY)/2;
+
+// Filter to create a natural circular 2D "flake" (Increased radius slightly for fuller look)
+let flake = rawAtoms.filter(a => Math.hypot(a.x - cx, a.y - cy) < 185);
+
+let targetAtom = null;
+let minDist = 9999;
+flake.forEach(a => {
+    let d = Math.hypot(a.x - cx, a.y - cy);
+    if(a.type === 'M' && d < minDist) {
+        minDist = d;
+        targetAtom = a;
+    }
+});
+
+const ATOMS = flake.map((a, i) => {
+    let g = (a === targetAtom) ? 'target' : (a.type === 'M' ? 'base_M' : 'base_X');
+    let r = (a.type === 'M') ? 24 : 18; // Increased base atomic radii
+
+    return {
+        // Significantly increased the multiplier from 1.35 to 1.6 to make the lattice larger
+        cx: (a.x - cx) * 1.6 + 540,
+        cy: (a.y - cy) * 1.6 + 540,
+        r: r,
+        g: g,
+        origX: a.x, origY: a.y
+    };
+});
+
+const BONDS = [];
+for(let i=0; i<ATOMS.length; i++){
+    for(let j=i+1; j<ATOMS.length; j++){
+        let dist = Math.hypot(ATOMS[i].origX - ATOMS[j].origX, ATOMS[i].origY - ATOMS[j].origY);
+        if(dist > spacing*0.8 && dist < spacing*1.2) {
+            BONDS.push([ATOMS[i].cx, ATOMS[i].cy, ATOMS[j].cx, ATOMS[j].cy]);
+        }
+    }
+}
+
+const bondPts = BONDS.map((b,i)=>bakeLine(b[0],b[1],b[2],b[3],i*113+5));
+ATOMS.forEach((a,i)=>{
+  a.pts=bakeCircle(a.cx,a.cy,a.r,i*79+11);
+  a.crayon1 = buildCrayon(a.cx, a.cy, a.r*0.85, i*333+77);
+  if (a.g === 'target') a.crayon2 = buildCrayon(a.cx, a.cy, a.r*0.85, i*444+88);
+});
+
+// HIGH CONTRAST COLOR PALETTE
+function crayonColor(g){
+  if (g === 'base_M') return '#3d85c6';  // Transition Metal (Bright Blue)
+  if (g === 'base_X') return '#f1c232';  // Eclipsed Chalcogen Pair (Bright Yellow)
+  return '#cc0000';                      // Target Dopant Atom (Vivid Red)
+}
+
+// ─── PLOTS DATA (Centered 1080x1080 coords) ──────────────────────────────────
+// DOS Plot
+const dosY = bakeLine(280, 750, 280, 350, 501);
+const dosX = bakeLine(150, 550, 450, 550, 502);
+const dosUp = bakeBezier(280, 530, 420, 450, 280, 380, 503);
+const dosDn = bakeBezier(280, 750, 140, 650, 280, 570, 504);
+const dosDnDoped = bakeBezier(280, 720, 140, 580, 280, 480, 505);
+
+// HER Gibbs Plot
+const herY = bakeLine(600, 750, 600, 350, 506);
+const herX = bakeLine(600, 575, 950, 575, 507);
+const herS1 = bakeLine(620, 575, 700, 575, 508);
+const herS3 = bakeLine(860, 575, 940, 575, 509);
+
+const herL12_base = bakeLine(700, 575, 740, 420, 510);
+const herS2_base  = bakeLine(740, 420, 820, 420, 511);
+const herL23_base = bakeLine(820, 420, 860, 575, 512);
+
+const herL12_doped = bakeLine(700, 575, 740, 540, 513);
+const herS2_doped  = bakeLine(740, 540, 820, 540, 514);
+const herL23_doped = bakeLine(820, 540, 860, 575, 515);
+
+const dgArrow = bakeLine(780, 575, 780, 540, 1007);
+const dgArrowH1 = bakeLine(780, 540, 775, 545, 1008);
+const dgArrowH2 = bakeLine(780, 540, 785, 545, 1009);
+
+// ─── PAPER BACKGROUND ────────────────────────────────────────────────────────
+function drawPaper(ctx){
+  ctx.fillStyle='#f0ece0'; ctx.fillRect(0,0,W,H);
+  sr(777);
+  const id=ctx.createImageData(W,H);
+  for(let i=0;i<id.data.length;i+=4){
+    const n=(rng()-.5)*18;
+    id.data[i]=240+n; id.data[i+1]=236+n; id.data[i+2]=224+n; id.data[i+3]=255;
+  }
+  ctx.putImageData(id,0,0);
+  const vg=ctx.createRadialGradient(W/2,H/2,W*.3,W/2,H/2,W*.9);
+  vg.addColorStop(0,'rgba(0,0,0,0)'); vg.addColorStop(1,'rgba(0,0,0,0.15)');
+  ctx.fillStyle=vg; ctx.fillRect(0,0,W,H);
+}
+drawPaper(pCtx);
+
+// ─── ANIMATION LOOP ──────────────────────────────────────────────────────────
+let time = 0;
+let rafId;
+
+function animate() {
+  time += 0.012;
+
+  c.drawImage(paperOS, 0, 0);
+
+  // ==========================================
+  // ACT 1: TMDC LATTICE STRUCTURE (t: 0.0 to 4.5)
+  // ==========================================
+  let latticeAlpha = 0;
+  if (time < 3.5) latticeAlpha = 1.0;
+  else if (time >= 3.5 && time < 4.5) latticeAlpha = Math.max(0, 1.0 - (time - 3.5));
+
+  if (latticeAlpha > 0.01) {
+    c.save();
+    c.globalAlpha = latticeAlpha;
+
+    // Increased the master scale slightly more from 0.85 to 1.15 to really fill the canvas
+    c.translate(540, 540);
+    c.scale(1.15, 1.15);
+    c.translate(-540, -540);
+
+    // Draw Wobbly Bonds First
+    let bondAlpha = time > 1.0 ? Math.max(0.2, 1.0 - (time - 1.0)*1.5) : 1.0;
+    c.globalAlpha = bondAlpha * latticeAlpha;
+    const bondDrawFrac = Math.min(1.0, time * 1.5);
+    bondPts.forEach(pts => drawStroke(c, pts, bondDrawFrac, 5, '#333'));
+
+    ATOMS.forEach(a => {
+      let alpha = (a.g !== 'target' && time > 1.0) ? Math.max(0.2, 1.0 - (time - 1.0)*1.5) : 1.0;
+      c.globalAlpha = alpha * latticeAlpha;
+
+      // Clear background so underlying bonds don't bleed through
+      c.fillStyle = '#f0ece0';
+      c.beginPath(); c.arc(a.cx, a.cy, a.r*0.85, 0, Math.PI*2); c.fill();
+
+      const sketchFrac = Math.min(1.0, time * 1.2);
+      drawCrayon(c, a.crayon1, a.cx, a.cy, a.r*0.85, sketchFrac, crayonColor(a.g));
+
+      if (a.g === 'target' && time > 2.0) {
+        const morphFrac = Math.min(1.0, (time - 2.0)*1.5);
+        c.globalAlpha = morphFrac * latticeAlpha;
+        drawCrayon(c, a.crayon2, a.cx, a.cy, a.r*0.85, 1.0, crayonColor('target'));
+      }
+
+      c.globalAlpha = alpha * latticeAlpha;
+      drawStroke(c, a.pts, sketchFrac, 3, '#222');
+    });
+    c.restore();
+
+    if(time < 4.5) {
+        c.globalAlpha = latticeAlpha * Math.min(1.0, time);
+        c.textAlign = 'center';
+        c.font = 'bold 42px "Caveat", cursive';
+        c.fillStyle = '#111';
+        c.fillText("TMDC Basal Plane Activation & Doping", 540, 160);
+    }
+  }
+
+  // ==========================================
+  // ACT 2: PLOTS & PHYSICS (t: 4.0 to 9.5)
+  // ==========================================
+  let plotAlpha = 0;
+  if (time >= 4.0 && time < 5.0) plotAlpha = time - 4.0;
+  else if (time >= 5.0 && time < 8.5) plotAlpha = 1.0;
+  else if (time >= 8.5 && time < 9.5) plotAlpha = Math.max(0, 1.0 - (time - 8.5));
+
+  if (plotAlpha > 0.01) {
+    c.globalAlpha = plotAlpha;
+    c.textAlign = 'center';
+    c.font = 'bold 42px "Caveat", cursive';
+    c.fillStyle = '#111';
+    c.fillText("Emergent Spintronic & Catalytic Functionalities", 540, 160);
+
+    // -- DOS PLOT --
+    drawStroke(c, dosY, 1.0, 3, '#444');
+    drawStroke(c, dosX, 1.0, 2, '#444');
+
+    const pTime = time - 4.0;
+    const drawBase = Math.min(1.0, pTime * 1.5);
+
+    drawStroke(c, dosUp, drawBase, 4, '#3d85c6'); // Match TM base color
+    drawStroke(c, dosDn, drawBase, 4, '#3d85c6');
+
+    c.font = 'italic 20px Georgia, serif'; c.fillStyle = '#444';
+    c.fillText("Energy", 280, 320);
+    c.fillText("DOS", 420, 580);
+    c.fillText("E_F", 100, 560);
+
+    if (time > 6.0) {
+      const morph = Math.min(1.0, (time - 6.0)*1.5);
+      c.globalAlpha = Math.max(0.2, 1.0 - morph) * plotAlpha;
+      drawStroke(c, dosDn, 1.0, 4, '#3d85c6');
+
+      c.globalAlpha = morph * plotAlpha;
+      drawStroke(c, dosDnDoped, morph, 5, '#cc0000'); // Shift to dopant Red
+
+      c.font = 'bold 24px "Caveat", cursive'; c.fillStyle = '#cc0000';
+      c.fillText("Spin-Polarized State", 180, 755);
+    }
+
+    c.globalAlpha = plotAlpha;
+
+    // -- HER PLOT --
+    drawStroke(c, herY, 1.0, 3, '#444');
+    drawStroke(c, herX, 1.0, 3, '#444');
+
+    drawStroke(c, herS1, drawBase, 4, '#3d85c6');
+    drawStroke(c, herS3, drawBase, 4, '#3d85c6');
+    drawStroke(c, herL12_base, drawBase, 4, '#3d85c6');
+    drawStroke(c, herS2_base, drawBase, 4, '#3d85c6');
+    drawStroke(c, herL23_base, drawBase, 4, '#3d85c6');
+
+    c.font = 'italic 20px Georgia, serif'; c.fillStyle = '#444';
+    c.fillText("Free Energy", 530, 420);
+    c.fillText("Reaction Coord.", 770, 620);
+
+    if (time > 6.5) {
+      const morph2 = Math.min(1.0, (time - 6.5)*1.5);
+      c.globalAlpha = Math.max(0.2, 1.0 - morph2) * plotAlpha;
+
+      drawStroke(c, herL12_base, 1.0, 4, '#3d85c6');
+      drawStroke(c, herS2_base, 1.0, 4, '#3d85c6');
+      drawStroke(c, herL23_base, 1.0, 4, '#3d85c6');
+
+      c.globalAlpha = morph2 * plotAlpha;
+      drawStroke(c, herL12_doped, morph2, 5, '#cc0000'); // Shift to dopant Red
+      drawStroke(c, herS2_doped, morph2, 5, '#cc0000');
+      drawStroke(c, herL23_doped, morph2, 5, '#cc0000');
+
+      drawStroke(c, dgArrow, morph2, 3, '#cc0000');
+      drawStroke(c, dgArrowH1, morph2, 3, '#cc0000');
+      drawStroke(c, dgArrowH2, morph2, 3, '#cc0000');
+
+      c.font = 'bold 22px "Courier New", monospace'; c.fillStyle = '#cc0000';
+      c.fillText("ΔG ≈ 0", 830, 520);
+      c.font = 'bold 24px "Caveat", cursive';
+      c.fillText("Catalytic Optimization", 775, 380);
+    }
+  }
+
+  // ==========================================
+  // ACT 3: TEXT SEQUENCE (t: 9.0 onwards)
+  // ==========================================
+  if (time > 9.0) {
+    c.textAlign = 'center';
+
+    c.globalAlpha = Math.min(1.0, (time - 9.0));
+    c.font = 'bold 54px "Caveat", cursive';
+    c.fillStyle = '#111';
+    c.fillText("Engineering 2D Functional Materials", 540, 320);
+
+    c.globalAlpha = Math.min(1.0, Math.max(0, time - 9.5));
+    c.font = '36px "Caveat", cursive';
+    c.fillStyle = '#cc0000'; // Match dopant color
+    c.fillText("Predictive control over 2D interfaces & defects", 540, 380);
+
+    c.font = 'bold 30px "Caveat", cursive';
+    c.fillStyle = '#333';
+
+    if (time > 10.5) {
+        c.globalAlpha = Math.min(1.0, (time - 10.5)*2);
+        c.fillText("→ Modulates electronic structure & spin coherence", 540, 520);
+    }
+    if (time > 11.5) {
+        c.globalAlpha = Math.min(1.0, (time - 11.5)*2);
+        c.fillText("→ Optimizes catalytic responses (e.g. |ΔG| ≈ 0.1 eV)", 540, 580);
+    }
+    if (time > 12.5) {
+        c.globalAlpha = Math.min(1.0, (time - 12.5)*2);
+        c.fillText("→ Enhances spin transmission & interfacial coupling", 540, 640);
+    }
+
+    if (time > 13.5) {
+        c.globalAlpha = Math.min(1.0, (time - 13.5)*2);
+        c.font = 'italic 22px Georgia, serif';
+        c.fillStyle = '#666';
+        c.fillText("Framework applied to MXenes, TMDCs & Porphyrins", 540, 800);
+    }
+  }
+
+  c.globalAlpha = 1.0;
+
+  if (time < 16.0) {
+    rafId = requestAnimationFrame(animate);
+  }
+}
+
+function restart() {
+  cancelAnimationFrame(rafId);
+  time = 0;
+  animate();
+}
+
+setTimeout(() => restart(), 300);
+
+</script>
+</body>
+</html>
