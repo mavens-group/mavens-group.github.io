@@ -10,132 +10,171 @@ summary: Introduction to DFT
 The density functional theory (DFT) has established itself as the primary tool to calculate the
 electronic structure of materials.
 
-The method is at its heart is a method to minimize the Helmholtz Free energy using variational
-principle. The Helmholtz energy of a system is a functional of the density and minimizing Helmholtz
-energy gives us the equilibrium density.
+At its heart, the method minimizes the Helmholtz free energy using the variational principle.
+The Helmholtz energy of a system is a functional of the density, and minimizing it gives us the
+equilibrium density.
 
-The DFT for electronic structure calculation takes the eigen value of the Schrödinger's equation as
-a functional of charge density.
+DFT for electronic structure calculation takes the eigenvalue of the Schrödinger equation as a
+functional of the charge density.
 
-## Schrödinger's Equation: revisit for multi-particles system
-The Schrödinger equation is the driver equation for quantum mechanical system
+## Schrödinger's Equation: Revisited for Many-Particle Systems
+
+The Schrödinger equation is the governing equation for quantum mechanical systems:
 \begin{equation}
- \left[\frac{\hbar^2}{2m}\nabla^2+V(r)\right]\Psi(r)=E\Psi(r)
+ \left[-\frac{\hbar^2}{2m}\nabla^2+V(r)\right]\Psi(r)=E\Psi(r)
 \end{equation}
 
-The problem arises when there is many particles in the system. In this case, The manybody
-Hamiltonian for N nucleus and n electrons is:
+The problem grows intractable when many particles are present. The many-body Hamiltonian for $N$
+nuclei and $n$ electrons is:
 
 {{< math >}}
 $$
 \begin{align*}
 	\hat{H} =&-\frac{\hbar^2}{2m}\sum_{i}^n\nabla^2_i+ \frac{1}{2}\sum_{i\neq j}\frac{1}{|\mathbf{r}_i-\mathbf{r}_j|}       &
 	\qquad \mbox{Electron} \newline
-   & -\frac{\hbar}{2M_j}\sum_j^N\nabla^2_j + \frac{1}{2}\sum_{i\neq j}\frac{Z_iZ_j}{|{R_i-R_j}|} & \mbox{Nuclei}\newline
-   &  -\sum\frac{Z_i}{|\mathbf{r}_i-\mathbf{R}_j|} & \mbox{Electron-Nucleus}
+   & -\frac{\hbar^2}{2M_j}\sum_j^N\nabla^2_j + \frac{1}{2}\sum_{i\neq j}\frac{Z_iZ_j}{|{R_i-R_j}|} & \mbox{Nuclei}\newline
+   &  -\sum_{i,j}\frac{Z_j}{|\mathbf{r}_i-\mathbf{R}_j|} & \mbox{Electron-Nucleus}
 \end{align*}
 $$
 {{< /math >}}
 
-Now, the time independent Hamiltonian $\hat{H}=H(p,q)$ is function of two vectors $p,q$ the
-solution of the problem becomes increasingly difficult when we deal with more than one-electron
-systems.
+The time-independent Hamiltonian $\hat{H}=H(p,q)$ is a function of the generalised momenta and
+coordinates $(p,q)$. Solving it becomes increasingly difficult for systems with more than one
+electron.
 
-Even for a simple system like  O, with 8 electrons, and we take very rough data of 10 points in
-each coordinates, we need $10^{24}$ data points. In modern computers, for each each real numbers
-we need 64 bit memory. Hence, to store the data of one O atom, we need $64\times 10^{24}$ bit
-$8\times 10^{24} \mathsf{bit}\approx 10^{17}$MB. (To understand how big this number is, try to find
-out the age of universe in second!!!)
+Even for a simple atom like oxygen, with 8 electrons, and taking a coarse grid of just 10 points
+in each spatial dimension, we need $10^{24}$ data points. On modern computers, each real number
+requires 64 bits of memory. To store the wavefunction of a single oxygen atom we would need
+$64\times 10^{24}$ bits $\approx 8\times 10^{24}$ bytes $\approx 10^{17}$ MB. (To appreciate how
+large this is, consider that the age of the universe is roughly $4\times 10^{17}$ seconds — the
+numbers are comparable!)
 
-So we need some approximations to solve the problem.
-## Born-Oppenheimer Approximation
+So we need systematic approximations to solve the problem.
 
-Given the fact that the protons are $\approx 10^3$ times heavier than electrons, under the same
-field, it moves much slower than electrons. That raises the Born-Oppenheimer (BO) approximations,
-where we freeze the motion of nucleus.
+## Born–Oppenheimer Approximation
 
-In the equation above, that means,
-$\frac{\hbar}{2M_j}\sum_j^N\nabla^2_j = 0$, $\frac{1}{2}\sum\frac{Z_iZ_j}{|{R_i-R_j}|}=constant$
-and $\sum\frac{Z_i}{|\mathbf{r}_i-\mathbf{R}_j|}$ is a function of $r$ only.
+Because protons are roughly $10^3$ times heavier than electrons, they move far more slowly under
+the same force. This motivates the **Born–Oppenheimer (BO) approximation**: we freeze the
+nuclear degrees of freedom and solve only for the electronic structure at fixed nuclear positions.
 
-So, the Hamiltonian is
+Under this approximation:
+- The nuclear kinetic energy term vanishes: $\frac{\hbar^2}{2M_j}\sum_j^N\nabla^2_j = 0$.
+- The nucleus–nucleus repulsion $\frac{1}{2}\sum_{i\neq j}\frac{Z_iZ_j}{|{R_i-R_j}|}$ becomes a
+  constant that shifts the total energy but does not affect the electronic wavefunction.
+- The electron–nucleus attraction $\sum_{i,j}\frac{Z_j}{|\mathbf{r}_i-\mathbf{R}_j|}$ depends
+  only on the electronic coordinates $r$ (nuclei are fixed parameters).
+
+The resulting electronic Hamiltonian is:
 \begin{align*}
-	\hat{H}  =&-\frac{\hbar^2}{2m}\sum_{i}^n\nabla^2_i & \mbox{Kinetic Energy of e}\newline
-    &+ \frac{1}{2}\sum_{i\neq j}\frac{1}{|\mathbf{r}_i-\mathbf{r}_j|} &\mbox{PE of e}\newline
-   & +v_0(r) & \mbox{PE of e due to nucleus}
+	\hat{H}  =&-\frac{\hbar^2}{2m}\sum_{i}^n\nabla^2_i & \mbox{Kinetic energy of electrons}\newline
+    &+ \frac{1}{2}\sum_{i\neq j}\frac{1}{|\mathbf{r}_i-\mathbf{r}_j|} &\mbox{Electron–electron repulsion}\newline
+   & +v_0(r) & \mbox{Electron–nucleus attraction}
 \end{align*}
 
-## Mean Field Approximation
+The electron–electron repulsion term is still a many-body interaction — handling it requires
+further approximation.
+
+## Mean-Field Approximations
 
 ### Hartree Approximation
-After the BO, we are still leaving with the fact that the main problematic variable, i.e. PE(e) is
-still there. We now approximate the variable.
 
-The obvious first approximation is that of non-interacting electrons, which means the electrons
-doesn't interact with each other, which gives PE(e)=0. But this gives a gross incorrect result.
+After invoking the Born–Oppenheimer approximation, the remaining challenge is the electron–electron
+repulsion $\frac{1}{2}\sum_{i\neq j}\frac{1}{|\mathbf{r}_i-\mathbf{r}_j|}$. The simplest
+treatment sets this to zero (non-interacting electrons), but this gives grossly incorrect results
+for most properties.
 
-To solve this, we approximate that all $e$s are in a _"mean"_ field created by _all_ the electrons.
-Legitimately, this approximation is called  the **mean field**, or by the name of the proposer,
-**Hartree** approximation.
+A better strategy is to assume that each electron does not interact with individual others, but
+instead moves in the **mean (average) field** generated by all the other electrons combined. This
+is called the **Hartree approximation**.
 
-By this, we can replace the PE(e) as
+In this picture, the electron–electron repulsion felt by electron $i$ is replaced by the
+electrostatic potential of the continuous charge density $\rho(r')$ of all other electrons:
 \begin{equation}
- \frac{1}{2}\sum_{i\neq j}\frac{1}{|\mathbf{r}_i-\mathbf{r}_j|} = \int dr
- \frac{\rho(r,r')}{|r_i-r'|}=U_H
+ \frac{1}{2}\sum_{i\neq j}\frac{1}{|\mathbf{r}_i-\mathbf{r}_j|}
+ \approx \int \frac{\rho(r')}{|\mathbf{r}_i-\mathbf{r}'|}\,dr' \equiv U_H
 \end{equation}
+where $\rho(r') = \sum_j |\psi_j(r')|^2$ is the electron number density at position $r'$.
 
-So, we have the final Hamiltonian:
+The approximation neglects explicit electron–electron correlations beyond the average field, but
+captures the dominant Coulomb screening effect, making it a significant improvement over the
+non-interacting picture.
 
+The full Hartree Hamiltonian then reads:
 \begin{align*}
-\hat{H}=-\frac{\hbar^2}{2m}\sum_{i}^n\nabla^2_i + \int dr \frac{\rho(r,r')}{|r_i-r'|} +v_0(r)
+\hat{H}=-\frac{\hbar^2}{2m}\sum_{i}^n\nabla^2_i + \int \frac{\rho(r')}{|\mathbf{r}_i-\mathbf{r}'|}\,dr' +v_0(r)
 \end{align*}
 
-### Hartree-Fock Approximation
-Hartree approximation is not perfect, as it did not take into account that $e$ has spin and obeys Pauli's
-exclusion. Fock incorporated that, resulting the Hartree-Fock approximation.
+### Hartree–Fock Approximation
 
-HF method anti-symmetrizes the $\Psi$
+The Hartree approximation is incomplete because it ignores the fact that electrons are
+**fermions**: identical spin-$\frac{1}{2}$ particles that obey the **Pauli exclusion principle**,
+which requires the many-body wavefunction to be antisymmetric under the exchange of any two
+electrons.
+
+Fock incorporated this antisymmetry into the Hartree scheme, yielding the **Hartree–Fock (HF)**
+approximation. The wavefunction is constructed as a **Slater determinant**, which automatically
+satisfies antisymmetry:
 
 {{< math >}}
 $$
-\Psi(r_1,r_2\cdots r_N)= \frac{1}{\sqrt{N}}\begin{bmatrix}
+\Psi(r_1,r_2\cdots r_N)= \frac{1}{\sqrt{N!}}\begin{vmatrix}
 \psi_1(r_1) &\cdots &\psi_1(r_N)\\
 \vdots & \ddots & \vdots\\
 \psi_N(r_1) &\cdots &\psi_N(r_N)\\
-\end{bmatrix}
+\end{vmatrix}
 $$
 {{< /math >}}
-and solve it using variational method:
+
+Swapping any two columns (i.e., exchanging two electrons) changes the sign of the determinant,
+ensuring the required antisymmetry. The single-particle orbitals $\psi_i$ are then determined
+by the variational condition:
 
 {{< math >}}
 $$
-\frac{\delta}{\delta \psi_j^*(r)}\left[\bra{\Psi}H\ket{\Psi}-\sum_i^N\epsilon_i\int d^3r |\psi_i(r)|^2\right]=0
+\frac{\delta}{\delta \psi_j^*(r)}\left[\langle\Psi|\hat{H}|\Psi\rangle-\sum_i^N\epsilon_i\int d^3r |\psi_i(r)|^2\right]=0
 $$
 {{< /math >}}
 
+This procedure introduces an **exchange energy** term — a purely quantum mechanical
+contribution absent in the Hartree scheme — which lowers the total energy by keeping electrons of
+the same spin spatially separated. The correlation energy (everything beyond HF) remains
+unaccounted for and is the key quantity that DFT's exchange-correlation functional $E_{\rm xc}$
+aims to capture.
 
 ### Example: Hartree–Fock Calculation for the Helium Atom
 
-Let's illustrate the mean-field and exchange concepts with the helium atom (two electrons, one nucleus with charge $Z=2$).
+The helium atom (two electrons, nucleus with charge $Z=2$) is the simplest system where many-body
+effects matter, making it an ideal test case.
 
-- **Hamiltonian:**
-  $$
-  \hat{H} = -\frac{\hbar^2}{2m} (\nabla_1^2 + \nabla_2^2) - \frac{2e^2}{r_1} - \frac{2e^2}{r_2} + \frac{e^2}{|\mathbf{r}_1 - \mathbf{r}_2|}
-  $$
+**Hamiltonian:**
+$$
+\hat{H} = -\frac{\hbar^2}{2m} (\nabla_1^2 + \nabla_2^2) - \frac{2e^2}{r_1} - \frac{2e^2}{r_2} + \frac{e^2}{|\mathbf{r}_1 - \mathbf{r}_2|}
+$$
 
-- **Hartree approximation:** Each electron feels the nuclear attraction and the average repulsion from the other electron. The total wavefunction is a product of single-electron orbitals: $\Psi(r_1, r_2) = \psi(r_1)\psi(r_2)$.
+**Hartree approximation:** Each electron feels the nuclear attraction plus the average repulsion
+from the other electron. The total wavefunction is a simple product of single-electron orbitals:
+$\Psi(r_1, r_2) = \psi(r_1)\psi(r_2)$, which is not antisymmetric.
 
-- **Hartree–Fock improvement:** The wavefunction is antisymmetrized to account for the Pauli principle:
-  $$
-  \Psi_{HF}(r_1, r_2) = \frac{1}{\sqrt{2}} [\psi_a(r_1)\psi_b(r_2) - \psi_a(r_2)\psi_b(r_1)]
-  $$
-  For the ground state, both electrons occupy the 1s orbital with opposite spins.
+**Hartree–Fock improvement:** The wavefunction is antisymmetrized via a Slater determinant:
+$$
+\Psi_{HF}(r_1, r_2) = \frac{1}{\sqrt{2}} [\psi_a(r_1)\psi_b(r_2) - \psi_a(r_2)\psi_b(r_1)]
+$$
+For the ground state, both electrons occupy the $1s$ orbital with opposite spins.
 
-- **Physical consequences:**
-  - The Hartree method overestimates the energy because it ignores exchange.
-  - The Hartree–Fock method lowers the energy by including exchange, but still neglects electron correlation.
+**Physical consequences:**
+- The Hartree method overestimates the energy because it ignores exchange.
+- The Hartree–Fock method lowers the energy by including exchange, but still neglects electron
+  correlation (all effects beyond a single Slater determinant).
 
-- **Numerical values:**
-  - Experimental ground-state energy of helium: $-78.98$ eV
-  - Hartree–Fock result: $-77.5$ eV (slightly higher due to missing correlation)
-  - Hartree result: even higher (less accurate)
+**Numerical comparison:**
+
+| Method | Ground-state energy (eV) |
+|---|---|
+| Hartree | > $-77.5$ eV |
+| Hartree–Fock | $-77.5$ eV |
+| Experiment | $-78.98$ eV |
+
+The gap between Hartree–Fock ($-77.5$ eV) and experiment ($-78.98$ eV) is called the
+**correlation energy**. Though small in absolute terms ($\approx 1.5$ eV), it is chemically
+significant — chemical bond energies are typically of this magnitude. Capturing this missing
+correlation is the central motivation for DFT and its exchange-correlation functionals.
