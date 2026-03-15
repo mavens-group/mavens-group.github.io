@@ -16,7 +16,7 @@ main:
   - name: Publications
     url: publication
     weight: 40
-  - name: Blogs
+  - name: Resources
     url: blog
     weight: 50
   - name: Software
@@ -25,7 +25,7 @@ main:
   - name: News
     url: news
     weight: 60
-  - name: Position
+  - name: Positions
     url: position
     weight: 70
   - name: Contact

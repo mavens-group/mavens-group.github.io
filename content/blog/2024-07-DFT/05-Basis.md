@@ -1,6 +1,6 @@
 ---
 title: Basis Sets and Pseudopotentials
-date: '2026-03-14'
+date: '2026-03-15'
 type: book
 weight: 05
 summary: Plane waves, localised orbitals, PAW, and convergence
@@ -25,7 +25,7 @@ on convergence.
 The KS orbital $\phi_i(\mathbf{r})$ is an element of an infinite-dimensional Hilbert space. In
 practice, it is expanded in a finite basis $\{f_\mu(\mathbf{r})\}$:
 \begin{equation}
-    \phi_i(\mathbf{r}) = \sum_\mu c_{i\mu}\, f_\mu(\mathbf{r}),
+    \phi\_i(\mathbf{r}) = \sum\_\mu c\_{i\mu}\, f\_\mu(\mathbf{r}),
 \end{equation}
 where the coefficients $c_{i\mu}$ are determined by diagonalising the KS Hamiltonian in this
 basis. The KS eigenvalue problem \eqref{eq:KS-eqn} becomes the generalised matrix eigenvalue
@@ -80,7 +80,7 @@ $E_{\rm cut}$:
 A **convergence test** is mandatory in every plane-wave calculation. The procedure is:
 1. Fix all other parameters (cell, $k$-points, functional).
 2. Compute the total energy $E_{\rm tot}(E_{\rm cut})$ for a series of cutoff values.
-3. Identify the cutoff where $\Delta E_{\rm tot} < \epsilon_{\rm tol}$ (typically $1$–$5$ meV/atom).
+3. Identify the cutoff where $\Delta E_{\rm tot} \leq \epsilon_{\rm tol}$ (typically $1$–$5$ meV/atom).
 
 Typical converged cutoffs: $\sim 400$–$600$ eV for GGA+PAW; $\sim 700$–$1200$ eV for
 norm-conserving PPs; transition metal oxides and $f$-electron systems often require higher
@@ -92,9 +92,13 @@ values.
 
 In a periodic solid, the KS equations must be solved at every $\mathbf{k}$-point in the first
 Brillouin zone (BZ). Physical observables involve BZ integrals, e.g.:
+
+{{< math >}}
 \begin{equation}
     \rho(\mathbf{r}) = \frac{\Omega}{(2\pi)^3}\sum_i \int_{\rm BZ} |\phi_{i\mathbf{k}}(\mathbf{r})|^2\,d\mathbf{k}.
 \end{equation}
+{{< /math >}}
+
 
 In practice, the integral is replaced by a discrete sum over a finite mesh. The standard choice
 is the **Monkhorst–Pack (MP) mesh**: a uniform $N_1 \times N_2 \times N_3$ grid in reciprocal
@@ -192,42 +196,153 @@ schemes are standard constructions.
 NCPPs typically require $E_{\rm cut} \sim 60$–$100$ Ry and are used in codes such as Quantum
 ESPRESSO and ABINIT.
 
-### Ultrasoft Pseudopotentials (USPP) and PAW
+### Ultrasoft Pseudopotentials (USPP)
 
 The **ultrasoft pseudopotential** (Vanderbilt, 1990) relaxes the norm-conservation condition,
-allowing smoother pseudo-wavefunctions with much lower $E_{\rm cut}$ ($\sim 25$–$40$ Ry). The
-missing norm is compensated by augmentation charges added to the density.
+allowing smoother pseudo-wavefunctions that require much lower plane-wave cutoffs
+($E_{\rm cut} \sim 25$–$40$ Ry). The pseudo-wavefunction $\tilde{\phi}_l(r)$ is permitted to
+deviate from the all-electron $\phi_l(r)$ even for $r > r_c^{\rm soft}$, producing a softer
+nodeless function.
 
-The **Projector Augmented Wave (PAW) method** (Blöchl, 1994) is the most rigorous and now most
-widely used approach. PAW introduces a linear transformation $\hat{\mathcal{T}}$ between the
-smooth pseudo-wavefunction $|\tilde{\phi}_i\rangle$ and the true all-electron wavefunction
-$|\phi_i\rangle$:
+The missing charge that would violate the norm-conservation sum rule is compensated by
+**augmentation charges** $Q_{nm}(\mathbf{r})$ added to the density:
+
+{{< math >}}
 \begin{equation}
-    |\phi_i\rangle = \hat{\mathcal{T}}|\tilde{\phi}_i\rangle,
-    \qquad
-    \hat{\mathcal{T}} = 1 + \sum_a\sum_n\left(|\phi_n^a\rangle - |\tilde{\phi}_n^a\rangle\right)\langle \tilde{p}_n^a|,
+    \rho(\mathbf{r}) = \sum_i |\tilde{\phi}_i(\mathbf{r})|^2 + \sum_a\sum_{nm} \rho_{nm}^a\,Q_{nm}^a(\mathbf{r}),
 \end{equation}
-where $|\phi_n^a\rangle$ are partial waves centred on atom $a$ and $\langle\tilde{p}_n^a|$ are
-projector functions. Key features:
+{{< /math >}}
 
-- **Formally all-electron**: PAW recovers the full all-electron density in the augmentation
-  spheres, giving access to core-level properties and accurate hyperfine parameters.
-- **Plane-wave efficiency**: The smooth part $|\tilde{\phi}_i\rangle$ has a low $E_{\rm cut}$
-  (similar to USPP), while the oscillatory core region is handled analytically.
-- **No norm-conservation constraint**: Each angular momentum channel can be optimised
-  independently.
+where $\rho\_{nm}^a = \sum\_i \langle\tilde{\phi}\_i|\tilde{p}\_n^a\rangle\langle\tilde{p}\_m^a|\tilde{\phi}\_i\rangle$ are the **occupancy matrices** for atom $a$, and $Q_{nm}^a(\mathbf{r})$ are localised functions inside the augmentation sphere that carry the missing charge. The generalised eigenvalue problem that results from USPP differs from the standard KS equation, requiring a modified orthonormality condition; however, this adds negligible overhead in practice.
 
-PAW is the default in VASP and is available in Quantum ESPRESSO and ABINIT. It is the
-recommended approach for most production calculations.
+USPP is available in Quantum ESPRESSO and CASTEP and offers an excellent cost-to-accuracy ratio
+for most elements.
 
-**Comparison:**
+---
 
-| Method | $E_{\rm cut}$ (typical) | Core accuracy | Cost | Default in |
-|---|---|---|---|---|
-| NCPP | High ($60$–$100$ Ry) | Good (outside $r_c$) | Moderate | QE, ABINIT |
-| USPP | Low ($25$–$40$ Ry) | Good (valence) | Low | QE, CASTEP |
-| PAW | Low–moderate | Excellent (AE inside sphere) | Low–moderate | VASP, QE |
-| All-electron | Very high | Exact | High | FHI-aims, WIEN2k |
+### Projector Augmented Wave (PAW) Method
+
+The **PAW method** (Blöchl, 1994) is the most rigorous of the pseudopotential-like approaches
+and is now the default in most major plane-wave codes. It can be understood as a generalisation
+of USPP that is formally equivalent to an all-electron calculation.
+
+#### The PAW Transformation
+
+PAW introduces a **linear transformation operator** $\hat{\mathcal{T}}$ that maps smooth,
+computationally convenient **pseudo-wavefunctions** $|\tilde{\Psi}_i\rangle$ onto the true
+all-electron wavefunctions $|\Psi_i\rangle$:
+\begin{equation}
+    |\Psi_i\rangle = \hat{\mathcal{T}}\,|\tilde{\Psi}_i\rangle.
+    \label{eq:PAW-transform}
+\end{equation}
+
+Inside the **augmentation sphere** of radius $r_c^a$ centred on each atom $a$, the smooth
+pseudo-wavefunction is a poor approximation to the oscillatory all-electron wavefunction. The
+transformation $\hat{\mathcal{T}}$ corrects for this, atom by atom:
+\begin{equation}
+    \hat{\mathcal{T}} = \mathbf{1} + \sum_a \hat{\mathcal{T}}^a,
+    \qquad
+    \hat{\mathcal{T}}^a = \sum_{n} \left(|\phi_n^a\rangle - |\tilde{\phi}_n^a\rangle\right)\langle\tilde{p}_n^a|,
+    \label{eq:PAW-T}
+\end{equation}
+where:
+- $|\phi_n^a\rangle$ are **all-electron partial waves** — solutions of the radial Schrödinger
+  equation for the isolated atom $a$ at reference energies, labelled by $n = (l, m, \epsilon_{\rm ref})$.
+- $|\tilde{\phi}_n^a\rangle$ are **smooth pseudo partial waves** that match $|\phi_n^a\rangle$
+  outside $r_c^a$ but are nodeless and smooth inside.
+- $\langle\tilde{p}_n^a|$ are **projector functions** localised inside $r_c^a$, dual to the
+  pseudo partial waves: $\langle\tilde{p}_n^a|\tilde{\phi}_m^a\rangle = \delta_{nm}$.
+
+The transformation acts as follows: when $\hat{\mathcal{T}}$ is applied to $|\tilde{\Psi}_i\rangle$,
+the projectors $\langle\tilde{p}_n^a|$ measure the overlap of the smooth wavefunction with the
+partial waves in each augmentation sphere, and the difference $(|\phi_n^a\rangle - |\tilde{\phi}_n^a\rangle)$ restores the all-electron character inside that sphere. Outside all augmentation
+spheres, $\hat{\mathcal{T}}^a = 0$ and the smooth wavefunction is used directly.
+
+#### Reconstruction of the All-Electron Density
+
+The all-electron charge density is:
+\begin{equation}
+    \rho(\mathbf{r}) = \tilde{\rho}(\mathbf{r}) + \rho^1(\mathbf{r}) - \tilde{\rho}^1(\mathbf{r}),
+    \label{eq:PAW-density}
+\end{equation}
+where each term has a specific role:
+
+- $\tilde{\rho}(\mathbf{r}) = \sum_i f_i\,|\tilde{\Psi}_i(\mathbf{r})|^2$ is the **smooth
+  pseudo-density**, computed from the plane-wave-expanded pseudo-wavefunctions throughout the
+  entire cell. This is the computationally cheap term, evaluated with FFTs.
+
+- $\rho^1(\mathbf{r}) = \sum_a\sum_{nm}\rho_{nm}^a\,\phi_n^a(\mathbf{r})\phi_m^a(\mathbf{r})$
+  is the **on-site all-electron density**, reconstructed analytically from the all-electron
+  partial waves inside the augmentation spheres. Here $\rho_{nm}^a = \sum_i f_i\langle\tilde{\Psi}_i|\tilde{p}_n^a\rangle\langle\tilde{p}_m^a|\tilde{\Psi}_i\rangle$ are the
+  **occupation matrices** that quantify the partial-wave character of each KS orbital at each
+  atom.
+
+- $\tilde{\rho}^1(\mathbf{r}) = \sum_a\sum_{nm}\rho_{nm}^a\,\tilde{\phi}_n^a(\mathbf{r})\tilde{\phi}_m^a(\mathbf{r})$ is the **on-site pseudo-density**, which subtracts the
+  smooth-wavefunction contribution inside the augmentation spheres so it is not double-counted
+  with $\tilde{\rho}$.
+
+The total energy is decomposed in the same three-part way. The smooth part is evaluated in
+reciprocal space via FFTs; the on-site parts are computed analytically on radial grids inside
+each augmentation sphere. This decomposition is the key to PAW's efficiency: the expensive
+oscillatory core region is handled on a small radial grid, while the smooth interstitial region
+uses the standard plane-wave machinery.
+
+#### The PAW Total Energy
+
+The total energy functional in PAW is:
+{{< math >}}
+\begin{equation}
+    E = \tilde{E} + E^1 - \tilde{E}^1,
+\end{equation}
+{{< /math >}}
+
+where $\tilde{E}$ is the energy of the pseudo-system (computed with plane waves), $E^1$ is the
+all-electron on-site energy inside the augmentation spheres, and $\tilde{E}^1$ is the
+corresponding pseudo on-site energy that prevents double-counting. The KS equations derived from
+this functional take the form of a **generalised eigenvalue problem**:
+{{< math >}}
+\begin{equation}
+    \hat{\tilde{H}}\,|\tilde{\Psi}_i\rangle = \epsilon_i\,\hat{S}\,|\tilde{\Psi}_i\rangle,
+\end{equation}
+{{< /math >}}
+
+where $\hat{\tilde{H}}$ is the smooth KS Hamiltonian (including on-site corrections) and
+$\hat{S} = \mathbf{1} + \sum\_a\sum\_{nm}({\langle\tilde{p}\_n^a|\tilde{p}\_m^a\rangle\_{\rm AE} - \delta_{nm}})|\tilde{p}\_m^a\rangle\langle\tilde{p}\_n^a|$ is the **overlap operator** that enforces
+the correct normalisation of the all-electron wavefunctions.
+
+#### Strengths of PAW
+
+- **Formally all-electron**: The full all-electron density is available in the augmentation
+  spheres through equation \eqref{eq:PAW-density}. This gives direct access to hyperfine
+  parameters, electric field gradients, NMR chemical shifts, and core-level binding energies.
+- **Low $E_{\rm cut}$**: The smooth part $|\tilde{\Psi}_i\rangle$ requires $E_{\rm cut} \sim
+  400$–$600$ eV (VASP), similar to USPP, far below what a true all-electron plane-wave
+  calculation would need.
+- **Transferability**: The partial waves are atom-specific but not system-specific; the same PAW
+  dataset works well across different chemical environments, unlike empirically fitted NCPP.
+- **Extensibility**: The occupation matrices $\rho_{nm}^a$ are a natural handle for DFT+U and
+  hybrid functional implementations.
+
+#### Limitations of PAW
+
+- **Fixed augmentation spheres**: If $r_c^a$ is too small, the smooth part is not genuinely
+  smooth; if too large, augmentation spheres on adjacent atoms overlap, invalidating the
+  non-overlapping sphere assumption. Standard VASP PAW datasets are designed to avoid overlap
+  for typical bond lengths, but this must be verified under compression.
+- **Linearisation of the partial wave expansion**: PAW is exact only if the partial wave basis
+  $\{|\phi_n^a\rangle\}$ is complete within the augmentation sphere. For highly ionic environments
+  or unusual oxidation states, a larger partial wave set or scattering energies closer to the
+  occupied states may be needed. VASP provides both standard and "hard" PAW datasets for such
+  cases.
+
+**Comparison of core-electron strategies:**
+
+| Method | $E_{\rm cut}$ (typical) | Core accuracy | Access to core density | Cost | Default in |
+|---|---|---|---|---|---|
+| NCPP | $60$–$100$ Ry | Good (outside $r_c$) | No | Moderate | QE, ABINIT |
+| USPP | $25$–$40$ Ry | Good (valence) | No | Low | QE, CASTEP |
+| PAW | $30$–$50$ Ry | Excellent (AE in spheres) | Yes | Low–moderate | VASP, QE |
+| All-electron | $\gg 100$ Ry | Exact | Yes | High | FHI-aims, WIEN2k |
 
 ---
 

@@ -71,6 +71,7 @@ features:
       - latex
   math:
     enable: true
+    provider: mathjax
   privacy_pack:
     enable: false
   repository:
