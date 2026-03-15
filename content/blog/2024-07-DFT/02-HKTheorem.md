@@ -98,6 +98,8 @@ $$
 $$
 {{< /math >}}
 
+![Proof of 1st HK Theorem](fig-hk-proof_dft.png)
+
 Symmetrically, using $\Psi$ as a trial state for $\hat{H}'$:
 {{< math >}}
 $$

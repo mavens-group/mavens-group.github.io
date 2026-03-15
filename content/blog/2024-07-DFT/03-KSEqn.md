@@ -145,7 +145,7 @@ in the next section).
 
 Equations \eqref{eq:KS-density}–\eqref{eq:Veff} form a **self-consistent system**: $V_{\mathrm{eff}}$ depends on $\rho(\mathbf{r})$ through $V_{\mathrm{H}}$ and $V_{\mathrm{xc}}$, but $\rho(\mathbf{r})$ itself is constructed from the KS orbitals $\phi_i$, which are solutions of the KS equations with $V_{\mathrm{eff}}$ as input. This circular dependency is resolved iteratively via the **self-consistent field (SCF)** method:
 
-![SCF Cycle](/uploads/dft/scf.webp)
+![SCF Cycle](fig-scf-cycle_dft.png)
 
 1. **Initialise**: Start with an initial guess for the electron density $\rho^{(0)}(\mathbf{r})$
    (commonly taken from a superposition of atomic densities).

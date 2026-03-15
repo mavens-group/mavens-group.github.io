@@ -71,6 +71,8 @@ The resulting electronic Hamiltonian is:
    & +v_0(r) & \mbox{Electron–nucleus attraction}
 \end{align*}
 
+![Born Oppenheimer Approximation](fig-born-oppenheimer_dft.png)
+
 The electron–electron repulsion term is still a many-body interaction — handling it requires
 further approximation.
 

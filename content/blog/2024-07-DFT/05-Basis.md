@@ -310,6 +310,7 @@ where $\hat{\tilde{H}}$ is the smooth KS Hamiltonian (including on-site correcti
 $\hat{S} = \mathbf{1} + \sum\_a\sum\_{nm}({\langle\tilde{p}\_n^a|\tilde{p}\_m^a\rangle\_{\rm AE} - \delta_{nm}})|\tilde{p}\_m^a\rangle\langle\tilde{p}\_n^a|$ is the **overlap operator** that enforces
 the correct normalisation of the all-electron wavefunctions.
 
+![PAW Schema](fig-paw_dft.png)
 #### Strengths of PAW
 
 - **Formally all-electron**: The full all-electron density is available in the augmentation

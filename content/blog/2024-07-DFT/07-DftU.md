@@ -314,6 +314,7 @@ states up by $\sim U_{\rm eff}/2$, opening a gap of approximately $U_{\rm eff}$ 
 correlated subspace. For a Mott insulator like NiO, DFT gives a metallic state while
 DFT+U with $U_{\rm eff} \approx 5$ eV correctly gives an insulating gap $\sim 3$–$4$ eV.
 
+![DFT+U effect on band gap opening](fig-dftu-levels_dft.png)
 **Orbital polarisation.** The integer-driving nature of DFT+U can lift orbital degeneracy via
 **orbital ordering** — a spontaneous symmetry breaking in which one particular $d$ orbital
 (e.g. $d_{z^2}$ vs. $d_{x^2-y^2}$) becomes preferentially occupied. This is relevant for
