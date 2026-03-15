@@ -24,16 +24,20 @@ on convergence.
 
 The KS orbital $\phi_i(\mathbf{r})$ is an element of an infinite-dimensional Hilbert space. In
 practice, it is expanded in a finite basis $\{f_\mu(\mathbf{r})\}$:
+{{< math >}}
 \begin{equation}
-    \phi\_i(\mathbf{r}) = \sum\_\mu c\_{i\mu}\, f\_\mu(\mathbf{r}),
+    \phi_i(\mathbf{r}) = \sum_\mu c_{i\mu}\, f_\mu(\mathbf{r}),
 \end{equation}
+{{< /math >}}
 where the coefficients $c_{i\mu}$ are determined by diagonalising the KS Hamiltonian in this
 basis. The KS eigenvalue problem \eqref{eq:KS-eqn} becomes the generalised matrix eigenvalue
 problem:
+{{< math >}}
 \begin{equation}
     \mathbf{H}_{\rm KS}\,\mathbf{c}_i = \epsilon_i\,\mathbf{S}\,\mathbf{c}_i,
 \end{equation}
-where $H_{\rm KS,\mu\nu} = \langle f_\mu | \hat{h}_{\rm KS} | f_\nu\rangle$ and
+{{< /math >}}
+where {{< math >}}$H_{\rm KS,\mu\nu} = \langle f_\mu | \hat{h}_{\rm KS} | f_\nu\rangle${{< /math >}} and
 $S_{\mu\nu} = \langle f_\mu | f_\nu\rangle$ is the overlap matrix. The two dominant choices are
 **plane waves** and **localised (atomic-like) basis functions**.
 

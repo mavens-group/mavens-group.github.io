@@ -51,9 +51,12 @@ where each term has a specific physical meaning:
 
 - $E_{\mathrm{xc}}[\rho]$ is the **exchange-correlation (XC) energy**. It collects everything
   that is missing from the above terms:
+
+{{< math >}}
     \begin{equation}
         E_{\mathrm{xc}}[\rho] = \underbrace{(T[\rho] - T_s[\rho])}_{\text{kinetic correlation}} + \underbrace{(V_{ee}[\rho] - E_{\mathrm{H}}[\rho])}_{\text{exchange + correlation}}.
     \end{equation}
+{{< /math >}}
   This includes the quantum exchange energy (from the antisymmetry of the wavefunction, as seen
   in the Hartree–Fock discussion in Chapter 1), all Coulomb correlation effects beyond the
   Hartree level, and the correction to the kinetic energy from the interacting nature of the true
@@ -78,17 +81,21 @@ The central assumption of the Kohn–Sham approach is:
 This is not an approximation in itself: under mild conditions it can be shown to hold (the
 "non-interacting $v$-representability" condition). The density is represented in terms of
 **Kohn–Sham orbitals** $\{\phi_i(\mathbf{r})\}$:
+{{< math >}}
 \begin{equation}
     \rho(\mathbf{r}) = \sum_{i=1}^{N} |\phi_i(\mathbf{r})|^2.
     \label{eq:KS-density}
 \end{equation}
+{{< /math >}}
 
 The kinetic energy of the non-interacting reference system is then computed exactly from these
 orbitals:
+{{< math >}}
 \begin{equation}
     T_s[\rho] = -\frac{1}{2}\sum_{i=1}^{N} \langle \phi_i | \nabla^2 | \phi_i \rangle
               = -\frac{1}{2}\sum_{i=1}^{N} \int \phi_i^*(\mathbf{r})\,\nabla^2\phi_i(\mathbf{r})\,d\mathbf{r}.
 \end{equation}
+{{< /math >}}
 
 This is the key advantage over orbital-free approaches like Thomas–Fermi: by working with
 orbitals we recover the exact non-interacting kinetic energy at the cost of introducing $N$
@@ -100,23 +107,29 @@ single-particle functions.
 
 We seek the set of orbitals $\{\phi_i\}$ that minimises the total energy functional
 \eqref{eq:KS-energy}, subject to the orthonormality constraint:
+{{< math >}}
 \begin{equation}
     \langle \phi_i | \phi_j \rangle = \int \phi_i^*(\mathbf{r})\,\phi_j(\mathbf{r})\,d\mathbf{r} = \delta_{ij}.
 \end{equation}
+{{< /math >}}
 
 We introduce Lagrange multipliers $\epsilon_i$ to enforce the constraints and form the
 Lagrangian:
+{{< math >}}
 \begin{equation}
     \mathcal{L}[\{\phi_i\}] = E[\rho] - \sum_{i=1}^{N} \epsilon_i \left( \langle \phi_i | \phi_i \rangle - 1 \right).
 \end{equation}
+{{< /math >}}
 
 Taking the functional derivative with respect to $\phi_i^*(\mathbf{r})$ and setting it to zero:
+{{< math >}}
 \begin{equation}
     \frac{\delta \mathcal{L}}{\delta \phi_i^*(\mathbf{r})} = 0
     \implies
     \left[ -\frac{1}{2} \nabla^2 + V_{\mathrm{eff}}(\mathbf{r}) \right] \phi_i(\mathbf{r}) = \epsilon_i\, \phi_i(\mathbf{r}),
     \label{eq:KS-eqn}
 \end{equation}
+{{< /math >}}
 
 which are the **Kohn–Sham equations**. They take the form of single-particle Schrödinger
 equations, with the complex many-body interaction absorbed into the **Kohn–Sham effective
