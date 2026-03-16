@@ -134,10 +134,12 @@ Taking the functional derivative with respect to $\phi_i^*(\mathbf{r})$ and sett
 which are the **Kohn–Sham equations**. They take the form of single-particle Schrödinger
 equations, with the complex many-body interaction absorbed into the **Kohn–Sham effective
 potential**:
+{{< math >}}
 \begin{equation}
     V_{\mathrm{eff}}(\mathbf{r}) = V_{\mathrm{ext}}(\mathbf{r}) + V_{\mathrm{H}}(\mathbf{r}) + V_{\mathrm{xc}}(\mathbf{r}),
     \label{eq:Veff}
 \end{equation}
+{{< /math >}}
 
 where each component has a clear origin:
 

@@ -118,10 +118,14 @@ and compare: $\Delta E = E_{\rm AFM} - E_{\rm FM}$.
 
 The energy difference between magnetic configurations can be mapped onto the **Heisenberg spin
 Hamiltonian**:
+
+{{< math >}}
 \begin{equation}
     \hat{\mathcal{H}}_{\rm Heis} = -\sum_{\langle i,j\rangle} J_{ij}\,\hat{\mathbf{S}}_i \cdot \hat{\mathbf{S}}_j,
 \end{equation}
-where $\hat{\mathbf{S}}_i$ is the spin operator on site $i$ and $J_{ij}$ is the **exchange
+{{< /math >}}
+
+where $\hat{\mathbf{S}}\_i$ is the spin operator on site $i$ and $J_{ij}$ is the **exchange
 coupling constant** between sites $i$ and $j$. The sign convention: $J > 0$ favours FM
 alignment; $J \leq 0$ favours AFM.
 
@@ -147,10 +151,12 @@ way to disentangle $J_1, J_2, J_3, \ldots$
 
 An alternative to total energy differences is the **LKAG (linear response) method**, which
 computes $J_{ij}$ directly from the Green's function:
+{{< math >}}
 \begin{equation}
     J_{ij} = \frac{1}{4\pi}\int_{-\infty}^{E_F} {\rm Im}\,{\rm Tr}_L\left[\Delta_i G_{ij}^\uparrow(E)\,\Delta_j G_{ji}^\downarrow(E)\right]\,dE,
 \end{equation}
-where $\Delta_i = V_{\rm xc,i}^\uparrow - V_{\rm xc,i}^\downarrow$ is the local exchange
+{{< /math >}}
+where {{< math >}}$\Delta_i = V_{\rm xc,i}^\uparrow - V_{\rm xc,i}^\downarrow${{< /math >}} is the local exchange
 splitting on site $i$ and $G_{ij}^\sigma$ are the spin-resolved intersite Green's functions.
 This method gives the full $J_{ij}$ tensor in a single DFT calculation and is available in codes
 such as FLEUR, SPR-KKR, and Questaal.
@@ -223,9 +229,11 @@ Full self-consistent inclusion of SOC requires the non-collinear spinor formalis
 
 The **magnetic anisotropy energy** is the difference in total energy between magnetisation
 oriented along the easy axis and a hard axis:
+{{< math >}}
 \begin{equation}
     {\rm MAE} = E(\hat{\mathbf{n}}_{\rm hard}) - E(\hat{\mathbf{n}}_{\rm easy}),
 \end{equation}
+{{< /math >}}
 typically measured in $\mu$eV/atom for $3d$ metals or meV/atom for heavy-element compounds. MAE
 determines the **magnetic hardness** of a material: a large positive MAE (perpendicular easy
 axis) is required for permanent magnets and perpendicular magnetic recording media.

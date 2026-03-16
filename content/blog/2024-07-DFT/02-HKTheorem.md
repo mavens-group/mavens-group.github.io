@@ -35,8 +35,8 @@ $$
 
 where
 * $\hat{T}$ is the kinetic energy operator of the electrons,
-* $\hat{V}_{ee}$ is the Coulomb electron–electron repulsion operator,
-* $\hat{V}_{ext} = \sum_{i=1}^N V_{\rm ext}(r_i)$ is the external potential due to the nuclei or
+* $\hat{V}\_{ee}$ is the Coulomb electron–electron repulsion operator,
+* $\hat{V}\_{ext} = \sum\_{i=1}^N V\_{\rm ext}(r\_i)$ is the external potential due to the nuclei or
   any applied field — it is the same for all systems considered in the proofs below.
 
 The **electron density** $\rho(r)$ is defined as the probability of finding any one electron at
