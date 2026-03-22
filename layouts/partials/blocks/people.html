@@ -74,3 +74,17 @@
     {{ end }}
   {{ end }}
 </div>
+
+<div class="col-12 mt-5 mb-3 text-center">
+  {{ if in $page.RelPermalink "/alumni/" }}
+    {{/* If we are on the Alumni page, show the button to go back to the current team */}}
+    <a href="/people/" class="btn btn-primary btn-lg px-3 py-3" style="border-radius: 10px;">
+      <strong>⬅ View Current MAVENs Team</strong>
+    </a>
+  {{ else }}
+    {{/* If we are on ANY other page (like the main People page), show the button for Alumni */}}
+    <a href="/alumni/" class="btn btn-primary btn-lg px-3 py-3" style="border-radius: 10px;">
+      <strong>View Alumni of the Group ➔</strong>
+    </a>
+  {{ end }}
+</div>

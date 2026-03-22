@@ -15,9 +15,6 @@ sections:
           - Researchers            # 2. Current Research Scholars/Staff
           - Grad Students          # 3. Current Students
           - Visitors               # 4. Current Visitors
-          - Alumni (Researchers)   # 5. Past Scholars
-          - Alumni                 # 6. General Alumni
-          - Alumni (Grad)          # 7. Past Grad Students
       sort_by: Params.join
       sort_ascending: true
     design:

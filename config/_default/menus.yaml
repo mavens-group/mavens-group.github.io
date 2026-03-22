@@ -11,23 +11,35 @@ main:
     url: research
     weight: 20
   - name: People
-    url: people
     weight: 30
+  - name: Members
+    url: people
+    parent: People
+    weight: 1
+  - name: Alumni
+    url: alumni
+    parent: People
+    weight: 2
+  - name: Open Positions
+    url: position
+    parent: People
+    weight: 3
   - name: Publications
     url: publication
     weight: 40
   - name: Resources
-    url: blog
     weight: 50
+  - name: Lectures and Tutorials
+    url: blog
+    parent: Resources
+    weight: 1
   - name: Software
     url: software
-    weight: 46
+    parent: Resources
+    weight: 2
   - name: News
     url: news
     weight: 60
-  - name: Positions
-    url: position
-    weight: 70
   - name: Contact
     url: contact
     weight: 80
