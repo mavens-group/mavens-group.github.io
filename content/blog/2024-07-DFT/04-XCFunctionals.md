@@ -1,6 +1,6 @@
 ---
 title: Exchange-Correlation Functionals
-date: '2026-03-15'
+date: '2025-06-01'
 type: book
 weight: 04
 summary: The XC landscape derived from two systematic expansions
@@ -34,25 +34,29 @@ choice of functional from a matter of recipe-following into a matter of physics.
 ### The XC Hole
 
 The XC energy is defined by the decomposition introduced in Chapter 3:
-\begin{equation}
+{{< math >}}
+$$
     E_{\rm xc}[\rho] = (T[\rho] - T_s[\rho]) + (V_{ee}[\rho] - E_{\rm H}[\rho]).
-    \label{eq:Exc-def}
-\end{equation}
+$$
+{{< /math >}}
 
 An equivalent and physically transparent form expresses $E_{\rm xc}$ in terms of the
 **exchange-correlation hole** $n_{\rm xc}(\mathbf{r}, \mathbf{r}')$ — the depletion of electron
 density at $\mathbf{r}'$ caused by the presence of an electron at $\mathbf{r}$:
-\begin{equation}
+{{< math >}}
+$$
     E_{\rm xc}[\rho] = \frac{1}{2}\iint \frac{\rho(\mathbf{r})\,n_{\rm xc}(\mathbf{r},\mathbf{r}')}{|\mathbf{r}-\mathbf{r}'|}\,d\mathbf{r}\,d\mathbf{r}'.
-\end{equation}
+$$
+{{< /math >}}
 
 The exact XC hole satisfies two rigorous constraints:
-\begin{equation}
+{{< math >}}
+$$
     n_{\rm xc}(\mathbf{r},\mathbf{r}') \leq 0,
     \qquad
     \int n_{\rm xc}(\mathbf{r},\mathbf{r}')\,d\mathbf{r}' = -1.
-    \label{eq:hole-sumrule}
-\end{equation}
+$$
+{{< /math >}}
 
 The second relation — the **sum rule** — encodes the fact that each electron excludes exactly
 one unit of charge from its neighbourhood. Approximations that satisfy this constraint tend to
@@ -73,14 +77,12 @@ Taylor series in density *variations*.
 XC energy is written as an integral over a coupling constant $\lambda \in [0,1]$ that smoothly
 scales the electron–electron interaction from zero (the KS system) to its physical value:
 {{< math >}}
-\begin{equation}
+$$
     E_{\rm xc}[\rho] = \int_0^1 W_{\rm xc}^\lambda[\rho]\,d\lambda,
     \qquad
     W_{\rm xc}^\lambda = \langle\Psi^\lambda|\hat{V}_{ee}|\Psi^\lambda\rangle - E_{\rm H}[\rho],
-    \label{eq:adiabatic}
-\end{equation}
+$$
 {{< /math >}}
-
 where $\Psi^\lambda$ is the ground state with the same density $\rho$ but interaction scaled by
 $\lambda$. At $\lambda = 0$, $\Psi^0$ is the KS Slater determinant and
 $W_{\rm xc}^0 = E_{\rm x}^{\rm exact}$ is known analytically. This is the natural anchor for a
@@ -90,46 +92,50 @@ Taylor series in *interaction strength*.
 
 ## The First Taylor Series: Gradient Expansion and Semi-Local Functionals
 
-![Jacobs Ladder](fig-jacobs-ladder_dft.png)
 ### The Dimensionless Gradient and the GEA
 
 For a slowly varying density, we measure spatial variation by the **reduced density gradient**:
-\begin{equation}
+{{< math >}}
+$$
     s(\mathbf{r}) = \frac{|\nabla\rho(\mathbf{r})|}{2k_F(\mathbf{r})\,\rho(\mathbf{r})},
     \qquad k_F(\mathbf{r}) = (3\pi^2\rho(\mathbf{r}))^{1/3},
-    \label{eq:s-def}
-\end{equation}
+$$
+{{< /math >}}
 where $k_F$ is the local Fermi wavevector. The parameter $s$ measures the density gradient in
 units of the local electron wavelength: $s = 0$ for the UEG; $s \sim 0.5$–$3$ in typical
 valence regions; $s \to \infty$ in exponentially decaying density tails.
 
 The formal **gradient expansion approximation (GEA)** from many-body perturbation theory gives
 the systematic Taylor series in $s^2$ (odd powers vanish by symmetry):
-\begin{equation}
+{{< math >}}
+$$
     E_{\rm xc}^{\rm GEA}[\rho] = \int \rho\,\varepsilon_{\rm xc}^{\rm UEG}(\rho)\,d\mathbf{r}
     + \int C_{\rm xc}(\rho)\,s^2\,\rho\,d\mathbf{r}
     + \mathcal{O}(s^4),
-    \\label{eq:GEA}
-\end{equation}
+$$
+{{< /math >}}
 where $C_{\rm xc}(\rho)$ is a density-dependent coefficient computable from perturbation theory.
 
 ### Rung 0: LDA — Zeroth Order
 
 Truncating \eqref{eq:GEA} at zeroth order ($s^0$) gives the **local density approximation**:
-\begin{equation}
+{{< math >}}
+$$
     \boxed{E_{\rm xc}^{\rm LDA}[\rho] = \int \varepsilon_{\rm xc}^{\rm UEG}(\rho(\mathbf{r}))\,\rho(\mathbf{r})\,d\mathbf{r}.}
-    \label{eq:LDA}
-\end{equation}
+$$
+{{< /math >}}
 
 The exchange part is analytic (Dirac, 1930):
-\begin{equation}
+{{< math >}}
+$$
     \varepsilon_{\rm x}^{\rm UEG}(\rho) = -\frac{3}{4}\!\left(\frac{3}{\pi}\right)^{\!1/3}\!\rho^{1/3}.
-\end{equation}
+$$
+{{< /math >}}
 The correlation $\varepsilon_{\rm c}(\rho)$ is parameterised from QMC data: the Perdew–Wang
 (PW92) and Vosko–Wilk–Nusair (VWN) parameterisations are most common.
 
 **Why LDA works better than a zeroth-order truncation deserves.** The LDA XC hole is that of
-the UEG, which satisfies the sum rule \\eqref{eq:hole-sumrule} by construction. Even when the
+the UEG, which satisfies the sum rule \eqref{eq:hole-sumrule} by construction. Even when the
 detailed angular shape of the hole is wrong, the *spherically averaged* hole — which is what
 determines $E_{\rm xc}$ via a radial integral — is described well. This is systematic error
 cancellation rooted in constraint satisfaction, not coincidence.
@@ -153,10 +159,11 @@ finite system.
 
 Rather than truncating \eqref{eq:GEA}, the **generalised gradient approximation** writes the XC
 energy in the **enhancement factor** form:
-\begin{equation}
+{{< math >}}
+$$
     \boxed{E_{\rm xc}^{\rm GGA}[\rho] = \int \varepsilon_{\rm xc}^{\rm UEG}(\rho)\,F_{\rm xc}(\rho, s)\,\rho\,d\mathbf{r},}
-    \label{eq:GGA}
-\end{equation}
+$$
+{{< /math >}}
 where $F_{\rm xc}(\rho, s)$ is a dimensionless enhancement factor. GGA is not the
 $\mathcal{O}(s^2)$ truncation — it is a *constrained resummation* that reproduces the correct
 $s^2$ behaviour near $s = 0$ while satisfying exact constraints for all $s$.
@@ -173,10 +180,12 @@ $s^2$ behaviour near $s = 0$ while satisfying exact constraints for all $s$.
    rigorous lower bound satisfied for all $s$.
 
 The explicit PBE exchange enhancement factor is:
-\begin{equation}
+{{< math >}}
+$$
     F_{\rm x}^{\rm PBE}(s) = 1 + \kappa - \frac{\kappa}{1 + \mu s^2/\kappa},
     \qquad \kappa = 0.804,\quad \mu = 0.2195,
-\end{equation}
+$$
+{{< /math >}}
 where both parameters are fixed by constraints, not by fitting to data. PBE has zero empirical
 parameters.
 
@@ -194,59 +203,93 @@ The band gap error is essentially unchanged between LDA and PBE: it originates n
 gradient expansion but in the missing **derivative discontinuity** of the exact XC potential at
 integer electron number, which no semi-local functional can capture.
 
-**PBEsol** restores the exact second-order GEA gradient coefficient for exchange (replacing
-$\mu$ with the perturbation-theory value), improving lattice constants for dense solids at the
-cost of atomisation energy accuracy. It is preferred for crystallographic properties.
+**Lieb–Oxford bound.** A rigorous lower bound on $E_{\rm xc}$ for any $N$-electron density follows from the Lieb–Oxford inequality (Lieb and Oxford, 1981):
+
+{{< math >}}
+$$
+E_{\rm xc}[\rho] \geq -C_{\rm LO}\int \rho(\mathbf{r})^{4/3}\,d\mathbf{r}, \qquad C_{\rm LO} \leq 1.679.
+$$
+{{< /math >}}
+
+Physically this bound says that the XC energy cannot be more negative than a multiple of the exchange energy of a fully spin-polarised UEG at the same density — it bounds how much the XC hole can deepen the energy. The numerical constant $C_{\rm LO} = 1.679$ was obtained by Lieb and Oxford from analysis of the indirect part of the Coulomb energy. PBE's exchange enhancement factor is explicitly constructed to satisfy this bound for all $s$, which is one of its 11 exact constraints. LDA satisfies the bound locally; GEA violates it at large $s$.
+
+**The GL4 argument for $a = 1/4$.** The fraction of exact exchange in PBE0 is not empirical but follows from fourth-order Görling–Levy (GL) perturbation theory (Perdew, Ernzerhof, Burke, 1996). The GL expansion of the adiabatic connection integrand gives:
+
+{{< math >}}
+$$
+W_{\rm xc}^\lambda = E_{\rm x}^{\rm exact} + 2\lambda E_{\rm c}^{\rm GL2} + 3\lambda^2 E_{\rm c}^{\rm GL3} + \cdots
+$$
+{{< /math >}}
+
+Integrating over $\lambda \in [0,1]$ with only the zeroth- and second-order terms:
+
+{{< math >}}
+$$
+E_{\rm xc}^{\rm GL4} \approx E_{\rm x}^{\rm exact} + E_{\rm c}^{\rm GL2}.
+$$
+{{< /math >}}
+
+Since GGA already approximates $E_{\rm c}^{\rm GL2}$ partially (capturing the short-range correlation at the GGA level), the optimal fraction of exact exchange that avoids double-counting the correlation already in the GGA is estimated by requiring that the hybrid reproduces GL4 for weakly correlated systems. This gives $a = 1/4$ as the parameter-free choice. Systems with stronger correlation (larger $\lambda$ dependence of $W_{\rm xc}^\lambda$) would prefer smaller $a$, while weakly correlated systems near the UEG prefer larger $a$ — this is the physical reason why one value of $a$ cannot be universally optimal.
 
 ### Rung 2: Meta-GGA — Encoding $\mathcal{O}(s^4)$ Through $\tau$
 
-The gradient expansion \eqref{eq:GEA} can in principle be extended to $\mathcal{O}(s^4)$, which
-involves second spatial derivatives $\nabla^2\rho$. However, $\nabla^2\rho$ included directly
-reintroduces oscillatory behaviour in the density tails. The **kinetic energy density**:
-\begin{equation}
-    \tau(\mathbf{r}) = \frac{1}{2}\sum_i f_i\,|\nabla\phi_i(\mathbf{r})|^2
-\end{equation}
-encodes the same fourth-order gradient information without the oscillation pathology, since it
-involves the *square* of orbital gradients rather than their Laplacian. The two quantities are
-related by:
-\begin{equation}
-    \tau = \tau^W + \tau^{\rm UEG} + \mathcal{O}(\nabla^4\rho),
-    \qquad
-    \tau^W = \frac{|\nabla\rho|^2}{8\rho},\quad
-    \tau^{\rm UEG} = \frac{3}{10}(3\pi^2)^{2/3}\rho^{5/3}.
-\end{equation}
+The gradient expansion can in principle be extended to $\mathcal{O}(s^4)$, which involves second spatial derivatives $\nabla^2\rho$. However, $\nabla^2\rho$ included directly reintroduces oscillatory behaviour in the density tails. The **kinetic energy density**:
 
-The **meta-GGA** adds $\tau$ as a third ingredient:
-\begin{equation}
-    \boxed{E_{\rm xc}^{\rm mGGA}[\rho] = \int \varepsilon_{\rm xc}(\rho,\,s,\,\alpha)\,\rho\,d\mathbf{r},}
-\end{equation}
-organised around the **iso-orbital indicator**:
-\begin{equation}
-    \alpha(\mathbf{r}) = \frac{\tau(\mathbf{r}) - \tau^W(\mathbf{r})}{\tau^{\rm UEG}(\mathbf{r})},
-    \label{eq:alpha}
-\end{equation}
-whose physical content follows directly from its definition:
+{{< math >}}
+$$
+\tau(\mathbf{r}) = \frac{1}{2}\sum_i f_i\,|\nabla\phi_i(\mathbf{r})|^2
+$$
+{{< /math >}}
 
-- $\alpha = 0$: $\tau = \tau^W$, which holds exactly for a single orbital. Signals a covalent
-  bond, a core region, or any single-orbital-dominated region. The functional should be exact
-  for one electron.
-- $\alpha = 1$: $\tau = \tau^W + \tau^{\rm UEG}$, which holds for the UEG. The functional
-  should recover LDA.
-- $\alpha \gg 1$: many KS orbitals contribute to $\tau$ but the density varies slowly. Signals
-  weak overlap between closed-shell fragments — the van der Waals regime.
+encodes the same fourth-order gradient information without the oscillation pathology. To see why, consider the two limiting forms of $\tau$.
 
-**SCAN** (Strongly Constrained and Appropriately Normed; Sun, Ruzsinszky, Perdew, 2015)
-constructs $\varepsilon_{\rm xc}(\rho, s, \alpha)$ to satisfy simultaneously all 17 exact
-constraints applicable to a semi-local functional — the first functional to achieve this.
-**r²SCAN** (Furness et al., 2020) is a numerically regularised variant that avoids a
-discontinuity in $\partial\varepsilon_{\rm xc}/\partial\alpha$ at $\alpha = 0$ that causes SCF
-convergence difficulties in plane-wave codes; it is the recommended choice for practical
-calculations.
+**The von Weizsäcker kinetic energy density** $\tau^W$ is the exact $\tau$ for a system described by a single orbital $\phi = \sqrt{\rho}\,e^{i\theta}$. For a real, nodeless orbital, $\phi = \sqrt{\rho}$, so:
 
-**Key improvements over PBE:** lattice constants improved to $\sim 0.3\%$; atomisation energies
-improved by $\sim 30\%$; qualitatively correct van der Waals interactions for layered materials
-from the $\alpha \gg 1$ switching (though quantitatively insufficient without dispersion
-corrections); better magnetic exchange couplings and transition metal oxide band gaps.
+{{< math >}}
+$$
+\tau^W = \frac{1}{2}|\nabla\sqrt{\rho}|^2 = \frac{1}{2}\left|\frac{\nabla\rho}{2\sqrt{\rho}}\right|^2 = \frac{|\nabla\rho|^2}{8\rho}.
+$$
+{{< /math >}}
+
+This is the minimum possible kinetic energy density consistent with a given $\rho$; any multi-orbital system has $\tau \geq \tau^W$ (the Pauli kinetic energy is non-negative). For the **uniform electron gas** with $N$ occupied plane-wave orbitals, the kinetic energy density is:
+
+{{< math >}}
+$$
+\tau^{\rm UEG}(\rho) = \frac{3}{10}(3\pi^2)^{2/3}\rho^{5/3},
+$$
+{{< /math >}}
+
+which is the Thomas–Fermi kinetic energy density. The gradient expansion then gives:
+
+{{< math >}}
+$$
+\tau = \tau^W + \tau^{\rm UEG} + \mathcal{O}(\nabla^4\rho),
+$$
+{{< /math >}}
+
+showing that $\tau - \tau^W$ measures the deviation from single-orbital character, i.e. the degree of multi-orbital kinetic energy. The **meta-GGA** uses this through the **iso-orbital indicator**:
+
+{{< math >}}
+$$
+\alpha(\mathbf{r}) = \frac{\tau(\mathbf{r}) - \tau^W(\mathbf{r})}{\tau^{\rm UEG}(\mathbf{r})},
+$$
+{{< /math >}}
+
+whose physical content follows directly:
+
+- $\alpha = 0$: $\tau = \tau^W$, exact for a single orbital — covalent bonds, core regions.
+- $\alpha = 1$: $\tau = \tau^W + \tau^{\rm UEG}$, the UEG limit — metallic regions, LDA should be recovered.
+- $\alpha \gg 1$: many orbitals, slowly varying density — van der Waals region between closed-shell fragments.
+
+The meta-GGA energy functional is:
+
+{{< math >}}
+$$
+E_{\rm xc}^{\rm mGGA}[\rho] = \int \varepsilon_{\rm xc}(\rho,\,s,\,\alpha)\,\rho\,d\mathbf{r}.
+$$
+{{< /math >}}
+
+**SCAN** (Strongly Constrained and Appropriately Normed; Sun, Ruzsinszky, Perdew, 2015) satisfies all 17 known exact constraints applicable to a semi-local functional simultaneously. **r²SCAN** (Furness et al., 2020) is a numerically regularised variant preferred in plane-wave codes.
 
 ---
 
@@ -261,40 +304,37 @@ $\mathbf{r}$. A qualitatively different class of improvement comes from the seco
 We expand the adiabatic connection integrand \eqref{eq:adiabatic} in $\lambda$:
 {{< math >}}
 $$
-\begin{equation}
     W_{\rm xc}^\lambda = W_{\rm xc}^0 + \lambda\left.\frac{dW_{\rm xc}^\lambda}{d\lambda}\right|_{\lambda=0}
     + \frac{\lambda^2}{2}\left.\frac{d^2W_{\rm xc}^\lambda}{d\lambda^2}\right|_{\lambda=0} + \cdots
-    \label{eq:AC-Taylor}
-\end{equation}
 $$
 {{< /math >}}
 
 The zeroth-order term is exactly known:
 {{< math >}}
-\begin{equation}
+$$
     W_{\rm xc}^0 = E_{\rm x}^{\rm exact}[\{\phi_i\}]
     = -\frac{1}{2}\sum_{i,j}\iint\frac{\phi_i^*(\mathbf{r})\phi_j(\mathbf{r})\phi_j^*(\mathbf{r}')\phi_i(\mathbf{r}')}{|\mathbf{r}-\mathbf{r}'|}\,d\mathbf{r}\,d\mathbf{r}'.
-\end{equation}
+$$
 {{< /math >}}
 
 The first derivative is identified by Görling–Levy (GL) perturbation theory as twice the
 second-order GL correlation energy $E_{\rm c}^{\rm GL2}$:
 {{< math >}}
-\begin{equation}
+$$
     \left.\frac{dW_{\rm xc}^\lambda}{d\lambda}\right|_{\lambda=0} = 2E_{\rm c}^{\rm GL2}
     = -2\sum_{\substack{i < j \\ a < b}}
     \frac{|\langle\phi_i\phi_j\|\phi_a\phi_b\rangle|^2}{\epsilon_a + \epsilon_b - \epsilon_i - \epsilon_j},
-    \label{eq:GL2}
-\end{equation}
+$$
 {{< /math >}}
 where $i,j$ label occupied and $a,b$ unoccupied KS orbitals. This has the same algebraic
 structure as MP2 correlation but is evaluated on KS orbitals. Integrating \eqref{eq:AC-Taylor}:
-\begin{equation}
+{{< math >}}
+$$
     E_{\rm xc} = E_{\rm x}^{\rm exact}
     + E_{\rm c}^{\rm GL2}
     + \frac{1}{6}\left.\frac{d^2W_{\rm xc}^\lambda}{d\lambda^2}\right|_{\lambda=0} + \cdots
-    \label{eq:AC-integrated}
-\end{equation}
+$$
+{{< /math >}}
 
 Each successive term is more expensive and more accurate.
 
@@ -302,10 +342,11 @@ Each successive term is more expensive and more accurate.
 
 Retaining only the zeroth-order term $E_{\rm x}^{\rm exact}$ and approximating the remainder of
 the $\lambda$ integral by a GGA gives the **global hybrid**:
-\begin{equation}
+{{< math >}}
+$$
     \boxed{E_{\rm xc}^{\rm hybrid} = a\,E_{\rm x}^{\rm exact} + (1-a)\,E_{\rm x}^{\rm GGA} + E_{\rm c}^{\rm GGA}.}
-    \label{eq:hybrid}
-\end{equation}
+$$
+{{< /math >}}
 
 The fraction $a$ is not a free parameter: fourth-order GL perturbation theory (Perdew, Ernzerhof,
 Burke, 1996) shows that for systems near the weakly correlated limit, the integrand
@@ -317,9 +358,11 @@ exchange weight is smaller, and GL4 gives $a = 1/4$ as the optimal parameter-fre
 
 PBE0 implements \eqref{eq:hybrid} with $a = 1/4$ from GL4 perturbation theory and PBE as the
 semi-local component:
-\begin{equation}
+{{< math >}}
+$$
     E_{\rm xc}^{\rm PBE0} = \frac{1}{4}E_{\rm x}^{\rm exact} + \frac{3}{4}E_{\rm x}^{\rm PBE} + E_{\rm c}^{\rm PBE}.
-\end{equation}
+$$
+{{< /math >}}
 
 PBE0 has no empirical parameters. In the limit $a \to 0$ it recovers PBE exactly. Band gaps
 improve from $-40\%$ (PBE) to $\sim -20\%$ (PBE0), and reaction barriers improve substantially.
@@ -331,10 +374,12 @@ expensive for large unit cells.
 B3LYP (Becke, 1993) occupies the same position in the coupling-constant series but determines
 its three parameters $(a_0, a_x, a_c)$ *empirically* by fitting to the G2 molecular
 thermochemistry database rather than from perturbation theory:
-\begin{equation}
+{{< math >}}
+$$
     E_{\rm xc}^{\rm B3LYP} = (1-a_0)E_{\rm x}^{\rm LSDA} + a_0\,E_{\rm x}^{\rm exact}
     + a_x\Delta E_{\rm x}^{\rm B88} + (1-a_c)E_{\rm c}^{\rm VWN} + a_c\,E_{\rm c}^{\rm LYP},
-\end{equation}
+$$
+{{< /math >}}
 with $a_0 = 0.20$, $a_x = 0.72$, $a_c = 0.81$. The LYP correlation (Lee–Yang–Parr) is derived
 from the Colle–Salvetti helium atom expression, not from the UEG, so it does not reduce to
 $\varepsilon_{\rm c}^{\rm UEG}$ in the uniform limit. This makes B3LYP physically inconsistent
@@ -369,13 +414,12 @@ logarithmic divergence of the exchange potential at the Fermi surface.
 This physics suggests splitting the Coulomb operator into short-range (SR) and long-range (LR)
 parts using the error function:
 {{< math >}}
-\begin{equation}
+$$
     \frac{1}{r_{12}} =
     \underbrace{\frac{\mathrm{erfc}(\omega r_{12})}{r_{12}}}_{\mathrm{SR}: \;\to 0\text{ as }r_{12}\to\infty}
     +
     \underbrace{\frac{\mathrm{erf}(\omega r_{12})}{r_{12}}}_{\mathrm{LR}: \;\to 1/r_{12}\text{ as }r_{12}\to\infty},
-    \label{eq:range-split}
-\end{equation}
+$$
 {{< /math >}}
 where $\omega$ controls the crossover: $r_c \approx 1/\omega$. Different exact exchange fractions
 $a_{\rm SR}$ and $a_{\rm LR}$ are then applied to each part.
@@ -383,10 +427,12 @@ $a_{\rm SR}$ and $a_{\rm LR}$ are then applied to each part.
 #### HSE06 — Short-Range Exact Exchange for Solids
 
 **HSE06** (Heyd–Scuseria–Ernzerhof, 2003/2006) applies exact exchange at short range only:
-\begin{equation}
+{{< math >}}
+$$
     E_{\rm xc}^{\rm HSE06} = \frac{1}{4}E_{\rm x}^{\rm exact,SR}(\omega)
     + \frac{3}{4}E_{\rm x}^{\rm PBE,SR}(\omega) + E_{\rm x}^{\rm PBE,LR}(\omega) + E_{\rm c}^{\rm PBE},
-\end{equation}
+$$
+{{< /math >}}
 with $\omega = 0.11$ bohr$^{-1}$ ($\approx 0.21$ Å$^{-1}$, crossover $\sim 5$–$10$ Å).
 
 The limits confirm the physical motivation: $\omega \to 0$ recovers PBE0 (no screening,
@@ -406,9 +452,11 @@ For isolated molecules, the physical argument is opposite: the density tails are
 the correct $-1/r$ asymptote of $V_{\rm x}$ is essential for Rydberg states and
 charge-transfer excitations. **Long-range corrected (LC)** functionals apply exact exchange at
 long range:
-\begin{equation}
+{{< math >}}
+$$
     E_{\rm xc}^{\rm LC} = E_{\rm x}^{\rm GGA,SR}(\omega) + E_{\rm x}^{\rm exact,LR}(\omega) + E_{\rm c}^{\rm GGA}.
-\end{equation}
+$$
+{{< /math >}}
 
 **$\omega$B97X-V** (Mardirossian–Head-Gordon, 2014; $a_{\rm SR} = 0.167$, $a_{\rm LR} = 1.0$,
 $\omega = 0.30$ Å$^{-1}$) further combines long-range correction with the non-local VV10
@@ -434,10 +482,12 @@ while improving excited states.
 
 Retaining both the zeroth- and first-order terms of \eqref{eq:AC-integrated} and approximating
 the GGA remainder for the higher orders gives the **double-hybrid**:
-\begin{equation}
+{{< math >}}
+$$
     \boxed{E_{\rm xc}^{\rm DH} = a\,E_{\rm x}^{\rm exact} + (1-a)\,E_{\rm x}^{\rm GGA}
     + b\,E_{\rm c}^{\rm GL2} + (1-b)\,E_{\rm c}^{\rm GGA},}
-\end{equation}
+$$
+{{< /math >}}
 where $E_{\rm c}^{\rm GL2}$ is the second-order Görling–Levy correlation \eqref{eq:GL2}.
 This costs $\mathcal{O}(N^5)$ in system size due to the four-index two-electron integrals,
 restricting applications to systems of tens to a few hundred atoms.

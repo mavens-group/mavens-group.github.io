@@ -30,10 +30,14 @@ remaining formally exact.
 The key idea is to split the unknown universal functional $F[\rho]$ into parts that can be
 handled accurately and a remainder that must be approximated:
 
+{{< math >}}
+$$
 \begin{equation}
     E[\rho] = T_s[\rho] + E_{\mathrm{H}}[\rho] + E_{\mathrm{xc}}[\rho] + \int V_{\mathrm{ext}}(\mathbf{r})\, \rho(\mathbf{r}) \, d\mathbf{r},
     \label{eq:KS-energy}
 \end{equation}
+$$
+{{< /math >}}
 
 where each term has a specific physical meaning:
 
@@ -44,18 +48,23 @@ where each term has a specific physical meaning:
 
 - $E_{\mathrm{H}}[\rho]$ is the **classical Hartree energy** — the electrostatic self-energy of
   the electron charge distribution, treating it as a classical continuous fluid:
+{{< math >}}
+$$
     \begin{equation}
         E_{\mathrm{H}}[\rho] = \frac{1}{2} \iint \frac{\rho(\mathbf{r})\, \rho(\mathbf{r}')}{|\mathbf{r} - \mathbf{r}'|} \, d\mathbf{r} \, d\mathbf{r}'.
     \end{equation}
+$$
+{{< /math >}}
   This is the dominant part of the electron–electron repulsion and is treated exactly.
 
 - $E_{\mathrm{xc}}[\rho]$ is the **exchange-correlation (XC) energy**. It collects everything
   that is missing from the above terms:
-
 {{< math >}}
+$$
     \begin{equation}
         E_{\mathrm{xc}}[\rho] = \underbrace{(T[\rho] - T_s[\rho])}_{\text{kinetic correlation}} + \underbrace{(V_{ee}[\rho] - E_{\mathrm{H}}[\rho])}_{\text{exchange + correlation}}.
     \end{equation}
+$$
 {{< /math >}}
   This includes the quantum exchange energy (from the antisymmetry of the wavefunction, as seen
   in the Hartree–Fock discussion in Chapter 1), all Coulomb correlation effects beyond the
@@ -78,23 +87,27 @@ The central assumption of the Kohn–Sham approach is:
 > *There exists a system of non-interacting electrons — the KS reference system — whose
 > ground-state density is identical to that of the true interacting system.*
 
-This is not an approximation in itself: under mild conditions it can be shown to hold (the
-"non-interacting $v$-representability" condition). The density is represented in terms of
-**Kohn–Sham orbitals** $\{\phi_i(\mathbf{r})\}$:
+**Non-interacting $v$-representability.** This assumption is not trivially guaranteed. It requires that the interacting ground-state density $\rho_0(\mathbf{r})$ can be reproduced as the ground-state density of some non-interacting system moving in a local effective potential $V_{\rm eff}(\mathbf{r})$. Densities for which this holds are called *non-interacting $v$-representable*. While a general proof is lacking, no physically relevant counterexample has been found, and the assumption is accepted as holding for all practical ground-state densities encountered in electronic structure calculations. The Kohn–Sham equations derived below are exact under this assumption.
+
+The density is represented in terms of **Kohn–Sham orbitals** $\{\phi_i(\mathbf{r})\}$:
 {{< math >}}
+$$
 \begin{equation}
     \rho(\mathbf{r}) = \sum_{i=1}^{N} |\phi_i(\mathbf{r})|^2.
     \label{eq:KS-density}
 \end{equation}
+$$
 {{< /math >}}
 
 The kinetic energy of the non-interacting reference system is then computed exactly from these
 orbitals:
 {{< math >}}
+$$
 \begin{equation}
     T_s[\rho] = -\frac{1}{2}\sum_{i=1}^{N} \langle \phi_i | \nabla^2 | \phi_i \rangle
               = -\frac{1}{2}\sum_{i=1}^{N} \int \phi_i^*(\mathbf{r})\,\nabla^2\phi_i(\mathbf{r})\,d\mathbf{r}.
 \end{equation}
+$$
 {{< /math >}}
 
 This is the key advantage over orbital-free approaches like Thomas–Fermi: by working with
@@ -108,37 +121,45 @@ single-particle functions.
 We seek the set of orbitals $\{\phi_i\}$ that minimises the total energy functional
 \eqref{eq:KS-energy}, subject to the orthonormality constraint:
 {{< math >}}
+$$
 \begin{equation}
     \langle \phi_i | \phi_j \rangle = \int \phi_i^*(\mathbf{r})\,\phi_j(\mathbf{r})\,d\mathbf{r} = \delta_{ij}.
 \end{equation}
+$$
 {{< /math >}}
 
 We introduce Lagrange multipliers $\epsilon_i$ to enforce the constraints and form the
 Lagrangian:
 {{< math >}}
+$$
 \begin{equation}
     \mathcal{L}[\{\phi_i\}] = E[\rho] - \sum_{i=1}^{N} \epsilon_i \left( \langle \phi_i | \phi_i \rangle - 1 \right).
 \end{equation}
+$$
 {{< /math >}}
 
 Taking the functional derivative with respect to $\phi_i^*(\mathbf{r})$ and setting it to zero:
 {{< math >}}
+$$
 \begin{equation}
     \frac{\delta \mathcal{L}}{\delta \phi_i^*(\mathbf{r})} = 0
     \implies
     \left[ -\frac{1}{2} \nabla^2 + V_{\mathrm{eff}}(\mathbf{r}) \right] \phi_i(\mathbf{r}) = \epsilon_i\, \phi_i(\mathbf{r}),
     \label{eq:KS-eqn}
 \end{equation}
+$$
 {{< /math >}}
 
 which are the **Kohn–Sham equations**. They take the form of single-particle Schrödinger
 equations, with the complex many-body interaction absorbed into the **Kohn–Sham effective
 potential**:
 {{< math >}}
+$$
 \begin{equation}
     V_{\mathrm{eff}}(\mathbf{r}) = V_{\mathrm{ext}}(\mathbf{r}) + V_{\mathrm{H}}(\mathbf{r}) + V_{\mathrm{xc}}(\mathbf{r}),
     \label{eq:Veff}
 \end{equation}
+$$
 {{< /math >}}
 
 where each component has a clear origin:
@@ -160,7 +181,7 @@ in the next section).
 
 Equations \eqref{eq:KS-density}–\eqref{eq:Veff} form a **self-consistent system**: $V_{\mathrm{eff}}$ depends on $\rho(\mathbf{r})$ through $V_{\mathrm{H}}$ and $V_{\mathrm{xc}}$, but $\rho(\mathbf{r})$ itself is constructed from the KS orbitals $\phi_i$, which are solutions of the KS equations with $V_{\mathrm{eff}}$ as input. This circular dependency is resolved iteratively via the **self-consistent field (SCF)** method:
 
-![SCF Cycle](fig-scf-cycle_dft.png)
+![SCF Cycle](/uploads/dft/scf.webp)
 
 1. **Initialise**: Start with an initial guess for the electron density $\rho^{(0)}(\mathbf{r})$
    (commonly taken from a superposition of atomic densities).
@@ -169,17 +190,17 @@ Equations \eqref{eq:KS-density}–\eqref{eq:Veff} form a **self-consistent syste
    density $\rho^{(n)}$ using equation \eqref{eq:Veff}.
 
 3. **Solve the KS equations**: Diagonalise the KS Hamiltonian
-
-   $\hat{H}\_{KS}= -\frac{1}{2}\nabla^2 + V_{\mathrm{eff}}^{(n)}$
-
-   to obtain the updated orbitals
-   $\phi_i^{(n)}(\mathbf{r})$
-   and eigenvalues $\epsilon_i^{(n)}$.
+   $\hat{h}_{KS} = -\frac{1}{2}\nabla^2 + V_{\mathrm{eff}}^{(n)}$ to obtain the updated
+   orbitals $\phi_i^{(n)}(\mathbf{r})$ and eigenvalues $\epsilon_i^{(n)}$.
 
 4. **Update the density**: Form the new density:
+{{< math >}}
+$$
     \begin{equation}
         \rho^{(n+1)}(\mathbf{r}) = \sum_{i=1}^N |\phi_i^{(n)}(\mathbf{r})|^2.
     \end{equation}
+$$
+{{< /math >}}
 
 5. **Check convergence**: If $\rho^{(n+1)} \approx \rho^{(n)}$ (to within a chosen threshold,
    e.g. in total energy or charge density norm), the SCF loop has converged. Otherwise, set

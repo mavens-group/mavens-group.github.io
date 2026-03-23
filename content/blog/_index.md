@@ -1,5 +1,5 @@
 ---
-title: Resources
+title: Lectures and Tutorials
 subtitle: Tutorials and Lecture Notes
 
 # Listing view

@@ -31,15 +31,17 @@ plane-wave or PAW framework.
 The Hubbard model (Hubbard, 1963) is the minimal lattice model capturing the competition
 between kinetic energy (electron hopping, bandwidth $W$) and on-site Coulomb repulsion:
 {{< math >}}
+$$
 \begin{equation}
     \hat{H}_{\rm Hub} = -t\sum_{\langle i,j\rangle,\sigma}\hat{c}_{i\sigma}^\dagger\hat{c}_{j\sigma}
     + U\sum_i \hat{n}_{i\uparrow}\hat{n}_{i\downarrow},
     \label{eq:Hubbard}
 \end{equation}
+$$
 {{< /math >}}
-where {{< math >}}$\hat{c}_{i\sigma}^\dagger${{< /math >}} creates an electron of spin $\sigma$ on site $i$, $t$ is the
+where $\hat{c}_{i\sigma}^\dagger$ creates an electron of spin $\sigma$ on site $i$, $t$ is the
 nearest-neighbour hopping integral, $U$ is the on-site Coulomb repulsion, and
-{{< math >}}$\hat{n}_{i\sigma} = \hat{c}_{i\sigma}^\dagger\hat{c}_{i\sigma}${{< /math >}} is the occupation operator.
+$\hat{n}_{i\sigma} = \hat{c}_{i\sigma}^\dagger\hat{c}_{i\sigma}$ is the occupation operator.
 
 The two limits are illuminating:
 
@@ -71,10 +73,14 @@ over-delocalise $d$ and $f$ electrons is a direct consequence.
 
 **2. Missing derivative discontinuity.** The exact XC potential has a finite discontinuity
 at integer electron numbers $N$:
+{{< math >}}
+$$
 \begin{equation}
     \Delta_{\rm xc} = V_{\rm xc}^+(N) - V_{\rm xc}^-(N) > 0,
     \label{eq:disc}
 \end{equation}
+$$
+{{< /math >}}
 where $V_{\rm xc}^\pm$ denote the XC potential just above and below integer $N$. This
 discontinuity, combined with the KS band gap, gives the true quasiparticle gap:
 $E_g^{\rm true} = E_g^{\rm KS} + \Delta_{\rm xc}$. Semi-local functionals give
@@ -95,24 +101,30 @@ discontinuity.
 The central object in DFT+U is the **occupation matrix** $n_{mm'}^\sigma$ of the correlated
 subspace on each atom $I$:
 {{< math >}}
+$$
 \begin{equation}
     n_{mm'}^{I\sigma} = \sum_{\mathbf{k},\nu} f_{\mathbf{k}\nu\sigma}
     \langle\phi_{\mathbf{k}\nu\sigma}|\hat{P}_{m'}^{I}\rangle
     \langle\hat{P}_m^{I}|\phi_{\mathbf{k}\nu\sigma}\rangle,
     \label{eq:occmat}
 \end{equation}
+$$
 {{< /math >}}
 where $f_{\mathbf{k}\nu\sigma}$ are KS orbital occupation numbers, $|\phi_{\mathbf{k}\nu\sigma}\rangle$
-are the KS spinor states, and {{< math >}}$\hat{P}_m^I = |\chi_m^I\rangle\langle\chi_m^I|${{< /math >}} is the projector
+are the KS spinor states, and $\hat{P}_m^I = |\chi_m^I\rangle\langle\chi_m^I|$ is the projector
 onto the localised orbital $|\chi_m^I\rangle$ (e.g. the $d_{m}$ orbital on atom $I$, with
 $m = -l, \ldots, l$). In PAW, these projectors are the on-site partial waves; in LCAO codes,
 they are the basis functions themselves.
 
 The occupation matrix is Hermitian ($n_{mm'}^{I\sigma} = (n_{m'm}^{I\sigma})^*$) and its trace
 gives the total occupation of spin channel $\sigma$ on site $I$:
+{{< math >}}
+$$
 \begin{equation}
     N^{I\sigma} = \sum_m n_{mm}^{I\sigma} = \mathrm{Tr}[\mathbf{n}^{I\sigma}].
 \end{equation}
+$$
+{{< /math >}}
 
 The eigenvalues $\{f_\alpha^{I\sigma}\}$ of $\mathbf{n}^{I\sigma}$ lie in $[0,1]$ and are the
 natural orbital occupation numbers of the correlated subspace.
@@ -120,10 +132,14 @@ natural orbital occupation numbers of the correlated subspace.
 ### The Full DFT+U Functional
 
 The total DFT+U energy is:
+{{< math >}}
+$$
 \begin{equation}
     E_{\rm DFT+U} = E_{\rm DFT}[\rho] + E_U[\{n_{mm'}^{I\sigma}\}] - E_{\rm dc}[\{N^{I\sigma}\}],
     \label{eq:DFTU-total}
 \end{equation}
+$$
+{{< /math >}}
 where $E_{\rm DFT}$ is the standard LDA or GGA energy, $E_U$ is the Hubbard correction, and
 $E_{\rm dc}$ is the **double-counting correction** — a term that must be subtracted because the
 Coulomb interaction among the correlated electrons is already partially included in the DFT XC
@@ -138,25 +154,37 @@ energy and must not be counted twice.
 The Liechtenstein formulation (Liechtenstein, Anisimov, Zaanen, 1995) uses the full
 rotationally invariant Coulomb interaction characterised by two parameters: the average on-site
 Coulomb repulsion $U$ and the average exchange interaction $J$:
+{{< math >}}
+$$
 \begin{equation}
     E_U^{\rm Lich} = \frac{1}{2}\sum_{I,\sigma}\sum_{\{m\}}
     \left[U_{m_1m_3}^{m_2m_4} - \delta_{\sigma\sigma'}J_{m_1m_3}^{m_2m_4}\right]
     n_{m_1m_2}^{I\sigma}\,n_{m_3m_4}^{I\sigma'},
 \end{equation}
+$$
+{{< /math >}}
 where $U_{m_1m_3}^{m_2m_4}$ and $J_{m_1m_3}^{m_2m_4}$ are the screened Slater integrals
 parametrising the full Coulomb tensor. In practice these are reduced to a small number of
 radial integrals $F^0, F^2, F^4$ (for $d$ orbitals) related to $U$ and $J$ by:
+{{< math >}}
+$$
 \begin{equation}
     U = F^0,
     \qquad
     J = \frac{F^2 + F^4}{14}.
 \end{equation}
+$$
+{{< /math >}}
 
 The double-counting correction in the Liechtenstein scheme uses the **around mean-field (AMF)**
 form:
+{{< math >}}
+$$
 \begin{equation}
     E_{\rm dc}^{\rm AMF} = \frac{U}{2}N(N-1) - \frac{J}{2}\sum_\sigma N^\sigma(N^\sigma - 1),
 \end{equation}
+$$
+{{< /math >}}
 where $N = \sum_\sigma N^\sigma$ is the total occupation of the correlated shell.
 
 ### Dudarev Formulation (Simplified, $U_{\rm eff}$)
@@ -164,11 +192,15 @@ where $N = \sum_\sigma N^\sigma$ is the total occupation of the correlated shell
 For most practical purposes, the simpler **Dudarev formulation** (Dudarev et al., 1998) is
 preferred. It collapses $U$ and $J$ into a single effective parameter $U_{\rm eff} = U - J$ and
 writes the correction as a penalty on fractional orbital occupations:
+{{< math >}}
+$$
 \begin{equation}
     \boxed{E_U^{\rm Dur} = \frac{U_{\rm eff}}{2}\sum_{I,\sigma}
     \mathrm{Tr}\!\left[\mathbf{n}^{I\sigma}\!\left(\mathbf{1} - \mathbf{n}^{I\sigma}\right)\right].}
     \label{eq:Dudarev}
 \end{equation}
+$$
+{{< /math >}}
 
 This elegant form has a transparent physical interpretation: the factor
 $n_{mm}^{I\sigma}(1 - n_{mm}^{I\sigma})$ vanishes when orbital $m$ is either fully occupied
@@ -178,10 +210,14 @@ towards integer eigenvalues. This is precisely the correction for the SIE, which
 stabilise unphysical non-integer occupations.
 
 The corresponding correction to the KS potential is:
+{{< math >}}
+$$
 \begin{equation}
     V_{mm'}^{I\sigma,\rm DFT+U} = \frac{U_{\rm eff}}{2}\left(\delta_{mm'} - 2n_{mm'}^{I\sigma}\right),
     \label{eq:Vpot}
 \end{equation}
+$$
+{{< /math >}}
 which shifts occupied orbitals (large $n_{mm}$) downward in energy by $-U_{\rm eff}/2$ and
 empty orbitals (small $n_{mm}$) upward by $+U_{\rm eff}/2$. The net effect is to open or widen
 the gap between occupied and empty states in the correlated subspace by approximately
@@ -191,7 +227,7 @@ $U_{\rm eff}$, as intended.
 $E_U - E_{\rm dc}$ combination reduces exactly to equation \eqref{eq:Dudarev}, with the
 double-counting absorbed algebraically. No separate choice of double-counting scheme is needed.
 
-### Comparison of Formulations
+### Comparison of Formulations and Equivalence Conditions
 
 | Feature | Liechtenstein | Dudarev |
 |---|---|---|
@@ -202,11 +238,21 @@ double-counting absorbed algebraically. No separate choice of double-counting sc
 | Typical use | $f$-electron systems, full anisotropy | $d$-electron oxides, most practical work |
 | Implementation in VASP | `LDAUTYPE = 1` | `LDAUTYPE = 2` (default) |
 
-For most $d$-electron transition metal compounds, the Dudarev formulation with a single
-$U_{\rm eff}$ is sufficient and is the default in VASP (`LDAUTYPE = 2`). The Liechtenstein form
-is preferred when orbital polarisation within the correlated shell matters — rare-earth $f$
-systems, systems near the Mott transition, or when $J$ significantly affects the orbital
-ordering.
+**Conditions under which Dudarev and Liechtenstein are equivalent.** The Dudarev functional is obtained from the Liechtenstein functional by making two approximations:
+
+1. **Isotropic (spherically averaged) Coulomb interaction**: replace the full Slater integrals $U_{m_1m_3}^{m_2m_4}$ by their spherical average $U\,\delta_{m_1m_2}\delta_{m_3m_4} - J\,\delta_{m_1m_4}\delta_{m_2m_3}$.
+
+2. **FLL double-counting with $J = 0$ in the double-counting term**: when the FLL double-counting correction is applied and the exchange term $J$ is absorbed into $U_{\rm eff}$, the Liechtenstein energy reduces exactly to the Dudarev form.
+
+Concretely, inserting the spherically averaged interaction into the Liechtenstein energy and subtracting the FLL double counting gives:
+
+{{< math >}}
+$$
+E_U^{\rm Lich,spherical} - E_{\rm dc}^{\rm FLL} = \frac{U-J}{2}\sum_{I,\sigma}\mathrm{Tr}\left[\mathbf{n}^{I\sigma}(\mathbf{1}-\mathbf{n}^{I\sigma})\right] \equiv E_U^{\rm Dur}.
+$$
+{{< /math >}}
+
+The two formulations therefore give identical results when: (a) the occupation matrix $\mathbf{n}^{I\sigma}$ is diagonal (no off-diagonal orbital coherences), and (b) the Slater integrals satisfy the spherical approximation $F^2/F^4 = 14/9$ (exact for a hydrogen-like atom, approximately satisfied for $3d$ transition metals). They **differ** when orbital polarisation within the correlated shell is important — i.e. when different $m$ orbitals have different occupations that couple through the full Coulomb tensor. This is the regime where the Liechtenstein formulation is necessary: rare-earth $f$ systems, orbitally ordered manganites, and systems near the Mott transition where the orbital degree of freedom is active.
 
 ---
 
@@ -217,17 +263,25 @@ form because the DFT XC energy does not separate cleanly into contributions from
 subspace and the rest. Two schemes are in common use:
 
 **Fully localised limit (FLL)**, also called the atomic limit:
+{{< math >}}
+$$
 \begin{equation}
     E_{\rm dc}^{\rm FLL} = \frac{U}{2}N(N-1) - \frac{J}{2}\left[\frac{N}{2}\!\left(\frac{N}{2}-1\right) + \frac{N}{2}\!\left(\frac{N}{2}-1\right)\right],
     \label{eq:FLL}
 \end{equation}
+$$
+{{< /math >}}
 valid when the correlated orbital is nearly fully occupied or nearly empty (close to the atomic
 limit). This is appropriate for $f$-electron systems and late transition metal oxides.
 
 **Around mean-field (AMF):**
+{{< math >}}
+$$
 \begin{equation}
     E_{\rm dc}^{\rm AMF} = \frac{U}{2}\bar{n}(N-1) - \frac{J}{2}\sum_\sigma\bar{n}^\sigma(N^\sigma - 1),
 \end{equation}
+$$
+{{< /math >}}
 where $\bar{n} = N/(2l+1)$ is the average occupation per orbital. This is appropriate when the
 occupations are close to the average (near the itinerant limit).
 
@@ -270,12 +324,16 @@ A compilation of commonly used values:
 A first-principles approach computes $U$ from the linear response of the occupation matrix to a
 localised perturbation potential $\alpha^I$ applied to site $I$ (Cococcioni and de Gironcoli,
 2005):
+{{< math >}}
+$$
 \begin{equation}
     U^I = \left(\chi_0^{-1} - \chi^{-1}\right)^{II},
     \label{eq:LR-U}
 \end{equation}
-where {{< math >}}$\chi_0^{II} = \partial N^I/\partial\alpha^I|_{\rm bare}${{< /math >}} is the bare (non-self-consistent)
-response and {{< math >}}$\chi^{II} = \partial N^I/\partial\alpha^I|_{\rm SCF}${{< /math >}} is the fully self-consistent
+$$
+{{< /math >}}
+where $\chi_0^{II} = \partial N^I/\partial\alpha^I|_{\rm bare}$ is the bare (non-self-consistent)
+response and $\chi^{II} = \partial N^I/\partial\alpha^I|_{\rm SCF}$ is the fully self-consistent
 response. The difference captures the screening of the bare Coulomb interaction by all other
 electrons. The parameter $U$ computed this way is self-consistent with the chosen DFT functional
 and projector, requiring no experimental input.
@@ -294,9 +352,13 @@ choice of projectors and may differ between PAW and LCAO implementations.
 The most rigorous approach is the **constrained RPA** (Aryasetiawan et al., 2004), which computes
 the partially screened Coulomb interaction $W(\omega)$ by excluding the screening from the
 correlated subspace itself (to avoid double counting):
+{{< math >}}
+$$
 \begin{equation}
     U(\omega) = \langle\chi_m\chi_{m'}|W_r(\omega)|\chi_m\chi_{m'}\rangle,
 \end{equation}
+$$
+{{< /math >}}
 where $W_r$ is the RPA-screened interaction with the polarisation of the correlated $d/f$
 subspace removed. cRPA gives frequency-dependent $U(\omega)$; the static limit $U(0)$ is
 used in DFT+U, while the full frequency dependence feeds into DFT+DMFT. cRPA requires a
@@ -314,7 +376,6 @@ states up by $\sim U_{\rm eff}/2$, opening a gap of approximately $U_{\rm eff}$ 
 correlated subspace. For a Mott insulator like NiO, DFT gives a metallic state while
 DFT+U with $U_{\rm eff} \approx 5$ eV correctly gives an insulating gap $\sim 3$–$4$ eV.
 
-![DFT+U effect on band gap opening](fig-dftu-levels_dft.png)
 **Orbital polarisation.** The integer-driving nature of DFT+U can lift orbital degeneracy via
 **orbital ordering** — a spontaneous symmetry breaking in which one particular $d$ orbital
 (e.g. $d_{z^2}$ vs. $d_{x^2-y^2}$) becomes preferentially occupied. This is relevant for

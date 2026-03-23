@@ -1,6 +1,6 @@
 ---
 title: Basis Sets and Pseudopotentials
-date: '2026-03-15'
+date: '2025-06-01'
 type: book
 weight: 05
 summary: Plane waves, localised orbitals, PAW, and convergence
@@ -25,19 +25,23 @@ on convergence.
 The KS orbital $\phi_i(\mathbf{r})$ is an element of an infinite-dimensional Hilbert space. In
 practice, it is expanded in a finite basis $\{f_\mu(\mathbf{r})\}$:
 {{< math >}}
+$$
 \begin{equation}
     \phi_i(\mathbf{r}) = \sum_\mu c_{i\mu}\, f_\mu(\mathbf{r}),
 \end{equation}
+$$
 {{< /math >}}
 where the coefficients $c_{i\mu}$ are determined by diagonalising the KS Hamiltonian in this
 basis. The KS eigenvalue problem \eqref{eq:KS-eqn} becomes the generalised matrix eigenvalue
 problem:
 {{< math >}}
+$$
 \begin{equation}
     \mathbf{H}_{\rm KS}\,\mathbf{c}_i = \epsilon_i\,\mathbf{S}\,\mathbf{c}_i,
 \end{equation}
+$$
 {{< /math >}}
-where {{< math >}}$H_{\rm KS,\mu\nu} = \langle f_\mu | \hat{h}_{\rm KS} | f_\nu\rangle${{< /math >}} and
+where $H_{\rm KS,\mu\nu} = \langle f_\mu | \hat{h}_{\rm KS} | f_\nu\rangle$ and
 $S_{\mu\nu} = \langle f_\mu | f_\nu\rangle$ is the overlap matrix. The two dominant choices are
 **plane waves** and **localised (atomic-like) basis functions**.
 
@@ -46,19 +50,33 @@ $S_{\mu\nu} = \langle f_\mu | f_\nu\rangle$ is the overlap matrix. The two domin
 ## Plane-Wave Basis Sets
 
 For crystalline solids, Bloch's theorem dictates that KS orbitals have the form:
+{{< math >}}
+$$
 \begin{equation}
     \phi_{i\mathbf{k}}(\mathbf{r}) = e^{i\mathbf{k}\cdot\mathbf{r}}\,u_{i\mathbf{k}}(\mathbf{r}),
 \end{equation}
+$$
+{{< /math >}}
 where $u_{i\mathbf{k}}(\mathbf{r})$ is lattice-periodic. The periodic part is naturally expanded
 in **plane waves** labelled by reciprocal lattice vectors $\mathbf{G}$:
+{{< math >}}
+$$
 \begin{equation}
     u_{i\mathbf{k}}(\mathbf{r}) = \frac{1}{\sqrt{\Omega}}\sum_{\mathbf{G}} c_{i,\mathbf{k}+\mathbf{G}}\,e^{i\mathbf{G}\cdot\mathbf{r}},
 \end{equation}
+$$
+{{< /math >}}
 where $\Omega$ is the unit cell volume. The basis is truncated at a **kinetic energy cutoff**
-$E_{\rm cut}$:
-\begin{equation}
-    \frac{\hbar^2}{2m}|\mathbf{k}+\mathbf{G}|^2 \leq E_{\rm cut}.
-\end{equation}
+$E_{\rm cut}$. In atomic units (Hartree), the condition is:
+
+{{< math >}}
+$$
+\frac{1}{2}|\mathbf{k}+\mathbf{G}|^2 \leq E_{\rm cut},
+$$
+{{< /math >}}
+
+equivalently $\frac{\hbar^2}{2m_e}|\mathbf{k}+\mathbf{G}|^2 \leq E_{\rm cut}$ in SI notation.
+Codes typically quote $E_{\rm cut}$ in eV (VASP) or Ry (Quantum ESPRESSO); 1 Hartree = 27.2 eV = 2 Ry.
 
 **Advantages of plane waves:**
 - **Systematic completeness**: increasing $E_{\rm cut}$ improves the basis in a controlled,
@@ -84,7 +102,7 @@ $E_{\rm cut}$:
 A **convergence test** is mandatory in every plane-wave calculation. The procedure is:
 1. Fix all other parameters (cell, $k$-points, functional).
 2. Compute the total energy $E_{\rm tot}(E_{\rm cut})$ for a series of cutoff values.
-3. Identify the cutoff where $\Delta E_{\rm tot} \leq \epsilon_{\rm tol}$ (typically $1$–$5$ meV/atom).
+3. Identify the cutoff where $\Delta E_{\rm tot} < \epsilon_{\rm tol}$ (typically $1$–$5$ meV/atom).
 
 Typical converged cutoffs: $\sim 400$–$600$ eV for GGA+PAW; $\sim 700$–$1200$ eV for
 norm-conserving PPs; transition metal oxides and $f$-electron systems often require higher
@@ -96,13 +114,13 @@ values.
 
 In a periodic solid, the KS equations must be solved at every $\mathbf{k}$-point in the first
 Brillouin zone (BZ). Physical observables involve BZ integrals, e.g.:
-
 {{< math >}}
+$$
 \begin{equation}
     \rho(\mathbf{r}) = \frac{\Omega}{(2\pi)^3}\sum_i \int_{\rm BZ} |\phi_{i\mathbf{k}}(\mathbf{r})|^2\,d\mathbf{k}.
 \end{equation}
+$$
 {{< /math >}}
-
 
 In practice, the integral is replaced by a discrete sum over a finite mesh. The standard choice
 is the **Monkhorst–Pack (MP) mesh**: a uniform $N_1 \times N_2 \times N_3$ grid in reciprocal
@@ -133,9 +151,13 @@ is centred on atom $A$.
 
 GTOs take the form $f(r) = r^l e^{-\alpha r^2} Y_l^m(\hat{\mathbf{r}})$, where $\alpha$ is the
 exponent and $Y_l^m$ is a real spherical harmonic. Multi-Gaussian contractions are used:
+{{< math >}}
+$$
 \begin{equation}
     f_\mu(r) = \sum_k d_{\mu k}\,g_k(r,\alpha_k).
 \end{equation}
+$$
+{{< /math >}}
 
 GTOs are the standard in quantum chemistry codes (Gaussian, CRYSTAL, FHI-aims). Common basis
 set families: **6-31G**, **cc-pVDZ/TZ**, **def2-TZVP**. The acronyms encode the contraction
@@ -185,14 +207,22 @@ The core electrons are replaced by an **effective potential** $V_{\rm PP}(\mathb
 reproduces the scattering properties of the full ionic potential in the valence region. The
 pseudo-wavefunction $\tilde{\phi}_l(r)$ agrees with the true all-electron wavefunction
 $\phi_l(r)$ outside a cutoff radius $r_c$:
+{{< math >}}
+$$
 \begin{equation}
     \tilde{\phi}_l(r) = \phi_l(r), \quad r > r_c.
 \end{equation}
+$$
+{{< /math >}}
 
 The **norm-conservation condition** requires:
+{{< math >}}
+$$
 \begin{equation}
     \int_0^{r_c} |\tilde{\phi}_l(r)|^2 r^2\,dr = \int_0^{r_c} |\phi_l(r)|^2 r^2\,dr,
 \end{equation}
+$$
+{{< /math >}}
 ensuring that the charge inside $r_c$ is preserved and that the logarithmic derivatives (which
 control scattering) match at $r_c$. The Hamann–Schlüter–Chiang (HSC) and Troullier–Martins (TM)
 schemes are standard constructions.
@@ -210,14 +240,14 @@ nodeless function.
 
 The missing charge that would violate the norm-conservation sum rule is compensated by
 **augmentation charges** $Q_{nm}(\mathbf{r})$ added to the density:
-
 {{< math >}}
+$$
 \begin{equation}
     \rho(\mathbf{r}) = \sum_i |\tilde{\phi}_i(\mathbf{r})|^2 + \sum_a\sum_{nm} \rho_{nm}^a\,Q_{nm}^a(\mathbf{r}),
 \end{equation}
+$$
 {{< /math >}}
-
-where $\rho\_{nm}^a = \sum\_i \langle\tilde{\phi}\_i|\tilde{p}\_n^a\rangle\langle\tilde{p}\_m^a|\tilde{\phi}\_i\rangle$ are the **occupancy matrices** for atom $a$, and $Q_{nm}^a(\mathbf{r})$ are localised functions inside the augmentation sphere that carry the missing charge. The generalised eigenvalue problem that results from USPP differs from the standard KS equation, requiring a modified orthonormality condition; however, this adds negligible overhead in practice.
+where $\rho_{nm}^a = \sum_i \langle\tilde{\phi}_i|\tilde{p}_n^a\rangle\langle\tilde{p}_m^a|\tilde{\phi}_i\rangle$ are the **occupancy matrices** for atom $a$, and $Q_{nm}^a(\mathbf{r})$ are localised functions inside the augmentation sphere that carry the missing charge. The generalised eigenvalue problem that results from USPP differs from the standard KS equation, requiring a modified orthonormality condition; however, this adds negligible overhead in practice.
 
 USPP is available in Quantum ESPRESSO and CASTEP and offers an excellent cost-to-accuracy ratio
 for most elements.
@@ -235,20 +265,28 @@ of USPP that is formally equivalent to an all-electron calculation.
 PAW introduces a **linear transformation operator** $\hat{\mathcal{T}}$ that maps smooth,
 computationally convenient **pseudo-wavefunctions** $|\tilde{\Psi}_i\rangle$ onto the true
 all-electron wavefunctions $|\Psi_i\rangle$:
+{{< math >}}
+$$
 \begin{equation}
     |\Psi_i\rangle = \hat{\mathcal{T}}\,|\tilde{\Psi}_i\rangle.
     \label{eq:PAW-transform}
 \end{equation}
+$$
+{{< /math >}}
 
 Inside the **augmentation sphere** of radius $r_c^a$ centred on each atom $a$, the smooth
 pseudo-wavefunction is a poor approximation to the oscillatory all-electron wavefunction. The
 transformation $\hat{\mathcal{T}}$ corrects for this, atom by atom:
+{{< math >}}
+$$
 \begin{equation}
     \hat{\mathcal{T}} = \mathbf{1} + \sum_a \hat{\mathcal{T}}^a,
     \qquad
     \hat{\mathcal{T}}^a = \sum_{n} \left(|\phi_n^a\rangle - |\tilde{\phi}_n^a\rangle\right)\langle\tilde{p}_n^a|,
     \label{eq:PAW-T}
 \end{equation}
+$$
+{{< /math >}}
 where:
 - $|\phi_n^a\rangle$ are **all-electron partial waves** — solutions of the radial Schrödinger
   equation for the isolated atom $a$ at reference energies, labelled by $n = (l, m, \epsilon_{\rm ref})$.
@@ -265,10 +303,14 @@ spheres, $\hat{\mathcal{T}}^a = 0$ and the smooth wavefunction is used directly.
 #### Reconstruction of the All-Electron Density
 
 The all-electron charge density is:
+{{< math >}}
+$$
 \begin{equation}
     \rho(\mathbf{r}) = \tilde{\rho}(\mathbf{r}) + \rho^1(\mathbf{r}) - \tilde{\rho}^1(\mathbf{r}),
     \label{eq:PAW-density}
 \end{equation}
+$$
+{{< /math >}}
 where each term has a specific role:
 
 - $\tilde{\rho}(\mathbf{r}) = \sum_i f_i\,|\tilde{\Psi}_i(\mathbf{r})|^2$ is the **smooth
@@ -295,26 +337,27 @@ uses the standard plane-wave machinery.
 
 The total energy functional in PAW is:
 {{< math >}}
+$$
 \begin{equation}
     E = \tilde{E} + E^1 - \tilde{E}^1,
 \end{equation}
+$$
 {{< /math >}}
-
 where $\tilde{E}$ is the energy of the pseudo-system (computed with plane waves), $E^1$ is the
 all-electron on-site energy inside the augmentation spheres, and $\tilde{E}^1$ is the
 corresponding pseudo on-site energy that prevents double-counting. The KS equations derived from
 this functional take the form of a **generalised eigenvalue problem**:
 {{< math >}}
+$$
 \begin{equation}
     \hat{\tilde{H}}\,|\tilde{\Psi}_i\rangle = \epsilon_i\,\hat{S}\,|\tilde{\Psi}_i\rangle,
 \end{equation}
+$$
 {{< /math >}}
-
 where $\hat{\tilde{H}}$ is the smooth KS Hamiltonian (including on-site corrections) and
-$\hat{S} = \mathbf{1} + \sum\_a\sum\_{nm}({\langle\tilde{p}\_n^a|\tilde{p}\_m^a\rangle\_{\rm AE} - \delta_{nm}})|\tilde{p}\_m^a\rangle\langle\tilde{p}\_n^a|$ is the **overlap operator** that enforces
+$\hat{S} = \mathbf{1} + \sum_a\sum_{nm}({\langle\tilde{p}_n^a|\tilde{p}_m^a\rangle_{\rm AE} - \delta_{nm}})|\tilde{p}_m^a\rangle\langle\tilde{p}_n^a|$ is the **overlap operator** that enforces
 the correct normalisation of the all-electron wavefunctions.
 
-![PAW Schema](fig-paw_dft.png)
 #### Strengths of PAW
 
 - **Formally all-electron**: The full all-electron density is available in the augmentation
