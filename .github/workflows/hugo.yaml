@@ -25,7 +25,7 @@ jobs:
       HUGO_VERSION: 0.153.2
       HUGO_ENVIRONMENT: production
       HUGO_ENV: production
-      DART_SASS_VERSION: 1.77.6
+      DART_SASS_VERSION: 1.97.3
 
     steps:
 
@@ -49,7 +49,7 @@ jobs:
         id: cache-dart-sass
         uses: actions/cache@v5
         with:
-          path: /usr/local/bin/sass
+          path: /opt/dart-sass
           key: dart-sass-${{ env.DART_SASS_VERSION }}-linux-x64
 
       - name: Install Dart Sass
@@ -57,7 +57,13 @@ jobs:
         run: |
           curl -fsSL \
             https://github.com/sass/dart-sass/releases/download/${DART_SASS_VERSION}/dart-sass-${DART_SASS_VERSION}-linux-x64.tar.gz \
-            | tar -xz -C /usr/local/bin --strip-components=1 dart-sass/sass
+            | tar -xz -C /opt
+          # dart-sass extracts to /opt/dart-sass/
+          # It needs src/dart alongside the sass wrapper — cannot just copy the binary
+
+      # Must run unconditionally (cache hit or miss) so sass is always on PATH
+      - name: Add Dart Sass to PATH
+        run: echo "/opt/dart-sass" >> $GITHUB_PATH
 
       # Prepare directories so cache steps never fail on first run
       - name: Prepare Hugo cache directories
