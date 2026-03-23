@@ -1,5 +1,5 @@
 ---
-title: Preamble
+title: Notations Used
 date: '2025-06-01'
 type: book
 weight: 00
@@ -7,7 +7,7 @@ summary: Notation, conventions, atomic units, and symbol table
 ---
 <!--more-->
 
-This preamble establishes the notation, units, and conventions used throughout the course. It is
+This page establishes the notation, units, and conventions used throughout the course. It is
 intended as a standing reference: every symbol defined here retains its meaning in all subsequent
 chapters unless explicitly redefined in context.
 
