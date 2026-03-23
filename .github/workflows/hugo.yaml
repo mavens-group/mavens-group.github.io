@@ -17,6 +17,12 @@ defaults:
   run:
     shell: bash
 
+# Force all actions to run on Node.js 24 now, ahead of the June 2, 2026 deadline.
+# Silences Node 20 deprecation warnings from actions that haven't yet released
+# their own Node 24 updates (currently: configure-pages@v5, upload-pages-artifact@v3).
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
 jobs:
   build:
     runs-on: ubuntu-latest
