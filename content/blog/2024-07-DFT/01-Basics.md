@@ -7,14 +7,6 @@ summary: Introduction to DFT
 ---
 <!--more-->
 
-## Notation and Conventions
-
-Throughout this course we use **atomic units** (a.u.) unless stated otherwise: $\hbar = m_e = e = 4\pi\varepsilon_0 = 1$. In these units, the unit of length is the Bohr radius $a_0 \approx 0.529$ Å, the unit of energy is the Hartree $E_h \approx 27.2$ eV, and the kinetic energy operator becomes $-\frac{1}{2}\nabla^2$ rather than $-\frac{\hbar^2}{2m_e}\nabla^2$. The introductory equations in this chapter are written with $\hbar$ and $m_e$ explicit so that connections to standard quantum mechanics textbooks remain transparent; from Chapter 3 onward atomic units are used throughout.
-
-The electron number density is denoted $\rho(\mathbf{r})$, normalised so that $\int\rho(\mathbf{r})\,d\mathbf{r} = N$. Single-particle Kohn–Sham orbitals are written $\phi_i(\mathbf{r})$; many-body wavefunctions are written $\Psi$. The classical electrostatic self-energy of the electron density is the **Hartree energy** $E_{\rm H}[\rho]$, with corresponding Hartree potential $V_{\rm H}(\mathbf{r}) = \int\rho(\mathbf{r}')/|\mathbf{r}-\mathbf{r}'|\,d\mathbf{r}'$; this is distinct from the bare electron–electron repulsion $\hat{V}_{ee}$ in the many-body Hamiltonian.
-
----
-
 The density functional theory (DFT) has established itself as the primary tool to calculate the
 electronic structure of materials.
 
