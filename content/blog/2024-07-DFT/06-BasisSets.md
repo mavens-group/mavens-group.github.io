@@ -41,7 +41,7 @@ $$
 \end{equation}
 $$
 {{< /math >}}
-where $H_{\rm KS,\mu\nu} = \langle f_\mu | \hat{h}_{\rm KS} | f_\nu\rangle$ and
+where {{< math >}}$H_{\rm KS,\mu\nu} = \langle f_\mu | \hat{h}_{\rm KS} | f_\nu\rangle${{< /math >}} and
 $S_{\mu\nu} = \langle f_\mu | f_\nu\rangle$ is the overlap matrix. The two dominant choices are
 **plane waves** and **localised (atomic-like) basis functions**.
 

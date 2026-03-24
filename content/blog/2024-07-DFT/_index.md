@@ -56,4 +56,4 @@ By the end of this course, participants will:
     related fields as a first step to the world of DFT.
 {{< /spoiler >}}
 
-{{< cta cta_text="Begin the course" cta_link="01-basics/" >}}
+{{< cta cta_text="Begin the course" cta_link="02-basics/" >}}

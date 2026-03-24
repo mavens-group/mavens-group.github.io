@@ -2,7 +2,7 @@
 title: Notations Used
 date: '2025-06-01'
 type: book
-weight: 00
+weight: 01
 summary: Notation, conventions, atomic units, and symbol table
 ---
 <!--more-->

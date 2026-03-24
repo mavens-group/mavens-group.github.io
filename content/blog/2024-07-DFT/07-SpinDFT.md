@@ -257,7 +257,7 @@ $$
 {{< /math >}}
 where $\boldsymbol{\sigma} = (\sigma_x, \sigma_y, \sigma_z)$ are the Pauli matrices.
 
-The KS orbitals become two-component **spinors** $\boldsymbol{\phi}_i = (\phi_i^\uparrow, \phi_i^\downarrow)^T$, and the KS equations take the matrix form:
+The KS orbitals become two-component **spinors** {{< math >}}$\boldsymbol{\phi}_i = (\phi_i^\uparrow, \phi_i^\downarrow)^T${{< /math >}}, and the KS equations take the matrix form:
 {{< math >}}
 $$
 \begin{equation}
@@ -275,7 +275,7 @@ $$
 $$
 {{< /math >}}
 where $V_{\rm xc}^{(0)} = \frac{1}{2}(V_{\rm xc}^\uparrow + V_{\rm xc}^\downarrow)$ is the
-spin-averaged XC potential and $\mathbf{B}_{\rm xc} = \frac{1}{2}(V_{\rm xc}^\uparrow - V_{\rm xc}^\downarrow)\hat{\mathbf{m}}$ is the XC magnetic field aligned along the local magnetisation
+spin-averaged XC potential and {{< math >}}$\mathbf{B}_{\rm xc} = \frac{1}{2}(V_{\rm xc}^\uparrow - V_{\rm xc}^\downarrow)\hat{\mathbf{m}}${{< /math >}} is the XC magnetic field aligned along the local magnetisation
 direction $\hat{\mathbf{m}}(\mathbf{r})$.
 
 ---

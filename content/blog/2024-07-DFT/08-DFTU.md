@@ -39,9 +39,9 @@ $$
 \end{equation}
 $$
 {{< /math >}}
-where $\hat{c}_{i\sigma}^\dagger$ creates an electron of spin $\sigma$ on site $i$, $t$ is the
+where {{< math >}}$\hat{c}_{i\sigma}^\dagger${{< /math >}} creates an electron of spin $\sigma$ on site $i$, $t$ is the
 nearest-neighbour hopping integral, $U$ is the on-site Coulomb repulsion, and
-$\hat{n}_{i\sigma} = \hat{c}_{i\sigma}^\dagger\hat{c}_{i\sigma}$ is the occupation operator.
+{{< math >}}$\hat{n}_{i\sigma} = \hat{c}_{i\sigma}^\dagger\hat{c}_{i\sigma}${{< /math >}} is the occupation operator.
 
 The two limits are illuminating:
 
