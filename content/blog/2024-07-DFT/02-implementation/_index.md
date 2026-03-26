@@ -103,34 +103,3 @@ chapters that follow provide the underlying explanations and rigorous solutions.
 | Band gap severely underestimated | Not a convergence issue — inherent DFT limitation | Use hybrid functional (Ch. 4) or DFT+U (Ch. 7) | — |
 | Eigenvalue solver converges to wrong states | RMM-DIIS subspace collapse | Switch to Davidson for initial iterations; re-orthogonalise | Ch. 9 |
 | Calculation runs out of memory | Too many plane waves or $\mathbf{k}$-points | Reduce $E_{\rm cut}$ or $\mathbf{k}$-mesh (after convergence tests) | Ch. 5, 10 |
-
----
-
-## Roadmap for Part II
-
-**Chapter 8 — SCF Convergence and Density Mixing** develops the theory of SCF convergence
-from the fixed-point formulation of the KS equations. It derives the charge-sloshing instability
-from the Lindhard dielectric function, then presents the main mixing schemes — linear, Kerker,
-Pulay/DIIS, and Broyden — as progressively more sophisticated solutions to the same
-mathematical problem. The chapter is self-contained: a reader who needs to understand why a
-metallic SCF calculation diverges and how to fix it will find the complete answer here.
-
-**Chapter 9 — Brillouin Zone Integration and Eigenvalue Solvers** covers the two pieces of
-numerical machinery that operate *within* each SCF step. Section 9.1 treats smearing and
-partial occupancies: Gaussian, Fermi–Dirac, and Methfessel–Paxton smearing are derived from
-their mathematical foundations, the tetrahedron method is presented as the gold standard for
-fixed-geometry calculations, and the interplay between $\sigma$ and $\mathbf{k}$-mesh density
-is quantified. Section 9.2 develops iterative diagonalisation: the Davidson algorithm and
-RMM-DIIS are derived as subspace methods for the KS eigenvalue problem, with their
-computational scaling and failure modes analysed. Section 9.3 brings everything together with
-convergence diagnostics and a worked example.
-
-**Chapter 10 — Forces, Stress, and Geometry Optimisation** uses the converged KS solution to
-compute forces (Hellmann–Feynman theorem, Pulay corrections) and stress, then develops
-geometry optimisation methods (BFGS, cell relaxation) and equations of state.
-
-**Chapter 11 — $\mathbf{k}$-Points and Band Structure** treats Monkhorst–Pack grids, symmetry
-reduction, band structure paths, and the connection between $\mathbf{k}$-sampling and the
-smearing/tetrahedron methods of Chapter 9.
-
----
