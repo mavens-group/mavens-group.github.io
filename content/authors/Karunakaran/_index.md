@@ -69,8 +69,6 @@ social:
     link: https://orcid.org/0000-0002-5401-7823
 
 user_groups: ["Alumni (Researchers)"]
-params:
-  css_class: alumni-researcher
 ---
 Dr Karunakaran M is the **first** PhD graduate of the MAVENs. He successfully defended his doctoral thesis in 2025, following a research programme focused on computational and theoretical materials science for energy- and spin-based applications.
 
