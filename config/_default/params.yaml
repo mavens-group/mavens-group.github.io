@@ -16,6 +16,7 @@ appearance:
 marketing:
   seo:
     site_type: Person
+    site_name: "MAVENs Group"
     local_business_type: ''
     org_name: ''
     description: 'MAVENs Group at SRMIST, led by Dr. Rudra Banerjee, specializes in Computational Materials Science. Our research integrates Density Functional Theory (DFT), Monte Carlo simulations, and Machine Learning to explore energy materials and quantum materials for qubit applications.'
