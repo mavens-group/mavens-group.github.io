@@ -17,15 +17,11 @@ sections:
             position: center
             color: '#666'
 
-        - title: Tuning Heusler Alloys for Magnetocalorics & Spintronics
+        - title: Architecting Disordered Alloys
           content: |
-            Strategic 3d-doping in Heusler systems allows precise control over complex magnetic
-            exchange interactions ($J_{ij}$). This precision enables the design of high-performance
-            spin-gapless semiconductors for energy-efficient computing, alongside optimized Curie
-            temperatures ($T_C$) for advanced solid-state cooling.<br>
-            doi: [10.1016/j.jssc.2024.124602](https://doi.org/10.1016/j.jssc.2024.124602)
-            | doi: [10.1063/5.0238199](https://doi.org/10.1063/5.0238199) | doi:
-            [10.1016/j.jpcs.2024.111914](https://doi.org/10.1016/j.jpcs.2024.111914)
+            Using first-principles blueprints, we engineer atomic disorder and 3d-dopants to
+            control magnetic exchange ($J_{ij}$) and $T_C$. This predictive approach accelerates
+            the discovery of next-generation spintronics and magnetic cooling materials.
           align: left
           background:
             image:
@@ -35,13 +31,11 @@ sections:
             position: center
             color: '#555'
 
-        - title: MXene Surface Engineering for HER
+        - title: Engineering Low-Dimensional Catalysts
           content: |
-            Strategic defect engineering and bimetallic Janus architectures in MXenes allow precise
-            control over hydrogen adsorption ($\Delta G_{H*}$). This precision enables the design
-            of highly active Zr-doped catalysts, alongside near-thermoneutral bimetallic systems
-            for efficient green hydrogen production.<br>
-            doi: [10.1016/j.physb.2025.417148](https://doi.org/10.1016/j.physb.2025.417148)
+            We computationally architect 2D bimetallic Janus MXenes for green hydrogen. By
+            exploiting d-band asymmetry to tune surface thermodynamics ($\Delta G_{H*}$), we
+            predict and design ideal, near-thermoneutral electrocatalysts.
           align: left
           background:
             image:
