@@ -8,7 +8,7 @@ sections:
   - block: slider
     content:
       slides:
-        - title: <br><br><br><br><br><br>MAVENs
+        - title: '<span style="display: inline-block; margin-top: 35vh;">MAVENs</span>'
           content: Materials Advancing a Viable ENergy future
           align: center
           background:
@@ -17,13 +17,15 @@ sections:
             position: center
             color: '#666'
 
-        - title: Tuning the properties of materials
+        - title: Tuning Heusler Alloys for Magnetocalorics & Spintronics
           content: |
-            Doping of 3d material changes the magnetic interaction $\mathsf{J_{ij}}$ considerably in Heusler alloy.
-            The change in $\mathsf{J_{ij}}$ affects the Curie temperature of the materials,
-            giving high magnetocaloric effect around room temperature.
-            doi: [10.1016/j.jpcs.2024.111914](https://doi.org/10.1016/j.jpcs.2024.111914)
-            doi: [10.1063/5.0238199](https://doi.org/10.1063/5.0238199)
+            Strategic 3d-doping in Heusler systems allows precise control over complex magnetic
+            exchange interactions ($J_{ij}$). This precision enables the design of high-performance
+            spin-gapless semiconductors for energy-efficient computing, alongside optimized Curie
+            temperatures ($T_C$) for advanced solid-state cooling.<br>
+            doi: [10.1016/j.jssc.2024.124602](https://doi.org/10.1016/j.jssc.2024.124602)
+            | doi: [10.1063/5.0238199](https://doi.org/10.1063/5.0238199) | doi:
+            [10.1016/j.jpcs.2024.111914](https://doi.org/10.1016/j.jpcs.2024.111914)
           align: left
           background:
             image:
@@ -33,11 +35,12 @@ sections:
             position: center
             color: '#555'
 
-        - title: Functionalize MXene for green hydrogen
+        - title: MXene Surface Engineering for HER
           content: |
-            $\mathsf{Ti_3C_2}$ MXene is a cheap material, easy to synthesize in production scale.
-            We have shown that $\mathsf{Ti_3C_2}$ can be used as a catalyst for Hydrogen Evolution Reaction (HER)
-            by means of doping Zr to Ti site.
+            Strategic defect engineering and bimetallic Janus architectures in MXenes allow precise
+            control over hydrogen adsorption ($\Delta G_{H*}$). This precision enables the design
+            of highly active Zr-doped catalysts, alongside near-thermoneutral bimetallic systems
+            for efficient green hydrogen production.<br>
             doi: [10.1016/j.physb.2025.417148](https://doi.org/10.1016/j.physb.2025.417148)
           align: left
           background:

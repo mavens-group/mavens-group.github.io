@@ -65,7 +65,7 @@ This approach contributes directly to **global efforts in clean energy, quantum 
 
 ### Collaborative Research
 
-We actively collaborate with **experimental groups at SRM Institute and external groups**, including [Dr. Ashutosh Kumar Singh, CeNS](https://sites.google.com/view/ashutoshksingh-cens/team/dr-ashutosh-k-singh) (quantum materials) and [Dr. Pralay K. Santra, CeNS](https://www.santragroup.in/group/pralay-k-santra) (2D systems). These collaborations ensure that computational predictions are validated through synthesis, characterization, and device testing, enhancing the impact, credibility, and practical relevance of our work.
+We actively collaborate with **experimental groups at SRM Institute and external groups**, including [Dr Payel Bandyopadhyay, SRMIST](https://sites.google.com/srmist.edu.in/primelab/)(Polymers and Soft Materials), [Dr. Ashutosh Kumar Singh, CeNS](https://sites.google.com/view/ashutoshksingh-cens/team/dr-ashutosh-k-singh) (quantum materials) and [Dr. Pralay K. Santra, CeNS](https://www.santragroup.in/group/pralay-k-santra) (2D systems). These collaborations ensure that computational predictions are validated through synthesis, characterization, and device testing, enhancing the impact, credibility, and practical relevance of our work.
 
 By integrating theory with experiment, we translate predictions into applications spanning sustainable energy conversion, spintronic devices, and quantum information platforms.
 
