@@ -17,11 +17,9 @@ sections:
             position: center
             color: '#666'
 
-        - title: Architecting Disordered Alloys
+        - title: Governing Quantum Materials
           content: |
-            Using first-principles blueprints, we engineer atomic disorder and 3d-dopants to
-            control magnetic exchange ($J_{ij}$) and $T_C$. This predictive approach accelerates
-            the discovery of next-generation spintronics and magnetic cooling materials.
+            Integrating first-principles, we explore how 3d-dopants modulate magnetic exchange ($J_{ij}$) and $T_C$. This predictive approach accelerates the discovery of disordered Heuslers for advanced spintronics and magnetic cooling.<br>doi: [10.1016/j.jssc.2024.124602](https://doi.org/10.1016/j.jssc.2024.124602) | doi: [10.1063/5.0238199](https://doi.org/10.1063/5.0238199) | doi: [10.1016/j.jpcs.2024.111914](https://doi.org/10.1016/j.jpcs.2024.111914)
           align: left
           background:
             image:
@@ -31,11 +29,9 @@ sections:
             position: center
             color: '#555'
 
-        - title: Engineering Low-Dimensional Catalysts
+        - title: Screening 2D Catalysts
           content: |
-            We computationally architect 2D bimetallic Janus MXenes for green hydrogen. By
-            exploiting d-band asymmetry to tune surface thermodynamics ($\Delta G_{H*}$), we
-            predict and design ideal, near-thermoneutral electrocatalysts.
+            We computationally screen bimetallic Janus MXenes for sustainable energy. By exploiting d-band asymmetry to modulate surface thermodynamics ($\Delta G_{H*}$), we predict ideal, near-thermoneutral materials for green hydrogen.<br>doi: [10.1016/j.physb.2025.417148](https://doi.org/10.1016/j.physb.2025.417148)
           align: left
           background:
             image:
