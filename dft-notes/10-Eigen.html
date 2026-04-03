@@ -1,0 +1,708 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Eigen Value Solver - Density Functional Theory</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="favicon-de23e50b.svg">
+        <link rel="shortcut icon" href="favicon-8114d1fc.png">
+        <link rel="stylesheet" href="css/variables-8adf115d.css">
+        <link rel="stylesheet" href="css/general-2459343d.css">
+        <link rel="stylesheet" href="css/chrome-ae938929.css">
+        <link rel="stylesheet" href="css/print-9e4910d8.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="fonts/fonts-9644e21d.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="mdbook-highlight-css" href="highlight-493f70e1.css">
+        <link rel="stylesheet" id="mdbook-tomorrow-night-css" href="tomorrow-night-4c0ae647.css">
+        <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="ayu-highlight-3fdfc3ac.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="src/custom-6ac2dfa5.css">
+
+        <!-- MathJax -->
+        <script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+            window.path_to_searchindex_js = "searchindex-7e969141.js";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="toc-db725d58.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="mdbook-body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="mdbook-sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("mdbook-sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
+
+        <nav id="mdbook-sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="toc.html"></iframe>
+            </noscript>
+            <div id="mdbook-sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="mdbook-page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="mdbook-menu-bar-hover-placeholder"></div>
+                <div id="mdbook-menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="mdbook-sidebar-toggle" class="icon-button" for="mdbook-sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="mdbook-sidebar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/></svg></span>
+                        </label>
+                        <button id="mdbook-theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="mdbook-theme-list">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M371.3 367.1c27.3-3.9 51.9-19.4 67.2-42.9L600.2 74.1c12.6-19.5 9.4-45.3-7.6-61.2S549.7-4.4 531.1 9.6L294.4 187.2c-24 18-38.2 46.1-38.4 76.1L371.3 367.1zm-19.6 25.4l-116-104.4C175.9 290.3 128 339.6 128 400c0 3.9 .2 7.8 .6 11.6c1.8 17.5-10.2 36.4-27.8 36.4H96c-17.7 0-32 14.3-32 32s14.3 32 32 32H240c61.9 0 112-50.1 112-112c0-2.5-.1-5-.2-7.5z"/></svg></span>
+                        </button>
+                        <ul id="mdbook-theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-ayu">Ayu</button></li>
+                        </ul>
+                        <button id="mdbook-search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="mdbook-searchbar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352c79.5 0 144-64.5 144-144s-64.5-144-144-144S64 128.5 64 208s64.5 144 144 144z"/></svg></span>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Density Functional Theory</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <span class=fa-svg id="print-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M128 0C92.7 0 64 28.7 64 64v96h64V64H354.7L384 93.3V160h64V93.3c0-17-6.7-33.3-18.7-45.3L400 18.7C388 6.7 371.7 0 354.7 0H128zM384 352v32 64H128V384 368 352H384zm64 32h32c17.7 0 32-14.3 32-32V256c0-35.3-28.7-64-64-64H64c-35.3 0-64 28.7-64 64v96c0 17.7 14.3 32 32 32H64v64c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V384zm-16-88c-13.3 0-24-10.7-24-24s10.7-24 24-24s24 10.7 24 24s-10.7 24-24 24z"/></svg></span>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="mdbook-search-wrapper" class="hidden">
+                    <form id="mdbook-searchbar-outer" class="searchbar-outer">
+                        <div class="search-wrapper">
+                            <input type="search" id="mdbook-searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="mdbook-searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <span class=fa-svg id="fa-spin"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M304 48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zm0 416c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM48 304c26.5 0 48-21.5 48-48s-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48zm464-48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM142.9 437c18.7-18.7 18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zm0-294.2c18.7-18.7 18.7-49.1 0-67.9S93.7 56.2 75 75s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zM369.1 437c18.7 18.7 49.1 18.7 67.9 0s18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9z"/></svg></span>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="mdbook-searchresults-outer" class="searchresults-outer hidden">
+                        <div id="mdbook-searchresults-header" class="searchresults-header"></div>
+                        <ul id="mdbook-searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('mdbook-sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('mdbook-sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#mdbook-sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="mdbook-content" class="content">
+                    <main>
+                        <h1 id="eigenvalue-solvers"><a class="header" href="#eigenvalue-solvers">Eigenvalue Solvers</a></h1>
+<h2 id="iterative-diagonalisation"><a class="header" href="#iterative-diagonalisation">Iterative Diagonalisation</a></h2>
+<h3 id="the-eigenvalue-problem-and-its-cost"><a class="header" href="#the-eigenvalue-problem-and-its-cost">The Eigenvalue Problem and Its Cost</a></h3>
+<p>At each SCF step, we must solve the Kohn–Sham eigenvalue equation:</p>
+<div>
+\begin{equation}
+    \hat{h}_{\rm KS} |\phi_i\rangle = \epsilon_i |\phi_i\rangle,
+    \qquad
+    \hat{h}_{\rm KS} = -\frac{1}{2}\nabla^2 + V_{\rm eff}(\mathbf{r}),
+    \label{eq:KS-eigen}
+\end{equation}
+</div>
+
+<p>for the lowest \(N_{\rm bands}\) eigenpairs \({(\epsilon_i, |\phi_i\rangle)}\). In a plane-wave
+basis, \(\hat{h}<em>{\rm KS}\) is represented as a matrix of dimension \(N</em>{\rm PW} \times N_{\rm PW}\),
+where \(N_{\rm PW}\) is the number of plane waves within the energy cutoff \(E_{\rm cut}\). For a
+typical calculation:</p>
+<p>A \(50\)-atom cell with \(E_{\rm cut} = 500\) eV gives \(N_{\rm PW} \sim 30,000\) per
+\(\mathbf{k}\)-point. A \(200\)-atom cell gives \(N_{\rm PW} \sim 120,000\). Full diagonalisation
+of an \(N_{\rm PW} \times N_{\rm PW}\) matrix costs \(\mathcal{O}(N_{\rm PW}^3)\) operations. For
+\(N_{\rm PW} = 30,000\), this is \(\sim 2.7 \times 10^{13}\) floating-point operations — already
+at the limit of practicality for a <em>single</em> diagonalisation at a <em>single</em> \(\mathbf{k}\)-point.
+Since the SCF loop requires \(\sim 20\)–\(50\) diagonalisations, and the BZ integral requires tens
+to hundreds of \(\mathbf{k}\)-points, full diagonalisation is completely intractable for any
+system of practical interest.</p>
+<p>The key observation is that we do not need <em>all</em> \(N_{\rm PW}\) eigenpairs — only the lowest
+\(N_{\rm bands}\), which is proportional to the number of electrons and hence to \(N_{\rm atom}\).
+For a \(50\)-atom cell, \(N_{\rm bands} \sim 200\), which is \(\ll N_{\rm PW}\). <strong>Iterative subspace
+methods</strong> exploit this by working in a small subspace of dimension \(m \sim 2\)–\(3 \times N_{\rm bands}\),
+reducing the cost from \(\mathcal{O}(N_{\rm PW}^3)\) to
+\(\mathcal{O}(N_{\rm bands}^2 \cdot N_{\rm PW})\) per SCF step — a reduction of several orders
+of magnitude.</p>
+<h3 id="the-davidson-algorithm"><a class="header" href="#the-davidson-algorithm">The Davidson Algorithm</a></h3>
+<p>The <strong>Davidson algorithm</strong> (Davidson, 1975; adapted for plane-wave DFT by Wood and Zunger,
+1985) is the most widely used iterative eigensolver in electronic structure codes. It belongs
+to the family of Krylov subspace methods but uses a preconditioner to accelerate convergence
+dramatically compared to the Lanczos algorithm.</p>
+<p><strong>The basic idea.</strong> Start with a set of \(N_{\rm bands}\) trial vectors
+\({|v_1\rangle, \ldots, |v_{N_{\rm bands}}\rangle}\) — typically the eigenvectors from the
+previous SCF step, or random vectors for the first step. These span an initial subspace
+\(\mathcal{V}\). The algorithm proceeds iteratively:</p>
+<p><strong>Step 1 — Project and diagonalise.</strong> Form the projected Hamiltonian and overlap matrices
+within the current subspace:</p>
+<div>
+\begin{equation}
+    H_{ij}^{\rm sub} = \langle v_i | \hat{h}_{\rm KS} | v_j \rangle, \qquad
+    S_{ij}^{\rm sub} = \langle v_i | v_j \rangle.
+    \label{eq:davidson-project}
+\end{equation}
+</div>
+
+<p>Diagonalise the small \(m \times m\) generalised eigenvalue problem
+\(\mathbf{H}^{\rm sub}\mathbf{c} = \epsilon, \mathbf{S}^{\rm sub}\mathbf{c}\) to obtain
+approximate eigenvalues \({\epsilon_i^{\rm sub}}\) and eigenvectors expressed as linear
+combinations of the subspace basis: \(|\tilde{\phi}<em>i\rangle = \sum_j c</em>{ij} |v_j\rangle\).
+This small diagonalisation costs \(\mathcal{O}(m^3)\), which is negligible.</p>
+<p><strong>Step 2 — Compute residuals.</strong> For each approximate eigenpair, compute the residual:</p>
+<div>
+\begin{equation}
+    |r_i\rangle = (\hat{h}_{\rm KS} - \epsilon_i^{\rm sub})|\tilde{\phi}_i\rangle.
+    \label{eq:davidson-residual}
+\end{equation}
+</div>
+
+<p>If \(|r_i| \leq \delta\) for all desired eigenpairs, the algorithm has converged. The threshold
+\(\delta\) is typically set to \(10^{-2}\)–\(10^{-3}\) times the SCF energy convergence criterion,
+since the eigenvalues need not be converged more tightly than the density at each SCF step.</p>
+<p><strong>Step 3 — Precondition and expand.</strong> The residual \(|r_i\rangle\) points in the direction of
+steepest descent toward the true eigenvector, but its components at different \(\mathbf{G}\)
+converge at very different rates. High-\(G\) components (large kinetic energy) have large
+eigenvalue separations and converge quickly; low-\(G\) components are nearly degenerate and
+converge slowly. The <strong>kinetic energy preconditioner</strong> corrects this disparity by
+approximately inverting the dominant part of the Hamiltonian:</p>
+<div>
+\begin{equation}
+    \boxed{|t_i\rangle = \hat{P}\,|r_i\rangle, \qquad
+    P(\mathbf{G}) = \frac{1}{\frac{1}{2}|\mathbf{k}+\mathbf{G}|^2 - \epsilon_i^{\rm sub}}.}
+    \label{eq:preconditioner}
+\end{equation}
+</div>
+
+<p>In reciprocal space, this simply divides each plane-wave component of the residual by the
+difference between its kinetic energy and the current eigenvalue estimate. The effect is to
+rotate the residual toward the true eigenspace: components that are far from the eigenvalue
+(large \(|\frac{1}{2}G^2 - \epsilon_i|\)) are suppressed, while components near the eigenvalue
+are amplified. This is the same principle as Kerker preconditioning for density mixing
+(Chapter 8, Section 8.2), applied here to the eigenvalue problem rather than the fixed-point
+problem.</p>
+<p>In practice, a regularisation is applied to prevent the denominator from vanishing when
+\(\frac{1}{2}G^2 \approx \epsilon_i\). The standard choice is:</p>
+<div>
+\begin{equation}
+    P(\mathbf{G}) = \frac{1}{\max\!\left(\frac{1}{2}|\mathbf{k}+\mathbf{G}|^2 - \epsilon_i^{\rm sub},\; \epsilon_{\rm ref}\right)},
+    \label{eq:preconditioner-regularised}
+\end{equation}
+</div>
+
+<p>where \(\epsilon_{\rm ref}\) is a small positive constant (typically a fraction of the bandwidth).</p>
+<p>The preconditioned residuals \({|t_i\rangle}\) are orthogonalised against the existing subspace
+and added as new basis vectors: \(\mathcal{V} \leftarrow \mathcal{V} \oplus \mathrm{span}{|t_i\rangle}\).
+The subspace dimension grows from \(m\) to \(m + N_{\rm bands}\).</p>
+<p><strong>Step 4 — Restart.</strong> When the subspace becomes too large (typically \(m \gt 3 N_{\rm bands}\)),
+the oldest basis vectors are discarded, keeping only the current best eigenvector approximations.
+This prevents the subspace from growing indefinitely while retaining the most useful information.</p>
+<p><strong>Convergence.</strong> With preconditioning, Davidson converges <em>quadratically</em> near the solution —
+each iteration roughly doubles the number of correct digits in the eigenvalues. In practice,
+\(3\)–\(5\) Davidson iterations per SCF step suffice to converge the eigenpairs to the required
+accuracy.</p>
+<p><strong>Block Davidson.</strong> Rather than processing one eigenpair at a time, the block variant processes
+all \(N_{\rm bands}\) eigenpairs simultaneously. The subspace expansion adds \(N_{\rm bands}\)
+preconditioned residuals at each step. This is more efficient because the Hamiltonian action
+\(\hat{h}_{\rm KS}|v\rangle\) — the most expensive operation, requiring FFTs between real and
+reciprocal space — can be batched over all vectors in the block.</p>
+<h3 id="rmm-diis"><a class="header" href="#rmm-diis">RMM-DIIS</a></h3>
+<p>The <strong>Residual Minimisation Method — Direct Inversion in the Iterative Subspace (RMM-DIIS)</strong>
+(Pulay, 1980; Wood and Zunger, 1985; Kresse and Furthmüller, 1996) takes a different approach:
+instead of expanding a subspace and projecting, it directly minimises the residual norm
+\(|(\hat{h}_{\rm KS} - \epsilon_i)|\phi_i\rangle|^2\) for each band individually, using the
+DIIS extrapolation from Section 8.2.</p>
+<p><strong>The method.</strong> For each band \(i\), maintain a history of trial vectors and their residuals from
+the last \(m\) iterations: \({|\phi_i^{(n)}\rangle, |r_i^{(n)}\rangle}\). Construct the optimal
+linear combination:</p>
+<div>
+\begin{equation}
+    |\bar{\phi}_i\rangle = \sum_{k=1}^{m} c_k |\phi_i^{(n-m+k)}\rangle,
+    \label{eq:rmm-trial}
+\end{equation}
+</div>
+
+<p>where the coefficients \({c_k}\) minimise the residual norm, exactly as in the density-mixing
+DIIS of Chapter 8:</p>
+<div>
+\begin{equation}
+    \min_{\{c_k\}} \left\|\sum_k c_k |r_i^{(n-m+k)}\rangle\right\|^2, \qquad \sum_k c_k = 1.
+    \label{eq:rmm-minimise}
+\end{equation}
+</div>
+
+<p>This leads to the same small linear system with the overlap matrix
+\(B_{jk} = \langle r_i^{(j)} | r_i^{(k)} \rangle\) as in equation \eqref{eq:DIIS-system}. The
+optimal trial vector is then updated by applying the preconditioned residual:</p>
+<div>
+\begin{equation}
+    |\phi_i^{(n+1)}\rangle = |\bar{\phi}_i\rangle + \hat{P}\,|\bar{r}_i\rangle.
+    \label{eq:rmm-update}
+\end{equation}
+</div>
+
+<p><strong>Key difference from Davidson:</strong> RMM-DIIS does <em>not</em> require the trial vectors to be mutually
+orthogonal at every step. Orthogonalisation is the most expensive operation in Davidson
+(\(\mathcal{O}(N_{\rm bands}^2 \cdot N_{\rm PW})\) per step), and RMM-DIIS avoids it almost
+entirely. This makes RMM-DIIS faster per iteration — typically \(30\)–\(50%\) cheaper than
+Davidson for the same system.</p>
+<p><strong>The risk: subspace collapse.</strong> Without explicit orthogonalisation, two or more bands can
+converge to the <em>same</em> eigenstate, losing one or more eigenpairs from the solution. This is
+the <strong>subspace collapse</strong> problem. It manifests as a sudden jump in the total energy when a
+previously tracked eigenstate “disappears” and is replaced by a duplicate. The risk is highest
+when eigenvalues are nearly degenerate (e.g., \(d\)-bands in transition metals) or when the
+initial guess is poor.</p>
+<p><strong>Practical mitigation.</strong> Occasional re-orthogonalisation — typically every \(5\)–\(10\) RMM-DIIS
+steps — prevents subspace collapse at minimal cost. Most implementations also monitor the
+overlap matrix of the trial vectors and trigger re-orthogonalisation when near-linear-dependence
+is detected.</p>
+<p><strong>The hybrid strategy.</strong> The most effective approach, used as the default in several major
+codes, combines both methods: start with a few Davidson steps to establish a well-separated,
+orthogonal initial subspace, then switch to RMM-DIIS for the remaining iterations where the
+eigenpairs are already approximately correct and only need refinement. The Davidson phase
+provides robustness; the RMM-DIIS phase provides speed.</p>
+<h3 id="conjugate-gradient-minimisation"><a class="header" href="#conjugate-gradient-minimisation">Conjugate Gradient Minimisation</a></h3>
+<p>An alternative to the subspace methods above is <strong>direct minimisation</strong> of the KS total energy
+functional with respect to the orbital coefficients, using a conjugate gradient (CG) algorithm.
+Rather than solving the eigenvalue equation \eqref{eq:KS-eigen} iteratively, CG treats the
+orbitals as variational parameters and minimises:</p>
+<div>
+\begin{equation}
+    E[\{\phi_i\}] = \sum_i f_i \langle\phi_i|\hat{h}_{\rm KS}|\phi_i\rangle + E_{\rm H}[\rho] + E_{\rm xc}[\rho] - \int V_{\rm H}\rho\,d\mathbf{r},
+    \label{eq:CG-functional}
+\end{equation}
+</div>
+
+<p>subject to the orthonormality constraints \(\langle\phi_i|\phi_j\rangle = \delta_{ij}\).</p>
+<p>CG is the most <strong>robust</strong> of the three methods: it is guaranteed to decrease the total energy
+at every step (it is a true minimisation, not an eigenvalue iteration), and it cannot suffer
+from subspace collapse. The price is speed — CG converges more slowly than Davidson or
+RMM-DIIS because it does not exploit the eigenvalue structure of the problem. It is typically
+\(2\)–\(5 \times\) slower per SCF step.</p>
+<p>CG is the method of choice when:
+the other methods fail to converge (e.g., systems with extremely flat potential energy surfaces
+or near-degenerate states), when memory is limited (CG requires minimal subspace storage), or
+for the first few SCF steps of a difficult system where a reliable initial eigenspace must be
+established before switching to faster methods.</p>
+<h3 id="computational-scaling"><a class="header" href="#computational-scaling">Computational Scaling</a></h3>
+<p>The dominant costs at each SCF step are:</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Operation</th><th>Scaling</th><th>Bottleneck for</th></tr>
+</thead>
+<tbody>
+<tr><td>Hamiltonian action \(\hat{h}_{\rm KS}|\phi\rangle\) (FFTs)</td><td>\(\mathcal{O}(N_{\rm PW} \log N_{\rm PW})\) per band</td><td>Small systems</td></tr>
+<tr><td>Orthogonalisation (Davidson)</td><td>\(\mathcal{O}(N_{\rm bands}^2 \cdot N_{\rm PW})\)</td><td>Medium systems (\(100\)–\(500\) atoms)</td></tr>
+<tr><td>Subspace diagonalisation</td><td>\(\mathcal{O}(N_{\rm bands}^3)\)</td><td>Large systems (\(\gt 500\) atoms)</td></tr>
+</tbody>
+</table>
+</div>
+<p>The crossover between regimes depends on the system and the parallelisation strategy. For
+most DFT calculations on \(50\)–\(200\) atom cells, the orthogonalisation and subspace
+diagonalisation costs dominate, giving an effective scaling of \(\mathcal{O}(N^3)\) with system
+size \(N\). This cubic wall is the fundamental limit of conventional KS-DFT and is the motivation
+for linear-scaling (\(\mathcal{O}(N)\)) methods, which require localised basis sets and are not
+yet standard for plane-wave calculations.</p>
+<p><strong>Parallelisation.</strong> The three levels of parallelism available in a plane-wave DFT calculation
+are: over \(\mathbf{k}\)-points (trivially parallel — no communication), over bands
+(moderate communication for orthogonalisation), and over plane waves (requires FFT
+communication). The optimal decomposition depends on the system: \(\mathbf{k}\)-point
+parallelism is most efficient for small unit cells with dense \(\mathbf{k}\)-meshes;
+band/plane-wave parallelism is needed for large supercells with few \(\mathbf{k}\)-points.</p>
+<details>
+<summary><b>Code Notes: VASP and Quantum ESPRESSO Parameters</b></summary>
+<p><strong>VASP:</strong></p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Parameter</th><th>Controls</th><th>Values</th></tr>
+</thead>
+<tbody>
+<tr><td><code>ALGO</code></td><td>Diagonalisation algorithm</td><td><code>Normal</code>: Davidson; <code>Fast</code>: Davidson + RMM-DIIS (default); <code>All</code>: Davidson every step; <code>Conjugate</code>: CG; <code>Damped</code>: damped velocity CG</td></tr>
+<tr><td><code>NBANDS</code></td><td>Number of bands to compute</td><td>Auto (typically \(N_{\rm elec}/2 + \) padding); increase for metals or unoccupied-state properties</td></tr>
+<tr><td><code>NELM</code></td><td>Maximum SCF iterations</td><td>\(40\)–\(200\) (default \(60\))</td></tr>
+<tr><td><code>NELMIN</code></td><td>Minimum SCF iterations</td><td>\(2\)–\(6\) (default \(2\)); increase for difficult systems</td></tr>
+<tr><td><code>NELMDL</code></td><td>Non-self-consistent initial steps</td><td>\(-5\) to \(-12\); negative = auto; builds initial subspace without updating potential</td></tr>
+</tbody>
+</table>
+</div>
+<p><code>ALGO = Fast</code> (the default) runs Davidson for the first few iterations to establish the
+eigenspace, then switches to RMM-DIIS. This is the optimal choice for most systems. Use
+<code>ALGO = All</code> (Davidson every step) for difficult cases where RMM-DIIS causes instabilities
+— particularly magnetic metals, systems with nearly degenerate states, or the first calculation
+on a new system type where robustness matters more than speed. Use <code>ALGO = Damped</code> for
+molecular dynamics at elevated temperatures where the eigenspectrum changes significantly
+between ionic steps.</p>
+<p><strong>Quantum ESPRESSO:</strong></p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Parameter</th><th>Controls</th><th>Values</th></tr>
+</thead>
+<tbody>
+<tr><td><code>diagonalization</code></td><td>Algorithm</td><td><code>'david'</code>: Davidson (default); <code>'cg'</code>: conjugate gradient; <code>'ppcg'</code>: parallel-preconditioned CG</td></tr>
+<tr><td><code>diago_david_ndim</code></td><td>Davidson subspace dimension per band</td><td>\(2\)–\(8\) (default \(2\)); increase for difficult convergence</td></tr>
+<tr><td><code>diago_full_acc</code></td><td>Force full accuracy at every SCF step</td><td><code>.true.</code> or <code>.false.</code> (default); use <code>.true.</code> for phonons and response properties</td></tr>
+<tr><td><code>nbnd</code></td><td>Number of bands</td><td>Auto; increase for metals or when unoccupied states are needed</td></tr>
+<tr><td><code>electron_maxstep</code></td><td>Maximum SCF iterations</td><td>\(100\)–\(200\) (default \(100\))</td></tr>
+</tbody>
+</table>
+</div>
+<p>In QE, <code>diagonalization = 'david'</code> is the default and works well for most systems. The
+<code>'cg'</code> option is more robust but slower, and is recommended when Davidson fails to converge.
+The <code>'ppcg'</code> option (parallel-preconditioned CG) is designed for massively parallel runs where
+band parallelism is dominant.</p>
+</details>
+<details>
+<summary><b>Further Reading</b></summary>
+<ul>
+<li>
+<p><strong>Davidson algorithm (original):</strong> E. R. Davidson, <em>The iterative calculation of a few of
+  the lowest eigenvalues and corresponding eigenvectors of large real-symmetric matrices</em>,
+  J. Comput. Phys. <strong>17</strong>, 87 (1975). The foundational paper for subspace iteration with
+  preconditioning.</p>
+</li>
+<li>
+<p><strong>Adaptation to DFT:</strong> D. M. Wood and A. Zunger, <em>A new method for diagonalising large
+  matrices</em>, J. Phys. A <strong>18</strong>, 1343 (1985). Adapts the Davidson method to the plane-wave
+  pseudopotential framework.</p>
+</li>
+<li>
+<p><strong>VASP implementation (Davidson + RMM-DIIS):</strong> G. Kresse and J. Furthmüller, <em>Efficient
+  iterative schemes for ab initio total-energy calculations using a plane-wave basis set</em>,
+  Phys. Rev. B <strong>54</strong>, 11169 (1996). Sections III and IV describe the block Davidson and
+  RMM-DIIS implementations in detail, including the hybrid strategy.</p>
+</li>
+<li>
+<p><strong>Conjugate gradient for DFT:</strong> M. C. Payne, M. P. Teter, D. C. Allan, T. A. Arias, and
+  J. D. Joannopoulos, <em>Iterative minimization techniques for ab initio total-energy
+  calculations: molecular dynamics and conjugate gradients</em>, Rev. Mod. Phys. <strong>64</strong>, 1045
+  (1992). The standard reference for CG-based total energy minimisation.</p>
+</li>
+<li>
+<p><strong>Linear-scaling methods:</strong> S. Goedecker, <em>Linear scaling electronic structure methods</em>,
+  Rev. Mod. Phys. <strong>71</strong>, 1085 (1999). Review of \(\mathcal{O}(N)\) approaches that circumvent
+  the cubic scaling wall.</p>
+</li>
+</ul>
+</details>
+<hr>
+<h2 id="convergence-diagnostics-and-practical-workflow"><a class="header" href="#convergence-diagnostics-and-practical-workflow">Convergence Diagnostics and Practical Workflow</a></h2>
+<h3 id="reading-the-scf-output"><a class="header" href="#reading-the-scf-output">Reading the SCF Output</a></h3>
+<p>A converging SCF calculation produces a characteristic pattern in its output: the total energy
+decreases monotonically (or nearly so) toward a limiting value, the energy change per iteration
+\(\Delta E^{(n)} = E^{(n)} - E^{(n-1)}\) decreases geometrically, and the density residual norm
+\(|R^{(n)}|\) decreases in parallel. Understanding what each output quantity means is essential
+for diagnosing problems.</p>
+<p><strong>Total energy.</strong> The KS total energy \(E^{(n)}\) at iteration \(n\) is <em>not</em> variational with
+respect to the density — it is only variational at self-consistency. During the SCF cycle,
+\(E^{(n)}\) can increase between iterations (especially in the first few steps when the density
+is far from self-consistent). A sustained increase after \(\sim 10\) iterations is a sign of
+divergence.</p>
+<p><strong>The Harris–Foulkes energy.</strong> An alternative energy estimate that <em>is</em> variational at each
+step. It uses the input density \(\rho_{\rm in}^{(n)}\) rather than the self-consistent density
+to evaluate the XC and Hartree contributions, giving an upper bound to the true ground-state
+energy. The difference between the Harris–Foulkes energy and the KS energy provides a measure
+of how far the current density is from self-consistency. When both agree to within the
+convergence threshold, the SCF cycle has converged.</p>
+<p><strong>Energy change \(\Delta E\).</strong> This is the primary convergence indicator. A converged calculation
+shows \(|\Delta E|\) decreasing by roughly one order of magnitude every \(2\)–\(5\) iterations
+(for Pulay/Broyden mixing). If \(|\Delta E|\) stalls at a plateau or oscillates, see the
+diagnostic table in the Part II overview.</p>
+<p><strong>Density residual.</strong> Some codes report the norm of the density residual
+\(|R^{(n)}| = |\rho_{\rm out}^{(n)} - \rho_{\rm in}^{(n)}|\) or the RMS change in the
+charge density. This should decrease in tandem with \(|\Delta E|\). A large residual at
+apparent energy convergence indicates that the energy is accidentally stationary (a saddle
+point of the SCF map) rather than truly self-consistent — increase the maximum number of
+SCF iterations and tighten the convergence threshold.</p>
+<h3 id="convergence-thresholds"><a class="header" href="#convergence-thresholds">Convergence Thresholds</a></h3>
+<p>The required SCF convergence depends on the property being computed:</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Target property</th><th>Required energy convergence</th><th>Rationale</th></tr>
+</thead>
+<tbody>
+<tr><td>Qualitative band structure</td><td>\(10^{-4}\) eV</td><td>Band positions change by \(\leq 10\) meV</td></tr>
+<tr><td>Total energy differences</td><td>\(10^{-6}\) eV</td><td>Formation energies accurate to \(\sim 1\) meV/atom</td></tr>
+<tr><td>Magnetic moments</td><td>\(10^{-6}\) eV</td><td>Moment stable to \(\leq 0.01,\mu_B\)</td></tr>
+<tr><td>Forces (geometry optimisation)</td><td>\(10^{-7}\) eV</td><td>Forces accurate to \(\sim 1\) meV/Å</td></tr>
+<tr><td>Stress tensor / elastic constants</td><td>\(10^{-8}\) eV</td><td>Stress accurate to \(\sim 0.1\) kbar</td></tr>
+<tr><td>Phonons (DFPT / finite differences)</td><td>\(10^{-8}\) eV</td><td>Force constants require tight force convergence</td></tr>
+</tbody>
+</table>
+</div>
+<p><strong>Why tighter is not always better.</strong> Beyond a certain point, tightening the SCF threshold does
+not improve results because other sources of error dominate: finite \(\mathbf{k}\)-mesh,
+finite \(E_{\rm cut}\), pseudopotential transferability, and the XC functional approximation
+itself. A calculation converged to \(10^{-10}\) eV is not more accurate than one converged to
+\(10^{-7}\) eV if the \(\mathbf{k}\)-mesh introduces \(1,\)meV/atom errors. Additionally,
+round-off errors in double-precision arithmetic set a floor at \(\sim 10^{-12}\)–\(10^{-14}\) eV
+for typical system sizes.</p>
+<h3 id="common-failure-modes-and-remedies"><a class="header" href="#common-failure-modes-and-remedies">Common Failure Modes and Remedies</a></h3>
+<p>The Part II overview provided a quick-reference table. Here we expand the most important
+failure modes with their underlying causes and systematic remedies.</p>
+<p><strong>Failure 1: Total energy oscillates without decreasing.</strong>
+The density is sloshing between iterations — the mixing parameter \(\alpha\) is too large for
+the system’s dielectric response (Chapter 8, Section 8.1). Reduce \(\alpha\) by a factor of
+\(2\)–\(5\). If Kerker preconditioning is not active, enable it. If the system is a metal or
+small-gap semiconductor, ensure that an appropriate smearing is used (Section 9.1) — sharp
+occupations exacerbate charge sloshing by making the density response discontinuous.</p>
+<p><strong>Failure 2: SCF converges slowly then stalls.</strong>
+The DIIS/Broyden subspace is contaminated by poor early iterates. Increase the number of
+initial non-DIIS steps (simple mixing with small \(\alpha\)) to bring the density into the basin
+of convergence before the subspace extrapolation takes over. Alternatively, increase the
+subspace size to allow more history, or clear the subspace and restart the mixing.</p>
+<p><strong>Failure 3: Spin channels oscillate out of phase.</strong>
+In spin-polarised calculations, the up and down densities can trade magnitude between
+iterations, producing an apparent antiferromagnetic oscillation that prevents convergence.
+This usually indicates either an incorrect initial magnetic configuration or a genuine
+competition between ferromagnetic and antiferromagnetic solutions. Fix the initial moments
+to match the expected ground state. Use a more robust diagonaliser (Davidson rather than
+RMM-DIIS) for the first \(\sim 10\) SCF steps to prevent subspace collapse from coupling
+to the spin oscillation. If both FM and AFM solutions converge, compare their total energies
+to determine the ground state.</p>
+<p><strong>Failure 4: Eigenvalue solver converges to wrong states.</strong>
+RMM-DIIS has lost track of one or more bands due to subspace collapse. The symptom is a sudden
+jump in the total energy mid-SCF, often accompanied by a change in the number of occupied
+states or the magnetic moment. Switch to Davidson for the problematic calculation. If the
+problem persists, increase the number of bands to provide a larger buffer between occupied and
+unoccupied states.</p>
+<p><strong>Failure 5: Energy converged but forces are noisy.</strong>
+The SCF threshold is too loose for the force accuracy required. Forces depend on the density
+through the Hellmann–Feynman theorem (Chapter 10), and small density errors that do not affect
+the total energy can produce significant force errors. Tighten the energy convergence by one
+to two orders of magnitude. Also check that the smearing is appropriate — tetrahedron method
+forces contain discontinuities for metals (Section 9.1).</p>
+<h3 id="worked-example-scf-convergence-for-bcc-fe"><a class="header" href="#worked-example-scf-convergence-for-bcc-fe">Worked Example: SCF Convergence for bcc Fe</a></h3>
+<p>To tie the chapter together, consider the SCF convergence of ferromagnetic bcc Fe — a
+system that exercises every piece of machinery developed in Chapters 8 and 9.</p>
+<p><strong>System:</strong> bcc Fe, \(a = 2.87,\)Å, \(1\)-atom primitive cell, ferromagnetic with initial moment
+\(5.0,\mu_B\), \(E_{\rm cut} = 500,\)eV, \(12 \times 12 \times 12\) \(\mathbf{k}\)-mesh.</p>
+<p><strong>Smearing:</strong> Methfessel–Paxton \(N = 1\) with \(\sigma = 0.2,\)eV — this is a metal, so the
+tetrahedron method would give discontinuous forces, and Gaussian smearing would require the
+\(\sigma \to 0\) extrapolation.</p>
+<p><strong>Mixing:</strong> Pulay/DIIS with Kerker preconditioning (\(\alpha = 0.05\), \(k_0 \sim 1.5,\)Å\(^{-1}\))
+— a small \(\alpha\) because Fe is a magnetic metal with both charge-sloshing and spin-oscillation
+risks.</p>
+<p><strong>Diagonalisation:</strong> Davidson for the first \(5\) steps to establish a clean eigenspace, then
+RMM-DIIS for speed.</p>
+<p><strong>Expected convergence behaviour:</strong></p>
+<p>Iterations \(1\)–\(5\): The total energy drops rapidly (by \(\sim 1\) eV) as the initial atomic
+superposition density relaxes toward the crystalline density. The magnetic moment adjusts from
+\(5.0,\mu_B\) toward the converged value of \(\sim 2.2,\mu_B\). Davidson diagonalisation ensures
+the correct band ordering is established.</p>
+<p>Iterations \(5\)–\(15\): The energy change decreases geometrically, roughly one order of magnitude
+every \(3\)–\(4\) iterations. The DIIS extrapolation begins to accelerate convergence. The switch
+to RMM-DIIS at iteration \(5\) speeds up each step by \(\sim 40%\).</p>
+<p>Iterations \(15\)–\(25\): Final convergence to \(10^{-7}\) eV. The magnetic moment is stable at
+\(2.17\)–\(2.22,\mu_B\) (depending on the functional). The entropy correction
+\(TS \approx 0.3,\)meV/atom confirms that \(\sigma = 0.2,\)eV is acceptable.</p>
+<p><strong>What would go wrong with poor settings:</strong>
+With simple mixing (\(\alpha = 0.3\), no Kerker), the same system would oscillate for \(\gt 200\)
+iterations without converging — the charge-sloshing modes at small \(\mathbf{G}\) are barely
+damped. With Gaussian smearing (rather than MP \(N=1\)), the total energy
+would converge but the \(\sigma \to 0\) extrapolation would introduce an additional \(\sim 5,\)meV
+error. With RMM-DIIS from the start (no initial Davidson), there is a risk of subspace collapse
+in the \(d\)-bands, which are nearly five-fold degenerate and prone to mixing.</p>
+<details>
+<summary><b>Code Notes: VASP and Quantum ESPRESSO Parameters — Full Reference</b></summary>
+<p><strong>VASP — Complete SCF parameter list:</strong></p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Parameter</th><th>Controls</th><th>Recommended</th><th>Notes</th></tr>
+</thead>
+<tbody>
+<tr><td><code>ALGO</code></td><td>Diagonalisation</td><td><code>Fast</code> (default)</td><td><code>All</code> for difficult systems</td></tr>
+<tr><td><code>NELM</code></td><td>Max SCF iterations</td><td>\(60\)–\(200\)</td><td>Increase for slabs, defects</td></tr>
+<tr><td><code>NELMIN</code></td><td>Min SCF iterations</td><td>\(2\)–\(6\)</td><td>Prevents premature exit</td></tr>
+<tr><td><code>NELMDL</code></td><td>Initial non-DIIS steps</td><td>\(-5\) to \(-12\)</td><td>Negative = auto</td></tr>
+<tr><td><code>EDIFF</code></td><td>Energy convergence (eV)</td><td>\(10^{-6}\)–\(10^{-8}\)</td><td>Match to target property</td></tr>
+<tr><td><code>ISMEAR</code></td><td>Smearing method</td><td>\(1\) (MP) for metals; \(-5\) (tet) for DOS</td><td>See Section 9.1</td></tr>
+<tr><td><code>SIGMA</code></td><td>Smearing width (eV)</td><td>\(0.1\)–\(0.2\)</td><td>Check <code>EENTRO</code> \(\lt 1\) meV/atom</td></tr>
+<tr><td><code>AMIX</code></td><td>Charge mixing \(\alpha\)</td><td>\(0.02\)–\(0.4\)</td><td>Small for metals</td></tr>
+<tr><td><code>BMIX</code></td><td>Kerker \(k_0\)</td><td>\(0.5\)–\(3.0\)</td><td>Enable for metals</td></tr>
+<tr><td><code>AMIX_MAG</code></td><td>Spin mixing \(\alpha\)</td><td>\(2\)–\(4 \times\) <code>AMIX</code></td><td>Often larger than charge mixing</td></tr>
+<tr><td><code>BMIX_MAG</code></td><td>Kerker for spin</td><td>\(\sim\) <code>BMIX</code></td><td></td></tr>
+<tr><td><code>MAXMIX</code></td><td>Mixing history size</td><td>\(20\)–\(60\)</td><td>Increase for slabs</td></tr>
+<tr><td><code>IMIX</code></td><td>Mixing scheme</td><td>\(4\) (Broyden, default)</td><td></td></tr>
+<tr><td><code>NBANDS</code></td><td>Number of bands</td><td>Auto + padding</td><td>Increase for metals</td></tr>
+<tr><td><code>LREAL</code></td><td>Real-space projection</td><td><code>.FALSE.</code> for small cells</td><td><code>.TRUE.</code> for \(\gt 20\) atoms</td></tr>
+</tbody>
+</table>
+</div>
+<p><strong>Quantum ESPRESSO — Complete SCF parameter list:</strong></p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Parameter</th><th>Controls</th><th>Recommended</th><th>Notes</th></tr>
+</thead>
+<tbody>
+<tr><td><code>diagonalization</code></td><td>Algorithm</td><td><code>'david'</code> (default)</td><td><code>'cg'</code> for robustness</td></tr>
+<tr><td><code>electron_maxstep</code></td><td>Max SCF iterations</td><td>\(100\)–\(200\)</td><td></td></tr>
+<tr><td><code>conv_thr</code></td><td>Energy convergence (Ry)</td><td>\(10^{-8}\)–\(10^{-10}\)</td><td>Note: Ry units</td></tr>
+<tr><td><code>occupations</code></td><td>Occupation scheme</td><td><code>'smearing'</code> or <code>'tetrahedra_opt'</code></td><td></td></tr>
+<tr><td><code>smearing</code></td><td>Smearing function</td><td><code>'methfessel-paxton'</code> for metals</td><td></td></tr>
+<tr><td><code>degauss</code></td><td>Smearing width (Ry)</td><td>\(0.005\)–\(0.02\)</td><td>\(1,\)Ry \(= 13.6,\)eV</td></tr>
+<tr><td><code>mixing_beta</code></td><td>Mixing parameter</td><td>\(0.1\)–\(0.7\)</td><td>Small for metals</td></tr>
+<tr><td><code>mixing_mode</code></td><td>Preconditioning</td><td><code>'local-TF'</code> for metals</td><td></td></tr>
+<tr><td><code>mixing_ndim</code></td><td>Mixing history</td><td>\(4\)–\(12\)</td><td></td></tr>
+<tr><td><code>nbnd</code></td><td>Number of bands</td><td>Auto</td><td>Increase for metals</td></tr>
+<tr><td><code>diago_david_ndim</code></td><td>Davidson subspace</td><td>\(2\)–\(8\)</td><td></td></tr>
+</tbody>
+</table>
+</div>
+</details>
+<hr>
+<h2 id="outlook"><a class="header" href="#outlook">Outlook</a></h2>
+<p>Chapters 8 and 9 together provide the complete numerical machinery for solving the Kohn–Sham
+equations self-consistently: density mixing drives the outer SCF loop to convergence
+(Chapter 8), while smearing regularises the BZ integrals and iterative diagonalisation makes
+the eigenvalue problem tractable (this chapter). With a converged, self-consistent ground-state
+density in hand, the next step is to extract physical observables.</p>
+<p>The most immediate observable beyond the total energy is the <strong>force</strong> on each atom — the
+negative gradient of the total energy with respect to atomic positions. The Hellmann–Feynman
+theorem provides an exact expression for this force, but its practical evaluation requires
+careful treatment of the Pulay corrections that arise when the basis set depends on atomic
+positions. Forces, in turn, enable <strong>geometry optimisation</strong> (finding the equilibrium structure)
+and <strong>ab initio molecular dynamics</strong> (following the time evolution of the nuclei on the DFT
+potential energy surface). These topics are the subject of the next chapter.</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="09-BZint.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                            </a>
+
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="09-BZint.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                    </a>
+
+            </nav>
+
+        </div>
+
+        <template id=fa-eye><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM432 256c0 79.5-64.5 144-144 144s-144-64.5-144-144s64.5-144 144-144s144 64.5 144 144zM288 192c0 35.3-28.7 64-64 64c-11.5 0-22.3-3-31.6-8.4c-.2 2.8-.4 5.5-.4 8.4c0 53 43 96 96 96s96-43 96-96s-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6z"/></svg></span></template>
+        <template id=fa-eye-slash><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M38.8 5.1C28.4-3.1 13.3-1.2 5.1 9.2S-1.2 34.7 9.2 42.9l592 464c10.4 8.2 25.5 6.3 33.7-4.1s6.3-25.5-4.1-33.7L525.6 386.7c39.6-40.6 66.4-86.1 79.9-118.4c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C465.5 68.8 400.8 32 320 32c-68.2 0-125 26.3-169.3 60.8L38.8 5.1zM223.1 149.5C248.6 126.2 282.7 112 320 112c79.5 0 144 64.5 144 144c0 24.9-6.3 48.3-17.4 68.7L408 294.5c5.2-11.8 8-24.8 8-38.5c0-53-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6c0 10.2-2.4 19.8-6.6 28.3l-90.3-70.8zm223.1 298L373 389.9c-16.4 6.5-34.3 10.1-53 10.1c-79.5 0-144-64.5-144-144c0-6.9 .5-13.6 1.4-20.2L83.1 161.5C60.3 191.2 44 220.8 34.5 243.7c-3.3 7.9-3.3 16.7 0 24.6c14.9 35.7 46.2 87.7 93 131.1C174.5 443.2 239.2 480 320 480c47.8 0 89.9-12.9 126.2-32.5z"/></svg></span></template>
+        <template id=fa-copy><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M502.6 70.63l-61.25-61.25C435.4 3.371 427.2 0 418.7 0H255.1c-35.35 0-64 28.66-64 64l.0195 256C192 355.4 220.7 384 256 384h192c35.2 0 64-28.8 64-64V93.25C512 84.77 508.6 76.63 502.6 70.63zM464 320c0 8.836-7.164 16-16 16H255.1c-8.838 0-16-7.164-16-16L239.1 64.13c0-8.836 7.164-16 16-16h128L384 96c0 17.67 14.33 32 32 32h47.1V320zM272 448c0 8.836-7.164 16-16 16H63.1c-8.838 0-16-7.164-16-16L47.98 192.1c0-8.836 7.164-16 16-16H160V128H63.99c-35.35 0-64 28.65-64 64l.0098 256C.002 483.3 28.66 512 64 512h192c35.2 0 64-28.8 64-64v-32h-47.1L272 448z"/></svg></span></template>
+        <template id=fa-play><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80V432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z"/></svg></span></template>
+        <template id=fa-clock-rotate-left><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M75 75L41 41C25.9 25.9 0 36.6 0 57.9V168c0 13.3 10.7 24 24 24H134.1c21.4 0 32.1-25.9 17-41l-30.8-30.8C155 85.5 203 64 256 64c106 0 192 86 192 192s-86 192-192 192c-40.8 0-78.6-12.7-109.7-34.4c-14.5-10.1-34.4-6.6-44.6 7.9s-6.6 34.4 7.9 44.6C151.2 495 201.7 512 256 512c141.4 0 256-114.6 256-256S397.4 0 256 0C185.3 0 121.3 28.7 75 75zm181 53c-13.3 0-24 10.7-24 24V256c0 6.4 2.5 12.5 7 17l72 72c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-65-65V152c0-13.3-10.7-24-24-24z"/></svg></span></template>
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr-ef4e11c1.min.js"></script>
+        <script src="mark-09e88c2c.min.js"></script>
+        <script src="searcher-c2a407aa.js"></script>
+
+        <script src="clipboard-1626706a.min.js"></script>
+        <script src="highlight-abc7f01d.js"></script>
+        <script src="book-a0b12cfe.js"></script>
+
+        <!-- Custom JS scripts -->
+        <script src="src/custom-1453193a.js"></script>
+
+
+
+    </div>
+    </body>
+</html>
