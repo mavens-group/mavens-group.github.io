@@ -1,0 +1,113 @@
+name: Deploy Hugo
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'webpage/**' # Only triggers when Hugo files change
+      - '.github/workflows/hugo.yaml'
+  workflow_dispatch:
+
+permissions:
+  contents: write # Required to push to the gh-pages branch
+
+concurrency:
+  group: "hugo-pages"
+  cancel-in-progress: false
+
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    # Run all command-line steps inside the webpage directory
+    defaults:
+      run:
+        working-directory: ./webpage
+
+    env:
+      HUGO_VERSION: 0.153.2
+      HUGO_ENVIRONMENT: production
+      HUGO_ENV: production
+      DART_SASS_VERSION: 1.97.3
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4 # Downgraded to v4 (v6 doesn't exist yet for checkout)
+        with:
+          submodules: recursive
+          fetch-depth: 0
+
+      - name: Set timezone
+        run: sudo timedatectl set-timezone America/Los_Angeles
+
+      - name: Install Hugo CLI
+        run: |
+          wget -O ${{ runner.temp }}/hugo.deb \
+          https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_extended_${HUGO_VERSION}_linux-amd64.deb
+          sudo dpkg -i ${{ runner.temp }}/hugo.deb
+
+      - name: Cache Dart Sass
+        id: cache-dart-sass
+        uses: actions/cache@v4
+        with:
+          path: /opt/dart-sass
+          key: dart-sass-${{ env.DART_SASS_VERSION }}-linux-x64
+
+      - name: Install Dart Sass
+        if: steps.cache-dart-sass.outputs.cache-hit != 'true'
+        run: |
+          curl -fsSL \
+            https://github.com/sass/dart-sass/releases/download/${DART_SASS_VERSION}/dart-sass-${DART_SASS_VERSION}-linux-x64.tar.gz \
+            | sudo tar -xz -C /opt
+
+      - name: Add Dart Sass to PATH
+        run: echo "/opt/dart-sass" >> $GITHUB_PATH
+
+      - name: Prepare Hugo cache directories
+        run: |
+          mkdir -p resources
+          mkdir -p .hugo_cache
+          mkdir -p /home/runner/.cache/hugo_cache
+
+      - name: Cache Hugo modules
+        uses: actions/cache@v4
+        with:
+          path: /home/runner/.cache/hugo_cache
+          # Note: hashFiles runs from the repo root, so we add 'webpage/'
+          key: ${{ runner.os }}-hugomod-${{ hashFiles('webpage/**/go.sum') }}
+          restore-keys: |
+            ${{ runner.os }}-hugomod-
+
+      - name: Cache Hugo resources
+        uses: actions/cache@v4
+        with:
+          path: |
+            webpage/resources
+            webpage/.hugo_cache
+          key: ${{ runner.os }}-hugo-${{ hashFiles('webpage/assets/**', 'webpage/static/**', 'webpage/content/**', 'webpage/layouts/**', 'webpage/config.*', 'webpage/hugo.*', 'webpage/go.sum') }}
+          restore-keys: |
+            ${{ runner.os }}-hugo-
+
+      - name: Install Node.js dependencies
+        run: |
+          [[ -f package-lock.json || -f npm-shrinkwrap.json ]] && npm ci || true
+
+      - name: Build with Hugo
+        # Hardcoding the baseURL since we removed the configure-pages action
+        run: |
+          hugo \
+            --gc \
+            --minify \
+            --baseURL "https://mavens-group.github.io/"
+
+      - name: Deploy to GitHub Pages (Branch Method)
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_branch: gh-pages
+          publish_dir: ./webpage/public
+          keep_files: true # CRITICAL: This is what protects your mdBook!
