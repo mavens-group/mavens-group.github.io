@@ -1,0 +1,920 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   viewBox="0 0 1920 1080"
+   width="1920"
+   height="1080"
+   style="font-family:Arial, sans-serif"
+   version="1.1"
+   id="svg75"
+   sodipodi:docname="mxene.svg"
+   inkscape:version="1.4.3 (0d15f75042, 2025-12-25)"
+   inkscape:export-filename="mxene.webp"
+   inkscape:export-xdpi="96"
+   inkscape:export-ydpi="96"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview75"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:zoom="0.68125"
+     inkscape:cx="1187.5229"
+     inkscape:cy="524.0367"
+     inkscape:window-width="1920"
+     inkscape:window-height="1168"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg75" />
+  <defs
+     id="defs8">
+    <radialGradient
+       id="ti-grad"
+       cx="0.34999999"
+       cy="0.30000001"
+       r="0.69999999">
+      <stop
+         offset="0%"
+         stop-color="#8ba2b8"
+         id="stop1" />
+      <stop
+         offset="100%"
+         stop-color="#3c4a59"
+         id="stop2" />
+    </radialGradient>
+    <radialGradient
+       id="c-grad"
+       cx="0.34999999"
+       cy="0.30000001"
+       r="0.69999999">
+      <stop
+         offset="0%"
+         stop-color="#b08b6b"
+         id="stop3" />
+      <stop
+         offset="100%"
+         stop-color="#6e5038"
+         id="stop4" />
+    </radialGradient>
+    <radialGradient
+       id="zr-grad"
+       cx="-4.5"
+       cy="-5.9999995"
+       r="21"
+       fx="-4.5"
+       fy="-5.9999995"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(1.6511572,0,0,1.6511572,232.03358,124.77546)">
+      <stop
+         offset="0%"
+         stop-color="#95b59f"
+         id="stop5" />
+      <stop
+         offset="100%"
+         stop-color="#4a6b52"
+         id="stop6" />
+    </radialGradient>
+    <radialGradient
+       id="h-grad"
+       cx="-2.1000001"
+       cy="-42.799999"
+       r="9.8000002"
+       fx="-2.1000001"
+       fy="-42.799999"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(1.6511572,0,0,1.6511572,232.03358,124.77546)">
+      <stop
+         offset="0"
+         stop-color="#ffffff"
+         id="stop7"
+         style="stop-color:#efaaaa;stop-opacity:1;" />
+      <stop
+         offset="1"
+         stop-color="#a0aab5"
+         id="stop8"
+         style="stop-color:#dd4848;stop-opacity:1;" />
+    </radialGradient>
+    <g
+       id="plot-axes">
+      <path
+         d="M 0,180 V 0 m 0,180 h 260"
+         stroke="#444b52"
+         stroke-width="1.5"
+         fill="none"
+         id="path8" />
+    </g>
+    <radialGradient
+       inkscape:collect="always"
+       xlink:href="#ti-grad"
+       id="radialGradient75"
+       cx="-84.199997"
+       cy="14.4"
+       r="19.6"
+       fx="-84.199997"
+       fy="14.4"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(1.6511572,0,0,1.6511572,232.03358,124.77546)" />
+    <radialGradient
+       inkscape:collect="always"
+       xlink:href="#ti-grad"
+       id="radialGradient76"
+       cx="-4.2000003"
+       cy="14.4"
+       r="19.6"
+       fx="-4.2000003"
+       fy="14.4"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(1.6511572,0,0,1.6511572,232.03358,124.77546)" />
+    <radialGradient
+       inkscape:collect="always"
+       xlink:href="#ti-grad"
+       id="radialGradient77"
+       cx="75.800003"
+       cy="14.4"
+       r="19.6"
+       fx="75.800003"
+       fy="14.4"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(1.6511572,0,0,1.6511572,232.03358,124.77546)" />
+    <radialGradient
+       inkscape:collect="always"
+       xlink:href="#ti-grad"
+       id="radialGradient78"
+       cx="-44.200001"
+       cy="34.400002"
+       r="19.6"
+       fx="-44.200001"
+       fy="34.400002"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(1.6511572,0,0,1.6511572,232.03358,124.77546)" />
+    <radialGradient
+       inkscape:collect="always"
+       xlink:href="#ti-grad"
+       id="radialGradient79"
+       cx="35.799999"
+       cy="34.400002"
+       r="19.6"
+       fx="35.799999"
+       fy="34.400002"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(1.6511572,0,0,1.6511572,232.03358,124.77546)" />
+    <radialGradient
+       inkscape:collect="always"
+       xlink:href="#c-grad"
+       id="radialGradient80"
+       cx="-62.400002"
+       cy="6.8000002"
+       r="11.2"
+       fx="-62.400002"
+       fy="6.8000002"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(1.6511572,0,0,1.6511572,232.03358,124.77546)" />
+    <radialGradient
+       inkscape:collect="always"
+       xlink:href="#c-grad"
+       id="radialGradient81"
+       cx="-22.4"
+       cy="26.799999"
+       r="11.2"
+       fx="-22.4"
+       fy="26.799999"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(1.6511572,0,0,1.6511572,232.03358,124.77546)" />
+    <radialGradient
+       inkscape:collect="always"
+       xlink:href="#c-grad"
+       id="radialGradient82"
+       cx="17.6"
+       cy="6.8000002"
+       r="11.2"
+       fx="17.6"
+       fy="6.8000002"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(1.6511572,0,0,1.6511572,232.03358,124.77546)" />
+    <radialGradient
+       inkscape:collect="always"
+       xlink:href="#c-grad"
+       id="radialGradient83"
+       cx="57.599998"
+       cy="26.799999"
+       r="11.2"
+       fx="57.599998"
+       fy="26.799999"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(1.6511572,0,0,1.6511572,232.03358,124.77546)" />
+    <radialGradient
+       inkscape:collect="always"
+       xlink:href="#ti-grad"
+       id="radialGradient84"
+       cx="-44.200001"
+       cy="-25.6"
+       r="19.6"
+       fx="-44.200001"
+       fy="-25.6"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(1.6511572,0,0,1.6511572,232.03358,124.77546)" />
+    <radialGradient
+       inkscape:collect="always"
+       xlink:href="#ti-grad"
+       id="radialGradient85"
+       cx="35.799999"
+       cy="-25.6"
+       r="19.6"
+       fx="35.799999"
+       fy="-25.6"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(1.6511572,0,0,1.6511572,232.03358,124.77546)" />
+  </defs>
+  <rect
+     style="fill:#c3c3c3;fill-opacity:1;stroke-width:11.701"
+     id="rect85"
+     width="1920"
+     height="1080"
+     x="0"
+     y="0" />
+  <g
+     transform="matrix(1.6511572,0,0,1.6511572,112.65197,97.316712)"
+     id="g25">
+    <text
+       x="130"
+       y="-15"
+       fill="#2d3748"
+       font-size="16px"
+       text-anchor="middle"
+       id="text8">Free Energy (|ΔG_H*|)</text>
+    <text
+       x="-40"
+       y="90"
+       fill="#2d3748"
+       font-size="14px"
+       transform="rotate(-90,-40,90)"
+       text-anchor="middle"
+       id="text9">eV</text>
+    <use
+       href="#plot-axes"
+       id="use9" />
+    <path
+       d="m -5,0 h 5 m -5,45 h 5 m -5,45 h 5 m -5,45 h 5"
+       stroke="#444b52"
+       stroke-width="1"
+       id="path9" />
+    <text
+       x="-10"
+       y="5"
+       fill="#444b52"
+       font-size="12px"
+       text-anchor="end"
+       id="text10">1.6</text>
+    <text
+       x="-10"
+       y="49"
+       fill="#444b52"
+       font-size="12px"
+       text-anchor="end"
+       id="text11">1.2</text>
+    <text
+       x="-10"
+       y="94"
+       fill="#444b52"
+       font-size="12px"
+       text-anchor="end"
+       id="text12">0.8</text>
+    <text
+       x="-10"
+       y="139"
+       fill="#444b52"
+       font-size="12px"
+       text-anchor="end"
+       id="text13">0.4</text>
+    <text
+       x="-10"
+       y="184"
+       fill="#444b52"
+       font-size="12px"
+       text-anchor="end"
+       id="text14">0.0</text>
+    <text
+       x="30"
+       y="170"
+       fill="#2d3748"
+       font-size="12px"
+       text-anchor="middle"
+       id="text15">H⁺+e⁻</text>
+    <text
+       x="230"
+       y="170"
+       fill="#2d3748"
+       font-size="12px"
+       text-anchor="middle"
+       id="text16">½H₂</text>
+    <path
+       d="M 10,180 H 50 M 100,11 h 60 m 50,169 h 40"
+       stroke="#3b6291"
+       stroke-width="2.5"
+       id="path16" />
+    <path
+       d="M 50,180 100,11 m 60,0 50,169"
+       stroke="#3b6291"
+       stroke-width="1"
+       stroke-dasharray="3, 3"
+       id="path17" />
+    <path
+       d="M 10,180 H 50 M 100,39 h 60 m 50,141 h 40"
+       stroke="#e28a2b"
+       stroke-width="2.5"
+       id="path18" />
+    <path
+       d="M 50,180 100,39 m 60,0 50,141"
+       stroke="#e28a2b"
+       stroke-width="1"
+       stroke-dasharray="3, 3"
+       id="path19" />
+    <path
+       d="m 10,180 h 40 m 50,-40 h 60 m 50,40 h 40"
+       stroke="#5a9254"
+       stroke-width="2.5"
+       id="path20" />
+    <path
+       d="m 50,180 50,-40 m 60,0 50,40"
+       stroke="#5a9254"
+       stroke-width="1"
+       stroke-dasharray="3, 3"
+       id="path21" />
+    <path
+       d="m 10,180 h 40 m 50,-21 h 60 m 50,21 h 40"
+       stroke="#c25456"
+       stroke-width="2.5"
+       id="path22" />
+    <path
+       d="m 50,180 50,-21 m 60,0 50,21"
+       stroke="#c25456"
+       stroke-width="1"
+       stroke-dasharray="3, 3"
+       id="path23" />
+    <path
+       d="m 10,180 h 40 m 50,-11 h 60 m 50,11 h 40"
+       stroke="#aab541"
+       stroke-width="2.5"
+       id="path24" />
+    <path
+       d="m 50,180 50,-11 m 60,0 50,11"
+       stroke="#aab541"
+       stroke-width="1"
+       stroke-dasharray="3, 3"
+       id="path25" />
+  </g>
+  <g
+     transform="matrix(1.6511572,0,0,1.6511572,112.65197,650.45438)"
+     id="g30">
+    <text
+       x="130"
+       y="-15"
+       fill="#2d3748"
+       font-size="16px"
+       text-anchor="middle"
+       id="text25">Tafel Slopes</text>
+    <text
+       x="-40"
+       y="90"
+       fill="#2d3748"
+       font-size="14px"
+       transform="rotate(-90,-40,90)"
+       text-anchor="middle"
+       id="text26">η (mV)</text>
+    <text
+       x="130"
+       y="215"
+       fill="#2d3748"
+       font-size="14px"
+       text-anchor="middle"
+       id="text27">log(j)</text>
+    <use
+       href="#plot-axes"
+       id="use27" />
+    <path
+       d="M 20,160 220,10"
+       stroke="#3b6291"
+       stroke-width="2"
+       id="path27" />
+    <path
+       d="M 20,150 240,60"
+       stroke="#e28a2b"
+       stroke-width="2"
+       id="path28" />
+    <path
+       d="M 20,130 250,100"
+       stroke="#5a9254"
+       stroke-width="2"
+       id="path29" />
+    <path
+       d="M 20,120 250,110"
+       stroke="#c25456"
+       stroke-width="2.5"
+       id="path30" />
+  </g>
+  <g
+     transform="matrix(1.6511572,0,0,1.6511572,1400.5546,97.316712)"
+     id="g34">
+    <text
+       x="130"
+       y="-15"
+       fill="#2d3748"
+       font-size="16px"
+       text-anchor="middle"
+       id="text30">Overpotential at 10 mA/cm²</text>
+    <use
+       href="#plot-axes"
+       id="use30" />
+    <rect
+       x="30"
+       y="20"
+       width="30"
+       height="160"
+       fill="#3b6291"
+       opacity="0.85"
+       id="rect30" />
+    <rect
+       x="80"
+       y="60"
+       width="30"
+       height="120"
+       fill="#e28a2b"
+       opacity="0.85"
+       id="rect31" />
+    <rect
+       x="130"
+       y="110"
+       width="30"
+       height="70"
+       fill="#5a9254"
+       opacity="0.85"
+       id="rect32" />
+    <rect
+       x="180"
+       y="140"
+       width="30"
+       height="40"
+       fill="#c25456"
+       opacity="0.85"
+       id="rect33" />
+    <rect
+       x="230"
+       y="160"
+       width="20"
+       height="20"
+       fill="#aab541"
+       opacity="0.85"
+       id="rect34" />
+    <path
+       d="M 0,160 H 260"
+       stroke="#aab541"
+       stroke-width="1.5"
+       stroke-dasharray="4, 4"
+       id="path34" />
+  </g>
+  <text
+     x="1615.2051"
+     y="625.68701"
+     fill="#2d3748"
+     font-size="26.4185px"
+     text-anchor="middle"
+     id="text34"
+     style="stroke-width:1.65116">Sabatier Volcano Plot</text>
+  <text
+     x="-782.54694"
+     y="1334.5083"
+     fill="#2d3748"
+     font-size="23.1162px"
+     transform="rotate(-90)"
+     text-anchor="middle"
+     id="text35"
+     style="stroke-width:1.65116">|ΔG_H*| (eV)</text>
+  <text
+     x="1615.2051"
+     y="1005.4532"
+     fill="#2d3748"
+     font-size="23.1162px"
+     text-anchor="middle"
+     id="text36"
+     style="stroke-width:1.65116">ΔG_H* (eV)</text>
+  <polygon
+     points="4,16 8,10 12,16 "
+     fill="#aab541"
+     id="polygon51"
+     transform="matrix(1.6511572,0,0,1.6511572,1625.112,815.5701)" />
+  <text
+     x="1654.8329"
+     y="838.68628"
+     fill="#444b52"
+     font-size="16.5116px"
+     id="text51"
+     style="stroke-width:1.65116">Pt Benchmark</text>
+  <circle
+     cx="1638.3213"
+     cy="856.84906"
+     r="5.7790504"
+     fill="#c25456"
+     id="circle52"
+     style="stroke-width:1.65116" />
+  <text
+     x="1654.8329"
+     y="861.80249"
+     fill="#444b52"
+     font-size="16.5116px"
+     id="text52"
+     style="stroke-width:1.65116">Janus Carbides</text>
+  <circle
+     cx="1638.3213"
+     cy="878.31409"
+     r="5.7790504"
+     fill="#3b6291"
+     id="circle53"
+     style="stroke-width:1.65116" />
+  <text
+     x="1654.8329"
+     y="883.26752"
+     fill="#444b52"
+     font-size="16.5116px"
+     id="text53"
+     style="stroke-width:1.65116">Janus Nitrides</text>
+  <circle
+     cx="1638.3213"
+     cy="898.12793"
+     r="5.7790504"
+     fill="#e28a2b"
+     id="circle54"
+     style="stroke-width:1.65116" />
+  <text
+     x="1654.8329"
+     y="903.08142"
+     fill="#444b52"
+     font-size="16.5116px"
+     id="text54"
+     style="stroke-width:1.65116">Symmetric (lit.)</text>
+  <path
+     d="M 1400.5546,914.63953 V 650.45438 m 0,264.18515 h 429.3009"
+     stroke="#444b52"
+     stroke-width="2.47674"
+     fill="none"
+     id="path36" />
+  <path
+     d="m 1615.205,914.63953 v 8.25579 m -99.0694,-8.25579 v 8.25579 m -99.0694,-8.25579 v 8.25579 m 297.2083,-8.25579 v 8.25579 m 99.0694,-8.25579 v 8.25579"
+     stroke="#444b52"
+     stroke-width="1.65116"
+     id="path37" />
+  <text
+     x="1615.2051"
+     y="947.66266"
+     fill="#444b52"
+     font-size="19.8139px"
+     text-anchor="middle"
+     id="text37"
+     style="stroke-width:1.65116">0.0</text>
+  <text
+     x="1516.1356"
+     y="947.66266"
+     fill="#444b52"
+     font-size="19.8139px"
+     text-anchor="middle"
+     id="text38"
+     style="stroke-width:1.65116">-1.0</text>
+  <text
+     x="1417.0662"
+     y="947.66266"
+     fill="#444b52"
+     font-size="19.8139px"
+     text-anchor="middle"
+     id="text39"
+     style="stroke-width:1.65116">-2.0</text>
+  <text
+     x="1714.2744"
+     y="947.66266"
+     fill="#444b52"
+     font-size="19.8139px"
+     text-anchor="middle"
+     id="text40"
+     style="stroke-width:1.65116">1.0</text>
+  <text
+     x="1813.3439"
+     y="947.66266"
+     fill="#444b52"
+     font-size="19.8139px"
+     text-anchor="middle"
+     id="text41"
+     style="stroke-width:1.65116">2.0</text>
+  <path
+     d="m 1392.2988,666.96595 h 8.2558 m -8.2558,82.55786 h 8.2558 m -8.2558,82.55786 h 8.2558 m -8.2558,82.55786 h 8.2558"
+     stroke="#444b52"
+     stroke-width="1.65116"
+     id="path41" />
+  <text
+     x="1384.043"
+     y="675.22174"
+     fill="#444b52"
+     font-size="19.8139px"
+     text-anchor="end"
+     id="text42"
+     style="stroke-width:1.65116">0.0</text>
+  <text
+     x="1384.043"
+     y="757.7796"
+     fill="#444b52"
+     font-size="19.8139px"
+     text-anchor="end"
+     id="text43"
+     style="stroke-width:1.65116">0.5</text>
+  <text
+     x="1384.043"
+     y="840.33746"
+     fill="#444b52"
+     font-size="19.8139px"
+     text-anchor="end"
+     id="text44"
+     style="stroke-width:1.65116">1.0</text>
+  <path
+     d="M 1615.205,666.96595 1466.6009,914.63953 M 1615.205,666.96595 1763.8092,914.63953"
+     stroke="#8ba2b8"
+     stroke-width="3.30231"
+     stroke-dasharray="6, 4"
+     fill="none"
+     id="path44" />
+  <polygon
+     points="124.6,15 128.6,23 120.6,23 "
+     fill="#aab541"
+     id="polygon45"
+     transform="matrix(1.6511572,0,0,1.6511572,1400.5546,650.45438)" />
+  <text
+     x="1608.4659"
+     y="667.37097"
+     fill="#444b52"
+     font-size="18.1627px"
+     font-weight="bold"
+     text-anchor="end"
+     id="text45"
+     style="stroke-width:1.65116">Pt(111)</text>
+  <circle
+     cx="1604.4098"
+     cy="687.10559"
+     r="8.2557859"
+     fill="#c25456"
+     stroke="#ffffff"
+     stroke-width="2.47674"
+     id="circle45" />
+  <text
+     x="1508.6847"
+     y="689.48755"
+     fill="#c25456"
+     font-size="19.8139px"
+     font-weight="bold"
+     text-anchor="start"
+     id="text46"
+     style="stroke-width:1.65116">VNbCO₂</text>
+  <circle
+     cx="1594.6434"
+     cy="702.61578"
+     r="8.2557859"
+     fill="#3b6291"
+     stroke="#ffffff"
+     stroke-width="2.47674"
+     id="circle46" />
+  <text
+     x="1504.543"
+     y="711.03357"
+     fill="#3b6291"
+     font-size="19.8139px"
+     font-weight="bold"
+     text-anchor="start"
+     id="text47"
+     style="stroke-width:1.65116">VNbNO₂</text>
+  <circle
+     cx="1664.7397"
+     cy="749.5238"
+     r="7.4302073"
+     fill="#e28a2b"
+     opacity="0.8"
+     id="circle47"
+     style="stroke-width:1.65116" />
+  <text
+     x="1677.949"
+     y="756.12842"
+     fill="#666666"
+     font-size="16.5116px"
+     text-anchor="start"
+     id="text48"
+     style="stroke-width:1.65116">Ti₃C₂O₂</text>
+  <circle
+     cx="1555.7634"
+     cy="766.0354"
+     r="7.4302073"
+     fill="#e28a2b"
+     opacity="0.8"
+     id="circle48"
+     style="stroke-width:1.65116" />
+  <text
+     x="1542.5541"
+     y="772.64001"
+     fill="#666666"
+     font-size="16.5116px"
+     text-anchor="end"
+     id="text49"
+     style="stroke-width:1.65116">Mo₂CO₂</text>
+  <circle
+     cx="1734.0884"
+     cy="865.1048"
+     r="7.4302073"
+     fill="#e28a2b"
+     opacity="0.8"
+     id="circle49"
+     style="stroke-width:1.65116" />
+  <circle
+     cx="1704.3676"
+     cy="815.57013"
+     r="7.4302073"
+     fill="#e28a2b"
+     opacity="0.8"
+     id="circle50"
+     style="stroke-width:1.65116" />
+  <circle
+     cx="1516.1356"
+     cy="832.08167"
+     r="7.4302073"
+     fill="#e28a2b"
+     opacity="0.8"
+     id="circle51"
+     style="stroke-width:1.65116" />
+  <g
+     transform="matrix(1.6,0,0,1.6,600,360)"
+     id="g75">
+    <g
+       stroke="#8ba2b8"
+       stroke-width="2"
+       opacity="0.5"
+       stroke-linecap="round"
+       id="g63"
+       transform="matrix(1.6511572,0,0,1.6511572,232.03358,124.77546)">
+      <line
+         x1="-80"
+         y1="20"
+         x2="-40"
+         y2="40"
+         id="line55" />
+      <line
+         x1="-40"
+         y1="40"
+         x2="0"
+         y2="20"
+         id="line56" />
+      <line
+         x1="0"
+         y1="20"
+         x2="40"
+         y2="40"
+         id="line57" />
+      <line
+         x1="40"
+         y1="40"
+         x2="80"
+         y2="20"
+         id="line58" />
+      <line
+         x1="-40"
+         y1="-20"
+         x2="0"
+         y2="0"
+         id="line59" />
+      <line
+         x1="0"
+         y1="0"
+         x2="40"
+         y2="-20"
+         id="line60" />
+      <line
+         x1="-40"
+         y1="-20"
+         x2="-40"
+         y2="40"
+         id="line61" />
+      <line
+         x1="0"
+         y1="0"
+         x2="0"
+         y2="20"
+         id="line62" />
+      <line
+         x1="40"
+         y1="-20"
+         x2="40"
+         y2="40"
+         id="line63" />
+    </g>
+    <circle
+       cx="99.941002"
+       cy="157.7986"
+       r="23.116201"
+       fill="url(#ti-grad)"
+       id="circle63"
+       style="fill:url(#radialGradient75);stroke-width:1.65116" />
+    <circle
+       cx="232.03357"
+       cy="157.7986"
+       r="23.116201"
+       fill="url(#ti-grad)"
+       id="circle64"
+       style="fill:url(#radialGradient76);stroke-width:1.65116" />
+    <circle
+       cx="364.12616"
+       cy="157.7986"
+       r="23.116201"
+       fill="url(#ti-grad)"
+       id="circle65"
+       style="fill:url(#radialGradient77);stroke-width:1.65116" />
+    <circle
+       cx="165.98729"
+       cy="190.82175"
+       r="23.116201"
+       fill="url(#ti-grad)"
+       id="circle66"
+       style="fill:url(#radialGradient78);stroke-width:1.65116" />
+    <circle
+       cx="298.07986"
+       cy="190.82175"
+       r="23.116201"
+       fill="url(#ti-grad)"
+       id="circle67"
+       style="fill:url(#radialGradient79);stroke-width:1.65116" />
+    <circle
+       cx="132.96414"
+       cy="141.28703"
+       r="13.209258"
+       fill="url(#c-grad)"
+       id="circle68"
+       style="fill:url(#radialGradient80);stroke-width:1.65116" />
+    <circle
+       cx="199.01044"
+       cy="174.31017"
+       r="13.209258"
+       fill="url(#c-grad)"
+       id="circle69"
+       style="fill:url(#radialGradient81);stroke-width:1.65116" />
+    <circle
+       cx="265.05673"
+       cy="141.28703"
+       r="13.209258"
+       fill="url(#c-grad)"
+       id="circle70"
+       style="fill:url(#radialGradient82);stroke-width:1.65116" />
+    <circle
+       cx="331.103"
+       cy="174.31017"
+       r="13.209258"
+       fill="url(#c-grad)"
+       id="circle71"
+       style="fill:url(#radialGradient83);stroke-width:1.65116" />
+    <circle
+       cx="165.98729"
+       cy="91.752312"
+       r="23.116201"
+       fill="url(#ti-grad)"
+       id="circle72"
+       style="fill:url(#radialGradient84);stroke-width:1.65116" />
+    <circle
+       cx="298.07986"
+       cy="91.752312"
+       r="23.116201"
+       fill="url(#ti-grad)"
+       id="circle73"
+       style="fill:url(#radialGradient85);stroke-width:1.65116" />
+    <circle
+       cx="232.03357"
+       cy="124.77546"
+       r="24.767359"
+       fill="url(#zr-grad)"
+       id="circle74"
+       style="fill:url(#zr-grad);stroke-width:1.65116" />
+    <line
+       x1="232.03357"
+       y1="116.51967"
+       x2="232.03357"
+       y2="66.984955"
+       stroke="#ffffff"
+       stroke-width="4.95347"
+       stroke-dasharray="4, 2"
+       opacity="0.8"
+       id="line74" />
+    <circle
+       cx="232.03357"
+       cy="58.729168"
+       r="11.558101"
+       fill="url(#h-grad)"
+       id="circle75"
+       style="fill:url(#h-grad);stroke-width:1.65116" />
+  </g>
+</svg>

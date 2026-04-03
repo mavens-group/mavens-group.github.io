@@ -1,0 +1,9 @@
+[book]
+title = "Density Functional Theory"
+authors = ["Rudra Banerjee"]
+language = "en"
+
+[output.html]
+mathjax-support = true
+additional-css = ["src/custom.css"]
+additional-js = ["src/custom.js"]
