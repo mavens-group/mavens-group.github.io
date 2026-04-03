@@ -1,0 +1,2342 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Part I — Foundations | MAVENs</title><link>https://mavens-group.github.io/blog/2024-07-dft/01-foundations/</link><atom:link href="https://mavens-group.github.io/blog/2024-07-dft/01-foundations/index.xml" rel="self" type="application/rss+xml"/><description>Part I — Foundations</description><generator>Hugo Blox Builder (https://hugoblox.com)</generator><language>en-us</language><lastBuildDate>Sun, 01 Jun 2025 00:00:00 +0000</lastBuildDate><image><url>https://mavens-group.github.io/media/logo.svg</url><title>Part I — Foundations</title><link>https://mavens-group.github.io/blog/2024-07-dft/01-foundations/</link></image><item><title>Introduction</title><link>https://mavens-group.github.io/blog/2024-07-dft/01-foundations/02-basics/</link><pubDate>Sat, 27 Jul 2024 00:00:00 +0000</pubDate><guid>https://mavens-group.github.io/blog/2024-07-dft/01-foundations/02-basics/</guid><description>&lt;p&gt;The density functional theory (DFT) has established itself as the primary tool to calculate the
+electronic structure of materials.&lt;/p&gt;
+&lt;p&gt;At its heart, the method minimizes the Helmholtz free energy using the variational principle.
+The Helmholtz energy of a system is a functional of the density, and minimizing it gives us the
+equilibrium density.&lt;/p&gt;
+&lt;p&gt;DFT for electronic structure calculation takes the eigenvalue of the Schrödinger equation as a
+functional of the charge density.&lt;/p&gt;
+&lt;h2 id="schrödingers-equation-revisited-for-many-particle-systems"&gt;Schrödinger&amp;rsquo;s Equation: Revisited for Many-Particle Systems&lt;/h2&gt;
+&lt;p&gt;The Schrödinger equation is the governing equation for quantum mechanical systems:&lt;/p&gt;
+$$
+\left[-\frac{\hbar^2}{2m_e}\nabla^2+V(\mathbf{r})\right]\Psi(\mathbf{r})=E\Psi(\mathbf{r})
+$$
+&lt;p&gt;The problem grows intractable when many particles are present. The many-body Hamiltonian for $N$
+nuclei and $n$ electrons is:&lt;/p&gt;
+$$
+\begin{align*}
+\hat{H} =&amp;-\frac{\hbar^2}{2m}\sum_{i}^n\nabla^2_i+ \frac{1}{2}\sum_{i\neq j}\frac{1}{|\mathbf{r}_i-\mathbf{r}_j|} &amp;
+\qquad \mbox{Electron} \newline
+&amp; -\frac{\hbar^2}{2M_j}\sum_j^N\nabla^2_j + \frac{1}{2}\sum_{i\neq j}\frac{Z_iZ_j}{|{R_i-R_j}|} &amp; \mbox{Nuclei}\newline
+&amp; -\sum_{i,j}\frac{Z_j}{|\mathbf{r}_i-\mathbf{R}_j|} &amp; \mbox{Electron-Nucleus}
+\end{align*}
+$$
+&lt;p&gt;The time-independent Hamiltonian $\hat{H}=H(p,q)$ is a function of the generalised momenta and
+coordinates $(p,q)$. Solving it becomes increasingly difficult for systems with more than one
+electron.&lt;/p&gt;
+&lt;p&gt;Even for a simple atom like oxygen, with 8 electrons, and taking a coarse grid of just 10 points
+in each spatial dimension, we need $10^{24}$ data points. On modern computers, each real number
+requires 64 bits of memory. To store the wavefunction of a single oxygen atom we would need
+$64\times 10^{24}$ bits $\approx 8\times 10^{24}$ bytes $\approx 10^{17}$ MB. (To appreciate how
+large this is, consider that the age of the universe is roughly $4\times 10^{17}$ seconds — the
+numbers are comparable!)&lt;/p&gt;
+&lt;p&gt;So we need systematic approximations to solve the problem.&lt;/p&gt;
+&lt;h2 id="bornoppenheimer-approximation"&gt;Born–Oppenheimer Approximation&lt;/h2&gt;
+&lt;p&gt;Because protons are roughly $10^3$ times heavier than electrons, they move far more slowly under
+the same force. This motivates the &lt;strong&gt;Born–Oppenheimer (BO) approximation&lt;/strong&gt;: we freeze the
+nuclear degrees of freedom and solve only for the electronic structure at fixed nuclear positions.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Validity condition.&lt;/strong&gt; The BO approximation is justified when the electronic excitation energy $\hbar\omega_{\rm el}$ greatly exceeds the nuclear vibrational energy $\hbar\omega_{\rm nuc}$:&lt;/p&gt;
+$$\omega_{\rm el} \gg \omega_{\rm nuc}, \qquad \frac{\omega_{\rm nuc}}{\omega_{\rm el}} \sim \left(\frac{m_e}{M}\right)^{1/2} \approx 10^{-2}.$$
+&lt;p&gt;This ratio is small for all atoms, which is why BO works so broadly. It breaks down near &lt;strong&gt;conical intersections&lt;/strong&gt; — geometries where two electronic potential energy surfaces become degenerate — leading to non-adiabatic dynamics that are important in photochemistry and certain charge-transfer processes. These are beyond the scope of ground-state DFT.&lt;/p&gt;
+&lt;p&gt;Under this approximation:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;The nuclear kinetic energy term vanishes: $\frac{\hbar^2}{2M_j}\sum_j^N\nabla^2_j = 0$.&lt;/li&gt;
+&lt;li&gt;The nucleus–nucleus repulsion $\frac{1}{2}\sum_{i\neq j}\frac{Z_iZ_j}{|{R_i-R_j}|}$ becomes a
+constant that shifts the total energy but does not affect the electronic wavefunction.&lt;/li&gt;
+&lt;li&gt;The electron–nucleus attraction $\sum_{i,j}\frac{Z_j}{|\mathbf{r}_i-\mathbf{R}_j|}$ depends
+only on the electronic coordinates $r$ (nuclei are fixed parameters).&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The resulting electronic Hamiltonian is:&lt;/p&gt;
+$$
+\begin{align*}
+\hat{H}_e =&amp;-\frac{\hbar^2}{2m_e}\sum_{i=1}^n\nabla^2_i &amp; \mbox{Kinetic energy of electrons}\newline
+&amp;+ \frac{1}{2}\sum_{i\neq j}\frac{e^2}{|\mathbf{r}_i-\mathbf{r}_j|} &amp;\mbox{Electron--electron repulsion}\newline
+&amp; +V_{\rm ext}(\mathbf{r}) &amp; \mbox{Electron--nucleus attraction}
+\end{align*}
+$$
+&lt;p&gt;The electron–electron repulsion term is still a many-body interaction — handling it requires
+further approximation.&lt;/p&gt;
+&lt;h2 id="mean-field-approximations"&gt;Mean-Field Approximations&lt;/h2&gt;
+&lt;h3 id="hartree-approximation"&gt;Hartree Approximation&lt;/h3&gt;
+&lt;p&gt;After invoking the Born–Oppenheimer approximation, the remaining challenge is the electron–electron
+repulsion $\frac{1}{2}\sum_{i\neq j}\frac{1}{|\mathbf{r}_i-\mathbf{r}_j|}$. The simplest
+treatment sets this to zero (non-interacting electrons), but this gives grossly incorrect results
+for most properties.&lt;/p&gt;
+&lt;p&gt;A better strategy is to assume that each electron does not interact with individual others, but
+instead moves in the &lt;strong&gt;mean (average) field&lt;/strong&gt; generated by all the other electrons combined. This
+is called the &lt;strong&gt;Hartree approximation&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;In this picture, the electron–electron repulsion felt by electron $i$ is replaced by the
+electrostatic potential of the continuous charge density $\rho(\mathbf{r}&amp;rsquo;)$ of all other electrons:&lt;/p&gt;
+$$
+\frac{1}{2}\sum_{i\neq j}\frac{e^2}{|\mathbf{r}_i-\mathbf{r}_j|}
+\approx \int \frac{e^2\,\rho(\mathbf{r}')}{|\mathbf{r}_i-\mathbf{r}'|}\,d\mathbf{r}' \equiv V_{\rm H}(\mathbf{r}_i),
+\qquad
+E_{\rm H}[\rho] = \frac{1}{2}\iint\frac{e^2\,\rho(\mathbf{r})\rho(\mathbf{r}')}{|\mathbf{r}-\mathbf{r}'|}\,d\mathbf{r}\,d\mathbf{r}'
+$$
+&lt;p&gt;where $\rho(\mathbf{r}&amp;rsquo;) = \sum_j |\phi_j(\mathbf{r}&amp;rsquo;)|^2$ is the electron number density. The quantity $E_{\rm H}[\rho]$ is the &lt;strong&gt;Hartree energy&lt;/strong&gt; — the classical electrostatic self-energy of the charge distribution. The corresponding single-electron potential $V_{\rm H}(\mathbf{r}_i)$ enters the effective single-particle Hamiltonian.&lt;/p&gt;
+&lt;p&gt;The full Hartree Hamiltonian then reads:&lt;/p&gt;
+$$
+\hat{H}_{\rm Hartree} = -\frac{\hbar^2}{2m_e}\sum_{i=1}^n\nabla^2_i + \sum_i V_{\rm H}(\mathbf{r}_i) + V_{\rm ext}(\mathbf{r})
+$$
+&lt;h3 id="hartreefock-approximation"&gt;Hartree–Fock Approximation&lt;/h3&gt;
+&lt;p&gt;The Hartree approximation is incomplete because it ignores the fact that electrons are
+&lt;strong&gt;fermions&lt;/strong&gt;: identical spin-$\frac{1}{2}$ particles that obey the &lt;strong&gt;Pauli exclusion principle&lt;/strong&gt;,
+which requires the many-body wavefunction to be antisymmetric under the exchange of any two
+electrons.&lt;/p&gt;
+&lt;p&gt;Fock incorporated this antisymmetry into the Hartree scheme, yielding the &lt;strong&gt;Hartree–Fock (HF)&lt;/strong&gt;
+approximation. The wavefunction is constructed as a &lt;strong&gt;Slater determinant&lt;/strong&gt;, which automatically
+satisfies antisymmetry:&lt;/p&gt;
+$$
+\Psi(r_1,r_2\cdots r_N)= \frac{1}{\sqrt{N!}}\begin{vmatrix}
+\psi_1(r_1) &amp;\cdots &amp;\psi_1(r_N)\\
+\vdots &amp; \ddots &amp; \vdots\\
+\psi_N(r_1) &amp;\cdots &amp;\psi_N(r_N)\\
+\end{vmatrix}
+$$
+&lt;p&gt;Swapping any two columns (i.e., exchanging two electrons) changes the sign of the determinant,
+ensuring the required antisymmetry. The single-particle orbitals $\psi_i$ are then determined
+by the variational condition:&lt;/p&gt;
+$$
+\frac{\delta}{\delta \psi_j^*(r)}\left[\langle\Psi|\hat{H}|\Psi\rangle-\sum_i^N\epsilon_i\int d^3r |\psi_i(r)|^2\right]=0
+$$
+&lt;p&gt;This procedure introduces an &lt;strong&gt;exchange energy&lt;/strong&gt; term — a purely quantum mechanical
+contribution absent in the Hartree scheme — which lowers the total energy by keeping electrons of
+the same spin spatially separated. The correlation energy (everything beyond HF) remains
+unaccounted for and is the key quantity that DFT&amp;rsquo;s exchange-correlation functional $E_{\rm xc}$
+aims to capture.&lt;/p&gt;
+&lt;h3 id="example-hartreefock-calculation-for-the-helium-atom"&gt;Example: Hartree–Fock Calculation for the Helium Atom&lt;/h3&gt;
+&lt;p&gt;The helium atom (two electrons, nucleus with charge $Z=2$) is the simplest system where many-body
+effects matter, making it an ideal test case.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Hamiltonian:&lt;/strong&gt;&lt;/p&gt;
+$$
+\hat{H} = -\frac{\hbar^2}{2m_e} (\nabla_1^2 + \nabla_2^2) - \frac{2e^2}{r_1} - \frac{2e^2}{r_2} + \frac{e^2}{|\mathbf{r}_1 - \mathbf{r}_2|}
+$$
+&lt;p&gt;&lt;strong&gt;Hartree approximation:&lt;/strong&gt; Each electron feels the nuclear attraction plus the average repulsion
+from the other electron. The total wavefunction is a simple product of single-electron orbitals:
+$\Psi(r_1, r_2) = \phi(r_1)\phi(r_2)$, which is not antisymmetric.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Hartree–Fock improvement:&lt;/strong&gt; The wavefunction is antisymmetrized via a Slater determinant:&lt;/p&gt;
+$$
+\Psi_{HF}(r_1, r_2) = \frac{1}{\sqrt{2}} [\phi_a(r_1)\phi_b(r_2) - \phi_a(r_2)\phi_b(r_1)]
+$$
+&lt;p&gt;For the ground state, both electrons occupy the $1s$ orbital with opposite spins.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Physical consequences:&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;The Hartree method overestimates the energy because it ignores exchange.&lt;/li&gt;
+&lt;li&gt;The Hartree–Fock method lowers the energy by including exchange, but still neglects electron
+correlation (all effects beyond a single Slater determinant).&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;Numerical comparison:&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Method&lt;/th&gt;
+&lt;th&gt;Ground-state energy (eV)&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;Hartree&lt;/td&gt;
+&lt;td&gt;&amp;gt; $-77.5$ eV&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Hartree–Fock&lt;/td&gt;
+&lt;td&gt;$-77.5$ eV&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Experiment&lt;/td&gt;
+&lt;td&gt;$-78.98$ eV&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;The gap between Hartree–Fock ($-77.5$ eV) and experiment ($-78.98$ eV) is called the
+&lt;strong&gt;correlation energy&lt;/strong&gt;. Though small in absolute terms ($\approx 1.5$ eV), it is chemically
+significant — chemical bond energies are typically of this magnitude. Capturing this missing
+correlation is the central motivation for DFT and its exchange-correlation functionals.&lt;/p&gt;</description></item><item><title>Hohenberg-Kohn Theorem</title><link>https://mavens-group.github.io/blog/2024-07-dft/01-foundations/03-hktheorem/</link><pubDate>Sun, 01 Jun 2025 00:00:00 +0000</pubDate><guid>https://mavens-group.github.io/blog/2024-07-dft/01-foundations/03-hktheorem/</guid><description>&lt;p&gt;The Hohenberg–Kohn (HK) theorems, proposed in 1964 by Pierre Hohenberg and Walter Kohn, are the
+fundamental theoretical pillars of Density Functional Theory (DFT). They establish that the
+ground-state properties of a many-electron system are &lt;strong&gt;uniquely determined by its electron
+density&lt;/strong&gt; $\rho(r)$, rather than by the complex many-body wavefunction $\Psi$.&lt;/p&gt;
+&lt;p&gt;This is a remarkable result: it implies that a function of three spatial variables $\rho(r)$ —
+rather than a wavefunction in $3N$ dimensions — contains all the information needed to determine
+the ground state of an $N$-electron system. The HK theorems provide the rigorous justification
+for replacing the many-body Schrödinger equation with a variational problem over electron
+densities, forming the conceptual basis for all practical implementations of DFT.&lt;/p&gt;
+&lt;h3 id="assumptions"&gt;Assumptions&lt;/h3&gt;
+&lt;p&gt;We consider a system of $N$ interacting electrons subject to an external scalar potential
+$V_{\rm ext}(r)$, at zero temperature, in its ground state, with no time-dependent fields. The
+many-body Hamiltonian is:&lt;/p&gt;
+$$
+\begin{align*}
+\hat{H} =&amp; \hat{T}+\hat{V}_{ee}+\hat{V}_{ext}\\
+\hat{H}\Psi =&amp; E\Psi
+\end{align*}
+$$
+&lt;p&gt;where&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;$\hat{T}$ is the kinetic energy operator of the electrons,&lt;/li&gt;
+&lt;li&gt;$\hat{V}_{ee}$ is the Coulomb electron–electron repulsion operator,&lt;/li&gt;
+&lt;li&gt;
+$\hat{V}_{ext} = \sum_{i=1}^N V_{\rm ext}(r_i)$ is the external potential due to the nuclei or
+any applied field — it is the same for all systems considered in the proofs below.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The &lt;strong&gt;electron density&lt;/strong&gt; $\rho(r)$ is defined as the probability of finding any one electron at
+position $r$, integrated over all other electron coordinates:&lt;/p&gt;
+$$
+\rho(r)=N\int |\Psi(r_1,r_2\cdots r_N)|^2 \,dr_2\,dr_3\cdots dr_N
+$$
+&lt;p&gt;Note that $\int \rho(r),dr = N$.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3 id="the-first-hohenbergkohn-theorem"&gt;The First Hohenberg–Kohn Theorem&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;Theorem:&lt;/strong&gt; &lt;em&gt;For any system of interacting particles in an external potential $V_{\rm ext}(r)$,
+the external potential is uniquely determined — up to a constant — by the ground-state electron
+density $\rho_0(r)$.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;Because $V_{\rm ext}(r)$ uniquely determines $\hat{H}$ (and hence all eigenstates and
+eigenvalues), the ground-state density $\rho_0(r)$ alone determines everything about the system.
+The wavefunction $\Psi_0$ is therefore a functional of $\rho_0$, written $\Psi_0 = \Psi[\rho_0]$.&lt;/p&gt;
+&lt;h4 id="proof-by-contradiction"&gt;Proof (by contradiction)&lt;/h4&gt;
+&lt;p&gt;Assume the contrary: suppose there exist two &lt;strong&gt;different&lt;/strong&gt; external potentials
+$V_{\rm ext}(\mathbf{r})$ and $V&amp;rsquo;_{\rm ext}(\mathbf{r})$, differing by more than a constant,&lt;/p&gt;
+$$
+\begin{equation}
+V_{\rm ext}(\mathbf{r}) \neq V'_{\rm ext}(\mathbf{r}) + \text{const.},
+\end{equation}
+$$
+&lt;p&gt;that nevertheless yield the &lt;strong&gt;same&lt;/strong&gt; ground-state density: $\rho(\mathbf{r})=\rho&amp;rsquo;(\mathbf{r}) \equiv \rho(\mathbf{r})$.&lt;/p&gt;
+&lt;p&gt;Let the two Hamiltonians and their ground states be:
+$$
+$$
+\begin{align}
+\hat{H} &amp; = \hat{T} + \hat{V}_{\rm ee} + \hat{V}_{\rm ext}, &amp; \hat{H}|\Psi\rangle = E_0|\Psi\rangle, \\
+\hat{H}' &amp; = \hat{T} + \hat{V}_{\rm ee} + \hat{V}'_{\rm ext}, &amp; \hat{H}'|\Psi'\rangle = E'_0|\Psi'\rangle.
+\end{align}
+$$
+$$
+&lt;/p&gt;
+&lt;p&gt;We apply the &lt;strong&gt;Rayleigh–Ritz variational principle&lt;/strong&gt;, which states that the true ground-state
+energy minimises the energy expectation value: any trial state $|\tilde{\Psi}\rangle \neq |\Psi_0\rangle$
+satisfies $\langle\tilde{\Psi}|\hat{H}|\tilde{\Psi}\rangle &amp;gt; E_0$.&lt;/p&gt;
+&lt;p&gt;Using $\Psi&amp;rsquo;$ as a trial state for $\hat{H}$:
+$$
+$$
+\begin{align}
+E_0 &lt;&amp; \langle \Psi' | \hat{H} | \Psi' \rangle
+= \langle \Psi' | \hat{H}' | \Psi' \rangle + \langle \Psi' | \hat{H} - \hat{H}' | \Psi' \rangle \notag\\
+=&amp; \; E'_0 + \int \left[ V_{\rm ext}(\mathbf{r}) - V'_{\rm ext}(\mathbf{r}) \right] \rho(\mathbf{r}) \, d\mathbf{r}. \label{eq:ineq1}
+\end{align}
+$$
+$$
+&lt;/p&gt;
+&lt;p&gt;Symmetrically, using $\Psi$ as a trial state for $\hat{H}&amp;rsquo;$:
+$$
+$$
+\begin{equation}
+E'_0 &lt; \langle \Psi | \hat{H}' | \Psi \rangle
+= E_0 + \int \left[ V'_{\rm ext}(\mathbf{r}) - V_{\rm ext}(\mathbf{r}) \right] \rho(\mathbf{r}) \, d\mathbf{r}. \label{eq:ineq2}
+\end{equation}
+$$
+$$
+&lt;/p&gt;
+&lt;p&gt;Adding the two inequalities \eqref{eq:ineq1} and \eqref{eq:ineq2}:
+$$
+$$
+\begin{align}
+E_0 + E'_0 &amp; &lt; E'_0 + E_0 + \int \underbrace{\left[ V_{\rm ext} - V'_{\rm ext} + V'_{\rm ext} - V_{\rm ext} \right]}_{=\,0} \rho(\mathbf{r}) \, d\mathbf{r}, \\
+E_0 + E'_0 &amp; &lt; E_0 + E'_0.
+\end{align}
+$$
+$$
+&lt;/p&gt;
+&lt;p&gt;This is a &lt;strong&gt;contradiction&lt;/strong&gt;. Our assumption must therefore be false: no two different external
+potentials (differing by more than a constant) can share the same ground-state density. The map
+$\rho_0(r) \mapsto V_{\rm ext}(r)$ is therefore one-to-one (up to a constant). $\blacksquare$&lt;/p&gt;
+&lt;h4 id="consequence-the-universal-energy-functional"&gt;Consequence: the universal energy functional&lt;/h4&gt;
+&lt;p&gt;Since $\rho_0 \to V_{\rm ext} \to \hat{H} \to \Psi_0$, the ground-state energy can be written as
+a functional of the density:
+$$
+$$
+\begin{align*}
+E[\rho] =&amp; F[\rho]+\int V_{\rm ext}(r)\rho(r)\,dr\\
+F[\rho] =&amp; \langle\Psi[\rho]|\, \hat{T}+\hat{V}_{ee}\,| \Psi[\rho]\rangle
+\end{align*}
+$$
+$$
+&lt;/p&gt;
+&lt;p&gt;The quantity $F[\rho]$ is called the &lt;strong&gt;universal functional&lt;/strong&gt; of the density. It is &amp;ldquo;universal&amp;rdquo;
+because it depends only on the electron density — not on the specific external potential —
+making it, in principle, applicable to any system of interacting electrons.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3 id="the-second-hohenbergkohn-theorem"&gt;The Second Hohenberg–Kohn Theorem&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;Theorem:&lt;/strong&gt; &lt;em&gt;The true ground-state density $\rho_0(\mathbf{r})$ minimises the total energy functional
+$E[\rho]$. That is, for any trial density $\tilde{\rho}(\mathbf{r})$ satisfying&lt;/em&gt;
+$$
+\begin{equation}
+\tilde{\rho}(\mathbf{r}) \geq 0, \quad \int \tilde{\rho}(\mathbf{r}) \, d\mathbf{r} = N,
+\end{equation}
+$$
+&lt;em&gt;we have&lt;/em&gt;
+$$
+\begin{equation}
+E_0 \leq E[\tilde{\rho}],
+\end{equation}
+$$
+&lt;em&gt;with equality if and only if $\tilde{\rho}(\mathbf{r}) = \rho_0(\mathbf{r})$.&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;The functional is:
+$$
+\begin{equation}
+E[\rho] = F[\rho] + \int V_{\rm ext}(\mathbf{r}) \rho(\mathbf{r}) \, d\mathbf{r},
+\end{equation}
+$$
+where $F[\rho]$ is the universal functional defined above.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Proof sketch:&lt;/strong&gt; By the first HK theorem, any trial density $\tilde{\rho} \neq \rho_0$ corresponds
+to some other external potential and thus to some other wavefunction $\tilde{\Psi} \neq \Psi_0$.
+By the Rayleigh–Ritz principle applied to $\hat{H}$, $\langle\tilde{\Psi}|\hat{H}|\tilde{\Psi}\rangle \geq E_0$,
+which translates directly to $E[\tilde{\rho}] \geq E_0$. $\blacksquare$&lt;/p&gt;
+&lt;p&gt;The second theorem transforms the problem of solving the many-body Schrödinger equation into a
+&lt;strong&gt;variational problem over electron densities&lt;/strong&gt; — a function in three dimensions rather than $3N$
+dimensions. This is the promise of DFT.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3 id="outlook"&gt;Outlook&lt;/h3&gt;
+&lt;p&gt;While the HK theorems establish that the ground-state density contains all physical information
+and that a universal energy functional $E[\rho]$ exists, they do &lt;strong&gt;not&lt;/strong&gt; provide an explicit form
+for the universal functional $F[\rho]$. In particular, the kinetic energy $T[\rho]$ and the
+electron–electron interaction $V_{ee}[\rho]$ are unknown functionals of $\rho$.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;A note on $v$-representability.&lt;/strong&gt; The HK proof assumes that the trial density $\tilde{\rho}$ is &lt;em&gt;$v$-representable&lt;/em&gt; — that it is the ground-state density of &lt;em&gt;some&lt;/em&gt; external potential $\tilde{V}_{\rm ext}$. Not all non-negative, normalised densities satisfy this condition. Lieb (1983) resolved this by reformulating DFT via a Legendre transform, defining the universal functional as:&lt;/p&gt;
+$$
+F[\rho] = \sup_{V_{\rm ext}} \left( E[V_{\rm ext}] - \int V_{\rm ext}(\mathbf{r})\,\rho(\mathbf{r})\,d\mathbf{r} \right),
+$$
+&lt;p&gt;which is well-defined for all non-negative $\rho$ with $\int\rho,d\mathbf{r} = N$ — a larger class called &lt;em&gt;ensemble $v$-representable&lt;/em&gt; densities. For the Kohn–Sham scheme specifically, the relevant condition is &lt;em&gt;non-interacting $v$-representability&lt;/em&gt;: the ground-state density of the interacting system must also be the ground-state density of some non-interacting system in an effective potential. This is assumed to hold throughout the KS construction (Chapter 3) and is believed to be satisfied for all physically relevant ground-state densities, though a general proof remains an open problem.&lt;/p&gt;
+&lt;p&gt;Computing $F[\rho]$ accurately is the central challenge of DFT in practice. The &lt;strong&gt;Kohn–Sham
+equations&lt;/strong&gt;, developed in the next chapter, provide a practical path forward by introducing a
+fictitious system of non-interacting electrons designed to reproduce the exact ground-state density
+— sidestepping the need to evaluate $F[\rho]$ directly.&lt;/p&gt;</description></item><item><title>Kohn-Sham Equations</title><link>https://mavens-group.github.io/blog/2024-07-dft/01-foundations/04-kseqn/</link><pubDate>Sun, 01 Jun 2025 00:00:00 +0000</pubDate><guid>https://mavens-group.github.io/blog/2024-07-dft/01-foundations/04-kseqn/</guid><description>&lt;p&gt;The Hohenberg–Kohn theorems establish that the ground-state density $\rho_0(\mathbf{r})$
+uniquely determines all ground-state properties, and that the total energy $E[\rho]$ is minimised
+by $\rho_0$. However, they say nothing about &lt;em&gt;how&lt;/em&gt; to compute the universal functional $F[\rho]$,
+and in particular how to evaluate the kinetic energy $T[\rho]$ as a functional of the density
+alone. Attempts to write $T$ purely in terms of $\rho$ (as in the Thomas–Fermi model) lead to
+poor accuracy.&lt;/p&gt;
+&lt;p&gt;The &lt;strong&gt;Kohn–Sham (KS) formalism&lt;/strong&gt;, introduced by Walter Kohn and Lu Jeu Sham in 1965, provides
+an elegant and highly accurate solution: introduce a fictitious system of &lt;strong&gt;non-interacting
+electrons&lt;/strong&gt; that, by construction, reproduces the exact ground-state density of the true
+interacting system. This maps the intractable many-body problem onto a set of effective
+single-particle equations — the Kohn–Sham equations — which are computationally feasible while
+remaining formally exact.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id="decomposition-of-the-energy-functional"&gt;Decomposition of the Energy Functional&lt;/h2&gt;
+&lt;p&gt;The key idea is to split the unknown universal functional $F[\rho]$ into parts that can be
+handled accurately and a remainder that must be approximated:&lt;/p&gt;
+$$
+\begin{equation}
+E[\rho] = T_s[\rho] + E_{\mathrm{H}}[\rho] + E_{\mathrm{xc}}[\rho] + \int V_{\mathrm{ext}}(\mathbf{r})\, \rho(\mathbf{r}) \, d\mathbf{r},
+\label{eq:KS-energy}
+\end{equation}
+$$
+&lt;p&gt;where each term has a specific physical meaning:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;$T_s[\rho]$ is the &lt;strong&gt;kinetic energy of a fictitious non-interacting system&lt;/strong&gt; with the same
+density $\rho(\mathbf{r})$ as the real interacting system. Unlike the full kinetic energy
+$T[\rho]$, this quantity can be computed exactly from the single-particle orbitals
+(see below).&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;$E_{\mathrm{H}}[\rho]$ is the &lt;strong&gt;classical Hartree energy&lt;/strong&gt; — the electrostatic self-energy of
+the electron charge distribution, treating it as a classical continuous fluid:
+$$
+\begin{equation}
+E_{\mathrm{H}}[\rho] = \frac{1}{2} \iint \frac{\rho(\mathbf{r})\, \rho(\mathbf{r}')}{|\mathbf{r} - \mathbf{r}'|} \, d\mathbf{r} \, d\mathbf{r}'.
+\end{equation}
+$$
+This is the dominant part of the electron–electron repulsion and is treated exactly.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;$E_{\mathrm{xc}}[\rho]$ is the &lt;strong&gt;exchange-correlation (XC) energy&lt;/strong&gt;. It collects everything
+that is missing from the above terms:
+$$
+\begin{equation}
+E_{\mathrm{xc}}[\rho] = \underbrace{(T[\rho] - T_s[\rho])}_{\text{kinetic correlation}} + \underbrace{(V_{ee}[\rho] - E_{\mathrm{H}}[\rho])}_{\text{exchange + correlation}}.
+\end{equation}
+$$
+This includes the quantum exchange energy (from the antisymmetry of the wavefunction, as seen
+in the Hartree–Fock discussion in Chapter 1), all Coulomb correlation effects beyond the
+Hartree level, and the correction to the kinetic energy from the interacting nature of the true
+system. $E_{\mathrm{xc}}$ is the only term that must be approximated; its exact form is
+unknown.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;$\int V_{\mathrm{ext}}(\mathbf{r}),\rho(\mathbf{r}),d\mathbf{r}$ is the &lt;strong&gt;interaction with
+the external potential&lt;/strong&gt; (the nuclear attraction and any applied fields), treated exactly.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The Kohn–Sham ansatz reduces the DFT problem to finding a good approximation for $E_{\mathrm{xc}}[\rho]$ — a functional of three-dimensional $\rho$ alone — rather than solving the full
+$3N$-dimensional Schrödinger equation.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id="the-kohnsham-ansatz"&gt;The Kohn–Sham Ansatz&lt;/h2&gt;
+&lt;p&gt;The central assumption of the Kohn–Sham approach is:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;There exists a system of non-interacting electrons — the KS reference system — whose
+ground-state density is identical to that of the true interacting system.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Non-interacting $v$-representability.&lt;/strong&gt; This assumption is not trivially guaranteed. It requires that the interacting ground-state density $\rho_0(\mathbf{r})$ can be reproduced as the ground-state density of some non-interacting system moving in a local effective potential $V_{\rm eff}(\mathbf{r})$. Densities for which this holds are called &lt;em&gt;non-interacting $v$-representable&lt;/em&gt;. While a general proof is lacking, no physically relevant counterexample has been found, and the assumption is accepted as holding for all practical ground-state densities encountered in electronic structure calculations. The Kohn–Sham equations derived below are exact under this assumption.&lt;/p&gt;
+&lt;p&gt;The density is represented in terms of &lt;strong&gt;Kohn–Sham orbitals&lt;/strong&gt; ${\phi_i(\mathbf{r})}$:
+$$
+\begin{equation}
+\rho(\mathbf{r}) = \sum_{i=1}^{N} |\phi_i(\mathbf{r})|^2.
+\label{eq:KS-density}
+\end{equation}
+$$
+&lt;/p&gt;
+&lt;p&gt;The kinetic energy of the non-interacting reference system is then computed exactly from these
+orbitals:
+$$
+\begin{equation}
+T_s[\rho] = -\frac{1}{2}\sum_{i=1}^{N} \langle \phi_i | \nabla^2 | \phi_i \rangle
+= -\frac{1}{2}\sum_{i=1}^{N} \int \phi_i^*(\mathbf{r})\,\nabla^2\phi_i(\mathbf{r})\,d\mathbf{r}.
+\end{equation}
+$$
+&lt;/p&gt;
+&lt;p&gt;This is the key advantage over orbital-free approaches like Thomas–Fermi: by working with
+orbitals we recover the exact non-interacting kinetic energy at the cost of introducing $N$
+single-particle functions.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id="derivation-of-the-kohnsham-equations"&gt;Derivation of the Kohn–Sham Equations&lt;/h2&gt;
+&lt;p&gt;We seek the set of orbitals ${\phi_i}$ that minimises the total energy functional
+\eqref{eq:KS-energy}, subject to the orthonormality constraint:
+$$
+\begin{equation}
+\langle \phi_i | \phi_j \rangle = \int \phi_i^*(\mathbf{r})\,\phi_j(\mathbf{r})\,d\mathbf{r} = \delta_{ij}.
+\end{equation}
+$$
+&lt;/p&gt;
+&lt;p&gt;We introduce Lagrange multipliers $\epsilon_i$ to enforce the constraints and form the
+Lagrangian:
+$$
+\begin{equation}
+\mathcal{L}[\{\phi_i\}] = E[\rho] - \sum_{i=1}^{N} \epsilon_i \left( \langle \phi_i | \phi_i \rangle - 1 \right).
+\end{equation}
+$$
+&lt;/p&gt;
+&lt;p&gt;Taking the functional derivative with respect to $\phi_i^*(\mathbf{r})$ and setting it to zero:
+$$
+\begin{equation}
+\frac{\delta \mathcal{L}}{\delta \phi_i^*(\mathbf{r})} = 0
+\implies
+\left[ -\frac{1}{2} \nabla^2 + V_{\mathrm{eff}}(\mathbf{r}) \right] \phi_i(\mathbf{r}) = \epsilon_i\, \phi_i(\mathbf{r}),
+\label{eq:KS-eqn}
+\end{equation}
+$$
+&lt;/p&gt;
+&lt;p&gt;which are the &lt;strong&gt;Kohn–Sham equations&lt;/strong&gt;. They take the form of single-particle Schrödinger
+equations, with the complex many-body interaction absorbed into the &lt;strong&gt;Kohn–Sham effective
+potential&lt;/strong&gt;:
+$$
+\begin{equation}
+V_{\mathrm{eff}}(\mathbf{r}) = V_{\mathrm{ext}}(\mathbf{r}) + V_{\mathrm{H}}(\mathbf{r}) + V_{\mathrm{xc}}(\mathbf{r}),
+\label{eq:Veff}
+\end{equation}
+$$
+&lt;/p&gt;
+&lt;p&gt;where each component has a clear origin:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;$V_{\mathrm{ext}}(\mathbf{r})$ — the external potential from the nuclei and any applied fields,
+unchanged from the real system.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;$V_{\mathrm{H}}(\mathbf{r}) = \displaystyle\int \frac{\rho(\mathbf{r}&amp;rsquo;)}{|\mathbf{r} - \mathbf{r}&amp;rsquo;|} , d\mathbf{r}&amp;rsquo;$ — the &lt;strong&gt;Hartree potential&lt;/strong&gt;, the classical electrostatic potential of the electron density. It represents the mean-field Coulomb repulsion each electron feels from the total charge distribution.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;$V_{\mathrm{xc}}(\mathbf{r}) = \dfrac{\delta E_{\mathrm{xc}}[\rho]}{\delta \rho(\mathbf{r})}$ — the &lt;strong&gt;exchange-correlation potential&lt;/strong&gt;, the functional derivative of $E_{\mathrm{xc}}$ with respect to the density. This term encodes all quantum mechanical many-body effects beyond the Hartree level.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;If the exact $E_{\mathrm{xc}}[\rho]$ were known, the Kohn–Sham equations would yield the exact
+ground-state density and energy. In practice, $E_{\mathrm{xc}}$ must be approximated (discussed
+in the next section).&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id="the-self-consistent-field-scf-procedure"&gt;The Self-Consistent Field (SCF) Procedure&lt;/h2&gt;
+&lt;p&gt;Equations \eqref{eq:KS-density}–\eqref{eq:Veff} form a &lt;strong&gt;self-consistent system&lt;/strong&gt;: $V_{\mathrm{eff}}$ depends on $\rho(\mathbf{r})$ through $V_{\mathrm{H}}$ and $V_{\mathrm{xc}}$, but $\rho(\mathbf{r})$ itself is constructed from the KS orbitals $\phi_i$, which are solutions of the KS equations with $V_{\mathrm{eff}}$ as input. This circular dependency is resolved iteratively via the &lt;strong&gt;self-consistent field (SCF)&lt;/strong&gt; method:&lt;/p&gt;
+&lt;p&gt;
+&lt;figure &gt;
+&lt;div class="d-flex justify-content-center"&gt;
+&lt;div class="w-100" &gt;&lt;img src="https://mavens-group.github.io/uploads/dft/scf.webp" alt="SCF Cycle" loading="lazy" data-zoomable /&gt;&lt;/div&gt;
+&lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Initialise&lt;/strong&gt;: Start with an initial guess for the electron density $\rho^{(0)}(\mathbf{r})$
+(commonly taken from a superposition of atomic densities).&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Build the potential&lt;/strong&gt;: Construct $V_{\mathrm{eff}}^{(n)}(\mathbf{r})$ from the current
+density $\rho^{(n)}$ using equation \eqref{eq:Veff}.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Solve the KS equations&lt;/strong&gt;: Diagonalise the KS Hamiltonian
+$\hat{h}&lt;em&gt;{KS} = -\frac{1}{2}\nabla^2 + V&lt;/em&gt;{\mathrm{eff}}^{(n)}$ to obtain the updated
+orbitals $\phi_i^{(n)}(\mathbf{r})$ and eigenvalues $\epsilon_i^{(n)}$.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Update the density&lt;/strong&gt;: Form the new density:
+$$
+\begin{equation}
+\rho^{(n+1)}(\mathbf{r}) = \sum_{i=1}^N |\phi_i^{(n)}(\mathbf{r})|^2.
+\end{equation}
+$$
+&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Check convergence&lt;/strong&gt;: If $\rho^{(n+1)} \approx \rho^{(n)}$ (to within a chosen threshold,
+e.g. in total energy or charge density norm), the SCF loop has converged. Otherwise, set
+$n \gets n+1$ and return to step 2.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;In practice, direct substitution $\rho^{(n+1)} \to \rho^{(n)}$ often converges slowly or not
+at all. Sophisticated &lt;strong&gt;density mixing schemes&lt;/strong&gt; (Pulay/DIIS mixing, Broyden mixing) are used
+to accelerate convergence by extrapolating from several previous iterations.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id="approximations-to-e_mathrmxc"&gt;Approximations to $E_{\mathrm{xc}}$&lt;/h2&gt;
+&lt;p&gt;The KS formalism is formally exact — all approximations enter solely through the choice of
+$E_{\mathrm{xc}}[\rho]$. The quality of a DFT calculation therefore rests on the quality of the
+XC approximation. Common choices, in increasing order of sophistication (the &amp;ldquo;Jacob&amp;rsquo;s Ladder&amp;rdquo; of
+DFT), include:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Local Density Approximation (LDA):&lt;/strong&gt; $E_{\mathrm{xc}}^{\mathrm{LDA}}[\rho] = \int \varepsilon_{\mathrm{xc}}(\rho(\mathbf{r})),\rho(\mathbf{r}),d\mathbf{r}$,
+where $\varepsilon_{\mathrm{xc}}$ is the XC energy per electron of a &lt;strong&gt;uniform electron gas&lt;/strong&gt;
+at density $\rho$. Accurate for slowly varying densities; systematically overbinds.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Generalised Gradient Approximation (GGA):&lt;/strong&gt; Adds dependence on the gradient $\nabla\rho(\mathbf{r})$
+to account for density inhomogeneity (e.g. PBE functional). Significantly improves over LDA
+for molecules and surfaces.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Hybrid functionals:&lt;/strong&gt; Mix a fraction of exact Hartree–Fock exchange with GGA correlation
+(e.g. B3LYP, HSE06). More accurate for band gaps and molecular properties, but computationally
+more expensive.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Meta-GGA, RPA, double hybrids:&lt;/strong&gt; Higher rungs of the Jacob&amp;rsquo;s Ladder incorporate kinetic
+energy density, non-local correlation, or perturbation theory corrections.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The choice of functional is system-dependent and is one of the primary sources of error in
+practical DFT calculations.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id="physical-interpretation-of-the-ks-eigenvalues"&gt;Physical Interpretation of the KS Eigenvalues&lt;/h2&gt;
+&lt;p&gt;A common point of confusion is the meaning of the Lagrange multipliers $\epsilon_i$ — the KS
+eigenvalues. They are &lt;strong&gt;not&lt;/strong&gt; the true quasiparticle excitation energies of the interacting
+system; they arise as mathematical parameters enforcing orbital orthonormality.&lt;/p&gt;
+&lt;p&gt;However, there are two rigorous statements:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Koopmans-like theorem (exact DFT):&lt;/strong&gt; The eigenvalue of the &lt;strong&gt;highest occupied KS orbital&lt;/strong&gt;
+(HOMO), $\epsilon_N$, equals the negative of the exact ionisation energy of the system:
+$\epsilon_N = -I$. This is an exact result in DFT (unlike in Hartree–Fock where it is only
+approximate).&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;All other eigenvalues&lt;/strong&gt; $\epsilon_i$ ($i &amp;lt; N$) have no rigorous physical interpretation in
+terms of excitation energies. In practice they are widely (and somewhat informally) used to
+interpret band structures, density of states, and orbital energies, and often agree
+qualitatively with experiment, but this agreement is not guaranteed by the theory.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Formally correct excitation spectra require going beyond ground-state DFT, e.g. via
+&lt;strong&gt;Time-Dependent DFT (TDDFT)&lt;/strong&gt; or many-body perturbation theory (&lt;strong&gt;GW approximation&lt;/strong&gt;).&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id="summary"&gt;Summary&lt;/h2&gt;
+&lt;p&gt;The Kohn–Sham scheme reduces the interacting many-body problem to a set of effective
+single-particle equations \eqref{eq:KS-eqn} that can be solved efficiently on modern computers.
+The key steps and ideas are:&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Concept&lt;/th&gt;
+&lt;th&gt;Role&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;Non-interacting reference system&lt;/td&gt;
+&lt;td&gt;Enables exact computation of $T_s[\rho]$ via orbitals&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;$V_{\mathrm{H}}$&lt;/td&gt;
+&lt;td&gt;Classical mean-field Coulomb repulsion, computed exactly&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;$V_{\mathrm{xc}}$&lt;/td&gt;
+&lt;td&gt;All many-body quantum effects, must be approximated&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;SCF loop&lt;/td&gt;
+&lt;td&gt;Resolves the self-consistency between density and potential&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;XC approximation (LDA, GGA, …)&lt;/td&gt;
+&lt;td&gt;The only uncontrolled approximation in the KS framework&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;The formal exactness of the KS framework — all errors traceable to a single approximated term —
+combined with its single-particle structure makes DFT the workhorse of electronic structure
+theory. In the chapters that follow, we will examine how this framework is implemented in
+practice: basis sets, pseudopotentials, $k$-point sampling, and the computational details of
+solving the KS equations for real materials.&lt;/p&gt;</description></item><item><title>Exchange-Correlation Functionals</title><link>https://mavens-group.github.io/blog/2024-07-dft/01-foundations/05-xcfunctionals/</link><pubDate>Sun, 01 Jun 2025 00:00:00 +0000</pubDate><guid>https://mavens-group.github.io/blog/2024-07-dft/01-foundations/05-xcfunctionals/</guid><description>&lt;p&gt;In the Kohn–Sham framework, all the complexity of many-body quantum mechanics is concentrated
+in a single term: the &lt;strong&gt;exchange-correlation energy&lt;/strong&gt; $E_{\rm xc}[\rho]$. If the exact
+$E_{\rm xc}$ were known, DFT would be formally exact. In practice it must be approximated,
+and six decades of development have produced a rich hierarchy of approximations.&lt;/p&gt;
+&lt;p&gt;Rather than presenting this hierarchy as a list of progressively better recipes, this chapter
+derives it from two systematic expansions, each anchored at a different exactly-known limit:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;A &lt;strong&gt;spatial gradient expansion&lt;/strong&gt; around the uniform electron gas (UEG) — the only
+interacting electron system for which $E_{\rm xc}$ is known exactly. Expanding in powers of
+the dimensionless density gradient generates the semi-local hierarchy: LDA → GGA → meta-GGA.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;A &lt;strong&gt;coupling-constant expansion&lt;/strong&gt; around the non-interacting KS limit — the point at which
+the exact exchange is known analytically. Expanding in powers of the interaction strength
+generates the non-local hierarchy: GGA → hybrid → double-hybrid.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;These two series are orthogonal: the first improves the &lt;em&gt;local&lt;/em&gt; description of the XC hole
+shape; the second improves its &lt;em&gt;non-local&lt;/em&gt; content. Understanding their structure turns the
+choice of functional from a matter of recipe-following into a matter of physics.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id="formal-definition-and-the-two-reference-points"&gt;Formal Definition and the Two Reference Points&lt;/h2&gt;
+&lt;h3 id="the-xc-hole"&gt;The XC Hole&lt;/h3&gt;
+&lt;p&gt;The XC energy is defined by the decomposition introduced in Chapter 3:
+$$
+E_{\rm xc}[\rho] = (T[\rho] - T_s[\rho]) + (V_{ee}[\rho] - E_{\rm H}[\rho]).
+$$
+&lt;/p&gt;
+&lt;p&gt;An equivalent and physically transparent form expresses $E_{\rm xc}$ in terms of the
+&lt;strong&gt;exchange-correlation hole&lt;/strong&gt; $n_{\rm xc}(\mathbf{r}, \mathbf{r}&amp;rsquo;)$ — the depletion of electron
+density at $\mathbf{r}&amp;rsquo;$ caused by the presence of an electron at $\mathbf{r}$:
+$$
+E_{\rm xc}[\rho] = \frac{1}{2}\iint \frac{\rho(\mathbf{r})\,n_{\rm xc}(\mathbf{r},\mathbf{r}')}{|\mathbf{r}-\mathbf{r}'|}\,d\mathbf{r}\,d\mathbf{r}'.
+$$
+&lt;/p&gt;
+&lt;p&gt;The exact XC hole satisfies two rigorous constraints:
+$$
+n_{\rm xc}(\mathbf{r},\mathbf{r}') \leq 0,
+\qquad
+\int n_{\rm xc}(\mathbf{r},\mathbf{r}')\,d\mathbf{r}' = -1.
+$$
+&lt;/p&gt;
+&lt;p&gt;The second relation — the &lt;strong&gt;sum rule&lt;/strong&gt; — encodes the fact that each electron excludes exactly
+one unit of charge from its neighbourhood. Approximations that satisfy this constraint tend to
+benefit from systematic error cancellation even when the detailed shape of the hole is wrong,
+which explains the surprising accuracy of LDA despite its crude derivation.&lt;/p&gt;
+&lt;h3 id="the-two-exactly-known-limits"&gt;The Two Exactly-Known Limits&lt;/h3&gt;
+&lt;p&gt;Two limits of $E_{\rm xc}$ are known exactly and serve as expansion points.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Limit 1 — Uniform electron gas ($s = 0$):&lt;/strong&gt; When the density is spatially uniform,
+$\rho(\mathbf{r}) = \bar\rho$, the XC energy per electron $\varepsilon_{\rm xc}(\bar\rho)$ is
+known with essentially arbitrary precision from quantum Monte Carlo simulations (Ceperley–Alder,
+1980). The exchange component is analytic (Dirac, 1930). This is the natural anchor for a
+Taylor series in density &lt;em&gt;variations&lt;/em&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Limit 2 — Non-interacting KS limit ($\lambda = 0$):&lt;/strong&gt; Via the &lt;strong&gt;adiabatic connection&lt;/strong&gt;, the
+XC energy is written as an integral over a coupling constant $\lambda \in [0,1]$ that smoothly
+scales the electron–electron interaction from zero (the KS system) to its physical value:
+$$
+E_{\rm xc}[\rho] = \int_0^1 W_{\rm xc}^\lambda[\rho]\,d\lambda,
+\qquad
+W_{\rm xc}^\lambda = \langle\Psi^\lambda|\hat{V}_{ee}|\Psi^\lambda\rangle - E_{\rm H}[\rho],
+$$
+where $\Psi^\lambda$ is the ground state with the same density $\rho$ but interaction scaled by
+$\lambda$. At $\lambda = 0$, $\Psi^0$ is the KS Slater determinant and
+$W_{\rm xc}^0 = E_{\rm x}^{\rm exact}$ is known analytically. This is the natural anchor for a
+Taylor series in &lt;em&gt;interaction strength&lt;/em&gt;.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id="the-first-taylor-series-gradient-expansion-and-semi-local-functionals"&gt;The First Taylor Series: Gradient Expansion and Semi-Local Functionals&lt;/h2&gt;
+&lt;h3 id="the-dimensionless-gradient-and-the-gea"&gt;The Dimensionless Gradient and the GEA&lt;/h3&gt;
+&lt;p&gt;For a slowly varying density, we measure spatial variation by the &lt;strong&gt;reduced density gradient&lt;/strong&gt;:
+$$
+s(\mathbf{r}) = \frac{|\nabla\rho(\mathbf{r})|}{2k_F(\mathbf{r})\,\rho(\mathbf{r})},
+\qquad k_F(\mathbf{r}) = (3\pi^2\rho(\mathbf{r}))^{1/3},
+$$
+where $k_F$ is the local Fermi wavevector. The parameter $s$ measures the density gradient in
+units of the local electron wavelength: $s = 0$ for the UEG; $s \sim 0.5$–$3$ in typical
+valence regions; $s \to \infty$ in exponentially decaying density tails.&lt;/p&gt;
+&lt;p&gt;The formal &lt;strong&gt;gradient expansion approximation (GEA)&lt;/strong&gt; from many-body perturbation theory gives
+the systematic Taylor series in $s^2$ (odd powers vanish by symmetry):
+$$
+E_{\rm xc}^{\rm GEA}[\rho] = \int \rho\,\varepsilon_{\rm xc}^{\rm UEG}(\rho)\,d\mathbf{r}
++ \int C_{\rm xc}(\rho)\,s^2\,\rho\,d\mathbf{r}
++ \mathcal{O}(s^4),
+$$
+where $C_{\rm xc}(\rho)$ is a density-dependent coefficient computable from perturbation theory.&lt;/p&gt;
+&lt;h3 id="rung-0-lda--zeroth-order"&gt;Rung 0: LDA — Zeroth Order&lt;/h3&gt;
+&lt;p&gt;Truncating \eqref{eq:GEA} at zeroth order ($s^0$) gives the &lt;strong&gt;local density approximation&lt;/strong&gt;:
+$$
+\boxed{E_{\rm xc}^{\rm LDA}[\rho] = \int \varepsilon_{\rm xc}^{\rm UEG}(\rho(\mathbf{r}))\,\rho(\mathbf{r})\,d\mathbf{r}.}
+$$
+&lt;/p&gt;
+&lt;p&gt;The exchange part is analytic (Dirac, 1930):
+$$
+\varepsilon_{\rm x}^{\rm UEG}(\rho) = -\frac{3}{4}\!\left(\frac{3}{\pi}\right)^{\!1/3}\!\rho^{1/3}.
+$$
+The correlation $\varepsilon_{\rm c}(\rho)$ is parameterised from QMC data: the Perdew–Wang
+(PW92) and Vosko–Wilk–Nusair (VWN) parameterisations are most common.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Why LDA works better than a zeroth-order truncation deserves.&lt;/strong&gt; The LDA XC hole is that of
+the UEG, which satisfies the sum rule \eqref{eq:hole-sumrule} by construction. Even when the
+detailed angular shape of the hole is wrong, the &lt;em&gt;spherically averaged&lt;/em&gt; hole — which is what
+determines $E_{\rm xc}$ via a radial integral — is described well. This is systematic error
+cancellation rooted in constraint satisfaction, not coincidence.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Known systematic errors:&lt;/strong&gt; overbinds (cohesive energies $+1$–$2$ eV/atom); underestimates
+lattice constants ($-1$–$3%$); underestimates band gaps ($-40%$); no dispersion.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;When to use LDA:&lt;/strong&gt; Phonons and structural properties of simple and alkali metals, where the
+electron gas is nearly uniform and the error cancellation is most favourable.&lt;/p&gt;
+&lt;h3 id="why-the-raw-gea-fails"&gt;Why the Raw GEA Fails&lt;/h3&gt;
+&lt;p&gt;The $\mathcal{O}(s^2)$ term in \eqref{eq:GEA} does not improve on LDA — it makes things worse.
+The GEA correction introduces oscillations in the XC hole at large $|\mathbf{r}-\mathbf{r}&amp;rsquo;|$
+(where $s$ is large), causing the hole to become positive and violating $n_{\rm xc} \leq 0$ and
+the $-1$ sum rule in the density tails. This is a classical example of a Taylor series that
+diverges when the expansion parameter is not uniformly small: $s \to \infty$ in the tail of any
+finite system.&lt;/p&gt;
+&lt;h3 id="rung-1-gga--constrained-resummation-of-the-gradient-series"&gt;Rung 1: GGA — Constrained Resummation of the Gradient Series&lt;/h3&gt;
+&lt;p&gt;Rather than truncating \eqref{eq:GEA}, the &lt;strong&gt;generalised gradient approximation&lt;/strong&gt; writes the XC
+energy in the &lt;strong&gt;enhancement factor&lt;/strong&gt; form:
+$$
+\boxed{E_{\rm xc}^{\rm GGA}[\rho] = \int \varepsilon_{\rm xc}^{\rm UEG}(\rho)\,F_{\rm xc}(\rho, s)\,\rho\,d\mathbf{r},}
+$$
+where $F_{\rm xc}(\rho, s)$ is a dimensionless enhancement factor. GGA is not the
+$\mathcal{O}(s^2)$ truncation — it is a &lt;em&gt;constrained resummation&lt;/em&gt; that reproduces the correct
+$s^2$ behaviour near $s = 0$ while satisfying exact constraints for all $s$.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;PBE&lt;/strong&gt; (Perdew–Burke–Ernzerhof, 1996) determines $F_{\rm xc}$ by imposing:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;$F_{\rm xc} \to 1$ as $s \to 0$: recovers LDA, consistent with the UEG limit.&lt;/li&gt;
+&lt;li&gt;$\partial F_{\rm xc}/\partial(s^2)|_0 = \mu$: matches the GEA gradient coefficient, ensuring
+consistency with perturbation theory at small $s$.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Cutoff at large $s$&lt;/strong&gt;: $F_{\rm xc}$ saturates rather than growing without bound, enforcing
+the sum rule $\int n_{\rm x}^{\rm GGA},d\mathbf{r}&amp;rsquo; = -1$ even in the density tails. This
+is precisely the correction to the GEA failure above.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Lieb–Oxford bound&lt;/strong&gt;: $E_{\rm xc}^{\rm GGA} \geq -1.679\int\rho^{4/3},d\mathbf{r}$, a
+rigorous lower bound satisfied for all $s$.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;The explicit PBE exchange enhancement factor is:
+$$
+F_{\rm x}^{\rm PBE}(s) = 1 + \kappa - \frac{\kappa}{1 + \mu s^2/\kappa},
+\qquad \kappa = 0.804,\quad \mu = 0.2195,
+$$
+where both parameters are fixed by constraints, not by fitting to data. PBE has zero empirical
+parameters.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;LDA vs. PBE:&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Property&lt;/th&gt;
+&lt;th&gt;LDA&lt;/th&gt;
+&lt;th&gt;PBE&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;Lattice constants&lt;/td&gt;
+&lt;td&gt;$-1$ to $-3%$&lt;/td&gt;
+&lt;td&gt;$+1$ to $+2%$&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Atomisation energies&lt;/td&gt;
+&lt;td&gt;$+30$ kcal/mol&lt;/td&gt;
+&lt;td&gt;$+10$ kcal/mol&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Band gaps&lt;/td&gt;
+&lt;td&gt;$-40%$&lt;/td&gt;
+&lt;td&gt;$-40%$&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Hydrogen bonds&lt;/td&gt;
+&lt;td&gt;Reasonable&lt;/td&gt;
+&lt;td&gt;Good&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Van der Waals&lt;/td&gt;
+&lt;td&gt;Very poor&lt;/td&gt;
+&lt;td&gt;Poor&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;The band gap error is essentially unchanged between LDA and PBE: it originates not in the
+gradient expansion but in the missing &lt;strong&gt;derivative discontinuity&lt;/strong&gt; of the exact XC potential at
+integer electron number, which no semi-local functional can capture.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Lieb–Oxford bound.&lt;/strong&gt; A rigorous lower bound on $E_{\rm xc}$ for any $N$-electron density follows from the Lieb–Oxford inequality (Lieb and Oxford, 1981):&lt;/p&gt;
+$$
+E_{\rm xc}[\rho] \geq -C_{\rm LO}\int \rho(\mathbf{r})^{4/3}\,d\mathbf{r}, \qquad C_{\rm LO} \leq 1.679.
+$$
+&lt;p&gt;Physically this bound says that the XC energy cannot be more negative than a multiple of the exchange energy of a fully spin-polarised UEG at the same density — it bounds how much the XC hole can deepen the energy. The numerical constant $C_{\rm LO} = 1.679$ was obtained by Lieb and Oxford from analysis of the indirect part of the Coulomb energy. PBE&amp;rsquo;s exchange enhancement factor is explicitly constructed to satisfy this bound for all $s$, which is one of its 11 exact constraints. LDA satisfies the bound locally; GEA violates it at large $s$.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;The GL4 argument for $a = 1/4$.&lt;/strong&gt; The fraction of exact exchange in PBE0 is not empirical but follows from fourth-order Görling–Levy (GL) perturbation theory (Perdew, Ernzerhof, Burke, 1996). The GL expansion of the adiabatic connection integrand gives:&lt;/p&gt;
+$$
+W_{\rm xc}^\lambda = E_{\rm x}^{\rm exact} + 2\lambda E_{\rm c}^{\rm GL2} + 3\lambda^2 E_{\rm c}^{\rm GL3} + \cdots
+$$
+&lt;p&gt;Integrating over $\lambda \in [0,1]$ with only the zeroth- and second-order terms:&lt;/p&gt;
+$$
+E_{\rm xc}^{\rm GL4} \approx E_{\rm x}^{\rm exact} + E_{\rm c}^{\rm GL2}.
+$$
+&lt;p&gt;Since GGA already approximates $E_{\rm c}^{\rm GL2}$ partially (capturing the short-range correlation at the GGA level), the optimal fraction of exact exchange that avoids double-counting the correlation already in the GGA is estimated by requiring that the hybrid reproduces GL4 for weakly correlated systems. This gives $a = 1/4$ as the parameter-free choice. Systems with stronger correlation (larger $\lambda$ dependence of $W_{\rm xc}^\lambda$) would prefer smaller $a$, while weakly correlated systems near the UEG prefer larger $a$ — this is the physical reason why one value of $a$ cannot be universally optimal.&lt;/p&gt;
+&lt;h3 id="rung-2-meta-gga--encoding-mathcalos4-through-tau"&gt;Rung 2: Meta-GGA — Encoding $\mathcal{O}(s^4)$ Through $\tau$&lt;/h3&gt;
+&lt;p&gt;The gradient expansion can in principle be extended to $\mathcal{O}(s^4)$, which involves second spatial derivatives $\nabla^2\rho$. However, $\nabla^2\rho$ included directly reintroduces oscillatory behaviour in the density tails. The &lt;strong&gt;kinetic energy density&lt;/strong&gt;:&lt;/p&gt;
+$$
+\tau(\mathbf{r}) = \frac{1}{2}\sum_i f_i\,|\nabla\phi_i(\mathbf{r})|^2
+$$
+&lt;p&gt;encodes the same fourth-order gradient information without the oscillation pathology. To see why, consider the two limiting forms of $\tau$.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;The von Weizsäcker kinetic energy density&lt;/strong&gt; $\tau^W$ is the exact $\tau$ for a system described by a single orbital $\phi = \sqrt{\rho},e^{i\theta}$. For a real, nodeless orbital, $\phi = \sqrt{\rho}$, so:&lt;/p&gt;
+$$
+\tau^W = \frac{1}{2}|\nabla\sqrt{\rho}|^2 = \frac{1}{2}\left|\frac{\nabla\rho}{2\sqrt{\rho}}\right|^2 = \frac{|\nabla\rho|^2}{8\rho}.
+$$
+&lt;p&gt;This is the minimum possible kinetic energy density consistent with a given $\rho$; any multi-orbital system has $\tau \geq \tau^W$ (the Pauli kinetic energy is non-negative). For the &lt;strong&gt;uniform electron gas&lt;/strong&gt; with $N$ occupied plane-wave orbitals, the kinetic energy density is:&lt;/p&gt;
+$$
+\tau^{\rm UEG}(\rho) = \frac{3}{10}(3\pi^2)^{2/3}\rho^{5/3},
+$$
+&lt;p&gt;which is the Thomas–Fermi kinetic energy density. The gradient expansion then gives:&lt;/p&gt;
+$$
+\tau = \tau^W + \tau^{\rm UEG} + \mathcal{O}(\nabla^4\rho),
+$$
+&lt;p&gt;showing that $\tau - \tau^W$ measures the deviation from single-orbital character, i.e. the degree of multi-orbital kinetic energy. The &lt;strong&gt;meta-GGA&lt;/strong&gt; uses this through the &lt;strong&gt;iso-orbital indicator&lt;/strong&gt;:&lt;/p&gt;
+$$
+\alpha(\mathbf{r}) = \frac{\tau(\mathbf{r}) - \tau^W(\mathbf{r})}{\tau^{\rm UEG}(\mathbf{r})},
+$$
+&lt;p&gt;whose physical content follows directly:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;$\alpha = 0$: $\tau = \tau^W$, exact for a single orbital — covalent bonds, core regions.&lt;/li&gt;
+&lt;li&gt;$\alpha = 1$: $\tau = \tau^W + \tau^{\rm UEG}$, the UEG limit — metallic regions, LDA should be recovered.&lt;/li&gt;
+&lt;li&gt;$\alpha \gg 1$: many orbitals, slowly varying density — van der Waals region between closed-shell fragments.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The meta-GGA energy functional is:&lt;/p&gt;
+$$
+E_{\rm xc}^{\rm mGGA}[\rho] = \int \varepsilon_{\rm xc}(\rho,\,s,\,\alpha)\,\rho\,d\mathbf{r}.
+$$
+&lt;p&gt;&lt;strong&gt;SCAN&lt;/strong&gt; (Strongly Constrained and Appropriately Normed; Sun, Ruzsinszky, Perdew, 2015) satisfies all 17 known exact constraints applicable to a semi-local functional simultaneously. &lt;strong&gt;r²SCAN&lt;/strong&gt; (Furness et al., 2020) is a numerically regularised variant preferred in plane-wave codes.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id="the-second-taylor-series-coupling-constant-expansion-and-non-local-functionals"&gt;The Second Taylor Series: Coupling-Constant Expansion and Non-Local Functionals&lt;/h2&gt;
+&lt;p&gt;The semi-local functionals above improve the spatial description of the XC hole but remain
+fundamentally local: $\varepsilon_{\rm xc}$ at $\mathbf{r}$ depends only on quantities at
+$\mathbf{r}$. A qualitatively different class of improvement comes from the second Taylor series.&lt;/p&gt;
+&lt;h3 id="expanding-w_rm-xclambda-around-lambda--0"&gt;Expanding $W_{\rm xc}^\lambda$ Around $\lambda = 0$&lt;/h3&gt;
+&lt;p&gt;We expand the adiabatic connection integrand \eqref{eq:adiabatic} in $\lambda$:
+$$
+W_{\rm xc}^\lambda = W_{\rm xc}^0 + \lambda\left.\frac{dW_{\rm xc}^\lambda}{d\lambda}\right|_{\lambda=0}
++ \frac{\lambda^2}{2}\left.\frac{d^2W_{\rm xc}^\lambda}{d\lambda^2}\right|_{\lambda=0} + \cdots
+$$
+&lt;/p&gt;
+&lt;p&gt;The zeroth-order term is exactly known:
+$$
+W_{\rm xc}^0 = E_{\rm x}^{\rm exact}[\{\phi_i\}]
+= -\frac{1}{2}\sum_{i,j}\iint\frac{\phi_i^*(\mathbf{r})\phi_j(\mathbf{r})\phi_j^*(\mathbf{r}')\phi_i(\mathbf{r}')}{|\mathbf{r}-\mathbf{r}'|}\,d\mathbf{r}\,d\mathbf{r}'.
+$$
+&lt;/p&gt;
+&lt;p&gt;The first derivative is identified by Görling–Levy (GL) perturbation theory as twice the
+second-order GL correlation energy $E_{\rm c}^{\rm GL2}$:
+$$
+\left.\frac{dW_{\rm xc}^\lambda}{d\lambda}\right|_{\lambda=0} = 2E_{\rm c}^{\rm GL2}
+= -2\sum_{\substack{i &lt; j \\ a &lt; b}}
+\frac{|\langle\phi_i\phi_j\|\phi_a\phi_b\rangle|^2}{\epsilon_a + \epsilon_b - \epsilon_i - \epsilon_j},
+$$
+where $i,j$ label occupied and $a,b$ unoccupied KS orbitals. This has the same algebraic
+structure as MP2 correlation but is evaluated on KS orbitals. Integrating \eqref{eq:AC-Taylor}:
+$$
+E_{\rm xc} = E_{\rm x}^{\rm exact}
++ E_{\rm c}^{\rm GL2}
++ \frac{1}{6}\left.\frac{d^2W_{\rm xc}^\lambda}{d\lambda^2}\right|_{\lambda=0} + \cdots
+$$
+&lt;/p&gt;
+&lt;p&gt;Each successive term is more expensive and more accurate.&lt;/p&gt;
+&lt;h3 id="rung-3-global-hybrid-functionals--zeroth-order-plus-remainder"&gt;Rung 3: Global Hybrid Functionals — Zeroth-Order Plus Remainder&lt;/h3&gt;
+&lt;p&gt;Retaining only the zeroth-order term $E_{\rm x}^{\rm exact}$ and approximating the remainder of
+the $\lambda$ integral by a GGA gives the &lt;strong&gt;global hybrid&lt;/strong&gt;:
+$$
+\boxed{E_{\rm xc}^{\rm hybrid} = a\,E_{\rm x}^{\rm exact} + (1-a)\,E_{\rm x}^{\rm GGA} + E_{\rm c}^{\rm GGA}.}
+$$
+&lt;/p&gt;
+&lt;p&gt;The fraction $a$ is not a free parameter: fourth-order GL perturbation theory (Perdew, Ernzerhof,
+Burke, 1996) shows that for systems near the weakly correlated limit, the integrand
+$W_{\rm xc}^\lambda$ is nearly linear in $\lambda$, and the trapezoidal rule $(W_0 + W_1)/2$
+gives $a = 1/2$. Since GGA already captures part of the $\lambda = 1$ end, the effective exact
+exchange weight is smaller, and GL4 gives $a = 1/4$ as the optimal parameter-free estimate.&lt;/p&gt;
+&lt;h4 id="pbe0"&gt;PBE0&lt;/h4&gt;
+&lt;p&gt;PBE0 implements \eqref{eq:hybrid} with $a = 1/4$ from GL4 perturbation theory and PBE as the
+semi-local component:
+$$
+E_{\rm xc}^{\rm PBE0} = \frac{1}{4}E_{\rm x}^{\rm exact} + \frac{3}{4}E_{\rm x}^{\rm PBE} + E_{\rm c}^{\rm PBE}.
+$$
+&lt;/p&gt;
+&lt;p&gt;PBE0 has no empirical parameters. In the limit $a \to 0$ it recovers PBE exactly. Band gaps
+improve from $-40%$ (PBE) to $\sim -20%$ (PBE0), and reaction barriers improve substantially.
+The cost in a periodic code scales as $\mathcal{O}(N^3)$ with density fitting, making it
+expensive for large unit cells.&lt;/p&gt;
+&lt;h4 id="b3lyp"&gt;B3LYP&lt;/h4&gt;
+&lt;p&gt;B3LYP (Becke, 1993) occupies the same position in the coupling-constant series but determines
+its three parameters $(a_0, a_x, a_c)$ &lt;em&gt;empirically&lt;/em&gt; by fitting to the G2 molecular
+thermochemistry database rather than from perturbation theory:
+$$
+E_{\rm xc}^{\rm B3LYP} = (1-a_0)E_{\rm x}^{\rm LSDA} + a_0\,E_{\rm x}^{\rm exact}
++ a_x\Delta E_{\rm x}^{\rm B88} + (1-a_c)E_{\rm c}^{\rm VWN} + a_c\,E_{\rm c}^{\rm LYP},
+$$
+with $a_0 = 0.20$, $a_x = 0.72$, $a_c = 0.81$. The LYP correlation (Lee–Yang–Parr) is derived
+from the Colle–Salvetti helium atom expression, not from the UEG, so it does not reduce to
+$\varepsilon_{\rm c}^{\rm UEG}$ in the uniform limit. This makes B3LYP physically inconsistent
+for metallic systems but very well-suited to organic molecules (its fitting set): thermochemical
+accuracy $\sim 3$ kcal/mol, bond lengths $\sim 0.01$ Å. It should not be used for periodic
+metals or large-gap insulators.&lt;/p&gt;
+&lt;p&gt;The contrast between PBE0 and B3LYP is instructive: both sit at the same rung of the
+coupling-constant ladder, but PBE0 is constraint-derived and transferable while B3LYP is
+empirically optimal within its training domain.&lt;/p&gt;
+&lt;h3 id="the-spatial-structure-of-the-exchange-hole-motivating-range-separation"&gt;The Spatial Structure of the Exchange Hole: Motivating Range Separation&lt;/h3&gt;
+&lt;p&gt;Global hybrids apply the same fraction $a$ of exact exchange uniformly at all length scales.
+But the exchange hole $n_{\rm x}(\mathbf{r},\mathbf{r}&amp;rsquo;)$ behaves fundamentally differently at
+short and long range.&lt;/p&gt;
+&lt;p&gt;At &lt;strong&gt;short range&lt;/strong&gt; ($|\mathbf{r}-\mathbf{r}&amp;rsquo;| \to 0$): the hole is deep, localised, and
+cusp-like. Semi-local functionals describe this region reasonably well.&lt;/p&gt;
+&lt;p&gt;At &lt;strong&gt;long range&lt;/strong&gt; ($|\mathbf{r}-\mathbf{r}&amp;rsquo;| \to \infty$): the exact exchange hole of a finite
+system must decay as $-1/r$ to satisfy the $-1$ sum rule. This $-1/r$ tail implies that the
+exchange potential $V_{\rm x}(\mathbf{r}) \to -1/r$ asymptotically — a non-local behaviour that
+only exact exchange can reproduce; semi-local functionals decay exponentially instead.&lt;/p&gt;
+&lt;p&gt;For solids, the situation is reversed at long range: the dielectric response of the crystal
+&lt;em&gt;screens&lt;/em&gt; the exchange hole so that the effective long-range decay is faster than $-1/r$. In a
+perfect metal, the exchange interaction is fully screened beyond the Thomas–Fermi length ($\sim
+0.5$ Å), so exact long-range exchange is not only unnecessary but harmful — it produces a
+logarithmic divergence of the exchange potential at the Fermi surface.&lt;/p&gt;
+&lt;p&gt;This physics suggests splitting the Coulomb operator into short-range (SR) and long-range (LR)
+parts using the error function:
+$$
+\frac{1}{r_{12}} =
+\underbrace{\frac{\mathrm{erfc}(\omega r_{12})}{r_{12}}}_{\mathrm{SR}: \;\to 0\text{ as }r_{12}\to\infty}
++
+\underbrace{\frac{\mathrm{erf}(\omega r_{12})}{r_{12}}}_{\mathrm{LR}: \;\to 1/r_{12}\text{ as }r_{12}\to\infty},
+$$
+where $\omega$ controls the crossover: $r_c \approx 1/\omega$. Different exact exchange fractions
+$a_{\rm SR}$ and $a_{\rm LR}$ are then applied to each part.&lt;/p&gt;
+&lt;h4 id="hse06--short-range-exact-exchange-for-solids"&gt;HSE06 — Short-Range Exact Exchange for Solids&lt;/h4&gt;
+&lt;p&gt;&lt;strong&gt;HSE06&lt;/strong&gt; (Heyd–Scuseria–Ernzerhof, 2003/2006) applies exact exchange at short range only:
+$$
+E_{\rm xc}^{\rm HSE06} = \frac{1}{4}E_{\rm x}^{\rm exact,SR}(\omega)
++ \frac{3}{4}E_{\rm x}^{\rm PBE,SR}(\omega) + E_{\rm x}^{\rm PBE,LR}(\omega) + E_{\rm c}^{\rm PBE},
+$$
+with $\omega = 0.11$ bohr$^{-1}$ ($\approx 0.21$ Å$^{-1}$, crossover $\sim 5$–$10$ Å).&lt;/p&gt;
+&lt;p&gt;The limits confirm the physical motivation: $\omega \to 0$ recovers PBE0 (no screening,
+appropriate for molecules); $\omega \to \infty$ recovers PBE (full screening, appropriate for
+metals). At $\omega = 0.11$ bohr$^{-1}$, HSE06 describes the screened exchange of a typical
+semiconductor. Computational advantages are significant: the short-range Fock operator decays
+exponentially in real space, enabling $\mathcal{O}(N)$ scaling, making HSE06 tractable for
+unit cells of hundreds of atoms.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Performance:&lt;/strong&gt; band gaps within $\sim 10$–$15%$ of experiment for most semiconductors;
+correct metallic behaviour where PBE0 fails; standard functional for band gap calculations in
+periodic solids.&lt;/p&gt;
+&lt;h4 id="lc-omegapbe-and-omegab97x-v--long-range-exact-exchange-for-molecules"&gt;LC-$\omega$PBE and $\omega$B97X-V — Long-Range Exact Exchange for Molecules&lt;/h4&gt;
+&lt;p&gt;For isolated molecules, the physical argument is opposite: the density tails are unscreened, and
+the correct $-1/r$ asymptote of $V_{\rm x}$ is essential for Rydberg states and
+charge-transfer excitations. &lt;strong&gt;Long-range corrected (LC)&lt;/strong&gt; functionals apply exact exchange at
+long range:
+$$
+E_{\rm xc}^{\rm LC} = E_{\rm x}^{\rm GGA,SR}(\omega) + E_{\rm x}^{\rm exact,LR}(\omega) + E_{\rm c}^{\rm GGA}.
+$$
+&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;$\omega$B97X-V&lt;/strong&gt; (Mardirossian–Head-Gordon, 2014; $a_{\rm SR} = 0.167$, $a_{\rm LR} = 1.0$,
+$\omega = 0.30$ Å$^{-1}$) further combines long-range correction with the non-local VV10
+dispersion functional, treating van der Waals at the functional level. It ranks among the best
+single functionals for molecular benchmarks.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;CAM-B3LYP&lt;/strong&gt; (Yanai et al., 2004) interpolates smoothly between $a_{\rm SR} = 0.19$ and
+$a_{\rm LR} = 0.65$ using $\omega = 0.33$ Å$^{-1}$, retaining B3LYP&amp;rsquo;s ground-state accuracy
+while improving excited states.&lt;/p&gt;
+&lt;h4 id="summary-global-and-range-separated-hybrids"&gt;Summary: Global and Range-Separated Hybrids&lt;/h4&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Functional&lt;/th&gt;
+&lt;th&gt;$a_{\rm SR}$&lt;/th&gt;
+&lt;th&gt;$a_{\rm LR}$&lt;/th&gt;
+&lt;th&gt;$\omega$ (Å$^{-1}$)&lt;/th&gt;
+&lt;th&gt;Primary use&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;PBE0&lt;/td&gt;
+&lt;td&gt;0.25&lt;/td&gt;
+&lt;td&gt;0.25&lt;/td&gt;
+&lt;td&gt;—&lt;/td&gt;
+&lt;td&gt;Molecules and solids (no screening)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;B3LYP&lt;/td&gt;
+&lt;td&gt;0.20&lt;/td&gt;
+&lt;td&gt;0.20&lt;/td&gt;
+&lt;td&gt;—&lt;/td&gt;
+&lt;td&gt;Organic molecules&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;HSE06&lt;/td&gt;
+&lt;td&gt;0.25&lt;/td&gt;
+&lt;td&gt;0.00&lt;/td&gt;
+&lt;td&gt;0.21&lt;/td&gt;
+&lt;td&gt;Periodic solids, large cells&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;LC-$\omega$PBE&lt;/td&gt;
+&lt;td&gt;0.00&lt;/td&gt;
+&lt;td&gt;1.00&lt;/td&gt;
+&lt;td&gt;0.40&lt;/td&gt;
+&lt;td&gt;Charge transfer, Rydberg&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;CAM-B3LYP&lt;/td&gt;
+&lt;td&gt;0.19&lt;/td&gt;
+&lt;td&gt;0.65&lt;/td&gt;
+&lt;td&gt;0.33&lt;/td&gt;
+&lt;td&gt;Molecular excited states&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;$\omega$B97X-V&lt;/td&gt;
+&lt;td&gt;0.167&lt;/td&gt;
+&lt;td&gt;1.00&lt;/td&gt;
+&lt;td&gt;0.30&lt;/td&gt;
+&lt;td&gt;Molecular thermochemistry + vdW&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id="rung-4-double-hybrid-functionals--first-order-term"&gt;Rung 4: Double-Hybrid Functionals — First-Order Term&lt;/h3&gt;
+&lt;p&gt;Retaining both the zeroth- and first-order terms of \eqref{eq:AC-integrated} and approximating
+the GGA remainder for the higher orders gives the &lt;strong&gt;double-hybrid&lt;/strong&gt;:
+$$
+\boxed{E_{\rm xc}^{\rm DH} = a\,E_{\rm x}^{\rm exact} + (1-a)\,E_{\rm x}^{\rm GGA}
++ b\,E_{\rm c}^{\rm GL2} + (1-b)\,E_{\rm c}^{\rm GGA},}
+$$
+where $E_{\rm c}^{\rm GL2}$ is the second-order Görling–Levy correlation \eqref{eq:GL2}.
+This costs $\mathcal{O}(N^5)$ in system size due to the four-index two-electron integrals,
+restricting applications to systems of tens to a few hundred atoms.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;B2PLYP&lt;/strong&gt; (Grimme, 2006; $a = 0.53$, $b = 0.27$, empirical) and &lt;strong&gt;PBE-QIDH&lt;/strong&gt; (Chai and Mao,
+2012; $a = (1/3)^{1/3}$, $b = 1/3$, derived from GL perturbation theory without fitting) achieve
+thermochemical accuracy of $\sim 1$ kcal/mol, rivalling wavefunction methods at substantially
+lower cost. Double hybrids are rarely applied to periodic solids due to the $\mathcal{O}(N^5)$
+cost.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id="the-two-expansions-together-jacobs-ladder-revisited"&gt;The Two Expansions Together: Jacob&amp;rsquo;s Ladder Revisited&lt;/h2&gt;
+&lt;p&gt;The full hierarchy is now organised by both Taylor series simultaneously:&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Rung&lt;/th&gt;
+&lt;th&gt;Series&lt;/th&gt;
+&lt;th&gt;Order&lt;/th&gt;
+&lt;th&gt;New ingredient&lt;/th&gt;
+&lt;th&gt;Example&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;LDA&lt;/td&gt;
+&lt;td&gt;Gradient, $s^0$&lt;/td&gt;
+&lt;td&gt;Zeroth&lt;/td&gt;
+&lt;td&gt;UEG: $\rho$&lt;/td&gt;
+&lt;td&gt;PW92, VWN&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;GGA&lt;/td&gt;
+&lt;td&gt;Gradient, resummation of $s^2$&lt;/td&gt;
+&lt;td&gt;First (resummed)&lt;/td&gt;
+&lt;td&gt;$\nabla\rho$&lt;/td&gt;
+&lt;td&gt;PBE, PBEsol&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;meta-GGA&lt;/td&gt;
+&lt;td&gt;Gradient, encodes $s^4$&lt;/td&gt;
+&lt;td&gt;Second (via $\tau$)&lt;/td&gt;
+&lt;td&gt;$\tau$, $\alpha$&lt;/td&gt;
+&lt;td&gt;SCAN, r²SCAN&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Hybrid&lt;/td&gt;
+&lt;td&gt;Coupling constant, $\lambda^0$&lt;/td&gt;
+&lt;td&gt;Zeroth&lt;/td&gt;
+&lt;td&gt;$E_{\rm x}^{\rm exact}$&lt;/td&gt;
+&lt;td&gt;PBE0, HSE06&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Double-hybrid&lt;/td&gt;
+&lt;td&gt;Coupling constant, $\lambda^1$&lt;/td&gt;
+&lt;td&gt;First&lt;/td&gt;
+&lt;td&gt;$E_{\rm c}^{\rm GL2}$&lt;/td&gt;
+&lt;td&gt;B2PLYP, PBE-QIDH&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;Meta-hybrid functionals (SCAN0, r²SCAN0: $a = 1/4$ exact exchange added to SCAN/r²SCAN) sit at
+the intersection — exploiting both expansions simultaneously for improved band gaps and magnetic
+exchange couplings.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id="van-der-waals-beyond-both-series"&gt;Van der Waals: Beyond Both Series&lt;/h2&gt;
+&lt;p&gt;London dispersion — the $-C_6/R^6$ attraction between distant closed-shell fragments — arises
+from &lt;em&gt;non-local&lt;/em&gt; correlated density fluctuations at distances $R$ far exceeding an inter-atomic
+spacing. Neither the spatial gradient expansion (local by construction) nor the GL expansion at
+low order captures it: $E_{\rm c}^{\rm GL2}$ underestimates medium-range correlation, and
+higher-order terms would be needed.&lt;/p&gt;
+&lt;p&gt;Practical remedies are dispersion corrections added to the DFT total energy:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;DFT-D3(BJ)&lt;/strong&gt; (Grimme et al., 2010): atom-pairwise $-C_6/r^6 - C_8/r^8$ with Becke–Johnson
+damping. Cheap, widely available, recommended default.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Tkatchenko–Scheffler (TS)&lt;/strong&gt;: $C_6$ coefficients from Hirshfeld density partitioning;
+captures chemical environment dependence.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Many-body dispersion (MBD)&lt;/strong&gt;: Collective dipole fluctuations via coupled quantum harmonic
+oscillators; important for molecular crystals and large biomolecules.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;vdW-DF / VV10&lt;/strong&gt;: Non-local correlation functional via a double spatial integral; dispersion
+at the functional level without atom-pairwise parameterisation.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;For periodic systems, &lt;strong&gt;PBE-D3(BJ)&lt;/strong&gt; or &lt;strong&gt;r²SCAN+rVV10&lt;/strong&gt; are recommended.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id="self-interaction-error"&gt;Self-Interaction Error&lt;/h2&gt;
+&lt;p&gt;The &lt;strong&gt;self-interaction error (SIE)&lt;/strong&gt; — the incomplete cancellation between $E_{\rm H}[\rho]$
+and $E_{\rm xc}[\rho]$ for the unphysical self-repulsion of each electron — is illuminated by
+both Taylor series. From the gradient expansion perspective, semi-local functionals built on the
+UEG reference cannot reproduce the single-electron limit because the UEG has many electrons and
+no self-interaction to cancel. From the coupling-constant perspective, the SIE is progressively
+reduced as more exact exchange (which is exactly self-interaction-free) is included. This is why
+each rung from hybrid upward improves reaction barriers, charge-transfer energies, and
+localisation of $d$/$f$ electrons — all dominated by regions where the self-interaction is
+severe.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id="practical-decision-guide"&gt;Practical Decision Guide&lt;/h2&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Property / System&lt;/th&gt;
+&lt;th&gt;Recommended functional&lt;/th&gt;
+&lt;th&gt;Key reason&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;Phonons, lattice constants (metals)&lt;/td&gt;
+&lt;td&gt;LDA or PBEsol&lt;/td&gt;
+&lt;td&gt;Near-UEG electron gas; error cancellation&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Geometry optimisation (general)&lt;/td&gt;
+&lt;td&gt;PBE or r²SCAN&lt;/td&gt;
+&lt;td&gt;PBE default; r²SCAN for improved quality&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Band gaps (semiconductors)&lt;/td&gt;
+&lt;td&gt;HSE06&lt;/td&gt;
+&lt;td&gt;Screened SR exchange, tractable for large cells&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Band gaps (insulators, molecules)&lt;/td&gt;
+&lt;td&gt;PBE0&lt;/td&gt;
+&lt;td&gt;Global hybrid sufficient; no screening needed&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Magnetic exchange coupling $J$&lt;/td&gt;
+&lt;td&gt;PBE0 or HSE06&lt;/td&gt;
+&lt;td&gt;Reduced SIE on $d$/$f$ orbitals&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Molecular thermochemistry&lt;/td&gt;
+&lt;td&gt;B3LYP or $\omega$B97X-V&lt;/td&gt;
+&lt;td&gt;Fitted or constraint-based with LR correction&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Charge-transfer / Rydberg (TDDFT)&lt;/td&gt;
+&lt;td&gt;CAM-B3LYP or LC-$\omega$PBE&lt;/td&gt;
+&lt;td&gt;LR exact exchange essential&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Layered / vdW systems&lt;/td&gt;
+&lt;td&gt;PBE-D3(BJ) or r²SCAN+rVV10&lt;/td&gt;
+&lt;td&gt;Explicit dispersion mandatory&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Large periodic cells ($&amp;gt;200$ atoms)&lt;/td&gt;
+&lt;td&gt;PBE, r²SCAN, or HSE06&lt;/td&gt;
+&lt;td&gt;Hybrid cost prohibitive beyond HSE06&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;High-accuracy thermochemistry&lt;/td&gt;
+&lt;td&gt;B2PLYP-D3 or PBE-QIDH&lt;/td&gt;
+&lt;td&gt;GL2 correlation, $\sim 1$ kcal/mol&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;hr&gt;
+&lt;h2 id="outlook"&gt;Outlook&lt;/h2&gt;
+&lt;p&gt;The two Taylor series give a unified account of the XC landscape but neither converges
+uniformly. The gradient expansion fails for $s \gg 1$ (exponential tails, surfaces), and the
+coupling-constant expansion is slow for strongly correlated systems (large $\lambda$ dependence,
+near-degenerate ground states). The next major failure mode — the treatment of localised $d$ and
+$f$ electrons in Mott–Hubbard materials — and the DFT+U correction that targets it directly are
+the subject of a later chapter.&lt;/p&gt;</description></item><item><title>Basis Sets and Pseudopotentials</title><link>https://mavens-group.github.io/blog/2024-07-dft/01-foundations/06-basissets/</link><pubDate>Sun, 01 Jun 2025 00:00:00 +0000</pubDate><guid>https://mavens-group.github.io/blog/2024-07-dft/01-foundations/06-basissets/</guid><description>&lt;p&gt;Solving the Kohn–Sham equations requires representing the single-particle orbitals
+$\phi_i(\mathbf{r})$ numerically. There are two complementary choices to be made:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;How to expand the orbitals&lt;/strong&gt; — the choice of &lt;em&gt;basis set&lt;/em&gt;.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;How to treat the core electrons&lt;/strong&gt; — full all-electron treatment, or replace the core with a
+&lt;em&gt;pseudopotential&lt;/em&gt; (PP) or &lt;em&gt;projector augmented wave&lt;/em&gt; (PAW) potential.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;These choices profoundly affect computational cost, accuracy, and the type of system tractable.
+This chapter develops the theory behind the most common approaches and provides practical guidance
+on convergence.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id="basis-set-expansion"&gt;Basis Set Expansion&lt;/h2&gt;
+&lt;p&gt;The KS orbital $\phi_i(\mathbf{r})$ is an element of an infinite-dimensional Hilbert space. In
+practice, it is expanded in a finite basis ${f_\mu(\mathbf{r})}$:
+$$
+\begin{equation}
+\phi_i(\mathbf{r}) = \sum_\mu c_{i\mu}\, f_\mu(\mathbf{r}),
+\end{equation}
+$$
+where the coefficients $c_{i\mu}$ are determined by diagonalising the KS Hamiltonian in this
+basis. The KS eigenvalue problem \eqref{eq:KS-eqn} becomes the generalised matrix eigenvalue
+problem:
+$$
+\begin{equation}
+\mathbf{H}_{\rm KS}\,\mathbf{c}_i = \epsilon_i\,\mathbf{S}\,\mathbf{c}_i,
+\end{equation}
+$$
+where
+$H_{\rm KS,\mu\nu} = \langle f_\mu | \hat{h}_{\rm KS} | f_\nu\rangle$ and
+$S_{\mu\nu} = \langle f_\mu | f_\nu\rangle$ is the overlap matrix. The two dominant choices are
+&lt;strong&gt;plane waves&lt;/strong&gt; and &lt;strong&gt;localised (atomic-like) basis functions&lt;/strong&gt;.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id="plane-wave-basis-sets"&gt;Plane-Wave Basis Sets&lt;/h2&gt;
+&lt;p&gt;For crystalline solids, Bloch&amp;rsquo;s theorem dictates that KS orbitals have the form:
+$$
+\begin{equation}
+\phi_{i\mathbf{k}}(\mathbf{r}) = e^{i\mathbf{k}\cdot\mathbf{r}}\,u_{i\mathbf{k}}(\mathbf{r}),
+\end{equation}
+$$
+where $u_{i\mathbf{k}}(\mathbf{r})$ is lattice-periodic. The periodic part is naturally expanded
+in &lt;strong&gt;plane waves&lt;/strong&gt; labelled by reciprocal lattice vectors $\mathbf{G}$:
+$$
+\begin{equation}
+u_{i\mathbf{k}}(\mathbf{r}) = \frac{1}{\sqrt{\Omega}}\sum_{\mathbf{G}} c_{i,\mathbf{k}+\mathbf{G}}\,e^{i\mathbf{G}\cdot\mathbf{r}},
+\end{equation}
+$$
+where $\Omega$ is the unit cell volume. The basis is truncated at a &lt;strong&gt;kinetic energy cutoff&lt;/strong&gt;
+$E_{\rm cut}$. In atomic units (Hartree), the condition is:&lt;/p&gt;
+$$
+\frac{1}{2}|\mathbf{k}+\mathbf{G}|^2 \leq E_{\rm cut},
+$$
+&lt;p&gt;equivalently $\frac{\hbar^2}{2m_e}|\mathbf{k}+\mathbf{G}|^2 \leq E_{\rm cut}$ in SI notation.
+Codes typically quote $E_{\rm cut}$ in eV (VASP) or Ry (Quantum ESPRESSO); 1 Hartree = 27.2 eV = 2 Ry.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Advantages of plane waves:&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Systematic completeness&lt;/strong&gt;: increasing $E_{\rm cut}$ improves the basis in a controlled,
+unbiased way. Convergence is monitored by a single parameter.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;No basis set superposition error (BSSE)&lt;/strong&gt;: Plane waves are not centred on atoms, so the
+basis does not artificially lower the energy when two atoms approach.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Efficient evaluation&lt;/strong&gt;: The Hartree potential and charge density are related by Poisson&amp;rsquo;s
+equation, which is diagonal in reciprocal space. Fast Fourier transforms (FFTs) enable
+$\mathcal{O}(N \log N)$ switching between real and reciprocal space.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Implemented in major codes&lt;/strong&gt;: VASP, Quantum ESPRESSO, ABINIT, CP2K (mixed Gaussian/PW).&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;Disadvantages:&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;All-electron calculations are impractical&lt;/strong&gt;: Near the nuclei, KS orbitals oscillate rapidly
+(due to orthogonality to core states), requiring an extremely large $E_{\rm cut}$. This
+motivates the use of pseudopotentials or PAW (see below).&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Poor for isolated molecules&lt;/strong&gt;: A large vacuum supercell is needed to prevent periodic
+images from interacting, wasting computational effort.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Not naturally localised&lt;/strong&gt;: Analysis (e.g. Bader charges, wannier functions) requires
+post-processing.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id="convergence-with-respect-to-e_rm-cut"&gt;Convergence with Respect to $E_{\rm cut}$&lt;/h3&gt;
+&lt;p&gt;A &lt;strong&gt;convergence test&lt;/strong&gt; is mandatory in every plane-wave calculation. The procedure is:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Fix all other parameters (cell, $k$-points, functional).&lt;/li&gt;
+&lt;li&gt;Compute the total energy $E_{\rm tot}(E_{\rm cut})$ for a series of cutoff values.&lt;/li&gt;
+&lt;li&gt;Identify the cutoff where $\Delta E_{\rm tot} &amp;lt; \epsilon_{\rm tol}$ (typically $1$–$5$ meV/atom).&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Typical converged cutoffs: $\sim 400$–$600$ eV for GGA+PAW; $\sim 700$–$1200$ eV for
+norm-conserving PPs; transition metal oxides and $f$-electron systems often require higher
+values.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id="k-point-sampling"&gt;$k$-Point Sampling&lt;/h2&gt;
+&lt;p&gt;In a periodic solid, the KS equations must be solved at every $\mathbf{k}$-point in the first
+Brillouin zone (BZ). Physical observables involve BZ integrals, e.g.:
+$$
+\begin{equation}
+\rho(\mathbf{r}) = \frac{\Omega}{(2\pi)^3}\sum_i \int_{\rm BZ} |\phi_{i\mathbf{k}}(\mathbf{r})|^2\,d\mathbf{k}.
+\end{equation}
+$$
+&lt;/p&gt;
+&lt;p&gt;In practice, the integral is replaced by a discrete sum over a finite mesh. The standard choice
+is the &lt;strong&gt;Monkhorst–Pack (MP) mesh&lt;/strong&gt;: a uniform $N_1 \times N_2 \times N_3$ grid in reciprocal
+space, optionally shifted to include or exclude $\Gamma$. The total number of $k$-points is
+reduced by the point-group symmetry of the crystal.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Convergence with $k$-mesh density:&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Metals require denser meshes (many $k$-points near the Fermi surface): $20\times 20\times 20$
+or more for simple metals.&lt;/li&gt;
+&lt;li&gt;Semiconductors and insulators with gaps converge faster: $6\times 6\times 6$ is often
+sufficient.&lt;/li&gt;
+&lt;li&gt;A smearing method (Methfessel–Paxton, Fermi–Dirac, or Gaussian) is applied to the
+occupation numbers for metals to accelerate convergence.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The $k$-point density and $E_{\rm cut}$ must be &lt;strong&gt;converged independently and jointly&lt;/strong&gt;: the two
+parameters interact through the density, so a joint convergence test (varying both) is the most
+rigorous approach.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id="localised-basis-sets"&gt;Localised Basis Sets&lt;/h2&gt;
+&lt;p&gt;An alternative to plane waves is to expand orbitals in &lt;strong&gt;atom-centred functions&lt;/strong&gt; that mimic the
+shape of atomic orbitals. Each basis function $f_\mu(\mathbf{r}) = f_\mu(|\mathbf{r}-\mathbf{R}_A|)$
+is centred on atom $A$.&lt;/p&gt;
+&lt;h3 id="gaussian-type-orbitals-gtos"&gt;Gaussian-Type Orbitals (GTOs)&lt;/h3&gt;
+&lt;p&gt;GTOs take the form $f(r) = r^l e^{-\alpha r^2} Y_l^m(\hat{\mathbf{r}})$, where $\alpha$ is the
+exponent and $Y_l^m$ is a real spherical harmonic. Multi-Gaussian contractions are used:
+$$
+\begin{equation}
+f_\mu(r) = \sum_k d_{\mu k}\,g_k(r,\alpha_k).
+\end{equation}
+$$
+&lt;/p&gt;
+&lt;p&gt;GTOs are the standard in quantum chemistry codes (Gaussian, CRYSTAL, FHI-aims). Common basis
+set families: &lt;strong&gt;6-31G&lt;/strong&gt;, &lt;strong&gt;cc-pVDZ/TZ&lt;/strong&gt;, &lt;strong&gt;def2-TZVP&lt;/strong&gt;. The acronyms encode the contraction
+scheme; &amp;ldquo;triple-zeta&amp;rdquo; basis sets use three groups of Gaussians per angular momentum channel and
+are typically converged for production calculations. Diffuse functions (denoted by $+$ or
+&amp;ldquo;aug-&amp;rdquo;) are important for anions and excited states.&lt;/p&gt;
+&lt;h3 id="numerical-atomic-orbitals-naos"&gt;Numerical Atomic Orbitals (NAOs)&lt;/h3&gt;
+&lt;p&gt;NAOs use numerically tabulated radial functions, typically derived from atomic DFT calculations.
+They are compact (strictly localised beyond a cutoff radius) and efficient for large-scale
+calculations. Used in FHI-aims (numeric all-electron), SIESTA, OpenMX.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Advantages of localised bases:&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Efficient for molecules and non-periodic systems (no vacuum padding needed).&lt;/li&gt;
+&lt;li&gt;Sparse Hamiltonian and overlap matrices enable $\mathcal{O}(N)$ scaling algorithms.&lt;/li&gt;
+&lt;li&gt;Natural interface with chemical intuition (orbital populations, Mulliken/Löwdin charges).&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;Disadvantages:&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Basis set superposition error (BSSE)&lt;/strong&gt;: When two fragments approach, each borrows basis
+functions from the other, artificially lowering the energy. The counterpoise correction
+(Boys–Bernardi) partially remedies this.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Incompleteness&lt;/strong&gt;: The basis is not systematically improvable by a single parameter;
+basis quality depends on the choice of exponents and contraction.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Egg-shaped convergence&lt;/strong&gt;: Difficult to converge to the complete basis set (CBS) limit.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id="core-electrons-three-strategies"&gt;Core Electrons: Three Strategies&lt;/h2&gt;
+&lt;p&gt;Relativistic and strongly oscillating core orbitals are expensive to represent and barely
+participate in chemistry or bonding. Three strategies exist for handling them.&lt;/p&gt;
+&lt;h3 id="all-electron-ae-calculations"&gt;All-Electron (AE) Calculations&lt;/h3&gt;
+&lt;p&gt;All electrons, including core, are treated explicitly. Mandatory when:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Core–valence interactions are chemically important (e.g. hyperfine coupling, NMR shifts, X-ray
+spectra).&lt;/li&gt;
+&lt;li&gt;High-accuracy benchmarks are required.&lt;/li&gt;
+&lt;li&gt;Working with very light elements (H, Li) where &amp;ldquo;core&amp;rdquo; electrons don&amp;rsquo;t exist.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Examples: FHI-aims (NAO), WIEN2k (LAPW), FLEUR.&lt;/p&gt;
+&lt;h3 id="norm-conserving-pseudopotentials-ncpp"&gt;Norm-Conserving Pseudopotentials (NCPP)&lt;/h3&gt;
+&lt;p&gt;The core electrons are replaced by an &lt;strong&gt;effective potential&lt;/strong&gt; $V_{\rm PP}(\mathbf{r})$ that
+reproduces the scattering properties of the full ionic potential in the valence region. The
+pseudo-wavefunction $\tilde{\phi}_l(r)$ agrees with the true all-electron wavefunction
+$\phi_l(r)$ outside a cutoff radius $r_c$:
+$$
+\begin{equation}
+\tilde{\phi}_l(r) = \phi_l(r), \quad r &gt; r_c.
+\end{equation}
+$$
+&lt;/p&gt;
+&lt;p&gt;The &lt;strong&gt;norm-conservation condition&lt;/strong&gt; requires:
+$$
+\begin{equation}
+\int_0^{r_c} |\tilde{\phi}_l(r)|^2 r^2\,dr = \int_0^{r_c} |\phi_l(r)|^2 r^2\,dr,
+\end{equation}
+$$
+ensuring that the charge inside $r_c$ is preserved and that the logarithmic derivatives (which
+control scattering) match at $r_c$. The Hamann–Schlüter–Chiang (HSC) and Troullier–Martins (TM)
+schemes are standard constructions.&lt;/p&gt;
+&lt;p&gt;NCPPs typically require $E_{\rm cut} \sim 60$–$100$ Ry and are used in codes such as Quantum
+ESPRESSO and ABINIT.&lt;/p&gt;
+&lt;h3 id="ultrasoft-pseudopotentials-uspp"&gt;Ultrasoft Pseudopotentials (USPP)&lt;/h3&gt;
+&lt;p&gt;The &lt;strong&gt;ultrasoft pseudopotential&lt;/strong&gt; (Vanderbilt, 1990) relaxes the norm-conservation condition,
+allowing smoother pseudo-wavefunctions that require much lower plane-wave cutoffs
+($E_{\rm cut} \sim 25$–$40$ Ry). The pseudo-wavefunction $\tilde{\phi}_l(r)$ is permitted to
+deviate from the all-electron $\phi_l(r)$ even for $r &amp;gt; r_c^{\rm soft}$, producing a softer
+nodeless function.&lt;/p&gt;
+&lt;p&gt;The missing charge that would violate the norm-conservation sum rule is compensated by
+&lt;strong&gt;augmentation charges&lt;/strong&gt; $Q_{nm}(\mathbf{r})$ added to the density:
+$$
+\begin{equation}
+\rho(\mathbf{r}) = \sum_i |\tilde{\phi}_i(\mathbf{r})|^2 + \sum_a\sum_{nm} \rho_{nm}^a\,Q_{nm}^a(\mathbf{r}),
+\end{equation}
+$$
+where $\rho_{nm}^a = \sum_i \langle\tilde{\phi}_i|\tilde{p}_n^a\rangle\langle\tilde{p}_m^a|\tilde{\phi}&lt;em&gt;i\rangle$ are the &lt;strong&gt;occupancy matrices&lt;/strong&gt; for atom $a$, and $Q&lt;/em&gt;{nm}^a(\mathbf{r})$ are localised functions inside the augmentation sphere that carry the missing charge. The generalised eigenvalue problem that results from USPP differs from the standard KS equation, requiring a modified orthonormality condition; however, this adds negligible overhead in practice.&lt;/p&gt;
+&lt;p&gt;USPP is available in Quantum ESPRESSO and CASTEP and offers an excellent cost-to-accuracy ratio
+for most elements.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3 id="projector-augmented-wave-paw-method"&gt;Projector Augmented Wave (PAW) Method&lt;/h3&gt;
+&lt;p&gt;The &lt;strong&gt;PAW method&lt;/strong&gt; (Blöchl, 1994) is the most rigorous of the pseudopotential-like approaches
+and is now the default in most major plane-wave codes. It can be understood as a generalisation
+of USPP that is formally equivalent to an all-electron calculation.&lt;/p&gt;
+&lt;h4 id="the-paw-transformation"&gt;The PAW Transformation&lt;/h4&gt;
+&lt;p&gt;PAW introduces a &lt;strong&gt;linear transformation operator&lt;/strong&gt; $\hat{\mathcal{T}}$ that maps smooth,
+computationally convenient &lt;strong&gt;pseudo-wavefunctions&lt;/strong&gt; $|\tilde{\Psi}_i\rangle$ onto the true
+all-electron wavefunctions $|\Psi_i\rangle$:
+$$
+\begin{equation}
+|\Psi_i\rangle = \hat{\mathcal{T}}\,|\tilde{\Psi}_i\rangle.
+\label{eq:PAW-transform}
+\end{equation}
+$$
+&lt;/p&gt;
+&lt;p&gt;Inside the &lt;strong&gt;augmentation sphere&lt;/strong&gt; of radius $r_c^a$ centred on each atom $a$, the smooth
+pseudo-wavefunction is a poor approximation to the oscillatory all-electron wavefunction. The
+transformation $\hat{\mathcal{T}}$ corrects for this, atom by atom:
+$$
+\begin{equation}
+\hat{\mathcal{T}} = \mathbf{1} + \sum_a \hat{\mathcal{T}}^a,
+\qquad
+\hat{\mathcal{T}}^a = \sum_{n} \left(|\phi_n^a\rangle - |\tilde{\phi}_n^a\rangle\right)\langle\tilde{p}_n^a|,
+\label{eq:PAW-T}
+\end{equation}
+$$
+where:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;$|\phi_n^a\rangle$ are &lt;strong&gt;all-electron partial waves&lt;/strong&gt; — solutions of the radial Schrödinger
+equation for the isolated atom $a$ at reference energies, labelled by $n = (l, m, \epsilon_{\rm ref})$.&lt;/li&gt;
+&lt;li&gt;$|\tilde{\phi}_n^a\rangle$ are &lt;strong&gt;smooth pseudo partial waves&lt;/strong&gt; that match $|\phi_n^a\rangle$
+outside $r_c^a$ but are nodeless and smooth inside.&lt;/li&gt;
+&lt;li&gt;$\langle\tilde{p}_n^a|$ are &lt;strong&gt;projector functions&lt;/strong&gt; localised inside $r_c^a$, dual to the
+pseudo partial waves: $\langle\tilde{p}_n^a|\tilde{\phi}&lt;em&gt;m^a\rangle = \delta&lt;/em&gt;{nm}$.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The transformation acts as follows: when $\hat{\mathcal{T}}$ is applied to $|\tilde{\Psi}_i\rangle$,
+the projectors $\langle\tilde{p}_n^a|$ measure the overlap of the smooth wavefunction with the
+partial waves in each augmentation sphere, and the difference $(|\phi_n^a\rangle - |\tilde{\phi}_n^a\rangle)$ restores the all-electron character inside that sphere. Outside all augmentation
+spheres, $\hat{\mathcal{T}}^a = 0$ and the smooth wavefunction is used directly.&lt;/p&gt;
+&lt;h4 id="reconstruction-of-the-all-electron-density"&gt;Reconstruction of the All-Electron Density&lt;/h4&gt;
+&lt;p&gt;The all-electron charge density is:
+$$
+\begin{equation}
+\rho(\mathbf{r}) = \tilde{\rho}(\mathbf{r}) + \rho^1(\mathbf{r}) - \tilde{\rho}^1(\mathbf{r}),
+\label{eq:PAW-density}
+\end{equation}
+$$
+where each term has a specific role:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;$\tilde{\rho}(\mathbf{r}) = \sum_i f_i,|\tilde{\Psi}_i(\mathbf{r})|^2$ is the &lt;strong&gt;smooth
+pseudo-density&lt;/strong&gt;, computed from the plane-wave-expanded pseudo-wavefunctions throughout the
+entire cell. This is the computationally cheap term, evaluated with FFTs.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;$\rho^1(\mathbf{r}) = \sum_a\sum_{nm}\rho_{nm}^a,\phi_n^a(\mathbf{r})\phi_m^a(\mathbf{r})$
+is the &lt;strong&gt;on-site all-electron density&lt;/strong&gt;, reconstructed analytically from the all-electron
+partial waves inside the augmentation spheres. Here $\rho_{nm}^a = \sum_i f_i\langle\tilde{\Psi}_i|\tilde{p}_n^a\rangle\langle\tilde{p}_m^a|\tilde{\Psi}_i\rangle$ are the
+&lt;strong&gt;occupation matrices&lt;/strong&gt; that quantify the partial-wave character of each KS orbital at each
+atom.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;$\tilde{\rho}^1(\mathbf{r}) = \sum_a\sum_{nm}\rho_{nm}^a,\tilde{\phi}_n^a(\mathbf{r})\tilde{\phi}_m^a(\mathbf{r})$ is the &lt;strong&gt;on-site pseudo-density&lt;/strong&gt;, which subtracts the
+smooth-wavefunction contribution inside the augmentation spheres so it is not double-counted
+with $\tilde{\rho}$.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The total energy is decomposed in the same three-part way. The smooth part is evaluated in
+reciprocal space via FFTs; the on-site parts are computed analytically on radial grids inside
+each augmentation sphere. This decomposition is the key to PAW&amp;rsquo;s efficiency: the expensive
+oscillatory core region is handled on a small radial grid, while the smooth interstitial region
+uses the standard plane-wave machinery.&lt;/p&gt;
+&lt;h4 id="the-paw-total-energy"&gt;The PAW Total Energy&lt;/h4&gt;
+&lt;p&gt;The total energy functional in PAW is:
+$$
+\begin{equation}
+E = \tilde{E} + E^1 - \tilde{E}^1,
+\end{equation}
+$$
+where $\tilde{E}$ is the energy of the pseudo-system (computed with plane waves), $E^1$ is the
+all-electron on-site energy inside the augmentation spheres, and $\tilde{E}^1$ is the
+corresponding pseudo on-site energy that prevents double-counting. The KS equations derived from
+this functional take the form of a &lt;strong&gt;generalised eigenvalue problem&lt;/strong&gt;:
+$$
+\begin{equation}
+\hat{\tilde{H}}\,|\tilde{\Psi}_i\rangle = \epsilon_i\,\hat{S}\,|\tilde{\Psi}_i\rangle,
+\end{equation}
+$$
+where $\hat{\tilde{H}}$ is the smooth KS Hamiltonian (including on-site corrections) and
+$\hat{S} = \mathbf{1} + \sum_a\sum_{nm}({\langle\tilde{p}&lt;em&gt;n^a|\tilde{p}&lt;em&gt;m^a\rangle&lt;/em&gt;{\rm AE} - \delta&lt;/em&gt;{nm}})|\tilde{p}_m^a\rangle\langle\tilde{p}_n^a|$ is the &lt;strong&gt;overlap operator&lt;/strong&gt; that enforces
+the correct normalisation of the all-electron wavefunctions.&lt;/p&gt;
+&lt;h4 id="strengths-of-paw"&gt;Strengths of PAW&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Formally all-electron&lt;/strong&gt;: The full all-electron density is available in the augmentation
+spheres through equation \eqref{eq:PAW-density}. This gives direct access to hyperfine
+parameters, electric field gradients, NMR chemical shifts, and core-level binding energies.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Low $E_{\rm cut}$&lt;/strong&gt;: The smooth part $|\tilde{\Psi}&lt;em&gt;i\rangle$ requires $E&lt;/em&gt;{\rm cut} \sim
+400$–$600$ eV (VASP), similar to USPP, far below what a true all-electron plane-wave
+calculation would need.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Transferability&lt;/strong&gt;: The partial waves are atom-specific but not system-specific; the same PAW
+dataset works well across different chemical environments, unlike empirically fitted NCPP.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Extensibility&lt;/strong&gt;: The occupation matrices $\rho_{nm}^a$ are a natural handle for DFT+U and
+hybrid functional implementations.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id="limitations-of-paw"&gt;Limitations of PAW&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Fixed augmentation spheres&lt;/strong&gt;: If $r_c^a$ is too small, the smooth part is not genuinely
+smooth; if too large, augmentation spheres on adjacent atoms overlap, invalidating the
+non-overlapping sphere assumption. Standard VASP PAW datasets are designed to avoid overlap
+for typical bond lengths, but this must be verified under compression.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Linearisation of the partial wave expansion&lt;/strong&gt;: PAW is exact only if the partial wave basis
+${|\phi_n^a\rangle}$ is complete within the augmentation sphere. For highly ionic environments
+or unusual oxidation states, a larger partial wave set or scattering energies closer to the
+occupied states may be needed. VASP provides both standard and &amp;ldquo;hard&amp;rdquo; PAW datasets for such
+cases.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;Comparison of core-electron strategies:&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Method&lt;/th&gt;
+&lt;th&gt;$E_{\rm cut}$ (typical)&lt;/th&gt;
+&lt;th&gt;Core accuracy&lt;/th&gt;
+&lt;th&gt;Access to core density&lt;/th&gt;
+&lt;th&gt;Cost&lt;/th&gt;
+&lt;th&gt;Default in&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;NCPP&lt;/td&gt;
+&lt;td&gt;$60$–$100$ Ry&lt;/td&gt;
+&lt;td&gt;Good (outside $r_c$)&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;td&gt;Moderate&lt;/td&gt;
+&lt;td&gt;QE, ABINIT&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;USPP&lt;/td&gt;
+&lt;td&gt;$25$–$40$ Ry&lt;/td&gt;
+&lt;td&gt;Good (valence)&lt;/td&gt;
+&lt;td&gt;No&lt;/td&gt;
+&lt;td&gt;Low&lt;/td&gt;
+&lt;td&gt;QE, CASTEP&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;PAW&lt;/td&gt;
+&lt;td&gt;$30$–$50$ Ry&lt;/td&gt;
+&lt;td&gt;Excellent (AE in spheres)&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;td&gt;Low–moderate&lt;/td&gt;
+&lt;td&gt;VASP, QE&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;All-electron&lt;/td&gt;
+&lt;td&gt;$\gg 100$ Ry&lt;/td&gt;
+&lt;td&gt;Exact&lt;/td&gt;
+&lt;td&gt;Yes&lt;/td&gt;
+&lt;td&gt;High&lt;/td&gt;
+&lt;td&gt;FHI-aims, WIEN2k&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;hr&gt;
+&lt;h2 id="practical-convergence-protocol"&gt;Practical Convergence Protocol&lt;/h2&gt;
+&lt;p&gt;A rigorous DFT calculation requires the following checks, performed in order:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;$E_{\rm cut}$ convergence&lt;/strong&gt;: Increase the plane-wave cutoff until the total energy changes
+by less than $1$–$2$ meV/atom. Use the converged cutoff for all subsequent calculations.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;$k$-mesh convergence&lt;/strong&gt;: Increase the Monkhorst–Pack grid density until the total energy and
+the quantity of interest (e.g. magnetic moment, band gap) are converged. Report the converged
+grid as $N_1 \times N_2 \times N_3$.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Supercell size&lt;/strong&gt; (for defects, surfaces, molecules): Increase the cell size until the
+interaction between periodic images is negligible ($\Delta E &amp;lt; 1$ meV/defect).&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;SCF convergence criterion&lt;/strong&gt;: Tighten the SCF energy tolerance to $\sim 10^{-6}$ eV for
+energy differences; $\sim 10^{-7}$ eV for forces or stress calculations.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Structural convergence&lt;/strong&gt;: Relax ionic positions until forces are below $0.01$–$0.02$
+eV/Å; relax the cell until stresses are below $0.1$ kbar.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Failure to converge any one of these can produce errors that dwarf those from the choice of XC
+functional. Convergence tests must be performed for each new system class; results from one
+system cannot be assumed transferable.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id="outlook"&gt;Outlook&lt;/h2&gt;
+&lt;p&gt;With the KS equations specified, the XC functional chosen, and the basis and pseudopotential
+converged, we have all the ingredients for a standard spin-unpolarised DFT calculation. The next
+chapter extends the framework to &lt;strong&gt;spin-polarised&lt;/strong&gt; systems, which are essential for magnetic
+materials and the study of exchange coupling in Heusler alloys and related compounds.&lt;/p&gt;</description></item><item><title>Spin-Polarised DFT and Magnetism</title><link>https://mavens-group.github.io/blog/2024-07-dft/01-foundations/07-spindft/</link><pubDate>Sun, 01 Jun 2025 00:00:00 +0000</pubDate><guid>https://mavens-group.github.io/blog/2024-07-dft/01-foundations/07-spindft/</guid><description>&lt;p&gt;The standard Kohn–Sham DFT developed in Chapter 3 treats electrons as spinless particles: the
+density $\rho(\mathbf{r})$ carries no spin label, and the KS equations yield doubly degenerate
+orbital energies. This is adequate for non-magnetic systems, but fails entirely when the ground
+state breaks time-reversal symmetry through a net electron spin polarisation.&lt;/p&gt;
+&lt;p&gt;To describe magnetic materials — from ferromagnetic iron to the half-metallic Heusler alloys and
+antiferromagnetic insulators — we must extend DFT to &lt;strong&gt;spin-polarised DFT (SDFT)&lt;/strong&gt;, and, for
+materials with strong spin–orbit coupling, to the full non-collinear formalism. This chapter
+develops the theoretical framework and connects it to the key observables: magnetic moments,
+exchange coupling constants $J$, and magnetic anisotropy energies (MAE).&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id="the-spin-density-functional"&gt;The Spin-Density Functional&lt;/h2&gt;
+&lt;h3 id="collinear-sdft"&gt;Collinear SDFT&lt;/h3&gt;
+&lt;p&gt;In &lt;strong&gt;collinear SDFT&lt;/strong&gt;, spins are quantised along a fixed axis (conventionally $z$). The
+fundamental variable is replaced by the &lt;strong&gt;spin-resolved density&lt;/strong&gt;:
+$$
+\begin{equation}
+\rho_\sigma(\mathbf{r}) = \sum_{i} f_{i\sigma}\,|\phi_{i\sigma}(\mathbf{r})|^2, \qquad \sigma \in \{\uparrow, \downarrow\},
+\end{equation}
+$$
+where $f_{i\sigma}$ are the orbital occupation numbers and the sum runs over all KS orbitals of
+spin $\sigma$. The total and magnetisation densities are:
+$$
+\begin{equation}
+\rho(\mathbf{r}) = \rho_\uparrow(\mathbf{r}) + \rho_\downarrow(\mathbf{r}),
+\qquad
+m(\mathbf{r}) = \rho_\uparrow(\mathbf{r}) - \rho_\downarrow(\mathbf{r}).
+\end{equation}
+$$
+&lt;/p&gt;
+&lt;p&gt;The HK theorem is generalised to show that the ground state is uniquely determined by the pair
+$(\rho(\mathbf{r}), m(\mathbf{r}))$, or equivalently by $(\rho_\uparrow, \rho_\downarrow)$.
+The total energy functional becomes:
+$$
+\begin{equation}
+E[\rho_\uparrow, \rho_\downarrow] = T_s[\rho_\uparrow, \rho_\downarrow] + E_{\rm H}[\rho] + E_{\rm xc}[\rho_\uparrow, \rho_\downarrow] + \int V_{\rm ext}(\mathbf{r})\,\rho(\mathbf{r})\,d\mathbf{r}.
+\end{equation}
+$$
+&lt;/p&gt;
+&lt;p&gt;The two sets of spin-channel KS equations decouple:
+$$
+\begin{equation}
+\left[-\frac{1}{2}\nabla^2 + V_{\rm eff}^\sigma(\mathbf{r})\right]\phi_{i\sigma}(\mathbf{r}) = \epsilon_{i\sigma}\,\phi_{i\sigma}(\mathbf{r}),
+\label{eq:SDFT-KS}
+\end{equation}
+$$
+with spin-dependent effective potentials:
+$$
+\begin{equation}
+V_{\rm eff}^\sigma(\mathbf{r}) = V_{\rm ext}(\mathbf{r}) + V_{\rm H}(\mathbf{r}) + V_{\rm xc}^\sigma(\mathbf{r}),
+\qquad V_{\rm xc}^\sigma = \frac{\delta E_{\rm xc}}{\delta \rho_\sigma(\mathbf{r})}.
+\end{equation}
+$$
+&lt;/p&gt;
+&lt;p&gt;The Hartree potential $V_{\rm H}$ is spin-independent (it depends on the total $\rho$), while
+$V_{\rm xc}^\sigma$ differs between spin channels, producing a &lt;strong&gt;spin-splitting&lt;/strong&gt; of the
+eigenvalues $\epsilon_{i\uparrow} \neq \epsilon_{i\downarrow}$. This is the quantum-mechanical
+origin of the &lt;strong&gt;exchange splitting&lt;/strong&gt; that drives ferromagnetism.&lt;/p&gt;
+&lt;h3 id="the-spin-polarised-xc-functional"&gt;The Spin-Polarised XC Functional&lt;/h3&gt;
+&lt;p&gt;The XC functional must be generalised to take both $\rho_\uparrow$ and $\rho_\downarrow$ as
+arguments. For the LDA, the &lt;strong&gt;local spin-density approximation (LSDA)&lt;/strong&gt; uses the XC energy of a
+spin-polarised uniform electron gas:&lt;/p&gt;
+$$
+E_{\rm xc}^{\rm LSDA}[\rho_\uparrow, \rho_\downarrow] = \int \varepsilon_{\rm xc}^{\rm UEG}(\rho_\uparrow(\mathbf{r}), \rho_\downarrow(\mathbf{r}))\,\rho(\mathbf{r})\,d\mathbf{r}.
+$$
+&lt;p&gt;&lt;strong&gt;Derivation of the spin-scaling relation (von Barth–Hedin).&lt;/strong&gt; The key step is to express $\varepsilon_{\rm xc}(\rho_\uparrow, \rho_\downarrow)$ in terms of the unpolarised value $\varepsilon_{\rm xc}(\rho, 0)$ and the fully polarised value $\varepsilon_{\rm xc}(\rho/2, \rho/2)$. For exchange, the exact spin-scaling follows from the Dirac formula: a fully spin-up gas of density $\rho$ has exchange energy $\varepsilon_{\rm x}(\rho, 0) = \varepsilon_{\rm x}^{\rm UEG}(\rho)$, while a spin-up gas of density $\rho_\uparrow$ contributes $\varepsilon_{\rm x}(\rho_\uparrow)\cdot(\rho_\uparrow/\rho)$ per unit total density. Adding both spin channels:&lt;/p&gt;
+$$
+\varepsilon_{\rm x}(\rho_\uparrow, \rho_\downarrow) = \frac{1}{2}\left[\varepsilon_{\rm x}^{\rm UEG}(2\rho_\uparrow)\frac{\rho_\uparrow}{\rho/2} + \varepsilon_{\rm x}^{\rm UEG}(2\rho_\downarrow)\frac{\rho_\downarrow}{\rho/2}\right]\cdot\frac{1}{2}.
+$$
+&lt;p&gt;Since $\varepsilon_{\rm x}^{\rm UEG}(\rho) \propto \rho^{1/3}$, this simplifies to the exact spin-scaling relation $\varepsilon_{\rm x}(\rho_\uparrow,\rho_\downarrow) = \frac{1}{2}[(1+\zeta)^{4/3}+(1-\zeta)^{4/3}],\varepsilon_{\rm x}^{\rm UEG}(\rho)$. For correlation, no exact spin-scaling exists; von Barth and Hedin (1972) proposed interpolating between the paramagnetic ($\zeta=0$) and ferromagnetic ($\zeta=1$) limits using a function $f(\zeta)$ that satisfies $f(0)=0$, $f(1)=1$, and $f&amp;rsquo;&amp;rsquo;(0) = 4/9$ (from the perturbative UEG correlation):&lt;/p&gt;
+$$
+\varepsilon_{\rm xc}(\rho_\uparrow, \rho_\downarrow) = \varepsilon_{\rm xc}(\rho, 0) + [\varepsilon_{\rm xc}(\rho/2, \rho/2) - \varepsilon_{\rm xc}(\rho, 0)]\,f(\zeta),
+$$
+&lt;p&gt;where $\zeta = (\rho_\uparrow - \rho_\downarrow)/\rho$ is the spin polarisation and the standard choice is:&lt;/p&gt;
+$$
+f(\zeta) = \frac{(1+\zeta)^{4/3} + (1-\zeta)^{4/3} - 2}{2(2^{1/3}-1)}.
+$$
+&lt;p&gt;This interpolation is exact for exchange and approximate for correlation; it reduces to the correct limits at $\zeta = 0$ (paramagnetic UEG) and $\zeta = 1$ (fully polarised UEG). GGA and meta-GGA functionals are extended analogously using the same spin-scaling for exchange and analogous interpolations for correlation.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id="magnetic-moments"&gt;Magnetic Moments&lt;/h2&gt;
+&lt;p&gt;The &lt;strong&gt;local magnetic moment&lt;/strong&gt; on site $A$ is:
+$$
+\begin{equation}
+\mu_A = \int_{\Omega_A} m(\mathbf{r})\,d\mathbf{r} = \int_{\Omega_A} [\rho_\uparrow(\mathbf{r}) - \rho_\downarrow(\mathbf{r})]\,d\mathbf{r},
+\end{equation}
+$$
+where $\Omega_A$ is the Wigner–Seitz (or PAW augmentation) sphere of atom $A$. The total
+magnetisation is:
+$$
+\begin{equation}
+M = \int m(\mathbf{r})\,d\mathbf{r} = N_\uparrow - N_\downarrow,
+\end{equation}
+$$
+where $N_\sigma = \int \rho_\sigma,d\mathbf{r}$ is the total number of electrons of spin
+$\sigma$.&lt;/p&gt;
+&lt;p&gt;For elemental ferromagnets, SDFT recovers the experimental moments well: Fe ($2.2,\mu_B$ exp.,
+$2.1$–$2.3,\mu_B$ DFT), Co ($1.7,\mu_B$), Ni ($0.6,\mu_B$). Orbital contributions (from
+spin–orbit coupling) are not included at the collinear SDFT level.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id="magnetic-ordering-ferro--antiferro--and-ferrimagnetic-states"&gt;Magnetic Ordering: Ferro-, Antiferro-, and Ferrimagnetic States&lt;/h2&gt;
+&lt;p&gt;By setting up different initial spin configurations in the SCF cycle, collinear SDFT can target
+different magnetic orderings:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Ferromagnetic (FM)&lt;/strong&gt;: all local moments aligned parallel, $M \neq 0$.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Antiferromagnetic (AFM)&lt;/strong&gt;: moments on sublattices aligned antiparallel, $M = 0$ globally.
+Requires a supercell large enough to contain both sublattices.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Ferrimagnetic (FiM)&lt;/strong&gt;: unequal antiparallel moments on distinct sublattices, $M \neq 0$.
+Common in half-Heusler and spinel compounds.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;To determine which ordering is the ground state, compute the total energy for each configuration
+and compare: $\Delta E = E_{\rm AFM} - E_{\rm FM}$.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id="exchange-coupling-the-heisenberg-model"&gt;Exchange Coupling: The Heisenberg Model&lt;/h2&gt;
+&lt;p&gt;The energy difference between magnetic configurations can be mapped onto the &lt;strong&gt;Heisenberg spin
+Hamiltonian&lt;/strong&gt;:
+$$
+\begin{equation}
+\hat{\mathcal{H}}_{\rm Heis} = -\sum_{\langle i,j\rangle} J_{ij}\,\hat{\mathbf{S}}_i \cdot \hat{\mathbf{S}}_j,
+\end{equation}
+$$
+where $\hat{\mathbf{S}}&lt;em&gt;i$ is the spin operator on site $i$ and $J&lt;/em&gt;{ij}$ is the &lt;strong&gt;exchange
+coupling constant&lt;/strong&gt; between sites $i$ and $j$. The sign convention: $J &amp;gt; 0$ favours FM
+alignment; $J &amp;lt; 0$ favours AFM.&lt;/p&gt;
+&lt;h3 id="extraction-of-j-from-total-energies"&gt;Extraction of $J$ from Total Energies&lt;/h3&gt;
+&lt;p&gt;For a two-sublattice system with spin $S$ per site, the energy difference between FM and AFM
+configurations (with $z$ equivalent nearest-neighbour pairs per formula unit) is:
+$$
+\begin{equation}
+\Delta E = E_{\rm AFM} - E_{\rm FM} = 2J\,z\,S^2.
+\label{eq:J-extraction}
+\end{equation}
+$$
+&lt;/p&gt;
+&lt;p&gt;Hence:
+$$
+\begin{equation}
+J = \frac{E_{\rm AFM} - E_{\rm FM}}{2\,z\,S^2}.
+\end{equation}
+$$
+&lt;/p&gt;
+&lt;p&gt;For more complex magnetic structures with multiple shells of neighbours, the &lt;strong&gt;four-state
+method&lt;/strong&gt; (Xiang et al.) or the &lt;strong&gt;spin-spiral approach&lt;/strong&gt; (Section below) provides a systematic
+way to disentangle $J_1, J_2, J_3, \ldots$&lt;/p&gt;
+&lt;h3 id="liechtensteinkatsnelsonantropovgubanov-lkag-method"&gt;Liechtenstein–Katsnelson–Antropov–Gubanov (LKAG) Method&lt;/h3&gt;
+&lt;p&gt;An alternative to total energy differences is the &lt;strong&gt;LKAG (linear response) method&lt;/strong&gt;, which
+computes $J_{ij}$ directly from the Green&amp;rsquo;s function:
+$$
+\begin{equation}
+J_{ij} = \frac{1}{4\pi}\int_{-\infty}^{E_F} {\rm Im}\,{\rm Tr}_L\left[\Delta_i G_{ij}^\uparrow(E)\,\Delta_j G_{ji}^\downarrow(E)\right]\,dE,
+\end{equation}
+$$
+where $\Delta_i = V_{\rm xc,i}^\uparrow - V_{\rm xc,i}^\downarrow$ is the local exchange
+splitting on site $i$ and $G_{ij}^\sigma$ are the spin-resolved intersite Green&amp;rsquo;s functions.
+This method gives the full $J_{ij}$ tensor in a single DFT calculation and is available in codes
+such as FLEUR, SPR-KKR, and Questaal.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Practical note:&lt;/strong&gt; Total energy methods (equation \eqref{eq:J-extraction}) are simpler and
+widely used. They require DFT+U or hybrid functionals for correlated $d$/$f$-electron systems
+where GGA overdelocalises the magnetic orbitals and underestimates $J$.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id="non-collinear-sdft"&gt;Non-Collinear SDFT&lt;/h2&gt;
+&lt;p&gt;In the collinear formalism, the magnetisation is constrained to lie along $z$. This is
+insufficient for:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Spin spirals&lt;/strong&gt; and incommensurate magnetic structures.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Spin frustration&lt;/strong&gt; in triangular or kagome lattices.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Spin–orbit coupling (SOC) effects&lt;/strong&gt;: the magnetisation direction matters when SOC is
+present, and it may vary in space.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Dzyaloshinskii–Moriya interaction (DMI)&lt;/strong&gt; and skyrmions.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;In &lt;strong&gt;non-collinear SDFT&lt;/strong&gt;, the density variable is replaced by the full $2\times 2$ density
+matrix in spin space:
+$$
+\begin{equation}
+n_{\alpha\beta}(\mathbf{r}) = \sum_i f_i\,\phi_i^\alpha(\mathbf{r})\left(\phi_i^\beta(\mathbf{r})\right)^*,
+\qquad \alpha,\beta \in \{\uparrow,\downarrow\},
+\end{equation}
+$$
+which is related to the magnetisation density vector $\mathbf{m}(\mathbf{r})$ via:
+$$
+\begin{equation}
+n_{\alpha\beta} = \frac{1}{2}\left[\rho\,\delta_{\alpha\beta} + \mathbf{m}\cdot\boldsymbol{\sigma}_{\alpha\beta}\right],
+\end{equation}
+$$
+where $\boldsymbol{\sigma} = (\sigma_x, \sigma_y, \sigma_z)$ are the Pauli matrices.&lt;/p&gt;
+&lt;p&gt;The KS orbitals become two-component &lt;strong&gt;spinors&lt;/strong&gt;
+$\boldsymbol{\phi}_i = (\phi_i^\uparrow, \phi_i^\downarrow)^T$, and the KS equations take the matrix form:
+$$
+\begin{equation}
+\left[-\frac{1}{2}\nabla^2\,\mathbf{I} + \mathbf{V}_{\rm eff}(\mathbf{r})\right]\boldsymbol{\phi}_i(\mathbf{r}) = \epsilon_i\,\boldsymbol{\phi}_i(\mathbf{r}),
+\end{equation}
+$$
+with the $2\times 2$ effective potential:
+$$
+\begin{equation}
+\mathbf{V}_{\rm eff}(\mathbf{r}) = \left[V_{\rm ext} + V_{\rm H} + V_{\rm xc}^{(0)}\right]\mathbf{I}
+- \mathbf{B}_{\rm xc}(\mathbf{r})\cdot\boldsymbol{\sigma},
+\end{equation}
+$$
+where $V_{\rm xc}^{(0)} = \frac{1}{2}(V_{\rm xc}^\uparrow + V_{\rm xc}^\downarrow)$ is the
+spin-averaged XC potential and
+$\mathbf{B}_{\rm xc} = \frac{1}{2}(V_{\rm xc}^\uparrow - V_{\rm xc}^\downarrow)\hat{\mathbf{m}}$ is the XC magnetic field aligned along the local magnetisation
+direction $\hat{\mathbf{m}}(\mathbf{r})$.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id="spinorbit-coupling-soc"&gt;Spin–Orbit Coupling (SOC)&lt;/h2&gt;
+&lt;p&gt;Spin–orbit coupling is a relativistic effect arising from the interaction of an electron&amp;rsquo;s spin
+magnetic moment with the magnetic field it experiences due to its orbital motion around the
+nucleus. In the Pauli approximation it takes the form:
+$$
+\begin{equation}
+\hat{H}_{\rm SOC} = \frac{\hbar^2}{4m_e^2c^2}\frac{1}{r}\frac{dV}{dr}\,\hat{\mathbf{L}}\cdot\hat{\mathbf{S}},
+\end{equation}
+$$
+where $\hat{\mathbf{L}}$ and $\hat{\mathbf{S}}$ are the orbital and spin angular momentum
+operators, and $dV/dr$ is the radial derivative of the ionic potential. SOC is strong near heavy
+nuclei (scales as $Z^4$), making it important for $4d$, $5d$, $4f$, and $5f$ elements.&lt;/p&gt;
+&lt;p&gt;In SDFT, SOC is most commonly included via the &lt;strong&gt;second-variational method&lt;/strong&gt;:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Solve the scalar-relativistic (collinear) SDFT problem first.&lt;/li&gt;
+&lt;li&gt;Construct the SOC matrix elements in the basis of scalar-relativistic eigenstates.&lt;/li&gt;
+&lt;li&gt;Diagonalise the full Hamiltonian $\hat{H}&lt;em&gt;{\rm SR} + \hat{H}&lt;/em&gt;{\rm SOC}$.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Full self-consistent inclusion of SOC requires the non-collinear spinor formalism.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id="magnetic-anisotropy-energy-mae"&gt;Magnetic Anisotropy Energy (MAE)&lt;/h2&gt;
+&lt;p&gt;The &lt;strong&gt;magnetic anisotropy energy&lt;/strong&gt; is the difference in total energy between magnetisation
+oriented along the easy axis and a hard axis:
+$$
+\begin{equation}
+{\rm MAE} = E(\hat{\mathbf{n}}_{\rm hard}) - E(\hat{\mathbf{n}}_{\rm easy}),
+\end{equation}
+$$
+typically measured in $\mu$eV/atom for $3d$ metals or meV/atom for heavy-element compounds. MAE
+determines the &lt;strong&gt;magnetic hardness&lt;/strong&gt; of a material: a large positive MAE (perpendicular easy
+axis) is required for permanent magnets and perpendicular magnetic recording media.&lt;/p&gt;
+&lt;p&gt;MAE arises entirely from &lt;strong&gt;spin–orbit coupling&lt;/strong&gt;: without SOC, all directions are degenerate.
+It vanishes in spin-orbit-free collinear SDFT and requires either:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Self-consistent non-collinear calculation with SOC&lt;/strong&gt; for large MAE (e.g. $L1_0$-FePt,
+$&amp;gt; 1$ meV/atom).&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Force theorem (perturbative SOC)&lt;/strong&gt;: For small MAE, compute the non-self-consistent energy
+with SOC applied to the converged scalar-relativistic density. Computationally cheaper but
+breaks down when SOC significantly modifies the density.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The MAE is dominated by the &lt;strong&gt;band energy&lt;/strong&gt; contribution (summed KS eigenvalue difference):
+$$
+\begin{equation}
+{\rm MAE} \approx \sum_i (f_i^{\rm hard}\,\epsilon_i^{\rm hard} - f_i^{\rm easy}\,\epsilon_i^{\rm easy}),
+\end{equation}
+$$
+which requires very dense $k$-meshes to converge (fine Brillouin zone features near the Fermi
+level). Typical convergence requires $40\times 40\times 40$ or finer grids for transition metal
+systems.&lt;/p&gt;
+&lt;h3 id="contribution-from-orbital-moments-bruno-relation"&gt;Contribution from Orbital Moments: Bruno Relation&lt;/h3&gt;
+&lt;p&gt;The connection between MAE and orbital moments was derived by Bruno (1989) using second-order
+perturbation theory in the SOC strength $\xi$. The SOC Hamiltonian is:&lt;/p&gt;
+$$
+\hat{H}_{\rm SOC} = \xi\,\hat{\mathbf{L}}\cdot\hat{\mathbf{S}}.
+$$
+&lt;p&gt;For a system with spin quantised along $\hat{\mathbf{n}}$, the second-order energy correction is:&lt;/p&gt;
+$$
+E^{(2)}(\hat{\mathbf{n}}) = -\xi^2 \sum_{o,u} \frac{|\langle u|\hat{H}_{\rm SOC}^{(\hat{\mathbf{n}})}|o\rangle|^2}{\epsilon_u - \epsilon_o},
+$$
+&lt;p&gt;where $o$ and $u$ label occupied and unoccupied states. Bruno showed that for a system with uniaxial symmetry and spin fixed along $\hat{\mathbf{n}}$, the dominant contribution to this sum is proportional to the expectation value of the orbital angular momentum along $\hat{\mathbf{n}}$:&lt;/p&gt;
+$$
+E^{(2)}(\hat{\mathbf{n}}) \approx -\frac{\xi}{4\mu_B}\langle \hat{L}_{\hat{\mathbf{n}}} \rangle,
+$$
+&lt;p&gt;where $\langle \hat{L}_{\hat{\mathbf{n}}} \rangle = \mu_B^{-1}\langle\hat{m}_L^{\hat{\mathbf{n}}}\rangle$ is the orbital moment along $\hat{\mathbf{n}}$ in units of $\mu_B$. The MAE then follows as the difference between two magnetisation directions:&lt;/p&gt;
+$$
+{\rm MAE} = E(\hat{\mathbf{n}}_{\rm hard}) - E(\hat{\mathbf{n}}_{\rm easy})
+\approx -\frac{\xi}{4\mu_B}\left(\langle L_z^{\rm hard}\rangle - \langle L_z^{\rm easy}\rangle\right).
+$$
+&lt;p&gt;&lt;strong&gt;Interpretation:&lt;/strong&gt; The easy axis is the direction along which the orbital moment is &lt;em&gt;largest&lt;/em&gt; (most negative $E^{(2)}$), since a larger orbital moment means more SOC energy lowering. Materials with large orbital moments — rare-earth $4f$ ions, $5d$ transition metals, or low-symmetry environments that quench the orbital moment less — consequently have large MAE. This is the microscopic basis for the empirical rule that heavier elements with unquenched orbital moments make better permanent magnets.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Caveats:&lt;/strong&gt; Bruno&amp;rsquo;s derivation assumes (i) perturbative SOC ($\xi \ll$ bandwidth), (ii) rigid band approximation (same orbitals for both directions), and (iii) collinear spin. It is quantitatively reliable for $3d$ metals but breaks down for $4f$ systems where SOC is comparable to the crystal field splitting, or for systems near band crossings where the denominator $\epsilon_u - \epsilon_o$ becomes small. In those cases the full non-perturbative calculation is required.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id="application-to-heusler-alloys"&gt;Application to Heusler Alloys&lt;/h2&gt;
+&lt;p&gt;Heusler alloys ($X_2YZ$ full Heusler or $XYZ$ half-Heusler) are a rich playground for SDFT
+because they exhibit a wide range of magnetic phenomena:&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Half-metallic ferromagnetism&lt;/strong&gt;: In compounds like Co$_2$MnSi, one spin channel ($\uparrow$)
+is metallic while the other ($\downarrow$) has a band gap at $E_F$, giving a spin polarisation
+of 100% in principle. SDFT with GGA predicts this correctly for many Heuslers; a scissor
+correction or hybrid functional is needed to accurately reproduce the minority-spin gap.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Slater–Pauling rule&lt;/strong&gt;: The total magnetic moment per formula unit follows
+$M = N_v - 24$ (full Heusler) or $M = N_v - 18$ (half-Heusler), where $N_v$ is the total
+valence electron count. This rule, reproduced by SDFT, provides a rapid screening criterion for
+half-metallicity.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Exchange coupling and $T_C$&lt;/strong&gt;: The Curie temperature can be estimated from $J_{ij}$ values
+via mean-field theory ($k_B T_C^{\rm MF} = \frac{2}{3}J_0$) or random phase approximation
+(RPA), with RPA giving more accurate results for itinerant magnets. SDFT+LKAG is the standard
+approach.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;MAE in Heuslers&lt;/strong&gt;: Most cubic Heuslers have small MAE ($\sim \mu$eV/atom) due to cubic
+symmetry. Tetragonally distorted Heuslers (e.g. Mn$_3$Ga) or inverse Heuslers can have
+significantly larger MAE, relevant for spin-transfer torque applications.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id="practical-checklist-for-magnetic-dft-calculations"&gt;Practical Checklist for Magnetic DFT Calculations&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;Initialise spin correctly&lt;/strong&gt;: Supply a non-zero initial magnetic moment to each magnetic
+site; the SCF loop will not spontaneously break spin symmetry from a non-magnetic starting
+point.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Check for multiple magnetic minima&lt;/strong&gt;: Try several initial configurations (FM, AFM,
+ferrimagnetic) and compare final energies. Collinear SDFT can get trapped in local minima.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Use appropriate XC&lt;/strong&gt;: PBE is standard; consider PBE+U or hybrid functionals for correlated
+$d/f$ systems where GGA under-localises the magnetic orbitals.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;For MAE&lt;/strong&gt;: Use a non-collinear calculation with SOC; converge the $k$-mesh carefully
+(MAE is extremely sensitive to $k$-point density).&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;For $J$&lt;/strong&gt;: Cross-check total-energy and Green&amp;rsquo;s function methods; the two should agree
+within $\sim 10$–$20%$.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Report orbital moments&lt;/strong&gt;: When SOC is included, report both spin and orbital magnetic
+moments for comparison with XMCD experiments.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;h2 id="outlook"&gt;Outlook&lt;/h2&gt;
+&lt;p&gt;Collinear SDFT provides an accurate and efficient framework for most magnetic materials, with
+non-collinear SDFT required for frustrated systems, SOC-driven anisotropy, and DMI. A systematic
+limitation shared by all SDFT methods is the treatment of &lt;strong&gt;strongly correlated&lt;/strong&gt; $d$ and $f$
+electrons, where the mean-field XC potential fails to capture Mott–Hubbard physics. The
+&lt;strong&gt;DFT+U&lt;/strong&gt; method, which introduces an on-site Hubbard correction for localised orbitals, is the
+subject of the next chapter.&lt;/p&gt;</description></item><item><title>DFT+U: Hubbard Correction for Correlated Electrons</title><link>https://mavens-group.github.io/blog/2024-07-dft/01-foundations/08-dftu/</link><pubDate>Sun, 01 Jun 2025 00:00:00 +0000</pubDate><guid>https://mavens-group.github.io/blog/2024-07-dft/01-foundations/08-dftu/</guid><description>&lt;p&gt;Standard DFT — whether LDA or GGA — describes electrons as moving in an effective single-particle
+potential constructed from the average charge density. This mean-field picture works well when
+electrons are itinerant, delocalised across the crystal in broad bands. It fails systematically
+for materials containing partially filled $d$ or $f$ shells, where electrons are spatially
+localised and strongly repel each other on the same atomic site. The canonical failures are
+well-known: GGA predicts NiO, CoO, and MnO to be metals; their experimental ground states are
+magnetic insulators with gaps of $3$–$4$ eV. Rare-earth oxides, actinide compounds, and many
+Heusler alloys with localised Mn or Co $d$ states share the same pathology.&lt;/p&gt;
+&lt;p&gt;The root cause is the &lt;strong&gt;self-interaction error (SIE)&lt;/strong&gt; and the failure of the semi-local XC
+functional to reproduce the &lt;strong&gt;Coulomb blockade&lt;/strong&gt; — the large energy cost $U$ of placing two
+electrons on the same atomic orbital simultaneously. The &lt;strong&gt;DFT+U&lt;/strong&gt; method (Anisimov, Zaanen,
+Andersen, 1991) corrects this by appending a Hubbard-like penalty term to the DFT energy
+functional, adding the cost of double occupation explicitly for a chosen set of localised
+orbitals. It is the most widely used method for strongly correlated materials in a
+plane-wave or PAW framework.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id="the-hubbard-model-physical-motivation"&gt;The Hubbard Model: Physical Motivation&lt;/h2&gt;
+&lt;p&gt;The Hubbard model (Hubbard, 1963) is the minimal lattice model capturing the competition
+between kinetic energy (electron hopping, bandwidth $W$) and on-site Coulomb repulsion:
+$$
+\begin{equation}
+\hat{H}_{\rm Hub} = -t\sum_{\langle i,j\rangle,\sigma}\hat{c}_{i\sigma}^\dagger\hat{c}_{j\sigma}
++ U\sum_i \hat{n}_{i\uparrow}\hat{n}_{i\downarrow},
+\label{eq:Hubbard}
+\end{equation}
+$$
+where
+$\hat{c}_{i\sigma}^\dagger$ creates an electron of spin $\sigma$ on site $i$, $t$ is the
+nearest-neighbour hopping integral, $U$ is the on-site Coulomb repulsion, and
+$\hat{n}_{i\sigma} = \hat{c}_{i\sigma}^\dagger\hat{c}_{i\sigma}$ is the occupation operator.&lt;/p&gt;
+&lt;p&gt;The two limits are illuminating:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;$U/W \ll 1$ (itinerant limit):&lt;/strong&gt; The bandwidth $W \sim zt$ (where $z$ is the coordination
+number) dominates. Electrons delocalise and form a metallic band. Standard DFT handles this
+regime well.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;$U/W \gg 1$ (Mott–Hubbard limit):&lt;/strong&gt; The on-site repulsion dominates. For a half-filled band
+(one electron per site), double occupancy costs energy $U$, so electrons localise on
+individual sites and the system becomes a &lt;strong&gt;Mott insulator&lt;/strong&gt;, even though band theory would
+predict a metal. DFT with semi-local XC functionals fails here because the mean-field
+treatment of electron–electron interaction cannot produce this correlation-driven localisation.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The Mott–Hubbard gap is approximately $U - W$: it opens when the repulsion energy exceeds the
+kinetic energy gain from delocalisation. For transition metal oxides, $U \sim 4$–$10$ eV and
+$W \sim 1$–$4$ eV, placing them firmly in the correlated regime.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id="why-standard-dft-fails-for-correlated-systems"&gt;Why Standard DFT Fails for Correlated Systems&lt;/h2&gt;
+&lt;p&gt;The failure of LDA/GGA for Mott insulators can be traced to two related deficiencies:&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;1. Self-interaction error (SIE).&lt;/strong&gt; As discussed in Chapter 4, approximate XC functionals
+do not fully cancel the spurious self-repulsion of an electron with itself. For a localised
+$d$ orbital occupied by a single electron, the SIE artificially delocalises the orbital,
+lowering its energy and pushing it into the valence band. The tendency of LDA/GGA to
+over-delocalise $d$ and $f$ electrons is a direct consequence.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;2. Missing derivative discontinuity.&lt;/strong&gt; The exact XC potential has a finite discontinuity
+at integer electron numbers $N$:
+$$
+\begin{equation}
+\Delta_{\rm xc} = V_{\rm xc}^+(N) - V_{\rm xc}^-(N) &gt; 0,
+\label{eq:disc}
+\end{equation}
+$$
+where $V_{\rm xc}^\pm$ denote the XC potential just above and below integer $N$. This
+discontinuity, combined with the KS band gap, gives the true quasiparticle gap:
+$E_g^{\rm true} = E_g^{\rm KS} + \Delta_{\rm xc}$. Semi-local functionals give
+$\Delta_{\rm xc} = 0$ exactly, so they systematically underestimate gaps. For Mott insulators
+the KS gap is zero (they are predicted metallic), and $\Delta_{\rm xc}$ accounts for the entire
+physical gap.&lt;/p&gt;
+&lt;p&gt;DFT+U corrects both deficiencies for the targeted orbitals: the Hubbard $U$ term penalises
+fractional occupations and introduces a step-like potential that mimics the derivative
+discontinuity.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id="the-dftu-energy-functional"&gt;The DFT+U Energy Functional&lt;/h2&gt;
+&lt;h3 id="occupation-matrix"&gt;Occupation Matrix&lt;/h3&gt;
+&lt;p&gt;The central object in DFT+U is the &lt;strong&gt;occupation matrix&lt;/strong&gt; $n_{mm&amp;rsquo;}^\sigma$ of the correlated
+subspace on each atom $I$:
+$$
+\begin{equation}
+n_{mm'}^{I\sigma} = \sum_{\mathbf{k},\nu} f_{\mathbf{k}\nu\sigma}
+\langle\phi_{\mathbf{k}\nu\sigma}|\hat{P}_{m'}^{I}\rangle
+\langle\hat{P}_m^{I}|\phi_{\mathbf{k}\nu\sigma}\rangle,
+\label{eq:occmat}
+\end{equation}
+$$
+where $f_{\mathbf{k}\nu\sigma}$ are KS orbital occupation numbers, $|\phi_{\mathbf{k}\nu\sigma}\rangle$
+are the KS spinor states, and $\hat{P}&lt;em&gt;m^I = |\chi_m^I\rangle\langle\chi_m^I|$ is the projector
+onto the localised orbital $|\chi_m^I\rangle$ (e.g. the $d&lt;/em&gt;{m}$ orbital on atom $I$, with
+$m = -l, \ldots, l$). In PAW, these projectors are the on-site partial waves; in LCAO codes,
+they are the basis functions themselves.&lt;/p&gt;
+&lt;p&gt;The occupation matrix is Hermitian ($n_{mm&amp;rsquo;}^{I\sigma} = (n_{m&amp;rsquo;m}^{I\sigma})^*$) and its trace
+gives the total occupation of spin channel $\sigma$ on site $I$:
+$$
+\begin{equation}
+N^{I\sigma} = \sum_m n_{mm}^{I\sigma} = \mathrm{Tr}[\mathbf{n}^{I\sigma}].
+\end{equation}
+$$
+&lt;/p&gt;
+&lt;p&gt;The eigenvalues ${f_\alpha^{I\sigma}}$ of $\mathbf{n}^{I\sigma}$ lie in $[0,1]$ and are the
+natural orbital occupation numbers of the correlated subspace.&lt;/p&gt;
+&lt;h3 id="the-full-dftu-functional"&gt;The Full DFT+U Functional&lt;/h3&gt;
+&lt;p&gt;The total DFT+U energy is:
+$$
+\begin{equation}
+E_{\rm DFT+U} = E_{\rm DFT}[\rho] + E_U[\{n_{mm'}^{I\sigma}\}] - E_{\rm dc}[\{N^{I\sigma}\}],
+\label{eq:DFTU-total}
+\end{equation}
+$$
+where $E_{\rm DFT}$ is the standard LDA or GGA energy, $E_U$ is the Hubbard correction, and
+$E_{\rm dc}$ is the &lt;strong&gt;double-counting correction&lt;/strong&gt; — a term that must be subtracted because the
+Coulomb interaction among the correlated electrons is already partially included in the DFT XC
+energy and must not be counted twice.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id="two-formulations"&gt;Two Formulations&lt;/h2&gt;
+&lt;h3 id="liechtenstein-formulation-full-rotationally-invariant"&gt;Liechtenstein Formulation (Full Rotationally Invariant)&lt;/h3&gt;
+&lt;p&gt;The Liechtenstein formulation (Liechtenstein, Anisimov, Zaanen, 1995) uses the full
+rotationally invariant Coulomb interaction characterised by two parameters: the average on-site
+Coulomb repulsion $U$ and the average exchange interaction $J$:
+$$
+\begin{equation}
+E_U^{\rm Lich} = \frac{1}{2}\sum_{I,\sigma}\sum_{\{m\}}
+\left[U_{m_1m_3}^{m_2m_4} - \delta_{\sigma\sigma'}J_{m_1m_3}^{m_2m_4}\right]
+n_{m_1m_2}^{I\sigma}\,n_{m_3m_4}^{I\sigma'},
+\end{equation}
+$$
+where $U_{m_1m_3}^{m_2m_4}$ and $J_{m_1m_3}^{m_2m_4}$ are the screened Slater integrals
+parametrising the full Coulomb tensor. In practice these are reduced to a small number of
+radial integrals $F^0, F^2, F^4$ (for $d$ orbitals) related to $U$ and $J$ by:
+$$
+\begin{equation}
+U = F^0,
+\qquad
+J = \frac{F^2 + F^4}{14}.
+\end{equation}
+$$
+&lt;/p&gt;
+&lt;p&gt;The double-counting correction in the Liechtenstein scheme uses the &lt;strong&gt;around mean-field (AMF)&lt;/strong&gt;
+form:
+$$
+\begin{equation}
+E_{\rm dc}^{\rm AMF} = \frac{U}{2}N(N-1) - \frac{J}{2}\sum_\sigma N^\sigma(N^\sigma - 1),
+\end{equation}
+$$
+where $N = \sum_\sigma N^\sigma$ is the total occupation of the correlated shell.&lt;/p&gt;
+&lt;h3 id="dudarev-formulation-simplified-u_rm-eff"&gt;Dudarev Formulation (Simplified, $U_{\rm eff}$)&lt;/h3&gt;
+&lt;p&gt;For most practical purposes, the simpler &lt;strong&gt;Dudarev formulation&lt;/strong&gt; (Dudarev et al., 1998) is
+preferred. It collapses $U$ and $J$ into a single effective parameter $U_{\rm eff} = U - J$ and
+writes the correction as a penalty on fractional orbital occupations:
+$$
+\begin{equation}
+\boxed{E_U^{\rm Dur} = \frac{U_{\rm eff}}{2}\sum_{I,\sigma}
+\mathrm{Tr}\!\left[\mathbf{n}^{I\sigma}\!\left(\mathbf{1} - \mathbf{n}^{I\sigma}\right)\right].}
+\label{eq:Dudarev}
+\end{equation}
+$$
+&lt;/p&gt;
+&lt;p&gt;This elegant form has a transparent physical interpretation: the factor
+$n_{mm}^{I\sigma}(1 - n_{mm}^{I\sigma})$ vanishes when orbital $m$ is either fully occupied
+($n = 1$) or fully empty ($n = 0$), and is maximised at $n = 1/2$ (half occupation). The
+correction thus adds a penalty for &lt;em&gt;fractional&lt;/em&gt; occupations, driving the occupation matrix
+towards integer eigenvalues. This is precisely the correction for the SIE, which tends to
+stabilise unphysical non-integer occupations.&lt;/p&gt;
+&lt;p&gt;The corresponding correction to the KS potential is:
+$$
+\begin{equation}
+V_{mm'}^{I\sigma,\rm DFT+U} = \frac{U_{\rm eff}}{2}\left(\delta_{mm'} - 2n_{mm'}^{I\sigma}\right),
+\label{eq:Vpot}
+\end{equation}
+$$
+which shifts occupied orbitals (large $n_{mm}$) downward in energy by $-U_{\rm eff}/2$ and
+empty orbitals (small $n_{mm}$) upward by $+U_{\rm eff}/2$. The net effect is to open or widen
+the gap between occupied and empty states in the correlated subspace by approximately
+$U_{\rm eff}$, as intended.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;The double-counting in Dudarev&lt;/strong&gt; is implicit: the functional is constructed so that the
+$E_U - E_{\rm dc}$ combination reduces exactly to equation \eqref{eq:Dudarev}, with the
+double-counting absorbed algebraically. No separate choice of double-counting scheme is needed.&lt;/p&gt;
+&lt;h3 id="comparison-of-formulations-and-equivalence-conditions"&gt;Comparison of Formulations and Equivalence Conditions&lt;/h3&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Feature&lt;/th&gt;
+&lt;th&gt;Liechtenstein&lt;/th&gt;
+&lt;th&gt;Dudarev&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;Parameters&lt;/td&gt;
+&lt;td&gt;$U$ and $J$ separately&lt;/td&gt;
+&lt;td&gt;$U_{\rm eff} = U - J$ only&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Rotational invariance&lt;/td&gt;
+&lt;td&gt;Full&lt;/td&gt;
+&lt;td&gt;Approximate&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Orbital polarisation&lt;/td&gt;
+&lt;td&gt;Captured&lt;/td&gt;
+&lt;td&gt;Not captured&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Double-counting&lt;/td&gt;
+&lt;td&gt;AMF or FLL, explicit choice&lt;/td&gt;
+&lt;td&gt;Implicit, absorbed&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Typical use&lt;/td&gt;
+&lt;td&gt;$f$-electron systems, full anisotropy&lt;/td&gt;
+&lt;td&gt;$d$-electron oxides, most practical work&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Implementation in VASP&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;LDAUTYPE = 1&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;LDAUTYPE = 2&lt;/code&gt; (default)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;strong&gt;Conditions under which Dudarev and Liechtenstein are equivalent.&lt;/strong&gt; The Dudarev functional is obtained from the Liechtenstein functional by making two approximations:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Isotropic (spherically averaged) Coulomb interaction&lt;/strong&gt;: replace the full Slater integrals $U_{m_1m_3}^{m_2m_4}$ by their spherical average $U,\delta_{m_1m_2}\delta_{m_3m_4} - J,\delta_{m_1m_4}\delta_{m_2m_3}$.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;FLL double-counting with $J = 0$ in the double-counting term&lt;/strong&gt;: when the FLL double-counting correction is applied and the exchange term $J$ is absorbed into $U_{\rm eff}$, the Liechtenstein energy reduces exactly to the Dudarev form.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Concretely, inserting the spherically averaged interaction into the Liechtenstein energy and subtracting the FLL double counting gives:&lt;/p&gt;
+$$
+E_U^{\rm Lich,spherical} - E_{\rm dc}^{\rm FLL} = \frac{U-J}{2}\sum_{I,\sigma}\mathrm{Tr}\left[\mathbf{n}^{I\sigma}(\mathbf{1}-\mathbf{n}^{I\sigma})\right] \equiv E_U^{\rm Dur}.
+$$
+&lt;p&gt;The two formulations therefore give identical results when: (a) the occupation matrix $\mathbf{n}^{I\sigma}$ is diagonal (no off-diagonal orbital coherences), and (b) the Slater integrals satisfy the spherical approximation $F^2/F^4 = 14/9$ (exact for a hydrogen-like atom, approximately satisfied for $3d$ transition metals). They &lt;strong&gt;differ&lt;/strong&gt; when orbital polarisation within the correlated shell is important — i.e. when different $m$ orbitals have different occupations that couple through the full Coulomb tensor. This is the regime where the Liechtenstein formulation is necessary: rare-earth $f$ systems, orbitally ordered manganites, and systems near the Mott transition where the orbital degree of freedom is active.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id="the-double-counting-problem"&gt;The Double-Counting Problem&lt;/h2&gt;
+&lt;p&gt;The double-counting term $E_{\rm dc}$ in equation \eqref{eq:DFTU-total} has no unique exact
+form because the DFT XC energy does not separate cleanly into contributions from the correlated
+subspace and the rest. Two schemes are in common use:&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Fully localised limit (FLL)&lt;/strong&gt;, also called the atomic limit:
+$$
+\begin{equation}
+E_{\rm dc}^{\rm FLL} = \frac{U}{2}N(N-1) - \frac{J}{2}\left[\frac{N}{2}\!\left(\frac{N}{2}-1\right) + \frac{N}{2}\!\left(\frac{N}{2}-1\right)\right],
+\label{eq:FLL}
+\end{equation}
+$$
+valid when the correlated orbital is nearly fully occupied or nearly empty (close to the atomic
+limit). This is appropriate for $f$-electron systems and late transition metal oxides.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Around mean-field (AMF):&lt;/strong&gt;
+$$
+\begin{equation}
+E_{\rm dc}^{\rm AMF} = \frac{U}{2}\bar{n}(N-1) - \frac{J}{2}\sum_\sigma\bar{n}^\sigma(N^\sigma - 1),
+\end{equation}
+$$
+where $\bar{n} = N/(2l+1)$ is the average occupation per orbital. This is appropriate when the
+occupations are close to the average (near the itinerant limit).&lt;/p&gt;
+&lt;p&gt;The FLL correction gives a larger energy shift for occupied orbitals and is the standard choice
+in most codes. However, the double-counting error is a fundamental limitation of DFT+U: since
+it cannot be derived from first principles, it introduces an uncontrolled approximation that
+depends on how much of $U$ is already captured in the DFT functional. This is one motivation
+for methods like DFT+DMFT, which treat the correlated subspace exactly.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id="determining-u"&gt;Determining $U$&lt;/h2&gt;
+&lt;p&gt;The Hubbard $U$ parameter is not a unique material property — it depends on the DFT functional,
+the choice of localised basis, and the degree of screening in the material. Three approaches
+are used in practice.&lt;/p&gt;
+&lt;h3 id="empirical-fitting"&gt;Empirical Fitting&lt;/h3&gt;
+&lt;p&gt;The simplest approach is to choose $U_{\rm eff}$ to reproduce an experimentally known
+quantity — typically the band gap, lattice constant, or magnetic moment. For NiO, $U_{\rm eff}
+\approx 5$–$6$ eV reproduces the experimental gap of $\sim 4$ eV; for FeO, $U_{\rm eff} \approx
+4$ eV. Empirical $U$ values are system-specific and should not be transferred between materials
+without validation.&lt;/p&gt;
+&lt;p&gt;A compilation of commonly used values:&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Material / Ion&lt;/th&gt;
+&lt;th&gt;Orbital&lt;/th&gt;
+&lt;th&gt;$U_{\rm eff}$ (eV)&lt;/th&gt;
+&lt;th&gt;Fitted property&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;Fe$^{2+/3+}$ in oxides&lt;/td&gt;
+&lt;td&gt;$3d$&lt;/td&gt;
+&lt;td&gt;$3.5$–$5.0$&lt;/td&gt;
+&lt;td&gt;Gap, moment&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Co$^{2+/3+}$&lt;/td&gt;
+&lt;td&gt;$3d$&lt;/td&gt;
+&lt;td&gt;$3.0$–$5.5$&lt;/td&gt;
+&lt;td&gt;Gap&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Ni$^{2+}$&lt;/td&gt;
+&lt;td&gt;$3d$&lt;/td&gt;
+&lt;td&gt;$5.0$–$6.5$&lt;/td&gt;
+&lt;td&gt;Gap&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Mn$^{2+/3+/4+}$&lt;/td&gt;
+&lt;td&gt;$3d$&lt;/td&gt;
+&lt;td&gt;$3.0$–$4.5$&lt;/td&gt;
+&lt;td&gt;Gap, structure&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Cu$^{2+}$&lt;/td&gt;
+&lt;td&gt;$3d$&lt;/td&gt;
+&lt;td&gt;$6.0$–$9.0$&lt;/td&gt;
+&lt;td&gt;Gap&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Ce$^{3+/4+}$&lt;/td&gt;
+&lt;td&gt;$4f$&lt;/td&gt;
+&lt;td&gt;$5.0$–$7.0$&lt;/td&gt;
+&lt;td&gt;$f$ occupancy&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;U$^{4+/5+}$&lt;/td&gt;
+&lt;td&gt;$5f$&lt;/td&gt;
+&lt;td&gt;$2.0$–$4.5$&lt;/td&gt;
+&lt;td&gt;Structure, gap&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id="linear-response-cococcionide-gironcoli"&gt;Linear Response (Cococcioni–de Gironcoli)&lt;/h3&gt;
+&lt;p&gt;A first-principles approach computes $U$ from the linear response of the occupation matrix to a
+localised perturbation potential $\alpha^I$ applied to site $I$ (Cococcioni and de Gironcoli,
+2005):
+$$
+\begin{equation}
+U^I = \left(\chi_0^{-1} - \chi^{-1}\right)^{II},
+\label{eq:LR-U}
+\end{equation}
+$$
+where $\chi_0^{II} = \partial N^I/\partial\alpha^I|&lt;em&gt;{\rm bare}$ is the bare (non-self-consistent)
+response and $\chi^{II} = \partial N^I/\partial\alpha^I|&lt;/em&gt;{\rm SCF}$ is the fully self-consistent
+response. The difference captures the screening of the bare Coulomb interaction by all other
+electrons. The parameter $U$ computed this way is self-consistent with the chosen DFT functional
+and projector, requiring no experimental input.&lt;/p&gt;
+&lt;p&gt;The procedure is: (1) apply a small perturbation $\pm\alpha$ to the Hubbard projector of
+site $I$; (2) compute the SCF and non-SCF changes in $N^I$; (3) extract $U$ from
+equation \eqref{eq:LR-U}. This is available as a post-processing step in Quantum ESPRESSO
+(&lt;code&gt;hp.x&lt;/code&gt;) and can be scripted in VASP.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Limitations:&lt;/strong&gt; Linear response $U$ values tend to be smaller than empirically fitted values
+because they include screening by itinerant valence electrons. The result also depends on the
+choice of projectors and may differ between PAW and LCAO implementations.&lt;/p&gt;
+&lt;h3 id="constrained-random-phase-approximation-crpa"&gt;Constrained Random Phase Approximation (cRPA)&lt;/h3&gt;
+&lt;p&gt;The most rigorous approach is the &lt;strong&gt;constrained RPA&lt;/strong&gt; (Aryasetiawan et al., 2004), which computes
+the partially screened Coulomb interaction $W(\omega)$ by excluding the screening from the
+correlated subspace itself (to avoid double counting):
+$$
+\begin{equation}
+U(\omega) = \langle\chi_m\chi_{m'}|W_r(\omega)|\chi_m\chi_{m'}\rangle,
+\end{equation}
+$$
+where $W_r$ is the RPA-screened interaction with the polarisation of the correlated $d/f$
+subspace removed. cRPA gives frequency-dependent $U(\omega)$; the static limit $U(0)$ is
+used in DFT+U, while the full frequency dependence feeds into DFT+DMFT. cRPA requires a
+GW-like calculation and is available in VASP (&lt;code&gt;ALGO = CRPA&lt;/code&gt;) and the WIEN2k+DMFT interface.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id="effect-of-u-on-the-electronic-structure"&gt;Effect of $U$ on the Electronic Structure&lt;/h2&gt;
+&lt;p&gt;The potential correction \eqref{eq:Vpot} produces several characteristic changes to the
+electronic structure that can be verified against experiment:&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Band gap opening.&lt;/strong&gt; Occupied $d/f$ states are shifted down by $\sim U_{\rm eff}/2$ and empty
+states up by $\sim U_{\rm eff}/2$, opening a gap of approximately $U_{\rm eff}$ in the
+correlated subspace. For a Mott insulator like NiO, DFT gives a metallic state while
+DFT+U with $U_{\rm eff} \approx 5$ eV correctly gives an insulating gap $\sim 3$–$4$ eV.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Orbital polarisation.&lt;/strong&gt; The integer-driving nature of DFT+U can lift orbital degeneracy via
+&lt;strong&gt;orbital ordering&lt;/strong&gt; — a spontaneous symmetry breaking in which one particular $d$ orbital
+(e.g. $d_{z^2}$ vs. $d_{x^2-y^2}$) becomes preferentially occupied. This is relevant for
+manganites and other Jahn–Teller active systems.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Magnetic moments.&lt;/strong&gt; By localising the $d/f$ electrons, DFT+U increases the local spin moment
+towards the ionic limit. For Fe$^{3+}$ in an oxide (half-filled $3d$, $S = 5/2$), GGA gives
+moments of $\sim 3.5,\mu_B$; DFT+U with appropriate $U$ gives $\sim 4.2,\mu_B$, closer to
+the ionic value of $5.0,\mu_B$.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Exchange coupling $J$.&lt;/strong&gt; The exchange coupling constants extracted from DFT+U are generally
+more reliable than from GGA for Mott insulators, because the localised occupations improve the
+description of the superexchange mechanism. For half-metallic Heusler alloys, DFT+U may be
+needed when one or more magnetic sublattice contains strongly correlated $d$ states.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Lattice parameters and forces.&lt;/strong&gt; The occupation-dependent potential modifies the forces on
+ions, generally increasing bond lengths for correlated oxides by $\sim 0.5$–$2%$ towards
+experiment.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id="multiple-correlated-sites-and-inter-site-u"&gt;Multiple Correlated Sites and Inter-Site $U$&lt;/h2&gt;
+&lt;p&gt;When a material contains more than one type of correlated atom (e.g. both Fe and Co in a double
+perovskite, or both $3d$ transition metal and $4f$ rare earth), separate $U$ values must be
+applied to each:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-fallback" data-lang="fallback"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;LDAUU = 0 0 5.0 6.5 # e.g. O p, La f, Fe d, Co d
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;LDAUJ = 0 0 1.0 0.7
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;LDAUL = -1 -1 2 2 # l quantum number: -1=off, 2=d
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;strong&gt;Inter-site Coulomb repulsion $V$&lt;/strong&gt; between neighbouring correlated sites (the extended Hubbard
+model: $\hat{H} = \ldots + V\sum_{\langle i,j\rangle}\hat{n}_i\hat{n}_j$) is not included in
+standard DFT+U but becomes important for charge-ordered states and certain multiferroics. The
+&lt;strong&gt;DFT+U+V&lt;/strong&gt; method (Campo and Cococcioni, 2010) extends the Dudarev functional to include
+inter-site occupations and is available in Quantum ESPRESSO.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id="practical-checklist-for-dftu-calculations"&gt;Practical Checklist for DFT+U Calculations&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Choose the correlated subspace&lt;/strong&gt;: Apply $U$ to the $d$ or $f$ orbitals of the magnetic or
+strongly correlated atoms. Do not apply $U$ to $s$ or $p$ orbitals unless specifically
+justified.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Determine $U_{\rm eff}$&lt;/strong&gt;: Use the linear response method for a first-principles estimate,
+or empirically fit to the experimental band gap or magnetic moment. Report the value used and
+validate against at least one observable.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Use Dudarev (&lt;code&gt;LDAUTYPE = 2&lt;/code&gt;) for $d$ electrons by default&lt;/strong&gt;. Switch to Liechtenstein
+(&lt;code&gt;LDAUTYPE = 1&lt;/code&gt;) with explicit $J$ only for $f$-electron systems or when orbital polarisation
+is physically important.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Check for metastable solutions&lt;/strong&gt;: The occupation matrix can converge to local energy
+minima corresponding to different orbital orderings. Always try multiple initial occupation
+matrices (e.g. initialise with identity, with the fully spin-polarised matrix, and with a
+broken-symmetry matrix) and compare final energies.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Initialise the occupation matrix explicitly&lt;/strong&gt; in VASP using &lt;code&gt;LDAUPRINT = 2&lt;/code&gt; to print the
+matrices and &lt;code&gt;MAGMOM&lt;/code&gt; tags to set the initial spin. In Quantum ESPRESSO, use &lt;code&gt;starting_ns_eigenvalue&lt;/code&gt;
+to initialise specific orbital occupations.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Converge $U$-dependent properties&lt;/strong&gt;: Band gaps, magnetic moments, and lattice constants
+all depend on $U_{\rm eff}$. Perform a sensitivity analysis over a range
+$U_{\rm eff} \pm 1$–$2$ eV to assess the robustness of your conclusions.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Validate against hybrid functionals&lt;/strong&gt;: For a subset of configurations, compare DFT+U
+results against HSE06 or PBE0. Reasonable agreement lends confidence to the $U$ choice;
+large discrepancies signal that the double-counting or projector choice may be inadequate.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;h2 id="limitations-of-dftu"&gt;Limitations of DFT+U&lt;/h2&gt;
+&lt;p&gt;DFT+U is a practical and computationally cheap correction, but it has fundamental limitations
+that must be kept in mind:&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Ambiguity in $U$ and double counting.&lt;/strong&gt; Neither $U$ nor $E_{\rm dc}$ is uniquely defined.
+Different codes, projectors, and double-counting schemes give different results for the same
+nominal $U$, making comparison between studies non-trivial.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Static mean-field treatment.&lt;/strong&gt; DFT+U replaces the dynamic on-site correlations of the Hubbard
+model with a static mean-field correction. It cannot describe the Kondo effect, orbital
+fluctuations, or the incoherent spectral weight (Hubbard bands) that are hallmarks of strongly
+correlated metals near the Mott transition. These require DFT+DMFT.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Orbital dependence and symmetry breaking.&lt;/strong&gt; The occupation matrix $n_{mm&amp;rsquo;}^{I\sigma}$ is
+basis-dependent and can break the rotational symmetry of the system if not handled carefully.
+Unphysical orbital orderings can appear as metastable SCF solutions.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Not a systematic improvement.&lt;/strong&gt; Unlike the Jacob&amp;rsquo;s Ladder hierarchy of Chapter 4, there is no
+guarantee that DFT+U improves all properties simultaneously. It often improves the gap while
+worsening structural parameters or vice versa, depending on the choice of $U$.&lt;/p&gt;
+&lt;hr&gt;
+&lt;h2 id="outlook"&gt;Outlook&lt;/h2&gt;
+&lt;p&gt;DFT+U addresses the most severe failure of semi-local DFT for correlated materials at minimal
+computational cost — a single SCF calculation with modified on-site potentials. It is the
+standard first step for any system containing transition metal or rare-earth ions. For systems
+where the full dynamical correlations matter (Kondo systems, strongly correlated metals,
+spectral functions), the natural extension is &lt;strong&gt;DFT+DMFT&lt;/strong&gt; (Dynamical Mean-Field Theory), which
+treats the correlated subspace exactly within an effective impurity model while embedding it in
+the DFT electronic structure of the surrounding crystal. This is beyond the scope of the present
+course, but the DFT+U occupation matrix and Hubbard projectors developed here form the direct
+input to any DFT+DMFT implementation.&lt;/p&gt;</description></item></channel></rss>
