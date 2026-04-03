@@ -1,0 +1,42 @@
+name: Deploy DFT Notes
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'Docs/DFT/**'
+      - '.github/workflows/dft.yaml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: "mdbook-pages"
+  cancel-in-progress: false
+
+jobs:
+  deploy-mdbook:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup mdBook
+        uses: peaceiris/actions-mdbook@v2
+        with:
+          mdbook-version: 'latest'
+
+      - name: Build mdBook
+        working-directory: ./Docs/DFT
+        run: mdbook build
+
+      - name: Deploy to GitHub Pages Subdirectory
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_branch: gh-pages
+          publish_dir: ./Docs/DFT/book
+          destination_dir: dft-notes
+          keep_files: true

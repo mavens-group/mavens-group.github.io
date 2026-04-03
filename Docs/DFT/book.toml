@@ -7,3 +7,4 @@ language = "en"
 mathjax-support = true
 additional-css = ["src/custom.css"]
 additional-js = ["src/custom.js"]
+site-url = "/dft-notes/"
