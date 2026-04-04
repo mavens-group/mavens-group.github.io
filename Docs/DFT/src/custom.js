@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // 1. Define Links
     // "index.html" is the rendered version of README.md (The Cover)
-    var logoUrl = path_to_root + "images/mavens.svg";
+    var logoUrl = path_to_root + "images/dz2.svg";
     var homeLink = path_to_root + "index.html";
 
     // 2. COVER PAGE LOGIC (No Sidebar/Menu)

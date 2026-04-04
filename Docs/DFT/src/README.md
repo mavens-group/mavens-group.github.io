@@ -1,5 +1,5 @@
 <div id="cover-page">
-<img src="images/mavens.svg" class="cover-logo" alt="MAVENs Logo">
+<img src="images/dz2.svg" class="cover-logo" alt="MAVENs Logo">
 <h1 class="cover-title">Density Functional Theory</h1>
 <p class="cover-subtitle">Lecture Note</p>
 <div class="cover-divider"></div>
