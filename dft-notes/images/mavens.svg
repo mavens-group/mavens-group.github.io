@@ -32,13 +32,23 @@
      inkscape:window-y="0"
      inkscape:window-maximized="1"
      inkscape:current-layer="layer1" />
-  <defs
-     id="defs1" />
+
+   <defs id="defs1" />
+    <style>
+      :root {
+        color: #000000; /* Default color for light mode */
+      }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          color: #ffffff; /* Color for system dark mode */
+        }
+      }
+    </style>
   <g
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
      id="layer1"
-     transform="translate(-33.866583,-5.2916674)">
+    transform="translate(-33.866583,-5.2916674)">
     <g
        id="g78"
        style="stroke:currentColor;stroke-opacity:1">
