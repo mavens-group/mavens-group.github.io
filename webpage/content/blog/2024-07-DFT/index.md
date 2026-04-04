@@ -20,8 +20,6 @@ image:
 type: post
 ---
 
-{{< figure src="featured.jpg" alt="Visualization of electron density and electronic structure in Density Functional Theory calculations" >}}
-
 **Density Functional Theory (DFT)** is one of the most powerful theoretical frameworks for studying the electronic structure of atoms, molecules, and solids. It is widely used in condensed matter physics, quantum chemistry, and computational materials science to accurately predict the structural, electronic, magnetic, and optical properties of complex materials.
 
 ## Course Syllabus
