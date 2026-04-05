@@ -24,16 +24,18 @@
      inkscape:deskcolor="#d1d1d1"
      inkscape:document-units="mm"
      inkscape:zoom="2.7204031"
-     inkscape:cx="76.643055"
-     inkscape:cy="168.725"
+     inkscape:cx="76.643053"
+     inkscape:cy="169.09259"
      inkscape:window-width="1920"
      inkscape:window-height="1168"
      inkscape:window-x="0"
      inkscape:window-y="0"
      inkscape:window-maximized="1"
      inkscape:current-layer="layer1" />
-   <defs id="defs1" />
-    <style>
+  <defs
+     id="defs1" />
+  <style
+     id="style1">
       :root {
         color: #000000; /* Default color for light mode */
       }
@@ -48,1037 +50,1034 @@
      inkscape:groupmode="layer"
      id="layer1"
      transform="translate(-86.079048,-44.657843)">
+    <path
+       class="lp"
+       d="m 106.35936,85.066332 c 5.82083,-4.233334 13.22917,-16.933333 11.1125,-28.045833 -1.5875,-7.9375 -7.40833,-12.170833 -11.1125,-12.170833 -3.70417,0 -9.525,4.233333 -11.1125,12.170833 -2.116667,11.1125 5.29167,23.812499 11.1125,28.045833"
+       id="path154"
+       style="fill:none;stroke:currentColor;stroke-width:0.383646" />
     <g
-       transform="matrix(0.26458333,0,0,0.26458333,106.35936,89.299665)"
-       id="g279">
-      <!-- UPPER lobe -->
-      <path
-         class="lp"
-         d="m 0,-16 c 22,-16 50,-64 42,-106 -6,-30 -28,-46 -42,-46 -14,0 -36,16 -42,46 -8,42 20,90 42,106"
-         id="path154"
-         style="fill:none;stroke:currentColor;stroke-width:1.45" />
+       id="g1"
+       transform="matrix(1,0,0,-1,0,128.34173)">
       <line
          class="ed"
-         x1="0"
-         y1="-158"
-         x2="-14"
-         y2="-142"
+         x1="106.35936"
+         y1="47.495499"
+         x2="102.6552"
+         y2="51.728832"
          id="line154"
-         style="opacity:0.85;fill:none;stroke:currentColor;stroke-width:1.2" />
+         style="opacity:0.85;fill:none;stroke:currentColor;stroke-width:0.3175" />
       <line
          class="ed"
-         x1="0"
-         y1="-158"
-         x2="14"
-         y2="-142"
+         x1="106.35936"
+         y1="47.495499"
+         x2="110.06353"
+         y2="51.728832"
          id="line155"
-         style="opacity:0.85;fill:none;stroke:currentColor;stroke-width:1.2" />
+         style="opacity:0.85;fill:none;stroke:currentColor;stroke-width:0.3175" />
       <line
          class="ef"
-         x1="-14"
-         y1="-142"
-         x2="14"
-         y2="-142"
+         x1="102.6552"
+         y1="51.728832"
+         x2="110.06353"
+         y2="51.728832"
          id="line156"
-         style="opacity:0.5;fill:none;stroke:currentColor;stroke-width:0.9" />
+         style="opacity:0.5;fill:none;stroke:currentColor;stroke-width:0.238125" />
       <line
          class="ed"
-         x1="-14"
-         y1="-142"
-         x2="-28"
-         y2="-118"
+         x1="102.6552"
+         y1="51.728832"
+         x2="98.951027"
+         y2="58.078831"
          id="line157"
-         style="opacity:0.85;fill:none;stroke:currentColor;stroke-width:1.2" />
+         style="opacity:0.85;fill:none;stroke:currentColor;stroke-width:0.3175" />
       <line
          class="ed"
-         x1="14"
-         y1="-142"
-         x2="28"
-         y2="-118"
+         x1="110.06353"
+         y1="51.728832"
+         x2="113.76769"
+         y2="58.078831"
          id="line158"
-         style="opacity:0.85;fill:none;stroke:currentColor;stroke-width:1.2" />
+         style="opacity:0.85;fill:none;stroke:currentColor;stroke-width:0.3175" />
       <line
          class="ef"
-         x1="-28"
-         y1="-118"
-         x2="28"
-         y2="-118"
+         x1="98.951027"
+         y1="58.078831"
+         x2="113.76769"
+         y2="58.078831"
          id="line159"
-         style="opacity:0.5;fill:none;stroke:currentColor;stroke-width:0.9" />
+         style="opacity:0.5;fill:none;stroke:currentColor;stroke-width:0.238125" />
       <line
          class="ef"
-         x1="-14"
-         y1="-142"
-         x2="0"
-         y2="-122"
+         x1="102.6552"
+         y1="51.728832"
+         x2="106.35936"
+         y2="57.0205"
          id="line160"
-         style="opacity:0.5;fill:none;stroke:currentColor;stroke-width:0.9" />
+         style="opacity:0.5;fill:none;stroke:currentColor;stroke-width:0.238125" />
       <line
          class="ef"
-         x1="14"
-         y1="-142"
-         x2="0"
-         y2="-122"
+         x1="110.06353"
+         y1="51.728832"
+         x2="106.35936"
+         y2="57.0205"
          id="line161"
-         style="opacity:0.5;fill:none;stroke:currentColor;stroke-width:0.9" />
+         style="opacity:0.5;fill:none;stroke:currentColor;stroke-width:0.238125" />
       <line
          class="ef"
-         x1="-28"
-         y1="-118"
-         x2="0"
-         y2="-122"
+         x1="98.951027"
+         y1="58.078831"
+         x2="106.35936"
+         y2="57.0205"
          id="line162"
-         style="opacity:0.5;fill:none;stroke:currentColor;stroke-width:0.9" />
+         style="opacity:0.5;fill:none;stroke:currentColor;stroke-width:0.238125" />
       <line
          class="ef"
-         x1="28"
-         y1="-118"
-         x2="0"
-         y2="-122"
+         x1="113.76769"
+         y1="58.078831"
+         x2="106.35936"
+         y2="57.0205"
          id="line163"
-         style="opacity:0.5;fill:none;stroke:currentColor;stroke-width:0.9" />
+         style="opacity:0.5;fill:none;stroke:currentColor;stroke-width:0.238125" />
       <line
          class="ed"
-         x1="-28"
-         y1="-118"
-         x2="-40"
-         y2="-90"
+         x1="98.951027"
+         y1="58.078831"
+         x2="95.776024"
+         y2="65.487167"
          id="line164"
-         style="opacity:0.85;fill:none;stroke:currentColor;stroke-width:1.2" />
+         style="opacity:0.85;fill:none;stroke:currentColor;stroke-width:0.3175" />
       <line
          class="ed"
-         x1="28"
-         y1="-118"
-         x2="40"
-         y2="-90"
+         x1="113.76769"
+         y1="58.078831"
+         x2="116.9427"
+         y2="65.487167"
          id="line165"
-         style="opacity:0.85;fill:none;stroke:currentColor;stroke-width:1.2" />
+         style="opacity:0.85;fill:none;stroke:currentColor;stroke-width:0.3175" />
       <line
          class="ef"
-         x1="-40"
-         y1="-90"
-         x2="40"
-         y2="-90"
+         x1="95.776024"
+         y1="65.487167"
+         x2="116.9427"
+         y2="65.487167"
          id="line166"
-         style="opacity:0.5;fill:none;stroke:currentColor;stroke-width:0.9" />
+         style="opacity:0.5;fill:none;stroke:currentColor;stroke-width:0.238125" />
       <line
          class="ef"
-         x1="-28"
-         y1="-118"
-         x2="-14"
-         y2="-96"
+         x1="98.951027"
+         y1="58.078831"
+         x2="102.6552"
+         y2="63.899666"
          id="line167"
-         style="opacity:0.5;fill:none;stroke:currentColor;stroke-width:0.9" />
+         style="opacity:0.5;fill:none;stroke:currentColor;stroke-width:0.238125" />
       <line
          class="ef"
-         x1="28"
-         y1="-118"
-         x2="14"
-         y2="-96"
+         x1="113.76769"
+         y1="58.078831"
+         x2="110.06353"
+         y2="63.899666"
          id="line168"
-         style="opacity:0.5;fill:none;stroke:currentColor;stroke-width:0.9" />
+         style="opacity:0.5;fill:none;stroke:currentColor;stroke-width:0.238125" />
       <line
          class="ef"
-         x1="0"
-         y1="-122"
-         x2="-14"
-         y2="-96"
+         x1="106.35936"
+         y1="57.0205"
+         x2="102.6552"
+         y2="63.899666"
          id="line169"
-         style="opacity:0.5;fill:none;stroke:currentColor;stroke-width:0.9" />
+         style="opacity:0.5;fill:none;stroke:currentColor;stroke-width:0.238125" />
       <line
          class="ef"
-         x1="0"
-         y1="-122"
-         x2="14"
-         y2="-96"
+         x1="106.35936"
+         y1="57.0205"
+         x2="110.06353"
+         y2="63.899666"
          id="line170"
-         style="opacity:0.5;fill:none;stroke:currentColor;stroke-width:0.9" />
+         style="opacity:0.5;fill:none;stroke:currentColor;stroke-width:0.238125" />
       <line
          class="ef"
-         x1="-14"
-         y1="-96"
-         x2="14"
-         y2="-96"
+         x1="102.6552"
+         y1="63.899666"
+         x2="110.06353"
+         y2="63.899666"
          id="line171"
-         style="opacity:0.5;fill:none;stroke:currentColor;stroke-width:0.9" />
+         style="opacity:0.5;fill:none;stroke:currentColor;stroke-width:0.238125" />
       <line
          class="ef"
-         x1="-40"
-         y1="-90"
-         x2="-14"
-         y2="-96"
+         x1="95.776024"
+         y1="65.487167"
+         x2="102.6552"
+         y2="63.899666"
          id="line172"
-         style="opacity:0.5;fill:none;stroke:currentColor;stroke-width:0.9" />
+         style="opacity:0.5;fill:none;stroke:currentColor;stroke-width:0.238125" />
       <line
          class="ef"
-         x1="40"
-         y1="-90"
-         x2="14"
-         y2="-96"
+         x1="116.9427"
+         y1="65.487167"
+         x2="110.06353"
+         y2="63.899666"
          id="line173"
-         style="opacity:0.5;fill:none;stroke:currentColor;stroke-width:0.9" />
+         style="opacity:0.5;fill:none;stroke:currentColor;stroke-width:0.238125" />
       <line
          class="ed"
-         x1="-40"
-         y1="-90"
-         x2="-40"
-         y2="-60"
+         x1="95.776024"
+         y1="65.487167"
+         x2="95.776024"
+         y2="73.424667"
          id="line174"
-         style="opacity:0.85;fill:none;stroke:currentColor;stroke-width:1.2" />
+         style="opacity:0.85;fill:none;stroke:currentColor;stroke-width:0.3175" />
       <line
          class="ed"
-         x1="40"
-         y1="-90"
-         x2="40"
-         y2="-60"
+         x1="116.9427"
+         y1="65.487167"
+         x2="116.9427"
+         y2="73.424667"
          id="line175"
-         style="opacity:0.85;fill:none;stroke:currentColor;stroke-width:1.2" />
+         style="opacity:0.85;fill:none;stroke:currentColor;stroke-width:0.3175" />
       <line
          class="ef"
-         x1="-40"
-         y1="-60"
-         x2="40"
-         y2="-60"
+         x1="95.776024"
+         y1="73.424667"
+         x2="116.9427"
+         y2="73.424667"
          id="line176"
-         style="opacity:0.5;fill:none;stroke:currentColor;stroke-width:0.9" />
+         style="opacity:0.5;fill:none;stroke:currentColor;stroke-width:0.238125" />
       <line
          class="ef"
-         x1="-14"
-         y1="-96"
-         x2="-20"
-         y2="-68"
+         x1="102.6552"
+         y1="63.899666"
+         x2="101.0677"
+         y2="71.307999"
          id="line177"
-         style="opacity:0.5;fill:none;stroke:currentColor;stroke-width:0.9" />
+         style="opacity:0.5;fill:none;stroke:currentColor;stroke-width:0.238125" />
       <line
          class="ef"
-         x1="14"
-         y1="-96"
-         x2="20"
-         y2="-68"
+         x1="110.06353"
+         y1="63.899666"
+         x2="111.65102"
+         y2="71.307999"
          id="line178"
-         style="opacity:0.5;fill:none;stroke:currentColor;stroke-width:0.9" />
+         style="opacity:0.5;fill:none;stroke:currentColor;stroke-width:0.238125" />
       <line
          class="ef"
-         x1="-20"
-         y1="-68"
-         x2="20"
-         y2="-68"
+         x1="101.0677"
+         y1="71.307999"
+         x2="111.65102"
+         y2="71.307999"
          id="line179"
-         style="opacity:0.5;fill:none;stroke:currentColor;stroke-width:0.9" />
+         style="opacity:0.5;fill:none;stroke:currentColor;stroke-width:0.238125" />
       <line
          class="ef"
-         x1="-40"
-         y1="-60"
-         x2="-20"
-         y2="-68"
+         x1="95.776024"
+         y1="73.424667"
+         x2="101.0677"
+         y2="71.307999"
          id="line180"
-         style="opacity:0.5;fill:none;stroke:currentColor;stroke-width:0.9" />
+         style="opacity:0.5;fill:none;stroke:currentColor;stroke-width:0.238125" />
       <line
          class="ef"
-         x1="40"
-         y1="-60"
-         x2="20"
-         y2="-68"
+         x1="116.9427"
+         y1="73.424667"
+         x2="111.65102"
+         y2="71.307999"
          id="line181"
-         style="opacity:0.5;fill:none;stroke:currentColor;stroke-width:0.9" />
+         style="opacity:0.5;fill:none;stroke:currentColor;stroke-width:0.238125" />
       <line
          class="ed"
-         x1="-40"
-         y1="-60"
-         x2="-22"
-         y2="-32"
+         x1="95.776024"
+         y1="73.424667"
+         x2="100.53853"
+         y2="80.833"
          id="line182"
-         style="opacity:0.85;fill:none;stroke:currentColor;stroke-width:1.2" />
+         style="opacity:0.85;fill:none;stroke:currentColor;stroke-width:0.3175" />
       <line
          class="ed"
-         x1="40"
-         y1="-60"
-         x2="22"
-         y2="-32"
+         x1="116.9427"
+         y1="73.424667"
+         x2="112.18019"
+         y2="80.833"
          id="line183"
-         style="opacity:0.85;fill:none;stroke:currentColor;stroke-width:1.2" />
+         style="opacity:0.85;fill:none;stroke:currentColor;stroke-width:0.3175" />
       <line
          class="ef"
-         x1="-20"
-         y1="-68"
-         x2="-10"
-         y2="-40"
+         x1="101.0677"
+         y1="71.307999"
+         x2="103.71352"
+         y2="78.716331"
          id="line184"
-         style="opacity:0.5;fill:none;stroke:currentColor;stroke-width:0.9" />
+         style="opacity:0.5;fill:none;stroke:currentColor;stroke-width:0.238125" />
       <line
          class="ef"
-         x1="20"
-         y1="-68"
-         x2="10"
-         y2="-40"
+         x1="111.65102"
+         y1="71.307999"
+         x2="109.0052"
+         y2="78.716331"
          id="line185"
-         style="opacity:0.5;fill:none;stroke:currentColor;stroke-width:0.9" />
+         style="opacity:0.5;fill:none;stroke:currentColor;stroke-width:0.238125" />
       <line
          class="ef"
-         x1="-10"
-         y1="-40"
-         x2="10"
-         y2="-40"
+         x1="103.71352"
+         y1="78.716331"
+         x2="109.0052"
+         y2="78.716331"
          id="line186"
-         style="opacity:0.5;fill:none;stroke:currentColor;stroke-width:0.9" />
+         style="opacity:0.5;fill:none;stroke:currentColor;stroke-width:0.238125" />
       <line
          class="ef"
-         x1="-22"
-         y1="-32"
-         x2="-10"
-         y2="-40"
+         x1="100.53853"
+         y1="80.833"
+         x2="103.71352"
+         y2="78.716331"
          id="line187"
-         style="opacity:0.5;fill:none;stroke:currentColor;stroke-width:0.9" />
+         style="opacity:0.5;fill:none;stroke:currentColor;stroke-width:0.238125" />
       <line
          class="ef"
-         x1="22"
-         y1="-32"
-         x2="10"
-         y2="-40"
+         x1="112.18019"
+         y1="80.833"
+         x2="109.0052"
+         y2="78.716331"
          id="line188"
-         style="opacity:0.5;fill:none;stroke:currentColor;stroke-width:0.9" />
+         style="opacity:0.5;fill:none;stroke:currentColor;stroke-width:0.238125" />
       <circle
          class="nd"
-         cx="0"
-         cy="-158"
-         r="4"
+         cx="106.35936"
+         cy="47.495499"
+         r="1.0583333"
          id="circle188"
-         style="fill:none;stroke:currentColor;stroke-width:1.3" />
+         style="fill:none;stroke:currentColor;stroke-width:0.343958" />
       <circle
          class="nd"
-         cx="-14"
-         cy="-142"
-         r="3.8"
+         cx="102.6552"
+         cy="51.728832"
+         r="1.0054166"
          id="circle189"
-         style="fill:none;stroke:currentColor;stroke-width:1.3" />
+         style="fill:none;stroke:currentColor;stroke-width:0.343958" />
       <circle
          class="nd"
-         cx="14"
-         cy="-142"
-         r="3.8"
+         cx="110.06353"
+         cy="51.728832"
+         r="1.0054166"
          id="circle190"
-         style="fill:none;stroke:currentColor;stroke-width:1.3" />
+         style="fill:none;stroke:currentColor;stroke-width:0.343958" />
       <circle
          class="nd"
-         cx="0"
-         cy="-122"
-         r="3.5999999"
+         cx="106.35936"
+         cy="57.0205"
+         r="0.95249999"
          id="circle191"
-         style="fill:none;stroke:currentColor;stroke-width:1.3" />
+         style="fill:none;stroke:currentColor;stroke-width:0.343958" />
       <circle
          class="nd"
-         cx="-28"
-         cy="-118"
-         r="3.8"
+         cx="98.951027"
+         cy="58.078831"
+         r="1.0054166"
          id="circle192"
-         style="fill:none;stroke:currentColor;stroke-width:1.3" />
+         style="fill:none;stroke:currentColor;stroke-width:0.343958" />
       <circle
          class="nd"
-         cx="28"
-         cy="-118"
-         r="3.8"
+         cx="113.76769"
+         cy="58.078831"
+         r="1.0054166"
          id="circle193"
-         style="fill:none;stroke:currentColor;stroke-width:1.3" />
+         style="fill:none;stroke:currentColor;stroke-width:0.343958" />
       <circle
          class="nd"
-         cx="-14"
-         cy="-96"
-         r="3.5"
+         cx="102.6552"
+         cy="63.899666"
+         r="0.92604166"
          id="circle194"
-         style="fill:none;stroke:currentColor;stroke-width:1.3" />
+         style="fill:none;stroke:currentColor;stroke-width:0.343958" />
       <circle
          class="nd"
-         cx="14"
-         cy="-96"
-         r="3.5"
+         cx="110.06353"
+         cy="63.899666"
+         r="0.92604166"
          id="circle195"
-         style="fill:none;stroke:currentColor;stroke-width:1.3" />
+         style="fill:none;stroke:currentColor;stroke-width:0.343958" />
       <circle
          class="nd"
-         cx="-40"
-         cy="-90"
-         r="3.8"
+         cx="95.776024"
+         cy="65.487167"
+         r="1.0054166"
          id="circle196"
-         style="fill:none;stroke:currentColor;stroke-width:1.3" />
+         style="fill:none;stroke:currentColor;stroke-width:0.343958" />
       <circle
          class="nd"
-         cx="40"
-         cy="-90"
-         r="3.8"
+         cx="116.9427"
+         cy="65.487167"
+         r="1.0054166"
          id="circle197"
-         style="fill:none;stroke:currentColor;stroke-width:1.3" />
+         style="fill:none;stroke:currentColor;stroke-width:0.343958" />
       <circle
          class="nd"
-         cx="-20"
-         cy="-68"
-         r="3.5"
+         cx="101.0677"
+         cy="71.307999"
+         r="0.92604166"
          id="circle198"
-         style="fill:none;stroke:currentColor;stroke-width:1.3" />
+         style="fill:none;stroke:currentColor;stroke-width:0.343958" />
       <circle
          class="nd"
-         cx="20"
-         cy="-68"
-         r="3.5"
+         cx="111.65102"
+         cy="71.307999"
+         r="0.92604166"
          id="circle199"
-         style="fill:none;stroke:currentColor;stroke-width:1.3" />
+         style="fill:none;stroke:currentColor;stroke-width:0.343958" />
       <circle
          class="nd"
-         cx="-40"
-         cy="-60"
-         r="3.8"
+         cx="95.776024"
+         cy="73.424667"
+         r="1.0054166"
          id="circle200"
-         style="fill:none;stroke:currentColor;stroke-width:1.3" />
+         style="fill:none;stroke:currentColor;stroke-width:0.343958" />
       <circle
          class="nd"
-         cx="40"
-         cy="-60"
-         r="3.8"
+         cx="116.9427"
+         cy="73.424667"
+         r="1.0054166"
          id="circle201"
-         style="fill:none;stroke:currentColor;stroke-width:1.3" />
+         style="fill:none;stroke:currentColor;stroke-width:0.343958" />
       <circle
          class="nd"
-         cx="-10"
-         cy="-40"
-         r="3.2"
+         cx="103.71352"
+         cy="78.716331"
+         r="0.84666669"
          id="circle202"
-         style="fill:none;stroke:currentColor;stroke-width:1.3" />
+         style="fill:none;stroke:currentColor;stroke-width:0.343958" />
       <circle
          class="nd"
-         cx="10"
-         cy="-40"
-         r="3.2"
+         cx="109.0052"
+         cy="78.716331"
+         r="0.84666669"
          id="circle203"
-         style="fill:none;stroke:currentColor;stroke-width:1.3" />
+         style="fill:none;stroke:currentColor;stroke-width:0.343958" />
       <circle
          class="ndb"
-         cx="-22"
-         cy="-32"
-         r="4"
+         cx="100.53853"
+         cy="80.833"
+         r="1.0583333"
          id="circle204"
-         style="fill:none;stroke:currentColor;stroke-width:1.4" />
+         style="fill:none;stroke:currentColor;stroke-width:0.370417" />
       <circle
          class="ndb"
-         cx="22"
-         cy="-32"
-         r="4"
+         cx="112.18019"
+         cy="80.833"
+         r="1.0583333"
          id="circle205"
-         style="fill:none;stroke:currentColor;stroke-width:1.4" />
-      <!-- LOWER lobe -->
-      <path
-         class="lp"
-         d="M 0,16 C 22,32 50,80 42,122 36,152 14,168 0,168 -14,168 -36,152 -42,122 -50,80 -22,32 0,16"
-         id="path205"
-         style="fill:none;stroke:currentColor;stroke-width:1.45" />
-      <line
-         class="ed"
-         x1="0"
-         y1="158"
-         x2="-14"
-         y2="142"
-         id="line205"
-         style="opacity:0.85;fill:none;stroke:currentColor;stroke-width:1.2" />
-      <line
-         class="ed"
-         x1="0"
-         y1="158"
-         x2="14"
-         y2="142"
-         id="line206"
-         style="opacity:0.85;fill:none;stroke:currentColor;stroke-width:1.2" />
-      <line
-         class="ef"
-         x1="-14"
-         y1="142"
-         x2="14"
-         y2="142"
-         id="line207"
-         style="opacity:0.5;fill:none;stroke:currentColor;stroke-width:0.9" />
-      <line
-         class="ed"
-         x1="-14"
-         y1="142"
-         x2="-28"
-         y2="118"
-         id="line208"
-         style="opacity:0.85;fill:none;stroke:currentColor;stroke-width:1.2" />
-      <line
-         class="ed"
-         x1="14"
-         y1="142"
-         x2="28"
-         y2="118"
-         id="line209"
-         style="opacity:0.85;fill:none;stroke:currentColor;stroke-width:1.2" />
-      <line
-         class="ef"
-         x1="-28"
-         y1="118"
-         x2="28"
-         y2="118"
-         id="line210"
-         style="opacity:0.5;fill:none;stroke:currentColor;stroke-width:0.9" />
-      <line
-         class="ef"
-         x1="-14"
-         y1="142"
-         x2="0"
-         y2="122"
-         id="line211"
-         style="opacity:0.5;fill:none;stroke:currentColor;stroke-width:0.9" />
-      <line
-         class="ef"
-         x1="14"
-         y1="142"
-         x2="0"
-         y2="122"
-         id="line212"
-         style="opacity:0.5;fill:none;stroke:currentColor;stroke-width:0.9" />
-      <line
-         class="ef"
-         x1="-28"
-         y1="118"
-         x2="0"
-         y2="122"
-         id="line213"
-         style="opacity:0.5;fill:none;stroke:currentColor;stroke-width:0.9" />
-      <line
-         class="ef"
-         x1="28"
-         y1="118"
-         x2="0"
-         y2="122"
-         id="line214"
-         style="opacity:0.5;fill:none;stroke:currentColor;stroke-width:0.9" />
-      <line
-         class="ed"
-         x1="-28"
-         y1="118"
-         x2="-40"
-         y2="90"
-         id="line215"
-         style="opacity:0.85;fill:none;stroke:currentColor;stroke-width:1.2" />
-      <line
-         class="ed"
-         x1="28"
-         y1="118"
-         x2="40"
-         y2="90"
-         id="line216"
-         style="opacity:0.85;fill:none;stroke:currentColor;stroke-width:1.2" />
-      <line
-         class="ef"
-         x1="-40"
-         y1="90"
-         x2="40"
-         y2="90"
-         id="line217"
-         style="opacity:0.5;fill:none;stroke:currentColor;stroke-width:0.9" />
-      <line
-         class="ef"
-         x1="-28"
-         y1="118"
-         x2="-14"
-         y2="96"
-         id="line218"
-         style="opacity:0.5;fill:none;stroke:currentColor;stroke-width:0.9" />
-      <line
-         class="ef"
-         x1="28"
-         y1="118"
-         x2="14"
-         y2="96"
-         id="line219"
-         style="opacity:0.5;fill:none;stroke:currentColor;stroke-width:0.9" />
-      <line
-         class="ef"
-         x1="0"
-         y1="122"
-         x2="-14"
-         y2="96"
-         id="line220"
-         style="opacity:0.5;fill:none;stroke:currentColor;stroke-width:0.9" />
-      <line
-         class="ef"
-         x1="0"
-         y1="122"
-         x2="14"
-         y2="96"
-         id="line221"
-         style="opacity:0.5;fill:none;stroke:currentColor;stroke-width:0.9" />
-      <line
-         class="ef"
-         x1="-14"
-         y1="96"
-         x2="14"
-         y2="96"
-         id="line222"
-         style="opacity:0.5;fill:none;stroke:currentColor;stroke-width:0.9" />
-      <line
-         class="ef"
-         x1="-40"
-         y1="90"
-         x2="-14"
-         y2="96"
-         id="line223"
-         style="opacity:0.5;fill:none;stroke:currentColor;stroke-width:0.9" />
-      <line
-         class="ef"
-         x1="40"
-         y1="90"
-         x2="14"
-         y2="96"
-         id="line224"
-         style="opacity:0.5;fill:none;stroke:currentColor;stroke-width:0.9" />
-      <line
-         class="ed"
-         x1="-40"
-         y1="90"
-         x2="-40"
-         y2="60"
-         id="line225"
-         style="opacity:0.85;fill:none;stroke:currentColor;stroke-width:1.2" />
-      <line
-         class="ed"
-         x1="40"
-         y1="90"
-         x2="40"
-         y2="60"
-         id="line226"
-         style="opacity:0.85;fill:none;stroke:currentColor;stroke-width:1.2" />
-      <line
-         class="ef"
-         x1="-40"
-         y1="60"
-         x2="40"
-         y2="60"
-         id="line227"
-         style="opacity:0.5;fill:none;stroke:currentColor;stroke-width:0.9" />
-      <line
-         class="ef"
-         x1="-14"
-         y1="96"
-         x2="-20"
-         y2="68"
-         id="line228"
-         style="opacity:0.5;fill:none;stroke:currentColor;stroke-width:0.9" />
-      <line
-         class="ef"
-         x1="14"
-         y1="96"
-         x2="20"
-         y2="68"
-         id="line229"
-         style="opacity:0.5;fill:none;stroke:currentColor;stroke-width:0.9" />
-      <line
-         class="ef"
-         x1="-20"
-         y1="68"
-         x2="20"
-         y2="68"
-         id="line230"
-         style="opacity:0.5;fill:none;stroke:currentColor;stroke-width:0.9" />
-      <line
-         class="ef"
-         x1="-40"
-         y1="60"
-         x2="-20"
-         y2="68"
-         id="line231"
-         style="opacity:0.5;fill:none;stroke:currentColor;stroke-width:0.9" />
-      <line
-         class="ef"
-         x1="40"
-         y1="60"
-         x2="20"
-         y2="68"
-         id="line232"
-         style="opacity:0.5;fill:none;stroke:currentColor;stroke-width:0.9" />
-      <line
-         class="ed"
-         x1="-40"
-         y1="60"
-         x2="-22"
-         y2="32"
-         id="line233"
-         style="opacity:0.85;fill:none;stroke:currentColor;stroke-width:1.2" />
-      <line
-         class="ed"
-         x1="40"
-         y1="60"
-         x2="22"
-         y2="32"
-         id="line234"
-         style="opacity:0.85;fill:none;stroke:currentColor;stroke-width:1.2" />
-      <line
-         class="ef"
-         x1="-20"
-         y1="68"
-         x2="-10"
-         y2="40"
-         id="line235"
-         style="opacity:0.5;fill:none;stroke:currentColor;stroke-width:0.9" />
-      <line
-         class="ef"
-         x1="20"
-         y1="68"
-         x2="10"
-         y2="40"
-         id="line236"
-         style="opacity:0.5;fill:none;stroke:currentColor;stroke-width:0.9" />
-      <line
-         class="ef"
-         x1="-10"
-         y1="40"
-         x2="10"
-         y2="40"
-         id="line237"
-         style="opacity:0.5;fill:none;stroke:currentColor;stroke-width:0.9" />
-      <line
-         class="ef"
-         x1="-22"
-         y1="32"
-         x2="-10"
-         y2="40"
-         id="line238"
-         style="opacity:0.5;fill:none;stroke:currentColor;stroke-width:0.9" />
-      <line
-         class="ef"
-         x1="22"
-         y1="32"
-         x2="10"
-         y2="40"
-         id="line239"
-         style="opacity:0.5;fill:none;stroke:currentColor;stroke-width:0.9" />
-      <circle
-         class="nd"
-         cx="0"
-         cy="158"
-         r="4"
-         id="circle239"
-         style="fill:none;stroke:currentColor;stroke-width:1.3" />
-      <circle
-         class="nd"
-         cx="-14"
-         cy="142"
-         r="3.8"
-         id="circle240"
-         style="fill:none;stroke:currentColor;stroke-width:1.3" />
-      <circle
-         class="nd"
-         cx="14"
-         cy="142"
-         r="3.8"
-         id="circle241"
-         style="fill:none;stroke:currentColor;stroke-width:1.3" />
-      <circle
-         class="nd"
-         cx="0"
-         cy="122"
-         r="3.5999999"
-         id="circle242"
-         style="fill:none;stroke:currentColor;stroke-width:1.3" />
-      <circle
-         class="nd"
-         cx="-28"
-         cy="118"
-         r="3.8"
-         id="circle243"
-         style="fill:none;stroke:currentColor;stroke-width:1.3" />
-      <circle
-         class="nd"
-         cx="28"
-         cy="118"
-         r="3.8"
-         id="circle244"
-         style="fill:none;stroke:currentColor;stroke-width:1.3" />
-      <circle
-         class="nd"
-         cx="-14"
-         cy="96"
-         r="3.5"
-         id="circle245"
-         style="fill:none;stroke:currentColor;stroke-width:1.3" />
-      <circle
-         class="nd"
-         cx="14"
-         cy="96"
-         r="3.5"
-         id="circle246"
-         style="fill:none;stroke:currentColor;stroke-width:1.3" />
-      <circle
-         class="nd"
-         cx="-40"
-         cy="90"
-         r="3.8"
-         id="circle247"
-         style="fill:none;stroke:currentColor;stroke-width:1.3" />
-      <circle
-         class="nd"
-         cx="40"
-         cy="90"
-         r="3.8"
-         id="circle248"
-         style="fill:none;stroke:currentColor;stroke-width:1.3" />
-      <circle
-         class="nd"
-         cx="-20"
-         cy="68"
-         r="3.5"
-         id="circle249"
-         style="fill:none;stroke:currentColor;stroke-width:1.3" />
-      <circle
-         class="nd"
-         cx="20"
-         cy="68"
-         r="3.5"
-         id="circle250"
-         style="fill:none;stroke:currentColor;stroke-width:1.3" />
-      <circle
-         class="nd"
-         cx="-40"
-         cy="60"
-         r="3.8"
-         id="circle251"
-         style="fill:none;stroke:currentColor;stroke-width:1.3" />
-      <circle
-         class="nd"
-         cx="40"
-         cy="60"
-         r="3.8"
-         id="circle252"
-         style="fill:none;stroke:currentColor;stroke-width:1.3" />
-      <circle
-         class="nd"
-         cx="-10"
-         cy="40"
-         r="3.2"
-         id="circle253"
-         style="fill:none;stroke:currentColor;stroke-width:1.3" />
-      <circle
-         class="nd"
-         cx="10"
-         cy="40"
-         r="3.2"
-         id="circle254"
-         style="fill:none;stroke:currentColor;stroke-width:1.3" />
-      <circle
-         class="ndb"
-         cx="-22"
-         cy="32"
-         r="4"
-         id="circle255"
-         style="fill:none;stroke:currentColor;stroke-width:1.4" />
-      <circle
-         class="ndb"
-         cx="22"
-         cy="32"
-         r="4"
-         id="circle256"
-         style="fill:none;stroke:currentColor;stroke-width:1.4" />
-      <!-- TORUS ring -->
-      <ellipse
-         class="lp"
-         cx="0"
-         cy="0"
-         rx="72"
-         ry="20"
-         id="ellipse256"
-         style="fill:none;stroke:currentColor;stroke-width:1.45" />
-      <ellipse
-         class="hr"
-         cx="0"
-         cy="0"
-         rx="52"
-         ry="14"
-         id="ellipse257"
-         style="opacity:0.65;fill:none;stroke:currentColor;stroke-width:1.3" />
-      <!-- Torus nodes outer -->
-      <circle
-         class="nd"
-         cx="72"
-         cy="0"
-         r="4"
-         id="circle257"
-         style="fill:none;stroke:currentColor;stroke-width:1.3" />
-      <circle
-         class="nd"
-         cx="51"
-         cy="-14"
-         r="3.8"
-         id="circle258"
-         style="fill:none;stroke:currentColor;stroke-width:1.3" />
-      <circle
-         class="nd"
-         cx="0"
-         cy="-20"
-         r="4"
-         id="circle259"
-         style="fill:none;stroke:currentColor;stroke-width:1.3" />
-      <circle
-         class="nd"
-         cx="-51"
-         cy="-14"
-         r="3.8"
-         id="circle260"
-         style="fill:none;stroke:currentColor;stroke-width:1.3" />
-      <circle
-         class="nd"
-         cx="-72"
-         cy="0"
-         r="4"
-         id="circle261"
-         style="fill:none;stroke:currentColor;stroke-width:1.3" />
-      <circle
-         class="nd"
-         cx="-51"
-         cy="14"
-         r="3.8"
-         id="circle262"
-         style="fill:none;stroke:currentColor;stroke-width:1.3" />
-      <circle
-         class="nd"
-         cx="0"
-         cy="20"
-         r="4"
-         id="circle263"
-         style="fill:none;stroke:currentColor;stroke-width:1.3" />
-      <circle
-         class="nd"
-         cx="51"
-         cy="14"
-         r="3.8"
-         id="circle264"
-         style="fill:none;stroke:currentColor;stroke-width:1.3" />
-      <!-- Torus nodes inner -->
-      <circle
-         class="nd"
-         cx="52"
-         cy="0"
-         r="3.5"
-         id="circle265"
-         style="fill:none;stroke:currentColor;stroke-width:1.3" />
-      <circle
-         class="nd"
-         cx="37"
-         cy="-10"
-         r="3.3"
-         id="circle266"
-         style="fill:none;stroke:currentColor;stroke-width:1.3" />
-      <circle
-         class="nd"
-         cx="0"
-         cy="-14"
-         r="3.5"
-         id="circle267"
-         style="fill:none;stroke:currentColor;stroke-width:1.3" />
-      <circle
-         class="nd"
-         cx="-37"
-         cy="-10"
-         r="3.3"
-         id="circle268"
-         style="fill:none;stroke:currentColor;stroke-width:1.3" />
-      <circle
-         class="nd"
-         cx="-52"
-         cy="0"
-         r="3.5"
-         id="circle269"
-         style="fill:none;stroke:currentColor;stroke-width:1.3" />
-      <circle
-         class="nd"
-         cx="-37"
-         cy="10"
-         r="3.3"
-         id="circle270"
-         style="fill:none;stroke:currentColor;stroke-width:1.3" />
-      <circle
-         class="nd"
-         cx="0"
-         cy="14"
-         r="3.5"
-         id="circle271"
-         style="fill:none;stroke:currentColor;stroke-width:1.3" />
-      <circle
-         class="nd"
-         cx="37"
-         cy="10"
-         r="3.3"
-         id="circle272"
-         style="fill:none;stroke:currentColor;stroke-width:1.3" />
-      <!-- Torus spokes -->
-      <line
-         class="ef"
-         x1="52"
-         y1="0"
-         x2="72"
-         y2="0"
-         id="line272"
-         style="opacity:0.5;fill:none;stroke:currentColor;stroke-width:0.9" />
-      <line
-         class="ef"
-         x1="-52"
-         y1="0"
-         x2="-72"
-         y2="0"
-         id="line273"
-         style="opacity:0.5;fill:none;stroke:currentColor;stroke-width:0.9" />
-      <line
-         class="ef"
-         x1="37"
-         y1="-10"
-         x2="51"
-         y2="-14"
-         id="line274"
-         style="opacity:0.5;fill:none;stroke:currentColor;stroke-width:0.9" />
-      <line
-         class="ef"
-         x1="-37"
-         y1="-10"
-         x2="-51"
-         y2="-14"
-         id="line275"
-         style="opacity:0.5;fill:none;stroke:currentColor;stroke-width:0.9" />
-      <line
-         class="ef"
-         x1="37"
-         y1="10"
-         x2="51"
-         y2="14"
-         id="line276"
-         style="opacity:0.5;fill:none;stroke:currentColor;stroke-width:0.9" />
-      <line
-         class="ef"
-         x1="-37"
-         y1="10"
-         x2="-51"
-         y2="14"
-         id="line277"
-         style="opacity:0.5;fill:none;stroke:currentColor;stroke-width:0.9" />
-      <line
-         class="ef"
-         x1="0"
-         y1="-14"
-         x2="0"
-         y2="-20"
-         id="line278"
-         style="opacity:0.5;fill:none;stroke:currentColor;stroke-width:0.9" />
-      <line
-         class="ef"
-         x1="0"
-         y1="14"
-         x2="0"
-         y2="20"
-         id="line279"
-         style="opacity:0.5;fill:none;stroke:currentColor;stroke-width:0.9" />
-      <!-- Nucleus -->
-      <circle
-         class="nuc"
-         cx="0"
-         cy="0"
-         r="8"
-         id="circle279"
-         style="fill:none;stroke:currentColor;stroke-width:2" />
+         style="fill:none;stroke:currentColor;stroke-width:0.370417" />
     </g>
+    <path
+       class="lp"
+       d="m 106.35936,93.532998 c 5.82083,4.233334 13.22917,16.933332 11.1125,28.045832 -1.5875,7.9375 -7.40833,12.17083 -11.1125,12.17083 -3.70417,0 -9.525,-4.23333 -11.1125,-12.17083 -2.116667,-11.1125 5.29167,-23.812498 11.1125,-28.045832"
+       id="path205"
+       style="fill:none;stroke:currentColor;stroke-width:0.383646" />
+    <g
+       id="g2"
+       transform="matrix(1,0,0,-1,0,228.85694)">
+      <line
+         class="ed"
+         x1="106.35936"
+         y1="131.10384"
+         x2="102.6552"
+         y2="126.8705"
+         id="line205"
+         style="opacity:0.85;fill:none;stroke:currentColor;stroke-width:0.3175" />
+      <line
+         class="ed"
+         x1="106.35936"
+         y1="131.10384"
+         x2="110.06353"
+         y2="126.8705"
+         id="line206"
+         style="opacity:0.85;fill:none;stroke:currentColor;stroke-width:0.3175" />
+      <line
+         class="ef"
+         x1="102.6552"
+         y1="126.8705"
+         x2="110.06353"
+         y2="126.8705"
+         id="line207"
+         style="opacity:0.5;fill:none;stroke:currentColor;stroke-width:0.238125" />
+      <line
+         class="ed"
+         x1="102.6552"
+         y1="126.8705"
+         x2="98.951027"
+         y2="120.5205"
+         id="line208"
+         style="opacity:0.85;fill:none;stroke:currentColor;stroke-width:0.3175" />
+      <line
+         class="ed"
+         x1="110.06353"
+         y1="126.8705"
+         x2="113.76769"
+         y2="120.5205"
+         id="line209"
+         style="opacity:0.85;fill:none;stroke:currentColor;stroke-width:0.3175" />
+      <line
+         class="ef"
+         x1="98.951027"
+         y1="120.5205"
+         x2="113.76769"
+         y2="120.5205"
+         id="line210"
+         style="opacity:0.5;fill:none;stroke:currentColor;stroke-width:0.238125" />
+      <line
+         class="ef"
+         x1="102.6552"
+         y1="126.8705"
+         x2="106.35936"
+         y2="121.57883"
+         id="line211"
+         style="opacity:0.5;fill:none;stroke:currentColor;stroke-width:0.238125" />
+      <line
+         class="ef"
+         x1="110.06353"
+         y1="126.8705"
+         x2="106.35936"
+         y2="121.57883"
+         id="line212"
+         style="opacity:0.5;fill:none;stroke:currentColor;stroke-width:0.238125" />
+      <line
+         class="ef"
+         x1="98.951027"
+         y1="120.5205"
+         x2="106.35936"
+         y2="121.57883"
+         id="line213"
+         style="opacity:0.5;fill:none;stroke:currentColor;stroke-width:0.238125" />
+      <line
+         class="ef"
+         x1="113.76769"
+         y1="120.5205"
+         x2="106.35936"
+         y2="121.57883"
+         id="line214"
+         style="opacity:0.5;fill:none;stroke:currentColor;stroke-width:0.238125" />
+      <line
+         class="ed"
+         x1="98.951027"
+         y1="120.5205"
+         x2="95.776024"
+         y2="113.11217"
+         id="line215"
+         style="opacity:0.85;fill:none;stroke:currentColor;stroke-width:0.3175" />
+      <line
+         class="ed"
+         x1="113.76769"
+         y1="120.5205"
+         x2="116.9427"
+         y2="113.11217"
+         id="line216"
+         style="opacity:0.85;fill:none;stroke:currentColor;stroke-width:0.3175" />
+      <line
+         class="ef"
+         x1="95.776024"
+         y1="113.11217"
+         x2="116.9427"
+         y2="113.11217"
+         id="line217"
+         style="opacity:0.5;fill:none;stroke:currentColor;stroke-width:0.238125" />
+      <line
+         class="ef"
+         x1="98.951027"
+         y1="120.5205"
+         x2="102.6552"
+         y2="114.69966"
+         id="line218"
+         style="opacity:0.5;fill:none;stroke:currentColor;stroke-width:0.238125" />
+      <line
+         class="ef"
+         x1="113.76769"
+         y1="120.5205"
+         x2="110.06353"
+         y2="114.69966"
+         id="line219"
+         style="opacity:0.5;fill:none;stroke:currentColor;stroke-width:0.238125" />
+      <line
+         class="ef"
+         x1="106.35936"
+         y1="121.57883"
+         x2="102.6552"
+         y2="114.69966"
+         id="line220"
+         style="opacity:0.5;fill:none;stroke:currentColor;stroke-width:0.238125" />
+      <line
+         class="ef"
+         x1="106.35936"
+         y1="121.57883"
+         x2="110.06353"
+         y2="114.69966"
+         id="line221"
+         style="opacity:0.5;fill:none;stroke:currentColor;stroke-width:0.238125" />
+      <line
+         class="ef"
+         x1="102.6552"
+         y1="114.69966"
+         x2="110.06353"
+         y2="114.69966"
+         id="line222"
+         style="opacity:0.5;fill:none;stroke:currentColor;stroke-width:0.238125" />
+      <line
+         class="ef"
+         x1="95.776024"
+         y1="113.11217"
+         x2="102.6552"
+         y2="114.69966"
+         id="line223"
+         style="opacity:0.5;fill:none;stroke:currentColor;stroke-width:0.238125" />
+      <line
+         class="ef"
+         x1="116.9427"
+         y1="113.11217"
+         x2="110.06353"
+         y2="114.69966"
+         id="line224"
+         style="opacity:0.5;fill:none;stroke:currentColor;stroke-width:0.238125" />
+      <line
+         class="ed"
+         x1="95.776024"
+         y1="113.11217"
+         x2="95.776024"
+         y2="105.17467"
+         id="line225"
+         style="opacity:0.85;fill:none;stroke:currentColor;stroke-width:0.3175" />
+      <line
+         class="ed"
+         x1="116.9427"
+         y1="113.11217"
+         x2="116.9427"
+         y2="105.17467"
+         id="line226"
+         style="opacity:0.85;fill:none;stroke:currentColor;stroke-width:0.3175" />
+      <line
+         class="ef"
+         x1="95.776024"
+         y1="105.17467"
+         x2="116.9427"
+         y2="105.17467"
+         id="line227"
+         style="opacity:0.5;fill:none;stroke:currentColor;stroke-width:0.238125" />
+      <line
+         class="ef"
+         x1="102.6552"
+         y1="114.69966"
+         x2="101.0677"
+         y2="107.29133"
+         id="line228"
+         style="opacity:0.5;fill:none;stroke:currentColor;stroke-width:0.238125" />
+      <line
+         class="ef"
+         x1="110.06353"
+         y1="114.69966"
+         x2="111.65102"
+         y2="107.29133"
+         id="line229"
+         style="opacity:0.5;fill:none;stroke:currentColor;stroke-width:0.238125" />
+      <line
+         class="ef"
+         x1="101.0677"
+         y1="107.29133"
+         x2="111.65102"
+         y2="107.29133"
+         id="line230"
+         style="opacity:0.5;fill:none;stroke:currentColor;stroke-width:0.238125" />
+      <line
+         class="ef"
+         x1="95.776024"
+         y1="105.17467"
+         x2="101.0677"
+         y2="107.29133"
+         id="line231"
+         style="opacity:0.5;fill:none;stroke:currentColor;stroke-width:0.238125" />
+      <line
+         class="ef"
+         x1="116.9427"
+         y1="105.17467"
+         x2="111.65102"
+         y2="107.29133"
+         id="line232"
+         style="opacity:0.5;fill:none;stroke:currentColor;stroke-width:0.238125" />
+      <line
+         class="ed"
+         x1="95.776024"
+         y1="105.17467"
+         x2="100.53853"
+         y2="97.766335"
+         id="line233"
+         style="opacity:0.85;fill:none;stroke:currentColor;stroke-width:0.3175" />
+      <line
+         class="ed"
+         x1="116.9427"
+         y1="105.17467"
+         x2="112.18019"
+         y2="97.766335"
+         id="line234"
+         style="opacity:0.85;fill:none;stroke:currentColor;stroke-width:0.3175" />
+      <line
+         class="ef"
+         x1="101.0677"
+         y1="107.29133"
+         x2="103.71352"
+         y2="99.882996"
+         id="line235"
+         style="opacity:0.5;fill:none;stroke:currentColor;stroke-width:0.238125" />
+      <line
+         class="ef"
+         x1="111.65102"
+         y1="107.29133"
+         x2="109.0052"
+         y2="99.882996"
+         id="line236"
+         style="opacity:0.5;fill:none;stroke:currentColor;stroke-width:0.238125" />
+      <line
+         class="ef"
+         x1="103.71352"
+         y1="99.882996"
+         x2="109.0052"
+         y2="99.882996"
+         id="line237"
+         style="opacity:0.5;fill:none;stroke:currentColor;stroke-width:0.238125" />
+      <line
+         class="ef"
+         x1="100.53853"
+         y1="97.766335"
+         x2="103.71352"
+         y2="99.882996"
+         id="line238"
+         style="opacity:0.5;fill:none;stroke:currentColor;stroke-width:0.238125" />
+      <line
+         class="ef"
+         x1="112.18019"
+         y1="97.766335"
+         x2="109.0052"
+         y2="99.882996"
+         id="line239"
+         style="opacity:0.5;fill:none;stroke:currentColor;stroke-width:0.238125" />
+      <circle
+         class="nd"
+         cx="106.35936"
+         cy="131.10384"
+         r="1.0583333"
+         id="circle239"
+         style="fill:none;stroke:currentColor;stroke-width:0.343958" />
+      <circle
+         class="nd"
+         cx="102.6552"
+         cy="126.8705"
+         r="1.0054166"
+         id="circle240"
+         style="fill:none;stroke:currentColor;stroke-width:0.343958" />
+      <circle
+         class="nd"
+         cx="110.06353"
+         cy="126.8705"
+         r="1.0054166"
+         id="circle241"
+         style="fill:none;stroke:currentColor;stroke-width:0.343958" />
+      <circle
+         class="nd"
+         cx="106.35936"
+         cy="121.57883"
+         r="0.95249999"
+         id="circle242"
+         style="fill:none;stroke:currentColor;stroke-width:0.343958" />
+      <circle
+         class="nd"
+         cx="98.951027"
+         cy="120.5205"
+         r="1.0054166"
+         id="circle243"
+         style="fill:none;stroke:currentColor;stroke-width:0.343958" />
+      <circle
+         class="nd"
+         cx="113.76769"
+         cy="120.5205"
+         r="1.0054166"
+         id="circle244"
+         style="fill:none;stroke:currentColor;stroke-width:0.343958" />
+      <circle
+         class="nd"
+         cx="102.6552"
+         cy="114.69966"
+         r="0.92604166"
+         id="circle245"
+         style="fill:none;stroke:currentColor;stroke-width:0.343958" />
+      <circle
+         class="nd"
+         cx="110.06353"
+         cy="114.69966"
+         r="0.92604166"
+         id="circle246"
+         style="fill:none;stroke:currentColor;stroke-width:0.343958" />
+      <circle
+         class="nd"
+         cx="95.776024"
+         cy="113.11217"
+         r="1.0054166"
+         id="circle247"
+         style="fill:none;stroke:currentColor;stroke-width:0.343958" />
+      <circle
+         class="nd"
+         cx="116.9427"
+         cy="113.11217"
+         r="1.0054166"
+         id="circle248"
+         style="fill:none;stroke:currentColor;stroke-width:0.343958" />
+      <circle
+         class="nd"
+         cx="101.0677"
+         cy="107.29133"
+         r="0.92604166"
+         id="circle249"
+         style="fill:none;stroke:currentColor;stroke-width:0.343958" />
+      <circle
+         class="nd"
+         cx="111.65102"
+         cy="107.29133"
+         r="0.92604166"
+         id="circle250"
+         style="fill:none;stroke:currentColor;stroke-width:0.343958" />
+      <circle
+         class="nd"
+         cx="95.776024"
+         cy="105.17467"
+         r="1.0054166"
+         id="circle251"
+         style="fill:none;stroke:currentColor;stroke-width:0.343958" />
+      <circle
+         class="nd"
+         cx="116.9427"
+         cy="105.17467"
+         r="1.0054166"
+         id="circle252"
+         style="fill:none;stroke:currentColor;stroke-width:0.343958" />
+      <circle
+         class="nd"
+         cx="103.71352"
+         cy="99.882996"
+         r="0.84666669"
+         id="circle253"
+         style="fill:none;stroke:currentColor;stroke-width:0.343958" />
+      <circle
+         class="nd"
+         cx="109.0052"
+         cy="99.882996"
+         r="0.84666669"
+         id="circle254"
+         style="fill:none;stroke:currentColor;stroke-width:0.343958" />
+      <circle
+         class="ndb"
+         cx="100.53853"
+         cy="97.766335"
+         r="1.0583333"
+         id="circle255"
+         style="fill:none;stroke:currentColor;stroke-width:0.370417" />
+      <circle
+         class="ndb"
+         cx="112.18019"
+         cy="97.766335"
+         r="1.0583333"
+         id="circle256"
+         style="fill:none;stroke:currentColor;stroke-width:0.370417" />
+    </g>
+    <ellipse
+       class="lp"
+       cx="106.35936"
+       cy="89.299667"
+       rx="19.049999"
+       ry="5.2916665"
+       id="ellipse256"
+       style="fill:none;stroke:currentColor;stroke-width:0.383646" />
+    <ellipse
+       class="hr"
+       cx="106.35936"
+       cy="89.299667"
+       rx="13.758333"
+       ry="3.7041667"
+       id="ellipse257"
+       style="opacity:0.65;fill:none;stroke:currentColor;stroke-width:0.343958" />
+    <circle
+       class="nd"
+       cx="125.40936"
+       cy="89.299667"
+       r="1.0583333"
+       id="circle257"
+       style="fill:none;stroke:currentColor;stroke-width:0.343958" />
+    <circle
+       class="nd"
+       cx="119.85311"
+       cy="85.595497"
+       r="1.0054166"
+       id="circle258"
+       style="fill:none;stroke:currentColor;stroke-width:0.343958" />
+    <circle
+       class="nd"
+       cx="106.35936"
+       cy="84.007996"
+       r="1.0583333"
+       id="circle259"
+       style="fill:none;stroke:currentColor;stroke-width:0.343958" />
+    <circle
+       class="nd"
+       cx="92.865608"
+       cy="85.595497"
+       r="1.0054166"
+       id="circle260"
+       style="fill:none;stroke:currentColor;stroke-width:0.343958" />
+    <circle
+       class="nd"
+       cx="87.309357"
+       cy="89.299667"
+       r="1.0583333"
+       id="circle261"
+       style="fill:none;stroke:currentColor;stroke-width:0.343958" />
+    <circle
+       class="nd"
+       cx="92.865608"
+       cy="93.00383"
+       r="1.0054166"
+       id="circle262"
+       style="fill:none;stroke:currentColor;stroke-width:0.343958" />
+    <circle
+       class="nd"
+       cx="106.35936"
+       cy="94.591331"
+       r="1.0583333"
+       id="circle263"
+       style="fill:none;stroke:currentColor;stroke-width:0.343958" />
+    <circle
+       class="nd"
+       cx="119.85311"
+       cy="93.00383"
+       r="1.0054166"
+       id="circle264"
+       style="fill:none;stroke:currentColor;stroke-width:0.343958" />
+    <circle
+       class="nd"
+       cx="120.11769"
+       cy="89.299667"
+       r="0.92604166"
+       id="circle265"
+       style="fill:none;stroke:currentColor;stroke-width:0.343958" />
+    <circle
+       class="nd"
+       cx="116.14894"
+       cy="86.653831"
+       r="0.87312496"
+       id="circle266"
+       style="fill:none;stroke:currentColor;stroke-width:0.343958" />
+    <circle
+       class="nd"
+       cx="106.35936"
+       cy="85.595497"
+       r="0.92604166"
+       id="circle267"
+       style="fill:none;stroke:currentColor;stroke-width:0.343958" />
+    <circle
+       class="nd"
+       cx="96.569778"
+       cy="86.653831"
+       r="0.87312496"
+       id="circle268"
+       style="fill:none;stroke:currentColor;stroke-width:0.343958" />
+    <circle
+       class="nd"
+       cx="92.601028"
+       cy="89.299667"
+       r="0.92604166"
+       id="circle269"
+       style="fill:none;stroke:currentColor;stroke-width:0.343958" />
+    <circle
+       class="nd"
+       cx="96.569778"
+       cy="91.945496"
+       r="0.87312496"
+       id="circle270"
+       style="fill:none;stroke:currentColor;stroke-width:0.343958" />
+    <circle
+       class="nd"
+       cx="106.35936"
+       cy="93.00383"
+       r="0.92604166"
+       id="circle271"
+       style="fill:none;stroke:currentColor;stroke-width:0.343958" />
+    <circle
+       class="nd"
+       cx="116.14894"
+       cy="91.945496"
+       r="0.87312496"
+       id="circle272"
+       style="fill:none;stroke:currentColor;stroke-width:0.343958" />
+    <line
+       class="ef"
+       x1="120.11769"
+       y1="89.299667"
+       x2="125.40936"
+       y2="89.299667"
+       id="line272"
+       style="opacity:0.5;fill:none;stroke:currentColor;stroke-width:0.238125" />
+    <line
+       class="ef"
+       x1="92.601028"
+       y1="89.299667"
+       x2="87.309357"
+       y2="89.299667"
+       id="line273"
+       style="opacity:0.5;fill:none;stroke:currentColor;stroke-width:0.238125" />
+    <line
+       class="ef"
+       x1="116.14894"
+       y1="86.653831"
+       x2="119.85311"
+       y2="85.595497"
+       id="line274"
+       style="opacity:0.5;fill:none;stroke:currentColor;stroke-width:0.238125" />
+    <line
+       class="ef"
+       x1="96.569778"
+       y1="86.653831"
+       x2="92.865608"
+       y2="85.595497"
+       id="line275"
+       style="opacity:0.5;fill:none;stroke:currentColor;stroke-width:0.238125" />
+    <line
+       class="ef"
+       x1="116.14894"
+       y1="91.945496"
+       x2="119.85311"
+       y2="93.00383"
+       id="line276"
+       style="opacity:0.5;fill:none;stroke:currentColor;stroke-width:0.238125" />
+    <line
+       class="ef"
+       x1="96.569778"
+       y1="91.945496"
+       x2="92.865608"
+       y2="93.00383"
+       id="line277"
+       style="opacity:0.5;fill:none;stroke:currentColor;stroke-width:0.238125" />
+    <line
+       class="ef"
+       x1="106.35936"
+       y1="85.595497"
+       x2="106.35936"
+       y2="84.007996"
+       id="line278"
+       style="opacity:0.5;fill:none;stroke:currentColor;stroke-width:0.238125" />
+    <line
+       class="ef"
+       x1="106.35936"
+       y1="93.00383"
+       x2="106.35936"
+       y2="94.591331"
+       id="line279"
+       style="opacity:0.5;fill:none;stroke:currentColor;stroke-width:0.238125" />
+    <circle
+       class="nuc"
+       cx="106.35936"
+       cy="89.299667"
+       r="2.1166666"
+       id="circle279"
+       style="fill:none;stroke:currentColor;stroke-width:0.529167" />
   </g>
 </svg>
