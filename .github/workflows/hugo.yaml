@@ -106,4 +106,4 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_branch: gh-pages
           publish_dir: ./webpage/public
-          keep_files: false # CRITICAL: This protects your mdBook!
+          keep_files: true # CRITICAL: This protects your mdBook!
