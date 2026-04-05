@@ -1,0 +1,1084 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="40.560623mm"
+   height="89.283646mm"
+   viewBox="0 0 40.560623 89.283646"
+   version="1.1"
+   id="svg1"
+   inkscape:version="1.4.3 (0d15f75042, 2025-12-25)"
+   sodipodi:docname="dz2.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm"
+     inkscape:zoom="2.7204031"
+     inkscape:cx="76.643055"
+     inkscape:cy="168.725"
+     inkscape:window-width="1920"
+     inkscape:window-height="1168"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
+   <defs id="defs1" />
+    <style>
+      :root {
+        color: #000000; /* Default color for light mode */
+      }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          color: #ffffff; /* Color for system dark mode */
+        }
+      }
+    </style>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-86.079048,-44.657843)">
+    <g
+       transform="matrix(0.26458333,0,0,0.26458333,106.35936,89.299665)"
+       id="g279">
+      <!-- UPPER lobe -->
+      <path
+         class="lp"
+         d="m 0,-16 c 22,-16 50,-64 42,-106 -6,-30 -28,-46 -42,-46 -14,0 -36,16 -42,46 -8,42 20,90 42,106"
+         id="path154"
+         style="fill:none;stroke:currentColor;stroke-width:1.45" />
+      <line
+         class="ed"
+         x1="0"
+         y1="-158"
+         x2="-14"
+         y2="-142"
+         id="line154"
+         style="opacity:0.85;fill:none;stroke:currentColor;stroke-width:1.2" />
+      <line
+         class="ed"
+         x1="0"
+         y1="-158"
+         x2="14"
+         y2="-142"
+         id="line155"
+         style="opacity:0.85;fill:none;stroke:currentColor;stroke-width:1.2" />
+      <line
+         class="ef"
+         x1="-14"
+         y1="-142"
+         x2="14"
+         y2="-142"
+         id="line156"
+         style="opacity:0.5;fill:none;stroke:currentColor;stroke-width:0.9" />
+      <line
+         class="ed"
+         x1="-14"
+         y1="-142"
+         x2="-28"
+         y2="-118"
+         id="line157"
+         style="opacity:0.85;fill:none;stroke:currentColor;stroke-width:1.2" />
+      <line
+         class="ed"
+         x1="14"
+         y1="-142"
+         x2="28"
+         y2="-118"
+         id="line158"
+         style="opacity:0.85;fill:none;stroke:currentColor;stroke-width:1.2" />
+      <line
+         class="ef"
+         x1="-28"
+         y1="-118"
+         x2="28"
+         y2="-118"
+         id="line159"
+         style="opacity:0.5;fill:none;stroke:currentColor;stroke-width:0.9" />
+      <line
+         class="ef"
+         x1="-14"
+         y1="-142"
+         x2="0"
+         y2="-122"
+         id="line160"
+         style="opacity:0.5;fill:none;stroke:currentColor;stroke-width:0.9" />
+      <line
+         class="ef"
+         x1="14"
+         y1="-142"
+         x2="0"
+         y2="-122"
+         id="line161"
+         style="opacity:0.5;fill:none;stroke:currentColor;stroke-width:0.9" />
+      <line
+         class="ef"
+         x1="-28"
+         y1="-118"
+         x2="0"
+         y2="-122"
+         id="line162"
+         style="opacity:0.5;fill:none;stroke:currentColor;stroke-width:0.9" />
+      <line
+         class="ef"
+         x1="28"
+         y1="-118"
+         x2="0"
+         y2="-122"
+         id="line163"
+         style="opacity:0.5;fill:none;stroke:currentColor;stroke-width:0.9" />
+      <line
+         class="ed"
+         x1="-28"
+         y1="-118"
+         x2="-40"
+         y2="-90"
+         id="line164"
+         style="opacity:0.85;fill:none;stroke:currentColor;stroke-width:1.2" />
+      <line
+         class="ed"
+         x1="28"
+         y1="-118"
+         x2="40"
+         y2="-90"
+         id="line165"
+         style="opacity:0.85;fill:none;stroke:currentColor;stroke-width:1.2" />
+      <line
+         class="ef"
+         x1="-40"
+         y1="-90"
+         x2="40"
+         y2="-90"
+         id="line166"
+         style="opacity:0.5;fill:none;stroke:currentColor;stroke-width:0.9" />
+      <line
+         class="ef"
+         x1="-28"
+         y1="-118"
+         x2="-14"
+         y2="-96"
+         id="line167"
+         style="opacity:0.5;fill:none;stroke:currentColor;stroke-width:0.9" />
+      <line
+         class="ef"
+         x1="28"
+         y1="-118"
+         x2="14"
+         y2="-96"
+         id="line168"
+         style="opacity:0.5;fill:none;stroke:currentColor;stroke-width:0.9" />
+      <line
+         class="ef"
+         x1="0"
+         y1="-122"
+         x2="-14"
+         y2="-96"
+         id="line169"
+         style="opacity:0.5;fill:none;stroke:currentColor;stroke-width:0.9" />
+      <line
+         class="ef"
+         x1="0"
+         y1="-122"
+         x2="14"
+         y2="-96"
+         id="line170"
+         style="opacity:0.5;fill:none;stroke:currentColor;stroke-width:0.9" />
+      <line
+         class="ef"
+         x1="-14"
+         y1="-96"
+         x2="14"
+         y2="-96"
+         id="line171"
+         style="opacity:0.5;fill:none;stroke:currentColor;stroke-width:0.9" />
+      <line
+         class="ef"
+         x1="-40"
+         y1="-90"
+         x2="-14"
+         y2="-96"
+         id="line172"
+         style="opacity:0.5;fill:none;stroke:currentColor;stroke-width:0.9" />
+      <line
+         class="ef"
+         x1="40"
+         y1="-90"
+         x2="14"
+         y2="-96"
+         id="line173"
+         style="opacity:0.5;fill:none;stroke:currentColor;stroke-width:0.9" />
+      <line
+         class="ed"
+         x1="-40"
+         y1="-90"
+         x2="-40"
+         y2="-60"
+         id="line174"
+         style="opacity:0.85;fill:none;stroke:currentColor;stroke-width:1.2" />
+      <line
+         class="ed"
+         x1="40"
+         y1="-90"
+         x2="40"
+         y2="-60"
+         id="line175"
+         style="opacity:0.85;fill:none;stroke:currentColor;stroke-width:1.2" />
+      <line
+         class="ef"
+         x1="-40"
+         y1="-60"
+         x2="40"
+         y2="-60"
+         id="line176"
+         style="opacity:0.5;fill:none;stroke:currentColor;stroke-width:0.9" />
+      <line
+         class="ef"
+         x1="-14"
+         y1="-96"
+         x2="-20"
+         y2="-68"
+         id="line177"
+         style="opacity:0.5;fill:none;stroke:currentColor;stroke-width:0.9" />
+      <line
+         class="ef"
+         x1="14"
+         y1="-96"
+         x2="20"
+         y2="-68"
+         id="line178"
+         style="opacity:0.5;fill:none;stroke:currentColor;stroke-width:0.9" />
+      <line
+         class="ef"
+         x1="-20"
+         y1="-68"
+         x2="20"
+         y2="-68"
+         id="line179"
+         style="opacity:0.5;fill:none;stroke:currentColor;stroke-width:0.9" />
+      <line
+         class="ef"
+         x1="-40"
+         y1="-60"
+         x2="-20"
+         y2="-68"
+         id="line180"
+         style="opacity:0.5;fill:none;stroke:currentColor;stroke-width:0.9" />
+      <line
+         class="ef"
+         x1="40"
+         y1="-60"
+         x2="20"
+         y2="-68"
+         id="line181"
+         style="opacity:0.5;fill:none;stroke:currentColor;stroke-width:0.9" />
+      <line
+         class="ed"
+         x1="-40"
+         y1="-60"
+         x2="-22"
+         y2="-32"
+         id="line182"
+         style="opacity:0.85;fill:none;stroke:currentColor;stroke-width:1.2" />
+      <line
+         class="ed"
+         x1="40"
+         y1="-60"
+         x2="22"
+         y2="-32"
+         id="line183"
+         style="opacity:0.85;fill:none;stroke:currentColor;stroke-width:1.2" />
+      <line
+         class="ef"
+         x1="-20"
+         y1="-68"
+         x2="-10"
+         y2="-40"
+         id="line184"
+         style="opacity:0.5;fill:none;stroke:currentColor;stroke-width:0.9" />
+      <line
+         class="ef"
+         x1="20"
+         y1="-68"
+         x2="10"
+         y2="-40"
+         id="line185"
+         style="opacity:0.5;fill:none;stroke:currentColor;stroke-width:0.9" />
+      <line
+         class="ef"
+         x1="-10"
+         y1="-40"
+         x2="10"
+         y2="-40"
+         id="line186"
+         style="opacity:0.5;fill:none;stroke:currentColor;stroke-width:0.9" />
+      <line
+         class="ef"
+         x1="-22"
+         y1="-32"
+         x2="-10"
+         y2="-40"
+         id="line187"
+         style="opacity:0.5;fill:none;stroke:currentColor;stroke-width:0.9" />
+      <line
+         class="ef"
+         x1="22"
+         y1="-32"
+         x2="10"
+         y2="-40"
+         id="line188"
+         style="opacity:0.5;fill:none;stroke:currentColor;stroke-width:0.9" />
+      <circle
+         class="nd"
+         cx="0"
+         cy="-158"
+         r="4"
+         id="circle188"
+         style="fill:none;stroke:currentColor;stroke-width:1.3" />
+      <circle
+         class="nd"
+         cx="-14"
+         cy="-142"
+         r="3.8"
+         id="circle189"
+         style="fill:none;stroke:currentColor;stroke-width:1.3" />
+      <circle
+         class="nd"
+         cx="14"
+         cy="-142"
+         r="3.8"
+         id="circle190"
+         style="fill:none;stroke:currentColor;stroke-width:1.3" />
+      <circle
+         class="nd"
+         cx="0"
+         cy="-122"
+         r="3.5999999"
+         id="circle191"
+         style="fill:none;stroke:currentColor;stroke-width:1.3" />
+      <circle
+         class="nd"
+         cx="-28"
+         cy="-118"
+         r="3.8"
+         id="circle192"
+         style="fill:none;stroke:currentColor;stroke-width:1.3" />
+      <circle
+         class="nd"
+         cx="28"
+         cy="-118"
+         r="3.8"
+         id="circle193"
+         style="fill:none;stroke:currentColor;stroke-width:1.3" />
+      <circle
+         class="nd"
+         cx="-14"
+         cy="-96"
+         r="3.5"
+         id="circle194"
+         style="fill:none;stroke:currentColor;stroke-width:1.3" />
+      <circle
+         class="nd"
+         cx="14"
+         cy="-96"
+         r="3.5"
+         id="circle195"
+         style="fill:none;stroke:currentColor;stroke-width:1.3" />
+      <circle
+         class="nd"
+         cx="-40"
+         cy="-90"
+         r="3.8"
+         id="circle196"
+         style="fill:none;stroke:currentColor;stroke-width:1.3" />
+      <circle
+         class="nd"
+         cx="40"
+         cy="-90"
+         r="3.8"
+         id="circle197"
+         style="fill:none;stroke:currentColor;stroke-width:1.3" />
+      <circle
+         class="nd"
+         cx="-20"
+         cy="-68"
+         r="3.5"
+         id="circle198"
+         style="fill:none;stroke:currentColor;stroke-width:1.3" />
+      <circle
+         class="nd"
+         cx="20"
+         cy="-68"
+         r="3.5"
+         id="circle199"
+         style="fill:none;stroke:currentColor;stroke-width:1.3" />
+      <circle
+         class="nd"
+         cx="-40"
+         cy="-60"
+         r="3.8"
+         id="circle200"
+         style="fill:none;stroke:currentColor;stroke-width:1.3" />
+      <circle
+         class="nd"
+         cx="40"
+         cy="-60"
+         r="3.8"
+         id="circle201"
+         style="fill:none;stroke:currentColor;stroke-width:1.3" />
+      <circle
+         class="nd"
+         cx="-10"
+         cy="-40"
+         r="3.2"
+         id="circle202"
+         style="fill:none;stroke:currentColor;stroke-width:1.3" />
+      <circle
+         class="nd"
+         cx="10"
+         cy="-40"
+         r="3.2"
+         id="circle203"
+         style="fill:none;stroke:currentColor;stroke-width:1.3" />
+      <circle
+         class="ndb"
+         cx="-22"
+         cy="-32"
+         r="4"
+         id="circle204"
+         style="fill:none;stroke:currentColor;stroke-width:1.4" />
+      <circle
+         class="ndb"
+         cx="22"
+         cy="-32"
+         r="4"
+         id="circle205"
+         style="fill:none;stroke:currentColor;stroke-width:1.4" />
+      <!-- LOWER lobe -->
+      <path
+         class="lp"
+         d="M 0,16 C 22,32 50,80 42,122 36,152 14,168 0,168 -14,168 -36,152 -42,122 -50,80 -22,32 0,16"
+         id="path205"
+         style="fill:none;stroke:currentColor;stroke-width:1.45" />
+      <line
+         class="ed"
+         x1="0"
+         y1="158"
+         x2="-14"
+         y2="142"
+         id="line205"
+         style="opacity:0.85;fill:none;stroke:currentColor;stroke-width:1.2" />
+      <line
+         class="ed"
+         x1="0"
+         y1="158"
+         x2="14"
+         y2="142"
+         id="line206"
+         style="opacity:0.85;fill:none;stroke:currentColor;stroke-width:1.2" />
+      <line
+         class="ef"
+         x1="-14"
+         y1="142"
+         x2="14"
+         y2="142"
+         id="line207"
+         style="opacity:0.5;fill:none;stroke:currentColor;stroke-width:0.9" />
+      <line
+         class="ed"
+         x1="-14"
+         y1="142"
+         x2="-28"
+         y2="118"
+         id="line208"
+         style="opacity:0.85;fill:none;stroke:currentColor;stroke-width:1.2" />
+      <line
+         class="ed"
+         x1="14"
+         y1="142"
+         x2="28"
+         y2="118"
+         id="line209"
+         style="opacity:0.85;fill:none;stroke:currentColor;stroke-width:1.2" />
+      <line
+         class="ef"
+         x1="-28"
+         y1="118"
+         x2="28"
+         y2="118"
+         id="line210"
+         style="opacity:0.5;fill:none;stroke:currentColor;stroke-width:0.9" />
+      <line
+         class="ef"
+         x1="-14"
+         y1="142"
+         x2="0"
+         y2="122"
+         id="line211"
+         style="opacity:0.5;fill:none;stroke:currentColor;stroke-width:0.9" />
+      <line
+         class="ef"
+         x1="14"
+         y1="142"
+         x2="0"
+         y2="122"
+         id="line212"
+         style="opacity:0.5;fill:none;stroke:currentColor;stroke-width:0.9" />
+      <line
+         class="ef"
+         x1="-28"
+         y1="118"
+         x2="0"
+         y2="122"
+         id="line213"
+         style="opacity:0.5;fill:none;stroke:currentColor;stroke-width:0.9" />
+      <line
+         class="ef"
+         x1="28"
+         y1="118"
+         x2="0"
+         y2="122"
+         id="line214"
+         style="opacity:0.5;fill:none;stroke:currentColor;stroke-width:0.9" />
+      <line
+         class="ed"
+         x1="-28"
+         y1="118"
+         x2="-40"
+         y2="90"
+         id="line215"
+         style="opacity:0.85;fill:none;stroke:currentColor;stroke-width:1.2" />
+      <line
+         class="ed"
+         x1="28"
+         y1="118"
+         x2="40"
+         y2="90"
+         id="line216"
+         style="opacity:0.85;fill:none;stroke:currentColor;stroke-width:1.2" />
+      <line
+         class="ef"
+         x1="-40"
+         y1="90"
+         x2="40"
+         y2="90"
+         id="line217"
+         style="opacity:0.5;fill:none;stroke:currentColor;stroke-width:0.9" />
+      <line
+         class="ef"
+         x1="-28"
+         y1="118"
+         x2="-14"
+         y2="96"
+         id="line218"
+         style="opacity:0.5;fill:none;stroke:currentColor;stroke-width:0.9" />
+      <line
+         class="ef"
+         x1="28"
+         y1="118"
+         x2="14"
+         y2="96"
+         id="line219"
+         style="opacity:0.5;fill:none;stroke:currentColor;stroke-width:0.9" />
+      <line
+         class="ef"
+         x1="0"
+         y1="122"
+         x2="-14"
+         y2="96"
+         id="line220"
+         style="opacity:0.5;fill:none;stroke:currentColor;stroke-width:0.9" />
+      <line
+         class="ef"
+         x1="0"
+         y1="122"
+         x2="14"
+         y2="96"
+         id="line221"
+         style="opacity:0.5;fill:none;stroke:currentColor;stroke-width:0.9" />
+      <line
+         class="ef"
+         x1="-14"
+         y1="96"
+         x2="14"
+         y2="96"
+         id="line222"
+         style="opacity:0.5;fill:none;stroke:currentColor;stroke-width:0.9" />
+      <line
+         class="ef"
+         x1="-40"
+         y1="90"
+         x2="-14"
+         y2="96"
+         id="line223"
+         style="opacity:0.5;fill:none;stroke:currentColor;stroke-width:0.9" />
+      <line
+         class="ef"
+         x1="40"
+         y1="90"
+         x2="14"
+         y2="96"
+         id="line224"
+         style="opacity:0.5;fill:none;stroke:currentColor;stroke-width:0.9" />
+      <line
+         class="ed"
+         x1="-40"
+         y1="90"
+         x2="-40"
+         y2="60"
+         id="line225"
+         style="opacity:0.85;fill:none;stroke:currentColor;stroke-width:1.2" />
+      <line
+         class="ed"
+         x1="40"
+         y1="90"
+         x2="40"
+         y2="60"
+         id="line226"
+         style="opacity:0.85;fill:none;stroke:currentColor;stroke-width:1.2" />
+      <line
+         class="ef"
+         x1="-40"
+         y1="60"
+         x2="40"
+         y2="60"
+         id="line227"
+         style="opacity:0.5;fill:none;stroke:currentColor;stroke-width:0.9" />
+      <line
+         class="ef"
+         x1="-14"
+         y1="96"
+         x2="-20"
+         y2="68"
+         id="line228"
+         style="opacity:0.5;fill:none;stroke:currentColor;stroke-width:0.9" />
+      <line
+         class="ef"
+         x1="14"
+         y1="96"
+         x2="20"
+         y2="68"
+         id="line229"
+         style="opacity:0.5;fill:none;stroke:currentColor;stroke-width:0.9" />
+      <line
+         class="ef"
+         x1="-20"
+         y1="68"
+         x2="20"
+         y2="68"
+         id="line230"
+         style="opacity:0.5;fill:none;stroke:currentColor;stroke-width:0.9" />
+      <line
+         class="ef"
+         x1="-40"
+         y1="60"
+         x2="-20"
+         y2="68"
+         id="line231"
+         style="opacity:0.5;fill:none;stroke:currentColor;stroke-width:0.9" />
+      <line
+         class="ef"
+         x1="40"
+         y1="60"
+         x2="20"
+         y2="68"
+         id="line232"
+         style="opacity:0.5;fill:none;stroke:currentColor;stroke-width:0.9" />
+      <line
+         class="ed"
+         x1="-40"
+         y1="60"
+         x2="-22"
+         y2="32"
+         id="line233"
+         style="opacity:0.85;fill:none;stroke:currentColor;stroke-width:1.2" />
+      <line
+         class="ed"
+         x1="40"
+         y1="60"
+         x2="22"
+         y2="32"
+         id="line234"
+         style="opacity:0.85;fill:none;stroke:currentColor;stroke-width:1.2" />
+      <line
+         class="ef"
+         x1="-20"
+         y1="68"
+         x2="-10"
+         y2="40"
+         id="line235"
+         style="opacity:0.5;fill:none;stroke:currentColor;stroke-width:0.9" />
+      <line
+         class="ef"
+         x1="20"
+         y1="68"
+         x2="10"
+         y2="40"
+         id="line236"
+         style="opacity:0.5;fill:none;stroke:currentColor;stroke-width:0.9" />
+      <line
+         class="ef"
+         x1="-10"
+         y1="40"
+         x2="10"
+         y2="40"
+         id="line237"
+         style="opacity:0.5;fill:none;stroke:currentColor;stroke-width:0.9" />
+      <line
+         class="ef"
+         x1="-22"
+         y1="32"
+         x2="-10"
+         y2="40"
+         id="line238"
+         style="opacity:0.5;fill:none;stroke:currentColor;stroke-width:0.9" />
+      <line
+         class="ef"
+         x1="22"
+         y1="32"
+         x2="10"
+         y2="40"
+         id="line239"
+         style="opacity:0.5;fill:none;stroke:currentColor;stroke-width:0.9" />
+      <circle
+         class="nd"
+         cx="0"
+         cy="158"
+         r="4"
+         id="circle239"
+         style="fill:none;stroke:currentColor;stroke-width:1.3" />
+      <circle
+         class="nd"
+         cx="-14"
+         cy="142"
+         r="3.8"
+         id="circle240"
+         style="fill:none;stroke:currentColor;stroke-width:1.3" />
+      <circle
+         class="nd"
+         cx="14"
+         cy="142"
+         r="3.8"
+         id="circle241"
+         style="fill:none;stroke:currentColor;stroke-width:1.3" />
+      <circle
+         class="nd"
+         cx="0"
+         cy="122"
+         r="3.5999999"
+         id="circle242"
+         style="fill:none;stroke:currentColor;stroke-width:1.3" />
+      <circle
+         class="nd"
+         cx="-28"
+         cy="118"
+         r="3.8"
+         id="circle243"
+         style="fill:none;stroke:currentColor;stroke-width:1.3" />
+      <circle
+         class="nd"
+         cx="28"
+         cy="118"
+         r="3.8"
+         id="circle244"
+         style="fill:none;stroke:currentColor;stroke-width:1.3" />
+      <circle
+         class="nd"
+         cx="-14"
+         cy="96"
+         r="3.5"
+         id="circle245"
+         style="fill:none;stroke:currentColor;stroke-width:1.3" />
+      <circle
+         class="nd"
+         cx="14"
+         cy="96"
+         r="3.5"
+         id="circle246"
+         style="fill:none;stroke:currentColor;stroke-width:1.3" />
+      <circle
+         class="nd"
+         cx="-40"
+         cy="90"
+         r="3.8"
+         id="circle247"
+         style="fill:none;stroke:currentColor;stroke-width:1.3" />
+      <circle
+         class="nd"
+         cx="40"
+         cy="90"
+         r="3.8"
+         id="circle248"
+         style="fill:none;stroke:currentColor;stroke-width:1.3" />
+      <circle
+         class="nd"
+         cx="-20"
+         cy="68"
+         r="3.5"
+         id="circle249"
+         style="fill:none;stroke:currentColor;stroke-width:1.3" />
+      <circle
+         class="nd"
+         cx="20"
+         cy="68"
+         r="3.5"
+         id="circle250"
+         style="fill:none;stroke:currentColor;stroke-width:1.3" />
+      <circle
+         class="nd"
+         cx="-40"
+         cy="60"
+         r="3.8"
+         id="circle251"
+         style="fill:none;stroke:currentColor;stroke-width:1.3" />
+      <circle
+         class="nd"
+         cx="40"
+         cy="60"
+         r="3.8"
+         id="circle252"
+         style="fill:none;stroke:currentColor;stroke-width:1.3" />
+      <circle
+         class="nd"
+         cx="-10"
+         cy="40"
+         r="3.2"
+         id="circle253"
+         style="fill:none;stroke:currentColor;stroke-width:1.3" />
+      <circle
+         class="nd"
+         cx="10"
+         cy="40"
+         r="3.2"
+         id="circle254"
+         style="fill:none;stroke:currentColor;stroke-width:1.3" />
+      <circle
+         class="ndb"
+         cx="-22"
+         cy="32"
+         r="4"
+         id="circle255"
+         style="fill:none;stroke:currentColor;stroke-width:1.4" />
+      <circle
+         class="ndb"
+         cx="22"
+         cy="32"
+         r="4"
+         id="circle256"
+         style="fill:none;stroke:currentColor;stroke-width:1.4" />
+      <!-- TORUS ring -->
+      <ellipse
+         class="lp"
+         cx="0"
+         cy="0"
+         rx="72"
+         ry="20"
+         id="ellipse256"
+         style="fill:none;stroke:currentColor;stroke-width:1.45" />
+      <ellipse
+         class="hr"
+         cx="0"
+         cy="0"
+         rx="52"
+         ry="14"
+         id="ellipse257"
+         style="opacity:0.65;fill:none;stroke:currentColor;stroke-width:1.3" />
+      <!-- Torus nodes outer -->
+      <circle
+         class="nd"
+         cx="72"
+         cy="0"
+         r="4"
+         id="circle257"
+         style="fill:none;stroke:currentColor;stroke-width:1.3" />
+      <circle
+         class="nd"
+         cx="51"
+         cy="-14"
+         r="3.8"
+         id="circle258"
+         style="fill:none;stroke:currentColor;stroke-width:1.3" />
+      <circle
+         class="nd"
+         cx="0"
+         cy="-20"
+         r="4"
+         id="circle259"
+         style="fill:none;stroke:currentColor;stroke-width:1.3" />
+      <circle
+         class="nd"
+         cx="-51"
+         cy="-14"
+         r="3.8"
+         id="circle260"
+         style="fill:none;stroke:currentColor;stroke-width:1.3" />
+      <circle
+         class="nd"
+         cx="-72"
+         cy="0"
+         r="4"
+         id="circle261"
+         style="fill:none;stroke:currentColor;stroke-width:1.3" />
+      <circle
+         class="nd"
+         cx="-51"
+         cy="14"
+         r="3.8"
+         id="circle262"
+         style="fill:none;stroke:currentColor;stroke-width:1.3" />
+      <circle
+         class="nd"
+         cx="0"
+         cy="20"
+         r="4"
+         id="circle263"
+         style="fill:none;stroke:currentColor;stroke-width:1.3" />
+      <circle
+         class="nd"
+         cx="51"
+         cy="14"
+         r="3.8"
+         id="circle264"
+         style="fill:none;stroke:currentColor;stroke-width:1.3" />
+      <!-- Torus nodes inner -->
+      <circle
+         class="nd"
+         cx="52"
+         cy="0"
+         r="3.5"
+         id="circle265"
+         style="fill:none;stroke:currentColor;stroke-width:1.3" />
+      <circle
+         class="nd"
+         cx="37"
+         cy="-10"
+         r="3.3"
+         id="circle266"
+         style="fill:none;stroke:currentColor;stroke-width:1.3" />
+      <circle
+         class="nd"
+         cx="0"
+         cy="-14"
+         r="3.5"
+         id="circle267"
+         style="fill:none;stroke:currentColor;stroke-width:1.3" />
+      <circle
+         class="nd"
+         cx="-37"
+         cy="-10"
+         r="3.3"
+         id="circle268"
+         style="fill:none;stroke:currentColor;stroke-width:1.3" />
+      <circle
+         class="nd"
+         cx="-52"
+         cy="0"
+         r="3.5"
+         id="circle269"
+         style="fill:none;stroke:currentColor;stroke-width:1.3" />
+      <circle
+         class="nd"
+         cx="-37"
+         cy="10"
+         r="3.3"
+         id="circle270"
+         style="fill:none;stroke:currentColor;stroke-width:1.3" />
+      <circle
+         class="nd"
+         cx="0"
+         cy="14"
+         r="3.5"
+         id="circle271"
+         style="fill:none;stroke:currentColor;stroke-width:1.3" />
+      <circle
+         class="nd"
+         cx="37"
+         cy="10"
+         r="3.3"
+         id="circle272"
+         style="fill:none;stroke:currentColor;stroke-width:1.3" />
+      <!-- Torus spokes -->
+      <line
+         class="ef"
+         x1="52"
+         y1="0"
+         x2="72"
+         y2="0"
+         id="line272"
+         style="opacity:0.5;fill:none;stroke:currentColor;stroke-width:0.9" />
+      <line
+         class="ef"
+         x1="-52"
+         y1="0"
+         x2="-72"
+         y2="0"
+         id="line273"
+         style="opacity:0.5;fill:none;stroke:currentColor;stroke-width:0.9" />
+      <line
+         class="ef"
+         x1="37"
+         y1="-10"
+         x2="51"
+         y2="-14"
+         id="line274"
+         style="opacity:0.5;fill:none;stroke:currentColor;stroke-width:0.9" />
+      <line
+         class="ef"
+         x1="-37"
+         y1="-10"
+         x2="-51"
+         y2="-14"
+         id="line275"
+         style="opacity:0.5;fill:none;stroke:currentColor;stroke-width:0.9" />
+      <line
+         class="ef"
+         x1="37"
+         y1="10"
+         x2="51"
+         y2="14"
+         id="line276"
+         style="opacity:0.5;fill:none;stroke:currentColor;stroke-width:0.9" />
+      <line
+         class="ef"
+         x1="-37"
+         y1="10"
+         x2="-51"
+         y2="14"
+         id="line277"
+         style="opacity:0.5;fill:none;stroke:currentColor;stroke-width:0.9" />
+      <line
+         class="ef"
+         x1="0"
+         y1="-14"
+         x2="0"
+         y2="-20"
+         id="line278"
+         style="opacity:0.5;fill:none;stroke:currentColor;stroke-width:0.9" />
+      <line
+         class="ef"
+         x1="0"
+         y1="14"
+         x2="0"
+         y2="20"
+         id="line279"
+         style="opacity:0.5;fill:none;stroke:currentColor;stroke-width:0.9" />
+      <!-- Nucleus -->
+      <circle
+         class="nuc"
+         cx="0"
+         cy="0"
+         r="8"
+         id="circle279"
+         style="fill:none;stroke:currentColor;stroke-width:2" />
+    </g>
+  </g>
+</svg>

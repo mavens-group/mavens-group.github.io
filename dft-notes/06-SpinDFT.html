@@ -1,0 +1,502 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Spin Dependent DFT - Density Functional Theory</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="favicon-de23e50b.svg">
+        <link rel="shortcut icon" href="favicon-8114d1fc.png">
+        <link rel="stylesheet" href="css/variables-8adf115d.css">
+        <link rel="stylesheet" href="css/general-2459343d.css">
+        <link rel="stylesheet" href="css/chrome-ae938929.css">
+        <link rel="stylesheet" href="css/print-9e4910d8.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="fonts/fonts-9644e21d.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="mdbook-highlight-css" href="highlight-493f70e1.css">
+        <link rel="stylesheet" id="mdbook-tomorrow-night-css" href="tomorrow-night-4c0ae647.css">
+        <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="ayu-highlight-3fdfc3ac.css">
+
+        <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="src/custom-6ac2dfa5.css">
+
+        <!-- MathJax -->
+        <script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+            window.path_to_searchindex_js = "searchindex-7e969141.js";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="toc-db725d58.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="mdbook-body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="mdbook-sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("mdbook-sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
+
+        <nav id="mdbook-sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="toc.html"></iframe>
+            </noscript>
+            <div id="mdbook-sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="mdbook-page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="mdbook-menu-bar-hover-placeholder"></div>
+                <div id="mdbook-menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="mdbook-sidebar-toggle" class="icon-button" for="mdbook-sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="mdbook-sidebar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/></svg></span>
+                        </label>
+                        <button id="mdbook-theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="mdbook-theme-list">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M371.3 367.1c27.3-3.9 51.9-19.4 67.2-42.9L600.2 74.1c12.6-19.5 9.4-45.3-7.6-61.2S549.7-4.4 531.1 9.6L294.4 187.2c-24 18-38.2 46.1-38.4 76.1L371.3 367.1zm-19.6 25.4l-116-104.4C175.9 290.3 128 339.6 128 400c0 3.9 .2 7.8 .6 11.6c1.8 17.5-10.2 36.4-27.8 36.4H96c-17.7 0-32 14.3-32 32s14.3 32 32 32H240c61.9 0 112-50.1 112-112c0-2.5-.1-5-.2-7.5z"/></svg></span>
+                        </button>
+                        <ul id="mdbook-theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-ayu">Ayu</button></li>
+                        </ul>
+                        <button id="mdbook-search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="mdbook-searchbar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352c79.5 0 144-64.5 144-144s-64.5-144-144-144S64 128.5 64 208s64.5 144 144 144z"/></svg></span>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Density Functional Theory</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <span class=fa-svg id="print-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M128 0C92.7 0 64 28.7 64 64v96h64V64H354.7L384 93.3V160h64V93.3c0-17-6.7-33.3-18.7-45.3L400 18.7C388 6.7 371.7 0 354.7 0H128zM384 352v32 64H128V384 368 352H384zm64 32h32c17.7 0 32-14.3 32-32V256c0-35.3-28.7-64-64-64H64c-35.3 0-64 28.7-64 64v96c0 17.7 14.3 32 32 32H64v64c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V384zm-16-88c-13.3 0-24-10.7-24-24s10.7-24 24-24s24 10.7 24 24s-10.7 24-24 24z"/></svg></span>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="mdbook-search-wrapper" class="hidden">
+                    <form id="mdbook-searchbar-outer" class="searchbar-outer">
+                        <div class="search-wrapper">
+                            <input type="search" id="mdbook-searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="mdbook-searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <span class=fa-svg id="fa-spin"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M304 48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zm0 416c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM48 304c26.5 0 48-21.5 48-48s-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48zm464-48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM142.9 437c18.7-18.7 18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zm0-294.2c18.7-18.7 18.7-49.1 0-67.9S93.7 56.2 75 75s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zM369.1 437c18.7 18.7 49.1 18.7 67.9 0s18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9z"/></svg></span>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="mdbook-searchresults-outer" class="searchresults-outer hidden">
+                        <div id="mdbook-searchresults-header" class="searchresults-header"></div>
+                        <ul id="mdbook-searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('mdbook-sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('mdbook-sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#mdbook-sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="mdbook-content" class="content">
+                    <main>
+                        <h1 id="spin-polarised-dft-and-magnetism"><a class="header" href="#spin-polarised-dft-and-magnetism">Spin-Polarised DFT and Magnetism</a></h1>
+<p>The standard Kohn–Sham DFT developed in Chapter 3 treats electrons as spinless particles: the
+density \(\rho(\mathbf{r})\) carries no spin label, and the KS equations yield doubly degenerate
+orbital energies. This is adequate for non-magnetic systems, but fails entirely when the ground
+state breaks time-reversal symmetry through a net electron spin polarisation.</p>
+<p>To describe magnetic materials — from ferromagnetic iron to the half-metallic Heusler alloys and
+antiferromagnetic insulators — we must extend DFT to <strong>spin-polarised DFT (SDFT)</strong>, and, for
+materials with strong spin–orbit coupling, to the full non-collinear formalism. This chapter
+develops the theoretical framework and connects it to the key observables: magnetic moments,
+exchange coupling constants \(J\), and magnetic anisotropy energies (MAE).</p>
+<h2 id="the-spin-density-functional"><a class="header" href="#the-spin-density-functional">The Spin-Density Functional</a></h2>
+<h3 id="collinear-sdft"><a class="header" href="#collinear-sdft">Collinear SDFT</a></h3>
+<p>In <strong>collinear SDFT</strong>, spins are quantised along a fixed axis (conventionally \(z\)). The
+fundamental variable is replaced by the <strong>spin-resolved density</strong>:</p>
+<p>\begin{equation}
+\rho_\sigma(\mathbf{r}) = \sum_{i} f_{i\sigma},|\phi_{i\sigma}(\mathbf{r})|^2, \qquad \sigma \in {\uparrow, \downarrow},
+\end{equation}</p>
+<p>where \(f_{i\sigma}\) are the orbital occupation numbers and the sum runs over all KS orbitals of
+spin \(\sigma\). The total and magnetisation densities are:</p>
+<p>\begin{equation}
+\rho(\mathbf{r}) = \rho_\uparrow(\mathbf{r}) + \rho_\downarrow(\mathbf{r}),
+\qquad
+m(\mathbf{r}) = \rho_\uparrow(\mathbf{r}) - \rho_\downarrow(\mathbf{r}).
+\end{equation}</p>
+<p>The HK theorem is generalised to show that the ground state is uniquely determined by the pair
+\((\rho(\mathbf{r}), m(\mathbf{r}))\), or equivalently by \((\rho_\uparrow, \rho_\downarrow)\).
+The total energy functional becomes:</p>
+<p>\begin{equation}
+E[\rho_\uparrow, \rho_\downarrow] = T_s[\rho_\uparrow, \rho_\downarrow] + E_{\rm H}[\rho] + E_{\rm xc}[\rho_\uparrow, \rho_\downarrow] + \int V_{\rm ext}(\mathbf{r}),\rho(\mathbf{r}),d\mathbf{r}.
+\end{equation}</p>
+<p>The two sets of spin-channel KS equations decouple:</p>
+<p>\begin{equation}
+\left[-\frac{1}{2}\nabla^2 + V_{\rm eff}^\sigma(\mathbf{r})\right]\phi_{i\sigma}(\mathbf{r}) = \epsilon_{i\sigma},\phi_{i\sigma}(\mathbf{r}),
+\label{eq:SDFT-KS}
+\end{equation}</p>
+<p>with spin-dependent effective potentials:</p>
+<p>\begin{equation}
+V_{\rm eff}^\sigma(\mathbf{r}) = V_{\rm ext}(\mathbf{r}) + V_{\rm H}(\mathbf{r}) + V_{\rm xc}^\sigma(\mathbf{r}),
+\qquad V_{\rm xc}^\sigma = \frac{\delta E_{\rm xc}}{\delta \rho_\sigma(\mathbf{r})}.
+\end{equation}</p>
+<p>The Hartree potential \(V_{\rm H}\) is spin-independent (it depends on the total \(\rho\)), while
+\(V_{\rm xc}^\sigma\) differs between spin channels, producing a <strong>spin-splitting</strong> of the
+eigenvalues \(\epsilon_{i\uparrow} \neq \epsilon_{i\downarrow}\). This is the quantum-mechanical
+origin of the <strong>exchange splitting</strong> that drives ferromagnetism.</p>
+<h3 id="the-spin-polarised-xc-functional"><a class="header" href="#the-spin-polarised-xc-functional">The Spin-Polarised XC Functional</a></h3>
+<p>The XC functional must be generalised to take both \(\rho_\uparrow\) and \(\rho_\downarrow\) as
+arguments. For the LDA, the <strong>local spin-density approximation (LSDA)</strong> uses the XC energy of a
+spin-polarised uniform electron gas:</p>
+<p>\[
+E_{\rm xc}^{\rm LSDA}[\rho_\uparrow, \rho_\downarrow] = \int \varepsilon_{\rm xc}^{\rm UEG}(\rho_\uparrow(\mathbf{r}), \rho_\downarrow(\mathbf{r})),\rho(\mathbf{r}),d\mathbf{r}.
+\]</p>
+<p><strong>Derivation of the spin-scaling relation (von Barth–Hedin).</strong> The key step is to express \(\varepsilon_{\rm xc}(\rho_\uparrow, \rho_\downarrow)\) in terms of the unpolarised value \(\varepsilon_{\rm xc}(\rho, 0)\) and the fully polarised value \(\varepsilon_{\rm xc}(\rho/2, \rho/2)\). For exchange, the exact spin-scaling follows from the Dirac formula: a fully spin-up gas of density \(\rho\) has exchange energy \(\varepsilon_{\rm x}(\rho, 0) = \varepsilon_{\rm x}^{\rm UEG}(\rho)\), while a spin-up gas of density \(\rho_\uparrow\) contributes \(\varepsilon_{\rm x}(\rho_\uparrow)\cdot(\rho_\uparrow/\rho)\) per unit total density. Adding both spin channels:</p>
+<p>\[
+\varepsilon_{\rm x}(\rho_\uparrow, \rho_\downarrow) = \frac{1}{2}\left[\varepsilon_{\rm x}^{\rm UEG}(2\rho_\uparrow)\frac{\rho_\uparrow}{\rho/2} + \varepsilon_{\rm x}^{\rm UEG}(2\rho_\downarrow)\frac{\rho_\downarrow}{\rho/2}\right]\cdot\frac{1}{2}.
+\]</p>
+<p>Since \(\varepsilon_{\rm x}^{\rm UEG}(\rho) \propto \rho^{1/3}\), this simplifies to the exact spin-scaling relation \(\varepsilon_{\rm x}(\rho_\uparrow,\rho_\downarrow) = \frac{1}{2}[(1+\zeta)^{4/3}+(1-\zeta)^{4/3}],\varepsilon_{\rm x}^{\rm UEG}(\rho)\). For correlation, no exact spin-scaling exists; von Barth and Hedin (1972) proposed interpolating between the paramagnetic (\(\zeta=0\)) and ferromagnetic (\(\zeta=1\)) limits using a function \(f(\zeta)\) that satisfies \(f(0)=0\), \(f(1)=1\), and \(f’’(0) = 4/9\) (from the perturbative UEG correlation):</p>
+<p>\[
+\varepsilon_{\rm xc}(\rho_\uparrow, \rho_\downarrow) = \varepsilon_{\rm xc}(\rho, 0) + [\varepsilon_{\rm xc}(\rho/2, \rho/2) - \varepsilon_{\rm xc}(\rho, 0)],f(\zeta),
+\]</p>
+<p>where \(\zeta = (\rho_\uparrow - \rho_\downarrow)/\rho\) is the spin polarisation and the standard choice is:</p>
+<p>\[
+f(\zeta) = \frac{(1+\zeta)^{4/3} + (1-\zeta)^{4/3} - 2}{2(2^{1/3}-1)}.
+\]</p>
+<p>This interpolation is exact for exchange and approximate for correlation; it reduces to the correct limits at \(\zeta = 0\) (paramagnetic UEG) and \(\zeta = 1\) (fully polarised UEG). GGA and meta-GGA functionals are extended analogously using the same spin-scaling for exchange and analogous interpolations for correlation.</p>
+<h2 id="magnetic-moments"><a class="header" href="#magnetic-moments">Magnetic Moments</a></h2>
+<p>The <strong>local magnetic moment</strong> on site \(A\) is:</p>
+<p>\begin{equation}
+\mu_A = \int_{\Omega_A} m(\mathbf{r}),d\mathbf{r} = \int_{\Omega_A} [\rho_\uparrow(\mathbf{r}) - \rho_\downarrow(\mathbf{r})],d\mathbf{r},
+\end{equation}</p>
+<p>where \(\Omega_A\) is the Wigner–Seitz (or PAW augmentation) sphere of atom \(A\). The total
+magnetisation is:</p>
+<p>\begin{equation}
+M = \int m(\mathbf{r}),d\mathbf{r} = N_\uparrow - N_\downarrow,
+\end{equation}</p>
+<p>where \(N_\sigma = \int \rho_\sigma,d\mathbf{r}\) is the total number of electrons of spin
+\(\sigma\).</p>
+<p>For elemental ferromagnets, SDFT recovers the experimental moments well: Fe (\(2.2,\mu_B\) exp.,
+\(2.1\)–\(2.3,\mu_B\) DFT), Co (\(1.7,\mu_B\)), Ni (\(0.6,\mu_B\)). Orbital contributions (from
+spin–orbit coupling) are not included at the collinear SDFT level.</p>
+<h2 id="magnetic-ordering-ferro--antiferro--and-ferrimagnetic-states"><a class="header" href="#magnetic-ordering-ferro--antiferro--and-ferrimagnetic-states">Magnetic Ordering: Ferro-, Antiferro-, and Ferrimagnetic States</a></h2>
+<p>By setting up different initial spin configurations in the SCF cycle, collinear SDFT can target
+different magnetic orderings:</p>
+<ul>
+<li><strong>Ferromagnetic (FM)</strong>: all local moments aligned parallel, \(M \neq 0\).</li>
+<li><strong>Antiferromagnetic (AFM)</strong>: moments on sublattices aligned antiparallel, \(M = 0\) globally.
+Requires a supercell large enough to contain both sublattices.</li>
+<li><strong>Ferrimagnetic (FiM)</strong>: unequal antiparallel moments on distinct sublattices, \(M \neq 0\).
+Common in half-Heusler and spinel compounds.</li>
+</ul>
+<p>To determine which ordering is the ground state, compute the total energy for each configuration
+and compare: \(\Delta E = E_{\rm AFM} - E_{\rm FM}\).</p>
+<h2 id="exchange-coupling-the-heisenberg-model"><a class="header" href="#exchange-coupling-the-heisenberg-model">Exchange Coupling: The Heisenberg Model</a></h2>
+<p>The energy difference between magnetic configurations can be mapped onto the <strong>Heisenberg spin
+Hamiltonian</strong>:</p>
+<p>\begin{equation}
+\hat{\mathcal{H}}_{\rm Heis} = -\sum_{\langle i,j\rangle} J_{ij},\hat{\mathbf{S}}_i \cdot \hat{\mathbf{S}}_j,
+\end{equation}</p>
+<p>where \(\hat{\mathbf{S}}_i\) is the spin operator on site \(i\) and \(J_{ij}\) is the <strong>exchange
+coupling constant</strong> between sites \(i\) and \(j\). The sign convention: \(J &gt; 0\) favours FM
+alignment; \(J \lt 0\) favours AFM.</p>
+<h3 id="extraction-of-j-from-total-energies"><a class="header" href="#extraction-of-j-from-total-energies">Extraction of \(J\) from Total Energies</a></h3>
+<p>For a two-sublattice system with spin \(S\) per site, the energy difference between FM and AFM
+configurations (with \(z\) equivalent nearest-neighbour pairs per formula unit) is:</p>
+<p>\begin{equation}
+\Delta E = E_{\rm AFM} - E_{\rm FM} = 2J,z,S^2.
+\label{eq:J-extraction}
+\end{equation}</p>
+<p>Hence:</p>
+<p>\begin{equation}
+J = \frac{E_{\rm AFM} - E_{\rm FM}}{2,z,S^2}.
+\end{equation}</p>
+<p>For more complex magnetic structures with multiple shells of neighbours, the <strong>four-state
+method</strong> (Xiang et al.) or the <strong>spin-spiral approach</strong> (Section below) provides a systematic
+way to disentangle \(J_1, J_2, J_3, \ldots\)</p>
+<h3 id="liechtensteinkatsnelsonantropovgubanov-lkag-method"><a class="header" href="#liechtensteinkatsnelsonantropovgubanov-lkag-method">Liechtenstein–Katsnelson–Antropov–Gubanov (LKAG) Method</a></h3>
+<p>An alternative to total energy differences is the <strong>LKAG (linear response) method</strong>, which
+computes \(J_{ij}\) directly from the Green’s function:</p>
+<p>\begin{equation}
+J_{ij} = \frac{1}{4\pi}\int_{-\infty}^{E_F} {\rm Im},{\rm Tr}_L\left[\Delta_i G_{ij}^\uparrow(E),\Delta_j G_{ji}^\downarrow(E)\right],dE,
+\end{equation}</p>
+<p>where \(\Delta_i = V_{\rm xc,i}^\uparrow - V_{\rm xc,i}^\downarrow\) is the local exchange
+splitting on site \(i\) and \(G_{ij}^\sigma\) are the spin-resolved intersite Green’s functions.
+This method gives the full \(J_{ij}\) tensor in a single DFT calculation and is available in codes
+such as FLEUR, SPR-KKR, and Questaal.</p>
+<p><strong>Practical note:</strong> Total energy methods (equation \eqref{eq:J-extraction}) are simpler and
+widely used. They require DFT+U or hybrid functionals for correlated \(d\)/\(f\)-electron systems
+where GGA overdelocalises the magnetic orbitals and underestimates \(J\).</p>
+<h2 id="non-collinear-sdft"><a class="header" href="#non-collinear-sdft">Non-Collinear SDFT</a></h2>
+<p>In the collinear formalism, the magnetisation is constrained to lie along \(z\). This is
+insufficient for:</p>
+<ul>
+<li><strong>Spin spirals</strong> and incommensurate magnetic structures.</li>
+<li><strong>Spin frustration</strong> in triangular or kagome lattices.</li>
+<li><strong>Spin–orbit coupling (SOC) effects</strong>: the magnetisation direction matters when SOC is
+present, and it may vary in space.</li>
+<li><strong>Dzyaloshinskii–Moriya interaction (DMI)</strong> and skyrmions.</li>
+</ul>
+<p>In <strong>non-collinear SDFT</strong>, the density variable is replaced by the full \(2\times 2\) density
+matrix in spin space:</p>
+<p>\begin{equation}
+n_{\alpha\beta}(\mathbf{r}) = \sum_i f_i,\phi_i^\alpha(\mathbf{r})\left(\phi_i^\beta(\mathbf{r})\right)^*,
+\qquad \alpha,\beta \in {\uparrow,\downarrow},
+\end{equation}</p>
+<p>which is related to the magnetisation density vector \(\mathbf{m}(\mathbf{r})\) via:</p>
+<p>\begin{equation}
+n_{\alpha\beta} = \frac{1}{2}\left[\rho,\delta_{\alpha\beta} + \mathbf{m}\cdot\boldsymbol{\sigma}_{\alpha\beta}\right],
+\end{equation}</p>
+<p>where \(\boldsymbol{\sigma} = (\sigma_x, \sigma_y, \sigma_z)\) are the Pauli matrices.</p>
+<p>The KS orbitals become two-component <strong>spinors</strong> \(\boldsymbol{\phi}_i = (\phi_i^\uparrow, \phi_i^\downarrow)^T\), and the KS equations take the matrix form:</p>
+<p>\begin{equation}
+\left[-\frac{1}{2}\nabla^2,\mathbf{I} + \mathbf{V}_{\rm eff}(\mathbf{r})\right]\boldsymbol{\phi}_i(\mathbf{r}) = \epsilon_i,\boldsymbol{\phi}_i(\mathbf{r}),
+\end{equation}</p>
+<p>with the \(2\times 2\) effective potential:</p>
+<p>\begin{equation}
+\mathbf{V}_{\rm eff}(\mathbf{r}) = \left[V_{\rm ext} + V_{\rm H} + V_{\rm xc}^{(0)}\right]\mathbf{I}
+- \mathbf{B}_{\rm xc}(\mathbf{r})\cdot\boldsymbol{\sigma},
+\end{equation}</p>
+<p>where \(V_{\rm xc}^{(0)} = \frac{1}{2}(V_{\rm xc}^\uparrow + V_{\rm xc}^\downarrow)\) is the
+spin-averaged XC potential and \(\mathbf{B}_{\rm xc} = \frac{1}{2}(V_{\rm xc}^\uparrow - V_{\rm xc}^\downarrow)\hat{\mathbf{m}}\) is the XC magnetic field aligned along the local magnetisation
+direction \(\hat{\mathbf{m}}(\mathbf{r})\).</p>
+<h2 id="spinorbit-coupling-soc"><a class="header" href="#spinorbit-coupling-soc">Spin–Orbit Coupling (SOC)</a></h2>
+<p>Spin–orbit coupling is a relativistic effect arising from the interaction of an electron’s spin
+magnetic moment with the magnetic field it experiences due to its orbital motion around the
+nucleus. In the Pauli approximation it takes the form:</p>
+<p>\begin{equation}
+\hat{H}_{\rm SOC} = \frac{\hbar^2}{4m_e^2c^2}\frac{1}{r}\frac{dV}{dr},\hat{\mathbf{L}}\cdot\hat{\mathbf{S}},
+\end{equation}</p>
+<p>where \(\hat{\mathbf{L}}\) and \(\hat{\mathbf{S}}\) are the orbital and spin angular momentum
+operators, and \(dV/dr\) is the radial derivative of the ionic potential. SOC is strong near heavy
+nuclei (scales as \(Z^4\)), making it important for \(4d\), \(5d\), \(4f\), and \(5f\) elements.</p>
+<p>In SDFT, SOC is most commonly included via the <strong>second-variational method</strong>:</p>
+<ol>
+<li>Solve the scalar-relativistic (collinear) SDFT problem first.</li>
+<li>Construct the SOC matrix elements in the basis of scalar-relativistic eigenstates.</li>
+<li>Diagonalise the full Hamiltonian \(\hat{H}_{\rm SR} + \hat{H}_{\rm SOC}\).</li>
+</ol>
+<p>Full self-consistent inclusion of SOC requires the non-collinear spinor formalism.</p>
+<h2 id="magnetic-anisotropy-energy-mae"><a class="header" href="#magnetic-anisotropy-energy-mae">Magnetic Anisotropy Energy (MAE)</a></h2>
+<p>The <strong>magnetic anisotropy energy</strong> is the difference in total energy between magnetisation
+oriented along the easy axis and a hard axis:</p>
+<p>\begin{equation}
+{\rm MAE} = E(\hat{\mathbf{n}}_{\rm hard}) - E(\hat{\mathbf{n}}_{\rm easy}),
+\end{equation}</p>
+<p>typically measured in \(\mu\)eV/atom for \(3d\) metals or meV/atom for heavy-element compounds. MAE
+determines the <strong>magnetic hardness</strong> of a material: a large positive MAE (perpendicular easy
+axis) is required for permanent magnets and perpendicular magnetic recording media.</p>
+<p>MAE arises entirely from <strong>spin–orbit coupling</strong>: without SOC, all directions are degenerate.
+It vanishes in spin-orbit-free collinear SDFT and requires either:</p>
+<ul>
+<li><strong>Self-consistent non-collinear calculation with SOC</strong> for large MAE (e.g. \(L1_0\)-FePt,
+\(&gt; 1\) meV/atom).</li>
+<li><strong>Force theorem (perturbative SOC)</strong>: For small MAE, compute the non-self-consistent energy
+with SOC applied to the converged scalar-relativistic density. Computationally cheaper but
+breaks down when SOC significantly modifies the density.</li>
+</ul>
+<p>The MAE is dominated by the <strong>band energy</strong> contribution (summed KS eigenvalue difference):</p>
+<p>\begin{equation}
+{\rm MAE} \approx \sum_i (f_i^{\rm hard},\epsilon_i^{\rm hard} - f_i^{\rm easy},\epsilon_i^{\rm easy}),
+\end{equation}</p>
+<p>which requires very dense \(k\)-meshes to converge (fine Brillouin zone features near the Fermi
+level). Typical convergence requires \(40\times 40\times 40\) or finer grids for transition metal
+systems.</p>
+<h3 id="contribution-from-orbital-moments-bruno-relation"><a class="header" href="#contribution-from-orbital-moments-bruno-relation">Contribution from Orbital Moments: Bruno Relation</a></h3>
+<p>The connection between MAE and orbital moments was derived by Bruno (1989) using second-order
+perturbation theory in the SOC strength \(\xi\). The SOC Hamiltonian is:</p>
+<p>\[
+\hat{H}_{\rm SOC} = \xi,\hat{\mathbf{L}}\cdot\hat{\mathbf{S}}.
+\]</p>
+<p>For a system with spin quantised along \(\hat{\mathbf{n}}\), the second-order energy correction is:</p>
+<p>\[
+E^{(2)}(\hat{\mathbf{n}}) = -\xi^2 \sum_{o,u} \frac{|\langle u|\hat{H}_{\rm SOC}^{(\hat{\mathbf{n}})}|o\rangle|^2}{\epsilon_u - \epsilon_o},
+\]</p>
+<p>where \(o\) and \(u\) label occupied and unoccupied states. Bruno showed that for a system with uniaxial symmetry and spin fixed along \(\hat{\mathbf{n}}\), the dominant contribution to this sum is proportional to the expectation value of the orbital angular momentum along \(\hat{\mathbf{n}}\):</p>
+<p>\[
+E^{(2)}(\hat{\mathbf{n}}) \approx -\frac{\xi}{4\mu_B}\langle \hat{L}_{\hat{\mathbf{n}}} \rangle,
+\]</p>
+<p>where \(\langle \hat{L}_{\hat{\mathbf{n}}} \rangle = \mu_B^{-1}\langle\hat{m}_L^{\hat{\mathbf{n}}}\rangle\) is the orbital moment along \(\hat{\mathbf{n}}\) in units of \(\mu_B\). The MAE then follows as the difference between two magnetisation directions:</p>
+<p>\[
+{\rm MAE} = E(\hat{\mathbf{n}}_{\rm hard}) - E(\hat{\mathbf{n}}_{\rm easy})
+\approx -\frac{\xi}{4\mu_B}\left(\langle L_z^{\rm hard}\rangle - \langle L_z^{\rm easy}\rangle\right).
+\]</p>
+<p><strong>Interpretation:</strong> The easy axis is the direction along which the orbital moment is <em>largest</em> (most negative \(E^{(2)}\)), since a larger orbital moment means more SOC energy lowering. Materials with large orbital moments — rare-earth \(4f\) ions, \(5d\) transition metals, or low-symmetry environments that quench the orbital moment less — consequently have large MAE. This is the microscopic basis for the empirical rule that heavier elements with unquenched orbital moments make better permanent magnets.</p>
+<p><strong>Caveats:</strong> Bruno’s derivation assumes (i) perturbative SOC (\(\xi \ll\) bandwidth), (ii) rigid band approximation (same orbitals for both directions), and (iii) collinear spin. It is quantitatively reliable for \(3d\) metals but breaks down for \(4f\) systems where SOC is comparable to the crystal field splitting, or for systems near band crossings where the denominator \(\epsilon_u - \epsilon_o\) becomes small. In those cases the full non-perturbative calculation is required.</p>
+<h2 id="application-to-heusler-alloys"><a class="header" href="#application-to-heusler-alloys">Application to Heusler Alloys</a></h2>
+<p>Heusler alloys (\(X_2YZ\) full Heusler or \(XYZ\) half-Heusler) are a rich playground for SDFT
+because they exhibit a wide range of magnetic phenomena:</p>
+<p><strong>Half-metallic ferromagnetism</strong>: In compounds like Co\(_2\)MnSi, one spin channel (\(\uparrow\))
+is metallic while the other (\(\downarrow\)) has a band gap at \(E_F\), giving a spin polarisation
+of 100% in principle. SDFT with GGA predicts this correctly for many Heuslers; a scissor
+correction or hybrid functional is needed to accurately reproduce the minority-spin gap.</p>
+<p><strong>Slater–Pauling rule</strong>: The total magnetic moment per formula unit follows
+\(M = N_v - 24\) (full Heusler) or \(M = N_v - 18\) (half-Heusler), where \(N_v\) is the total
+valence electron count. This rule, reproduced by SDFT, provides a rapid screening criterion for
+half-metallicity.</p>
+<p><strong>Exchange coupling and \(T_C\)</strong>: The Curie temperature can be estimated from \(J_{ij}\) values
+via mean-field theory (\(k_B T_C^{\rm MF} = \frac{2}{3}J_0\)) or random phase approximation
+(RPA), with RPA giving more accurate results for itinerant magnets. SDFT+LKAG is the standard
+approach.</p>
+<p><strong>MAE in Heuslers</strong>: Most cubic Heuslers have small MAE (\(\sim \mu\)eV/atom) due to cubic
+symmetry. Tetragonally distorted Heuslers (e.g. Mn\(_3\)Ga) or inverse Heuslers can have
+significantly larger MAE, relevant for spin-transfer torque applications.</p>
+<h2 id="practical-checklist-for-magnetic-dft-calculations"><a class="header" href="#practical-checklist-for-magnetic-dft-calculations">Practical Checklist for Magnetic DFT Calculations</a></h2>
+<ol>
+<li><strong>Initialise spin correctly</strong>: Supply a non-zero initial magnetic moment to each magnetic
+site; the SCF loop will not spontaneously break spin symmetry from a non-magnetic starting
+point.</li>
+<li><strong>Check for multiple magnetic minima</strong>: Try several initial configurations (FM, AFM,
+ferrimagnetic) and compare final energies. Collinear SDFT can get trapped in local minima.</li>
+<li><strong>Use appropriate XC</strong>: PBE is standard; consider PBE+U or hybrid functionals for correlated
+\(d/f\) systems where GGA under-localises the magnetic orbitals.</li>
+<li><strong>For MAE</strong>: Use a non-collinear calculation with SOC; converge the \(k\)-mesh carefully
+(MAE is extremely sensitive to \(k\)-point density).</li>
+<li><strong>For \(J\)</strong>: Cross-check total-energy and Green’s function methods; the two should agree
+within \(\sim 10\)–\(20%\).</li>
+<li><strong>Report orbital moments</strong>: When SOC is included, report both spin and orbital magnetic
+moments for comparison with XMCD experiments.</li>
+</ol>
+<h2 id="outlook"><a class="header" href="#outlook">Outlook</a></h2>
+<p>Collinear SDFT provides an accurate and efficient framework for most magnetic materials, with
+non-collinear SDFT required for frustrated systems, SOC-driven anisotropy, and DMI. A systematic
+limitation shared by all SDFT methods is the treatment of <strong>strongly correlated</strong> \(d\) and \(f\)
+electrons, where the mean-field XC potential fails to capture Mott–Hubbard physics. The
+<strong>DFT+U</strong> method, which introduces an on-site Hubbard correction for localised orbitals, is the
+subject of the next chapter.</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="05-BasisSets.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                            </a>
+
+                            <a rel="next prefetch" href="07-DFTU.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="05-BasisSets.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                    </a>
+
+                    <a rel="next prefetch" href="07-DFTU.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                    </a>
+            </nav>
+
+        </div>
+
+        <template id=fa-eye><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM432 256c0 79.5-64.5 144-144 144s-144-64.5-144-144s64.5-144 144-144s144 64.5 144 144zM288 192c0 35.3-28.7 64-64 64c-11.5 0-22.3-3-31.6-8.4c-.2 2.8-.4 5.5-.4 8.4c0 53 43 96 96 96s96-43 96-96s-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6z"/></svg></span></template>
+        <template id=fa-eye-slash><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M38.8 5.1C28.4-3.1 13.3-1.2 5.1 9.2S-1.2 34.7 9.2 42.9l592 464c10.4 8.2 25.5 6.3 33.7-4.1s6.3-25.5-4.1-33.7L525.6 386.7c39.6-40.6 66.4-86.1 79.9-118.4c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C465.5 68.8 400.8 32 320 32c-68.2 0-125 26.3-169.3 60.8L38.8 5.1zM223.1 149.5C248.6 126.2 282.7 112 320 112c79.5 0 144 64.5 144 144c0 24.9-6.3 48.3-17.4 68.7L408 294.5c5.2-11.8 8-24.8 8-38.5c0-53-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6c0 10.2-2.4 19.8-6.6 28.3l-90.3-70.8zm223.1 298L373 389.9c-16.4 6.5-34.3 10.1-53 10.1c-79.5 0-144-64.5-144-144c0-6.9 .5-13.6 1.4-20.2L83.1 161.5C60.3 191.2 44 220.8 34.5 243.7c-3.3 7.9-3.3 16.7 0 24.6c14.9 35.7 46.2 87.7 93 131.1C174.5 443.2 239.2 480 320 480c47.8 0 89.9-12.9 126.2-32.5z"/></svg></span></template>
+        <template id=fa-copy><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M502.6 70.63l-61.25-61.25C435.4 3.371 427.2 0 418.7 0H255.1c-35.35 0-64 28.66-64 64l.0195 256C192 355.4 220.7 384 256 384h192c35.2 0 64-28.8 64-64V93.25C512 84.77 508.6 76.63 502.6 70.63zM464 320c0 8.836-7.164 16-16 16H255.1c-8.838 0-16-7.164-16-16L239.1 64.13c0-8.836 7.164-16 16-16h128L384 96c0 17.67 14.33 32 32 32h47.1V320zM272 448c0 8.836-7.164 16-16 16H63.1c-8.838 0-16-7.164-16-16L47.98 192.1c0-8.836 7.164-16 16-16H160V128H63.99c-35.35 0-64 28.65-64 64l.0098 256C.002 483.3 28.66 512 64 512h192c35.2 0 64-28.8 64-64v-32h-47.1L272 448z"/></svg></span></template>
+        <template id=fa-play><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80V432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z"/></svg></span></template>
+        <template id=fa-clock-rotate-left><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M75 75L41 41C25.9 25.9 0 36.6 0 57.9V168c0 13.3 10.7 24 24 24H134.1c21.4 0 32.1-25.9 17-41l-30.8-30.8C155 85.5 203 64 256 64c106 0 192 86 192 192s-86 192-192 192c-40.8 0-78.6-12.7-109.7-34.4c-14.5-10.1-34.4-6.6-44.6 7.9s-6.6 34.4 7.9 44.6C151.2 495 201.7 512 256 512c141.4 0 256-114.6 256-256S397.4 0 256 0C185.3 0 121.3 28.7 75 75zm181 53c-13.3 0-24 10.7-24 24V256c0 6.4 2.5 12.5 7 17l72 72c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-65-65V152c0-13.3-10.7-24-24-24z"/></svg></span></template>
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr-ef4e11c1.min.js"></script>
+        <script src="mark-09e88c2c.min.js"></script>
+        <script src="searcher-c2a407aa.js"></script>
+
+        <script src="clipboard-1626706a.min.js"></script>
+        <script src="highlight-abc7f01d.js"></script>
+        <script src="book-a0b12cfe.js"></script>
+
+        <!-- Custom JS scripts -->
+        <script src="src/custom-69685f6c.js"></script>
+
+
+
+    </div>
+    </body>
+</html>
