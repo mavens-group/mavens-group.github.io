@@ -1,5 +1,4 @@
 ---
-title: "Part I — Foundations"
-linkTitle: "Part I — Foundations"
-weight: 10
+type: redirect
+target: "https://mavens-group.github.io/dft-notes/index.html"
 ---
