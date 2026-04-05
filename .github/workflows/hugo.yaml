@@ -97,6 +97,7 @@ jobs:
           hugo \
             --gc \
             --minify \
+            --ignoreCache \
             --baseURL "https://mavens-group.github.io/"
 
       - name: Deploy to GitHub Pages (Branch Method)
