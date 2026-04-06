@@ -32,6 +32,23 @@ jobs:
         working-directory: ./Docs/DFT
         run: mdbook build
 
+      - name: Generate Sitemap
+        working-directory: ./Docs/DFT
+        run: |
+          BASE="https://mavens-group.github.io/dft-notes"
+          DATE=$(date -u +"%Y-%m-%d")
+          echo '<?xml version="1.0" encoding="UTF-8"?>' > book/sitemap.xml
+          echo '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' >> book/sitemap.xml
+          find book -name "*.html" | sort | while read f; do
+            path="${f#book/}"
+            echo "  <url>" >> book/sitemap.xml
+            echo "    <loc>${BASE}/${path}</loc>" >> book/sitemap.xml
+            echo "    <lastmod>${DATE}</lastmod>" >> book/sitemap.xml
+            echo "    <changefreq>weekly</changefreq>" >> book/sitemap.xml
+            echo "  </url>" >> book/sitemap.xml
+          done
+          echo '</urlset>' >> book/sitemap.xml
+
       - name: Deploy to GitHub Pages Subdirectory
         uses: peaceiris/actions-gh-pages@v4
         with:
