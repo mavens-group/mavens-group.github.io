@@ -1,5 +1,5 @@
 ---
-title: "Density Functional Theory (DFT) Course: From Theory to Practice"
+title: "Density Functional Theory (DFT): Lecture Note"
 linkTitle: Density Functional Theory Course
 date: 2024-07-26
 summary: "Master Density Functional Theory (DFT) with this comprehensive course. Learn the Hohenberg-Kohn theorems, Kohn-Sham equations, and how to run practical electronic-structure calculations using VASP and Quantum ESPRESSO."
@@ -18,6 +18,8 @@ image:
   focal_point: 'top'
   alt_text: 'Visualization of electron density and electronic structure in Density Functional Theory'
 type: post
+listing:
+  id: none
 ---
 
 **Density Functional Theory (DFT)** is one of the most powerful theoretical frameworks for studying the electronic structure of atoms, molecules, and solids. It is widely used in condensed matter physics, quantum chemistry, and computational materials science to accurately predict the structural, electronic, magnetic, and optical properties of complex materials.
@@ -42,7 +44,6 @@ Theoretical knowledge is only half the battle. The second half of the course ope
 * **Brillouin Zone Integration**
 * **Eigenvalue Solvers**
 
----
 
 ## Meet Your Instructor
 

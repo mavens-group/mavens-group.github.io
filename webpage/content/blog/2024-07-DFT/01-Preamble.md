@@ -4,6 +4,10 @@ date: '2025-06-01'
 type: book
 weight: 01
 summary: Notation, conventions, atomic units, and symbol table
+
+_build:
+  list: never
+  render: always
 ---
 <!--more-->
 
