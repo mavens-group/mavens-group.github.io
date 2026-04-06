@@ -1,3 +1,5 @@
+# Kohn-Sham Equations
+
 The Hohenberg–Kohn theorems establish that the ground-state density \\(\rho_0(\mathbf{r})\\)
 uniquely determines all ground-state properties, and that the total energy \\(E[\rho]\\) is minimised
 by \\(\rho_0\\). However, they say nothing about *how* to compute the universal functional \\(F[\rho]\\),

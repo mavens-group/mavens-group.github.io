@@ -1,3 +1,5 @@
+# Hohenberg-Kohn Theorems
+
 The Hohenberg–Kohn (HK) theorems, proposed in 1964 by Pierre Hohenberg and Walter Kohn, are the
 fundamental theoretical pillars of Density Functional Theory (DFT). They establish that the
 ground-state properties of a many-electron system are **uniquely determined by its electron
