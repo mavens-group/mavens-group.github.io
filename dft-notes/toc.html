@@ -15,6 +15,32 @@
         <meta charset="UTF-8">
         <meta name="robots" content="noindex">
         <!-- Custom HTML head -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+        
+        <script>
+        window.MathJax = {
+          tex: {
+            inlineMath:  [['\\(', '\\)']],
+            displayMath: [['\\[', '\\]'], ['$$', '$$']],
+            tags: 'ams',
+            processEscapes:      true,
+            processEnvironments: true,
+          },
+          options: {
+            skipHtmlTags: ['script','noscript','style','textarea','pre','code'],
+          },
+          startup: {
+            ready() {
+              MathJax.startup.defaultReady();
+              MathJax.startup.promise.then(() => MathJax.typesetPromise());
+            }
+          }
+        };
+        </script>
+        
+        <script id="MathJax-script" async
+          src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+        </script>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff">
         <link rel="stylesheet" href="css/variables-8adf115d.css">
@@ -24,9 +50,9 @@
         <!-- Fonts -->
         <link rel="stylesheet" href="fonts/fonts-9644e21d.css">
         <!-- Custom theme stylesheets -->
-        <link rel="stylesheet" href="src/custom-6ac2dfa5.css">
+        <link rel="stylesheet" href="src/custom-5f363160.css">
     </head>
     <body class="sidebar-iframe-inner">
-        <ol class="chapter"><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="index.html" target="_parent">Cover</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="00_preamble.html" target="_parent">Preamble</a></span></li><li class="chapter-item expanded "><li class="part-title">Part I: Foundation</li></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="01-introduction.html" target="_parent"><strong aria-hidden="true">1.</strong> Introduction</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="02-HKTheorem.html" target="_parent"><strong aria-hidden="true">2.</strong> Hohenberg-Kohn Theorem</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="03-KSEqn.html" target="_parent"><strong aria-hidden="true">3.</strong> Kohn-Sham  Equations</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="04-XCFunctionals.html" target="_parent"><strong aria-hidden="true">4.</strong> Exchange-Correlation</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="05-BasisSets.html" target="_parent"><strong aria-hidden="true">5.</strong> Basis Sets</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="06-SpinDFT.html" target="_parent"><strong aria-hidden="true">6.</strong> Spin Dependent DFT</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="07-DFTU.html" target="_parent"><strong aria-hidden="true">7.</strong> DFT+U</a></span></li><li class="chapter-item expanded "><li class="part-title">Part II: Implementation</li></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="08-SCF.html" target="_parent"><strong aria-hidden="true">8.</strong> SCF</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="09-BZint.html" target="_parent"><strong aria-hidden="true">9.</strong> Brilloun Zone Integration</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="10-Eigen.html" target="_parent"><strong aria-hidden="true">10.</strong> Eigen Value Solver</a></span></li></ol>
+        <ol class="chapter"><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="index.html" target="_parent">Cover</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="00_preamble.html" target="_parent">Preamble</a></span></li><li class="chapter-item expanded "><li class="part-title">Part I: Foundation</li></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="01-introduction.html" target="_parent"><strong aria-hidden="true">1.</strong> Introduction</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="02-HKTheorem.html" target="_parent"><strong aria-hidden="true">2.</strong> Hohenberg-Kohn Theorem</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="03-KSEqn.html" target="_parent"><strong aria-hidden="true">3.</strong> Kohn-Sham Equations</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="04-XCFunctionals.html" target="_parent"><strong aria-hidden="true">4.</strong> Exchange-Correlation</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="05-BasisSets.html" target="_parent"><strong aria-hidden="true">5.</strong> Basis Sets</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="06-SpinDFT.html" target="_parent"><strong aria-hidden="true">6.</strong> Spin Dependent DFT</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="07-DFTU.html" target="_parent"><strong aria-hidden="true">7.</strong> DFT+U</a></span></li><li class="chapter-item expanded "><li class="part-title">Part II: Implementation</li></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="08-SCF.html" target="_parent"><strong aria-hidden="true">8.</strong> SCF</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="09-BZint.html" target="_parent"><strong aria-hidden="true">9.</strong> Brilloun Zone Integration</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="10-Eigen.html" target="_parent"><strong aria-hidden="true">10.</strong> Eigen Value Solver</a></span></li></ol>
     </body>
 </html>

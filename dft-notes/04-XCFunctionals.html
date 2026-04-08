@@ -7,6 +7,32 @@
 
 
         <!-- Custom HTML head -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+        
+        <script>
+        window.MathJax = {
+          tex: {
+            inlineMath:  [['\\(', '\\)']],
+            displayMath: [['\\[', '\\]'], ['$$', '$$']],
+            tags: 'ams',
+            processEscapes:      true,
+            processEnvironments: true,
+          },
+          options: {
+            skipHtmlTags: ['script','noscript','style','textarea','pre','code'],
+          },
+          startup: {
+            ready() {
+              MathJax.startup.defaultReady();
+              MathJax.startup.promise.then(() => MathJax.typesetPromise());
+            }
+          }
+        };
+        </script>
+        
+        <script id="MathJax-script" async
+          src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+        </script>
 
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -28,20 +54,18 @@
         <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="ayu-highlight-3fdfc3ac.css">
 
         <!-- Custom theme stylesheets -->
-        <link rel="stylesheet" href="src/custom-6ac2dfa5.css">
+        <link rel="stylesheet" href="src/custom-5f363160.css">
 
-        <!-- MathJax -->
-        <script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
         <!-- Provide site root and default themes to javascript -->
         <script>
             const path_to_root = "";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "searchindex-f9c84dd4.js";
+            window.path_to_searchindex_js = "searchindex-1496153c.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="toc-db725d58.js"></script>
+        <script src="toc-e07c914a.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -686,7 +710,7 @@ the subject of a later chapter.</p>
         <script src="book-a0b12cfe.js"></script>
 
         <!-- Custom JS scripts -->
-        <script src="src/custom-69685f6c.js"></script>
+        <script src="src/custom-cd58eebe.js"></script>
 
 
 
