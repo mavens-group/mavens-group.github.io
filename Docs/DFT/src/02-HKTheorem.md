@@ -1,4 +1,4 @@
-# Hohenberg-Kohn Theorems
+# Hohenberg-Kohn (HK) Theorems
 
 The Hohenberg–Kohn (HK) theorems, proposed in 1964 by Pierre Hohenberg and Walter Kohn, are the
 fundamental theoretical pillars of Density Functional Theory (DFT). They establish that the
@@ -46,15 +46,19 @@ Note that \\(\int \rho(r)\,dr = N\\).
 
 ### The First Hohenberg–Kohn Theorem
 
-**Theorem:** *For any system of interacting particles in an external potential \\(V_{\rm ext}(r)\\),
+<div class="theorem">
+For any system of interacting particles in an external potential \(V_{\rm ext}(r)\),
 the external potential is uniquely determined — up to a constant — by the ground-state electron
-density \\(\rho_0(r)\\).*
+density \\(\rho_0(r)\\).
+</div>
 
 Because \\(V_{\rm ext}(r)\\) uniquely determines \\(\hat{H}\\) (and hence all eigenstates and
 eigenvalues), the ground-state density \\(\rho_0(r)\\) alone determines everything about the system.
 The wavefunction \\(\Psi_0\\) is therefore a functional of \\(\rho_0\\), written \\(\Psi_0 = \Psi[\rho_0]\\).
 
 #### Proof (by contradiction)
+
+<div class="proof" title="by contradiction">
 
 Assume the contrary: suppose there exist two **different** external potentials
 \\(V_{\rm ext}(\mathbf{r})\\) and \\(V'_{\rm ext}(\mathbf{r})\\), differing by more than a constant,
@@ -112,14 +116,17 @@ This is a **contradiction**. Our assumption must therefore be false: no two diff
 potentials (differing by more than a constant) can share the same ground-state density. The map
 \\(\rho_0(r) \mapsto V_{\rm ext}(r)\\) is therefore one-to-one (up to a constant). \\(\blacksquare\\)
 
+</div>
+
 #### Consequence: the universal energy functional
 
-Since \\(\rho_0 \to V_{\rm ext} \to \hat{H} \to \Psi_0\\), the ground-state energy can be written as
+<div class="lemma">
+Since \(\rho_0 \to V_{\rm ext} \to \hat{H} \to \Psi_0\), the ground-state energy can be written as
 a functional of the density:
 
 \\[
 \begin{align*}
-  E[\rho] =& F[\rho]+\int V_{\rm ext}(r)\rho(r)\,dr\\
+  E[\rho] =& F[\rho]+\int V_{\rm ext}(r)\rho(r)\,dr\\\\
    F[\rho] =& \langle\Psi[\rho]|\, \hat{T}+\hat{V}_{ee}\,| \Psi[\rho]\rangle
 \end{align*}
 \\]
@@ -127,13 +134,18 @@ a functional of the density:
 The quantity \\(F[\rho]\\) is called the **universal functional** of the density. It is "universal"
 because it depends only on the electron density — not on the specific external potential —
 making it, in principle, applicable to any system of interacting electrons.
+</div>
 
 ---
 
 ### The Second Hohenberg–Kohn Theorem
 
-**Theorem:** *The true ground-state density \\(\rho_0(\mathbf{r})\\) minimises the total energy functional
-\\(E[\rho]\\). That is, for any trial density \\(\tilde{\rho}(\mathbf{r})\\) satisfying*
+<div class="theorem">
+The true ground-state density \(\rho_0(\mathbf{r})\) minimises the total energy functional
+\(E[\rho]\).
+</div>
+
+That is, for any trial density \\(\tilde{\rho}(\mathbf{r})\\) satisfying
 
 <div>
 \begin{equation}
@@ -161,10 +173,36 @@ The functional is:
 
 where \\(F[\rho]\\) is the universal functional defined above.
 
-**Proof sketch:** By the first HK theorem, any trial density \\(\tilde{\rho} \neq \rho_0\\) corresponds
-to some other external potential and thus to some other wavefunction \\(\tilde{\Psi} \neq \Psi_0\\).
-By the Rayleigh–Ritz principle applied to \\(\hat{H}\\), \\(\langle\tilde{\Psi}|\hat{H}|\tilde{\Psi}\rangle \geq E_0\\),
-which translates directly to \\(E[\tilde{\rho}] \geq E_0\\). \\(\blacksquare\\)
+
+#### Proof of the 2nd HK Theorem
+<div class="proof">
+
+By the First HK Theorem, every *v*-representable density \\(\tilde{\rho}\\) uniquely determines an external potential \\(\tilde{V}_{\rm ext}\\) (up to a constant), and hence a Hamiltonian \\(\tilde{H}\\) and a ground-state wavefunction \\(\tilde{\Psi}\\). The ground-state energy functional is therefore well-defined:
+
+\\[
+E[\tilde{\rho}] = \langle \tilde{\Psi}[\tilde{\rho}] | \hat{T} + \hat{V}\_{ee} + \hat{V}\_{\rm ext} | \tilde{\Psi}[\tilde{\rho}] \rangle = F[\tilde{\rho}] + \int V_{\rm ext}(\mathbf{r})\tilde{\rho}(\mathbf{r}) d\mathbf{r}
+\\]
+
+Now consider the true ground state \\(|\Psi_0\rangle\\) with density \\(\rho_0\\) and energy \\(E_0\\). For any trial density \\(\tilde{\rho} \neq \rho_0\\), the associated wavefunction \\(\tilde{\Psi}\\) is *different* from \\(\Psi_0\\) (again by the First HK Theorem). Since \\(\Psi_0\\) is the true ground state of \\(\hat{H}\\), the **Rayleigh–Ritz variational principle** gives:
+
+\\[
+E_0 = \langle \Psi_0 | \hat{H} | \Psi_0 \rangle \leq \langle \tilde{\Psi} | \hat{H} | \tilde{\Psi} \rangle.
+\\]
+
+The right-hand side is precisely \\(E[\tilde{\rho}]\\) as defined above (using \\(\hat{V}_{\rm ext}\\) of the *original* system). Therefore:
+
+\\[
+E_0 \leq E[\tilde{\rho}], \quad \forall\, \tilde{\rho} \neq \rho_0,
+\\]
+
+with equality if and only if \\(\tilde{\Psi} = \Psi_0\\), i.e. \\(\tilde{\rho} = \rho_0\\). \\(\blacksquare\\)
+
+</div>
+
+The key logical chain is:
+
+1. The First HK Theorem guarantees the map \\(\tilde{\rho} \mapsto \tilde{\Psi}\\) is one-to-one, so \\(\tilde{\rho} \neq \rho_0 \Rightarrow \tilde{\Psi} \neq \Psi_0\\).
+2. The Rayleigh–Ritz principle then directly delivers the inequality \\(E[\tilde{\rho}] \geq E_0\\).
 
 The second theorem transforms the problem of solving the many-body Schrödinger equation into a
 **variational problem over electron densities** — a function in three dimensions rather than \\(3N\\)

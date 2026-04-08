@@ -139,6 +139,7 @@ html:has(#cover-page) .page-wrapper {
   margin-top: 0.8vh !important;  /* Add a small gap above it */
   font-family: 'Consolas', 'Monaco', monospace !important; /* Tech look */
 }
+
 /* BUTTON */
 #cover-page .cover-button {
   display: inline-block;
@@ -202,40 +203,78 @@ html:has(#cover-page) .page-wrapper {
 .sidebar-scrollbox .chapter > li:first-child {
     display: none !important;
 }
-/* /* ========================================= */
-   /* TOP BAR (MAIN PANEL) LOGO */
-   /* ========================================= */ */
-/* [> Ensure the title container uses Flexbox to align icon and text <] */
-/* .menu-title { */
-    /* display: flex !important; */
-    /* align-items: center; */
-    /* justify-content: center; */
-/* } */
 
-/* .top-bar-logo-link { */
-    /* display: flex; [> Removes weird gap under images <] */
-    /* align-items: center; */
-    /* margin-right: 10px; [> Space between logo and text <] */
-    /* text-decoration: none !important; */
-    /* border: none !important; */
-/* } */
+/* ========================================================================
+5. CUSTOM MATH ENVIRONMENT BLOCKS
+   Usage: <div class="theorem" data-title="...">, <div class="proof">, etc.
+======================================================================== */
 
-/* .top-bar-logo { */
-    /* height: 1.5em; [> Scale relative to the font size <] */
-    /* width: auto; */
-    /* transition: transform 0.2s ease; */
-/* } */
+/* Shared base styles for all environment types */
+div.theorem, div.lemma, div.corollary, div.proposition,
+div.definition, div.proof, div.remark, div.assumption, div.example {
+    display: block;
+    box-sizing: border-box;
+    width: 100%;
+    margin: 1.4em 0 !important;
+    padding: 0.75em 1.1em 0.75em 1.2em !important;
+    border-radius: 0 6px 6px 0;
+    color: var(--fg) !important;
+    font-style: normal;
+    /* border-left is set per-type below */
+}
 
-/* .top-bar-logo:hover { */
-    /* transform: scale(1.1); */
-/* } */
+/* Label injected by JS as first child div */
+.math-env-label {
+    display: block;
+    margin-bottom: 0.35em;
+    font-weight: 700;
+    font-variant: small-caps;
+    letter-spacing: 0.06em;
+    font-size: 0.92em;
+    line-height: 1.4;
+}
 
-/* [> Mobile Tweak: Ensure title text doesn't vanish if logo takes space <] */
-/* @media only screen and (max-width: 600px) { */
-    /* .menu-title { */
-        /* font-size: 1.2rem; [> Slightly smaller text on mobile <] */
-    /* } */
-    /* .top-bar-logo { */
-        /* height: 1.2em; */
-    /* } */
-/* } */
+.math-env-title {
+    font-weight: 400;
+    font-variant: normal;
+    letter-spacing: normal;
+    font-style: italic;
+    margin-left: 0.2em;
+}
+.math-env-title::before { content: "("; }
+.math-env-title::after  { content: ")"; }
+
+/* Per-type: border + background + label colour — muted academic palette */
+div.theorem     { border-left: 4px solid #4a7bb5 !important; background: rgba(74,123,181,0.09) !important; }
+div.lemma       { border-left: 4px solid #7b6fa0 !important; background: rgba(123,111,160,0.09) !important; }
+div.corollary   { border-left: 4px solid #7aaabf !important; background: rgba(122,170,191,0.09) !important; }
+div.proposition { border-left: 4px solid #5b8db8 !important; background: rgba(91,141,184,0.09) !important; }
+div.definition  { border-left: 4px solid #4e8c6e !important; background: rgba(78,140,110,0.09) !important; }
+div.proof       { border-left: 4px solid #8a9bae !important; background: rgba(138,155,174,0.09) !important; font-style: italic; }
+div.remark      { border-left: 4px solid #b07d62 !important; background: rgba(176,125,98,0.09) !important; }
+div.assumption  { border-left: 4px solid #7a8c6e !important; background: rgba(122,140,110,0.08) !important; }
+div.example     { border-left: 4px solid #c4a84f !important; background: rgba(196,168,79,0.09) !important; }
+
+div.theorem     .math-env-label { color: #2d5f8a; }
+div.lemma       .math-env-label { color: #5c5080; }
+div.corollary   .math-env-label { color: #4a88a2; }
+div.proposition .math-env-label { color: #3a6e96; }
+div.definition  .math-env-label { color: #2e6b4f; }
+div.proof       .math-env-label { color: #566878; font-style: normal; }
+div.remark      .math-env-label { color: #8a5c3e; }
+div.assumption  .math-env-label { color: #546347; }
+div.example     .math-env-label { color: #8a6f1e; }
+
+/* proof body italic but math upright */
+div.proof mjx-container { font-style: normal; }
+
+/* Dark themes — slightly boosted alpha so muted colours stay visible */
+html.coal div.theorem,   html.navy div.theorem,   html.ayu div.theorem     { background: rgba(74,123,181,0.14) !important; }
+html.coal div.lemma,     html.navy div.lemma,     html.ayu div.lemma       { background: rgba(123,111,160,0.14) !important; }
+html.coal div.corollary, html.navy div.corollary, html.ayu div.corollary   { background: rgba(122,170,191,0.14) !important; }
+html.coal div.proposition, html.navy div.proposition, html.ayu div.proposition { background: rgba(91,141,184,0.14) !important; }
+html.coal div.definition,  html.navy div.definition,  html.ayu div.definition  { background: rgba(78,140,110,0.14) !important; }
+html.coal div.proof,     html.navy div.proof,     html.ayu div.proof       { background: rgba(138,155,174,0.12) !important; }
+html.coal div.remark,    html.navy div.remark,    html.ayu div.remark      { background: rgba(176,125,98,0.14) !important; }
+html.coal div.assumption, html.navy div.assumption, html.ayu div.assumption { background: rgba(122,140,110,0.13) !important; }
+html.coal div.example,   html.navy div.example,   html.ayu div.example     { background: rgba(196,168,79,0.14) !important; }

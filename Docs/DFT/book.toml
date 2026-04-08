@@ -4,7 +4,8 @@ authors = ["Rudra Banerjee"]
 language = "en"
 
 [output.html]
-mathjax-support = true
+mathjax-support = false
+theme = "theme"
 additional-css = ["src/custom.css"]
 additional-js = ["src/custom.js"]
 site-url = "/dft-notes/"
