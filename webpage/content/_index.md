@@ -19,7 +19,7 @@ sections:
 
         - title: Governing Quantum Materials
           content: |
-            Integrating first-principles, we explore how 3d-dopants modulate magnetic exchange ($J_{ij}$) and $T_C$. This predictive approach accelerates the discovery of disordered Heuslers for advanced spintronics and magnetic cooling.<br>doi: [10.1016/j.jssc.2024.124602](https://doi.org/10.1016/j.jssc.2024.124602) | doi: [10.1063/5.0238199](https://doi.org/10.1063/5.0238199) | doi: [10.1016/j.jpcs.2024.111914](https://doi.org/10.1016/j.jpcs.2024.111914)
+            Integrating first-principles, we explore how 3d-dopants modulate magnetic exchange ($J_{ij}$) and $T_C$. This predictive approach accelerates the discovery of disordered Heuslers for advanced spintronics and magnetic cooling.<br><small>doi: [10.1016/j.jssc.2024.124602](https://doi.org/10.1016/j.jssc.2024.124602) | doi: [10.1063/5.0238199](https://doi.org/10.1063/5.0238199) | doi: [10.1016/j.jpcs.2024.111914](https://doi.org/10.1016/j.jpcs.2024.111914)</small>
           align: left
           background:
             image:
@@ -31,7 +31,7 @@ sections:
 
         - title: Screening 2D Catalysts
           content: |
-            We computationally screen bimetallic Janus MXenes for sustainable energy. By exploiting d-band asymmetry to modulate surface thermodynamics ($\Delta G_{H*}$), we predict ideal, near-thermoneutral materials for green hydrogen.<br>doi: [10.1016/j.physb.2025.417148](https://doi.org/10.1016/j.physb.2025.417148)
+            We computationally screen bimetallic Janus MXenes for sustainable energy. By exploiting d-band asymmetry to modulate surface thermodynamics ($\Delta G_{H*}$), we predict ideal, near-thermoneutral materials for green hydrogen.<br><small>doi: [10.1016/j.physb.2025.417148](https://doi.org/10.1016/j.physb.2025.417148)</small>
           align: left
           background:
             image:
@@ -46,6 +46,7 @@ sections:
       slide_height: ''
       loop: true
       interval: 5000
+      css_class: "slider-fade"
 
   - block: markdown
     content:
