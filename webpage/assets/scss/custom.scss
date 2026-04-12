@@ -195,4 +195,46 @@ body {
   .carousel-control-prev,
   .carousel-control-next {
     display: none !important;
-}}
+  }
+}
+
+/* Targeted Fix for Mobile Width & Font */
+@media (max-width: 768px) {
+  /* 1. Force the container and its internal rows/cols to fill the screen */
+  .slider-fade .container,
+  .slider-fade .row,
+  .slider-fade [class*="col-"] {
+    max-width: 100% !important;
+    width: 100% !important;
+    flex: 0 0 100% !important;
+    padding-left: 10px !important;
+    padding-right: 10px !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+
+  /* 2. Fix the vertical positioning (35vh can be too much on small screens) */
+  .slider-fade h1 span {
+    margin-top: 25vh !important; /* Brings the title up so you don't have to scroll */
+  }
+
+  /* 3. Adjust Font Sizes for readability */
+  .slider-fade h1 {
+    font-size: 2rem !important; /* Slightly smaller title for mobile */
+    line-height: 1.2;
+    margin-bottom: 1rem;
+  }
+
+  .slider-fade p {
+    font-size: 1.2rem !important; /* Keeps the text readable but not tiny */
+    line-height: 1.5;
+  }
+
+  /* 4. Keep DOIs small but clear */
+  .slider-fade small {
+    font-size: 0.85rem !important;
+    display: block;
+    margin-top: 1rem;
+    word-break: break-all; /* Prevents long DOI links from overflowing the screen */
+  }
+}
