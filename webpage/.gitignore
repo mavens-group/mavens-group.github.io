@@ -1,2 +1,4 @@
 resources
 *.swp
+assets/jsconfig.json
+public/

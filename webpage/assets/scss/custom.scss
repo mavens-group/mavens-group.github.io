@@ -1,14 +1,36 @@
-/* --- Navbar Logo + Text Fix --- */
+/* ==========================================================================
+   1. FONTS & GLOBAL RESET
+   ========================================================================== */
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,300;0,400;0,700;0,800;1,300&display=swap');
+
+/* Force Roboto Condensed everywhere to kill the Windows Serif bug */
+html, body, p, div, span, li, input, textarea {
+  font-family: 'Roboto Condensed', sans-serif !important;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Roboto Condensed', sans-serif !important;
+  /* font-weight: 700; */
+}
+
+/* ==========================================================================
+   2. NAVBAR & BRANDING
+   ========================================================================== */
+.navbar-brand, .nav-link {
+  font-family: 'Roboto Condensed', sans-serif !important;
+}
+
 .navbar-brand {
   display: flex !important;
   align-items: center;
-  color: inherit; // Ensures the brand link uses the theme text color
+  color: inherit;
 
   .navbar-logo-svg svg {
     height: 40px;
     width: auto;
     margin-right: 12px;
-    /* The SVG will now automatically change color because of currentColor! */
   }
   .navbar-brand-text {
     display: inline-block !important;
@@ -19,33 +41,22 @@
   }
 }
 
-// [> 1. LIGHT MODE: Apply to body when it DOES NOT have the .dark class <]
-// body:not(.dark) .navbar-brand .navbar-logo-svg {
-  // filter: invert(1) brightness(0.2) !important;
-// }
-
-// [> 2. DARK MODE: Force it to show its natural white color <]
-// body.dark .navbar-brand .navbar-logo-svg {
-  // filter: invert(0) brightness(1) !important;
-// }
-
-/* Mobile Wrapper consistency */
 .navbar-brand-mobile-wrapper .navbar-brand {
   display: flex !important;
 }
-/* Reset counter once per page */
-body {
-  counter-reset: pub-counter;
-}
 
-/* Increment per publication */
+/* ==========================================================================
+   3. PUBLICATIONS & PEOPLE
+   ========================================================================== */
+/* Numbered Publication List */
+body { counter-reset: pub-counter; }
+
 .pub-list-item.view-citation {
   counter-increment: pub-counter;
   position: relative;
   padding-left: 2em;
 }
 
-/* Render number */
 .pub-list-item.view-citation::before {
   content: counter(pub-counter) ".";
   position: absolute;
@@ -53,131 +64,65 @@ body {
   font-weight: 200;
 }
 
-
-// [> Alumni Researchers - normal size <]
-// .people-person.alumni-researcher {
-  // flex: 0 0 30%;   [> 3 per row on desktop <]
-  // max-width: 30%;
-  // margin-bottom: 1.5rem;
-// }
-
-// Alumni Grads / Project Students - smaller
-// .people-person.alumni-grad {
-  // flex: 0 0 25%;   [> 2 per row on desktop/mobile <]
-  // max-width: 15%;
-  // font-size: 0.85rem;
-// }
-
-// [> Mobile responsiveness <]
-// @media (max-width: 768px) {
-  // .people-person.alumni-researcher,
-  // .people-person.alumni-grad {
-    // flex: 0 0 100%;
-    // max-width: 100%;
-  // }
-// }
-
-
-/* Alumni Grads - smaller font */
+/* Alumni Grid Styling */
 .people-person.alumni-grad {
-  /* Optionally shrink the whole card */
-  flex: 0 0 20%;   /* 2 per row on desktop/mobile */
+  flex: 0 0 20%;
   max-width: 15%;
-  font-size: 0.85rem; /* smaller text overall */
+  font-size: 0.85rem;
 
-  /* If you want to target specific elements inside the card: */
-  .portrait-title h2 {
-    font-size: .9rem;  /* Name */
-  }
-
-  .portrait-title h3 {
-    font-size: 0.75rem; /* Role/Project */
-  }
-
-  .people-interests {
-    font-size: 0.75rem; /* Interests, if displayed */
-  }
+  .portrait-title h2 { font-size: .9rem; }
+  .portrait-title h3 { font-size: 0.75rem; }
+  .people-interests { font-size: 0.75rem; }
 }
 
-// Mobile / small tablets - 3 per row
+/* Mobile People Grid (3 per row) */
 @media (max-width: 999px) {
-  .people-person.alumni-grad {
-    flex: 0 0 30%;   /* roughly 2 per row with some margin */
-    max-width: 48%;
-    font-size: 0.85rem; /* same as desktop */
-    margin-right: 2%;   /* spacing between cards */
-    margin-bottom: 1rem;
-
-    &:nth-child(2n) { /* remove right margin for every 2nd card */
-      margin-right: 0;
-    }
-    .portrait-title h3 {
-      font-size: 0.0rem; /* Role/Project */
-    }
-  }
-}
-
-/* Mobile / small tablets: hide role and icons for alumni grad */
-@media (max-width: 768px) {
   .people-person.alumni-grad {
     flex: 0 0 30%;
     max-width: 48%;
     margin-right: 2%;
     margin-bottom: 1rem;
-
-    &:nth-child(2n) {
-      margin-right: 0;
-    }
-
-    /* Hide the role/position */
-    .portrait-title h3 {
-      display: none;
-    }
-
-    /* Hide social icons */
-    ul.network-icon {
-      display: none;
-    }
+    &:nth-child(2n) { margin-right: 0; }
+    .portrait-title h3 { font-size: 0.0rem; }
   }
 }
 
-/* True Cross-Fade for Wowchemy Slider */
-.slider-fade {
-  .carousel-inner {
-    /* Ensure the container doesn't flash the background color */
-    background-color: #000;
+/* Mobile People Grid (Hide extras) */
+@media (max-width: 768px) {
+  .people-person.alumni-grad {
+    .portrait-title h3, ul.network-icon { display: none; }
   }
+}
+
+/* ==========================================================================
+   4. SLIDER FADE MECHANICS
+   ========================================================================== */
+.slider-fade {
+  .carousel-inner { background-color: #000; }
 
   .carousel-item {
-    /* Stack slides on top of each other instead of side-by-side */
     display: block !important;
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
     opacity: 0;
-    /* Increase duration for a 'dreamy' smooth transition */
     transition: opacity 1.5s ease-in-out !important;
     z-index: 0;
     transform: none !important;
   }
 
-  /* The active slide stays visible and on top */
   .carousel-item.active {
-    position: relative; /* Maintains the height of the slider */
+    position: relative;
     opacity: 1;
     z-index: 2;
   }
 
-  /* Ensures the incoming slide starts fading in immediately */
   .carousel-item-next.carousel-item-start,
   .carousel-item-prev.carousel-item-end {
     opacity: 1;
     z-index: 1;
   }
 
-  /* Keeps the DOIs subtle and small */
   small {
     font-size: 0.85rem;
     opacity: 0.7;
@@ -186,55 +131,54 @@ body {
     line-height: 1.4;
   }
 
-  /* Hide the bottom "pager" dots */
-  .carousel-indicators {
-    display: none !important;
-  }
-
-  /* Hide the left and right navigation arrows */
-  .carousel-control-prev,
-  .carousel-control-next {
+  .carousel-indicators, .carousel-control-prev, .carousel-control-next {
     display: none !important;
   }
 }
 
-/* Targeted Fix for Mobile Width & Font */
+/* Mobile Slider Adjustments */
 @media (max-width: 768px) {
-  /* 1. Force the container and its internal rows/cols to fill the screen */
-  .slider-fade .container,
-  .slider-fade .row,
-  .slider-fade [class*="col-"] {
+  .slider-fade .container, .slider-fade .row, .slider-fade [class*="col-"] {
     max-width: 100% !important;
     width: 100% !important;
     flex: 0 0 100% !important;
-    padding-left: 10px !important;
-    padding-right: 10px !important;
-    margin-left: 0 !important;
-    margin-right: 0 !important;
+    padding: 0 10px !important;
+    margin: 0 !important;
   }
 
-  /* 2. Fix the vertical positioning (35vh can be too much on small screens) */
-  .slider-fade h1 span {
-    margin-top: 25vh !important; /* Brings the title up so you don't have to scroll */
+  .slider-fade h1 { font-size: 2rem !important; margin-bottom: 1rem; }
+  .slider-fade p { font-size: 1.2rem !important; line-height: 1.5; }
+  .slider-fade small { word-break: break-all; margin-top: 1rem; }
+}
+
+/* ==========================================================================
+   5. FIRST SLIDE (IDENTITY) OVERRIDES
+   ========================================================================== */
+.carousel-item:first-child {
+  h1 span {
+    font-family: 'Roboto Condensed', sans-serif !important;
+    font-weight: 400 !important; /* Regular weight for a modern look */
+    letter-spacing: 0.5rem !important;
+    font-size: 4rem !important;
+    color: #fff;
+    text-shadow: 2px 2px 10px rgba(0,0,0,0.4);
+    display: inline-block;
+    margin-top: 35vh; /* Desktop vertical alignment */
   }
 
-  /* 3. Adjust Font Sizes for readability */
-  .slider-fade h1 {
-    font-size: 2rem !important; /* Slightly smaller title for mobile */
-    line-height: 1.2;
-    margin-bottom: 1rem;
+  p {
+    font-family: 'Roboto Condensed', sans-serif !important;
+    font-weight: 300 !important;
+    letter-spacing: 2px;
+    font-size: 1.4rem;
   }
+}
 
-  .slider-fade p {
-    font-size: 1.2rem !important; /* Keeps the text readable but not tiny */
-    line-height: 1.5;
+@media (max-width: 768px) {
+  .carousel-item:first-child h1 span {
+    font-size: 2.8rem !important;
+    letter-spacing: 0.2rem !important;
+    margin-top: 25vh !important; /* Mobile vertical alignment */
   }
-
-  /* 4. Keep DOIs small but clear */
-  .slider-fade small {
-    font-size: 0.85rem !important;
-    display: block;
-    margin-top: 1rem;
-    word-break: break-all; /* Prevents long DOI links from overflowing the screen */
-  }
+  .carousel-item:first-child p { font-size: 1.1rem !important; }
 }
