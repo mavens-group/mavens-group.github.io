@@ -1,3 +1,5 @@
 # Netlify redirects
 # Automatically generated
 # Documentation: https://docs.netlify.com/routing/redirects/
+/post/HEA/ /research/post/energy/
+/post/2d/ /research/post/quantum/
