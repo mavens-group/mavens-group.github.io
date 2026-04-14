@@ -261,3 +261,14 @@ h1, h2, h3, h4 {
   }
   .carousel-item:first-child p { font-size: 1.1rem !important; }
 }
+
+.article-header > div:first-child {
+  position: absolute !important;
+  bottom: 0 !important;
+  top: auto !important;
+  height: auto !important;
+  align-items: flex-end !important;
+  padding-bottom: 2rem;
+  width: 100%;
+  background: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.3));
+}
