@@ -1,0 +1,8 @@
+# data/fonts/custom.toml
+name = "custom"
+
+[[font_set]]
+  heading_font = "Roboto Condensed"
+  body_font = "Roboto Condensed"
+  nav_font = "Roboto Condensed"
+  mono_font = "Lucida Console"
