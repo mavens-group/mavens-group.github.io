@@ -262,7 +262,25 @@ h1, h2, h3, h4 {
   .carousel-item:first-child p { font-size: 1.1rem !important; }
 }
 
-.article-header > div:first-child {
+// [> ==========================================================================
+   // SUBPAGE TITLE POSITION
+   // ========================================================================== */
+// .article-header > div:first-child {
+  // position: absolute !important;
+  // bottom: 0 !important;
+  // top: auto !important;
+  // height: auto !important;
+  // align-items: flex-end !important;
+  // padding-bottom: 2rem;
+  // width: 100%;
+  // background: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.3));
+// }
+
+/* ==========================================================================
+   SUBPAGE TITLE POSITION — only on top-level section pages
+   (e.g. /research, /publications), not on /research/post/hea
+   ========================================================================== */
+.article-header:has(> img.article-banner) > div:first-child {
   position: absolute !important;
   bottom: 0 !important;
   top: auto !important;
@@ -271,4 +289,23 @@ h1, h2, h3, h4 {
   padding-bottom: 2rem;
   width: 100%;
   background: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.3));
+}/* --- Research page: wider content + tamer banner on large screens --- */
+
+/* 1. Text column: full width on mobile/tablet, 95% on desktop */
+@include media-breakpoint-up(lg) {
+  .universal-wrapper {
+    max-width: 80%;
+    width: 80%;
+  }
+}
+
+/* 2. Banner image: cap height and control focal point.
+   Only constrain the <img>, not the parent — capping .article-header
+   with overflow:hidden breaks subpage banners where the title overlay
+   sits at the bottom of the header. */
+.article-header .article-banner {
+  width: 100%;
+  max-height: 70vh;
+  object-fit: cover;
+  object-position: center 50%;
 }
