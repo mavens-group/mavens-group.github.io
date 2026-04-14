@@ -19,7 +19,7 @@ sections:
 
         - title: Governing Quantum Materials
           content: |
-            Integrating first-principles, we explore how 3d-dopants modulate magnetic exchange ($J_{ij}$) and $T_C$. This predictive approach accelerates the discovery of disordered Heuslers for advanced spintronics and magnetic cooling.<br><small>doi: [10.1016/j.jssc.2024.124602](https://doi.org/10.1016/j.jssc.2024.124602) | doi: [10.1063/5.0238199](https://doi.org/10.1063/5.0238199) | doi: [10.1016/j.jpcs.2024.111914](https://doi.org/10.1016/j.jpcs.2024.111914)</small>
+            Integrating first-principles molecular dynamics, DFT and Monte-Carlo methods, we explore how 3d-dopants modulate magnetic exchange (J<sub>ij</sub>) and critical temperature (T<sub>C</sub>). This predictive approach accelerates the discovery of disordered Heuslers for advanced spintronics and magnetic cooling.<br><small>doi: [10.1016/j.jssc.2024.124602](https://doi.org/10.1016/j.jssc.2024.124602)<br>doi: [10.1063/5.0238199](https://doi.org/10.1063/5.0238199)<br>doi: [10.1016/j.jpcs.2024.111914](https://doi.org/10.1016/j.jpcs.2024.111914)</small>
           align: left
           background:
             image:
