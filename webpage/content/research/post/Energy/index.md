@@ -1,12 +1,22 @@
 ---
-title: Energy materials by design
+title: Energy Materials by design
 summary: Which features of the electronic structure actually decide whether a material solves an energy problem?
 show_date: false
 profile: false
 weight: 1
 aliases:
   - /post/HEA/
+image:
+  placement: 1
+  caption: "Energy materials animation"
+  focal_point: "Center"
+  preview_only: true
 ---
+<!-- {{< video src="output.mp4" controls="no" autoplay="yes" loop="yes" muted="yes" >}} -->
+<video autoplay loop muted playsinline style="width: 100%; border-radius: 8px;">
+  <source src="energy.mp4" type="video/mp4">
+</video>
+
 ### Scientific Challenge
 The energy transition is, at its heart, a materials problem. Catalysts that split water without platinum, magnetocalorics that refrigerate without hydrofluorocarbons, and electrodes that store charge reversibly all depend on placing a material at a narrow operating point in a high-dimensional compositional space. The scientific question is physical: **which features of the electronic structure actually decide whether a material sits at that operating point, and which are incidental?** A catalyst is active when the hydrogen adsorption free energy falls inside a thermoneutral window; a magnetocaloric is useful when its Curie temperature sits near room temperature with a large entropy change. The functional target is macroscopic, but the control variable — Fermi-level position relative to a pseudogap, d-band filling, site-resolved d-band centre — is electronic and atomic.
 

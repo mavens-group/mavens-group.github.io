@@ -6,7 +6,16 @@ profile: false
 weight: 2
 aliases:
   - /post/2d/
+image:
+  placement: 1
+  caption: "Energy materials animation"
+  focal_point: "Center"
+  preview_only: true
 ---
+<video autoplay loop muted playsinline style="width: 100%; border-radius: 8px;">
+  <source src="quantum.mp4" type="video/mp4">
+</video>
+
 ### Scientific Challenge
 Spintronic and quantum-information technologies place unusually unforgiving demands on materials. A half-metal is useful only if its spin polarisation is complete and its conduction band is connected across the sample; a spin-gapless semiconductor is useful only if its gap and exchange splitting survive the disorder synthesis introduces; a defect-based qubit is useful only if its local environment is both well-defined and thermodynamically stable. The question that organises our work here is hard: **given that we can form a local magnetic moment, a defect state, or a site-selective electronic environment, what decides whether that local feature survives into a macroscopic spin-dependent response?** A vacancy can host a perfectly good local moment and yet produce a paramagnetic insulator; a disordered Heusler can have large site-resolved exchanges and still fail to order usefully. The gap between local electronic structure and collective behaviour is where the interesting physics of these systems actually lives.
 
