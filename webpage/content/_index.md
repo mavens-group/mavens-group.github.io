@@ -19,7 +19,7 @@ sections:
 
         - title: Governing Quantum Materials
           content: |
-            Integrating first-principles molecular dynamics, DFT and Monte-Carlo methods, we explore how 3d-dopants modulate magnetic exchange (J<sub>ij</sub>) and critical temperature (T<sub>C</sub>). This predictive approach accelerates the discovery of disordered Heuslers for advanced spintronics and magnetic cooling.<br><small>doi: [10.1016/j.jssc.2024.124602](https://doi.org/10.1016/j.jssc.2024.124602)<br>doi: [10.1063/5.0238199](https://doi.org/10.1063/5.0238199)<br>doi: [10.1016/j.jpcs.2024.111914](https://doi.org/10.1016/j.jpcs.2024.111914)</small>
+            When does local electronic structure decide a material's function, and when does something larger take over? We track how symmetry breaking — a vacancy, a Janus stacking, a substitutional site — propagates from local descriptor to collective spin-dependent response.<br><small>doi: [10.1016/j.jssc.2024.124602](https://doi.org/10.1016/j.jssc.2024.124602)<br>doi: [10.1063/5.0238199](https://doi.org/10.1063/5.0238199)<br>doi: [10.1016/j.jpcs.2024.111914](https://doi.org/10.1016/j.jpcs.2024.111914)</small>
           align: left
           background:
             image:
@@ -29,9 +29,9 @@ sections:
             position: center
             color: '#555'
 
-        - title: Screening 2D Catalysts
+        - title: Energy materials by Design
           content: |
-            We computationally screen bimetallic Janus MXenes for sustainable energy. By exploiting d-band asymmetry to modulate surface thermodynamics ($\Delta G_{H*}$), we predict ideal, near-thermoneutral materials for green hydrogen.<br><small>doi: [10.1016/j.physb.2025.417148](https://doi.org/10.1016/j.physb.2025.417148)</small>
+            Which features of the electronic structure actually decide whether a material solves an energy problem? We isolate electronic-structure control variables — d-band filling, site-resolved d-band centre, Fermi-level position — to make compositional design predictive rather than exploratory.<br><small>doi: [10.1016/j.physb.2025.417148](https://doi.org/10.1016/j.physb.2025.417148)</small>
           align: left
           background:
             image:
