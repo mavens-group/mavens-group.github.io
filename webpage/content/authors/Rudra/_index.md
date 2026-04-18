@@ -54,7 +54,7 @@ teaching:
     - course: Computational Physics
       institution: MSc, BSc
     - course: Computational Materials Science
-      institution: PhD Coursework
+      institution: PhD
     - course: Nuclear and Particle Physics
       institution: MSc
 
@@ -90,8 +90,8 @@ seo:
 ---
 At the intersection of quantum physics and materials design, Dr Rudra Banerjee leads the **M**aterials **A**dvancing a **V**iable **EN**ergy future (MAVENs) Group in the [Department of Physics and Nanotechnology](https://www.srmist.edu.in/department/department-of-physics-and-nanotechnology/) at [SRMIST, Kattankulathur](https://www.srmist.edu.in) — using computation to answer a deceptively simple question: _why do some materials behave the way they do, and how can we design better ones?_
 
-His work combines _ab-initio_ DFT, KKR–CPA, and Monte Carlo simulations with machine learning to predict electronic, magnetic, and catalytic properties of disordered alloys, MXenes, and quantum defect systems — bridging atomic-scale structure to device-relevant function.
+His work uses ab-initio DFT, and Monte Carlo simulations to compute electronic structure, revealing how atomic-scale disorder governs magnetic, catalytic, and quantum properties in bulk systems (Heusler alloys, perovskites, Fe-based alloys), 2D materials (MXenes, TMDCs), and defect-based quantum systems — with machine learning accelerating materials discovery.
 
 He currently leads a group of four PhD researchers and three project students, and has graduated one PhD and eight MSc/BSc project students — with work spanning Heusler alloys, 2D catalysis, and qubit materials design.
 
-He teaches classical mechanics, mathematical physics, and computational physics at BSc/MSc level, and has developed a graduate-level monograph on Density Functional Theory for PhD coursework — covering everything from the Hohenberg–Kohn theorem to practical implementation in modern codes.
+He teaches classical mechanics, mathematical physics, and computational physics at BSc/MSc level, and has developed a graduate-level monograph on [Density Functional Theory](../../blog/2024-07-dft) for PhD coursework — covering everything from the Hohenberg–Kohn theorem to practical implementation.

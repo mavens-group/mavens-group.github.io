@@ -107,105 +107,104 @@
           {{ end }}
         </ul>
       </div>
-      {{ end }}
+    {{ end }}
 
-      {{ with $person.education }}
-      <div class="col-md-6">
-        <div class="section-subheading">{{ i18n "education" | markdownify }}</div>
-        <ul class="ul-edu fa-ul mb-0">
-          {{ range .courses }}
-          <li>
-            <i class="fa-li fas fa-graduation-cap"></i>
-            <div class="description">
-              <p class="course">{{ .course }}{{ with .year }}, {{ . }}{{ end }}</p>
-              <p class="institution">{{ .institution }}</p>
-            </div>
-          </li>
-          {{ end }}
-        </ul>
-      </div>
-      {{ end }}
-
-      {{ with $person.experience }}
-      <div class="col-md-6">
-        <div class="section-subheading">{{ "Experience" | markdownify }}</div>
-        <ul class="ul-edu fa-ul mb-0">
-          {{ range .courses }}
-          <li>
-            <i class="fa-li fas fa-graduation-cap"></i>
-            <div class="description">
-              <p class="course">{{ .institution }}</p>
-              <p class="institution">{{ .course }}{{ with .year }}, {{ . }}{{ end }}</p>
-            </div>
-          </li>
-          {{ end }}
-        </ul>
-      </div>
-      {{ end }}
-
-      {{ with $person.teaching }}
+    {{ with $person.teaching }}
       <div class="col-md-6">
         <div class="section-subheading">{{ "Teaching" | markdownify }}</div>
         <ul class="ul-edu fa-ul mb-0">
           {{ range .courses }}
-          <li>
-            <i class="fa-li fas fa-chalkboard-teacher"></i>
-            <div class="description">
-              <p class="course">{{ .course }}{{ with .year }}, {{ . }}{{ end }}</p>
-              <p class="institution">{{ .institution }}</p>
-            </div>
-          </li>
+            <li>
+              <i class="fa-li fas fa-chalkboard-teacher"></i>
+              <div class="description">
+                <p class="course">{{ .course }}{{ with .institution }}, <small style="opacity: 0.7;">{{ . }}</small>{{ end }}</p>
+              </div>
+            </li>
           {{ end }}
         </ul>
       </div>
-      {{ end }}
+    {{ end }}
 
-      {{ with $person.accolade }}
+    {{ with $person.education }}
+      <div class="col-md-6">
+        <div class="section-subheading">{{ i18n "education" | markdownify }}</div>
+        <ul class="ul-edu fa-ul mb-0">
+          {{ range .courses }}
+            <li>
+              <i class="fa-li fas fa-graduation-cap"></i>
+              <div class="description">
+                <p class="course">{{ .course }}{{ with .year }}, {{ . }}{{ end }}</p>
+                <p class="institution">{{ .institution }}</p>
+              </div>
+            </li>
+          {{ end }}
+        </ul>
+      </div>
+    {{ end }}
+
+    {{ with $person.experience }}
+      <div class="col-md-6">
+        <div class="section-subheading">{{ "Experience" | markdownify }}</div>
+        <ul class="ul-edu fa-ul mb-0">
+          {{ range .courses }}
+            <li>
+              <i class="fa-li fas fa-graduation-cap"></i>
+              <div class="description">
+                <p class="course">{{ .institution }}</p>
+                <p class="institution">{{ .course }}{{ with .year }}, {{ . }}{{ end }}</p>
+              </div>
+            </li>
+          {{ end }}
+        </ul>
+      </div>
+    {{ end }}
+
+    {{ with $person.accolade }}
       <div class="col-md-6">
         <div class="section-subheading">{{ "Accolade" | markdownify }}</div>
         <ul class="ul-edu fa-ul mb-0">
           {{ range .courses }}
-          <li>
-            <i class="fa-li fas fa-trophy"></i>
-            <div class="description">
-              <p class="course">{{ .course }}{{ with .year }}, {{ . }}{{ end }}</p>
-              <p class="institution">{{ .institution }}</p>
-            </div>
-          </li>
+            <li>
+              <i class="fa-li fas fa-trophy"></i>
+              <div class="description">
+                <p class="course">{{ .course }}{{ with .year }}, {{ . }}{{ end }}</p>
+                <p class="institution">{{ .institution }}</p>
+              </div>
+            </li>
           {{ end }}
         </ul>
       </div>
-      {{ end }}
+    {{ end }}
 
-      {{ with $person.skills }}
+    {{ with $person.skills }}
       <ul class="col-md-6" aria-hidden="true">
         <div class="section-subheading">{{ "Skills" | markdownify }}</div>
         <ul class="ul-edu fa-ul mb-0">
-        {{ range $person.skills }}
-        {{ $pack := or .icon_pack "fas" }}
-        {{ $pack_prefix := $pack }}
-        {{ if in (slice "fab" "fas" "far" "fal") $pack }}
-          {{ $pack_prefix = "fa" }}
-        {{ end }}
-          <li>
-            <i class="fa-li fas {{ $pack }} {{ $pack_prefix }}-{{ .icon }} medium-icon{{ .icon}}"></i>
-            <div class="description">
-              <p class="course">{{ .skill }}</p>
-            </div>
-          </li>
-        {{/* {{ $link := .skill }} */}}
-        {{/* {{ $scheme := (urls.Parse $link).Scheme }} */}}
-        {{/* {{ $target := "" }} */}}
-        {{/* {{ if not $scheme }} */}}
-          {{/* {{ $link = .link | relLangURL }} */}}
-        {{/* {{ else if in (slice "http" "https") $scheme }} */}}
-          {{/* {{ $target = "target=\"_blank\" rel=\"noopener\"" }} */}}
-        {{/* {{ end }} */}}
-        {{/* <li> */}}
-            {{/* <i class="{{ $pack }} {{ $pack_prefix }}-{{ .icon }} medium-icon">{{ " " }}</i>{{ .skill }} */}}
-        {{/* </li> */}}
-      {{ end }}
-      </ul>
+          {{ range $person.skills }}
+            {{ $pack := or .icon_pack "fas" }}
+            {{ $pack_prefix := $pack }}
+            {{ if in (slice "fab" "fas" "far" "fal") $pack }}
+              {{ $pack_prefix = "fa" }}
+            {{ end }}
+            <li>
+              <i class="fa-li fas {{ $pack }} {{ $pack_prefix }}-{{ .icon }} medium-icon{{ .icon}}"></i>
+              <div class="description">
+                <p class="course">{{ .skill }}</p>
+              </div>
+            </li>
+            {{/* {{ $link := .skill }} */}}
+            {{/* {{ $scheme := (urls.Parse $link).Scheme }} */}}
+            {{/* {{ $target := "" }} */}}
+            {{/* {{ if not $scheme }} */}}
+            {{/* {{ $link = .link | relLangURL }} */}}
+            {{/* {{ else if in (slice "http" "https") $scheme }} */}}
+            {{/* {{ $target = "target=\"_blank\" rel=\"noopener\"" }} */}}
+            {{/* {{ end }} */}}
+            {{/* <li> */}}
+              {{/* <i class="{{ $pack }} {{ $pack_prefix }}-{{ .icon }} medium-icon">{{ " " }}</i>{{ .skill }} */}}
+              {{/* </li> */}}
+          {{ end }}
+        </ul>
       {{ end }}
 
     </div>
