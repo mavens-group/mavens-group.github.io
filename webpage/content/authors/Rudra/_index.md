@@ -25,10 +25,18 @@ organizations:
 bio: "Designing next-generation magnetic, catalytic, and quantum materials from first principles — bridging atomic-scale disorder to device-relevant function."
 
 interests:
-  - Disordered & High-Entropy Alloys
-  - 2D Materials & MXenes
-  - Qubit & Quantum Materials Design
-  - Magnetocaloric & Spintronic Materials
+  - interest: Disordered & High-Entropy Alloys
+    icon: cube
+    icon_pack: fas
+  - interest: 2D Materials & MXenes
+    icon: atom
+    icon_pack: fas
+  - interest: Qubit & Quantum Materials Design
+    icon: brain
+    icon_pack: fas
+  - interest: Magnetocaloric & Spintronic Materials
+    icon: magnet
+    icon_pack: fas
 
 experience:
   courses:
