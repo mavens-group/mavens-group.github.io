@@ -22,13 +22,13 @@ organizations:
     url: 'https://www.srmist.edu.in/'
 
 # Short bio (displayed in user profile at end of posts)
-bio: "Computational physicist exploring energy and quantum materials through DFT, Monte Carlo, and
-machine learning methods."
+bio: "Designing next-generation magnetic, catalytic, and quantum materials from first principles — bridging atomic-scale disorder to device-relevant function."
 
 interests:
-  - Density Functional Theory
-  - Monte Carlo Simulations
-  - Machine Learning
+  - Disordered & High-Entropy Alloys
+  - 2D Materials & MXenes
+  - Qubit & Quantum Materials Design
+  - Magnetocaloric & Spintronic Materials
 
 experience:
   courses:
@@ -88,10 +88,10 @@ seo:
   description: "Dr. Rudra Banerjee is a computational physicist leading the MAVENs group at SRMIST. His research uses DFT, Monte Carlo, and machine learning to design materials for quantum, energy, and magnetic applications."
   keywords: ["Computational Materials Science", "DFT", "Quantum Materials", "Spintronics", "Machine Learning", "Heusler Alloys", "Green Energy", "Qubit Materials", "Monte Carlo", "Magnetocaloric Materials", "SRMIST"]
 ---
-Dr Rudra Banerjee, Assistant Professor, leads the **M**aterials **A**dvancing a **V**iable **EN**ergy future (MAVENs) Group in the [Department of Physics and Nanotechnology](https://www.srmist.edu.in/department/department-of-physics-and-nanotechnology/) at [SRMIST, Kattankulathur](https://www.srmist.edu.in). With over a decade of research in 2D materials and disordered systems, he focuses on designing novel materials for green energy and quantum technologies.
+At the intersection of quantum physics and materials design, Dr Rudra Banerjee leads the **M**aterials **A**dvancing a **V**iable **EN**ergy future (MAVENs) Group in the [Department of Physics and Nanotechnology](https://www.srmist.edu.in/department/department-of-physics-and-nanotechnology/) at [SRMIST, Kattankulathur](https://www.srmist.edu.in) — using computation to answer a deceptively simple question: _why do some materials behave the way they do, and how can we design better ones?_
 
-His work combines Monte Carlo simulations, _ab-initio_ DFT, and KKR–CPA methods with machine learning approaches to predict and analyse material properties from first principles. He supervises MSc and PhD researchers in computational physics and materials design, guiding them through projects in quantum materials, energy applications, and computational method development.
+His work combines _ab-initio_ DFT, KKR–CPA, and Monte Carlo simulations with machine learning to predict electronic, magnetic, and catalytic properties of disordered alloys, MXenes, and quantum defect systems — bridging atomic-scale structure to device-relevant function.
 
-He teaches core physics courses like classical mechanics, mathematical physics, and computational physics to undergraduate and postgraduate students, and computational methods to PhD scholars.
+He currently leads a group of four PhD researchers and three project students, and has graduated one PhD and eight MSc/BSc project students — with work spanning Heusler alloys, 2D catalysis, and qubit materials design.
 
-He is a lifetime member of the Indian Physics Association.
+He teaches classical mechanics, mathematical physics, and computational physics at BSc/MSc level, and has developed a graduate-level monograph on Density Functional Theory for PhD coursework — covering everything from the Hohenberg–Kohn theorem to practical implementation in modern codes.

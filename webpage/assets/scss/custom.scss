@@ -400,3 +400,16 @@ h1, h2, h3, h4 {
     min-height: 100dvh;
   }
 }
+
+/* ==========================================================================
+   PUBLICATIONS HEADING: "View all" link on author page
+   ========================================================================== */
+.pub-view-all {
+  font-size: 0.87rem;
+  font-weight: 600;
+  margin-left: 0.6rem;
+  vertical-align: middle;
+  text-decoration: none;
+
+  &:hover { text-decoration: underline; }
+}

@@ -26,8 +26,7 @@
 
     {{ if $count }}
     <div class="article-widget content-widget-hr">
-      <h3>{{ if gt $totalPublications (len $limitedQuery) }} Publications <small>(Latest: Check
-          <a href="../../publication/">Publications</a> for complete list)</small>{{ else }}Publications{{ end }}</h3>
+      <h3>Publications{{ if gt $totalPublications (len $limitedQuery) }} <a href="../../publication/" class="pub-view-all">View all &rarr;</a>{{ end }}</h3>
       <ul>
         {{ range $limitedQuery }}
         <li>
