@@ -29,8 +29,8 @@ interests:
     icon: cube
     icon_pack: fas
   - interest: 2D Materials & MXenes
-    icon: atom
-    icon_pack: fas
+    icon: hive
+    icon_pack: fab
   - interest: Qubit & Quantum Materials Design
     icon: brain
     icon_pack: fas
