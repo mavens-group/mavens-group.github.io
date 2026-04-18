@@ -1,3 +1,8 @@
+/* ==========================================================================
+   FONT FACES
+   Roboto Condensed loaded locally across four weights (100–600).
+   STIX Two Text faces are kept commented out for future use.
+   ========================================================================== */
 @font-face {
   font-family: 'Roboto Condensed';
   src: url('/fonts/roboto-condensed-100.woff2') format('woff2');
@@ -26,29 +31,34 @@
   font-style: normal;
   font-display: swap;
 }
+
 // @font-face {
-  // font-family: 'STIX Two Text';
-  // src: url('/fonts/stix-two-text-400.woff2') format('woff2');
-  // font-weight: 400;
-  // font-style: normal;
-  // font-display: swap;
+//   font-family: 'STIX Two Text';
+//   src: url('/fonts/stix-two-text-400.woff2') format('woff2');
+//   font-weight: 400;
+//   font-style: normal;
+//   font-display: swap;
 // }
 // @font-face {
-  // font-family: 'STIX Two Text';
-  // src: url('/fonts/stix-two-text-400italic.woff2') format('woff2');
-  // font-weight: 400;
-  // font-style: italic;
-  // font-display: swap;
+//   font-family: 'STIX Two Text';
+//   src: url('/fonts/stix-two-text-400italic.woff2') format('woff2');
+//   font-weight: 400;
+//   font-style: italic;
+//   font-display: swap;
 // }
 // @font-face {
-  // font-family: 'STIX Two Text';
-  // src: url('/fonts/stix-two-text-600.woff2') format('woff2');
-  // font-weight: 600;
-  // font-style: normal;
-  // font-display: swap;
+//   font-family: 'STIX Two Text';
+//   src: url('/fonts/stix-two-text-600.woff2') format('woff2');
+//   font-weight: 600;
+//   font-style: normal;
+//   font-display: swap;
 // }
+
+
 /* ==========================================================================
    GLOBAL TYPOGRAPHY
+   Sets Roboto Condensed as the site-wide typeface for body and headings.
+   Also resets the CSS counter used by the publication list.
    ========================================================================== */
 body {
   font-family: 'Roboto Condensed', sans-serif;
@@ -61,12 +71,13 @@ h1, h2, h3, h4 {
   font-weight: 300;
 }
 
-/* Centre the hero/landing wrapper heading */
+/* Centre the heading inside the universal (research page) content wrapper */
 .universal-wrapper h1 {
   text-align: center;
   vertical-align: baseline;
 }
 
+/* Centre CTA button groups site-wide */
 .cta-group {
   justify-content: center;
 }
@@ -74,6 +85,8 @@ h1, h2, h3, h4 {
 
 /* ==========================================================================
    NAVBAR
+   Aligns logo SVG and brand text side-by-side; works for both desktop
+   and the mobile wrapper variant.
    ========================================================================== */
 .navbar-brand {
   display: flex !important;
@@ -102,6 +115,8 @@ h1, h2, h3, h4 {
 
 /* ==========================================================================
    PUBLICATION LIST COUNTER
+   Auto-numbers publication entries on the /publications page using a CSS
+   counter. Counter is reset on <body> (see GLOBAL TYPOGRAPHY above).
    ========================================================================== */
 .pub-list-item.view-citation {
   counter-increment: pub-counter;
@@ -119,7 +134,12 @@ h1, h2, h3, h4 {
 
 /* ==========================================================================
    ALUMNI GRAD CARDS
+   Shrinks the card size and typography for alumni/project-student entries
+   on the People page. Responsive breakpoints adjust layout for tablets
+   and phones, hiding role text and social icons on small screens.
    ========================================================================== */
+
+/* Desktop: small fixed-width cards */
 .people-person.alumni-grad {
   flex: 0 0 20%;
   max-width: 15%;
@@ -130,6 +150,7 @@ h1, h2, h3, h4 {
   .people-interests   { font-size: 0.75rem; }
 }
 
+/* Tablet (≤999px): two cards per row, role text suppressed */
 @media (max-width: 999px) {
   .people-person.alumni-grad {
     flex: 0 0 30%;
@@ -143,6 +164,7 @@ h1, h2, h3, h4 {
   }
 }
 
+/* Mobile (≤768px): two cards per row, role text and social icons hidden */
 @media (max-width: 768px) {
   .people-person.alumni-grad {
     flex: 0 0 30%;
@@ -158,8 +180,16 @@ h1, h2, h3, h4 {
 
 
 /* ==========================================================================
-   SLIDER: CROSS-FADE
+   HOMEPAGE SLIDER
    ========================================================================== */
+
+/* ------------------------------------------------------------------
+   Cross-fade transition
+   Overrides Bootstrap's default slide translation with an opacity
+   fade. All items are stacked absolutely; only .active is visible.
+   ------------------------------------------------------------------ */
+
+/* Hide prev/next arrow controls */
 .carousel-control-prev,
 .carousel-control-next {
   display: none;
@@ -168,6 +198,7 @@ h1, h2, h3, h4 {
 .slider-fade {
   .carousel-inner {
     background-color: #000;
+
     /* Stack all items on top of each other */
     > .carousel-item {
       display: block !important;         /* always in flow so height is preserved */
@@ -180,6 +211,7 @@ h1, h2, h3, h4 {
       pointer-events: none;
       z-index: 1;
     }
+
     /* The active item sits on top, is visible, and receives clicks */
     > .carousel-item.active {
       position: relative;                /* holds the container height */
@@ -187,6 +219,7 @@ h1, h2, h3, h4 {
       pointer-events: auto;
       z-index: 2;
     }
+
     /* Transitioning items: keep them visible during crossfade */
     > .carousel-item-next,
     > .carousel-item-prev {
@@ -206,9 +239,10 @@ h1, h2, h3, h4 {
   }
 }
 
-/* ==========================================================================
-   SLIDER: PAGINATION DOTS
-   ========================================================================== */
+/* ------------------------------------------------------------------
+   Pagination indicators
+   Replaces Bootstrap's default wide-rectangle dashes with round dots.
+   ------------------------------------------------------------------ */
 .carousel-indicators [data-bs-target],
 .carousel-indicators li {
   width: 8px !important;
@@ -220,9 +254,11 @@ h1, h2, h3, h4 {
   margin-right: 4px !important;
   flex: unset !important;
 }
-/* ==========================================================================
-   SLIDER: MOBILE FIXES
-   ========================================================================== */
+
+/* ------------------------------------------------------------------
+   Mobile layout fixes (≤768px)
+   Forces full-width columns and adjusts font sizes for the slider.
+   ------------------------------------------------------------------ */
 @media (max-width: 768px) {
   .slider-fade .container,
   .slider-fade .row,
@@ -242,10 +278,11 @@ h1, h2, h3, h4 {
   .slider-fade small    { font-size: 0.85rem !important; display: block; margin-top: 1rem; word-break: break-all; }
 }
 
-
-/* ==========================================================================
-   SLIDER: FIRST SLIDE (IDENTITY / MAVENs)
-   ========================================================================== */
+/* ------------------------------------------------------------------
+   First slide typography (MAVENs identity slide)
+   Large letter-spaced heading pushed down ~35vh; mobile override
+   reduces size and spacing.
+   ------------------------------------------------------------------ */
 .carousel-item:first-child {
   h1 span {
     font-family: 'Roboto Condensed', sans-serif !important;
@@ -275,24 +312,33 @@ h1, h2, h3, h4 {
   .carousel-item:first-child p { font-size: 1.1rem !important; }
 }
 
-// [> ==========================================================================
-   // SUBPAGE TITLE POSITION
-   // ========================================================================== */
-// .article-header > div:first-child {
-  // position: absolute !important;
-  // bottom: 0 !important;
-  // top: auto !important;
-  // height: auto !important;
-  // align-items: flex-end !important;
-  // padding-bottom: 2rem;
-  // width: 100%;
-  // background: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.3));
-// }
 
 /* ==========================================================================
-   SUBPAGE TITLE POSITION — only on top-level section pages
-   (e.g. /research, /publications), not on /research/post/hea
+   ARTICLE / SUBPAGE BANNER
    ========================================================================== */
+
+/* ------------------------------------------------------------------
+   Title overlay position
+   Pins the title block to the bottom of the banner image, with a
+   gradient scrim, but ONLY on top-level section pages that have a
+   direct <img class="article-banner"> child (e.g. /research,
+   /publications). Deeper subpages (/research/post/hea) are unaffected.
+
+   NOTE: The broader selector below (commented out) applied to ALL
+   article headers and was replaced by the :has() version.
+   ------------------------------------------------------------------ */
+
+// .article-header > div:first-child {
+//   position: absolute !important;
+//   bottom: 0 !important;
+//   top: auto !important;
+//   height: auto !important;
+//   align-items: flex-end !important;
+//   padding-bottom: 2rem;
+//   width: 100%;
+//   background: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.3));
+// }
+
 .article-header:has(> img.article-banner) > div:first-child {
   position: absolute !important;
   bottom: 0 !important;
@@ -302,9 +348,12 @@ h1, h2, h3, h4 {
   padding-bottom: 2rem;
   width: 100%;
   background: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.3));
-}/* --- Research page: wider content + tamer banner on large screens --- */
+}
 
-/* 1. Text column: full width on mobile/tablet, 95% on desktop */
+/* ------------------------------------------------------------------
+   Content width on large screens
+   Narrows the research page text column to 80% for readability.
+   ------------------------------------------------------------------ */
 @include media-breakpoint-up(lg) {
   .universal-wrapper {
     max-width: 80%;
@@ -312,10 +361,12 @@ h1, h2, h3, h4 {
   }
 }
 
-/* 2. Banner image: cap height and control focal point.
-   Only constrain the <img>, not the parent — capping .article-header
-   with overflow:hidden breaks subpage banners where the title overlay
-   sits at the bottom of the header. */
+/* ------------------------------------------------------------------
+   Banner image constraints
+   Caps banner height at 70vh and centres the focal point.
+   The <img> is constrained directly (not its parent) to avoid
+   breaking the bottom-pinned title overlay on subpages.
+   ------------------------------------------------------------------ */
 .article-header .article-banner {
   width: 100%;
   max-height: 70vh;
@@ -323,7 +374,14 @@ h1, h2, h3, h4 {
   object-position: center 50%;
 }
 
-/* Fix mobile browser address bar clipping the fullscreen hero */
+
+/* ==========================================================================
+   MOBILE VIEWPORT FIX
+   Uses dvh (dynamic viewport height) to account for the browser address
+   bar on mobile, preventing the fullscreen hero from being clipped.
+   Falls back gracefully to the vh-based rules in _base.scss on older
+   browsers that do not support dvh.
+   ========================================================================== */
 @supports (min-height: 1dvh) {
   .home-section.fullscreen,
   .fullscreen {
