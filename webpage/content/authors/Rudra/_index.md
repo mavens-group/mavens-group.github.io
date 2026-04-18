@@ -28,9 +28,9 @@ interests:
   - interest: Disordered & High-Entropy Alloys
     icon: cube
     icon_pack: fas
-  - interest: 2D Materials & MXenes
-    icon: hive
-    icon_pack: fab
+  - interest: 2D and Layered Materials
+    icon: hexagon
+    icon_pack: fas
   - interest: Qubit & Quantum Materials Design
     icon: brain
     icon_pack: fas
