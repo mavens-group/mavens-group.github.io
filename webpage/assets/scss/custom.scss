@@ -207,6 +207,20 @@ h1, h2, h3, h4 {
 }
 
 /* ==========================================================================
+   SLIDER: PAGINATION DOTS
+   ========================================================================== */
+.carousel-indicators [data-bs-target],
+.carousel-indicators li {
+  width: 8px !important;
+  height: 8px !important;
+  border-radius: 50% !important;
+  border-top: none !important;
+  border-bottom: none !important;
+  margin-left: 4px !important;
+  margin-right: 4px !important;
+  flex: unset !important;
+}
+/* ==========================================================================
    SLIDER: MOBILE FIXES
    ========================================================================== */
 @media (max-width: 768px) {
@@ -307,4 +321,24 @@ h1, h2, h3, h4 {
   max-height: 70vh;
   object-fit: cover;
   object-position: center 50%;
+}
+
+/* Fix mobile browser address bar clipping the fullscreen hero */
+@supports (min-height: 1dvh) {
+  .home-section.fullscreen,
+  .fullscreen {
+    min-height: calc(100dvh - 70px);
+  }
+
+  @media (max-width: 768px) {
+    .home-section.fullscreen,
+    .fullscreen {
+      min-height: calc(100dvh - 50px);
+    }
+  }
+
+  .no-navbar .home-section.fullscreen,
+  .no-navbar .fullscreen {
+    min-height: 100dvh;
+  }
 }
