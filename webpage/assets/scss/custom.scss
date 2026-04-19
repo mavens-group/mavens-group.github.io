@@ -134,60 +134,40 @@ h1, h2, h3, h4 {
 
 /* ==========================================================================
    ALUMNI GRAD CARDS
-   Shrinks the card size and typography for alumni/project-student entries
-   on the People page. Responsive breakpoints adjust layout for tablets
-   and phones, hiding role text and social icons on small screens.
+   Smaller cards (130px avatar) that flow naturally based on available space.
    ========================================================================== */
 
-/* Desktop: small fixed-width cards */
 .people-person.alumni-grad {
-  flex: 0 0 20%;
-  max-width: 15%;
-  font-size: 0.85rem;
+  /* Override Bootstrap col-12 which forces 100% width on mobile */
+  flex: 0 0 auto !important;
+  width: auto !important;
+  max-width: none !important;
 
-  .portrait-title h2 { font-size: 0.9rem; }
-  .portrait-title h3 { font-size: 0.75rem; }
-  .people-interests   { font-size: 0.75rem; }
+  /* Smaller avatar: 130px instead of default 270px */
+  .avatar {
+    width: 130px !important;
+    height: 130px !important;
+  }
+
+  /* Smaller fonts than current students (default h2 is ~1.5-1.75rem) */
+  .portrait-title h2 {
+    font-size: 0.95rem !important;
+  }
+
+  .portrait-title h3 {
+    font-size: 0.85rem !important;
+  }
+
+  .people-interests {
+    font-size: 0.8rem !important;
+  }
 }
 
-/* Tablet (≤999px): two cards per row, role text suppressed */
-// @media (max-width: 999px) {
-  // .people-person.alumni-grad {
-    // flex: 0 0 30% !important;
-    // max-width: 48% !important;
-    // font-size: 0.85rem !important;
-    // margin-right: 2% !important;
-    // margin-bottom: 1rem !important;
-
-    // &:nth-child(2n) { margin-right: 0 !important; }
-    // .portrait-title h3 { font-size: 0 !important; }
-  // }
-// }
-
-/* Mobile (≤768px): two cards per row, role text and social icons hidden */
+/* Hide role and social icons on mobile screens */
 @media (max-width: 768px) {
   .people-person.alumni-grad {
-    flex: 0 0 48% !important;
-    max-width: 48% !important;
-    margin-right: 4% !important;
-    margin-bottom: 1.5rem !important;
-    font-size: .9rem !important;
-
-    &:nth-child(2n) { margin-right: 0 !important; }
-
-    .portrait-title h2 {
-      font-size: .9rem !important;
-      margin-top: 0.5rem !important;
-    }
-    // .portrait-title h3 { display: none !important; }
+    .portrait-title h3 { display: none !important; }
     ul.network-icon    { display: none !important; }
-
-    /* Make avatar scale with container width */
-    .avatar {
-      width: 70% !important;
-      height: auto !important;
-      max-width: 180px !important;
-    }
   }
 }
 
