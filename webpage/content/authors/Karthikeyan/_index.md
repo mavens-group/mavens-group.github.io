@@ -9,7 +9,7 @@ title: Karthikeyan C A
 # Full name (for SEO)
 first_name: Karthikeyan
 last_name: C A
-join: 2025
+join: -2026
 
 # Username (this should match the folder name)
 authors:
@@ -46,8 +46,8 @@ social:
   - icon: envelope-square
     icon_pack: fas
     link: 'mailto:kc3477@srmist.edu.in'
-user_groups:
-  - Grad Students
+
+user_groups: ["Alumni (Grad)"]
 ---
 Karthikeyan is a Master's student in the [Department of Physics and
 Nanotechnology](https://www.srmist.edu.in/department/department-of-physics-and-nanotechnology/) at

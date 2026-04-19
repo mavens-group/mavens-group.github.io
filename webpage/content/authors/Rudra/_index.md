@@ -26,17 +26,17 @@ bio: "Designing next-generation magnetic, catalytic, and quantum materials from 
 
 interests:
   - interest: Disordered & High-Entropy Alloys
-    icon: cube
-    icon_pack: fas
+    icon: box
+    icon_pack: feather
   - interest: 2D and Layered Materials
     icon: hexagon
-    icon_pack: fas
+    icon_pack: feather
   - interest: Qubit & Quantum Materials Design
-    icon: brain
-    icon_pack: fas
+    icon: aiml
+    icon_pack: custom
   - interest: Magnetocaloric & Spintronic Materials
     icon: magnet
-    icon_pack: fas
+    icon_pack: custom
 
 experience:
   courses:

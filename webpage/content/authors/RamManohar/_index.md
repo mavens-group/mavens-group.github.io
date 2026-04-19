@@ -20,7 +20,7 @@ authors:
 superuser: false
 
 # Role/position
-role: Masters project (2023-24)
+role: PG Project (2023-24)
 
 # Organizations/Affiliations
 organizations:

@@ -98,24 +98,56 @@
 
     <div class="row">
 
-      {{ with $person.interests }}
+     {{ with $person.interests }}
         <div class="col-md-6">
           <div class="section-subheading">{{ i18n "interests" | markdownify }}</div>
           <ul class="ul-interests fa-ul mb-0">
             {{ range . }}
               {{ if reflect.IsMap . }}
-                {{/* This handles the NEW format with icons */}}
                 {{ $pack := or .icon_pack "fas" }}
-                {{ $pack_prefix := $pack }}
-                {{ if in (slice "fab" "fas" "far" "fal") $pack }}
-                  {{ $pack_prefix = "fa" }}
+
+                {{ if eq $pack "custom" }}
+                  {{/* Custom SVG Icons from assets/media/icons/ */}}
+                  {{ $iconPath := printf "media/icons/%s.svg" .icon }}
+                  {{ $iconResource := resources.Get $iconPath }}
+                  {{ if $iconResource }}
+                    <li>
+                      <i class="fa-li">
+                        <span class="feather-icon">
+                          {{ $iconResource.Content | safeHTML }}
+                        </span>
+                      </i>
+                      {{ .interest | markdownify | emojify }}
+                    </li>
+                  {{ else }}
+                    <li>
+                      <i class="fa-li fas fa-question-circle"></i>
+                      {{ .interest | markdownify | emojify }} (icon not found: {{ $iconPath }})
+                    </li>
+                  {{ end }}
+                {{ else if eq $pack "feather" }}
+                  {{/* Feather Icons */}}
+                  <li>
+                    <i class="fa-li">
+                      <svg class="feather-icon" data-feather="{{ .icon | default "star" }}"></svg>
+                    </i>
+                    {{ .interest | markdownify | emojify }}
+                  </li>
+
+                {{ else }}
+                  {{/* FontAwesome Icons */}}
+                  {{ $pack_prefix := $pack }}
+                  {{ if in (slice "fab" "fas" "far" "fal") $pack }}
+                    {{ $pack_prefix = "fa" }}
+                  {{ end }}
+                  <li>
+                    <i class="fa-li {{ $pack }} {{ $pack_prefix }}-{{ .icon | default "star" }}"></i>
+                    {{ .interest | markdownify | emojify }}
+                  </li>
                 {{ end }}
-                <li>
-                  <i class="fa-li {{ $pack }} {{ $pack_prefix }}-{{ .icon | default "star" }}"></i>
-                  {{ .interest | markdownify | emojify }}
-                </li>
+
               {{ else }}
-                {{/* This handles your OLD string format without crashing */}}
+                {{/* OLD string format without icons */}}
                 <li>
                   <i class="fa-li fas fa-check"></i> {{ . | markdownify | emojify }}
                 </li>
@@ -124,6 +156,32 @@
           </ul>
         </div>
       {{ end }}
+      {{/* {{ with $person.interests }} */}}
+      {{/* <div class="col-md-6"> */}}
+        {{/* <div class="section-subheading">{{ i18n "interests" | markdownify }}</div> */}}
+        {{/* <ul class="ul-interests fa-ul mb-0"> */}}
+          {{/* {{ range . }} */}}
+          {{/* {{ if reflect.IsMap . }} */}}
+          {{/* [> This handles the NEW format with icons <] */}}
+          {{/* {{ $pack := or .icon_pack "fas" }} */}}
+          {{/* {{ $pack_prefix := $pack }} */}}
+          {{/* {{ if in (slice "fab" "fas" "far" "fal") $pack }} */}}
+          {{/* {{ $pack_prefix = "fa" }} */}}
+          {{/* {{ end }} */}}
+          {{/* <li> */}}
+            {{/* <i class="fa-li {{ $pack }} {{ $pack_prefix }}-{{ .icon | default "star" }}"></i> */}}
+            {{/* {{ .interest | markdownify | emojify }} */}}
+            {{/* </li> */}}
+          {{/* {{ else }} */}}
+          {{/* [> This handles your OLD string format without crashing <] */}}
+          {{/* <li> */}}
+            {{/* <i class="fa-li fas fa-check"></i> {{ . | markdownify | emojify }} */}}
+            {{/* </li> */}}
+          {{/* {{ end }} */}}
+          {{/* {{ end }} */}}
+          {{/* </ul> */}}
+        {{/* </div> */}}
+      {{/* {{ end }} */}}
 
       {{/* {{ with $person.interests }} */}}
       {{/* <div class="col-md-6"> */}}
