@@ -48,6 +48,7 @@ social:
     link: 'mailto:kc3477@srmist.edu.in'
 
 user_groups: ["Alumni (Grad)"]
+css_class: alumni-grad
 ---
 Karthikeyan is a Master's student in the [Department of Physics and
 Nanotechnology](https://www.srmist.edu.in/department/department-of-physics-and-nanotechnology/) at

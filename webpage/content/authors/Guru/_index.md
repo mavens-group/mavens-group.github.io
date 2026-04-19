@@ -40,5 +40,6 @@ education:
       year: 2018-2021
 
 user_groups: ["Alumni (Grad)"]
+css_class: alumni-grad
 ---
 Guru has worked on the SVEIRD model of COVID-19 pandemic.

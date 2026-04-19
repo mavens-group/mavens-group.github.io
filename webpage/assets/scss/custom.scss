@@ -151,30 +151,43 @@ h1, h2, h3, h4 {
 }
 
 /* Tablet (≤999px): two cards per row, role text suppressed */
-@media (max-width: 999px) {
-  .people-person.alumni-grad {
-    flex: 0 0 30%;
-    max-width: 48%;
-    font-size: 0.85rem;
-    margin-right: 2%;
-    margin-bottom: 1rem;
+// @media (max-width: 999px) {
+  // .people-person.alumni-grad {
+    // flex: 0 0 30% !important;
+    // max-width: 48% !important;
+    // font-size: 0.85rem !important;
+    // margin-right: 2% !important;
+    // margin-bottom: 1rem !important;
 
-    &:nth-child(2n) { margin-right: 0; }
-    .portrait-title h3 { font-size: 0; }
-  }
-}
+    // &:nth-child(2n) { margin-right: 0 !important; }
+    // .portrait-title h3 { font-size: 0 !important; }
+  // }
+// }
 
 /* Mobile (≤768px): two cards per row, role text and social icons hidden */
 @media (max-width: 768px) {
   .people-person.alumni-grad {
-    flex: 0 0 30%;
-    max-width: 48%;
-    margin-right: 2%;
-    margin-bottom: 1rem;
+    flex: 0 0 48% !important;
+    max-width: 48% !important;
+    margin-right: 4% !important;
+    margin-bottom: 1.5rem !important;
+    font-size: .9rem !important;
 
-    &:nth-child(2n) { margin-right: 0; }
-    .portrait-title h3 { display: none; }
-    ul.network-icon    { display: none; }
+    &:nth-child(2n) { margin-right: 0 !important; }
+
+    .portrait-title h2 {
+      font-size: .9rem !important;
+      margin-top: 0.5rem !important;
+    }
+    // .portrait-title h3 { display: none !important; }
+    ul.network-icon    { display: none !important; }
+
+    /* Make avatar scale with container width */
+    .avatar {
+      width: 70% !important;
+      height: auto !important;
+      max-width: 180px !important;
+    }
   }
 }
 

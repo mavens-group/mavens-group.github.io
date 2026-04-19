@@ -42,7 +42,7 @@ experience:
   courses:
     - course: Assistant Professor
       institution: SRM Institute of Science and Technology
-      year: 2019 - Present
+      year: 2020 - Present
     - course: Guest Scientist
       institution: Harish-chandra Research Institute
       year: 2017 - 2019
