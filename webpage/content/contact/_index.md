@@ -9,6 +9,7 @@ banner:
 
 I welcome inquiries about **research collaborations**, **graduate opportunities in computational materials science**, and discussions on **DFT methodology**.
 
+
 <div class="row align-items-start" style="margin-top: 2rem;">
   <div class="col-md-6">
     <h3>Contact</h3>
@@ -30,7 +31,7 @@ I welcome inquiries about **research collaborations**, **graduate opportunities 
   <div class="col-md-6">
     <h3>Office Hours</h3>
     <ul class="fa-ul">
-      <li>
+      <li><span class="fa-li"><i class="fa-solid fa-clock"></i></span>
       <p><strong>Mon–Fri:</strong> 10:00 AM – 5:00 PM IST</p>
       </li>
     </ul>
