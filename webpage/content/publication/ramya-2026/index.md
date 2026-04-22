@@ -1,6 +1,6 @@
 ---
 title: 'A joint viscoelastic model for full-spectrum creep prediction: application
-  to PMMA/ȩTiO2 nanocomposites'
+  to PMMA/TiO$_\mathsf{2}$ nanocomposites'
 
 # Authors
 # A YAML list of author names

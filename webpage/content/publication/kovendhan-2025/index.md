@@ -1,5 +1,5 @@
 ---
-title: 'Facile synthesis of heterojunction BaTiO3/g-C3N4 electrocatalyst for hydrogen evolution reaction under acidic condition'
+title: 'Facile synthesis of heterojunction BaTiO$_\mathsf{3}$/g-C$_\mathsf{3}$N$_\mathsf{4}$ electrocatalyst for hydrogen evolution reaction under acidic condition'
 
 # Authors
 # A YAML list of author names

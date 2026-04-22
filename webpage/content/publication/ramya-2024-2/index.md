@@ -1,6 +1,6 @@
 ---
 title: 'Unveiling the electronic structure-mechanical properties correlation in nanocomposites:
-  A nanoindentation and DFT analysis of \(\mathsf{PMMA/TiO_2}\)'
+  A nanoindentation and DFT analysis of PMMA/TiO$_\mathsf{2}$'
 
 # Authors
 # A YAML list of author names
