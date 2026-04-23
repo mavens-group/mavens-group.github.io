@@ -1,4 +1,5 @@
 ---
+# Research
 title: Research
 type: research
 view: card
@@ -27,7 +28,7 @@ sections:
       # Choose a listing view
       view: card
 ---
-At [MAVENs](../), we harness **first-principles modelling, Monte Carlo simulations, and machine learning** to predict material properties from electronic structure, advancing the design of **next-generation materials** for energy, magnetism, and quantum applications.
+At [MAVENs](../), we harness **first-principles modelling, Monte Carlo simulations, and machine learning** to predict material properties from electronic structure, advancing the design of functional materials for energy, magnetism, and quantum applications.
 
 {{< video src="research.mp4" controls=false autoplay=true loop=true muted=true >}}
 
@@ -39,7 +40,7 @@ Our research is driven by a commitment to **predictive insight rather than trial
 - Reveal fundamental mechanisms behind complex behaviour in alloys, 2D materials, and defect systems
 - Translate computational predictions into experimentally actionable outcomes
 
-From the catalytic activity of doped MXenes and quantum spin textures of disordered Heusler alloys to interpretable machine learning for defect-based qubit design, our work addresses the question: _**"How can we computationally design materials that solve pressing energy and quantum challenges?"**_
+From the catalytic activity of doped MXenes and quantum spin textures of disordered Heusler alloys to interpretable machine learning for defect-based qubit design, our work addresses the question: _**"How do we computationally design materials that solve energy and quantum challenges?"**_
 
 ### Computational Methods & Tools
 
@@ -61,14 +62,14 @@ Our computational insights drive materials innovation by:
 - **Revealing fundamental mechanisms** behind disorder, quantum coherence, and catalytic activity
 - **Accelerating translation** from discovery to functional technologies in energy storage, spintronics, and quantum computing
 
-This approach contributes directly to **global efforts in clean energy, quantum technologies, and advanced manufacturing**.
+This approach contributes to broader efforts in clean energy, quantum technologies, and advanced manufacturing.
 
 ### Collaborative Research
 
-We actively collaborate with **experimental groups at SRM Institute and external groups**, including [Dr Payel Bandyopadhyay, SRMIST](https://sites.google.com/srmist.edu.in/primelab/)(Polymers and Soft Materials), [Dr. Ashutosh Kumar Singh, CeNS](https://sites.google.com/view/ashutoshksingh-cens/team/dr-ashutosh-k-singh) (quantum materials) and [Dr. Pralay K. Santra, CeNS](https://www.santragroup.in/group/pralay-k-santra) (2D systems). These collaborations ensure that computational predictions are validated through synthesis, characterization, and device testing, enhancing the impact, credibility, and practical relevance of our work.
+We actively collaborate with **experimental groups at SRM Institute and external partners**, including [Dr Payel Bandyopadhyay, SRMIST](https://sites.google.com/srmist.edu.in/primelab/) (Polymers and Soft Materials), [Dr. Ashutosh Kumar Singh, CeNS](https://sites.google.com/view/ashutoshksingh-cens/team/dr-ashutosh-k-singh) (quantum materials), and [Dr. Pralay K. Santra, CeNS](https://www.santragroup.in/group/pralay-k-santra) (2D systems). These collaborations ensure that computational predictions are validated through synthesis, characterization, and device testing, enhancing the impact, credibility, and practical relevance of our work.
 
 By integrating theory with experiment, we translate predictions into applications spanning sustainable energy conversion, spintronic devices, and quantum information platforms.
 
 ### Research Themes
 
-Our research spans **three interconnected themes**, each addressing a specific scientific challenge. Click each title to explore the detailed below, integrating _ab-initio_ modelling, statistical mechanics and data-driven approach:
+Our research spans **three interconnected themes**, each addressing a specific scientific challenge. Click each title to explore detailed descriptions, integrating *ab-initio* modelling, statistical mechanics, and data-driven approaches:

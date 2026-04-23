@@ -1,4 +1,5 @@
 ---
+# Rudra Banerjee
 _build:
   render: always
   list: always
@@ -98,7 +99,7 @@ seo:
 ---
 At the intersection of quantum physics and materials design, Dr Rudra Banerjee leads the **M**aterials **A**dvancing a **V**iable **EN**ergy future (MAVENs) Group in the [Department of Physics and Nanotechnology](https://www.srmist.edu.in/department/department-of-physics-and-nanotechnology/) at [SRMIST, Kattankulathur](https://www.srmist.edu.in) — using computation to answer a deceptively simple question: _why do some materials behave the way they do, and how can we design better ones?_
 
-His work uses ab-initio DFT, and Monte Carlo simulations to compute electronic structure, revealing how atomic-scale disorder governs magnetic, catalytic, and quantum properties in bulk systems (Heusler alloys, perovskites, Fe-based alloys), 2D materials (MXenes, TMDCs), and defect-based quantum systems — with machine learning accelerating materials discovery.
+His work uses *ab-initio* DFT and Monte Carlo simulations to compute electronic structure, revealing how atomic-scale disorder governs magnetic, catalytic, and quantum properties in bulk systems (Heusler alloys, perovskites, Fe-based alloys), 2D materials (MXenes, TMDCs), and defect-based quantum systems — with machine learning accelerating materials discovery.
 
 He currently leads a group of four PhD researchers and three project students, and has graduated one PhD and eight MSc/BSc project students — with work spanning Heusler alloys, 2D catalysis, and qubit materials design.
 

@@ -20,10 +20,11 @@ superuser: false
 
 # Role/position
 role: Defended thesis on 28/11/2025
+mrole: Post Doc
 
 # Organizations/Affiliations
 organizations:
-  - name: SRM Institute of Science and Technology
+  - name: SNBose national Centre for Basic Sciences
     url: 'https://www.srmist.edu.in/'
 
 # Short bio (displayed in user profile at end of posts)

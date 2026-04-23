@@ -1,4 +1,5 @@
 ---
+# Landing Page
 # Leave the homepage title empty to use the site title
 title:
 date: 2022-10-24
@@ -29,7 +30,7 @@ sections:
             position: center
             color: '#555'
 
-        - title: Energy materials by Design
+        - title: Energy Materials by Design
           content: |
             Which features of the electronic structure actually decide whether a material solves an energy problem? We isolate electronic-structure control variables — d-band filling, site-resolved d-band centre, Fermi-level position — to make compositional design predictive rather than exploratory.<br><small>doi: [10.1016/j.physb.2025.417148](https://doi.org/10.1016/j.physb.2025.417148)</small>
           align: left
@@ -63,11 +64,11 @@ sections:
 
         **MAVENs** (*Materials Advancing a Viable ENergy Future*), led by [Dr. Rudra Banerjee](https://mavens-group.github.io/author/rudra-banerjee/), is based in the [Department of Physics and Nanotechnology](https://www.srmist.edu.in/department/department-of-physics-and-nanotechnology/) at the [SRM Institute of Science and Technology](https://srmist.edu.in).
 
-        We address a fundamental question in materials science:
+        We address a central question in computational materials science:
 
-        ```How can we architect the atomic blueprints for the next generation of energy and quantum technologies?```
+        ```How do we computationally design materials that solve energy and quantum challenges?```
 
-        Our approach combines **[Density Functional Theory (DFT)](blog/2024-07-dft)**, **Monte Carlo simulations**, and **Machine Learning (ML)** to predict material properties from electronic structure—bridging atomic-scale behavior with macroscopic functionality. By linking fundamental theory with experimentally relevant outcomes, we **predict material behavior before synthesis**, reducing trial-and-error and accelerating discovery.
+        Our approach combines **[Density Functional Theory (DFT)](blog/2024-07-dft)**, **Monte Carlo simulations**, and **Machine Learning (ML)** to predict material properties from electronic structure—bridging atomic-scale behaviour with macroscopic functionality. By linking fundamental theory with experimentally relevant outcomes, we **predict material behaviour before synthesis**, reducing trial-and-error and accelerating discovery.
 
         {{% cta cta_link="./research/" cta_text="Explore Our Research" %}}
 
@@ -75,13 +76,13 @@ sections:
 
         Our work spans three interconnected areas, each addressing specific scientific challenges:
 
-        1. **[Disordered Alloys](/research/post/hea/)** – Understanding how atomic-scale disorder controls mechanical, magnetic, and electronic functionality in Heusler and high-entropy alloys for spintronic applications.
+        1. **[Energy Materials by Design](/research/post/energy/)** – Identifying electronic-structure control variables that govern catalytic, magnetic, and electronic functionality in itinerant systems.
 
-        2. **[Quantum and Low-Dimensional Materials](/research/post/2d/)** – Engineering MXenes, monolayers, and single molecules systems for quantum technologies, spintronics, and energy conversion.
+        2. **[Quantum Materials by Design](/research/post/quantum/)** – Tracking how local electronic features survive into collective spin-dependent responses in defect systems, disordered alloys, and layered materials.
 
-        3. **[Interpretable Machine Learning](/research/post/ml/)** – Developing physics-informed ML models to predict defect-host systems for spin qubits, catalysts, and other functional materials.
+        3. **[Interpretable Machine Learning](/research/post/ml/)** – Developing physics-informed ML models that discover materials while preserving the insight that makes predictions transferable.
 
-        These themes contribute directly to **global efforts in clean energy, quantum technologies, and advanced manufacturing**.
+        These themes contribute to broader efforts in clean energy, quantum technologies, and advanced manufacturing.
 
         ### Collaborative Impact
 
