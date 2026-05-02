@@ -20,12 +20,12 @@ superuser: false
 
 # Role/position
 role: Defended thesis on 28/11/2025
-#mrole: Post Doc
+mrole: Post Doc
 
 # Organizations/Affiliations
 organizations:
-  - name: SRMIST
-    url: 'https://www.srmist.edu.in/'
+  - name: SR University
+    url: 'https://sru.edu.in/'
 
 # Short bio (displayed in user profile at end of posts)
 bio: My research focuses on exploring the electronic and magnetic properties of disordered Heusler alloys.
