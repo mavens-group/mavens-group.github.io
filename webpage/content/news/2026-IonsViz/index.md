@@ -1,5 +1,5 @@
 ---
-title: "When Quantum Theory Meets Hardware Reality: IonVis Wins QtHack04"
+title: "IonVis Wins QtHack"
 
 date: 2026-05-06
 profile: false
