@@ -3,6 +3,7 @@ title: "IonVis Wins QtHack"
 
 date: 2026-05-06
 profile: false
+tags: [highlight]
 image:
   placement: 1
   caption: "QtHack04"

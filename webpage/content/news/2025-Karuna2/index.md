@@ -3,6 +3,7 @@ title: Karunakaran defended his thesis
 
 date: 2025-11-28
 profile: false
+tags: [highlight]
 ---
 I am absolutely thrilled and immensely proud to announce that my first PhD student, [Karunakaran M](../../author/dr-karunakaran-m) has successfully defended his doctoral thesis!
 <!--more-->

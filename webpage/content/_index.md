@@ -55,12 +55,13 @@ sections:
       text: |
 
         <blockquote style="text-align:center; font-size: 2rem; font-style: italic; margin: 0; padding: 0;">
-          You may say <b>we</b> are a dreamer
+          You may say <b>we</b> are dreamers
           <footer style="text-align:center; font-size: 0.9rem; margin-top: 0.2rem;
           margin-bottom:.2rem">
             — <cite>John Lennon</cite>, <em>Imagine</em> (slightly modified)
           </footer>
         </blockquote>
+
 
         **MAVENs** (*Materials Advancing a Viable ENergy Future*), led by [Dr. Rudra Banerjee](https://mavens-group.github.io/author/rudra-banerjee/), is based in the [Department of Physics and Nanotechnology](https://www.srmist.edu.in/department/department-of-physics-and-nanotechnology/) at the [SRM Institute of Science and Technology](https://srmist.edu.in).
 
@@ -82,7 +83,6 @@ sections:
 
         3. **[Interpretable Machine Learning](/research/post/ml/)** – Developing physics-informed ML models that discover materials while preserving the insight that makes predictions transferable.
 
-        These themes contribute to broader efforts in clean energy, quantum technologies, and advanced manufacturing.
 
         ### Collaborative Impact
 
@@ -90,12 +90,15 @@ sections:
 
         {{% cta cta_link="./publication/" cta_text="View Our Publications" %}}
 
+        ### Research Highlights [→](/news/)
+        {{% highlight-list %}}
+
         ### Join the Discovery
 
         We welcome **M.Sc. and graduate students** in physics, chemistry, or materials science interested in computational materials research. Develop expertise in _ab-initio_ [DFT](blog/2024-07-dft) and ML-driven materials screening while contributing to technologies shaping a sustainable, quantum-enabled future.
 
         {{% cta cta_link="./position/" cta_text="See Open Projects" %}}
 
-    design:
-      columns: '1'
+design:
+columns: '1'
 ---
