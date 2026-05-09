@@ -1,3 +1,4 @@
+
 ---
 # Landing Page
 # Leave the homepage title empty to use the site title
@@ -49,6 +50,7 @@ sections:
       interval: 5000
       css_class: "slider-fade"
 
+  # ── About ──────────────────────────────────────────────────────────────────
   - block: markdown
     content:
       title:
@@ -62,7 +64,6 @@ sections:
           </footer>
         </blockquote>
 
-
         **MAVENs** (*Materials Advancing a Viable ENergy Future*), led by [Dr. Rudra Banerjee](https://mavens-group.github.io/author/rudra-banerjee/), is based in the [Department of Physics and Nanotechnology](https://www.srmist.edu.in/department/department-of-physics-and-nanotechnology/) at the [SRM Institute of Science and Technology](https://srmist.edu.in).
 
         We address a central question in computational materials science:
@@ -73,6 +74,14 @@ sections:
 
         {{% cta cta_link="./research/" cta_text="Explore Our Research" %}}
 
+    design:
+      columns: '1'
+
+  # ── Research Themes ────────────────────────────────────────────────────────
+  - block: markdown
+    content:
+      title:
+      text: |
         ### Research Themes
 
         Our work spans three interconnected areas, each addressing specific scientific challenges:
@@ -83,22 +92,46 @@ sections:
 
         3. **[Interpretable Machine Learning](/research/post/ml/)** – Developing physics-informed ML models that discover materials while preserving the insight that makes predictions transferable.
 
+    design:
+      columns: '1'
 
+  # ── Collaborative Impact ───────────────────────────────────────────────────
+  - block: markdown
+    content:
+      title:
+      text: |
         ### Collaborative Impact
 
         We collaborate with experimental groups at SRM Institute and worldwide, partnering with researchers in quantum materials and 2D systems to ensure our computational predictions are validated and translated into real-world applications.
 
         {{% cta cta_link="./publication/" cta_text="View Our Publications" %}}
 
+    design:
+      columns: '1'
+
+  # ── Research Highlights ────────────────────────────────────────────────────
+  - block: markdown
+    content:
+      title:
+      text: |
         ### Research Highlights [→](/news/)
+
         {{% highlight-list %}}
 
+    design:
+      columns: '1'
+
+  # ── Join the Discovery ─────────────────────────────────────────────────────
+  - block: markdown
+    content:
+      title:
+      text: |
         ### Join the Discovery
 
         We welcome **M.Sc. and graduate students** in physics, chemistry, or materials science interested in computational materials research. Develop expertise in _ab-initio_ [DFT](blog/2024-07-dft) and ML-driven materials screening while contributing to technologies shaping a sustainable, quantum-enabled future.
 
         {{% cta cta_link="./position/" cta_text="See Open Projects" %}}
 
-design:
-columns: '1'
+    design:
+      columns: '1'
 ---

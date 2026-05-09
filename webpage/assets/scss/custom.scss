@@ -406,3 +406,10 @@ h1, h2, h3, h4 {
 
   &:hover { text-decoration: underline; }
 }
+
+.home-section:nth-of-type(even) {
+  background: $sta-home-section-odd !important;
+}
+.dark .home-section:nth-of-type(even) {
+  background: $sta-dark-home-section-odd !important;
+}
