@@ -413,3 +413,29 @@ h1, h2, h3, h4 {
 .dark .home-section:nth-of-type(even) {
   background: $sta-dark-home-section-odd !important;
 }
+
+/* --- Reduce padding on all home sections --- */
+.home-section {
+  padding: 0px 0 !important;
+}
+
+.home-section:first-of-type {
+  padding-top: 0 !important;  /* slider needs no top padding */
+}
+
+/* --- Uniform background --- */
+.home-section:nth-of-type(even) {
+  background: $sta-home-section-odd !important;
+}
+
+.dark .home-section:nth-of-type(even) {
+  background: $sta-dark-home-section-odd !important;
+}
+
+.home-section:last-of-type {
+  padding-bottom: none !important;
+}
+
+.universal-wrapper:empty {
+  display: none;
+}
