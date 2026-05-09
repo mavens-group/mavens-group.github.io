@@ -1,0 +1,25 @@
+{{/* {{ $pages := where (where site.RegularPages "Section" "news") ".Params.tags" "intersect" (slice "highlight") }} */}}
+{{/* {{ $pages = $pages | first 4 }} */}}
+{{/* {{ range $pages }} */}}
+{{/* <div style="margin: 0.3rem 0;"> */}}
+  {{/* <span style="opacity:0.5; font-size:0.85rem; margin-right:0.6rem;"> */}}
+    {{/* {{ .Date.Format "Jan 2006" }} */}}
+  {{/* </span> */}}
+  {{/* <a href="{{ .RelPermalink }}">{{ .Title }}</a> */}}
+{{/* </div> */}}
+{{/* {{ end }} */}}
+
+
+{{ $pages := where (where site.RegularPages "Section" "news") ".Params.tags" "intersect" (slice "highlight") }}
+{{ $pages = $pages | first 6 }}
+<div style="display:grid; grid-template-columns:1fr 1fr; gap:0.3rem 2rem;">
+{{ range $pages }}
+  <div style="margin: 0.2rem 0;">
+    <span style="opacity:0.8; font-size:0.95rem; margin-right:0.6rem;">
+      {{ .Date.Format "Jan 2006" }}
+    </span>
+    <a href="{{ .RelPermalink }}" style="text-decoration:underline;">{{ .Title }}</a>
+    {{/* <a href="{{ .RelPermalink }}" style="color: inherit; text-decoration: underline; font-weight: 500;">{{ .Title }}</a> */}}
+  </div>
+{{ end }}
+</div>
