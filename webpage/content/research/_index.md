@@ -40,33 +40,22 @@ Our research is driven by a commitment to **predictive insight rather than trial
 - Reveal fundamental mechanisms behind complex behaviour in alloys, 2D materials, and defect systems
 - Translate computational predictions into experimentally actionable outcomes
 
-From the catalytic activity of doped MXenes and quantum spin textures of disordered Heusler alloys to interpretable machine learning for defect-based qubit design, our work addresses the question: _**"How do we computationally design materials that solve energy and quantum challenges?"**_
+From Fermi-level engineering in magnetocalorics and site-resolved catalysis in Janus MXenes to interpretable ML models for qubit-host discovery, our work is unified by a common principle: identifying the electronic-structure control parameters that turn compositional design from screening into prediction.
 
 ### Computational Methods & Tools
 
-We use a suite of computational approaches **as enablers to answer scientific questions**, applying these methods across multiple length scales to bridge atomic-level structure with macroscopic properties:
+We use a suite of computational approaches **as enablers to answer scientific questions**, applying them across multiple length scales:
 
 - **Density Functional Theory (DFT):** Accurately computes electronic, magnetic, and structural properties for alloys, 2D materials, and molecular systems
 - **Monte Carlo Simulations:** Explores thermodynamic and configurational landscapes in disordered and multi-component systems
 - **Machine Learning:** Accelerates discovery of functional materials and defects with interpretable, physics-informed models
-- **High-throughput Computing:** Enables systematic screening of candidate materials
+- **High-throughput Computing:** Screens candidate materials systematically across compositional space
 
-These tools are applied **in service of our research themes**, ensuring that predictions are physically grounded, scientifically robust, and experimentally relevant.
-
-### Research Impact
-
-Our computational insights drive materials innovation by:
-
-- **Reducing experimental trial-and-error** through predictive screening
-- **Predicting novel materials prior to synthesis**, guiding targeted experiments
-- **Revealing fundamental mechanisms** behind disorder, quantum coherence, and catalytic activity
-- **Accelerating translation** from discovery to functional technologies in energy storage, spintronics, and quantum computing
-
-This approach contributes to broader efforts in clean energy, quantum technologies, and advanced manufacturing.
+These methods underpin the three research themes below, ensuring that predictions are physically grounded and experimentally relevant.
 
 ### Collaborative Research
 
-We actively collaborate with **experimental groups at SRM Institute and external partners**, including [Dr Payel Bandyopadhyay, SRMIST](https://sites.google.com/srmist.edu.in/primelab/) (Polymers and Soft Materials), [Dr. Ashutosh Kumar Singh, CeNS](https://sites.google.com/view/ashutoshksingh-cens/team/dr-ashutosh-k-singh) (quantum materials), and [Dr. Pralay K. Santra, CeNS](https://www.santragroup.in/group/pralay-k-santra) (2D systems). These collaborations ensure that computational predictions are validated through synthesis, characterization, and device testing, enhancing the impact, credibility, and practical relevance of our work.
+We actively collaborate with **experimental groups at SRM Institute and external partners**, including [Dr Payel Bandyopadhyay, SRMIST](https://sites.google.com/srmist.edu.in/primelab/) (Polymers and Soft Materials), [Dr. Ashutosh Kumar Singh, CeNS](https://sites.google.com/view/ashutoshksingh-cens/team/dr-ashutosh-k-singh) (quantum materials), and [Dr. Pralay K. Santra, CeNS](https://www.santragroup.in/group/pralay-k-santra) (2D systems). These collaborations ensure that computational predictions are validated through synthesis, characterization, and device testing.
 
 By integrating theory with experiment, we translate predictions into applications spanning sustainable energy conversion, spintronic devices, and quantum information platforms.
 
