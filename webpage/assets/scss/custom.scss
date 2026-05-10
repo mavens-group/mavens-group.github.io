@@ -444,3 +444,24 @@ h1, h2, h3, h4 {
   margin: 1rem 0 0;
   font-size: 0.85rem;
 }
+
+/* 1. The container link */
+.highlight-cta {
+  text-decoration: none !important; /* No underline */
+  display: inline-block;
+  margin-left: 2px;
+  vertical-align: middle;
+}
+
+/* 2. The FontAwesome Icon */
+.highlight-cta i {
+  font-size: 0.8em; /* Makes it slightly smaller than the text for a better look */
+  transition: transform 0.3s ease-in-out, color 0.3s ease;
+  display: inline-block; /* Required for transform to work */
+}
+
+/* 3. Hover Effect: The Slide */
+.highlight-cta:hover i {
+  transform: translateX(6px); /* Smooth slide to the right */
+  color: #007bff; /* Optional: change color on hover to match your link theme */
+}

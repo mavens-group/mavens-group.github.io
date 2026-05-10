@@ -1,4 +1,3 @@
-
 ---
 # Landing Page
 # Leave the homepage title empty to use the site title
@@ -114,7 +113,8 @@ sections:
     content:
       title:
       text: |
-        ### Research Highlights [→](/news/)
+
+       ### Research Highlights <a href="/news/" class="highlight-cta"><i class="fas fa-chevron-right"></i></a>
 
         {{% highlight-list %}}
 
