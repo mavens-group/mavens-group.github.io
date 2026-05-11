@@ -467,47 +467,60 @@ h1, h2, h3, h4 {
 }
 
 @media (max-width: 991.98px) {
-  /* 1. Force the Toggle Button to the very front */
+  /* 1. PIN THE TOGGLER (Always visible, always on top) */
   .navbar-toggler {
     position: fixed !important;
     top: 15px;
     left: 15px;
-    z-index: 1200 !important; /* Higher than the menu */
+    z-index: 1200 !important;
     border: none !important;
     background: transparent !important;
   }
 
-  /* 2. The Drawer with Material Elevation */
-  .navbar-collapse {
+  /* 2. THE MATERIAL DRAWER */
+  .navbar .navbar-collapse {
     position: fixed !important;
     top: 0 !important;
     left: 0 !important;
-    height: 100vh !important;
-    width: 46vw !important;
-    padding-top: 50px !important; /* Lowered to keep links clear of the icon */
-    margin: 0 !important;
-    z-index: 1100 !important; /* Below the button, above the page */
+    height: 70vh !important;
+    width: 60vw !important;
     display: block !important;
+    z-index: 1100 !important;
+    margin: 0 !important;
+    padding: 50px 0 20px 0 !important; /* Items start below the icon */
 
+    /* ROUNDED CORNERS (MD3 Standard) */
+    border-radius: 0 28px 28px 0 !important;
+
+    /* SLIDE ANIMATION */
     transform: translateX(-100%);
     visibility: hidden;
-    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.3s !important;
+    transition: transform 0.35s cubic-bezier(0, 0, 0.2, 1), visibility 0.35s !important;
 
-    /* Light Mode */
+    /* LIGHT MODE ELEVATION */
     background-color: #ffffff !important;
-    box-shadow: 10px 0 20px rgba(0,0,0,0.2);
+    box-shadow: 12px 0 25px rgba(0,0,0,0.15) !important;
+    border-right: 1px solid rgba(0,0,0,0.05) !important;
   }
 
-  /* 3. Dark Mode: Elevation Surface */
-  .dark .navbar-collapse,
-  [data-theme='dark'] .navbar-collapse {
-    background-color: #202c2c !important; /* Lighter grey for contrast */
-    border-right: 1px solid rgba(255, 255, 255, 0.15) !important;
-    box-shadow: 15px 0 35px rgba(0, 0, 0, 0.9) !important;
-  }
-
-  .navbar-collapse.show {
+  /* 3. SHOW STATE */
+  .navbar .navbar-collapse.show {
     transform: translateX(0) !important;
     visibility: visible !important;
+  }
+
+  /* 4. DARK MODE ELEVATION & CONTRAST */
+  /* Added multiple selectors to ensure it forces the color change */
+  html.dark .navbar .navbar-collapse,
+  body.dark .navbar .navbar-collapse,
+  [data-theme='dark'] .navbar .navbar-collapse {
+    background-color: #ff0000 !important; /* Surface 3 Grey */
+    border-right: 1px solid rgba(255, 255, 255, 0.15) !important;
+    box-shadow: 20px 0 40px rgba(0, 0, 0, 0.8) !important;
+  }
+
+  /* Keep links aligned and using site fonts */
+  .navbar-nav {
+    padding: 0 10px !important;
   }
 }
