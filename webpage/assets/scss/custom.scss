@@ -465,3 +465,49 @@ h1, h2, h3, h4 {
   transform: translateX(6px); /* Smooth slide to the right */
   color: #007bff; /* Optional: change color on hover to match your link theme */
 }
+
+@media (max-width: 991.98px) {
+  /* 1. Force the Toggle Button to the very front */
+  .navbar-toggler {
+    position: fixed !important;
+    top: 15px;
+    left: 15px;
+    z-index: 1200 !important; /* Higher than the menu */
+    border: none !important;
+    background: transparent !important;
+  }
+
+  /* 2. The Drawer with Material Elevation */
+  .navbar-collapse {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    height: 100vh !important;
+    width: 46vw !important;
+    padding-top: 50px !important; /* Lowered to keep links clear of the icon */
+    margin: 0 !important;
+    z-index: 1100 !important; /* Below the button, above the page */
+    display: block !important;
+
+    transform: translateX(-100%);
+    visibility: hidden;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.3s !important;
+
+    /* Light Mode */
+    background-color: #ffffff !important;
+    box-shadow: 10px 0 20px rgba(0,0,0,0.2);
+  }
+
+  /* 3. Dark Mode: Elevation Surface */
+  .dark .navbar-collapse,
+  [data-theme='dark'] .navbar-collapse {
+    background-color: #202c2c !important; /* Lighter grey for contrast */
+    border-right: 1px solid rgba(255, 255, 255, 0.15) !important;
+    box-shadow: 15px 0 35px rgba(0, 0, 0, 0.9) !important;
+  }
+
+  .navbar-collapse.show {
+    transform: translateX(0) !important;
+    visibility: visible !important;
+  }
+}
