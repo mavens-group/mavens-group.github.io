@@ -114,7 +114,7 @@ sections:
       title:
       text: |
 
-       ### Research Highlights <a href="/news/" class="highlight-cta"><i class="fas fa-chevron-right"></i></a>
+       ### Research Highlights <a href="/news/" class="highlight-cta"><i data-feather="chevron-right"></i></a>
 
         {{% highlight-list %}}
 

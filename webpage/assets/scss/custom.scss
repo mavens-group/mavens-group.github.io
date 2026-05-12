@@ -404,7 +404,10 @@ h1, h2, h3, h4 {
   vertical-align: middle;
   text-decoration: none;
 
-  &:hover { text-decoration: underline; }
+  &:hover {
+  transform: translateX(6px); /* Smooth slide to the right */
+  color: #007bff; /* Optional: change color on hover to match your link theme */
+  }
 }
 
 .home-section:nth-of-type(even) {
@@ -453,19 +456,79 @@ h1, h2, h3, h4 {
   vertical-align: middle;
 }
 
-/* 2. The FontAwesome Icon */
-.highlight-cta i {
-  font-size: 0.8em; /* Makes it slightly smaller than the text for a better look */
-  transition: transform 0.3s ease-in-out, color 0.3s ease;
-  display: inline-block; /* Required for transform to work */
+// [> 2. The FontAwesome Icon <]
+// .highlight-cta i {
+  // font-size: 0.8em; [> Makes it slightly smaller than the text for a better look <]
+  // transition: transform 0.3s ease-in-out, color 0.3s ease;
+  // display: inline-block; [> Required for transform to work <]
+// }
+
+// [> 3. Hover Effect: The Slide <]
+// .highlight-cta:hover i {
+  // transform: translateX(6px); [> Smooth slide to the right <]
+  // color: #007bff; [> Optional: change color on hover to match your link theme <]
+// }
+
+/* ── Feather chevron inside CTA links ── */
+.highlight-cta {
+  text-decoration: none;
+
+  /* Match both pre- and post-replacement states */
+  i[data-feather],
+  svg.feather {
+    width: 0.85em;
+    height: 0.85em;
+    vertical-align: -0.1em;
+    stroke: currentColor;
+    fill: none;
+    stroke-width: 2.5;
+    margin-left: 0.15em;
+    transition: transform 0.25s ease, color 0.25s ease;
+    display: inline-block;
+  }
+
+  &:hover svg.feather,
+  &:hover i[data-feather] {
+    transform: translateX(5px);
+    color: #007bff;
+  }
 }
 
-/* 3. Hover Effect: The Slide */
-.highlight-cta:hover i {
-  transform: translateX(6px); /* Smooth slide to the right */
-  color: #007bff; /* Optional: change color on hover to match your link theme */
+/* Same treatment for the "View all" link in author/publications */
+.pub-view-all {
+  display: inline-flex;
+  align-items: center;
+  padding: 0;
+  margin-left: 0.15em;          /* small breathing room, not a gap */
+  text-decoration: none;
+
+  i[data-feather],
+  svg.feather {
+    width: 0.85em;
+    height: 0.85em;
+    stroke: currentColor;
+    fill: none;
+    stroke-width: 2.5;
+    transition: transform 0.25s ease;
+  }
+  &:hover svg.feather,
+  &:hover i[data-feather] {
+    transform: translateX(4px);
+  }
+  &:focus-visible {
+    outline: 2px solid #0066cc;
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
 }
 
+/* Restore generous tap target on mobile only */
+@media (max-width: 991.98px) {
+  .pub-view-all {
+    padding: 0.4em 0.6em;
+    margin-left: 0;             /* padding handles the spacing */
+  }
+}
 /* ============================================================
    MOBILE DRAWER MENU
    Left-side slide-in. JS in assets/js/custom.js manages .show

@@ -26,7 +26,17 @@
 
     {{ if $count }}
     <div class="article-widget content-widget-hr">
-      <h3>Publications{{ if gt $totalPublications (len $limitedQuery) }} <a href="../../publication/" class="pub-view-all">View all &rarr;</a>{{ end }}</h3>
+<h3>
+  Publications
+  {{ if gt $totalPublications (len $limitedQuery) }}
+    <a href="../../publication/"
+       class="pub-view-all"
+       aria-label="View all publications"
+       title="View all publications">
+      <i data-feather="chevron-right"></i>
+    </a>
+  {{ end }}
+</h3>
       <ul>
         {{ range $limitedQuery }}
         <li>
