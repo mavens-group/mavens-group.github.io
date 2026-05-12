@@ -466,61 +466,164 @@ h1, h2, h3, h4 {
   color: #007bff; /* Optional: change color on hover to match your link theme */
 }
 
+/* ============================================================
+   MOBILE DRAWER MENU
+   Left-side slide-in. JS in assets/js/custom.js manages .show
+   class on the drawer, .is-active on the scrim, and applies
+   .drawer-dark / .is-dark when site is in dark mode.
+   ============================================================ */
 @media (max-width: 991.98px) {
-  /* 1. PIN THE TOGGLER (Always visible, always on top) */
-  .navbar-toggler {
+
+  /* ── Drawer panel ── */
+  .navbar-collapse {
     position: fixed !important;
-    top: 15px;
-    left: 15px;
-    z-index: 1200 !important;
-    border: none !important;
-    background: transparent !important;
-  }
+    top: 0;
+    left: 0;
+    height: 100dvh;
+    width: 78vw;
+    max-width: 300px;
 
-  /* 2. THE MATERIAL DRAWER */
-  .navbar .navbar-collapse {
-    position: fixed !important;
-    top: 0 !important;
-    left: 0 !important;
-    height: 70vh !important;
-    width: 60vw !important;
-    display: block !important;
-    z-index: 1100 !important;
-    margin: 0 !important;
-    padding: 50px 0 20px 0 !important; /* Items start below the icon */
+    background: #ffffff;
+    color: #212529;
+    border-right: 1px solid rgba(0, 0, 0, 0.08);
+    box-shadow: 2px 0 12px rgba(0, 0, 0, 0.08);
 
-    /* ROUNDED CORNERS (MD3 Standard) */
-    border-radius: 0 28px 28px 0 !important;
+    padding: 72px 0 24px;
+    overflow-y: auto;
+    z-index: 2001;          /* well above scrim and any body stacking */
 
-    /* SLIDE ANIMATION */
-    transform: translateX(-100%);
+    transform: translateX(-110%);
     visibility: hidden;
-    transition: transform 0.35s cubic-bezier(0, 0, 0.2, 1), visibility 0.35s !important;
+    transition: transform 0.28s cubic-bezier(0.4, 0, 0.2, 1),
+                visibility 0s linear 0.28s;
 
-    /* LIGHT MODE ELEVATION */
-    background-color: #ffffff !important;
-    box-shadow: 12px 0 25px rgba(0,0,0,0.15) !important;
-    border-right: 1px solid rgba(0,0,0,0.05) !important;
+    display: block !important;
+
+    &.show {
+      transform: translateX(0);
+      visibility: visible;
+      transition: transform 0.28s cubic-bezier(0.4, 0, 0.2, 1),
+                  visibility 0s linear 0s;
+    }
+
+    /* ── Nav links: list-like ── */
+    .nav-item {
+      border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+    }
+    .nav-link {
+      padding: 14px 24px !important;
+      font-size: 1rem;
+      color: #212529 !important;
+      border-radius: 0 !important;
+      border-left: 3px solid transparent;
+      transition: background 0.15s ease, border-left-color 0.15s ease;
+
+      &:hover { background: rgba(0, 0, 0, 0.03); }
+      &.active {
+        border-left-color: #0066cc;
+        background: rgba(0, 0, 0, 0.02);
+        font-weight: 500;
+      }
+    }
+
+    /* ── Dropdown submenus ── */
+    .dropdown-menu {
+      position: static !important;
+      float: none !important;
+      box-shadow: none !important;
+      border: none !important;
+      background: rgba(0, 0, 0, 0.025);
+      padding: 0;
+      margin: 0;
+      border-radius: 0;
+      display: none;
+      &.show { display: block; }
+
+      .dropdown-item {
+        padding: 11px 24px 11px 40px;
+        font-size: 0.94rem;
+        color: #212529 !important;
+        background: transparent;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+        border-left: 3px solid transparent;
+        transition: background 0.15s ease, border-left-color 0.15s ease;
+
+        &:last-child { border-bottom: none; }
+        &:hover, &:focus { background: rgba(0, 0, 0, 0.05); }
+
+        /* Active submenu item highlight */
+        &.active {
+          border-left-color: #0066cc;
+          background: rgba(0, 102, 204, 0.06);
+          font-weight: 500;
+          color: #0066cc !important;
+        }
+      }
+    }
+
+    .nav-item.dropdown > .nav-link::after {
+      float: right;
+      margin-top: 6px;
+    }
   }
 
-  /* 3. SHOW STATE */
-  .navbar .navbar-collapse.show {
-    transform: translateX(0) !important;
-    visibility: visible !important;
+  /* ── Dark mode drawer (keyed off JS-added .drawer-dark class) ── */
+  .navbar-collapse.drawer-dark {
+    background: #1e2433;
+    color: #d8dde6;
+    border-right: 1px solid rgba(255, 255, 255, 0.12);
+    box-shadow: 4px 0 24px rgba(0, 0, 0, 0.7);
+
+    .nav-item { border-bottom-color: rgba(255, 255, 255, 0.07); }
+    .nav-link {
+      color: #d8dde6 !important;
+      &:hover  { background: rgba(255, 255, 255, 0.04); }
+      &.active {
+        border-left-color: #6ea8e0;
+        background: rgba(255, 255, 255, 0.04);
+      }
+    }
+    .dropdown-menu { background: rgba(255, 255, 255, 0.04); }
+    .dropdown-item {
+      color: #d8dde6 !important;
+      border-bottom-color: rgba(255, 255, 255, 0.05);
+      &:hover, &:focus { background: rgba(255, 255, 255, 0.07); }
+      &.active {
+        border-left-color: #6ea8e0;
+        background: rgba(110, 168, 224, 0.12);
+        color: #6ea8e0 !important;
+      }
+    }
   }
 
-  /* 4. DARK MODE ELEVATION & CONTRAST */
-  /* Added multiple selectors to ensure it forces the color change */
-  html.dark .navbar .navbar-collapse,
-  body.dark .navbar .navbar-collapse,
-  [data-theme='dark'] .navbar .navbar-collapse {
-    background-color: #ff0000 !important; /* Surface 3 Grey */
-    border-right: 1px solid rgba(255, 255, 255, 0.15) !important;
-    box-shadow: 20px 0 40px rgba(0, 0, 0, 0.8) !important;
+  /* ── Scrim ── */
+  .mobile-menu-scrim {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.45);
+    z-index: 2000;          /* sits just below drawer (2001) */
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.28s ease;
+
+    &.is-active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    /* Darker scrim in dark mode, JS-toggled */
+    &.is-dark {
+      background: rgba(0, 0, 0, 0.65);
+    }
   }
 
-  /* Keep links aligned and using site fonts */
-  .navbar-nav {
-    padding: 0 10px !important;
+  /* ── Navbar + hamburger above drawer ── */
+  .navbar {
+    position: relative;
+    z-index: 2002;
+  }
+  .navbar-toggler {
+    position: relative;
+    z-index: 2002;
   }
 }
