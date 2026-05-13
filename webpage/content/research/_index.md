@@ -22,27 +22,20 @@ sections:
     design:
       view: card
 ---
-
-At [MAVENs](../), we work on a small set of recurring physics questions: when itinerant ferromagnetism survives compositional disorder, when a local magnetic moment or a defect state in a 2D material propagates into a collective spin-dependent response, and when a machine-learned model identifies a descriptor that is physically readable rather than merely predictive. The systems we use — Heusler alloys, Janus MXenes, vacancy-doped dichalcogenides, and defect-host qubit candidates — are testbeds where one symmetry can be broken at a time, so that the variable doing the work in the physics can be isolated and tuned.
-
-Taken together, these are how we approach the problem of computationally designing materials for energy and quantum applications — not by screening compounds for properties, but by isolating the electronic-structure variables that decide whether a system can sit at its operating point at all.
+At [MAVENs](../), the work is computational, and the recurring question is the same across the systems we choose: which atomic-scale feature carries the macroscopic property, and what additional structure decides whether it does. The behaviour we care about — magnetic order at finite temperature, catalytic activity on a surface, a defect-supported spin state — is collective. The variables a calculation can vary are local. The work lives in that gap.
 
 {{< video src="research.mp4" controls=false autoplay=true loop=true muted=true >}}
 
-### A Unifying Commitment
+### The Unified Problem
+A local feature is necessary but rarely sufficient. A local moment can produce a paramagnet; a favourable adsorption energy at one site does not make a catalyst; a defect's electronic structure can be ideal while the defect network fails to support transport. What sits between the local feature and the collective response — the statistics of substitutional disorder, the topology of exchange pathways, the geometric connectivity of a defect network, the dimensionality of a magnetic phase — is usually where the physics that matters lives. We choose systems where this second layer can be isolated: substitutional alloys where one element substitutes at one sublattice, defect-bearing semiconductors where a vacancy breaks a specific symmetry, layered phases where the stacking is the variable. Studies are constructed factorially — hole-doping against electron-doping at the same site, isovalent substitution across periods, asymmetric against symmetric stacking — so that the variable changing across a series is the one we set out to vary.
 
-A result is interesting when it isolates the variable that decides the outcome — the d-band filling that controls whether a magnet's Curie temperature collapses under doping, the percolation threshold that decides whether a defect network conducts, the descriptor whose contribution to a model is physically readable — rather than merely correlating composition with property. This commitment shapes how studies are designed: factorially where possible, with one symmetry broken at a time, and with the passage from local descriptor to collective response treated as a question rather than an assumption. A favourable d-band centre is not a catalyst; a large local moment is not a magnet. The route from one to the other is where the substantive physics sits, and where our methods are chosen to match.
+### Unification of Methods
+Methods enter the work in response to what a question needs. Ground-state electronic and magnetic structure comes from density functional theory; finite-temperature behaviour from Monte Carlo simulation on effective spin or configurational models built from first-principles exchange interactions; statistical treatment of substitutional disorder from Green's-function methods, with explicit supercells where short-range order matters. Machine learning enters where compositional spaces are too large to enumerate, and is constrained to features a physicist would call physical, so that what the model uses to predict is also what we use to understand. Predictions return to first-principles calculation for validation. No method is loaded as a default.
 
-### Method Choice as a Physics Question
+The systems we work on — Heusler and all-d-metal Heusler alloys, layered transition-metal carbides and nitrides, vacancy-bearing dichalcogenides, van der Waals magnets, defect-host semiconductors for spin-based quantum information — are testbeds. Each was chosen because it isolates a specific instance of the local-to-collective problem cleanly: Fermi-level position against lattice in an itinerant ferromagnet, single-site adsorption against magnetic exchange splitting on a catalytic surface, local moments against network percolation in a defect array, model features against physical descriptors in a learned predictor. Reporting where a local descriptor predicts and where it stops predicting is, for us, part of the result.
 
-We work with DFT, Monte Carlo, and machine learning, but treat them as instruments selected for the problem rather than a fixed toolkit applied uniformly. The choice between explicit supercells and Green's-function CPA — a treatment of substitutional disorder that averages over configurations rather than enumerating them — is made by the physics of the disorder. The choice between black-box ML accuracy and interpretable descriptor models is made by what we want the prediction to teach us. Lichtenstein exchange extraction, which gives site-resolved magnetic interactions from a single DFT calculation, and percolation analysis on tight-binding lattices appear when, and only when, the question demands them.
+### Collaboration
+We collaborate with experimental groups at SRM Institute and elsewhere — [Dr Payel Bandyopadhyay, SRMIST](https://sites.google.com/srmist.edu.in/primelab/) on polymers and soft materials, [Dr. Ashutosh Kumar Singh, CeNS](https://sites.google.com/view/ashutoshksingh-cens/team/dr-ashutosh-k-singh) on quantum materials, [Dr. Pralay K. Santra, CeNS](https://www.santragroup.in/group/pralay-k-santra) on 2D systems — both to validate predictions and to keep the choice of problem honest about what synthesis and characterization can probe.
 
-The interpretability commitment in ML is the same commitment that organises the other two themes: a prediction is useful when it isolates the variable doing the work, regardless of whether the method that found it was a functional, a Hamiltonian, or a gradient-boosted tree.
-
-### Validation through Collaboration
-
-Computational predictions become useful only when they meet synthesis. We work with experimental groups at SRM Institute and beyond — [Dr Payel Bandyopadhyay (SRMIST)](https://sites.google.com/srmist.edu.in/primelab/) on polymers and soft materials, [Dr. Ashutosh Kumar Singh (CeNS)](https://sites.google.com/view/ashutoshksingh-cens/team/dr-ashutosh-k-singh) on quantum materials, and [Dr. Pralay K. Santra (CeNS)](https://www.santragroup.in/group/pralay-k-santra) on 2D systems — to test predictions against synthesis, characterisation, and device measurement.
-
-### Three Themes, One Programme
-
-The three themes below take up the three questions named above. Each theme page opens with the question, and then takes it seriously.
+### Three Themes, One goal
+The three themes below develop the work in detail.
