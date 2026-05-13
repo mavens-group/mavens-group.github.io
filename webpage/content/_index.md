@@ -94,19 +94,6 @@ sections:
     design:
       columns: '1'
 
-  # ── Collaborative Impact ───────────────────────────────────────────────────
-  - block: markdown
-    content:
-      title:
-      text: |
-        ### Collaborative Impact
-
-        We collaborate with experimental groups at SRM Institute and worldwide, partnering with researchers in quantum materials and 2D systems to ensure our computational predictions are validated and translated into real-world applications.
-
-        {{% cta cta_link="./publication/" cta_text="View Our Publications" %}}
-
-    design:
-      columns: '1'
 
   # ── Research Highlights ────────────────────────────────────────────────────
   - block: markdown
