@@ -22,30 +22,53 @@ sections:
     design:
       view: card
 ---
-At [MAVENs](../), our pursuit of next-generation energy and quantum materials hinges on a single, recurring scientific bottleneck: the gap between local atomic features and collective macroscopic behaviour.
+At [MAVENs](../), we study how local electronic structure evolves into collective material behaviour — and why that transition so often determines whether a material ultimately functions.
 
-Local features of electronic structure — a magnetic moment, a defect state, an adsorption site — are necessary to produce a useful macroscopic function, but they are rarely sufficient for it. A local moment can produce a paramagnet rather than a ferromagnet; a chemically ideal adsorption site can sit in a matrix that suppresses catalytic turnover; a defect with the right spin state can fail to support coherent transport if the defect network does not percolate.
+A magnetic moment may produce a paramagnet rather than a ferromagnet. A chemically ideal adsorption site may sit in a matrix that suppresses catalytic turnover. A defect with the correct spin state may still fail to support coherent transport if the surrounding defect network does not percolate.
 
-What decides whether a local feature survives into a collective response is usually not the feature itself but something about the larger structure it sits in — the statistics of how disorder is distributed, the topology of exchange pathways between sites, the geometric connectivity of a defect array, the dimensionality of a magnetic phase. This intermediate scale — the physical bridge between the local and the collective — is what we study.
+Local electronic features are necessary for functionality, but they are rarely sufficient for it.
+
+What decides whether a local feature survives into a macroscopic response is usually not the feature itself, but the larger physical structure it inhabits: the topology of exchange pathways, the statistics of disorder, the connectivity of defect networks, or the dimensionality of an interacting phase.
+
+```This intermediate scale — the physical bridge between local structure and collective response — is the central focus of our research.```
 
 {{< video src="research.mp4" controls=false autoplay=true loop=true muted=true >}}
 
-### Isolating the Intermediate Scale
+## Isolating the Intermediate Scale
 
-We choose systems where this intermediate scale takes a specific, tractable form: how exchange topology reorganises under sublattice doping in Heusler alloys; whether surface adsorption is governed by the metal site, the anion, or their coupling in layered carbides and nitrides; whether local moments at every vacancy site are sufficient for itinerant order, or whether the transition is geometrical, in dichalcogenide monolayers; how the route from local exchange to collective phase changes with dimensionality in van der Waals magnets.
+We choose systems — substitutional alloys, layered surfaces, defect-bearing semiconductors, two-dimensional magnets — where the intermediate scale takes a specific, computationally tractable form, and where one variable at a time can be cleanly isolated. The recurring question across these systems is the same:
 
-### Methods Chosen by the Question
+```When does a local descriptor remain predictive, and when does an intermediate scale become decisive?```
 
-Methods enter only when a question needs them. We derive ground-state electronic and magnetic structure from density functional theory; finite-temperature and configurational behaviour from Monte Carlo on effective models built from first-principles exchange interactions; and treatment of substitutional disorder from Green's-function methods or explicit supercells depending on whether short-range order matters.
+## Methods Chosen by the Question
 
-Machine learning is constrained to physically interpretable features where compositional spaces are too large to enumerate, with predictions validated against first-principles calculations. Part of what we report is where a local descriptor predicts correctly and where it stops — that boundary is usually where the intermediate scale becomes decisive.
+Methods enter only when a question requires them.
 
-### Building the Infrastructure
+We use:
 
-When standard implementations fall short, we build the tools we need. Rather than forcing a physical problem to fit off-the-shelf software, we develop our own computational infrastructure. This includes in-house kinetic Monte Carlo codes to capture exact non-equilibrium dynamics, as well as high-performance, open-source tools like [CView](https://github.com/mavensgroup/cview). Written in Rust and GTK4, CView bridges the gap between structure visualization and *ab-initio* calculation setup (VASP, QE, SPRKKR). Developing our own code ensures that our analysis is limited only by the physics itself. *(See our [Software](/software) page).*
+- **Density functional theory** for electronic and magnetic structure, primarily through VASP and Quantum ESPRESSO for ordered systems, and SPRKKR with Green's-function coherent potential approximation for substitutional disorder.
+- **First-principles exchange interactions** extracted through the Lichtenstein formalism, preserving the topology of competing magnetic pathways when mapping finite-temperature behaviour onto effective spin models.
+- **Classical Monte Carlo simulations** to study ordering temperatures, phase competition, and magnetocaloric response.
+- **Machine learning constrained by physically interpretable descriptors** when compositional spaces become too large for direct first-principles exploration.
 
-### Experimental Constraints and Validation
+Part of what we report is where local descriptors succeed — and where they fail. That boundary is often where the intermediate scale becomes physically important.
 
-We work alongside experimental groups — [Dr Payel Bandyopadhyay, SRMIST](https://sites.google.com/srmist.edu.in/primelab/) on polymers and soft materials, [Dr. Ashutosh Kumar Singh, CeNS](https://sites.google.com/view/ashutoshksingh-cens/team/dr-ashutosh-k-singh) on quantum materials, [Dr. Pralay K. Santra, CeNS](https://www.santragroup.in/group/pralay-k-santra) on 2D systems — both to validate predictions and to keep the choice of system honest about what synthesis can probe.
+## Research Software and Computational Infrastructure
 
-### Research Themes
+We also develop computational tools where existing workflows become restrictive.
+
+[**cview**](https://github.com/mavensgroup/cview) is an open-source crystallographic interface designed to bridge structure visualisation and ab-initio workflow generation across VASP, Quantum ESPRESSO, and SPRKKR.
+
+A kinetic Monte Carlo engine for defect evolution and ordering dynamics is currently under active development.
+
+## Experimental Constraints and Validation
+
+Because collective behaviour is ultimately constrained by synthesis, morphology, and disorder, we work closely with experimental collaborators to ensure that computational predictions remain physically accessible.
+
+Current collaborations include:
+
+- [Dr Ashutosh Kumar Singh, CeNS](https://sites.google.com/view/ashutoshksingh-cens/team/dr-ashutosh-k-singh) — quantum materials
+- [Dr Payel Bandyopadhyay, SRMIST](https://sites.google.com/srmist.edu.in/primelab/) — polymers and soft materials
+- [Dr Pralay K. Santra, CeNS](https://www.santragroup.in/group/pralay-k-santra) — two-dimensional materials
+
+## Research Themes
