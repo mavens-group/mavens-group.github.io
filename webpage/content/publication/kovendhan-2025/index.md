@@ -26,8 +26,7 @@ date: '2025-06-06'
 
 # Date to publish webpage (NOT necessarily Bibtex publication's date).
 publishDate: '2025-06-06T00:33:47.161082Z'
-abstract: "Background
-Hydrogen evolution reaction (HER) is an electrochemical process for achieving sustainable energy by
+abstract: 'Background Hydrogen evolution reaction (HER) is an electrochemical process for achieving sustainable energy by
 environment friendly process. To enhance the HER activity, perovskite BaTiO3 oxides are explored as
 electrocatalysts for hydrogen evolution reaction in acidic solutions. The g-C3N4 is a
 cost-effective, stable, and property tunable catalyst with electrocatalytic properties suitable for
@@ -44,7 +43,8 @@ BaTiO3 with 1 wt % g-C3N4 composite exhibit low overpotential value of 254 mV an
 investigating more on these 2D incorporated perovskite materials for electrochemical hydrogen
 evolution reaction. The observed enhanced electrocatalytic performance of the BaTiO3/g-C3N4
 composite is attributed to the synergistic effects of BaTiO3 and g-C3N4 creating a new pathway for
-the development of inexpensive and efficient electrocatalysts."
+the development of inexpensive and efficient electrocatalysts.'
+
 # Publication type.
 # A single CSL publication type but formatted as a YAML list (for Hugo requirements).
 publication_types:
