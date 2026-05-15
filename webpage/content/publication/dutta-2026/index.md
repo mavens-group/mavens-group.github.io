@@ -1,6 +1,5 @@
 ---
-title: Geometric percolation threshold defines half-metallic window in vacancy-doped
-  TiS 2
+title: Geometric percolation threshold defines half-metallic window in vacancy-doped TiS$_2$
 
 # Authors
 # A YAML list of author names
@@ -42,7 +41,7 @@ C_{4v}$) selectively stabilizes the Ti $3d_{z^2}$ orbital, generating robust loc
 critical vacancy concentration $x_c \approx 12.5\%$, a percolation transition drives the
 majority-spin impurity band from flat, localized levels ($W < 0.1$ eV) to a dispersive 1.5 eV-wide
 band with 100\% spin polarization and a minority-spin gap of 1.0 eV. Finite-size scaling yields a
-Fisher exponent $\tau = 2.09 \pm 0.03$, confirmed by fractal scaling of \textit{ab initio} charge
+Fisher exponent $\tau = 2.09 \pm 0.03$, confirmed by fractal scaling of _ab initio_ charge
 densities ($\tau_{\text{eff}}^{\text{DFT}} = 1.87 \pm 0.26$), placing the transition in the 2D
 percolation universality class. The percolation mechanism is independently corroborated by a
 striking supercell-size effect: at identical concentration, $2\times2$ cells yield
@@ -94,5 +93,3 @@ links:
 - name: URL
   url: http://dx.doi.org/10.1103/nt5p-5n1p
 ---
-
-Add the **full text** or **supplementary notes** for the publication here using Markdown formatting.
