@@ -1,5 +1,5 @@
 ---
-title: "Mahshook's work on ML published in PRM"
+title: "New Paper in PRM: Machine Learning for Quantum Defect Hosts"
 
 date: 2026-05-12
 profile: false

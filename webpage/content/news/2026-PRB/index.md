@@ -1,5 +1,5 @@
 ---
-title: "Shrestha published on PRB"
+title: "New Paper in PRB: Half-metallicity in 2D TMDCs"
 
 date: 2026-05-14
 profile: false
