@@ -46,7 +46,7 @@ Methods enter only when a question requires them.
 
 We use:
 
-- **Density functional theory** for electronic and magnetic structure, primarily through VASP and Quantum ESPRESSO for ordered systems, and SPRKKR with Green's-function coherent potential approximation for substitutional disorder.
+- **Density functional theory** for electronic and magnetic structure, primarily through plane wave and  Green's-function coherent potential approximation based methods.
 - **First-principles exchange interactions** extracted through the Lichtenstein formalism, preserving the topology of competing magnetic pathways when mapping finite-temperature behaviour onto effective spin models.
 - **Classical Monte Carlo simulations** to study ordering temperatures, phase competition, and magnetocaloric response.
 - **Machine learning constrained by physically interpretable descriptors** when compositional spaces become too large for direct first-principles exploration.
@@ -57,7 +57,7 @@ Part of what we report is where local descriptors succeed — and where they fai
 
 We also develop computational tools where existing workflows become restrictive.
 
-[**cview**](https://github.com/mavensgroup/cview) is an open-source crystallographic interface designed to bridge structure visualisation and ab-initio workflow generation across VASP, Quantum ESPRESSO, and SPRKKR.
+[**cview**](https://github.com/mavensgroup/cview) is an open-source crystallographic interface designed to bridge structure visualisation and _ab-initio_ workflow generation across multiple formats.
 
 A kinetic Monte Carlo engine for defect evolution and ordering dynamics is currently under active development.
 
