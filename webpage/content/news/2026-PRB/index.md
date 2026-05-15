@@ -5,7 +5,8 @@ date: 2026-05-14
 profile: false
 tags: [highlight]
 ---
-Huge congratulations to Shrestha Dutta on our latest paper, just published in Physical Review B!
+Huge congratulations to [Shrestha Dutta](../../author/shrestha-dutta) on our latest paper, just published in Physical Review B!
+<!--more-->
 In the field of two-dimensional (2D) spintronics, defect engineering of transition metal dichalcogenides (TMDCs) routinely produces local magnetic moments. However, itinerant half-metallic ferromagnetism has remained a significant challenge, with experimental realizations frequently yielding paramagnetic insulators instead of the predicted half-metals.
 
 Lead author Shrestha Dutta rigorously resolves this paradox for vacancy-doped monolayer 1T-TiS₂. Her work demonstrates that the insulator-to-half-metal transition is governed fundamentally by the universal geometric percolation of the defect network, extending frameworks previously established for 3D diluted magnetic semiconductors into the 2D limit.
