@@ -690,3 +690,112 @@ h1, h2, h3, h4 {
     z-index: 2002;
   }
 }
+
+/* ==========================================================================
+   RESEARCH THEMES GRID
+   3-column card row on desktop; stacks to 1 column on mobile.
+   ========================================================================== */
+.research-themes-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem 2rem;
+  margin-top: 1.25rem;
+  margin-bottom: 1.25rem;
+}
+
+.theme-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  padding: 0.9rem 1rem;
+  border-left: 2px solid currentColor;
+  opacity: 0.9;
+  transition: opacity 0.2s ease, border-left-width 0.2s ease;
+
+  &:hover {
+    opacity: 1;
+    border-left-width: 3px;
+  }
+
+  .theme-title {
+    font-weight: 600;
+    font-size: 0.95rem;
+    line-height: 1.3;
+    text-decoration: none;
+
+    &:hover { text-decoration: underline; }
+  }
+
+  .theme-desc {
+    font-weight: 300;
+    font-size: 0.85rem;
+    line-height: 1.5;
+    opacity: 0.8;
+  }
+}
+
+@media (max-width: 991.98px) {
+  .research-themes-grid {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+}
+
+/* ==========================================================================
+   HIGHLIGHT LIST GRID
+   Tighter 2-column grid on desktop; single column on mobile.
+   Paired with layouts/shortcodes/highlight-list.html (emits these classes).
+   ========================================================================== */
+.highlight-list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  column-gap: 1.25rem;
+  row-gap: 0;
+  margin-top: 0.25rem;
+}
+
+.highlight-item {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+  padding: 0.3rem 0;
+  border-bottom: 1px solid rgba(128, 128, 128, 0.14);
+  font-size: 0.9rem;
+  line-height: 1.35;
+
+  /* Vertical divider: sits to the right of every left-column item */
+  &:nth-child(odd) {
+    padding-right: 0.6rem;
+    border-right: 1px solid rgba(128, 128, 128, 0.14);
+  }
+  &:nth-child(even) {
+    padding-left: 0.5rem;
+  }
+
+  .highlight-date {
+    flex: 0 0 4.5rem;        /* fixed-width date column: titles wrap clean */
+    font-size: 0.78rem;
+    opacity: 0.75;
+    white-space: nowrap;
+  }
+
+  .highlight-link {
+    text-decoration: none;
+    &:hover { text-decoration: underline; }
+  }
+}
+
+@media (max-width: 767.98px) {
+  .highlight-list {
+    grid-template-columns: 1fr;
+    column-gap: 0;
+  }
+  /* No divider when stacked to one column */
+  .highlight-item:nth-child(odd) {
+    padding-right: 0;
+    border-right: none;
+  }
+  .highlight-item:nth-child(even) {
+    padding-left: 0;
+  }
+}

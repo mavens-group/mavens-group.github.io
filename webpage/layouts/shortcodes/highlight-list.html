@@ -24,24 +24,35 @@
 {{/* </div> */}}
 
 
+{{/* {{ $pages := where (where site.RegularPages "Section" "news") ".Params.tags" "intersect" (slice "highlight") }} */}}
+{{/* {{ $pages = $pages | first 6 }} */}}
+{{/* <div style="display:grid; grid-template-columns:1fr 1fr; gap:0.3rem 2rem;"> */}}
+{{/* {{ range $pages }} */}}
+  {{/* <div style="margin: 0.2rem 0;"> */}}
+    {{/* <span style="opacity:0.8; font-size:0.95rem; margin-right:0.6rem;"> */}}
+      {{/* {{ .Date.Format "Jan 2006" }} */}}
+    {{/* </span> */}}
+    {{/* <a href="{{ .RelPermalink }}">{{ .Title }}</a> */}}
+  {{/* </div> */}}
+{{/* {{ end }} */}}
+{{/* </div> */}}
+
+{{/* <style> */}}
+{{/* @media (max-width: 768px) { */}}
+  {{/* div[style*="grid-template-columns:1fr 1fr"] { */}}
+    {{/* grid-template-columns: 1fr !important; */}}
+    {{/* gap: 0.5rem !important; */}}
+  {{/* } */}}
+{{/* } */}}
+{{/* </style> */}}
+
 {{ $pages := where (where site.RegularPages "Section" "news") ".Params.tags" "intersect" (slice "highlight") }}
 {{ $pages = $pages | first 6 }}
-<div style="display:grid; grid-template-columns:1fr 1fr; gap:0.3rem 2rem;">
+<div class="highlight-list">
 {{ range $pages }}
-  <div style="margin: 0.2rem 0;">
-    <span style="opacity:0.8; font-size:0.95rem; margin-right:0.6rem;">
-      {{ .Date.Format "Jan 2006" }}
-    </span>
-    <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+  <div class="highlight-item">
+    <span class="highlight-date">{{ .Date.Format "Jan 2006" }}</span>
+    <a class="highlight-link" href="{{ .RelPermalink }}">{{ .Title }}</a>
   </div>
 {{ end }}
 </div>
-
-<style>
-@media (max-width: 768px) {
-  div[style*="grid-template-columns:1fr 1fr"] {
-    grid-template-columns: 1fr !important;
-    gap: 0.5rem !important;
-  }
-}
-</style>

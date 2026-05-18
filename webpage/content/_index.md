@@ -71,7 +71,6 @@ sections:
 
         Our approach combines **[Density Functional Theory (DFT)](blog/2024-07-dft)**, **Monte Carlo simulations**, and **Machine Learning (ML)** to predict material properties from electronic structure—bridging atomic-scale behaviour with macroscopic functionality. By linking fundamental theory with experimentally relevant outcomes, we **predict material behaviour before synthesis**, reducing trial-and-error and accelerating discovery.
 
-        {{% cta cta_link="./research/" cta_text="Explore Our Research" %}}
 
     design:
       columns: '1'
@@ -83,14 +82,22 @@ sections:
       text: |
         ### Research Themes
 
-        Our work spans three interconnected areas, each addressing specific scientific challenges:
+        <div class="research-themes-grid">
+          <div class="theme-card">
+            <a class="theme-title" href="/research/post/energy/">Energy Materials by Design</a>
+            <span class="theme-desc">Which electronic-structure variables actually control catalytic, magnetic, and electronic function in itinerant systems?</span>
+          </div>
+          <div class="theme-card">
+            <a class="theme-title" href="/research/post/quantum/">Quantum Materials by Design</a>
+            <span class="theme-desc">How do local electronic features — at a vacancy, a Janus interface, a substitutional site — propagate into collective spin-dependent responses?</span>
+          </div>
+          <div class="theme-card">
+            <a class="theme-title" href="/research/post/ml/">Interpretable Machine Learning</a>
+            <span class="theme-desc">Physics-informed ML that discovers materials while preserving the mechanistic insight that makes predictions transferable.</span>
+          </div>
+        </div>
 
-        1. **[Energy Materials by Design](/research/post/energy/)** – Identifying electronic-structure control variables that govern catalytic, magnetic, and electronic functionality in itinerant systems.
-
-        2. **[Quantum Materials by Design](/research/post/quantum/)** – Tracking how local electronic features survive into collective spin-dependent responses in defect systems, disordered alloys, and layered materials.
-
-        3. **[Interpretable Machine Learning](/research/post/ml/)** – Developing physics-informed ML models that discover materials while preserving the insight that makes predictions transferable.
-
+        {{% cta cta_link="./research/" cta_text="Explore Our Research" %}}
     design:
       columns: '1'
 
@@ -113,9 +120,9 @@ sections:
     content:
       title:
       text: |
-        ### Join the Discovery
+        ### Open Positions
 
-        We welcome **M.Sc. and graduate students** in physics, chemistry, or materials science interested in computational materials research. Develop expertise in _ab-initio_ [DFT](blog/2024-07-dft) and ML-driven materials screening while contributing to technologies shaping a sustainable, quantum-enabled future.
+        We welcome M.Sc. and PhD students in physics, chemistry, or materials science. Projects span _ab-initio_ [DFT](blog/2024-07-dft), Monte Carlo, and ML-driven screening.
 
         {{% cta cta_link="./position/" cta_text="See Open Projects" %}}
 
