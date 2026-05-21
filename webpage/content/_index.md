@@ -66,8 +66,7 @@ sections:
         **MAVENs** (*Materials Advancing a Viable ENergy Future*), led by [Dr. Rudra Banerjee](https://mavens-group.github.io/author/rudra-banerjee/), is based in the [Department of Physics and Nanotechnology](https://www.srmist.edu.in/department/department-of-physics-and-nanotechnology/) at the [SRM Institute of Science and Technology](https://srmist.edu.in).
 
         We address a central question in computational materials science:
-
-        ```How do we computationally design materials that solve energy and quantum challenges?```
+        <div class="callout-question">How do we computationally design materials that solve energy and quantum challenges?</div>
 
         Our approach combines **[Density Functional Theory (DFT)](blog/2024-07-dft)**, **Monte Carlo simulations**, and **Machine Learning (ML)** to predict material properties from electronic structure—bridging atomic-scale behaviour with macroscopic functionality. By linking fundamental theory with experimentally relevant outcomes, we **predict material behaviour before synthesis**, reducing trial-and-error and accelerating discovery.
 

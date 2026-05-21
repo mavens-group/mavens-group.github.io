@@ -30,7 +30,9 @@ Local electronic features are necessary for functionality, but they are rarely s
 
 What decides whether a local feature survives into a macroscopic response is usually not the feature itself, but the larger physical structure it inhabits: the topology of exchange pathways, the statistics of disorder, the connectivity of defect networks, or the dimensionality of an interacting phase.
 
-```This intermediate scale — the physical bridge between local structure and collective response — is the central focus of our research.```
+
+<div class="callout-question">This intermediate scale — the physical bridge between local structure and collective response — is the central focus of our research.</div>
+
 
 {{< video src="research.mp4" controls=false autoplay=true loop=true muted=true >}}
 
@@ -38,7 +40,9 @@ What decides whether a local feature survives into a macroscopic response is usu
 
 We choose systems — substitutional alloys, layered surfaces, defect-bearing semiconductors, two-dimensional magnets — where the intermediate scale takes a specific, computationally tractable form, and where one variable at a time can be cleanly isolated. The recurring question across these systems is the same:
 
-```When does a local descriptor remain predictive, and when does an intermediate scale become decisive?```
+
+<div class="callout-question">When does a local descriptor remain predictive, and when does an intermediate scale become decisive?</div>
+
 
 ## Methods Chosen by the Question
 
