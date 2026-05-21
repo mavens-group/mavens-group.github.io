@@ -1,0 +1,2108 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Monte Carlo Methods for Physicists</title>
+        <meta name="robots" content="noindex">
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="A graduate-level course on Monte Carlo methods with applications in physics and chemistry">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="favicon-de23e50b.svg">
+        <link rel="shortcut icon" href="favicon-8114d1fc.png">
+        <link rel="stylesheet" href="css/variables-8adf115d.css">
+        <link rel="stylesheet" href="css/general-0392ca55.css">
+        <link rel="stylesheet" href="css/chrome-fc474251.css">
+        <link rel="stylesheet" href="css/print-9e4910d8.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="fonts/fonts-9644e21d.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="mdbook-highlight-css" href="highlight-493f70e1.css">
+        <link rel="stylesheet" id="mdbook-tomorrow-night-css" href="tomorrow-night-4c0ae647.css">
+        <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="ayu-highlight-3fdfc3ac.css">
+
+        <!-- Custom theme stylesheets -->
+
+        <!-- MathJax -->
+        <script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+            window.path_to_searchindex_js = "searchindex-b873c817.js";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="toc-c1e50cd2.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="mdbook-body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="mdbook-sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("mdbook-sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
+
+        <nav id="mdbook-sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="toc.html"></iframe>
+            </noscript>
+            <div id="mdbook-sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="mdbook-page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="mdbook-menu-bar-hover-placeholder"></div>
+                <div id="mdbook-menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="mdbook-sidebar-toggle" class="icon-button" for="mdbook-sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="mdbook-sidebar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/></svg></span>
+                        </label>
+                        <button id="mdbook-theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="mdbook-theme-list">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M371.3 367.1c27.3-3.9 51.9-19.4 67.2-42.9L600.2 74.1c12.6-19.5 9.4-45.3-7.6-61.2S549.7-4.4 531.1 9.6L294.4 187.2c-24 18-38.2 46.1-38.4 76.1L371.3 367.1zm-19.6 25.4l-116-104.4C175.9 290.3 128 339.6 128 400c0 3.9 .2 7.8 .6 11.6c1.8 17.5-10.2 36.4-27.8 36.4H96c-17.7 0-32 14.3-32 32s14.3 32 32 32H240c61.9 0 112-50.1 112-112c0-2.5-.1-5-.2-7.5z"/></svg></span>
+                        </button>
+                        <ul id="mdbook-theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-ayu">Ayu</button></li>
+                        </ul>
+                        <button id="mdbook-search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="mdbook-searchbar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352c79.5 0 144-64.5 144-144s-64.5-144-144-144S64 128.5 64 208s64.5 144 144 144z"/></svg></span>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Monte Carlo Methods for Physicists</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <span class=fa-svg id="print-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M128 0C92.7 0 64 28.7 64 64v96h64V64H354.7L384 93.3V160h64V93.3c0-17-6.7-33.3-18.7-45.3L400 18.7C388 6.7 371.7 0 354.7 0H128zM384 352v32 64H128V384 368 352H384zm64 32h32c17.7 0 32-14.3 32-32V256c0-35.3-28.7-64-64-64H64c-35.3 0-64 28.7-64 64v96c0 17.7 14.3 32 32 32H64v64c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V384zm-16-88c-13.3 0-24-10.7-24-24s10.7-24 24-24s24 10.7 24 24s-10.7 24-24 24z"/></svg></span>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="mdbook-search-wrapper" class="hidden">
+                    <form id="mdbook-searchbar-outer" class="searchbar-outer">
+                        <div class="search-wrapper">
+                            <input type="search" id="mdbook-searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="mdbook-searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <span class=fa-svg id="fa-spin"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M304 48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zm0 416c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM48 304c26.5 0 48-21.5 48-48s-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48zm464-48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM142.9 437c18.7-18.7 18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zm0-294.2c18.7-18.7 18.7-49.1 0-67.9S93.7 56.2 75 75s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zM369.1 437c18.7 18.7 49.1 18.7 67.9 0s18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9z"/></svg></span>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="mdbook-searchresults-outer" class="searchresults-outer hidden">
+                        <div id="mdbook-searchresults-header" class="searchresults-header"></div>
+                        <ul id="mdbook-searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('mdbook-sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('mdbook-sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#mdbook-sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="mdbook-content" class="content">
+                    <main>
+                        <h1 id="monte-carlo-methods-for-physicists"><a class="header" href="#monte-carlo-methods-for-physicists">Monte Carlo Methods for Physicists</a></h1>
+<p><strong>MSc Physics — Graduate Course</strong></p>
+<hr>
+<h2 id="about-this-course"><a class="header" href="#about-this-course">About This Course</a></h2>
+<p>This course introduces Monte Carlo (MC) methods from first principles, developing both theoretical understanding and practical computational skill. The methods covered are among the most broadly applicable in all of physics and physical chemistry: they are used to study phase transitions in magnetic materials, compute free energies of proteins, simulate particle detector responses, model surface catalysis, and sample posterior distributions in data analysis.</p>
+<p>The course assumes familiarity with thermodynamics, statistical mechanics at the undergraduate level, and basic programming in Python. No prior knowledge of stochastic methods is required.</p>
+<hr>
+<h2 id="course-structure"><a class="header" href="#course-structure">Course Structure</a></h2>
+<p>The 15 classes are organised into 9 chapters:</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Chapter</th><th>Topic</th><th>Classes</th></tr>
+</thead>
+<tbody>
+<tr><td>1</td><td>Foundations of Probability &amp; Randomness</td><td>1–2</td></tr>
+<tr><td>2</td><td>Sampling Methods</td><td>3–4</td></tr>
+<tr><td>3</td><td>Monte Carlo Integration</td><td>5–6</td></tr>
+<tr><td>4</td><td>Markov Chain Monte Carlo (MCMC)</td><td>7–8</td></tr>
+<tr><td>5</td><td>The Ising Model &amp; Statistical Mechanics</td><td>9–10</td></tr>
+<tr><td>6</td><td>The Heisenberg Model &amp; Classical Spin Systems</td><td>11</td></tr>
+<tr><td>7</td><td>Advanced MCMC &amp; Free Energy Methods</td><td>12</td></tr>
+<tr><td>8</td><td>Kinetic Monte Carlo</td><td>13–14</td></tr>
+<tr><td>9</td><td>Applications, Error Analysis &amp; Special Topics</td><td>15</td></tr>
+</tbody>
+</table>
+</div>
+<hr>
+<h2 id="how-to-use-these-notes"><a class="header" href="#how-to-use-these-notes">How to Use These Notes</a></h2>
+<blockquote class="blockquote-tag blockquote-tag-note">
+<p class="blockquote-tag-title"><svg viewbox="0 0 16 16" width="18" height="18"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"></path></svg>Note</p>
+<p>Admonish boxes appear throughout to highlight important results, warn of common pitfalls, and flag computational exercises. Equations are typeset in LaTeX; all displayed equations are numbered within each chapter.</p>
+</blockquote>
+<blockquote class="blockquote-tag blockquote-tag-tip">
+<p class="blockquote-tag-title"><svg viewbox="0 0 16 16" width="18" height="18"><path d="M8 1.5c-2.363 0-4 1.69-4 3.75 0 .984.424 1.625.984 2.304l.214.253c.223.264.47.556.673.848.284.411.537.896.621 1.49a.75.75 0 0 1-1.484.211c-.04-.282-.163-.547-.37-.847a8.456 8.456 0 0 0-.542-.68c-.084-.1-.173-.205-.268-.32C3.201 7.75 2.5 6.766 2.5 5.25 2.5 2.31 4.863 0 8 0s5.5 2.31 5.5 5.25c0 1.516-.701 2.5-1.328 3.259-.095.115-.184.22-.268.319-.207.245-.383.453-.541.681-.208.3-.33.565-.37.847a.751.751 0 0 1-1.485-.212c.084-.593.337-1.078.621-1.489.203-.292.45-.584.673-.848.075-.088.147-.173.213-.253.561-.679.985-1.32.985-2.304 0-2.06-1.637-3.75-4-3.75ZM5.75 12h4.5a.75.75 0 0 1 0 1.5h-4.5a.75.75 0 0 1 0-1.5ZM6 15.25a.75.75 0 0 1 .75-.75h2.5a.75.75 0 0 1 0 1.5h-2.5a.75.75 0 0 1-.75-.75Z"></path></svg>Tip</p>
+<p><strong>Computational Labs</strong>
+Each chapter contains one or more computational labs. These are hands-on Python exercises designed to run in under 30 minutes on a modern laptop. Skeleton code is provided in Appendix A.</p>
+</blockquote>
+<blockquote class="blockquote-tag blockquote-tag-warning">
+<p class="blockquote-tag-title"><svg viewbox="0 0 16 16" width="18" height="18"><path d="M6.457 1.047c.659-1.234 2.427-1.234 3.086 0l6.082 11.378A1.75 1.75 0 0 1 14.082 15H1.918a1.75 1.75 0 0 1-1.543-2.575Zm1.763.707a.25.25 0 0 0-.44 0L1.698 13.132a.25.25 0 0 0 .22.368h12.164a.25.25 0 0 0 .22-.368Zm.53 3.996v2.5a.75.75 0 0 1-1.5 0v-2.5a.75.75 0 0 1 1.5 0ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"></path></svg>Warning</p>
+<p>Monte Carlo methods are probabilistic. Always check convergence, always quote statistical errors, and always seed your random number generator for reproducibility during development.</p>
+</blockquote>
+<hr>
+<h2 id="notation"><a class="header" href="#notation">Notation</a></h2>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Symbol</th><th>Meaning</th></tr>
+</thead>
+<tbody>
+<tr><td>\(\langle A \rangle\)</td><td>Thermal (ensemble) average of observable \(A\)</td></tr>
+<tr><td>\(\beta\)</td><td>Inverse temperature \(1/k_B T\)</td></tr>
+<tr><td>\(Z\)</td><td>Partition function</td></tr>
+<tr><td>\(N\)</td><td>Number of MC steps or particles (context-dependent)</td></tr>
+<tr><td>\(\sigma^2\)</td><td>Variance</td></tr>
+<tr><td>\(\mathcal{U}[0,1]\)</td><td>Uniform distribution on \([0,1]\)</td></tr>
+<tr><td>\(p(\mathbf{x})\)</td><td>Probability density function of \(\mathbf{x}\)</td></tr>
+</tbody>
+</table>
+</div>
+<p>Throughout, \(k_B = 1\) (natural units) unless stated otherwise.</p>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="chapter-1-foundations-of-probability--randomness"><a class="header" href="#chapter-1-foundations-of-probability--randomness">Chapter 1: Foundations of Probability &amp; Randomness</a></h1>
+<p><em>Classes 1–2</em></p>
+<hr>
+<h2 id="11-probability-spaces-and-random-variables"><a class="header" href="#11-probability-spaces-and-random-variables">1.1 Probability Spaces and Random Variables</a></h2>
+<p>A <strong>probability space</strong> is a triple \((\Omega, \mathcal{F}, P)\) where \(\Omega\) is the sample space, \(\mathcal{F}\) is a \(\sigma\)-algebra of events, and \(P: \mathcal{F} \to [0,1]\) is a probability measure satisfying \(P(\Omega) = 1\).</p>
+<p>A <strong>random variable</strong> \(X: \Omega \to \mathbb{R}\) maps outcomes to real numbers. For a continuous random variable its <strong>probability density function</strong> (PDF) \(p(x)\) satisfies:</p>
+<p>$$P(a \leq X \leq b) = \int_a^b p(x), dx, \qquad \int_{-\infty}^{\infty} p(x), dx = 1. \tag{1.1}$$</p>
+<p>The <strong>cumulative distribution function</strong> (CDF) is:</p>
+<p>$$F(x) = \int_{-\infty}^{x} p(x’), dx’. \tag{1.2}$$</p>
+<h3 id="key-distributions-in-physics"><a class="header" href="#key-distributions-in-physics">Key Distributions in Physics</a></h3>
+<p><strong>Gaussian (Normal):</strong>
+$$p(x) = \frac{1}{\sqrt{2\pi\sigma^2}} \exp!\left(-\frac{(x-\mu)^2}{2\sigma^2}\right). \tag{1.3}$$
+Arises in measurement errors, Brownian motion, and the CLT (see §1.2).</p>
+<p><strong>Poisson:</strong>
+$$P(n; \lambda) = \frac{\lambda^n e^{-\lambda}}{n!}, \quad n = 0, 1, 2, \ldots \tag{1.4}$$
+Governs photon counts in a detector, nuclear decay events, and cosmic ray arrivals in a given time window.</p>
+<p><strong>Exponential:</strong>
+$$p(t) = \lambda e^{-\lambda t}, \quad t \geq 0. \tag{1.5}$$
+The waiting time between successive Poisson events — equivalently, the <strong>lifetime</strong> of a radioactive nucleus with decay constant \(\lambda\).</p>
+<p><strong>Maxwell-Boltzmann speed distribution</strong> (to be sampled in Ch. 2):
+$$p(v) = 4\pi n \left(\frac{m}{2\pi k_B T}\right)^{3/2} v^2 \exp!\left(-\frac{mv^2}{2k_B T}\right). \tag{1.6}$$</p>
+<blockquote class="blockquote-tag blockquote-tag-note">
+<p class="blockquote-tag-title"><svg viewbox="0 0 16 16" width="18" height="18"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"></path></svg>Note</p>
+<p><strong>Radioactive Decay</strong>
+A sample of \(^{14}\)C has decay constant \(\lambda = 3.84 \times 10^{-12}\) s\(^{-1}\). The number of decays in a 1-second window follows a Poisson distribution. If the initial activity is \(A_0 = 10^4\) Bq, the standard deviation in the count is \(\sqrt{A_0} \approx 100\) — illustrating how counting statistics limit detector precision.</p>
+</blockquote>
+<h3 id="moments-and-cumulants"><a class="header" href="#moments-and-cumulants">Moments and Cumulants</a></h3>
+<p>The <strong>mean</strong> and <strong>variance</strong> of \(X\):
+$$\mu = \langle X \rangle = \int x, p(x), dx, \qquad \sigma^2 = \langle (X - \mu)^2 \rangle. \tag{1.7}$$</p>
+<p>The <strong>moment generating function</strong> \(M(t) = \langle e^{tX} \rangle\) and <strong>characteristic function</strong> \(\phi(k) = \langle e^{ikX} \rangle\) encode all moments.</p>
+<hr>
+<h2 id="12-the-law-of-large-numbers-and-central-limit-theorem"><a class="header" href="#12-the-law-of-large-numbers-and-central-limit-theorem">1.2 The Law of Large Numbers and Central Limit Theorem</a></h2>
+<h3 id="law-of-large-numbers"><a class="header" href="#law-of-large-numbers">Law of Large Numbers</a></h3>
+<p>Let \(X_1, X_2, \ldots, X_N\) be independent, identically distributed (i.i.d.) random variables with mean \(\mu\). Define the sample mean:</p>
+<p>$$\bar{X}<em>N = \frac{1}{N} \sum</em>{i=1}^N X_i. \tag{1.8}$$</p>
+<p>The <strong>strong law of large numbers</strong> states:</p>
+<p>$$\bar{X}_N \xrightarrow{a.s.} \mu \quad \text{as } N \to \infty. \tag{1.9}$$</p>
+<p>This underpins every Monte Carlo estimator: replace an ensemble average by a sample average.</p>
+<h3 id="central-limit-theorem"><a class="header" href="#central-limit-theorem">Central Limit Theorem</a></h3>
+<p>Regardless of the parent distribution \(p(x)\) (provided \(\sigma^2 &lt; \infty\)), the distribution of \(\bar{X}_N\) converges to a Gaussian:</p>
+<p>$$\frac{\bar{X}_N - \mu}{\sigma/\sqrt{N}} \xrightarrow{d} \mathcal{N}(0,1) \quad \text{as } N \to \infty. \tag{1.10}$$</p>
+<p><strong>Consequence:</strong> the statistical error of any MC estimator scales as:</p>
+<p>$$\epsilon \sim \frac{\sigma}{\sqrt{N}}. \tag{1.11}$$</p>
+<p>To halve the error, one must quadruple the number of samples. This \(1/\sqrt{N}\) convergence rate is universal — it does not depend on dimensionality, unlike grid-based quadrature.</p>
+<blockquote class="blockquote-tag blockquote-tag-note">
+<p class="blockquote-tag-title"><svg viewbox="0 0 16 16" width="18" height="18"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"></path></svg>Note</p>
+<p><strong>Why MC beats quadrature in high dimensions</strong>
+A regular grid with \(k\) points per dimension in \(d\) dimensions requires \(N = k^d\) points. The error scales as \(k^{-p}\) for a \(p\)-th order method, i.e. \(N^{-p/d}\). For \(d = 10\) and \(p = 4\), the error goes as \(N^{-0.4}\), slower than MC’s \(N^{-1/2}\). Above \(d \approx 8\), MC wins unconditionally.</p>
+</blockquote>
+<hr>
+<h2 id="13-generating-random-numbers"><a class="header" href="#13-generating-random-numbers">1.3 Generating Random Numbers</a></h2>
+<h3 id="true-vs-pseudo-random-numbers"><a class="header" href="#true-vs-pseudo-random-numbers">True vs. Pseudo-Random Numbers</a></h3>
+<p>A true random number generator (TRNG) harvests physical entropy — thermal noise, radioactive decay, atmospheric noise. Pseudo-random number generators (PRNGs) are deterministic algorithms producing sequences that pass statistical tests of randomness. For scientific computing, PRNGs are preferable: they are fast, reproducible (given the seed), and well-characterised.</p>
+<h3 id="linear-congruential-generators-lcgs"><a class="header" href="#linear-congruential-generators-lcgs">Linear Congruential Generators (LCGs)</a></h3>
+<p>$$x_{n+1} = (a, x_n + c) \bmod m. \tag{1.12}$$</p>
+<p>The Hull–Dobell theorem gives conditions on \(a, c, m\) for full period \(m\). A classic choice (ANSI C <code>rand</code>): \(a = 1103515245\), \(c = 12345\), \(m = 2^{31}\).</p>
+<blockquote class="blockquote-tag blockquote-tag-warning">
+<p class="blockquote-tag-title"><svg viewbox="0 0 16 16" width="18" height="18"><path d="M6.457 1.047c.659-1.234 2.427-1.234 3.086 0l6.082 11.378A1.75 1.75 0 0 1 14.082 15H1.918a1.75 1.75 0 0 1-1.543-2.575Zm1.763.707a.25.25 0 0 0-.44 0L1.698 13.132a.25.25 0 0 0 .22.368h12.164a.25.25 0 0 0 .22-.368Zm.53 3.996v2.5a.75.75 0 0 1-1.5 0v-2.5a.75.75 0 0 1 1.5 0ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"></path></svg>Warning</p>
+<p><strong>LCGs are not suitable for serious MC work</strong>
+LCGs have short periods and strong lattice correlations. RANDU (\(a=65539\), \(m=2^{31}\)) places all triples \((x_n, x_{n+1}, x_{n+2})\) on 15 parallel planes — catastrophic for 3D integration. Never use it.</p>
+</blockquote>
+<h3 id="mersenne-twister-mt19937"><a class="header" href="#mersenne-twister-mt19937">Mersenne Twister (MT19937)</a></h3>
+<p>The default PRNG in Python (<code>numpy.random</code>). Key properties:</p>
+<ul>
+<li>Period: \(2^{19937} - 1\) (a Mersenne prime, hence the name)</li>
+<li>Passes all Diehard and TestU01 statistical tests</li>
+<li>623-dimensional equidistribution</li>
+<li>State: 624 32-bit integers</li>
+</ul>
+<pre><code class="language-python">import numpy as np
+rng = np.random.default_rng(seed=42)   # modern API, reproducible
+u = rng.uniform(0, 1, size=10_000)     # 10000 uniform samples
+</code></pre>
+<h3 id="pcg-and-xoshiro-generators"><a class="header" href="#pcg-and-xoshiro-generators">PCG and Xoshiro Generators</a></h3>
+<p>Modern alternatives to MT for performance-critical code:</p>
+<ul>
+<li><strong>PCG64</strong>: default in <code>numpy.random.default_rng</code>. Better statistical properties than MT, smaller state.</li>
+<li><strong>Xoshiro256**</strong>: extremely fast, suitable for parallel streams.</li>
+</ul>
+<h3 id="random-numbers-on-the-unit-sphere"><a class="header" href="#random-numbers-on-the-unit-sphere">Random Numbers on the Unit Sphere</a></h3>
+<p>Uniformly distributed points on \(S^2\) require:</p>
+<p>$$\theta = \arccos(1 - 2u_1), \quad \phi = 2\pi u_2, \tag{1.13}$$</p>
+<p>where \(u_1, u_2 \sim \mathcal{U}[0,1]\). <strong>Do not</strong> sample \(\theta\) uniformly — this clusters points at the poles.</p>
+<hr>
+<h2 id="14-testing-randomness"><a class="header" href="#14-testing-randomness">1.4 Testing Randomness</a></h2>
+<p>A sequence \({x_n}\) that fails statistical tests may bias MC results. Standard tests:</p>
+<h3 id="chi-squared-uniformity-test"><a class="header" href="#chi-squared-uniformity-test">Chi-Squared Uniformity Test</a></h3>
+<p>Divide \([0,1]\) into \(k\) equal bins with expected count \(E = N/k\) each. The test statistic:</p>
+<p>$$\chi^2 = \sum_{i=1}^k \frac{(O_i - E)^2}{E} \tag{1.14}$$</p>
+<p>follows a \(\chi^2\) distribution with \(k-1\) degrees of freedom under \(H_0\) (perfect uniformity). Reject if \(p &lt; 0.05\).</p>
+<h3 id="autocorrelation-test"><a class="header" href="#autocorrelation-test">Autocorrelation Test</a></h3>
+<p>The lag-\(\tau\) autocorrelation:</p>
+<p>$$C(\tau) = \frac{\langle x_n x_{n+\tau} \rangle - \langle x_n \rangle^2}{\langle x_n^2 \rangle - \langle x_n \rangle^2}. \tag{1.15}$$</p>
+<p>For a good PRNG, \(C(\tau) \approx 0\) for all \(\tau &gt; 0\). In MCMC, non-zero \(C(\tau)\) reflects physical correlations and must be accounted for in error estimation (see Ch. 4).</p>
+<h3 id="spectral-test"><a class="header" href="#spectral-test">Spectral Test</a></h3>
+<p>In \(d\) dimensions, plot \(d\)-tuples \((x_n, x_{n+1}, \ldots, x_{n+d-1})\). Ideally these fill the unit hypercube uniformly; LCGs reveal planes.</p>
+<blockquote class="blockquote-tag blockquote-tag-tip">
+<p class="blockquote-tag-title"><svg viewbox="0 0 16 16" width="18" height="18"><path d="M8 1.5c-2.363 0-4 1.69-4 3.75 0 .984.424 1.625.984 2.304l.214.253c.223.264.47.556.673.848.284.411.537.896.621 1.49a.75.75 0 0 1-1.484.211c-.04-.282-.163-.547-.37-.847a8.456 8.456 0 0 0-.542-.68c-.084-.1-.173-.205-.268-.32C3.201 7.75 2.5 6.766 2.5 5.25 2.5 2.31 4.863 0 8 0s5.5 2.31 5.5 5.25c0 1.516-.701 2.5-1.328 3.259-.095.115-.184.22-.268.319-.207.245-.383.453-.541.681-.208.3-.33.565-.37.847a.751.751 0 0 1-1.485-.212c.084-.593.337-1.078.621-1.489.203-.292.45-.584.673-.848.075-.088.147-.173.213-.253.561-.679.985-1.32.985-2.304 0-2.06-1.637-3.75-4-3.75ZM5.75 12h4.5a.75.75 0 0 1 0 1.5h-4.5a.75.75 0 0 1 0-1.5ZM6 15.25a.75.75 0 0 1 .75-.75h2.5a.75.75 0 0 1 0 1.5h-2.5a.75.75 0 0 1-.75-.75Z"></path></svg>Tip</p>
+<p><strong>The TestU01 Library</strong>
+The most comprehensive battery of statistical tests is TestU01 (L’Ecuyer &amp; Simard). It includes BigCrush (over 100 tests). MT19937 passes; many simple generators fail.</p>
+</blockquote>
+<hr>
+<h2 id="15-computational-lab--class-2"><a class="header" href="#15-computational-lab--class-2">1.5 Computational Lab — Class 2</a></h2>
+<p><strong>Objectives:</strong></p>
+<ol>
+<li>Implement a simple LCG and compare its \(\chi^2\) and spectral behaviour to MT19937.</li>
+<li>Generate \(N = 10^5\) exponential random variates using the inverse CDF (see Ch. 2) and compare the empirical histogram to equation (1.5).</li>
+<li>Simulate radioactive decay of \(^{60}\)Co (\(t_{1/2} = 5.27\) yr) for 1000 atoms over 20 years using the waiting-time method. Plot the activity as a function of time and compare to the analytic result \(A(t) = A_0 e^{-\lambda t}\).</li>
+</ol>
+<blockquote class="blockquote-tag blockquote-tag-note">
+<p class="blockquote-tag-title"><svg viewbox="0 0 16 16" width="18" height="18"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"></path></svg>Note</p>
+<p><strong>Skeleton Code</strong>
+See Appendix A for the Python skeleton. You will need <code>numpy</code>, <code>scipy.stats</code>, and <code>matplotlib</code>.</p>
+</blockquote>
+<hr>
+<h2 id="summary"><a class="header" href="#summary">Summary</a></h2>
+<ul>
+<li>A Monte Carlo estimator of \(\langle f \rangle = \int f(x) p(x), dx\) is \(\hat{f} = \frac{1}{N}\sum_{i=1}^N f(x_i)\) with \(x_i \sim p(x)\).</li>
+<li>The error is \(\sigma/\sqrt{N}\), universal and dimension-independent.</li>
+<li>Use MT19937 or PCG64; never use LCGs or RANDU for scientific work.</li>
+<li>Always test your RNG and seed it for reproducibility.</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="chapter-2-sampling-methods"><a class="header" href="#chapter-2-sampling-methods">Chapter 2: Sampling Methods</a></h1>
+<p><em>Classes 3–4</em></p>
+<hr>
+<h2 id="21-the-sampling-problem"><a class="header" href="#21-the-sampling-problem">2.1 The Sampling Problem</a></h2>
+<p>We want to draw samples \(x_1, \ldots, x_N\) from a target distribution \(p(x)\). If we can do this efficiently, we can estimate any expectation value:</p>
+<p>$$\langle f \rangle = \int f(x), p(x), dx \approx \frac{1}{N} \sum_{i=1}^N f(x_i). \tag{2.1}$$</p>
+<p>This chapter treats methods that work when \(p(x)\) is known analytically and can be sampled directly. Chapter 4 handles the harder case (MCMC) when only the unnormalised density is available.</p>
+<hr>
+<h2 id="22-inverse-transform-sampling"><a class="header" href="#22-inverse-transform-sampling">2.2 Inverse Transform Sampling</a></h2>
+<p>If \(F(x) = \int_{-\infty}^x p(x’), dx’\) is the CDF and \(u \sim \mathcal{U}[0,1]\), then:</p>
+<p>$$x = F^{-1}(u) \tag{2.2}$$</p>
+<p>is distributed according to \(p(x)\). This follows from the probability integral transform: \(F(X) \sim \mathcal{U}[0,1]\) for any continuous \(X\).</p>
+<h3 id="derivation"><a class="header" href="#derivation">Derivation</a></h3>
+<p>$$P(x \leq x_0) = P(F^{-1}(u) \leq x_0) = P(u \leq F(x_0)) = F(x_0). \tag{2.3}$$</p>
+<h3 id="examples"><a class="header" href="#examples">Examples</a></h3>
+<p><strong>Exponential distribution</strong> (radioactive decay lifetimes):
+$$F(t) = 1 - e^{-\lambda t} \implies t = -\frac{1}{\lambda}\ln(1-u) = -\frac{1}{\lambda}\ln u. \tag{2.4}$$</p>
+<p>Since \(1 - u \sim \mathcal{U}[0,1]\) when \(u \sim \mathcal{U}[0,1]\), the last equality holds.</p>
+<p><strong>Cauchy distribution</strong> (resonance lineshapes, Lorentzian profiles):
+$$p(x) = \frac{1}{\pi}\frac{\gamma}{(x-x_0)^2 + \gamma^2} \implies x = x_0 + \gamma \tan!\left(\pi\left(u - \tfrac{1}{2}\right)\right). \tag{2.5}$$</p>
+<p><strong>Planck spectrum</strong> (photon energy sampling in radiative transfer):</p>
+<p>The Planck energy density \(u(\nu) \propto \nu^3/(e^{h\nu/k_BT}-1)\) has no closed-form CDF inverse, but can be sampled via the method in §2.3 or by a dedicated algorithm (Baluev 2014).</p>
+<blockquote class="blockquote-tag blockquote-tag-note">
+<p class="blockquote-tag-title"><svg viewbox="0 0 16 16" width="18" height="18"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"></path></svg>Note</p>
+<p><strong>Stellar Atmosphere Simulation</strong>
+Monte Carlo codes for stellar atmosphere modelling (e.g., CMFGEN, PHOENIX) sample photon packets from the Planck distribution at each atmospheric layer. The inverse CDF for the Planck spectrum is approximated numerically, then applied millions of times per model.</p>
+</blockquote>
+<hr>
+<h2 id="23-rejection-sampling-von-neumann-method"><a class="header" href="#23-rejection-sampling-von-neumann-method">2.3 Rejection Sampling (von Neumann Method)</a></h2>
+<p>When \(F^{-1}\) is unavailable, find a <strong>proposal distribution</strong> \(q(x)\) and constant \(M\) such that:</p>
+<p>$$p(x) \leq M, q(x) \quad \forall x. \tag{2.6}$$</p>
+<p><strong>Algorithm:</strong></p>
+<ol>
+<li>Draw \(x \sim q(x)\).</li>
+<li>Draw \(u \sim \mathcal{U}[0,1]\).</li>
+<li>If \(u \leq p(x) / (M q(x))\), <strong>accept</strong> \(x\); else <strong>reject</strong> and return to 1.</li>
+</ol>
+<p>The acceptance rate is \(1/M\), so we want \(M\) as small as possible — the tightest envelope.</p>
+<blockquote class="blockquote-tag blockquote-tag-note">
+<p class="blockquote-tag-title"><svg viewbox="0 0 16 16" width="18" height="18"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"></path></svg>Note</p>
+<p><strong>Why This Works</strong>
+The joint distribution of accepted \((x, u)\) pairs is uniform under the curve \(p(x)\). Marginalising over \(u\) gives \(p(x)\).</p>
+</blockquote>
+<h3 id="example-maxwell-boltzmann-speed-distribution"><a class="header" href="#example-maxwell-boltzmann-speed-distribution">Example: Maxwell-Boltzmann Speed Distribution</a></h3>
+<p>The 3D speed distribution (eq. 1.6) is awkward to invert. With proposal \(q(v) = \text{Gamma}(3/2, v_p)\) (where \(v_p = \sqrt{2k_BT/m}\)), one can achieve \(M \approx 1.1\), giving a 91% acceptance rate.</p>
+<blockquote class="blockquote-tag blockquote-tag-note">
+<p class="blockquote-tag-title"><svg viewbox="0 0 16 16" width="18" height="18"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"></path></svg>Note</p>
+<p><strong>Molecular Dynamics Initialisation</strong>
+MD simulations of noble gases or Lennard-Jones fluids initialise particle speeds by rejection-sampling the Maxwell-Boltzmann distribution. For argon at 300 K, \(v_p \approx 352\) m/s and the most probable speed drawn should match this within \(\sim 1%\) for \(N = 10^4\) particles.</p>
+</blockquote>
+<hr>
+<h2 id="24-importance-sampling"><a class="header" href="#24-importance-sampling">2.4 Importance Sampling</a></h2>
+<p>The idea: instead of sampling from \(p(x)\), sample from a proposal \(q(x)\) that concentrates where the integrand \(f(x)p(x)\) is large, and reweight:</p>
+<p>$$\langle f \rangle = \int f(x), p(x), dx = \int f(x), \frac{p(x)}{q(x)}, q(x), dx \approx \frac{1}{N}\sum_{i=1}^N f(x_i), w(x_i), \tag{2.7}$$</p>
+<p>where \(x_i \sim q(x)\) and the <strong>importance weight</strong> is:</p>
+<p>$$w(x) = \frac{p(x)}{q(x)}. \tag{2.8}$$</p>
+<h3 id="optimal-proposal-distribution"><a class="header" href="#optimal-proposal-distribution">Optimal Proposal Distribution</a></h3>
+<p>The variance of the estimator (2.7) is minimised when:</p>
+<p>$$q^*(x) = \frac{|f(x)|, p(x)}{\int |f(x’)|, p(x’), dx’}, \tag{2.9}$$</p>
+<p>i.e., \(q^*(x) \propto |f(x)|, p(x)\). This is rarely available in closed form but guides the choice of \(q\).</p>
+<h3 id="variance-reduction"><a class="header" href="#variance-reduction">Variance Reduction</a></h3>
+<p>Define the naive variance \(\sigma_0^2 = \text{Var}<em>{p}[f]\) and the importance-sampled variance \(\sigma</em>{IS}^2\). The <strong>variance reduction factor</strong> is \(\sigma_0^2 / \sigma_{IS}^2\).</p>
+<blockquote class="blockquote-tag blockquote-tag-note">
+<p class="blockquote-tag-title"><svg viewbox="0 0 16 16" width="18" height="18"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"></path></svg>Note</p>
+<p><strong>Tail Probabilities in Particle Detectors</strong>
+Estimating the probability of a particle depositing energy \(E &gt; E_{\text{threshold}}\) in a thin detector requires sampling the far tail of \(p(E)\). Naive MC is hopelessly inefficient: if \(P(E &gt; E_{\text{th}}) = 10^{-6}\), one needs \(\sim 10^8\) events for even 0.1% precision. Importance sampling with a shifted exponential proposal reduces this to \(\sim 10^4\) events — a factor \(10^4\) speedup.</p>
+</blockquote>
+<blockquote class="blockquote-tag blockquote-tag-note">
+<p class="blockquote-tag-title"><svg viewbox="0 0 16 16" width="18" height="18"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"></path></svg>Note</p>
+<p><strong>Virial Coefficients of Dense Gases</strong>
+The second virial coefficient of a gas with pair potential \(\phi(r)\) is:
+$$B_2(T) = -2\pi \int_0^\infty (e^{-\beta\phi(r)} - 1), r^2, dr.$$
+For a hard-sphere potential, the integrand is concentrated near \(r = \sigma\). Using \(q(r) \propto r^2 e^{-r/\sigma}\) as proposal reduces variance by a factor \(\sim 5\) compared to uniform sampling.</p>
+</blockquote>
+<hr>
+<h2 id="25-stratified-and-quasi-monte-carlo-sampling"><a class="header" href="#25-stratified-and-quasi-monte-carlo-sampling">2.5 Stratified and Quasi-Monte Carlo Sampling</a></h2>
+<h3 id="stratified-sampling"><a class="header" href="#stratified-sampling">Stratified Sampling</a></h3>
+<p>Divide the integration domain into \(k\) strata \(S_1, \ldots, S_k\). Draw \(n_j\) samples from each stratum and combine:</p>
+<p>$$\hat{I} = \sum_{j=1}^k \frac{|S_j|}{n_j} \sum_{i \in S_j} f(x_i). \tag{2.10}$$</p>
+<p>Optimal allocation: \(n_j \propto |S_j| \sigma_j\) where \(\sigma_j\) is the standard deviation of \(f\) within stratum \(j\). Variance is always less than or equal to naive MC.</p>
+<h3 id="quasi-monte-carlo-qmc"><a class="header" href="#quasi-monte-carlo-qmc">Quasi-Monte Carlo (QMC)</a></h3>
+<p>Replace pseudorandom sequences with <strong>low-discrepancy sequences</strong> that fill space more uniformly:</p>
+<p><strong>Halton sequence</strong> (base \(b\) van der Corput sequence):
+$$h_n^{(b)} = \sum_{k=0}^K d_k b^{-(k+1)}, \tag{2.11}$$
+where \(d_k\) are the digits of \(n\) in base \(b\).</p>
+<p><strong>Sobol sequences</strong>: higher-dimensional generalisations with better uniformity.</p>
+<p>QMC achieves error \(\mathcal{O}((\log N)^d / N)\) for smooth functions, beating MC’s \(1/\sqrt{N}\) for moderate \(d\).</p>
+<blockquote class="blockquote-tag blockquote-tag-warning">
+<p class="blockquote-tag-title"><svg viewbox="0 0 16 16" width="18" height="18"><path d="M6.457 1.047c.659-1.234 2.427-1.234 3.086 0l6.082 11.378A1.75 1.75 0 0 1 14.082 15H1.918a1.75 1.75 0 0 1-1.543-2.575Zm1.763.707a.25.25 0 0 0-.44 0L1.698 13.132a.25.25 0 0 0 .22.368h12.164a.25.25 0 0 0 .22-.368Zm.53 3.996v2.5a.75.75 0 0 1-1.5 0v-2.5a.75.75 0 0 1 1.5 0ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"></path></svg>Warning</p>
+<p>QMC sequences are deterministic and do not admit straightforward error estimation. Use <strong>randomised QMC</strong> (scrambled Sobol) to recover statistical error bars.</p>
+</blockquote>
+<blockquote class="blockquote-tag blockquote-tag-note">
+<p class="blockquote-tag-title"><svg viewbox="0 0 16 16" width="18" height="18"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"></path></svg>Note</p>
+<p><strong>Classical Partition Functions</strong>
+The configurational partition function of a \(d\)-dimensional harmonic oscillator lattice:
+$$Z = \int e^{-\beta \sum_{i} \frac{1}{2}k x_i^2}, d^N x$$
+can be evaluated exactly, making it a useful benchmark. QMC (Sobol) converges in \(N = 10^4\) evaluations to the same accuracy as plain MC with \(N = 10^6\) for \(d = 20\).</p>
+</blockquote>
+<hr>
+<h2 id="26-computational-lab--class-4"><a class="header" href="#26-computational-lab--class-4">2.6 Computational Lab — Class 4</a></h2>
+<p><strong>Objectives:</strong></p>
+<ol>
+<li>
+<p>Sample the Maxwell-Boltzmann speed distribution for N₂ at 300 K using rejection sampling. Plot the histogram and compare to equation (1.6). Compute \(\langle v \rangle\), \(\langle v^2 \rangle^{1/2}\), and \(v_{\rm mp}\) from your samples.</p>
+</li>
+<li>
+<p>Use importance sampling to estimate the integral
+$$I = \int_0^\infty x^4 e^{-x}, dx = 24$$
+using the proposal \(q(x) = e^{-x}\). Compare the variance to naive uniform-domain MC.</p>
+</li>
+<li>
+<p>Compare stratified MC, Sobol QMC, and plain MC for integrating \(f(x,y) = \sin(\pi x)\sin(\pi y)\) over \([0,1]^2\). Plot error vs. \(N\) on a log-log scale.</p>
+</li>
+</ol>
+<blockquote class="blockquote-tag blockquote-tag-note">
+<p class="blockquote-tag-title"><svg viewbox="0 0 16 16" width="18" height="18"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"></path></svg>Note</p>
+<p><strong>Skeleton Code</strong>
+Sobol sequences are available in <code>scipy.stats.qmc.Sobol</code>. See Appendix A.</p>
+</blockquote>
+<hr>
+<h2 id="summary-1"><a class="header" href="#summary-1">Summary</a></h2>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Method</th><th>When to use</th><th>Error scaling</th></tr>
+</thead>
+<tbody>
+<tr><td>Inverse CDF</td><td>Closed-form \(F^{-1}\) exists</td><td>\(1/\sqrt{N}\)</td></tr>
+<tr><td>Rejection sampling</td><td>\(p(x)\) bounded above by \(Mq(x)\)</td><td>\(1/\sqrt{N}\)</td></tr>
+<tr><td>Importance sampling</td><td>Integrand concentrated in a small region</td><td>\(1/\sqrt{N}\) (reduced variance)</td></tr>
+<tr><td>Stratified MC</td><td>Smooth integrands, known structure</td><td>Better than \(1/\sqrt{N}\)</td></tr>
+<tr><td>Quasi-MC</td><td>Smooth, moderate dimension</td><td>\(\sim (\log N)^d / N\)</td></tr>
+</tbody>
+</table>
+</div>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="chapter-3-monte-carlo-integration"><a class="header" href="#chapter-3-monte-carlo-integration">Chapter 3: Monte Carlo Integration</a></h1>
+<p><em>Classes 5–6</em></p>
+<hr>
+<h2 id="31-the-basic-estimator"><a class="header" href="#31-the-basic-estimator">3.1 The Basic Estimator</a></h2>
+<p>Given an integral \(I = \int_\Omega f(\mathbf{x}), d\mathbf{x}\) over a domain \(\Omega \subset \mathbb{R}^d\) with volume \(|\Omega|\), draw \(\mathbf{x}_i \sim \mathcal{U}(\Omega)\) and estimate:</p>
+<p>$$\hat{I} = \frac{|\Omega|}{N} \sum_{i=1}^N f(\mathbf{x}_i). \tag{3.1}$$</p>
+<p>The <strong>standard error</strong> of this estimator is:</p>
+<p>$$\sigma_{\hat{I}} = \frac{|\Omega|}{\sqrt{N}} \sqrt{\frac{1}{N-1}\sum_{i=1}^N \left(f(\mathbf{x}_i) - \bar{f}\right)^2}. \tag{3.2}$$</p>
+<p>This is the fundamental MC integration formula. The error scales as \(N^{-1/2}\) regardless of dimension — the key advantage over deterministic quadrature in high dimensions.</p>
+<blockquote class="blockquote-tag blockquote-tag-note">
+<p class="blockquote-tag-title"><svg viewbox="0 0 16 16" width="18" height="18"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"></path></svg>Note</p>
+<p><strong>Estimating π</strong>
+\(\pi = 4 \times P(\text{point in unit circle})\). Draw \(N\) points uniform in \([-1,1]^2\), accept those with \(x^2 + y^2 \leq 1\):
+$$\hat{\pi} = 4 \times \frac{N_{\rm in}}{N}.$$
+For \(N = 10^6\): error \(\approx 4\sigma/\sqrt{N} \approx 0.002\). This is pedagogically useful but inefficient — better methods exist.</p>
+</blockquote>
+<hr>
+<h2 id="32-variance-reduction-techniques"><a class="header" href="#32-variance-reduction-techniques">3.2 Variance Reduction Techniques</a></h2>
+<h3 id="321-antithetic-variates"><a class="header" href="#321-antithetic-variates">3.2.1 Antithetic Variates</a></h3>
+<p>If \(f\) is monotone, the pairs \((f(u), f(1-u))\) are negatively correlated. Replace naive estimator with:</p>
+<p>$$\hat{I}<em>{\rm AV} = \frac{1}{N}\sum</em>{i=1}^{N/2} \frac{f(u_i) + f(1-u_i)}{2}. \tag{3.3}$$</p>
+<p>The variance is reduced by a factor \((1 + \rho)/2\) where \(\rho &lt; 0\) is the correlation between \(f(u)\) and \(f(1-u)\).</p>
+<h3 id="322-control-variates"><a class="header" href="#322-control-variates">3.2.2 Control Variates</a></h3>
+<p>Choose a function \(g(\mathbf{x})\) with known mean \(\mu_g = \int g(\mathbf{x})p(\mathbf{x}),d\mathbf{x}\) and high correlation with \(f\). Define:</p>
+<p>$$h(\mathbf{x}) = f(\mathbf{x}) - c(g(\mathbf{x}) - \mu_g). \tag{3.4}$$</p>
+<p>Since \(\langle h \rangle = \langle f \rangle\), we can estimate \(\langle f \rangle\) via \(\hat{h}\). The optimal coefficient is:</p>
+<p>$$c^* = \frac{\text{Cov}(f, g)}{\text{Var}(g)}, \tag{3.5}$$</p>
+<p>giving variance reduction factor \((1 - \rho_{fg}^2)\). If \(|\rho_{fg}| = 0.99\), variance drops by \(\sim 10^4\).</p>
+<blockquote class="blockquote-tag blockquote-tag-note">
+<p class="blockquote-tag-title"><svg viewbox="0 0 16 16" width="18" height="18"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"></path></svg>Note</p>
+<p><strong>Second Virial Coefficient of Hard Spheres</strong>
+For the pair potential \(\phi(r) = 0\) for \(r &gt; \sigma\) and \(\infty\) for \(r &lt; \sigma\):
+$$B_2 = -2\pi \int_0^\infty (e^{-\beta\phi(r)} - 1), r^2, dr = \frac{2\pi\sigma^3}{3}.$$
+This is analytically known. When estimating \(B_2\) for a soft potential (e.g., Lennard-Jones), use the hard-sphere \(B_2\) as a control variate: \(g(r) = \Theta(\sigma - r)\). This can reduce variance by a factor of 3–5 near the Boyle temperature.</p>
+</blockquote>
+<h3 id="323-rao-blackwellisation"><a class="header" href="#323-rao-blackwellisation">3.2.3 Rao-Blackwellisation</a></h3>
+<p>Analytically integrate out some variables and MC-sample only the remainder. If \(f(\mathbf{x}) = f(x_1, x_2)\) and \(\int f(x_1, x_2) p_2(x_2),dx_2 = \tilde{f}(x_1)\) is tractable:</p>
+<p>$$\hat{I} = \frac{1}{N}\sum_{i=1}^N \tilde{f}(x_{1,i}), \quad \text{Var}[\tilde{f}(X_1)] \leq \text{Var}[f(X_1, X_2)]. \tag{3.6}$$</p>
+<hr>
+<h2 id="33-multi-dimensional-integration"><a class="header" href="#33-multi-dimensional-integration">3.3 Multi-Dimensional Integration</a></h2>
+<h3 id="the-curse-of-dimensionality"><a class="header" href="#the-curse-of-dimensionality">The Curse of Dimensionality</a></h3>
+<p>For a \(d\)-dimensional integral with regular quadrature using \(k\) points per dimension:</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Method</th><th>Error</th><th>Points needed for \(\epsilon = 10^{-3}\), \(d = 10\)</th></tr>
+</thead>
+<tbody>
+<tr><td>Trapezoidal</td><td>\(k^{-2}\)</td><td>\(10^{15}\)</td></tr>
+<tr><td>Simpson’s</td><td>\(k^{-4}\)</td><td>\(10^{7.5}\)</td></tr>
+<tr><td>Monte Carlo</td><td>\(N^{-1/2}\)</td><td>\(10^6\)</td></tr>
+</tbody>
+</table>
+</div>
+<p>MC requires \(N = \sigma^2/\epsilon^2\) samples — <strong>independent of \(d\)</strong>.</p>
+<h3 id="phase-space-integrals-in-particle-physics"><a class="header" href="#phase-space-integrals-in-particle-physics">Phase Space Integrals in Particle Physics</a></h3>
+<p>The \(n\)-body phase space integral for a decay \(A \to 1 + 2 + \cdots + n\) involves a \(3n - 4\) dimensional integral. For \(n = 5\) (11-dimensional), MC is the only practical approach. Tools like RAMBO or VEGAS are standard.</p>
+<p><strong>VEGAS algorithm</strong> (Lepage 1978): adaptive importance sampling that iteratively refines a grid to concentrate points where \(|f|\) is large. Widely used in particle physics for cross-section calculations.</p>
+<blockquote class="blockquote-tag blockquote-tag-note">
+<p class="blockquote-tag-title"><svg viewbox="0 0 16 16" width="18" height="18"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"></path></svg>Note</p>
+<p><strong>Atomic Form Factors</strong>
+The electron density form factor for atomic hydrogen:
+$$f(\mathbf{q}) = \int |\psi_{1s}(\mathbf{r})|^2 e^{i\mathbf{q}\cdot\mathbf{r}}, d^3r = \frac{1}{(1 + q^2 a_0^2/4)^2}$$
+is analytically known. For multi-electron atoms, the 3\(Z\)-dimensional integral \(\int |\Psi(\mathbf{r}_1,\ldots,\mathbf{r}_Z)|^2 e^{i\mathbf{q}\cdot\mathbf{r}_1}, d^{3Z}r\) requires MC. For iron (\(Z=26\)), this is a 78-dimensional integral.</p>
+</blockquote>
+<hr>
+<h2 id="34-estimating-partition-functions"><a class="header" href="#34-estimating-partition-functions">3.4 Estimating Partition Functions</a></h2>
+<p>The canonical partition function:
+$$Z = \int e^{-\beta H(\mathbf{q},\mathbf{p})}, d\mathbf{q}, d\mathbf{p} \tag{3.7}$$</p>
+<p>is a \(6N\)-dimensional integral for \(N\) particles. Direct MC evaluation is only possible for small systems. In practice, we compute <strong>ratios</strong> and <strong>differences</strong> of free energies (see Ch. 7).</p>
+<h3 id="thermodynamic-averages"><a class="header" href="#thermodynamic-averages">Thermodynamic Averages</a></h3>
+<p>Any observable \(A\) in the canonical ensemble:</p>
+<p>$$\langle A \rangle = \frac{\int A(\mathbf{x}), e^{-\beta H(\mathbf{x})}, d\mathbf{x}}{\int e^{-\beta H(\mathbf{x})}, d\mathbf{x}}. \tag{3.8}$$</p>
+<p>Naive MC estimates numerator and denominator separately — both are exponentially small in \(N\) and heavily dominated by rare configurations. <strong>Importance sampling with \(p(\mathbf{x}) \propto e^{-\beta H(\mathbf{x})}\)</strong> is the solution — this is the Metropolis algorithm (Ch. 4).</p>
+<blockquote class="blockquote-tag blockquote-tag-note">
+<p class="blockquote-tag-title"><svg viewbox="0 0 16 16" width="18" height="18"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"></path></svg>Note</p>
+<p><strong>Configurational Energy of Argon</strong>
+For 108 argon atoms in a cubic box at 85 K (near the triple point), the configurational partition function is a \(324\)-dimensional integral. Naive MC requires \(\sim 10^{100}\) samples to find the relevant configuration space. Metropolis sampling (Ch. 4) visits configurations according to their Boltzmann weight and makes the problem tractable with \(\sim 10^6\) steps.</p>
+</blockquote>
+<hr>
+<h2 id="35-error-analysis-for-mc-integrals"><a class="header" href="#35-error-analysis-for-mc-integrals">3.5 Error Analysis for MC Integrals</a></h2>
+<h3 id="standard-error-and-confidence-intervals"><a class="header" href="#standard-error-and-confidence-intervals">Standard Error and Confidence Intervals</a></h3>
+<p>Given \(N\) samples \({f_i}\):</p>
+<p>$$\hat{I} = \frac{1}{N}\sum_i f_i, \qquad s^2 = \frac{1}{N-1}\sum_i (f_i - \hat{I})^2, \qquad \sigma_{\hat{I}} = \frac{s}{\sqrt{N}}. \tag{3.9}$$</p>
+<p>A 95% confidence interval: \(\hat{I} \pm 1.96,\sigma_{\hat{I}}\).</p>
+<h3 id="multiple-independent-runs"><a class="header" href="#multiple-independent-runs">Multiple Independent Runs</a></h3>
+<p>Run \(M\) independent simulations, each giving \(\hat{I}_k\). The grand estimate and its error:</p>
+<p>$$\bar{I} = \frac{1}{M}\sum_{k=1}^M \hat{I}<em>k, \qquad \sigma</em>{\bar{I}} = \frac{s_M}{\sqrt{M}}. \tag{3.10}$$</p>
+<p>This is the most robust approach when \(M \geq 5\).</p>
+<blockquote class="blockquote-tag blockquote-tag-warning">
+<p class="blockquote-tag-title"><svg viewbox="0 0 16 16" width="18" height="18"><path d="M6.457 1.047c.659-1.234 2.427-1.234 3.086 0l6.082 11.378A1.75 1.75 0 0 1 14.082 15H1.918a1.75 1.75 0 0 1-1.543-2.575Zm1.763.707a.25.25 0 0 0-.44 0L1.698 13.132a.25.25 0 0 0 .22.368h12.164a.25.25 0 0 0 .22-.368Zm.53 3.996v2.5a.75.75 0 0 1-1.5 0v-2.5a.75.75 0 0 1 1.5 0ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"></path></svg>Warning</p>
+<p><strong>Do not underestimate your error</strong>
+Publishing MC results without statistical errors is unacceptable. Always report \(\hat{I} \pm \sigma_{\hat{I}}\) and state \(N\). The error should decrease as \(N^{-1/2}\) — if it does not, check for bugs or autocorrelation (relevant in MCMC, Ch. 4).</p>
+</blockquote>
+<hr>
+<h2 id="36-computational-lab--class-6"><a class="header" href="#36-computational-lab--class-6">3.6 Computational Lab — Class 6</a></h2>
+<p><strong>Objectives:</strong></p>
+<ol>
+<li>
+<p>Compute \(B_2(T)\) for a Lennard-Jones gas with \(\epsilon/k_B = 120\) K and \(\sigma = 3.4\) Å (argon parameters) at \(T = 300\) K using plain MC, antithetic variates, and importance sampling. Compare the variance of the three estimators.</p>
+</li>
+<li>
+<p>Estimate the configurational energy \(\langle U \rangle\) of 4 hard spheres in a 2D box using uniform MC sampling. How many samples are needed before a single configuration with no overlaps is found? This motivates the Metropolis algorithm.</p>
+</li>
+<li>
+<p>Use VEGAS (via <code>scipy.integrate.quad</code> or <code>vegas</code> package) to compute a 4D integral of your choice. Compare to Sobol QMC.</p>
+</li>
+</ol>
+<hr>
+<h2 id="summary-2"><a class="header" href="#summary-2">Summary</a></h2>
+<ul>
+<li>The MC estimator has error \(\sigma/\sqrt{N}\), dimension-independent.</li>
+<li>Antithetic variates, control variates, and importance sampling all reduce variance without changing the estimator’s mean.</li>
+<li>Multi-dimensional integrals arising in statistical mechanics and particle physics are the natural domain of MC.</li>
+<li>Always quote statistical errors.</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="chapter-4-markov-chain-monte-carlo"><a class="header" href="#chapter-4-markov-chain-monte-carlo">Chapter 4: Markov Chain Monte Carlo</a></h1>
+<p><em>Classes 7–8</em></p>
+<hr>
+<h2 id="41-the-idea-behind-mcmc"><a class="header" href="#41-the-idea-behind-mcmc">4.1 The Idea Behind MCMC</a></h2>
+<p>In statistical mechanics we want averages of the form:</p>
+<p>$$\langle A \rangle = \frac{\sum_{\mathbf{x}} A(\mathbf{x}), e^{-\beta H(\mathbf{x})}}{\sum_{\mathbf{x}} e^{-\beta H(\mathbf{x})}}. \tag{4.1}$$</p>
+<p>We cannot enumerate all microstates \(\mathbf{x}\) (there are \(\sim 2^N\) for a spin system). We cannot directly draw from \(p(\mathbf{x}) \propto e^{-\beta H(\mathbf{x})}\) because \(Z\) is unknown.</p>
+<p>The solution: construct a <strong>Markov chain</strong> with stationary distribution \(p(\mathbf{x})\). After an initial burn-in, the chain samples from \(p(\mathbf{x})\) and we can average along its trajectory.</p>
+<hr>
+<h2 id="42-markov-chains"><a class="header" href="#42-markov-chains">4.2 Markov Chains</a></h2>
+<p>A Markov chain is a sequence \(\mathbf{x}^{(0)}, \mathbf{x}^{(1)}, \ldots\) where the transition \(\mathbf{x}^{(t)} \to \mathbf{x}^{(t+1)}\) depends only on \(\mathbf{x}^{(t)}\). The transition kernel \(T(\mathbf{x} \to \mathbf{x}’)\) satisfies:</p>
+<p>$$\sum_{\mathbf{x}‘} T(\mathbf{x} \to \mathbf{x}’) = 1. \tag{4.2}$$</p>
+<h3 id="detailed-balance"><a class="header" href="#detailed-balance">Detailed Balance</a></h3>
+<p>A sufficient condition for \(p(\mathbf{x})\) to be the stationary distribution is <strong>detailed balance</strong>:</p>
+<p>$$p(\mathbf{x}), T(\mathbf{x} \to \mathbf{x}‘) = p(\mathbf{x}’), T(\mathbf{x}’ \to \mathbf{x}). \tag{4.3}$$</p>
+<p>This is a microscopic reversibility condition: in equilibrium, probability flux from \(\mathbf{x}\) to \(\mathbf{x}’\) equals the reverse flux.</p>
+<h3 id="ergodicity"><a class="header" href="#ergodicity">Ergodicity</a></h3>
+<p>For the chain to converge to \(p\) from any initial state, we need <strong>ergodicity</strong>: every state must be reachable from every other state in a finite number of steps. This requires the chain to be:</p>
+<ul>
+<li><strong>Irreducible</strong>: all states communicate.</li>
+<li><strong>Aperiodic</strong>: no trapping in cycles.</li>
+</ul>
+<blockquote class="blockquote-tag blockquote-tag-note">
+<p class="blockquote-tag-title"><svg viewbox="0 0 16 16" width="18" height="18"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"></path></svg>Note</p>
+<p>For physical systems, ergodicity can fail due to <strong>broken ergodicity</strong> — e.g., below \(T_c\) in an Ising ferromagnet, the chain can get trapped in a single magnetisation sector. Cluster algorithms (Ch. 5) partially address this.</p>
+</blockquote>
+<hr>
+<h2 id="43-the-metropolishastings-algorithm"><a class="header" href="#43-the-metropolishastings-algorithm">4.3 The Metropolis–Hastings Algorithm</a></h2>
+<p>Proposed independently by Metropolis et al. (1953, Los Alamos) and generalised by Hastings (1970).</p>
+<p><strong>Setup:</strong> propose a move \(\mathbf{x} \to \mathbf{x}‘\) with probability \(Q(\mathbf{x} \to \mathbf{x}’)\). Accept with probability:</p>
+<p>$$A(\mathbf{x} \to \mathbf{x}‘) = \min!\left(1,, \frac{p(\mathbf{x}’), Q(\mathbf{x}’ \to \mathbf{x})}{p(\mathbf{x}), Q(\mathbf{x} \to \mathbf{x}’)}\right). \tag{4.4}$$</p>
+<p>If \(Q\) is symmetric (\(Q(\mathbf{x} \to \mathbf{x}‘) = Q(\mathbf{x}’ \to \mathbf{x})\)), this reduces to the <strong>Metropolis criterion</strong>:</p>
+<p>$$A = \min!\left(1,, \frac{p(\mathbf{x}’)}{p(\mathbf{x})}\right) = \min!\left(1,, e^{-\beta \Delta H}\right), \tag{4.5}$$</p>
+<p>where \(\Delta H = H(\mathbf{x}’) - H(\mathbf{x})\).</p>
+<p><strong>Algorithm (Metropolis):</strong></p>
+<pre><code>initialise x
+for t = 1 to N_steps:
+    propose x' from Q(x → x')
+    compute ΔH = H(x') - H(x)
+    if ΔH &lt; 0: accept x' → x
+    else: accept x' with probability exp(-β ΔH)
+    record x
+</code></pre>
+<h3 id="verification-of-detailed-balance"><a class="header" href="#verification-of-detailed-balance">Verification of Detailed Balance</a></h3>
+<p>$$p(\mathbf{x}), T(\mathbf{x} \to \mathbf{x}‘) = p(\mathbf{x}), Q(\mathbf{x} \to \mathbf{x}’), \min!\left(1, \frac{p(\mathbf{x}‘)}{p(\mathbf{x})}\right) = \min(p(\mathbf{x}’), p(\mathbf{x})), Q. \tag{4.6}$$</p>
+<p>This is symmetric in \(\mathbf{x}, \mathbf{x}’\), confirming detailed balance.</p>
+<blockquote class="blockquote-tag blockquote-tag-note">
+<p class="blockquote-tag-title"><svg viewbox="0 0 16 16" width="18" height="18"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"></path></svg>Note</p>
+<p><strong>Lennard-Jones Fluid</strong>
+For \(N\) particles in a box with pair potential \(\phi(r) = 4\epsilon[(\sigma/r)^{12} - (\sigma/r)^6]\), a standard MC move displaces one particle by \(\delta \mathbf{r}\) drawn from a uniform cube of side \(2\delta_{\max}\). The energy change \(\Delta H\) only involves the moved particle’s neighbours — \(\mathcal{O}(1)\) work per step. Tune \(\delta_{\max}\) to achieve 40–50% acceptance rate for efficient sampling.</p>
+</blockquote>
+<blockquote class="blockquote-tag blockquote-tag-note">
+<p class="blockquote-tag-title"><svg viewbox="0 0 16 16" width="18" height="18"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"></path></svg>Note</p>
+<p><strong>Polymer Chain Configurational Sampling</strong>
+A freely jointed chain of \(n\) monomers has \(3(n-1)\) degrees of freedom. A <strong>pivot move</strong> rotates a random sub-chain about a random bond by a random angle. The Metropolis criterion with the Boltzmann weight for bending energy and excluded volume efficiently samples chain configurations. This is the basis of polymer Monte Carlo in biophysics and materials science.</p>
+</blockquote>
+<hr>
+<h2 id="44-gibbs-sampling"><a class="header" href="#44-gibbs-sampling">4.4 Gibbs Sampling</a></h2>
+<p>In Gibbs sampling, update each variable \(x_i\) in turn by sampling from the <strong>conditional distribution</strong>:</p>
+<p>$$x_i^{(t+1)} \sim p(x_i \mid x_1^{(t+1)}, \ldots, x_{i-1}^{(t+1)}, x_{i+1}^{(t)}, \ldots, x_d^{(t)}). \tag{4.7}$$</p>
+<p>No acceptance/rejection step — all proposals are accepted. Requires the conditionals to be tractable.</p>
+<blockquote class="blockquote-tag blockquote-tag-note">
+<p class="blockquote-tag-title"><svg viewbox="0 0 16 16" width="18" height="18"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"></path></svg>Note</p>
+<p><strong>Ising Model via Gibbs Sampling</strong>
+For the Ising model, the conditional distribution of spin \(s_i\) given all others is:
+$$P(s_i = +1 \mid {s_{j \neq i}}) = \frac{1}{1 + e^{-2\beta J \sum_j s_j}},$$
+where the sum is over nearest neighbours. This is a single Bernoulli draw — \(\mathcal{O}(1)\) cost. Gibbs sampling of the Ising model is equivalent to the <strong>heat bath algorithm</strong>.</p>
+</blockquote>
+<hr>
+<h2 id="45-convergence-diagnostics"><a class="header" href="#45-convergence-diagnostics">4.5 Convergence Diagnostics</a></h2>
+<p>The chain must reach equilibrium before measurements begin. Never skip this step.</p>
+<h3 id="burn-in"><a class="header" href="#burn-in">Burn-in</a></h3>
+<p>Discard the first \(N_{\rm burn}\) steps. Plot the running average of an observable vs. step number; burn-in is adequate when the average has stabilised.</p>
+<h3 id="autocorrelation-time"><a class="header" href="#autocorrelation-time">Autocorrelation Time</a></h3>
+<p>Consecutive samples are correlated. The <strong>integrated autocorrelation time</strong>:</p>
+<p>$$\tau_{\rm int} = \frac{1}{2} + \sum_{\tau=1}^{\infty} C(\tau), \tag{4.8}$$</p>
+<p>where \(C(\tau) = \langle s_t s_{t+\tau} \rangle_c / \langle s_t^2 \rangle_c\) is the normalised autocorrelation. The effective sample size is:</p>
+<p>$$N_{\rm eff} = \frac{N}{2\tau_{\rm int}}. \tag{4.9}$$</p>
+<p>The true statistical error is \(\sigma / \sqrt{N_{\rm eff}}\), not \(\sigma / \sqrt{N}\).</p>
+<blockquote class="blockquote-tag blockquote-tag-warning">
+<p class="blockquote-tag-title"><svg viewbox="0 0 16 16" width="18" height="18"><path d="M6.457 1.047c.659-1.234 2.427-1.234 3.086 0l6.082 11.378A1.75 1.75 0 0 1 14.082 15H1.918a1.75 1.75 0 0 1-1.543-2.575Zm1.763.707a.25.25 0 0 0-.44 0L1.698 13.132a.25.25 0 0 0 .22.368h12.164a.25.25 0 0 0 .22-.368Zm.53 3.996v2.5a.75.75 0 0 1-1.5 0v-2.5a.75.75 0 0 1 1.5 0ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"></path></svg>Warning</p>
+<p><strong>Critical Slowing Down</strong>
+Near a continuous phase transition at \(T_c\), the autocorrelation time diverges as:
+$$\tau_{\rm int} \sim \xi^z \sim |T - T_c|^{-\nu z},$$
+where \(\xi\) is the correlation length and \(z \approx 2\) for local algorithms (Metropolis). For a 100×100 Ising lattice at \(T_c\), \(\tau_{\rm int} \sim 10^3\) MC sweeps. Cluster algorithms (Ch. 5) have \(z \approx 0.2\).</p>
+</blockquote>
+<h3 id="gelman-rubin-diagnostic"><a class="header" href="#gelman-rubin-diagnostic">Gelman-Rubin Diagnostic</a></h3>
+<p>Run \(M \geq 4\) independent chains. The potential scale reduction factor:</p>
+<p>$$\hat{R} = \sqrt{\frac{\hat{V}}{W}}, \tag{4.10}$$</p>
+<p>where \(W\) is the within-chain variance and \(\hat{V}\) is the pooled variance estimate. Convergence: \(\hat{R} &lt; 1.01\).</p>
+<hr>
+<h2 id="46-computational-lab--class-8"><a class="header" href="#46-computational-lab--class-8">4.6 Computational Lab — Class 8</a></h2>
+<p><strong>Objectives:</strong></p>
+<ol>
+<li>
+<p>Implement the Metropolis algorithm for a 1D double-well potential \(V(x) = (x^2 - 1)^2\) at inverse temperature \(\beta = 2\). Plot the trajectory, histogram, and autocorrelation function \(C(\tau)\). Compute \(\tau_{\rm int}\).</p>
+</li>
+<li>
+<p>Implement MC for a Lennard-Jones dimer in 2D. Compare the mean inter-particle separation to the analytic result from the pair distribution function.</p>
+</li>
+<li>
+<p>Run the Metropolis algorithm for the 1D Ising model (\(N=50\) spins) and compute the specific heat \(C_V = \beta^2(\langle E^2 \rangle - \langle E \rangle^2)\). Compare to the exact result.</p>
+</li>
+</ol>
+<blockquote class="blockquote-tag blockquote-tag-note">
+<p class="blockquote-tag-title"><svg viewbox="0 0 16 16" width="18" height="18"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"></path></svg>Note</p>
+<p>The exact specific heat for the 1D Ising model (no field): \(C_V / k_B = (\beta J)^2 / \cosh^2(\beta J)\) per spin.</p>
+</blockquote>
+<hr>
+<h2 id="summary-3"><a class="header" href="#summary-3">Summary</a></h2>
+<ul>
+<li>MCMC constructs a Markov chain with the target distribution \(p(\mathbf{x}) \propto e^{-\beta H}\) as its stationary distribution.</li>
+<li>Metropolis-Hastings: detailed balance is satisfied by the acceptance criterion \(A = \min(1, e^{-\beta \Delta H})\).</li>
+<li>Gibbs sampling: sample each variable from its conditional; always accepted.</li>
+<li>Statistical errors require \(N_{\rm eff} = N / (2\tau_{\rm int})\), not \(N\).</li>
+<li>Use Gelman-Rubin \(\hat{R}\) and autocorrelation plots to verify convergence.</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="chapter-5-the-ising-model--statistical-mechanics"><a class="header" href="#chapter-5-the-ising-model--statistical-mechanics">Chapter 5: The Ising Model &amp; Statistical Mechanics</a></h1>
+<p><em>Classes 9–10</em></p>
+<hr>
+<h2 id="51-the-ising-model"><a class="header" href="#51-the-ising-model">5.1 The Ising Model</a></h2>
+<p>The Ising model is the workhorse of computational statistical mechanics. Despite its simplicity, it captures the physics of ferromagnetic phase transitions, liquid-gas criticality, binary alloys, and lattice gases.</p>
+<h3 id="hamiltonian"><a class="header" href="#hamiltonian">Hamiltonian</a></h3>
+<p>$$H = -J \sum_{\langle i,j \rangle} s_i s_j - h \sum_i s_i, \qquad s_i = \pm 1. \tag{5.1}$$</p>
+<p>Here \(\langle i,j \rangle\) denotes nearest-neighbour pairs, \(J &gt; 0\) is the ferromagnetic coupling, and \(h\) is an external field.</p>
+<p><strong>Key observables:</strong></p>
+<p>$$M = \frac{1}{N}\sum_i s_i \quad (\text{magnetisation per spin}), \tag{5.2}$$
+$$E = \langle H \rangle / N \quad (\text{energy per spin}), \tag{5.3}$$
+$$C_V = \frac{\partial \langle E \rangle}{\partial T} = \frac{\beta^2}{N}(\langle H^2 \rangle - \langle H \rangle^2), \tag{5.4}$$
+$$\chi = \frac{\partial \langle M \rangle}{\partial h}\bigg|_{h=0} = \frac{\beta}{N}(\langle M^2 N^2\rangle - \langle MN\rangle^2). \tag{5.5}$$</p>
+<h3 id="exact-results"><a class="header" href="#exact-results">Exact Results</a></h3>
+<p><strong>1D Ising</strong> (Ising 1925): no phase transition at finite \(T\). Exact free energy per spin:
+$$f = -k_B T \ln\left(e^{\beta J} \cosh(\beta h) + \sqrt{e^{2\beta J}\sinh^2(\beta h) + e^{-2\beta J}}\right). \tag{5.6}$$</p>
+<p><strong>2D Ising, zero field</strong> (Onsager 1944): exact solution gives a phase transition at:
+$$k_B T_c = \frac{2J}{\ln(1+\sqrt{2})} \approx 2.269,J. \tag{5.7}$$</p>
+<p>The exact free energy, magnetisation, and specific heat are known analytically. This makes the 2D Ising model the ideal benchmark for any MC code.</p>
+<blockquote class="blockquote-tag blockquote-tag-note">
+<p class="blockquote-tag-title"><svg viewbox="0 0 16 16" width="18" height="18"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"></path></svg>Note</p>
+<p><strong>Ferromagnetic Transition in Iron</strong>
+Iron has \(T_c \approx 1044\) K. Near \(T_c\), the spontaneous magnetisation vanishes as \(M \sim |T - T_c|^\beta\) with \(\beta \approx 0.326\) (3D Ising universality class). The 3D Ising model belongs to this class; its \(T_c\) and critical exponents are accessible via MC.</p>
+</blockquote>
+<blockquote class="blockquote-tag blockquote-tag-note">
+<p class="blockquote-tag-title"><svg viewbox="0 0 16 16" width="18" height="18"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"></path></svg>Note</p>
+<p><strong>Binary Alloys: Order-Disorder Transitions</strong>
+The Cu-Zn (brass) alloy system undergoes a B2 → A2 order-disorder transition at \(\sim 470\)°C. The two sub-lattices in the BCC structure map exactly onto an Ising model with \(s_i = +1\) (Cu) or \(-1\) (Zn). The MC-computed transition temperature and specific heat anomaly match experiment.</p>
+</blockquote>
+<hr>
+<h2 id="52-metropolis-algorithm-for-the-ising-model"><a class="header" href="#52-metropolis-algorithm-for-the-ising-model">5.2 Metropolis Algorithm for the Ising Model</a></h2>
+<p><strong>One Monte Carlo sweep</strong> = \(N\) attempted single-spin flips (each spin on average visited once).</p>
+<p><strong>Single-spin flip update:</strong></p>
+<ol>
+<li>Select spin \(i\) uniformly at random.</li>
+<li>Compute the energy change if \(s_i \to -s_i\):
+$$\Delta H = 2J s_i \sum_{j \in \partial i} s_j + 2h s_i. \tag{5.8}$$</li>
+<li>Accept with probability \(\min(1, e^{-\beta \Delta H})\).</li>
+</ol>
+<blockquote class="blockquote-tag blockquote-tag-tip">
+<p class="blockquote-tag-title"><svg viewbox="0 0 16 16" width="18" height="18"><path d="M8 1.5c-2.363 0-4 1.69-4 3.75 0 .984.424 1.625.984 2.304l.214.253c.223.264.47.556.673.848.284.411.537.896.621 1.49a.75.75 0 0 1-1.484.211c-.04-.282-.163-.547-.37-.847a8.456 8.456 0 0 0-.542-.68c-.084-.1-.173-.205-.268-.32C3.201 7.75 2.5 6.766 2.5 5.25 2.5 2.31 4.863 0 8 0s5.5 2.31 5.5 5.25c0 1.516-.701 2.5-1.328 3.259-.095.115-.184.22-.268.319-.207.245-.383.453-.541.681-.208.3-.33.565-.37.847a.751.751 0 0 1-1.485-.212c.084-.593.337-1.078.621-1.489.203-.292.45-.584.673-.848.075-.088.147-.173.213-.253.561-.679.985-1.32.985-2.304 0-2.06-1.637-3.75-4-3.75ZM5.75 12h4.5a.75.75 0 0 1 0 1.5h-4.5a.75.75 0 0 1 0-1.5ZM6 15.25a.75.75 0 0 1 .75-.75h2.5a.75.75 0 0 1 0 1.5h-2.5a.75.75 0 0 1-.75-.75Z"></path></svg>Tip</p>
+<p><strong>Lookup Table Optimisation</strong>
+For the 2D square lattice with no field, \(\Delta H\) takes only 5 distinct values: \({-8J, -4J, 0, 4J, 8J}\). Pre-compute the acceptance probabilities in a table. This gives a \(\sim 3\times\) speedup over computing exponentials on the fly.</p>
+</blockquote>
+<h3 id="measuring-physical-quantities"><a class="header" href="#measuring-physical-quantities">Measuring Physical Quantities</a></h3>
+<p>Average over \(N_{\rm meas}\) uncorrelated measurements (separated by \(\sim 2\tau_{\rm int}\) sweeps):</p>
+<pre><code>for t in range(N_sweeps):
+    for i in range(N_spins):  # one sweep
+        flip spin i with Metropolis acceptance
+    if t &gt; N_burn and t % delta_t == 0:
+        record E, M
+compute mean, variance, error
+</code></pre>
+<h3 id="finite-size-scaling"><a class="header" href="#finite-size-scaling">Finite-Size Scaling</a></h3>
+<p>For a finite lattice of linear size \(L\), the apparent critical temperature \(T_c(L)\) shifts as:</p>
+<p>$$T_c(L) = T_c(\infty) + a L^{-1/\nu}, \tag{5.9}$$</p>
+<p>where \(\nu\) is the correlation length exponent (\(\nu = 1\) in 2D). The susceptibility and specific heat peak scale as:</p>
+<p>$$\chi_{\max}(L) \sim L^{\gamma/\nu}, \qquad C_{V,\max}(L) \sim L^{\alpha/\nu}. \tag{5.10}$$</p>
+<blockquote class="blockquote-tag blockquote-tag-note">
+<p class="blockquote-tag-title"><svg viewbox="0 0 16 16" width="18" height="18"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"></path></svg>Note</p>
+<p><strong>2D Ising Critical Exponents</strong>
+Exact Onsager values: \(\nu = 1\), \(\gamma = 7/4\), \(\alpha = 0\) (log divergence), \(\beta = 1/8\).
+These are landmarks to verify your MC code against.</p>
+</blockquote>
+<hr>
+<h2 id="53-phase-transitions-and-critical-slowing-down"><a class="header" href="#53-phase-transitions-and-critical-slowing-down">5.3 Phase Transitions and Critical Slowing Down</a></h2>
+<p>Near \(T_c\), spatial correlations grow as \(\xi \sim |T - T_c|^{-\nu}\). The autocorrelation time:</p>
+<p>$$\tau \sim \xi^z \sim |T - T_c|^{-\nu z}. \tag{5.11}$$</p>
+<p>For Metropolis (local updates), \(z \approx 2.17\) in 2D. On a \(256 \times 256\) lattice at \(T_c\), \(\tau_{\rm int} \sim 10^4\) sweeps — rendering precision measurements impractical without cluster moves.</p>
+<blockquote class="blockquote-tag blockquote-tag-note">
+<p class="blockquote-tag-title"><svg viewbox="0 0 16 16" width="18" height="18"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"></path></svg>Note</p>
+<p><strong>Liquid-Gas Criticality</strong>
+The critical point of CO₂ (\(T_c = 304.1\) K, \(P_c = 73.8\) bar) belongs to the 3D Ising universality class. MC simulations of the lattice gas model — where \(s_i = +1\) means “occupied” and \(s_i = -1\) means “empty” — reproduce the critical density fluctuations and coexistence curve with \(\beta = 0.326\), in agreement with experiment.</p>
+</blockquote>
+<hr>
+<h2 id="54-cluster-algorithms"><a class="header" href="#54-cluster-algorithms">5.4 Cluster Algorithms</a></h2>
+<h3 id="wolff-algorithm"><a class="header" href="#wolff-algorithm">Wolff Algorithm</a></h3>
+<ol>
+<li>Choose a seed spin \(i\) at random.</li>
+<li>Add neighbouring spin \(j\) to the cluster if \(s_j = s_i\) with probability \(p = 1 - e^{-2\beta J}\).</li>
+<li>Repeat for all cluster boundary spins (breadth-first or depth-first).</li>
+<li>Flip all spins in the cluster.</li>
+</ol>
+<p>The Wolff algorithm satisfies detailed balance and has dynamic exponent \(z \approx 0.25\) in 2D — nearly 10× smaller than Metropolis near \(T_c\).</p>
+<h3 id="swendsen-wang-algorithm"><a class="header" href="#swendsen-wang-algorithm">Swendsen-Wang Algorithm</a></h3>
+<p>Build all clusters simultaneously using the Fortuin-Kasteleyn mapping; colour each cluster independently. Less efficient per step than Wolff but offers different statistical properties.</p>
+<blockquote class="blockquote-tag blockquote-tag-tip">
+<p class="blockquote-tag-title"><svg viewbox="0 0 16 16" width="18" height="18"><path d="M8 1.5c-2.363 0-4 1.69-4 3.75 0 .984.424 1.625.984 2.304l.214.253c.223.264.47.556.673.848.284.411.537.896.621 1.49a.75.75 0 0 1-1.484.211c-.04-.282-.163-.547-.37-.847a8.456 8.456 0 0 0-.542-.68c-.084-.1-.173-.205-.268-.32C3.201 7.75 2.5 6.766 2.5 5.25 2.5 2.31 4.863 0 8 0s5.5 2.31 5.5 5.25c0 1.516-.701 2.5-1.328 3.259-.095.115-.184.22-.268.319-.207.245-.383.453-.541.681-.208.3-.33.565-.37.847a.751.751 0 0 1-1.485-.212c.084-.593.337-1.078.621-1.489.203-.292.45-.584.673-.848.075-.088.147-.173.213-.253.561-.679.985-1.32.985-2.304 0-2.06-1.637-3.75-4-3.75ZM5.75 12h4.5a.75.75 0 0 1 0 1.5h-4.5a.75.75 0 0 1 0-1.5ZM6 15.25a.75.75 0 0 1 .75-.75h2.5a.75.75 0 0 1 0 1.5h-2.5a.75.75 0 0 1-.75-.75Z"></path></svg>Tip</p>
+<p><strong>When to use cluster vs. Metropolis</strong></p>
+<ul>
+<li><strong>Below \(T_c\)</strong>: Metropolis is efficient (small \(\tau_{\rm int}\), small clusters formed in Wolff).</li>
+<li><strong>Near \(T_c\)</strong>: Wolff dramatically outperforms Metropolis.</li>
+<li><strong>With an external field</strong>: Wolff is inefficient (clusters don’t flip easily). Use Metropolis.</li>
+</ul>
+</blockquote>
+<hr>
+<h2 id="55-extensions-potts-model-and-lattice-gas"><a class="header" href="#55-extensions-potts-model-and-lattice-gas">5.5 Extensions: Potts Model and Lattice Gas</a></h2>
+<h3 id="q-state-potts-model"><a class="header" href="#q-state-potts-model">q-State Potts Model</a></h3>
+<p>Generalise the Ising model to \(q\) states:</p>
+<p>$$H = -J \sum_{\langle i,j \rangle} \delta_{\sigma_i, \sigma_j}, \qquad \sigma_i \in {1, 2, \ldots, q}. \tag{5.12}$$</p>
+<p>For \(q = 2\) this is the Ising model. For \(q = 3\): second-order transition in 2D. For \(q \geq 5\) in 2D: first-order transition.</p>
+<blockquote class="blockquote-tag blockquote-tag-note">
+<p class="blockquote-tag-title"><svg viewbox="0 0 16 16" width="18" height="18"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"></path></svg>Note</p>
+<p><strong>Grain Growth in Polycrystalline Materials</strong>
+The \(q\)-state Potts model (large \(q\)) is a standard model for grain microstructure in metals. Each grain orientation corresponds to a Potts state. MC simulations with \(q = 48\) and \(N \sim 10^6\) sites reproduce the experimentally observed grain size distribution and von Neumann law for grain growth.</p>
+</blockquote>
+<h3 id="lattice-gas"><a class="header" href="#lattice-gas">Lattice Gas</a></h3>
+<p>Map \(s_i = (1 + n_i)/2\) where \(n_i \in {0, 1}\) is the occupancy. The Ising Hamiltonian becomes:</p>
+<p>$$H_{\rm LG} = -4J \sum_{\langle i,j \rangle} n_i n_j - \mu \sum_i n_i + \text{const.} \tag{5.13}$$</p>
+<p>This maps the liquid-gas transition to the ferromagnetic Ising transition.</p>
+<hr>
+<h2 id="56-computational-lab--class-10"><a class="header" href="#56-computational-lab--class-10">5.6 Computational Lab — Class 10</a></h2>
+<p><strong>Objectives:</strong></p>
+<ol>
+<li>
+<p>Implement the 2D Ising model (\(L = 32, 64\)) with periodic boundary conditions. Using Metropolis, measure \(\langle |M| \rangle\), \(\chi\), and \(C_V\) as a function of \(T \in [1.5J, 3.5J]\). Locate \(T_c\) and compare to the Onsager value.</p>
+</li>
+<li>
+<p>Implement the Wolff cluster algorithm. Compare \(\tau_{\rm int}(M)\) for Metropolis vs. Wolff at \(T = T_c\) for \(L = 32\). Plot \(\tau_{\rm int}\) as a function of \(L\) and extract \(z\).</p>
+</li>
+<li>
+<p>Perform a finite-size scaling collapse of \(\chi(T, L)\) using the 2D Ising exponents. Do the curves for \(L = 16, 32, 64\) collapse onto a single universal curve?</p>
+</li>
+</ol>
+<blockquote class="blockquote-tag blockquote-tag-note">
+<p class="blockquote-tag-title"><svg viewbox="0 0 16 16" width="18" height="18"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"></path></svg>Note</p>
+<p><strong>Skeleton Code</strong>
+A minimal Ising Metropolis implementation in NumPy runs \(\sim 10^7\) steps/second on a modern CPU. For \(L = 64\) (4096 spins), this gives \(\sim 2400\) sweeps/second — enough for the lab in minutes.</p>
+</blockquote>
+<hr>
+<h2 id="summary-4"><a class="header" href="#summary-4">Summary</a></h2>
+<ul>
+<li>The Ising model provides exact benchmarks (Onsager) and connects to diverse physical systems.</li>
+<li>Metropolis single-spin flips satisfy detailed balance; the energy change involves only nearest neighbours.</li>
+<li>Finite-size scaling reveals the universality class and allows extraction of critical exponents.</li>
+<li>Wolff cluster algorithm: dynamic exponent \(z \approx 0.25\) vs. \(z \approx 2.17\) for Metropolis.</li>
+<li>The same MC framework applies to Potts models, lattice gases, and adsorption problems.</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="chapter-6-the-heisenberg-model--classical-spin-systems"><a class="header" href="#chapter-6-the-heisenberg-model--classical-spin-systems">Chapter 6: The Heisenberg Model &amp; Classical Spin Systems</a></h1>
+<p><em>Class 11</em></p>
+<hr>
+<h2 id="61-classical-spin-models"><a class="header" href="#61-classical-spin-models">6.1 Classical Spin Models</a></h2>
+<p>The Ising model restricts spins to two states. Real magnetic materials often have <strong>continuous</strong> spin degrees of freedom. Classical spin models capture this:</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Model</th><th>Spin \(\mathbf{S}_i\)</th><th>Dimensionality</th><th>Example system</th></tr>
+</thead>
+<tbody>
+<tr><td>Ising</td><td>\(\pm 1\)</td><td>\(n=1\)</td><td>Uniaxial magnets</td></tr>
+<tr><td>XY</td><td>\((\cos\theta_i, \sin\theta_i)\)</td><td>\(n=2\)</td><td>Planar magnets, superfluids</td></tr>
+<tr><td>Heisenberg</td><td>\((S_i^x, S_i^y, S_i^z)\), \(</td><td>\mathbf{S}</td><td>=1\)</td></tr>
+</tbody>
+</table>
+</div>
+<p>These are the \(O(n)\) models, characterised by the symmetry group of the spin space.</p>
+<hr>
+<h2 id="62-the-classical-heisenberg-model"><a class="header" href="#62-the-classical-heisenberg-model">6.2 The Classical Heisenberg Model</a></h2>
+<h3 id="hamiltonian-1"><a class="header" href="#hamiltonian-1">Hamiltonian</a></h3>
+<p>$$H = -J \sum_{\langle i,j \rangle} \mathbf{S}_i \cdot \mathbf{S}_j - \mathbf{h} \cdot \sum_i \mathbf{S}_i, \quad |\mathbf{S}_i| = 1. \tag{6.1}$$</p>
+<p>Each spin is a unit vector on \(S^2\). For \(J &gt; 0\) (ferromagnetic) in 3D, there is a phase transition at finite \(T_c\). In 1D and 2D, the <strong>Mermin-Wagner theorem</strong> forbids continuous symmetry breaking at any \(T &gt; 0\).</p>
+<blockquote class="blockquote-tag blockquote-tag-note">
+<p class="blockquote-tag-title"><svg viewbox="0 0 16 16" width="18" height="18"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"></path></svg>Note</p>
+<p><strong>Mermin-Wagner Theorem</strong>
+In a 2D system with a continuous symmetry (\(n \geq 2\)) and short-range interactions, there is no spontaneous symmetry breaking at any finite temperature. Long-range order is destroyed by spin-wave fluctuations. The 2D Ising model (discrete symmetry) is exempt.</p>
+</blockquote>
+<h3 id="physical-examples"><a class="header" href="#physical-examples">Physical Examples</a></h3>
+<blockquote class="blockquote-tag blockquote-tag-note">
+<p class="blockquote-tag-title"><svg viewbox="0 0 16 16" width="18" height="18"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"></path></svg>Note</p>
+<p><strong>MnO and FeF₂</strong>
+MnO has a rock-salt structure with Mn²⁺ ions carrying spin \(S = 5/2\). Below the Néel temperature \(T_N = 122\) K, spins order antiferromagnetically (\(J &lt; 0\)) in (111) planes — well described by the classical Heisenberg model. FeF₂ is a nearly ideal Ising antiferromagnet (\(T_N = 78\) K) due to strong single-ion anisotropy.</p>
+</blockquote>
+<blockquote class="blockquote-tag blockquote-tag-note">
+<p class="blockquote-tag-title"><svg viewbox="0 0 16 16" width="18" height="18"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"></path></svg>Note</p>
+<p><strong>Spin-Ice Materials: Dy₂Ti₂O₇</strong>
+In spin-ice, magnetic moments sit on a pyrochlore lattice and are constrained to point along local ⟨111⟩ axes. The ice rule (2-in, 2-out per tetrahedron) maps to the proton disorder in water ice. MC simulations with dipolar interactions reproduce the broad specific heat anomaly, diffuse neutron scattering, and emergent magnetic monopole excitations.</p>
+</blockquote>
+<hr>
+<h2 id="63-mc-updates-for-continuous-spins"><a class="header" href="#63-mc-updates-for-continuous-spins">6.3 MC Updates for Continuous Spins</a></h2>
+<h3 id="random-rotation-on-s2"><a class="header" href="#random-rotation-on-s2">Random Rotation on \(S^2\)</a></h3>
+<p>A Metropolis update must propose \(\mathbf{S}’\) from the surface of the unit sphere. <strong>Do not</strong> sample angles uniformly — this oversamples the poles.</p>
+<p>Correct uniform sampling on \(S^2\):
+$$\cos\theta \sim \mathcal{U}[-1,1], \quad \phi \sim \mathcal{U}[0, 2\pi]. \tag{6.2}$$</p>
+<p>In practice, propose a <strong>small rotation</strong>:</p>
+<p>$$\mathbf{S}’_i = \mathbf{S}_i + \delta \mathbf{v}, \quad \text{then normalise}, \tag{6.3}$$</p>
+<p>where \(\delta \mathbf{v}\) is drawn from a small cube. Tune \(\delta\) for 40–50% acceptance.</p>
+<p>The energy change:
+$$\Delta H = -J (\mathbf{S}’<em>i - \mathbf{S}<em>i) \cdot \mathbf{h}</em>{\rm eff}, \quad \mathbf{h}</em>{\rm eff} = \sum_{j \in \partial i} \mathbf{S}_j + \mathbf{h}/J. \tag{6.4}$$</p>
+<h3 id="over-relaxation"><a class="header" href="#over-relaxation">Over-Relaxation</a></h3>
+<p>The <strong>over-relaxation</strong> (or microcanonical) step reflects the spin about its local field direction:</p>
+<p>$$\mathbf{S}’<em>i = 2(\hat{\mathbf{h}}</em>{\rm eff} \cdot \mathbf{S}<em>i)\hat{\mathbf{h}}</em>{\rm eff} - \mathbf{S}_i. \tag{6.5}$$</p>
+<p>This is always accepted (\(\Delta H = 0\)) and moves the spin to the “opposite side” of its local field. Combined with Metropolis steps in ratio \(\sim 4:1\) (over-relaxation: Metropolis), it dramatically reduces autocorrelation time while maintaining ergodicity.</p>
+<hr>
+<h2 id="64-the-xy-model-and-the-kosterlitz-thouless-transition"><a class="header" href="#64-the-xy-model-and-the-kosterlitz-thouless-transition">6.4 The XY Model and the Kosterlitz-Thouless Transition</a></h2>
+<p>The 2D XY model has spins \(\mathbf{S}_i = (\cos\theta_i, \sin\theta_i)\):</p>
+<p>$$H = -J \sum_{\langle i,j \rangle} \cos(\theta_i - \theta_j). \tag{6.6}$$</p>
+<p>Despite Mermin-Wagner (no long-range order), the 2D XY model has a remarkable <strong>topological phase transition</strong> at \(T_{\rm KT} = \pi J / 2\) (Kosterlitz-Thouless 1973, Nobel Prize 2016).</p>
+<h3 id="vortices"><a class="header" href="#vortices">Vortices</a></h3>
+<p>A <strong>vortex</strong> is a topological defect where the spin winds by \(2\pi\) around a loop:
+$$\oint \nabla \theta \cdot d\mathbf{l} = 2\pi n, \quad n \in \mathbb{Z}. \tag{6.7}$$</p>
+<p>Below \(T_{\rm KT}\): vortices bound in pairs (vanishing net topological charge). Algebraic long-range order.</p>
+<p>Above \(T_{\rm KT}\): free vortices proliferate, destroying quasi-long-range order. The transition is driven by vortex unbinding.</p>
+<blockquote class="blockquote-tag blockquote-tag-note">
+<p class="blockquote-tag-title"><svg viewbox="0 0 16 16" width="18" height="18"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"></path></svg>Note</p>
+<p><strong>Superfluid Helium Films</strong>
+The 2D superfluid transition of \(^4\)He adsorbed on a substrate (e.g., graphite) belongs to the XY universality class. The superfluid stiffness \(\rho_s\) jumps discontinuously at \(T_{\rm KT}\) — the “universal jump” predicted by Nelson and Kosterlitz and confirmed by Rudnick (1978). MC simulations of the 2D XY model reproduce this jump.</p>
+</blockquote>
+<h3 id="measuring-the-kt-transition"><a class="header" href="#measuring-the-kt-transition">Measuring the KT Transition</a></h3>
+<p>The helicity modulus (spin-wave stiffness):
+$$\Upsilon = J\left[\langle \cos(\theta_i - \theta_j) \rangle - \frac{J}{T} \langle \sin^2(\theta_i - \theta_j) \rangle\right] \tag{6.8}$$</p>
+<p>(averaged over horizontal bonds). The universal jump condition: \(\Upsilon(T_{\rm KT}) = 2T_{\rm KT}/\pi\). This gives a sharp MC signature of \(T_{\rm KT}\).</p>
+<hr>
+<h2 id="65-frustrated-spin-systems"><a class="header" href="#65-frustrated-spin-systems">6.5 Frustrated Spin Systems</a></h2>
+<p>When competing interactions cannot all be simultaneously satisfied, the system is <strong>frustrated</strong>.</p>
+<h3 id="triangular-antiferromagnet"><a class="header" href="#triangular-antiferromagnet">Triangular Antiferromagnet</a></h3>
+<p>For \(J &lt; 0\) on a triangular lattice, not all pairs of neighbours can be antiparallel. The ground state is the 120° structure; entropy remains finite at \(T = 0\). MC reveals a continuous spectrum of degenerate ground states.</p>
+<h3 id="heisenberg-antiferromagnet-on-the-kagome-lattice"><a class="header" href="#heisenberg-antiferromagnet-on-the-kagome-lattice">Heisenberg Antiferromagnet on the Kagome Lattice</a></h3>
+<p>Extreme frustration — the classical ground-state degeneracy is exponentially large. The system remains disordered (a <strong>classical spin liquid</strong>) down to \(T = 0\). MC simulations show no peak in \(C_V\), a signature of the absence of order.</p>
+<blockquote class="blockquote-tag blockquote-tag-note">
+<p class="blockquote-tag-title"><svg viewbox="0 0 16 16" width="18" height="18"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"></path></svg>Note</p>
+<p><strong>Spin Ice: Emergent Monopoles</strong>
+In Dy₂Ti₂O₇, the “2-in, 2-out” ice rule is violated at finite \(T\) by topological excitations that act as magnetic monopoles (Castelnovo, Moessner &amp; Sondhi 2008). MC simulations with dipolar interactions reproduce the monopole density, their diffusion constant, and the anomalous low-\(T\) specific heat.</p>
+</blockquote>
+<hr>
+<h2 id="66-spin-spin-correlation-functions"><a class="header" href="#66-spin-spin-correlation-functions">6.6 Spin-Spin Correlation Functions</a></h2>
+<p>The <strong>spin-spin correlation function</strong>:</p>
+<p>$$G(\mathbf{r}) = \langle \mathbf{S}<em>0 \cdot \mathbf{S}</em>{\mathbf{r}} \rangle \tag{6.9}$$</p>
+<p>characterises spatial ordering. In the ordered phase: \(G(r) \to M^2\) as \(r \to \infty\). At \(T_c\): \(G(r) \sim r^{-(d-2+\eta)}\) with anomalous exponent \(\eta\).</p>
+<p>The correlation length \(\xi\) is extracted from the exponential decay in the disordered phase:</p>
+<p>$$G(r) \sim e^{-r/\xi} \quad (T &gt; T_c). \tag{6.10}$$</p>
+<hr>
+<h2 id="67-computational-lab--class-11"><a class="header" href="#67-computational-lab--class-11">6.7 Computational Lab — Class 11</a></h2>
+<p><strong>Objectives:</strong></p>
+<ol>
+<li>
+<p>Simulate the 3D classical Heisenberg model on an \(L = 16\) cubic lattice. Using Metropolis + over-relaxation, compute \(\langle |\mathbf{M}| \rangle\) and \(\chi\) as a function of \(T\). Compare \(T_c\) to the literature value \(T_c \approx 1.443 J/k_B\).</p>
+</li>
+<li>
+<p>Simulate the 2D XY model on an \(L = 64\) lattice. Compute the helicity modulus \(\Upsilon(T)\) and locate \(T_{\rm KT}\). Compare to the theoretical prediction \(T_{\rm KT} = \pi J / 2 \approx 1.571 J/k_B\).</p>
+</li>
+<li>
+<p>Visualise vortices in the 2D XY model above and below \(T_{\rm KT}\) by plotting the local winding number on each plaquette. Count free vortices as a function of \(T\).</p>
+</li>
+</ol>
+<hr>
+<h2 id="summary-5"><a class="header" href="#summary-5">Summary</a></h2>
+<ul>
+<li>The classical Heisenberg model (continuous spins on \(S^2\)) requires correct uniform sampling of \(S^2\).</li>
+<li>Over-relaxation dramatically reduces \(\tau_{\rm int}\) at low cost.</li>
+<li>The 2D XY model: KT transition at \(T_{\rm KT} = \pi J/2\), driven by vortex unbinding.</li>
+<li>Frustration (triangular AF, kagomé, spin ice) leads to macroscopic ground-state degeneracy and exotic physics.</li>
+<li>Spin-spin correlation functions and helicity modulus are key MC observables.</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="chapter-7-advanced-mcmc--free-energy-methods"><a class="header" href="#chapter-7-advanced-mcmc--free-energy-methods">Chapter 7: Advanced MCMC &amp; Free Energy Methods</a></h1>
+<p><em>Class 12</em></p>
+<hr>
+<h2 id="71-the-free-energy-problem"><a class="header" href="#71-the-free-energy-problem">7.1 The Free Energy Problem</a></h2>
+<p>Most MC methods sample the canonical distribution and give direct access to \(\langle A \rangle\) but <strong>not</strong> to the free energy \(F = -k_B T \ln Z\). The free energy requires the partition function \(Z\), which is not a thermal average. Yet \(F\) is central to:</p>
+<ul>
+<li>Phase equilibria (which phase is stable at a given \(T, P\)?).</li>
+<li>Chemical reaction rates (via the activation free energy).</li>
+<li>Protein folding (stability of folded vs. unfolded states).</li>
+<li>Alloy phase diagrams.</li>
+</ul>
+<p>This chapter presents three families of methods to access \(F\).</p>
+<hr>
+<h2 id="72-parallel-tempering-replica-exchange-mc"><a class="header" href="#72-parallel-tempering-replica-exchange-mc">7.2 Parallel Tempering (Replica Exchange MC)</a></h2>
+<h3 id="motivation"><a class="header" href="#motivation">Motivation</a></h3>
+<p>At low temperatures, the energy landscape has many local minima separated by high barriers. Ordinary MC takes exponentially long to escape. <strong>Parallel tempering</strong> runs multiple replicas simultaneously at different temperatures and swaps their configurations.</p>
+<h3 id="algorithm"><a class="header" href="#algorithm">Algorithm</a></h3>
+<p>Run \(M\) replicas at temperatures \(T_1 &lt; T_2 &lt; \cdots &lt; T_M\). After \(n_{\rm swap}\) MC sweeps at each temperature, attempt to swap configurations \(\mathbf{x}<em>k \leftrightarrow \mathbf{x}</em>{k+1}\) between adjacent replicas with acceptance probability:</p>
+<p>$$A_{\rm swap} = \min!\left(1,, \exp!\left[(\beta_{k+1} - \beta_k)(H(\mathbf{x}<em>k) - H(\mathbf{x}</em>{k+1}))\right]\right). \tag{7.1}$$</p>
+<p>Detailed balance is satisfied. High-temperature replicas explore freely; accepted swaps inject these configurations into the low-temperature replicas.</p>
+<h3 id="choosing-temperatures"><a class="header" href="#choosing-temperatures">Choosing Temperatures</a></h3>
+<p>Target a swap acceptance rate of 20–40%. This requires overlapping energy distributions. A rule of thumb for the spacing:</p>
+<p>$$\Delta\beta = \beta_{k+1} - \beta_k \approx \sqrt{2 / N_{\rm dof}} \cdot \beta_k, \tag{7.2}$$</p>
+<p>where \(N_{\rm dof}\) is the number of degrees of freedom.</p>
+<blockquote class="blockquote-tag blockquote-tag-note">
+<p class="blockquote-tag-title"><svg viewbox="0 0 16 16" width="18" height="18"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"></path></svg>Note</p>
+<p><strong>Protein Folding Free Energy Landscapes</strong>
+Parallel tempering (also called Replica Exchange MD or REMD in the MD context) is the standard method for sampling biomolecular free energy landscapes. For a 50-residue peptide, 32–64 replicas spanning 280–600 K allow exploration of the folded, partially folded, and unfolded states. The free energy profile \(F(\text{RMSD from native})\) reveals the folding funnel and barriers.</p>
+</blockquote>
+<blockquote class="blockquote-tag blockquote-tag-note">
+<p class="blockquote-tag-title"><svg viewbox="0 0 16 16" width="18" height="18"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"></path></svg>Note</p>
+<p><strong>Nucleation in First-Order Transitions</strong>
+For a supersaturated Lennard-Jones liquid below \(T_c\), parallel tempering can cross the nucleation barrier (\(\sim 10^2 k_B T\)) that traps ordinary MC in the metastable phase. The critical nucleus size and nucleation rate are extracted from the sampled free energy surface.</p>
+</blockquote>
+<hr>
+<h2 id="73-wang-landau-algorithm"><a class="header" href="#73-wang-landau-algorithm">7.3 Wang-Landau Algorithm</a></h2>
+<p>Instead of sampling at fixed \(T\), estimate the <strong>density of states</strong> \(g(E)\) defined by:</p>
+<p>$$Z(T) = \int g(E), e^{-\beta E}, dE. \tag{7.3}$$</p>
+<p>Once \(g(E)\) is known, the partition function and free energy are available at <strong>all temperatures</strong> from a single simulation.</p>
+<h3 id="algorithm-1"><a class="header" href="#algorithm-1">Algorithm</a></h3>
+<ol>
+<li>Start with \(g(E) = 1\) and a flat histogram \(H(E) = 0\. Set modification factor \(f = e^1\).</li>
+<li>Perform random walk in energy space. At each step, propose a new state \(E’\) and accept with:
+$$A = \min!\left(1, \frac{g(E)}{g(E’)}\right). \tag{7.4}$$</li>
+<li>Update: \(g(E) \to g(E) \times f\) and \(H(E) \to H(E) + 1\).</li>
+<li>When \(H(E)\) is flat (all energies visited equally), set \(f \to \sqrt{f}\) and reset \(H(E) = 0\).</li>
+<li>Stop when \(f &lt; e^{10^{-8}}\) (convergence criterion).</li>
+</ol>
+<blockquote class="blockquote-tag blockquote-tag-note">
+<p class="blockquote-tag-title"><svg viewbox="0 0 16 16" width="18" height="18"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"></path></svg>Note</p>
+<p><strong>Extracting Thermodynamics</strong>
+From \(g(E)\), compute:
+$$Z(T) = \sum_E g(E) e^{-\beta E}, \quad F(T) = -k_B T \ln Z(T), \quad C_V(T) = \frac{\partial^2 (F/T)}{\partial(1/T)^2}.$$
+This gives the complete thermal behaviour from a single WL run.</p>
+</blockquote>
+<blockquote class="blockquote-tag blockquote-tag-note">
+<p class="blockquote-tag-title"><svg viewbox="0 0 16 16" width="18" height="18"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"></path></svg>Note</p>
+<p><strong>Ising Model Density of States</strong>
+For the \(L = 16\) 2D Ising model (4096 energies), the Wang-Landau algorithm converges to \(g(E)\) in \(\sim 10^8\) steps. The resulting \(F(T)\) matches the Onsager exact result to \(\sim 0.1%\) across the full temperature range, including the peak in \(C_V\) at \(T_c\).</p>
+</blockquote>
+<hr>
+<h2 id="74-umbrella-sampling-and-wham"><a class="header" href="#74-umbrella-sampling-and-wham">7.4 Umbrella Sampling and WHAM</a></h2>
+<h3 id="the-problem"><a class="header" href="#the-problem">The Problem</a></h3>
+<p>Some physical processes involve a <strong>rare event</strong> between state A and state B separated by a free energy barrier \(\Delta F^\ddagger \gg k_B T\). Ordinary MC never crosses the barrier.</p>
+<h3 id="umbrella-sampling"><a class="header" href="#umbrella-sampling">Umbrella Sampling</a></h3>
+<p>Introduce a <strong>biasing potential</strong> \(V_{\rm bias}(\xi)\) centred on a value of the <strong>reaction coordinate</strong> \(\xi\):</p>
+<p>$$H_{\rm biased}(\mathbf{x}) = H(\mathbf{x}) + V_{\rm bias}(\xi(\mathbf{x})). \tag{7.5}$$</p>
+<p>Common choice: harmonic umbrella \(V_{\rm bias}(\xi) = \frac{1}{2}K(\xi - \xi_0)^2\). Run independent simulations at each \(\xi_0\) (each “window”), covering the reaction coordinate from A to B.</p>
+<h3 id="wham-weighted-histogram-analysis-method"><a class="header" href="#wham-weighted-histogram-analysis-method">WHAM: Weighted Histogram Analysis Method</a></h3>
+<p>Combine the biased histograms from all windows into the unbiased free energy profile:</p>
+<p>$$F(\xi) = -k_B T \ln P(\xi) + \text{const.} \tag{7.6}$$</p>
+<p>WHAM solves a self-consistent set of equations to extract \(F(\xi)\) with optimal statistical efficiency.</p>
+<blockquote class="blockquote-tag blockquote-tag-note">
+<p class="blockquote-tag-title"><svg viewbox="0 0 16 16" width="18" height="18"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"></path></svg>Note</p>
+<p><strong>Solvation Free Energy of NaCl in Water</strong>
+The free energy of dissolving NaCl: \(\Delta F_{\rm solv} = F_{\rm ion pair in water} - F_{\rm ion pair in vacuum}\). Umbrella sampling along the Na-Cl distance \(r\) from 2.4 Å to 10 Å, with 16 windows and \(K = 40\) kcal/mol/Å², gives the full potential of mean force. The minimum at \(r \approx 2.7\) Å (contact ion pair) and barrier at \(r \approx 4\) Å (solvent-separated pair) match experiment.</p>
+</blockquote>
+<blockquote class="blockquote-tag blockquote-tag-note">
+<p class="blockquote-tag-title"><svg viewbox="0 0 16 16" width="18" height="18"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"></path></svg>Note</p>
+<p><strong>Alloy Phase Diagrams via Free Energy Integration</strong>
+For a Cu-Au alloy, the free energy difference between ordered (L1₀) and disordered (A1) phases as a function of composition is computed by thermodynamic integration (see §7.5). The calculated phase diagram matches the experimental one to within 30 K in \(T_c\).</p>
+</blockquote>
+<hr>
+<h2 id="75-free-energy-perturbation-and-thermodynamic-integration"><a class="header" href="#75-free-energy-perturbation-and-thermodynamic-integration">7.5 Free Energy Perturbation and Thermodynamic Integration</a></h2>
+<h3 id="free-energy-perturbation-fep"><a class="header" href="#free-energy-perturbation-fep">Free Energy Perturbation (FEP)</a></h3>
+<p>Define a parameter \(\lambda\) that interpolates between two Hamiltonians: \(H_0\) (state A) and \(H_1\) (state B).</p>
+<p>$$\Delta F = F_B - F_A = -k_B T \ln \left\langle e^{-\beta(H_1 - H_0)} \right\rangle_A. \tag{7.7}$$</p>
+<p>Equation (7.7) is <strong>exact</strong> but only converges when the energy distributions of A and B significantly overlap. For large \(\Delta F\), one must use intermediate states \(\lambda = 0, 0.1, 0.2, \ldots, 1.0\).</p>
+<h3 id="thermodynamic-integration-ti"><a class="header" href="#thermodynamic-integration-ti">Thermodynamic Integration (TI)</a></h3>
+<p>$$\Delta F = \int_0^1 \left\langle \frac{\partial H(\lambda)}{\partial \lambda} \right\rangle_\lambda d\lambda. \tag{7.8}$$</p>
+<p>Compute the integrand at discrete \(\lambda\) values by MC simulations; integrate numerically. More stable than FEP for large \(\Delta F\).</p>
+<blockquote class="blockquote-tag blockquote-tag-note">
+<p class="blockquote-tag-title"><svg viewbox="0 0 16 16" width="18" height="18"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"></path></svg>Note</p>
+<p><strong>Drug Binding Affinity Calculations</strong>
+The relative binding affinity of two drug candidates A and B to a protein target:
+$$\Delta\Delta F_{\rm bind} = \Delta F_{\rm bind}^B - \Delta F_{\rm bind}^A$$
+is computed via a thermodynamic cycle using FEP or TI. This is standard practice in pharmaceutical MC/MD, with GROMACS and NAMD implementing TI natively. Typical accuracy: 1–2 kcal/mol.</p>
+</blockquote>
+<hr>
+<h2 id="76-computational-lab--class-12"><a class="header" href="#76-computational-lab--class-12">7.6 Computational Lab — Class 12</a></h2>
+<p><strong>Objectives:</strong></p>
+<ol>
+<li>
+<p>Implement Wang-Landau for the 1D Ising model (\(N = 20\) spins). Recover \(g(E)\) and compute \(F(T)\), \(C_V(T)\), \(M(T)\). Compare to the exact transfer-matrix result.</p>
+</li>
+<li>
+<p>Use umbrella sampling to compute the potential of mean force between two Lennard-Jones particles in 2D. Compare to the pair distribution function \(g(r)\) from a direct Metropolis simulation.</p>
+</li>
+<li>
+<p>(Bonus) Implement parallel tempering for the 2D Ising model at \(L = 16\) with 4 temperatures bracketing \(T_c\). Monitor the swap acceptance rate and the replica diffusion in temperature space.</p>
+</li>
+</ol>
+<hr>
+<h2 id="summary-6"><a class="header" href="#summary-6">Summary</a></h2>
+<ul>
+<li><strong>Parallel tempering</strong>: multiple replicas at different \(T\); swap configurations to overcome barriers.</li>
+<li><strong>Wang-Landau</strong>: iteratively flatten the energy histogram to estimate \(g(E)\); gives \(F(T)\) at all temperatures.</li>
+<li><strong>Umbrella sampling + WHAM</strong>: sample rare events with a biasing potential; remove the bias analytically.</li>
+<li><strong>FEP / TI</strong>: compute free energy differences via perturbation theory or numerical integration over \(\lambda\).</li>
+<li>All methods obey detailed balance; errors can be estimated by standard MC techniques.</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="chapter-8-kinetic-monte-carlo"><a class="header" href="#chapter-8-kinetic-monte-carlo">Chapter 8: Kinetic Monte Carlo</a></h1>
+<p><em>Classes 13–14</em></p>
+<hr>
+<h2 id="81-from-equilibrium-to-dynamics"><a class="header" href="#81-from-equilibrium-to-dynamics">8.1 From Equilibrium to Dynamics</a></h2>
+<p>Standard MCMC samples the <strong>equilibrium</strong> distribution. It does not provide physical time: the MC “time” (number of sweeps) is not proportional to real time, and the sequence of configurations is not a physical trajectory.</p>
+<p><strong>Kinetic Monte Carlo (KMC)</strong> is different: it is a stochastic simulation of the <strong>master equation</strong>, giving a physically correct time evolution of a system between rare events (hops, reactions, emissions). KMC is the method of choice when:</p>
+<ul>
+<li>Dynamics is governed by <strong>thermally activated processes</strong> with known rates.</li>
+<li>The system dwells for long periods in a state, then transitions <strong>rapidly</strong> to another.</li>
+<li>One wants to access <strong>timescales far beyond MD</strong> (ns to hours or years).</li>
+</ul>
+<h3 id="the-master-equation"><a class="header" href="#the-master-equation">The Master Equation</a></h3>
+<p>Let \(P_\alpha(t)\) be the probability of being in state \(\alpha\) at time \(t\). The master equation is:</p>
+<p>$$\frac{dP_\alpha}{dt} = \sum_{\beta \neq \alpha} \left[ k_{\beta \to \alpha} P_\beta - k_{\alpha \to \beta} P_\alpha \right], \tag{8.1}$$</p>
+<p>where \(k_{\alpha \to \beta}\) is the transition rate from state \(\alpha\) to state \(\beta\). KMC is an <strong>exact stochastic simulation</strong> of equation (8.1).</p>
+<blockquote class="blockquote-tag blockquote-tag-note">
+<p class="blockquote-tag-title"><svg viewbox="0 0 16 16" width="18" height="18"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"></path></svg>Note</p>
+<p><strong>KMC vs. MD</strong>
+MD integrates Newton’s equations and is limited to \(\sim\)ns timescales by the MD timestep (\(\sim\)1 fs). KMC jumps between metastable states, accessing \(\mu\)s–s timescales. The price: rates \(k_{\alpha\to\beta}\) must be provided as input.</p>
+</blockquote>
+<hr>
+<h2 id="82-transition-state-theory-and-arrhenius-rates"><a class="header" href="#82-transition-state-theory-and-arrhenius-rates">8.2 Transition State Theory and Arrhenius Rates</a></h2>
+<p>The rate of a thermally activated process is given by Arrhenius theory:</p>
+<p>$$k = \nu_0, e^{-E_a / k_B T}, \tag{8.2}$$</p>
+<p>where \(E_a\) is the <strong>activation energy</strong> (energy barrier) and \(\nu_0\) is an attempt frequency (typically \(\sim 10^{12}\)–\(10^{13}\) s\(^{-1}\) for solids, related to the Debye frequency).</p>
+<p>More precisely, <strong>Transition State Theory</strong> (Eyring) gives:</p>
+<p>$$k = \frac{k_B T}{h} e^{-\Delta G^\ddagger / k_B T} = \frac{k_B T}{h} e^{\Delta S^\ddagger / k_B} e^{-\Delta H^\ddagger / k_B T}, \tag{8.3}$$</p>
+<p>where \(\Delta G^\ddagger\), \(\Delta H^\ddagger\), \(\Delta S^\ddagger\) are the free energy, enthalpy, and entropy of activation.</p>
+<blockquote class="blockquote-tag blockquote-tag-note">
+<p class="blockquote-tag-title"><svg viewbox="0 0 16 16" width="18" height="18"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"></path></svg>Note</p>
+<p><strong>Surface Diffusion: Adatom Hopping on Cu(100)</strong>
+A Cu adatom on a Cu(100) surface hops between four-fold hollow sites. The barrier \(E_a = 0.49\) eV (from DFT/NEB) and \(\nu_0 = 3 \times 10^{12}\) s\(^{-1}\) give a hop rate at 300 K:
+$$k = 3\times10^{12} \times e^{-0.49/0.026} \approx 10^{-6} \text{ hops/s}.$$
+At 700 K: \(k \approx 3\times10^8\) hops/s. KMC bridges these 14 decades in rate.</p>
+</blockquote>
+<h3 id="computing-barriers-neb-method"><a class="header" href="#computing-barriers-neb-method">Computing Barriers: NEB Method</a></h3>
+<p>The <strong>Nudged Elastic Band (NEB)</strong> method finds the minimum energy path between two states by relaxing a chain of images connected by spring forces:</p>
+<p>$$\mathbf{F}_i = -\nabla E(\mathbf{r}_i) + \mathbf{F}^{\rm spring}_i. \tag{8.4}$$</p>
+<p>The saddle point (transition state) gives \(E_a\). NEB is implemented in VASP, GPAW, and ASE.</p>
+<hr>
+<h2 id="83-the-bkl-algorithm-bortz-kalos-lebowitz"><a class="header" href="#83-the-bkl-algorithm-bortz-kalos-lebowitz">8.3 The BKL Algorithm (Bortz-Kalos-Lebowitz)</a></h2>
+<p>Also called the <strong>residence-time algorithm</strong> or <strong>Gillespie algorithm</strong> (Gillespie 1977 in chemistry), the <strong>n-fold way</strong> (Bortz et al. 1975 in physics).</p>
+<p><strong>Setup:</strong> at each state \(\alpha\), there are \(M\) possible processes with rates \(k_1, k_2, \ldots, k_M\). Define the total rate:</p>
+<p>$$K_{\rm tot} = \sum_{j=1}^M k_j. \tag{8.5}$$</p>
+<p><strong>Algorithm:</strong></p>
+<ol>
+<li>Compute \(K_{\rm tot}\) and cumulative rates \(R_j = \sum_{i \leq j} k_i\).</li>
+<li>Draw \(u_1 \sim \mathcal{U}[0,1]\). Execute event \(j^<em>\) where \(R_{j^</em>-1} &lt; u_1 K_{\rm tot} \leq R_{j^*}\).</li>
+<li>Advance time by \(\Delta t = -\ln(u_2) / K_{\rm tot}\) where \(u_2 \sim \mathcal{U}[0,1]\).</li>
+<li>Update the system state and all affected rates.</li>
+<li>Repeat.</li>
+</ol>
+<p>This is <strong>rejection-free</strong>: every step executes a physical event. There is no wasted computation.</p>
+<blockquote class="blockquote-tag blockquote-tag-note">
+<p class="blockquote-tag-title"><svg viewbox="0 0 16 16" width="18" height="18"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"></path></svg>Note</p>
+<p><strong>Physical Time in KMC</strong>
+The time increment \(\Delta t = -\ln u / K_{\rm tot}\) is an exponentially distributed waiting time. Summing these gives physical time in seconds (if rates are in s\(^{-1}\)). This is exact — not an approximation.</p>
+</blockquote>
+<hr>
+<h2 id="84-kmc-for-surface-processes-crystal-growth"><a class="header" href="#84-kmc-for-surface-processes-crystal-growth">8.4 KMC for Surface Processes: Crystal Growth</a></h2>
+<p>A paradigmatic KMC application is thin-film deposition and crystal growth. Processes included:</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Process</th><th>Rate</th></tr>
+</thead>
+<tbody>
+<tr><td>Adsorption from gas phase</td><td>\(k_{\rm ads} = F \cdot \exp(-E_{\rm ads}/k_BT) / \nu_0\)</td></tr>
+<tr><td>Terrace diffusion</td><td>\(k_{\rm diff} = \nu_0, e^{-E_{\rm diff}/k_BT}\)</td></tr>
+<tr><td>Edge diffusion</td><td>\(k_{\rm edge} = \nu_0, e^{-E_{\rm edge}/k_BT}\)</td></tr>
+<tr><td>Desorption</td><td>\(k_{\rm des} = \nu_0, e^{-E_{\rm des}/k_BT}\)</td></tr>
+<tr><td>Island nucleation</td><td>\(k_{\rm nuc} = \nu_0, e^{-E_{\rm nuc}/k_BT}\)</td></tr>
+</tbody>
+</table>
+</div>
+<blockquote class="blockquote-tag blockquote-tag-note">
+<p class="blockquote-tag-title"><svg viewbox="0 0 16 16" width="18" height="18"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"></path></svg>Note</p>
+<p><strong>Silicon MBE: Growth Mode Selection</strong>
+KMC simulations of Si(001) molecular beam epitaxy (MBE) with DFT-computed barriers reproduce the experimentally observed crossover from layer-by-layer (Frank-van der Merwe) to island (Volmer-Weber) growth as a function of deposition rate \(F\) and temperature \(T\). The critical island density \(N_x \sim (F/\nu_0)^{1/3} e^{E_{\rm diff}/3k_BT}\) is directly measurable in KMC.</p>
+</blockquote>
+<blockquote class="blockquote-tag blockquote-tag-note">
+<p class="blockquote-tag-title"><svg viewbox="0 0 16 16" width="18" height="18"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"></path></svg>Note</p>
+<p><strong>Thin-Film Deposition: TiN Coatings</strong>
+KMC models of TiN(001) growth (hard coating for cutting tools) capture the competition between N₂ dissociation, Ti surface diffusion (\(E_a = 0.3\) eV), and incorporation at step edges. Simulations over \(10^{10}\) events (physical time \(\sim\) 1 ms) reproduce the experimentally observed columnar microstructure.</p>
+</blockquote>
+<hr>
+<h2 id="85-kmc-in-heterogeneous-catalysis"><a class="header" href="#85-kmc-in-heterogeneous-catalysis">8.5 KMC in Heterogeneous Catalysis</a></h2>
+<p>Catalytic surface reactions are ideally suited to KMC: individual elementary steps have well-defined rates; experiments access steady-state turnover frequencies (TOF); timescales are far beyond MD.</p>
+<h3 id="co-oxidation-on-pt111"><a class="header" href="#co-oxidation-on-pt111">CO Oxidation on Pt(111)</a></h3>
+<p>The Langmuir-Hinshelwood mechanism:</p>
+<p>$$\text{CO} + * \xrightarrow{k_{\rm ads}^{\rm CO}} \text{CO}^<em>, \quad \text{O}_2 + 2</em> \xrightarrow{k_{\rm ads}^{\rm O_2}} 2\text{O}^<em>, \quad \text{CO}^</em> + \text{O}^* \xrightarrow{k_{\rm rxn}} \text{CO}_2 + 2*. \tag{8.6}$$</p>
+<p>KMC processes:</p>
+<ul>
+<li>CO adsorption/desorption (\(E_a^{\rm des} = 1.45\) eV)</li>
+<li>O₂ dissociative adsorption (\(E_a = 0\))</li>
+<li>CO diffusion (\(E_a = 0.5\) eV)</li>
+<li>O diffusion (\(E_a = 0.7\) eV)</li>
+<li>CO + O reaction (\(E_a = 1.0\) eV, Brønsted-Evans-Polanyi)</li>
+</ul>
+<blockquote class="blockquote-tag blockquote-tag-note">
+<p class="blockquote-tag-title"><svg viewbox="0 0 16 16" width="18" height="18"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"></path></svg>Note</p>
+<p><strong>Reproducing the Ertl Oscillations</strong>
+At certain \(T\) and \(P_{\rm CO}/P_{\rm O_2}\) ratios, the CO oxidation rate on Pt oscillates (discovered by Ertl, Nobel Prize 2007). KMC simulations on a \(128 \times 128\) Pt(110) lattice with CO, O, and surface reconstruction reproduce the kinetic oscillations, bistability, and the CO-poisoning transition — purely from elementary rate constants.</p>
+</blockquote>
+<hr>
+<h2 id="86-kmc-for-vacancy-migration-and-diffusion-in-solids"><a class="header" href="#86-kmc-for-vacancy-migration-and-diffusion-in-solids">8.6 KMC for Vacancy Migration and Diffusion in Solids</a></h2>
+<h3 id="vacancy-diffusion-in-fcc-metals"><a class="header" href="#vacancy-diffusion-in-fcc-metals">Vacancy Diffusion in FCC Metals</a></h3>
+<p>In a pure FCC metal (e.g., Cu, Ni), a vacancy diffuses by hopping between nearest-neighbour sites. The rate for a single hop:</p>
+<p>$$k_{\rm hop} = \nu_0, e^{-E_m / k_B T}, \tag{8.7}$$</p>
+<p>where \(E_m\) is the migration energy. The diffusion coefficient:</p>
+<p>$$D = a^2 k_{\rm hop} / z, \tag{8.8}$$</p>
+<p>where \(a\) is the lattice constant and \(z\) is the coordination number.</p>
+<blockquote class="blockquote-tag blockquote-tag-note">
+<p class="blockquote-tag-title"><svg viewbox="0 0 16 16" width="18" height="18"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"></path></svg>Note</p>
+<p><strong>Alloy Ordering Kinetics</strong>
+In a binary A-B alloy, the vacancy-mediated ordering kinetics (e.g., Ni₃Al) involve dozens of distinct hop rates depending on the local chemical environment. KMC with pair interaction energies from cluster expansion (fitted to DFT) reproduces the experimentally observed ordering time at 700°C to within a factor of 2.</p>
+</blockquote>
+<blockquote class="blockquote-tag blockquote-tag-note">
+<p class="blockquote-tag-title"><svg viewbox="0 0 16 16" width="18" height="18"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"></path></svg>Note</p>
+<p><strong>Radioactive Transmutation Chains</strong>
+KMC naturally handles decay chains: ²³⁸U → ²³⁴Th → ²³⁴Pa → ²³⁴U → … → ²⁰⁶Pb. Each decay is a Poisson process with rate \(\lambda = \ln 2 / t_{1/2}\). KMC gives the exact time evolution of each isotope’s population, including correlations — more informative than the Bateman equations when starting from small atom counts (e.g., a single ²³⁸U nucleus).</p>
+</blockquote>
+<hr>
+<h2 id="87-advanced-kmc-adaptive-and-off-lattice-methods"><a class="header" href="#87-advanced-kmc-adaptive-and-off-lattice-methods">8.7 Advanced KMC: Adaptive and Off-Lattice Methods</a></h2>
+<h3 id="on-lattice-vs-off-lattice-kmc"><a class="header" href="#on-lattice-vs-off-lattice-kmc">On-Lattice vs. Off-Lattice KMC</a></h3>
+<p>Standard KMC uses a fixed lattice. <strong>Off-lattice KMC</strong> (also: adaptive KMC, AKMC) is needed when the transition states are not known a priori (e.g., glasses, amorphous materials).</p>
+<p><strong>AKMC Algorithm:</strong></p>
+<ol>
+<li>From current state, use a saddle-point search method (dimer, ART) to find transition states.</li>
+<li>Compute rates via harmonic TST.</li>
+<li>Execute one event via BKL.</li>
+<li>Repeat.</li>
+</ol>
+<blockquote class="blockquote-tag blockquote-tag-note">
+<p class="blockquote-tag-title"><svg viewbox="0 0 16 16" width="18" height="18"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"></path></svg>Note</p>
+<p><strong>Diffusion in Amorphous Silicon</strong>
+In a-Si:H (hydrogenated amorphous silicon), H atoms diffuse through a disordered network of Si-H bonds, Si-Si bonds, and voids. AKMC identifies thousands of distinct hop environments. The simulated diffusion coefficient \(D(T)\) agrees with experiment over 10 decades in \(D\).</p>
+</blockquote>
+<h3 id="parallel-kmc"><a class="header" href="#parallel-kmc">Parallel KMC</a></h3>
+<p>For large systems (\(10^6\) sites), divide the lattice into domains and run KMC in each domain in parallel, synchronising at regular intervals (Synchronous Sublattice KMC, Shim &amp; Amar 2005).</p>
+<hr>
+<h2 id="88-computational-lab--class-14"><a class="header" href="#88-computational-lab--class-14">8.8 Computational Lab — Class 14</a></h2>
+<p><strong>Objectives:</strong></p>
+<ol>
+<li>
+<p>Implement lattice KMC for adatom diffusion on a 2D square lattice with 4 degenerate hop rates \(k = \nu_0 e^{-E_a/k_BT}\). Compute the mean-square displacement \(\langle r^2(t) \rangle\) and extract the diffusion coefficient \(D(T)\). Compare to \(D = k a^2 / 4\). Plot \(\ln D\) vs. \(1/T\) (Arrhenius plot).</p>
+</li>
+<li>
+<p>Add deposition from a beam (rate \(F\) per site) and desorption. Run KMC for 10⁷ events. Visualise island nucleation and growth. Measure island density \(N_x\) as a function of \(T\) and \(F\).</p>
+</li>
+<li>
+<p>Implement a simple 2-species reaction A + B → C on a lattice with diffusion and adsorption. Measure the steady-state TOF as a function of temperature and compare to the mean-field rate equation.</p>
+</li>
+</ol>
+<blockquote class="blockquote-tag blockquote-tag-note">
+<p class="blockquote-tag-title"><svg viewbox="0 0 16 16" width="18" height="18"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"></path></svg>Note</p>
+<p><strong>Skeleton Code</strong>
+Use a sorted list or a Fenwick tree for efficient event selection in the BKL algorithm. See Appendix C for pseudocode. NumPy’s <code>np.searchsorted</code> implements \(\mathcal{O}(\log M)\) event selection.</p>
+</blockquote>
+<hr>
+<h2 id="summary-7"><a class="header" href="#summary-7">Summary</a></h2>
+<ul>
+<li>KMC solves the master equation exactly for systems with known transition rates.</li>
+<li>BKL (Gillespie) algorithm: rejection-free, physical time, scales as \(\mathcal{O}(M)\) or \(\mathcal{O}(\log M)\) per event.</li>
+<li>Rates come from Arrhenius/TST theory and DFT/NEB barrier calculations.</li>
+<li>Applications: surface growth (MBE, CVD), heterogeneous catalysis (CO oxidation), vacancy diffusion in alloys, decay chain kinetics.</li>
+<li>Off-lattice / adaptive KMC extends the method to systems with unknown transition states.</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="chapter-9-applications-error-analysis--special-topics"><a class="header" href="#chapter-9-applications-error-analysis--special-topics">Chapter 9: Applications, Error Analysis &amp; Special Topics</a></h1>
+<p><em>Class 15</em></p>
+<hr>
+<h2 id="91-statistical-error-analysis-in-mc"><a class="header" href="#91-statistical-error-analysis-in-mc">9.1 Statistical Error Analysis in MC</a></h2>
+<p>Reliable error quantification is as important as the simulation itself. This section collects the essential tools.</p>
+<h3 id="911-blocking-analysis"><a class="header" href="#911-blocking-analysis">9.1.1 Blocking Analysis</a></h3>
+<p>Divide \(N\) correlated MC samples into \(B\) blocks of size \(b = N/B\). Compute block averages \(\bar{A}_k\). The block variance:</p>
+<p>$$\sigma_B^2 = \frac{1}{B(B-1)} \sum_{k=1}^B (\bar{A}_k - \bar{A})^2. \tag{9.1}$$</p>
+<p>Plot \(\sigma_B^2\) vs. block size \(b\). When \(b \gg \tau_{\rm int}\), the block averages are independent and \(\sigma_B^2\) plateaus. This plateau gives the true statistical error.</p>
+<blockquote class="blockquote-tag blockquote-tag-warning">
+<p class="blockquote-tag-title"><svg viewbox="0 0 16 16" width="18" height="18"><path d="M6.457 1.047c.659-1.234 2.427-1.234 3.086 0l6.082 11.378A1.75 1.75 0 0 1 14.082 15H1.918a1.75 1.75 0 0 1-1.543-2.575Zm1.763.707a.25.25 0 0 0-.44 0L1.698 13.132a.25.25 0 0 0 .22.368h12.164a.25.25 0 0 0 .22-.368Zm.53 3.996v2.5a.75.75 0 0 1-1.5 0v-2.5a.75.75 0 0 1 1.5 0ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"></path></svg>Warning</p>
+<p><strong>Never trust naive variance</strong>
+If you ignore autocorrelations, your error bars will be underestimated by a factor \(\sqrt{2\tau_{\rm int}}\). For Metropolis near \(T_c\), this can be a factor of 100.</p>
+</blockquote>
+<h3 id="912-bootstrap-resampling"><a class="header" href="#912-bootstrap-resampling">9.1.2 Bootstrap Resampling</a></h3>
+<p>Draw \(N^*\) bootstrap samples (with replacement) from the \(N\) MC data points. Compute the estimator for each bootstrap sample. The bootstrap distribution of the estimator approximates its sampling distribution.</p>
+<p>For a function \(\theta = g(\langle A \rangle, \langle B \rangle)\) of correlated averages (e.g., \(\chi = \beta(\langle M^2 \rangle - \langle M \rangle^2)\)):</p>
+<p>$$\hat{\sigma}<em>\theta = \text{std}[\theta_1^<em>, \theta_2^</em>, \ldots, \theta</em>{N^<em>}^</em>]. \tag{9.2}$$</p>
+<p>Bootstrap handles nonlinear estimators naturally, unlike error propagation.</p>
+<h3 id="913-jackknife-resampling"><a class="header" href="#913-jackknife-resampling">9.1.3 Jackknife Resampling</a></h3>
+<p>Leave out the \(k\)-th data point and compute the estimator on the remaining \(N-1\) points:</p>
+<p>$$\hat{\theta}<em>k = g({A_i}</em>{i \neq k}). \tag{9.3}$$</p>
+<p>The jackknife variance:</p>
+<p>$$\sigma_{\rm JK}^2 = \frac{N-1}{N}\sum_{k=1}^N (\hat{\theta}_k - \bar{\theta})^2. \tag{9.4}$$</p>
+<p>Jackknife is \(\mathcal{O}(N)\) faster than bootstrap for expensive estimators. It is exact for linear estimators and a good approximation for smooth nonlinear functions.</p>
+<blockquote class="blockquote-tag blockquote-tag-note">
+<p class="blockquote-tag-title"><svg viewbox="0 0 16 16" width="18" height="18"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"></path></svg>Note</p>
+<p><strong>Extracting Critical Exponents</strong>
+The Binder cumulant \(U_4 = 1 - \langle M^4 \rangle / (3 \langle M^2 \rangle^2)\) is a nonlinear function of MC data. Jackknife correctly propagates errors through the nonlinearity. For the 2D Ising model with \(L = 64\) and \(N = 10^6\) sweeps, jackknife gives \(\sigma_{U_4} \approx 0.002\), enabling precise location of \(T_c\).</p>
+</blockquote>
+<hr>
+<h2 id="92-bayesian-inference-and-mcmc"><a class="header" href="#92-bayesian-inference-and-mcmc">9.2 Bayesian Inference and MCMC</a></h2>
+<p>Bayesian inference treats model parameters \(\theta\) as random variables with a <strong>posterior</strong> distribution:</p>
+<p>$$p(\theta \mid \mathcal{D}) = \frac{p(\mathcal{D} \mid \theta), p(\theta)}{p(\mathcal{D})} \propto \mathcal{L}(\theta), \pi(\theta), \tag{9.5}$$</p>
+<p>where \(\mathcal{L}(\theta) = p(\mathcal{D} \mid \theta)\) is the likelihood and \(\pi(\theta)\) is the prior. The posterior is precisely the distribution one wants to sample — and MCMC is the tool.</p>
+<h3 id="application-to-equation-of-state-fitting"><a class="header" href="#application-to-equation-of-state-fitting">Application to Equation of State Fitting</a></h3>
+<p>Given MD/MC simulation data \({(T_i, P_i, V_i)}\) with uncertainties \(\sigma_i\), fit a van der Waals or Redlich-Kwong EOS:</p>
+<p>$$p(\mathbf{r}) = \frac{Nk_BT}{V - Nb} - \frac{aN^2}{V^2}. \tag{9.6}$$</p>
+<p>The posterior \(p(a, b \mid {P_i})\) is sampled via Metropolis. The resulting marginal posteriors give \(a) and \(b\) with full uncertainty quantification — more informative than a least-squares fit.</p>
+<blockquote class="blockquote-tag blockquote-tag-note">
+<p class="blockquote-tag-title"><svg viewbox="0 0 16 16" width="18" height="18"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"></path></svg>Note</p>
+<p><strong>Astrophysical Parameter Estimation</strong>
+The posterior distribution of cosmological parameters (\(\Omega_m, \Omega_\Lambda, H_0, \ldots\)) given CMB power spectrum data is sampled by MCMC — specifically, the COSMOMC and Cobaya codes. The 6-parameter \(\Lambda\)CDM model posterior lives in a curved, banana-shaped manifold best explored by Hamiltonian Monte Carlo.</p>
+</blockquote>
+<blockquote class="blockquote-tag blockquote-tag-note">
+<p class="blockquote-tag-title"><svg viewbox="0 0 16 16" width="18" height="18"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"></path></svg>Note</p>
+<p><strong>Neutron Star Equation of State</strong>
+Gravitational wave events (e.g., GW170817) constrain the neutron star EOS via Bayesian inference. MCMC samples the posterior over EOS parameters (nuclear symmetry energy, skewness) given the measured tidal deformabilities. Each likelihood evaluation requires solving the Tolman-Oppenheimer-Volkoff equations — making efficiency critical.</p>
+</blockquote>
+<hr>
+<h2 id="93-monte-carlo-in-particle-physics"><a class="header" href="#93-monte-carlo-in-particle-physics">9.3 Monte Carlo in Particle Physics</a></h2>
+<h3 id="detector-simulation-geant4"><a class="header" href="#detector-simulation-geant4">Detector Simulation: Geant4</a></h3>
+<p><strong>Geant4</strong> (CERN) is the standard toolkit for simulating particle interactions with matter. It uses MC to:</p>
+<ul>
+<li>Propagate particles through detector geometry (ionisation energy loss, Bethe-Bloch formula).</li>
+<li>Simulate electromagnetic showers (pair production, bremsstrahlung, Compton scattering).</li>
+<li>Simulate hadronic showers (nuclear interactions).</li>
+</ul>
+<p>Each particle track is an independent MC trajectory. The LHC experiments run \(\sim 10^9\) simulated events per year — the dominant computational cost.</p>
+<blockquote class="blockquote-tag blockquote-tag-note">
+<p class="blockquote-tag-title"><svg viewbox="0 0 16 16" width="18" height="18"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"></path></svg>Note</p>
+<p><strong>Calorimeter Response</strong>
+In the ATLAS electromagnetic calorimeter (liquid argon), an incoming 100 GeV electron produces a shower of \(\sim 10^5\) particles. Geant4 tracks each particle using MC sampling of the cross-sections for bremsstrahlung and pair production. The simulated energy deposit matches the measured 1.5% energy resolution.</p>
+</blockquote>
+<h3 id="phase-space-sampling-rambo"><a class="header" href="#phase-space-sampling-rambo">Phase Space Sampling: RAMBO</a></h3>
+<p>For \(n\)-body final states in particle decays, the phase space measure is:</p>
+<p>$$d\Phi_n = \prod_{i=1}^n \frac{d^3 p_i}{(2\pi)^3 2E_i} \cdot (2\pi)^4 \delta^{(4)}!\left(\sum p_i - P\right). \tag{9.7}$$</p>
+<p>RAMBO (Kleiss, Stirling &amp; Ellis 1985) samples this uniformly in \(3n - 4\) dimensions. For \(n = 10\) (26 dimensions), MC is the only feasible approach.</p>
+<hr>
+<h2 id="94-neutron-and-photon-transport"><a class="header" href="#94-neutron-and-photon-transport">9.4 Neutron and Photon Transport</a></h2>
+<p>The <strong>radiative transfer equation</strong> for photon specific intensity \(I_\nu\):</p>
+<p>$$\frac{dI_\nu}{ds} = -\kappa_\nu I_\nu + j_\nu, \tag{9.8}$$</p>
+<p>where \(\kappa_\nu\) is the absorption coefficient and \(j_\nu\) is the emission coefficient, is solved by MC by tracking photon packets:</p>
+<ol>
+<li>Emit a photon packet with frequency \(\nu\) sampled from the source spectrum.</li>
+<li>Sample the free path \(\ell = -\ln u / \kappa_\nu\).</li>
+<li>At the interaction site: scatter (sample new direction from the phase function) or absorb.</li>
+<li>Repeat until the packet escapes or is absorbed.</li>
+</ol>
+<blockquote class="blockquote-tag blockquote-tag-note">
+<p class="blockquote-tag-title"><svg viewbox="0 0 16 16" width="18" height="18"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"></path></svg>Note</p>
+<p><strong>Stellar Interior Opacity</strong>
+MC transport codes (e.g., SEDONA, Cloudy) compute radiative opacities in stellar atmospheres by tracking \(10^6\)–\(10^7\) photon packets through a model atmosphere with thousands of atomic lines. The resulting synthetic spectrum is compared to the observed one to determine stellar parameters (\(T_{\rm eff}\), \(\log g\), metallicity).</p>
+</blockquote>
+<blockquote class="blockquote-tag blockquote-tag-note">
+<p class="blockquote-tag-title"><svg viewbox="0 0 16 16" width="18" height="18"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"></path></svg>Note</p>
+<p><strong>Nuclear Reactor Shielding: MCNP</strong>
+MCNP (Los Alamos) uses MC to simulate neutron and photon transport through reactor shielding. Neutrons are tracked through the geometry, with cross-sections sampled from the ENDF library at each interaction point. Variance reduction (importance sampling, splitting) is essential to reach the deep-penetration regime where attenuation is \(10^{-10}\) of the source.</p>
+</blockquote>
+<hr>
+<h2 id="95-computational-best-practices"><a class="header" href="#95-computational-best-practices">9.5 Computational Best Practices</a></h2>
+<h3 id="reproducibility"><a class="header" href="#reproducibility">Reproducibility</a></h3>
+<blockquote class="blockquote-tag blockquote-tag-tip">
+<p class="blockquote-tag-title"><svg viewbox="0 0 16 16" width="18" height="18"><path d="M8 1.5c-2.363 0-4 1.69-4 3.75 0 .984.424 1.625.984 2.304l.214.253c.223.264.47.556.673.848.284.411.537.896.621 1.49a.75.75 0 0 1-1.484.211c-.04-.282-.163-.547-.37-.847a8.456 8.456 0 0 0-.542-.68c-.084-.1-.173-.205-.268-.32C3.201 7.75 2.5 6.766 2.5 5.25 2.5 2.31 4.863 0 8 0s5.5 2.31 5.5 5.25c0 1.516-.701 2.5-1.328 3.259-.095.115-.184.22-.268.319-.207.245-.383.453-.541.681-.208.3-.33.565-.37.847a.751.751 0 0 1-1.485-.212c.084-.593.337-1.078.621-1.489.203-.292.45-.584.673-.848.075-.088.147-.173.213-.253.561-.679.985-1.32.985-2.304 0-2.06-1.637-3.75-4-3.75ZM5.75 12h4.5a.75.75 0 0 1 0 1.5h-4.5a.75.75 0 0 1 0-1.5ZM6 15.25a.75.75 0 0 1 .75-.75h2.5a.75.75 0 0 1 0 1.5h-2.5a.75.75 0 0 1-.75-.75Z"></path></svg>Tip</p>
+<p><strong>Always do these</strong></p>
+<ol>
+<li><strong>Seed your RNG</strong> and record the seed in your output.</li>
+<li><strong>Save the full configuration</strong> at intervals for restart.</li>
+<li><strong>Version-control your code</strong> (git).</li>
+<li><strong>Record all parameters</strong> (\(N, T, L, N_{\rm steps}, N_{\rm burn}\)) in the output file header.</li>
+<li><strong>Report error bars</strong> on every published number.</li>
+</ol>
+</blockquote>
+<h3 id="parallelisation"><a class="header" href="#parallelisation">Parallelisation</a></h3>
+<ul>
+<li><strong>Trivially parallel</strong>: run \(M\) independent replicas with different seeds. Combine for better statistics.</li>
+<li><strong>Domain decomposition</strong>: split the lattice across CPUs; communicate boundary spins (MPI).</li>
+<li><strong>GPU acceleration</strong>: for Ising/Heisenberg on large lattices, checkerboard updates allow full vectorisation. A modern GPU achieves \(\sim 10^{10}\) spin flips/second.</li>
+</ul>
+<h3 id="performance-tips-for-python"><a class="header" href="#performance-tips-for-python">Performance Tips for Python</a></h3>
+<pre><code class="language-python"># Use vectorised NumPy, avoid Python loops over spins
+# For L=64 Ising, full-lattice checkerboard update:
+sublattice_A = spins[::2, ::2]  # even-even sites
+local_field = (np.roll(spins, 1, 0) + np.roll(spins, -1, 0) +
+               np.roll(spins, 1, 1) + np.roll(spins, -1, 1))[::2, ::2]
+delta_E = 2 * J * sublattice_A * local_field
+accept = np.random.random(sublattice_A.shape) &lt; np.exp(-beta * delta_E)
+spins[::2, ::2] = np.where(accept, -sublattice_A, sublattice_A)
+</code></pre>
+<p>For production runs, use Numba JIT or C extensions for 10–100× speedup over pure Python.</p>
+<hr>
+<h2 id="96-final-project-discussion"><a class="header" href="#96-final-project-discussion">9.6 Final Project Discussion</a></h2>
+<p>The course concludes with student project presentations. Suggested project topics:</p>
+<ul>
+<li>3D Ising model: phase diagram and critical exponents vs. series expansion results.</li>
+<li>Heisenberg model on the Pyrochlore lattice: spin ice signatures.</li>
+<li>KMC of CO₂ → CO + O dissociation on a Ru catalyst surface.</li>
+<li>Parallel tempering for a frustrated spin glass (\(J_{ij} = \pm J\) random).</li>
+<li>Bayesian EOS fitting to LJ simulation data.</li>
+<li>Wang-Landau calculation of the Potts model density of states and the order of the transition for \(q = 4, 5, 6\).</li>
+</ul>
+<hr>
+<h2 id="summary-8"><a class="header" href="#summary-8">Summary</a></h2>
+<p>This chapter collected tools for:</p>
+<ul>
+<li><strong>Error analysis</strong>: blocking, bootstrap, jackknife — essential for autocorrelated MC data.</li>
+<li><strong>Bayesian inference</strong>: MCMC samples posterior distributions; fundamental to modern data analysis in physics.</li>
+<li><strong>Particle physics</strong>: Geant4 detector simulation; phase space MC.</li>
+<li><strong>Transport</strong>: photon and neutron MC; the radiative transfer equation.</li>
+<li><strong>Best practices</strong>: reproducibility, parallelisation, GPU acceleration.</li>
+</ul>
+<blockquote class="blockquote-tag blockquote-tag-note">
+<p class="blockquote-tag-title"><svg viewbox="0 0 16 16" width="18" height="18"><path d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"></path></svg>Note</p>
+<p><strong>The Road Ahead</strong>
+The methods in this course underlie essentially all quantitative computational physics. The natural extensions are: Hamiltonian Monte Carlo (Ch. 5 of Betancourt’s review), normalising flows for enhanced sampling, and machine-learning-accelerated MC (using neural network potentials as fast surrogates for DFT). The foundation you have built is directly applicable to all of these.</p>
+</blockquote>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="appendix-a-python-reference-for-monte-carlo"><a class="header" href="#appendix-a-python-reference-for-monte-carlo">Appendix A: Python Reference for Monte Carlo</a></h1>
+<p>This appendix collects skeleton code for the computational labs and a reference for the key libraries.</p>
+<hr>
+<h2 id="a1-environment-setup"><a class="header" href="#a1-environment-setup">A.1 Environment Setup</a></h2>
+<pre><code class="language-bash"># Recommended: create a dedicated conda environment
+conda create -n mc_course python=3.11
+conda activate mc_course
+pip install numpy scipy matplotlib numba tqdm
+pip install vegas  # for adaptive MC integration
+</code></pre>
+<hr>
+<h2 id="a2-random-number-generation"><a class="header" href="#a2-random-number-generation">A.2 Random Number Generation</a></h2>
+<pre><code class="language-python">import numpy as np
+
+# Modern API: always use default_rng with a seed
+rng = np.random.default_rng(seed=42)
+
+# Uniform samples
+u = rng.uniform(0, 1, size=10_000)
+
+# Standard normal
+z = rng.standard_normal(size=10_000)
+
+# Exponential (radioactive decay lifetimes)
+lam = 1.0  # decay constant
+t = rng.exponential(scale=1/lam, size=10_000)
+# or via inverse CDF:
+t_inv = -np.log(rng.uniform(size=10_000)) / lam
+
+# Uniform on S^2 (correct method)
+cos_theta = rng.uniform(-1, 1, size=1000)
+phi = rng.uniform(0, 2*np.pi, size=1000)
+sin_theta = np.sqrt(1 - cos_theta**2)
+x = sin_theta * np.cos(phi)
+y = sin_theta * np.sin(phi)
+z = cos_theta  # unit vectors on sphere
+</code></pre>
+<hr>
+<h2 id="a3-maxwell-boltzmann-sampling-chapter-2-lab"><a class="header" href="#a3-maxwell-boltzmann-sampling-chapter-2-lab">A.3 Maxwell-Boltzmann Sampling (Chapter 2 Lab)</a></h2>
+<pre><code class="language-python">import numpy as np
+import matplotlib.pyplot as plt
+from scipy.stats import chi
+
+def sample_maxwell_boltzmann(T, m, N, rng=None):
+    """Sample N speeds from Maxwell-Boltzmann at temperature T."""
+    if rng is None:
+        rng = np.random.default_rng()
+    kB = 1.380649e-23
+    sigma = np.sqrt(kB * T / m)
+    # v = sqrt(vx^2 + vy^2 + vz^2), vx ~ N(0, sigma)
+    v = np.sqrt(np.sum(rng.normal(0, sigma, size=(N, 3))**2, axis=1))
+    return v
+
+# Argon parameters
+T = 300.0          # K
+m = 6.634e-26      # kg (Ar mass)
+N = 100_000
+rng = np.random.default_rng(seed=0)
+
+v = sample_maxwell_boltzmann(T, m, N, rng)
+
+kB = 1.380649e-23
+v_p = np.sqrt(2 * kB * T / m)   # most probable speed
+
+print(f"&lt;v&gt;   = {np.mean(v):.1f} m/s  (theory: {np.sqrt(8*kB*T/(np.pi*m)):.1f})")
+print(f"v_rms = {np.sqrt(np.mean(v**2)):.1f} m/s  (theory: {np.sqrt(3*kB*T/m):.1f})")
+print(f"v_mp  = {v_p:.1f} m/s (bin peak ~ {v[np.argmax(np.histogram(v,100)[0])]:.1f})")
+</code></pre>
+<hr>
+<h2 id="a4-metropolis-for-the-1d-double-well-chapter-4-lab"><a class="header" href="#a4-metropolis-for-the-1d-double-well-chapter-4-lab">A.4 Metropolis for the 1D Double-Well (Chapter 4 Lab)</a></h2>
+<pre><code class="language-python">import numpy as np
+
+def double_well(x):
+    return (x**2 - 1)**2
+
+def metropolis_1d(beta, N_steps, delta, x0=0.0, seed=42):
+    rng = np.random.default_rng(seed)
+    x = x0
+    trajectory = np.zeros(N_steps)
+    n_accept = 0
+    for t in range(N_steps):
+        x_new = x + rng.uniform(-delta, delta)
+        dE = double_well(x_new) - double_well(x)
+        if np.log(rng.uniform()) &lt; -beta * dE:
+            x = x_new
+            n_accept += 1
+        trajectory[t] = x
+    return trajectory, n_accept / N_steps
+
+beta = 2.0
+traj, acc = metropolis_1d(beta, N_steps=500_000, delta=0.5)
+print(f"Acceptance rate: {acc:.2f}")
+</code></pre>
+<hr>
+<h2 id="a5-2d-ising-model-chapter-5-lab"><a class="header" href="#a5-2d-ising-model-chapter-5-lab">A.5 2D Ising Model (Chapter 5 Lab)</a></h2>
+<pre><code class="language-python">import numpy as np
+
+def ising_energy(spins, J=1.0):
+    """Total energy of 2D Ising model with periodic BC."""
+    E = -J * np.sum(spins * (
+        np.roll(spins, 1, 0) + np.roll(spins, -1, 0) +
+        np.roll(spins, 1, 1) + np.roll(spins, -1, 1)
+    ))
+    return E / 2  # avoid double-counting
+
+def ising_metropolis(L, T, N_sweeps, J=1.0, seed=42):
+    rng = np.random.default_rng(seed)
+    beta = 1.0 / T
+    spins = rng.choice([-1, 1], size=(L, L))
+    
+    # Pre-compute acceptance probabilities
+    dE_vals = np.array([-8, -4, 0, 4, 8]) * J
+    acc_prob = {dE: min(1.0, np.exp(-beta * dE)) for dE in dE_vals}
+    
+    E_list, M_list = [], []
+    
+    for sweep in range(N_sweeps):
+        # N random single-spin flips per sweep
+        for _ in range(L * L):
+            i, j = rng.integers(0, L, size=2)
+            nb_sum = (spins[(i+1)%L, j] + spins[(i-1)%L, j] +
+                      spins[i, (j+1)%L] + spins[i, (j-1)%L])
+            dE = 2 * J * spins[i, j] * nb_sum
+            if rng.uniform() &lt; acc_prob[dE]:
+                spins[i, j] *= -1
+        
+        E_list.append(ising_energy(spins, J) / (L*L))
+        M_list.append(np.mean(spins))
+    
+    return np.array(E_list), np.array(M_list)
+
+# Example: L=32, T=2.27 (near Tc)
+E, M = ising_metropolis(32, T=2.27, N_sweeps=5000)
+print(f"&lt;E&gt;/N = {np.mean(E[1000:]):.4f} ± {np.std(E[1000:])/np.sqrt(4000):.4f}")
+print(f"&lt;|M|&gt; = {np.mean(np.abs(M[1000:])):.4f}")
+</code></pre>
+<hr>
+<h2 id="a6-wolff-cluster-algorithm-chapter-5-lab"><a class="header" href="#a6-wolff-cluster-algorithm-chapter-5-lab">A.6 Wolff Cluster Algorithm (Chapter 5 Lab)</a></h2>
+<pre><code class="language-python">import numpy as np
+from collections import deque
+
+def wolff_sweep(spins, beta, J=1.0, rng=None):
+    if rng is None:
+        rng = np.random.default_rng()
+    L = spins.shape[0]
+    p_add = 1 - np.exp(-2 * beta * J)
+    
+    # Pick random seed spin
+    i0, j0 = rng.integers(0, L, size=2)
+    cluster_spin = spins[i0, j0]
+    in_cluster = np.zeros((L, L), dtype=bool)
+    in_cluster[i0, j0] = True
+    queue = deque([(i0, j0)])
+    
+    while queue:
+        i, j = queue.popleft()
+        for di, dj in [(-1,0),(1,0),(0,-1),(0,1)]:
+            ni, nj = (i+di)%L, (j+dj)%L
+            if not in_cluster[ni, nj] and spins[ni, nj] == cluster_spin:
+                if rng.uniform() &lt; p_add:
+                    in_cluster[ni, nj] = True
+                    queue.append((ni, nj))
+    
+    spins[in_cluster] *= -1
+    return np.sum(in_cluster)  # cluster size
+</code></pre>
+<hr>
+<h2 id="a7-bkl--gillespie-kmc-chapter-8-lab"><a class="header" href="#a7-bkl--gillespie-kmc-chapter-8-lab">A.7 BKL / Gillespie KMC (Chapter 8 Lab)</a></h2>
+<pre><code class="language-python">import numpy as np
+
+def kmc_adatom_diffusion(L, T, E_a, nu0, N_events, seed=42):
+    """
+    KMC for single adatom diffusion on 2D square lattice.
+    Returns trajectory (positions) and times.
+    """
+    rng = np.random.default_rng(seed)
+    kB = 8.617e-5  # eV/K
+    
+    k_hop = nu0 * np.exp(-E_a / (kB * T))
+    K_tot = 4 * k_hop   # 4 neighbours
+    
+    x, y = L // 2, L // 2  # start at centre
+    t = 0.0
+    times = np.zeros(N_events)
+    positions = np.zeros((N_events, 2), dtype=int)
+    
+    moves = np.array([[1,0],[-1,0],[0,1],[0,-1]])
+    
+    for n in range(N_events):
+        # Time advance
+        dt = -np.log(rng.uniform()) / K_tot
+        t += dt
+        # Choose event (uniform since all rates equal)
+        move = moves[rng.integers(4)]
+        x = (x + move[0]) % L
+        y = (y + move[1]) % L
+        times[n] = t
+        positions[n] = [x, y]
+    
+    return times, positions
+
+# Example: Cu adatom, E_a = 0.49 eV, T = 600 K
+times, pos = kmc_adatom_diffusion(100, T=600, E_a=0.49,
+                                   nu0=3e12, N_events=100_000)
+# Compute MSD
+origin = pos[0]
+msd = np.mean((pos - pos[0])**2, axis=1)
+D_fit = np.polyfit(times[100:], msd[100:], 1)[0] / 4  # 2D: MSD = 4Dt
+print(f"D = {D_fit:.4e} m^2/s")
+</code></pre>
+<hr>
+<h2 id="a8-blocking-analysis-for-autocorrelated-data"><a class="header" href="#a8-blocking-analysis-for-autocorrelated-data">A.8 Blocking Analysis for Autocorrelated Data</a></h2>
+<pre><code class="language-python">import numpy as np
+
+def blocking_analysis(data, max_block_size=None):
+    """
+    Compute standard error as a function of block size.
+    Returns block_sizes, standard_errors.
+    """
+    N = len(data)
+    if max_block_size is None:
+        max_block_size = N // 4
+    
+    block_sizes = []
+    std_errors = []
+    
+    b = 1
+    while b &lt;= max_block_size:
+        n_blocks = N // b
+        blocks = data[:n_blocks*b].reshape(n_blocks, b).mean(axis=1)
+        se = np.std(blocks, ddof=1) / np.sqrt(n_blocks)
+        block_sizes.append(b)
+        std_errors.append(se)
+        b = max(b + 1, int(b * 1.5))
+    
+    return np.array(block_sizes), np.array(std_errors)
+
+# Usage:
+# bs, se = blocking_analysis(magnetisation_timeseries)
+# plt.semilogx(bs, se); plt.xlabel('Block size'); plt.ylabel('SE')
+# True error = plateau value
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="appendix-b-key-statistical-mechanics-formulas"><a class="header" href="#appendix-b-key-statistical-mechanics-formulas">Appendix B: Key Statistical Mechanics Formulas</a></h1>
+<hr>
+<h2 id="b1-ensembles"><a class="header" href="#b1-ensembles">B.1 Ensembles</a></h2>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Ensemble</th><th>Fixed variables</th><th>Partition function</th><th>Free energy</th></tr>
+</thead>
+<tbody>
+<tr><td>Microcanonical (NVE)</td><td>\(N, V, E\)</td><td>\(\Omega(E)\)</td><td>\(S = k_B \ln \Omega\)</td></tr>
+<tr><td>Canonical (NVT)</td><td>\(N, V, T\)</td><td>\(Z = \sum_i e^{-\beta E_i}\)</td><td>\(F = -k_BT \ln Z\)</td></tr>
+<tr><td>Grand canonical (\(\mu\)VT)</td><td>\(\mu, V, T\)</td><td>\(\mathcal{Z} = \sum_{N,i} e^{-\beta(E_i - \mu N)}\)</td><td>\(\Omega = -k_BT \ln \mathcal{Z}\)</td></tr>
+<tr><td>Isothermal-isobaric (NPT)</td><td>\(N, P, T\)</td><td>\(\Delta = \sum_i e^{-\beta(E_i + PV_i)}\)</td><td>\(G = -k_BT \ln \Delta\)</td></tr>
+</tbody>
+</table>
+</div>
+<hr>
+<h2 id="b2-thermodynamic-relations-from-mc-data"><a class="header" href="#b2-thermodynamic-relations-from-mc-data">B.2 Thermodynamic Relations from MC Data</a></h2>
+<p>Given canonical MC samples \({E_k, M_k}\):</p>
+<p>$$\langle E \rangle = \frac{1}{N}\sum_k E_k, \qquad \langle M \rangle = \frac{1}{N}\sum_k M_k$$</p>
+<p>$$C_V = \frac{\langle E^2 \rangle - \langle E \rangle^2}{k_B T^2} = \frac{\beta^2}{N_{\rm spins}}\left(\langle H^2 \rangle - \langle H \rangle^2\right)$$</p>
+<p>$$\chi = \frac{\langle M^2 \rangle - \langle M \rangle^2}{k_B T} = \frac{\beta}{N_{\rm spins}}\left(\langle (MN)^2 \rangle - \langle MN \rangle^2\right)$$</p>
+<p>$$P = \frac{Nk_BT}{V} + \frac{\langle \mathcal{W} \rangle}{3V}, \quad \mathcal{W} = -\sum_{i&lt;j} r_{ij} \frac{\partial \phi}{\partial r_{ij}} \quad (\text{virial})$$</p>
+<hr>
+<h2 id="b3-ising-model-reference-values"><a class="header" href="#b3-ising-model-reference-values">B.3 Ising Model Reference Values</a></h2>
+<p><strong>2D Square Lattice</strong> (Onsager exact solution, \(h = 0\)):</p>
+<p>$$k_BT_c = \frac{2J}{\ln(1+\sqrt{2})} \approx 2.2692,J$$</p>
+<p>$$M(T) = \left[1 - \sinh^{-4}(2\beta J)\right]^{1/8} \quad (T &lt; T_c)$$</p>
+<p><strong>Critical exponents (2D Ising):</strong></p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Exponent</th><th>Symbol</th><th>Value</th></tr>
+</thead>
+<tbody>
+<tr><td>Correlation length</td><td>\(\nu\)</td><td>1</td></tr>
+<tr><td>Magnetisation</td><td>\(\beta\)</td><td>1/8</td></tr>
+<tr><td>Susceptibility</td><td>\(\gamma\)</td><td>7/4</td></tr>
+<tr><td>Specific heat</td><td>\(\alpha\)</td><td>0 (log divergence)</td></tr>
+<tr><td>Anomalous dimension</td><td>\(\eta\)</td><td>1/4</td></tr>
+<tr><td>Dynamic (Metropolis)</td><td>\(z\)</td><td>≈ 2.17</td></tr>
+<tr><td>Dynamic (Wolff)</td><td>\(z\)</td><td>≈ 0.25</td></tr>
+</tbody>
+</table>
+</div>
+<p><strong>3D Ising critical exponents</strong> (numerical):</p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Exponent</th><th>Value</th></tr>
+</thead>
+<tbody>
+<tr><td>\(\nu\)</td><td>0.6301</td></tr>
+<tr><td>\(\beta\)</td><td>0.3265</td></tr>
+<tr><td>\(\gamma\)</td><td>1.2372</td></tr>
+<tr><td>\(\eta\)</td><td>0.0364</td></tr>
+</tbody>
+</table>
+</div>
+<hr>
+<h2 id="b4-heisenberg-and-xy-models"><a class="header" href="#b4-heisenberg-and-xy-models">B.4 Heisenberg and XY Models</a></h2>
+<p><strong>3D Classical Heisenberg</strong> (\(J &gt; 0\)):
+$$k_B T_c \approx 1.4432,J \quad (\text{simple cubic, MC})$$</p>
+<p><strong>2D XY model — Kosterlitz-Thouless transition:</strong>
+$$k_B T_{\rm KT} = \frac{\pi J}{2} \approx 1.5708,J$$</p>
+<p>Universal helicity modulus jump:
+$$\lim_{T \to T_{\rm KT}^-} \Upsilon(T) = \frac{2}{\pi} k_B T_{\rm KT}$$</p>
+<p><strong>Mermin-Wagner theorem:</strong> \(T_c = 0\) for \(n \geq 2\) in \(d \leq 2\).</p>
+<hr>
+<h2 id="b5-lennard-jones-fluid-reference"><a class="header" href="#b5-lennard-jones-fluid-reference">B.5 Lennard-Jones Fluid Reference</a></h2>
+<p>Lennard-Jones potential:
+$$\phi(r) = 4\varepsilon\left[\left(\frac{\sigma}{r}\right)^{12} - \left(\frac{\sigma}{r}\right)^6\right]$$</p>
+<p>Critical point (reduced units \(T^* = k_BT/\varepsilon\), \(\rho^* = \rho\sigma^3\)):
+$$T_c^* \approx 1.326, \quad \rho_c^* \approx 0.316, \quad P_c^* \approx 0.129$$</p>
+<p>Triple point: \(T_{\rm tp}^* \approx 0.694\), \(\rho_{\rm tp,liq}^* \approx 0.845\).</p>
+<p>Argon parameters: \(\varepsilon/k_B = 119.8\) K, \(\sigma = 3.405\) Å.</p>
+<hr>
+<h2 id="b6-arrhenius-and-transition-state-theory"><a class="header" href="#b6-arrhenius-and-transition-state-theory">B.6 Arrhenius and Transition State Theory</a></h2>
+<p>$$k = \nu_0, e^{-E_a/k_BT} \quad \text{(Arrhenius)}$$</p>
+<p>$$k = \frac{k_BT}{h} e^{-\Delta G^\ddagger/k_BT} = \frac{k_BT}{h} e^{\Delta S^\ddagger/k_B} e^{-\Delta H^\ddagger/k_BT} \quad \text{(Eyring TST)}$$</p>
+<p>Typical attempt frequency for solids: \(\nu_0 \sim 10^{12}\text{–}10^{13}\) s\(^{-1}\).</p>
+<hr>
+<h2 id="b7-statistical-error-formulas"><a class="header" href="#b7-statistical-error-formulas">B.7 Statistical Error Formulas</a></h2>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Quantity</th><th>Formula</th></tr>
+</thead>
+<tbody>
+<tr><td>Sample mean</td><td>\(\bar{A} = N^{-1}\sum_i A_i\)</td></tr>
+<tr><td>Sample variance</td><td>\(s^2 = (N-1)^{-1}\sum_i(A_i - \bar{A})^2\)</td></tr>
+<tr><td>Standard error (i.i.d.)</td><td>\(\text{SE} = s/\sqrt{N}\)</td></tr>
+<tr><td>Integrated autocorr. time</td><td>\(\tau_{\rm int} = \frac{1}{2} + \sum_{\tau=1}^\infty C(\tau)\)</td></tr>
+<tr><td>Effective sample size</td><td>\(N_{\rm eff} = N/(2\tau_{\rm int})\)</td></tr>
+<tr><td>True standard error</td><td>\(\text{SE}<em>{\rm true} = s/\sqrt{N</em>{\rm eff}}\)</td></tr>
+<tr><td>Jackknife variance</td><td>\(\sigma_{\rm JK}^2 = \frac{N-1}{N}\sum_k(\hat{\theta}_k - \bar{\theta})^2\)</td></tr>
+</tbody>
+</table>
+</div>
+<hr>
+<h2 id="b8-free-energy-methods-reference"><a class="header" href="#b8-free-energy-methods-reference">B.8 Free Energy Methods Reference</a></h2>
+<p><strong>Free energy perturbation:</strong>
+$$\Delta F_{A\to B} = -k_BT \ln \langle e^{-\beta(H_B - H_A)} \rangle_A$$</p>
+<p><strong>Thermodynamic integration:</strong>
+$$\Delta F_{A\to B} = \int_0^1 \left\langle \frac{\partial H(\lambda)}{\partial\lambda} \right\rangle_\lambda d\lambda$$</p>
+<p><strong>Wang-Landau:</strong> \(Z(T) = \sum_E g(E) e^{-\beta E}\) from flat-histogram sampling of \(g(E)\).</p>
+<p><strong>Parallel tempering swap acceptance:</strong>
+$$A = \min!\left(1, e^{(\beta_k - \beta_{k+1})(E_k - E_{k+1})}\right)$$</p>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="appendix-c-algorithm-pseudocode"><a class="header" href="#appendix-c-algorithm-pseudocode">Appendix C: Algorithm Pseudocode</a></h1>
+<p>Clean, language-agnostic pseudocode for all major algorithms in this course.</p>
+<hr>
+<h2 id="c1-metropolishastings"><a class="header" href="#c1-metropolishastings">C.1 Metropolis–Hastings</a></h2>
+<pre><code>INPUT: target p(x), proposal Q(x→x'), initial x, N_steps, β
+OUTPUT: trajectory {x^(t)}
+
+x ← x_0
+for t = 1 to N_steps:
+    propose x' ~ Q(x → x')
+    α ← p(x') Q(x'→x) / [p(x) Q(x→x')]
+    u ~ Uniform(0, 1)
+    if u &lt; min(1, α):
+        x ← x'            # accept
+    record x^(t) ← x
+</code></pre>
+<p>For symmetric proposals (\(Q\) symmetric): \(\alpha = p(x’)/p(x) = e^{-\beta \Delta H}\).</p>
+<hr>
+<h2 id="c2-gibbs-sampler"><a class="header" href="#c2-gibbs-sampler">C.2 Gibbs Sampler</a></h2>
+<pre><code>INPUT: conditional distributions p(x_i | x_{-i}), initial x, N_steps
+OUTPUT: trajectory {x^(t)}
+
+for t = 1 to N_steps:
+    for i = 1 to d:
+        x_i ← sample from p(x_i | x_1,...,x_{i-1}, x_{i+1},...,x_d)
+    record x^(t) ← x
+</code></pre>
+<hr>
+<h2 id="c3-ising-metropolis-single-spin-flip"><a class="header" href="#c3-ising-metropolis-single-spin-flip">C.3 Ising Metropolis (Single-Spin Flip)</a></h2>
+<pre><code>INPUT: L × L spin lattice, β, J, N_sweeps
+OUTPUT: time series of E, M
+
+initialise spins randomly ±1
+precompute: acc[ΔE] = min(1, exp(-β ΔE)) for ΔE in {-8J,-4J,0,4J,8J}
+
+for sweep = 1 to N_sweeps:
+    for k = 1 to L²:
+        pick spin (i,j) at random
+        ΔE ← 2J · s[i,j] · (s[i+1,j] + s[i-1,j] + s[i,j+1] + s[i,j-1])
+        u ~ Uniform(0,1)
+        if u &lt; acc[ΔE]:
+            s[i,j] ← -s[i,j]
+    record E ← Σ_&lt;ij&gt; (-J s_i s_j), M ← Σ_i s_i / L²
+</code></pre>
+<hr>
+<h2 id="c4-wolff-cluster-algorithm"><a class="header" href="#c4-wolff-cluster-algorithm">C.4 Wolff Cluster Algorithm</a></h2>
+<pre><code>INPUT: L × L spin lattice, β, J
+OUTPUT: updated spins, cluster size
+
+pick random seed (i₀, j₀)
+cluster_spin ← s[i₀, j₀]
+p_add ← 1 - exp(-2βJ)
+cluster ← {(i₀, j₀)}
+queue ← {(i₀, j₀)}
+
+while queue not empty:
+    (i, j) ← pop from queue
+    for each neighbour (i', j') of (i, j):
+        if s[i',j'] == cluster_spin and (i',j') not in cluster:
+            u ~ Uniform(0,1)
+            if u &lt; p_add:
+                add (i',j') to cluster and queue
+
+for each (i,j) in cluster:
+    s[i,j] ← -s[i,j]
+
+return |cluster|
+</code></pre>
+<hr>
+<h2 id="c5-wang-landau-algorithm"><a class="header" href="#c5-wang-landau-algorithm">C.5 Wang-Landau Algorithm</a></h2>
+<pre><code>INPUT: system, energy range [E_min, E_max], bin width ΔE
+OUTPUT: density of states g(E)
+
+initialise: g(E) ← 1 for all E bins
+            H(E) ← 0 (histogram)
+            f ← exp(1) ≈ 2.718
+            flatness_criterion ← 0.8
+
+x ← random initial configuration
+E ← energy(x)
+
+while f &gt; exp(1e-8):
+    propose x' (random spin flip or move)
+    E' ← energy(x')
+    u ~ Uniform(0,1)
+    if u &lt; g(E) / g(E'):
+        x ← x'
+        E ← E'
+    g(E) ← g(E) · f
+    H(E) ← H(E) + 1
+
+    if histogram is flat (min(H) &gt; flatness_criterion · mean(H)):
+        f ← sqrt(f)
+        H(E) ← 0 for all E
+
+return g(E)
+</code></pre>
+<p>Flatness check: \(\min_E H(E) &gt; 0.8 \times \langle H \rangle\).</p>
+<hr>
+<h2 id="c6-bkl--gillespie-kmc"><a class="header" href="#c6-bkl--gillespie-kmc">C.6 BKL / Gillespie KMC</a></h2>
+<pre><code>INPUT: initial state α, rate catalog {k_j(α)}, T_max
+OUTPUT: trajectory of states and times
+
+t ← 0
+state ← α
+
+while t &lt; T_max:
+    # 1. Compute all rates from current state
+    rates ← [k_1(state), k_2(state), ..., k_M(state)]
+    K_tot ← sum(rates)
+
+    # 2. Draw time increment
+    u1 ~ Uniform(0,1)
+    dt ← -ln(u1) / K_tot
+    t ← t + dt
+
+    # 3. Select event
+    u2 ~ Uniform(0,1)
+    cumulative ← 0
+    for j = 1 to M:
+        cumulative ← cumulative + rates[j]
+        if u2 · K_tot ≤ cumulative:
+            execute event j
+            break
+
+    # 4. Update state and rate catalog
+    state ← new_state_after_event_j
+    record (t, state)
+</code></pre>
+<p>Event selection can be done in \(\mathcal{O}(\log M)\) using binary search on the cumulative rate array.</p>
+<hr>
+<h2 id="c7-parallel-tempering"><a class="header" href="#c7-parallel-tempering">C.7 Parallel Tempering</a></h2>
+<pre><code>INPUT: M replicas at temperatures T_1 &lt; T_2 &lt; ... &lt; T_M
+       N_swap steps between swap attempts
+OUTPUT: sampled configurations at each temperature
+
+initialise: x_k ~ random, for k = 1...M
+
+for step = 1 to N_total:
+    # Standard MC/MD at each temperature (in parallel)
+    for k = 1 to M (parallel):
+        perform N_swap sweeps of x_k at β_k
+
+    # Attempt swaps between adjacent replicas
+    for k = 1 to M-1 (sequential or checkerboard):
+        Δ ← (β_{k+1} - β_k) · (H(x_k) - H(x_{k+1}))
+        u ~ Uniform(0,1)
+        if u &lt; min(1, exp(Δ)):
+            swap x_k ↔ x_{k+1}
+
+    record x_k for all k
+</code></pre>
+<hr>
+<h2 id="c8-umbrella-sampling--wham"><a class="header" href="#c8-umbrella-sampling--wham">C.8 Umbrella Sampling + WHAM</a></h2>
+<pre><code>INPUT: M windows with centres {ξ₀^(m)}, spring constants {K^(m)}
+       N_steps per window
+OUTPUT: free energy profile F(ξ)
+
+# Step 1: Run biased simulations
+for m = 1 to M:
+    H_biased(x) ← H(x) + ½ K^(m) (ξ(x) - ξ₀^(m))²
+    run N_steps Metropolis with H_biased
+    record histogram n_m(ξ)
+
+# Step 2: WHAM self-consistent equations
+initialise F_m ← 0 for m = 1...M
+
+repeat until convergence:
+    # Unbiased density
+    ρ(ξ) ← Σ_m n_m(ξ) / Σ_m N_m exp(β F_m - β V_m(ξ))
+
+    # Update free energy offsets
+    F_m ← -k_BT ln Σ_ξ ρ(ξ) exp(-β V_m(ξ))
+
+F(ξ) ← -k_BT ln ρ(ξ)
+</code></pre>
+<hr>
+<h2 id="c9-blocking-analysis"><a class="header" href="#c9-blocking-analysis">C.9 Blocking Analysis</a></h2>
+<pre><code>INPUT: time series {A_t}, t = 1...N
+OUTPUT: standard error as function of block size b
+
+for b = 1, 2, 4, 8, ..., N/4:
+    n_blocks ← floor(N / b)
+    block_means ← [mean(A[k*b : (k+1)*b]) for k in 0..n_blocks-1]
+    SE(b) ← std(block_means) / sqrt(n_blocks)
+
+True error ← plateau value of SE(b) for large b
+τ_int ← SE(b_plateau)² · N / (2 · SE(b=1)²)
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div>
+<h1 id="appendix-d-further-reading--references"><a class="header" href="#appendix-d-further-reading--references">Appendix D: Further Reading &amp; References</a></h1>
+<hr>
+<h2 id="d1-textbooks"><a class="header" href="#d1-textbooks">D.1 Textbooks</a></h2>
+<h3 id="monte-carlo-methods-general"><a class="header" href="#monte-carlo-methods-general">Monte Carlo Methods (General)</a></h3>
+<ul>
+<li><strong>Newman, M. E. J. &amp; Barkema, G. T.</strong> — <em>Monte Carlo Methods in Statistical Physics</em> (Oxford, 1999). The standard graduate text. Covers Ising, Potts, cluster algorithms, and finite-size scaling in depth.</li>
+<li><strong>Frenkel, D. &amp; Smit, B.</strong> — <em>Understanding Molecular Simulation</em> (Academic Press, 3rd ed. 2023). The reference for MC and MD in chemical physics. Comprehensive treatment of free energy methods.</li>
+<li><strong>Landau, D. P. &amp; Binder, K.</strong> — <em>A Guide to Monte Carlo Simulations in Statistical Physics</em> (Cambridge, 4th ed. 2014). Encyclopaedic coverage of algorithms and applications.</li>
+<li><strong>Krauth, W.</strong> — <em>Statistical Mechanics: Algorithms and Computations</em> (Oxford, 2006). Elegant and rigorous; excellent on cluster algorithms and MCMC theory.</li>
+</ul>
+<h3 id="probability-and-statistics"><a class="header" href="#probability-and-statistics">Probability and Statistics</a></h3>
+<ul>
+<li><strong>Gelman, A. et al.</strong> — <em>Bayesian Data Analysis</em> (CRC Press, 3rd ed. 2013). Standard reference for Bayesian inference and MCMC.</li>
+<li><strong>Robert, C. P. &amp; Casella, G.</strong> — <em>Monte Carlo Statistical Methods</em> (Springer, 2nd ed. 2004). Mathematically rigorous treatment of MCMC convergence.</li>
+</ul>
+<h3 id="kinetic-monte-carlo"><a class="header" href="#kinetic-monte-carlo">Kinetic Monte Carlo</a></h3>
+<ul>
+<li><strong>Voter, A. F.</strong> — “Introduction to the Kinetic Monte Carlo Method”, in <em>Radiation Effects in Solids</em> (Springer, 2007). The clearest introductory review.</li>
+<li><strong>Reuter, K.</strong> — “First-Principles Kinetic Monte Carlo Simulations for Heterogeneous Catalysis”, in <em>Modelling and Simulation of Heterogeneous Catalytic Reactions</em> (Wiley-VCH, 2011).</li>
+</ul>
+<hr>
+<h2 id="d2-key-papers"><a class="header" href="#d2-key-papers">D.2 Key Papers</a></h2>
+<h3 id="algorithms"><a class="header" href="#algorithms">Algorithms</a></h3>
+<ul>
+<li><strong>Metropolis, N. et al.</strong> — “Equation of State Calculations by Fast Computing Machines”, <em>J. Chem. Phys.</em> <strong>21</strong>, 1087 (1953). The original Metropolis paper.</li>
+<li><strong>Hastings, W. K.</strong> — “Monte Carlo Sampling Methods Using Markov Chains and Their Applications”, <em>Biometrika</em> <strong>57</strong>, 97 (1970).</li>
+<li><strong>Swendsen, R. H. &amp; Wang, J.-S.</strong> — “Nonuniversal Critical Dynamics in Monte Carlo Simulations”, <em>Phys. Rev. Lett.</em> <strong>58</strong>, 86 (1987). Cluster algorithm.</li>
+<li><strong>Wolff, U.</strong> — “Collective Monte Carlo Updating for Spin Systems”, <em>Phys. Rev. Lett.</em> <strong>62</strong>, 361 (1989).</li>
+<li><strong>Wang, F. &amp; Landau, D. P.</strong> — “Efficient, Multiple-Range Random Walk Algorithm to Calculate the Density of States”, <em>Phys. Rev. Lett.</em> <strong>86</strong>, 2050 (2001).</li>
+<li><strong>Geyer, C. J.</strong> — “Markov Chain Monte Carlo Maximum Likelihood”, <em>Proc. 23rd Symp. Interface</em> (1991). Parallel tempering.</li>
+<li><strong>Bortz, A. B., Kalos, M. H. &amp; Lebowitz, J. L.</strong> — “A New Algorithm for Monte Carlo Simulation of Ising Spin Systems”, <em>J. Comput. Phys.</em> <strong>17</strong>, 10 (1975). The BKL algorithm.</li>
+<li><strong>Gillespie, D. T.</strong> — “Exact Stochastic Simulation of Coupled Chemical Reactions”, <em>J. Phys. Chem.</em> <strong>81</strong>, 2340 (1977).</li>
+</ul>
+<h3 id="exact-results-1"><a class="header" href="#exact-results-1">Exact Results</a></h3>
+<ul>
+<li><strong>Onsager, L.</strong> — “Crystal Statistics. I. A Two-Dimensional Model with an Order-Disorder Transition”, <em>Phys. Rev.</em> <strong>65</strong>, 117 (1944).</li>
+<li><strong>Kosterlitz, J. M. &amp; Thouless, D. J.</strong> — “Ordering, Metastability and Phase Transitions in Two-Dimensional Systems”, <em>J. Phys. C</em> <strong>6</strong>, 1181 (1973).</li>
+<li><strong>Mermin, N. D. &amp; Wagner, H.</strong> — “Absence of Ferromagnetism or Antiferromagnetism in One- or Two-Dimensional Isotropic Heisenberg Models”, <em>Phys. Rev. Lett.</em> <strong>17</strong>, 1133 (1966).</li>
+</ul>
+<h3 id="applications"><a class="header" href="#applications">Applications</a></h3>
+<ul>
+<li><strong>Kirkpatrick, S., Gelatt, C. D. &amp; Vecchi, M. P.</strong> — “Optimization by Simulated Annealing”, <em>Science</em> <strong>220</strong>, 671 (1983).</li>
+<li><strong>Reuter, K. &amp; Scheffler, M.</strong> — “Composition, Structure, and Stability of RuO₂(110) as a Function of Oxygen Pressure”, <em>Phys. Rev. B</em> <strong>65</strong>, 035406 (2001). First-principles KMC.</li>
+<li><strong>Castelnovo, C., Moessner, R. &amp; Sondhi, S. L.</strong> — “Magnetic Monopoles in Spin Ice”, <em>Nature</em> <strong>451</strong>, 42 (2008).</li>
+</ul>
+<hr>
+<h2 id="d3-review-articles"><a class="header" href="#d3-review-articles">D.3 Review Articles</a></h2>
+<ul>
+<li><strong>Binder, K.</strong> — “Monte Carlo Simulations in Statistical Physics”, <em>Am. J. Phys.</em> <strong>80</strong>, 1099 (2012). Excellent overview for physicists.</li>
+<li><strong>Betancourt, M.</strong> — “A Conceptual Introduction to Hamiltonian Monte Carlo”, <em>arXiv:1701.02434</em> (2017). Best pedagogical treatment of HMC.</li>
+<li><strong>Voter, A. F.</strong> — “Hyperdynamics: Accelerated Molecular Dynamics of Infrequent Events”, <em>Phys. Rev. Lett.</em> <strong>78</strong>, 3908 (1997). Foundation of accelerated dynamics methods.</li>
+<li><strong>Rohwedder, T. &amp; Schneider, R.</strong> — “Error Estimates for the Coupled Cluster Method”, <em>ESAIM</em> (2013). For context on quantum chemistry methods.</li>
+</ul>
+<hr>
+<h2 id="d4-software-packages"><a class="header" href="#d4-software-packages">D.4 Software Packages</a></h2>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Package</th><th>Purpose</th><th>Language</th></tr>
+</thead>
+<tbody>
+<tr><td><strong>LAMMPS</strong></td><td>Molecular dynamics + MC</td><td>C++</td></tr>
+<tr><td><strong>GROMACS</strong></td><td>MD with free energy</td><td>C++/CUDA</td></tr>
+<tr><td><strong>HOOMD-blue</strong></td><td>GPU MC/MD</td><td>Python/C++</td></tr>
+<tr><td><strong>PyMC</strong></td><td>Bayesian MCMC</td><td>Python</td></tr>
+<tr><td><strong>emcee</strong></td><td>Affine-invariant MCMC</td><td>Python</td></tr>
+<tr><td><strong>MCNP6</strong></td><td>Neutron/photon transport</td><td>Fortran</td></tr>
+<tr><td><strong>Geant4</strong></td><td>Particle detector simulation</td><td>C++</td></tr>
+<tr><td><strong>SPPARKS</strong></td><td>KMC for materials</td><td>C++</td></tr>
+<tr><td><strong>KMCLib</strong></td><td>Lattice KMC</td><td>Python/C++</td></tr>
+<tr><td><strong>ASE</strong></td><td>Atomic simulation environment</td><td>Python</td></tr>
+<tr><td><strong>vegas</strong></td><td>Adaptive MC integration</td><td>Python</td></tr>
+<tr><td><strong>scipy.stats.qmc</strong></td><td>Quasi-MC sequences</td><td>Python</td></tr>
+</tbody>
+</table>
+</div>
+<hr>
+<h2 id="d5-online-resources"><a class="header" href="#d5-online-resources">D.5 Online Resources</a></h2>
+<ul>
+<li>Computational Physics course notes, Krauth (ENS Paris): <code>https://www.lps.ens.fr/~krauth/</code></li>
+<li>NIST Digital Library of Mathematical Functions: <code>https://dlmf.nist.gov</code></li>
+<li>TestU01 RNG testing library: <code>https://simul.iro.umontreal.ca/testu01/</code></li>
+<li>OpenKIM: verified interatomic potentials for KMC/MD: <code>https://openkim.org</code></li>
+<li>Materials Project: DFT-computed properties for KMC input: <code>https://materialsproject.org</code></li>
+</ul>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+
+            </nav>
+
+        </div>
+
+        <template id=fa-eye><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM432 256c0 79.5-64.5 144-144 144s-144-64.5-144-144s64.5-144 144-144s144 64.5 144 144zM288 192c0 35.3-28.7 64-64 64c-11.5 0-22.3-3-31.6-8.4c-.2 2.8-.4 5.5-.4 8.4c0 53 43 96 96 96s96-43 96-96s-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6z"/></svg></span></template>
+        <template id=fa-eye-slash><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M38.8 5.1C28.4-3.1 13.3-1.2 5.1 9.2S-1.2 34.7 9.2 42.9l592 464c10.4 8.2 25.5 6.3 33.7-4.1s6.3-25.5-4.1-33.7L525.6 386.7c39.6-40.6 66.4-86.1 79.9-118.4c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C465.5 68.8 400.8 32 320 32c-68.2 0-125 26.3-169.3 60.8L38.8 5.1zM223.1 149.5C248.6 126.2 282.7 112 320 112c79.5 0 144 64.5 144 144c0 24.9-6.3 48.3-17.4 68.7L408 294.5c5.2-11.8 8-24.8 8-38.5c0-53-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6c0 10.2-2.4 19.8-6.6 28.3l-90.3-70.8zm223.1 298L373 389.9c-16.4 6.5-34.3 10.1-53 10.1c-79.5 0-144-64.5-144-144c0-6.9 .5-13.6 1.4-20.2L83.1 161.5C60.3 191.2 44 220.8 34.5 243.7c-3.3 7.9-3.3 16.7 0 24.6c14.9 35.7 46.2 87.7 93 131.1C174.5 443.2 239.2 480 320 480c47.8 0 89.9-12.9 126.2-32.5z"/></svg></span></template>
+        <template id=fa-copy><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M502.6 70.63l-61.25-61.25C435.4 3.371 427.2 0 418.7 0H255.1c-35.35 0-64 28.66-64 64l.0195 256C192 355.4 220.7 384 256 384h192c35.2 0 64-28.8 64-64V93.25C512 84.77 508.6 76.63 502.6 70.63zM464 320c0 8.836-7.164 16-16 16H255.1c-8.838 0-16-7.164-16-16L239.1 64.13c0-8.836 7.164-16 16-16h128L384 96c0 17.67 14.33 32 32 32h47.1V320zM272 448c0 8.836-7.164 16-16 16H63.1c-8.838 0-16-7.164-16-16L47.98 192.1c0-8.836 7.164-16 16-16H160V128H63.99c-35.35 0-64 28.65-64 64l.0098 256C.002 483.3 28.66 512 64 512h192c35.2 0 64-28.8 64-64v-32h-47.1L272 448z"/></svg></span></template>
+        <template id=fa-play><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80V432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z"/></svg></span></template>
+        <template id=fa-clock-rotate-left><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M75 75L41 41C25.9 25.9 0 36.6 0 57.9V168c0 13.3 10.7 24 24 24H134.1c21.4 0 32.1-25.9 17-41l-30.8-30.8C155 85.5 203 64 256 64c106 0 192 86 192 192s-86 192-192 192c-40.8 0-78.6-12.7-109.7-34.4c-14.5-10.1-34.4-6.6-44.6 7.9s-6.6 34.4 7.9 44.6C151.2 495 201.7 512 256 512c141.4 0 256-114.6 256-256S397.4 0 256 0C185.3 0 121.3 28.7 75 75zm181 53c-13.3 0-24 10.7-24 24V256c0 6.4 2.5 12.5 7 17l72 72c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-65-65V152c0-13.3-10.7-24-24-24z"/></svg></span></template>
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr-ef4e11c1.min.js"></script>
+        <script src="mark-09e88c2c.min.js"></script>
+        <script src="searcher-09f2665d.js"></script>
+
+        <script src="clipboard-1626706a.min.js"></script>
+        <script src="highlight-abc7f01d.js"></script>
+        <script src="book-c22b7243.js"></script>
+
+        <!-- Custom JS scripts -->
+
+        <script>
+        window.addEventListener('load', function() {
+            MathJax.Hub.Register.StartupHook('End', function() {
+                window.setTimeout(window.print, 100);
+            });
+        });
+        </script>
+
+
+    </div>
+    </body>
+</html>
