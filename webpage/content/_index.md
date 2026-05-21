@@ -68,7 +68,9 @@ sections:
         We address a central question in computational materials science:
         <div class="callout-question">How do we computationally design materials that solve energy and quantum challenges?</div>
 
-        Our approach combines **[Density Functional Theory (DFT)](blog/2024-07-dft)**, **Monte Carlo simulations**, and **Machine Learning (ML)** to predict material properties from electronic structure—bridging atomic-scale behaviour with macroscopic functionality. By linking fundamental theory with experimentally relevant outcomes, we **predict material behaviour before synthesis**, reducing trial-and-error and accelerating discovery.
+        We combine DFT, Monte Carlo simulations, and machine learning — using each where the physics demands it: DFT for electronic structure, Monte Carlo for finite-temperature collective behaviour, ML where compositional spaces become too large for direct first-principles study.
+
+
 
 
     design:
