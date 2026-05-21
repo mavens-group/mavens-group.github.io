@@ -1,0 +1,64 @@
+name: Deploy MC Notes
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'Docs/MC/**'
+      - '.github/workflows/mc.yaml'
+  workflow_dispatch:
+    inputs:
+      reason:
+        description: 'mc* - manual trigger reason'
+        required: false
+        default: 'mc-manual'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: "mdbook-pages"
+  cancel-in-progress: false
+
+jobs:
+  deploy-mdbook:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup mdBook
+        uses: peaceiris/actions-mdbook@v2
+        with:
+          mdbook-version: 'latest'
+
+      - name: Build mdBook
+        working-directory: ./Docs/MC
+        run: mdbook build
+
+      - name: Generate Sitemap
+        working-directory: ./Docs/MC
+        run: |
+          BASE="https://mavens-group.github.io/mc-notes"
+          DATE=$(date -u +"%Y-%m-%d")
+          echo '<?xml version="1.0" encoding="UTF-8"?>' > book/sitemap.xml
+          echo '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">' >> book/sitemap.xml
+          find book -name "*.html" | sort | while read f; do
+            path="${f#book/}"
+            echo "  <url>" >> book/sitemap.xml
+            echo "    <loc>${BASE}/${path}</loc>" >> book/sitemap.xml
+            echo "    <lastmod>${DATE}</lastmod>" >> book/sitemap.xml
+            echo "    <changefreq>weekly</changefreq>" >> book/sitemap.xml
+            echo "  </url>" >> book/sitemap.xml
+          done
+          echo '</urlset>' >> book/sitemap.xml
+
+      - name: Deploy to GitHub Pages Subdirectory
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_branch: gh-pages
+          publish_dir: ./Docs/MC/book
+          destination_dir: mc-notes
+          keep_files: true

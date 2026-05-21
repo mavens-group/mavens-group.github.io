@@ -1,0 +1,17 @@
+[book]
+title = "Monte Carlo Methods for Physicists"
+authors = ["MSc Physics Course"]
+description = "A graduate-level course on Monte Carlo methods with applications in physics and chemistry"
+language = "en"
+src = "src"
+
+[build]
+build-dir = "book"
+
+[output.html]
+mathjax-support = true
+git-repository-url = ""
+edit-url-template = ""
+
+[output.html.playground]
+editable = false
