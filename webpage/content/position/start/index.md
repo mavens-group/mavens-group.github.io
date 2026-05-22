@@ -44,4 +44,4 @@ Bring or send:
 - A photograph for the group website
 - Your email and phone number
 
-In your first month, review the group's GitHub repositories, get the tools above installed and working, and read the literature your supervisor assigns. Ask questions in Chat, not in private messages — others benefit from the answers.
+In your first month, review the group's GitHub repositories, get the tools above installed and working, and read the literatures on topic assigned to you. Ask questions in Chat, not in private messages — others benefit from the answers.
