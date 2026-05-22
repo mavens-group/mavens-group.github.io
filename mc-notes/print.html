@@ -38,10 +38,10 @@
             const path_to_root = "";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "searchindex-b873c817.js";
+            window.path_to_searchindex_js = "searchindex-b4449181.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="toc-c1e50cd2.js"></script>
+        <script src="toc-675388d6.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -239,9 +239,7 @@ Each chapter contains one or more computational labs. These are hands-on Python 
 </div>
 <p>Throughout, \(k_B = 1\) (natural units) unless stated otherwise.</p>
 <div style="break-before: page; page-break-before: always;"></div>
-<h1 id="chapter-1-foundations-of-probability--randomness"><a class="header" href="#chapter-1-foundations-of-probability--randomness">Chapter 1: Foundations of Probability &amp; Randomness</a></h1>
-<p><em>Classes 1–2</em></p>
-<hr>
+<h1 id="foundations-of-probability--randomness"><a class="header" href="#foundations-of-probability--randomness">Foundations of Probability &amp; Randomness</a></h1>
 <h2 id="11-probability-spaces-and-random-variables"><a class="header" href="#11-probability-spaces-and-random-variables">1.1 Probability Spaces and Random Variables</a></h2>
 <p>A <strong>probability space</strong> is a triple \((\Omega, \mathcal{F}, P)\) where \(\Omega\) is the sample space, \(\mathcal{F}\) is a \(\sigma\)-algebra of events, and \(P: \mathcal{F} \to [0,1]\) is a probability measure satisfying \(P(\Omega) = 1\).</p>
 <p>A <strong>random variable</strong> \(X: \Omega \to \mathbb{R}\) maps outcomes to real numbers. For a continuous random variable its <strong>probability density function</strong> (PDF) \(p(x)\) satisfies:</p>
@@ -362,9 +360,7 @@ See Appendix A for the Python skeleton. You will need <code>numpy</code>, <code>
 <li>Always test your RNG and seed it for reproducibility.</li>
 </ul>
 <div style="break-before: page; page-break-before: always;"></div>
-<h1 id="chapter-2-sampling-methods"><a class="header" href="#chapter-2-sampling-methods">Chapter 2: Sampling Methods</a></h1>
-<p><em>Classes 3–4</em></p>
-<hr>
+<h1 id="sampling-methods"><a class="header" href="#sampling-methods">Sampling Methods</a></h1>
 <h2 id="21-the-sampling-problem"><a class="header" href="#21-the-sampling-problem">2.1 The Sampling Problem</a></h2>
 <p>We want to draw samples \(x_1, \ldots, x_N\) from a target distribution \(p(x)\). If we can do this efficiently, we can estimate any expectation value:</p>
 <p>$$\langle f \rangle = \int f(x), p(x), dx \approx \frac{1}{N} \sum_{i=1}^N f(x_i). \tag{2.1}$$</p>
@@ -498,9 +494,7 @@ Sobol sequences are available in <code>scipy.stats.qmc.Sobol</code>. See Appendi
 </table>
 </div>
 <div style="break-before: page; page-break-before: always;"></div>
-<h1 id="chapter-3-monte-carlo-integration"><a class="header" href="#chapter-3-monte-carlo-integration">Chapter 3: Monte Carlo Integration</a></h1>
-<p><em>Classes 5–6</em></p>
-<hr>
+<h1 id="monte-carlo-integration"><a class="header" href="#monte-carlo-integration">Monte Carlo Integration</a></h1>
 <h2 id="31-the-basic-estimator"><a class="header" href="#31-the-basic-estimator">3.1 The Basic Estimator</a></h2>
 <p>Given an integral \(I = \int_\Omega f(\mathbf{x}), d\mathbf{x}\) over a domain \(\Omega \subset \mathbb{R}^d\) with volume \(|\Omega|\), draw \(\mathbf{x}_i \sim \mathcal{U}(\Omega)\) and estimate:</p>
 <p>$$\hat{I} = \frac{|\Omega|}{N} \sum_{i=1}^N f(\mathbf{x}_i). \tag{3.1}$$</p>
@@ -615,9 +609,7 @@ Publishing MC results without statistical errors is unacceptable. Always report 
 <li>Always quote statistical errors.</li>
 </ul>
 <div style="break-before: page; page-break-before: always;"></div>
-<h1 id="chapter-4-markov-chain-monte-carlo"><a class="header" href="#chapter-4-markov-chain-monte-carlo">Chapter 4: Markov Chain Monte Carlo</a></h1>
-<p><em>Classes 7–8</em></p>
-<hr>
+<h1 id="markov-chain-monte-carlo"><a class="header" href="#markov-chain-monte-carlo">Markov Chain Monte Carlo</a></h1>
 <h2 id="41-the-idea-behind-mcmc"><a class="header" href="#41-the-idea-behind-mcmc">4.1 The Idea Behind MCMC</a></h2>
 <p>In statistical mechanics we want averages of the form:</p>
 <p>$$\langle A \rangle = \frac{\sum_{\mathbf{x}} A(\mathbf{x}), e^{-\beta H(\mathbf{x})}}{\sum_{\mathbf{x}} e^{-\beta H(\mathbf{x})}}. \tag{4.1}$$</p>
@@ -733,9 +725,7 @@ where \(\xi\) is the correlation length and \(z \approx 2\) for local algorithms
 <li>Use Gelman-Rubin \(\hat{R}\) and autocorrelation plots to verify convergence.</li>
 </ul>
 <div style="break-before: page; page-break-before: always;"></div>
-<h1 id="chapter-5-the-ising-model--statistical-mechanics"><a class="header" href="#chapter-5-the-ising-model--statistical-mechanics">Chapter 5: The Ising Model &amp; Statistical Mechanics</a></h1>
-<p><em>Classes 9–10</em></p>
-<hr>
+<h1 id="the-ising-model--statistical-mechanics"><a class="header" href="#the-ising-model--statistical-mechanics">The Ising Model &amp; Statistical Mechanics</a></h1>
 <h2 id="51-the-ising-model"><a class="header" href="#51-the-ising-model">5.1 The Ising Model</a></h2>
 <p>The Ising model is the workhorse of computational statistical mechanics. Despite its simplicity, it captures the physics of ferromagnetic phase transitions, liquid-gas criticality, binary alloys, and lattice gases.</p>
 <h3 id="hamiltonian"><a class="header" href="#hamiltonian">Hamiltonian</a></h3>
@@ -872,9 +862,7 @@ A minimal Ising Metropolis implementation in NumPy runs \(\sim 10^7\) steps/seco
 <li>The same MC framework applies to Potts models, lattice gases, and adsorption problems.</li>
 </ul>
 <div style="break-before: page; page-break-before: always;"></div>
-<h1 id="chapter-6-the-heisenberg-model--classical-spin-systems"><a class="header" href="#chapter-6-the-heisenberg-model--classical-spin-systems">Chapter 6: The Heisenberg Model &amp; Classical Spin Systems</a></h1>
-<p><em>Class 11</em></p>
-<hr>
+<h1 id="the-heisenberg-model--classical-spin-systems"><a class="header" href="#the-heisenberg-model--classical-spin-systems">The Heisenberg Model &amp; Classical Spin Systems</a></h1>
 <h2 id="61-classical-spin-models"><a class="header" href="#61-classical-spin-models">6.1 Classical Spin Models</a></h2>
 <p>The Ising model restricts spins to two states. Real magnetic materials often have <strong>continuous</strong> spin degrees of freedom. Classical spin models capture this:</p>
 <div class="table-wrapper">
@@ -988,9 +976,7 @@ In Dy₂Ti₂O₇, the “2-in, 2-out” ice rule is violated at finite \(T\) by
 <li>Spin-spin correlation functions and helicity modulus are key MC observables.</li>
 </ul>
 <div style="break-before: page; page-break-before: always;"></div>
-<h1 id="chapter-7-advanced-mcmc--free-energy-methods"><a class="header" href="#chapter-7-advanced-mcmc--free-energy-methods">Chapter 7: Advanced MCMC &amp; Free Energy Methods</a></h1>
-<p><em>Class 12</em></p>
-<hr>
+<h1 id="advanced-mcmc--free-energy-methods"><a class="header" href="#advanced-mcmc--free-energy-methods">Advanced MCMC &amp; Free Energy Methods</a></h1>
 <h2 id="71-the-free-energy-problem"><a class="header" href="#71-the-free-energy-problem">7.1 The Free Energy Problem</a></h2>
 <p>Most MC methods sample the canonical distribution and give direct access to \(\langle A \rangle\) but <strong>not</strong> to the free energy \(F = -k_B T \ln Z\). The free energy requires the partition function \(Z\), which is not a thermal average. Yet \(F\) is central to:</p>
 <ul>
@@ -1110,9 +1096,7 @@ is computed via a thermodynamic cycle using FEP or TI. This is standard practice
 <li>All methods obey detailed balance; errors can be estimated by standard MC techniques.</li>
 </ul>
 <div style="break-before: page; page-break-before: always;"></div>
-<h1 id="chapter-8-kinetic-monte-carlo"><a class="header" href="#chapter-8-kinetic-monte-carlo">Chapter 8: Kinetic Monte Carlo</a></h1>
-<p><em>Classes 13–14</em></p>
-<hr>
+<h1 id="kinetic-monte-carlo"><a class="header" href="#kinetic-monte-carlo">Kinetic Monte Carlo</a></h1>
 <h2 id="81-from-equilibrium-to-dynamics"><a class="header" href="#81-from-equilibrium-to-dynamics">8.1 From Equilibrium to Dynamics</a></h2>
 <p>Standard MCMC samples the <strong>equilibrium</strong> distribution. It does not provide physical time: the MC “time” (number of sweeps) is not proportional to real time, and the sequence of configurations is not a physical trajectory.</p>
 <p><strong>Kinetic Monte Carlo (KMC)</strong> is different: it is a stochastic simulation of the <strong>master equation</strong>, giving a physically correct time evolution of a system between rare events (hops, reactions, emissions). KMC is the method of choice when:</p>
@@ -1279,9 +1263,7 @@ Use a sorted list or a Fenwick tree for efficient event selection in the BKL alg
 <li>Off-lattice / adaptive KMC extends the method to systems with unknown transition states.</li>
 </ul>
 <div style="break-before: page; page-break-before: always;"></div>
-<h1 id="chapter-9-applications-error-analysis--special-topics"><a class="header" href="#chapter-9-applications-error-analysis--special-topics">Chapter 9: Applications, Error Analysis &amp; Special Topics</a></h1>
-<p><em>Class 15</em></p>
-<hr>
+<h1 id="applications-error-analysis--special-topics"><a class="header" href="#applications-error-analysis--special-topics">Applications, Error Analysis &amp; Special Topics</a></h1>
 <h2 id="91-statistical-error-analysis-in-mc"><a class="header" href="#91-statistical-error-analysis-in-mc">9.1 Statistical Error Analysis in MC</a></h2>
 <p>Reliable error quantification is as important as the simulation itself. This section collects the essential tools.</p>
 <h3 id="911-blocking-analysis"><a class="header" href="#911-blocking-analysis">9.1.1 Blocking Analysis</a></h3>
@@ -1983,7 +1965,7 @@ True error ← plateau value of SE(b) for large b
 <li><strong>Gelman, A. et al.</strong> — <em>Bayesian Data Analysis</em> (CRC Press, 3rd ed. 2013). Standard reference for Bayesian inference and MCMC.</li>
 <li><strong>Robert, C. P. &amp; Casella, G.</strong> — <em>Monte Carlo Statistical Methods</em> (Springer, 2nd ed. 2004). Mathematically rigorous treatment of MCMC convergence.</li>
 </ul>
-<h3 id="kinetic-monte-carlo"><a class="header" href="#kinetic-monte-carlo">Kinetic Monte Carlo</a></h3>
+<h3 id="kinetic-monte-carlo-1"><a class="header" href="#kinetic-monte-carlo-1">Kinetic Monte Carlo</a></h3>
 <ul>
 <li><strong>Voter, A. F.</strong> — “Introduction to the Kinetic Monte Carlo Method”, in <em>Radiation Effects in Solids</em> (Springer, 2007). The clearest introductory review.</li>
 <li><strong>Reuter, K.</strong> — “First-Principles Kinetic Monte Carlo Simulations for Heterogeneous Catalysis”, in <em>Modelling and Simulation of Heterogeneous Catalytic Reactions</em> (Wiley-VCH, 2011).</li>
