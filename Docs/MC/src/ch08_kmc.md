@@ -1,8 +1,4 @@
-# Chapter 8: Kinetic Monte Carlo
-
-*Classes 13–14*
-
----
+# Kinetic Monte Carlo
 
 ## 8.1 From Equilibrium to Dynamics
 

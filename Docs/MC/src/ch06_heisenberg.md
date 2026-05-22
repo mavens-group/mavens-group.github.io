@@ -1,8 +1,4 @@
-# Chapter 6: The Heisenberg Model & Classical Spin Systems
-
-*Class 11*
-
----
+# The Heisenberg Model & Classical Spin Systems
 
 ## 6.1 Classical Spin Models
 

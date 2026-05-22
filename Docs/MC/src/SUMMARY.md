@@ -6,15 +6,15 @@
 
 # Course Chapters
 
-- [Chapter 1: Foundations of Probability & Randomness](./ch01_foundations.md)
-- [Chapter 2: Sampling Methods](./ch02_sampling.md)
-- [Chapter 3: Monte Carlo Integration](./ch03_integration.md)
-- [Chapter 4: Markov Chain Monte Carlo](./ch04_mcmc.md)
-- [Chapter 5: The Ising Model & Statistical Mechanics](./ch05_ising.md)
-- [Chapter 6: The Heisenberg Model & Classical Spin Systems](./ch06_heisenberg.md)
-- [Chapter 7: Advanced MCMC & Free Energy Methods](./ch07_free_energy.md)
-- [Chapter 8: Kinetic Monte Carlo](./ch08_kmc.md)
-- [Chapter 9: Applications, Error Analysis & Special Topics](./ch09_applications.md)
+- [Foundations of Probability & Randomness](./ch01_foundations.md)
+- [Sampling Methods](./ch02_sampling.md)
+- [ Monte Carlo Integration](./ch03_integration.md)
+- [Markov Chain Monte Carlo](./ch04_mcmc.md)
+- [The Ising Model & Statistical Mechanics](./ch05_ising.md)
+- [The Heisenberg Model & Classical Spin Systems](./ch06_heisenberg.md)
+- [Advanced MCMC & Free Energy Methods](./ch07_free_energy.md)
+- [Kinetic Monte Carlo](./ch08_kmc.md)
+- [Applications, Error Analysis & Special Topics](./ch09_applications.md)
 
 ---
 

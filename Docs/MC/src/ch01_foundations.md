@@ -1,8 +1,4 @@
-# Chapter 1: Foundations of Probability & Randomness
-
-*Classes 1–2*
-
----
+# Foundations of Probability & Randomness
 
 ## 1.1 Probability Spaces and Random Variables
 

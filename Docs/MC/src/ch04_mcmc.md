@@ -1,8 +1,4 @@
-# Chapter 4: Markov Chain Monte Carlo
-
-*Classes 7–8*
-
----
+# Markov Chain Monte Carlo
 
 ## 4.1 The Idea Behind MCMC
 
@@ -10,7 +6,7 @@ In statistical mechanics we want averages of the form:
 
 $$\langle A \rangle = \frac{\sum_{\mathbf{x}} A(\mathbf{x})\, e^{-\beta H(\mathbf{x})}}{\sum_{\mathbf{x}} e^{-\beta H(\mathbf{x})}}. \tag{4.1}$$
 
-We cannot enumerate all microstates \\(\mathbf{x}\\) (there are \\(\sim 2^N\\) for a spin system). We cannot directly draw from \\(p(\mathbf{x}) \propto e^{-\beta H(\mathbf{x})}\\) because \\(Z\\) is unknown. 
+We cannot enumerate all microstates \\(\mathbf{x}\\) (there are \\(\sim 2^N\\) for a spin system). We cannot directly draw from \\(p(\mathbf{x}) \propto e^{-\beta H(\mathbf{x})}\\) because \\(Z\\) is unknown.
 
 The solution: construct a **Markov chain** with stationary distribution \\(p(\mathbf{x})\\). After an initial burn-in, the chain samples from \\(p(\mathbf{x})\\) and we can average along its trajectory.
 

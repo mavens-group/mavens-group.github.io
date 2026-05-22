@@ -1,101 +1,47 @@
 ---
-title: MAVENs Research Group — Guide for New Members
+title: Guide for New Members
 show_date: false
 profile: true
 summary: Beginner's guide for students who are interested in project (BSc/MSc) or PhD
  with [me](https://mavens-group.github.io/author/rudra-banerjee/).
 ---
-Welcome to the MAVENs group. This guide introduces our research philosophy, methodology, essential tools, and expectations. Each project presents unique challenges, but this foundation will support your research journey. We encourage you to explore the referenced materials and discuss any questions with the research team.
+Welcome to MAVENs. This page covers what you need to know before your first week and what we expect through your time here.
 
-## Research Focus
+## What We Do
 
-### Mission
+We use computational methods — density functional theory, Monte Carlo simulations, and machine learning — to understand and design materials. Our problems span energy materials, quantum and spintronic materials, and ML-driven discovery. If you are joining, you have already discussed your specific project; the methods and mindset below apply across all of them.
 
-The MAVENs group addresses critical challenges in sustainable energy through computational materials science. Our research targets material-based solutions to pressing environmental concerns, including resource depletion and pollution from traditional energy systems.
+## How Research Works Here
 
-Our work bridges fundamental materials science with practical applications for environmental sustainability.
+There are no predetermined answers. You will spend significant time not knowing what to do next — that is normal and expected. The skill we want you to develop is reformulating questions when you are stuck, not looking for someone to hand you the answer.
 
-## Research Methodology
+Richard Hamming's lecture [*You and Your Research*](http://www.youtube.com/watch?v=a1zDuOPkMSw) is worth your time early on.
 
-### Approach
+## Tools
 
-Research in computational materials science involves addressing open-ended challenges without predetermined solutions. Success requires systematic inquiry, creative problem-solving, and iterative refinement of approaches.
+**Operating system:** Linux. Fedora is what we use, but any Unix-based system is fine. You need to be comfortable at the command line.
 
-When encountering obstacles, focus on reformulating questions rather than seeking immediate answers. Research progress emerges through careful observation, hypothesis testing, and methodical exploration of possibilities.
+**Version control:** Git, with repositories hosted on [GitHub](https://github.com/). All code and analysis scripts go here from day one — not after things are cleaned up.
 
-**Recommended Resource:** Richard Hamming's lecture [*You and Your Research*](http://www.youtube.com/watch?v=a1zDuOPkMSw) provides valuable insights into effective research practices.
+**Communication:** Google Chat Spaces for group discussions. Conversations are archived and searchable, so use them in preference to email for technical matters.
 
-## Expectations and Standards
+**Writing:** LaTeX for all reports and manuscripts. Start early; do not wait until you have results.
 
-### Research Excellence
+<!-- **Literature:** Access to our shared Zotero library will be set up for you. -->
 
-Your contribution supports the group's broader research objectives. We expect:
+## Expectations
 
-**Technical Competency**
-- Develop comprehensive understanding of your research area sufficient to explain concepts clearly to colleagues
-- Apply critical thinking to analyze problems and propose solutions
-- Demonstrate proficiency with computational tools and methodologies
+**For project students (BSc/MSc):** Minimum 10 hours per week during coursework, full-time during your thesis semester. Your final report should be drafted from the first month — begin with the expected conclusions and work backward. This forces clarity on what you are actually trying to show.
 
-**Professional Conduct**
-- Maintain integrity in all research activities
-- Collaborate effectively with team members
-- Participate constructively in technical discussions and group meetings
+**For PhD students:** Full-time (40+ hours per week). Monthly progress updates as LaTeX reports, written toward eventual publication quality from the start.
 
-**Communication Skills**
-- Document research progress clearly and systematically
-- Present findings to both technical and general audiences
-- Prepare reports and presentations meeting professional standards
+Across both: document as you go, not at the end. Code that is not version-controlled does not exist as far as the group is concerned.
 
-Students from other departments should coordinate with their home department requirements.
+## Before You Arrive
 
-## Technical Tools and Infrastructure
+Bring or send:
+- Your CV and academic transcript
+- A photograph for the group website
+- Your email and phone number
 
-### Operating System
-We use Linux (primarily [Fedora](https://fedoraproject.org/) distribution, but you can use any unix OS) for computational work. Familiarity with command-line interfaces and text editors is essential for efficient workflow.
-
-### Communication
-Group communications occur through Google Chat [Spaces](https://mail.google.com/chat/u/1/#chat/home), which maintain searchable archives of discussions and facilitate knowledge transfer between team members.
-
-### Version Control
-All code and documentation are managed using `Git` with repositories hosted on [GitLab](https://about.gitlab.com/). Version control ensures reproducibility and enables collaborative development.
-
-### Documentation
-Reports and presentations are prepared using `LaTeX`, the standard for scientific writing. Early familiarity with LaTeX is recommended as documentation begins early in each project.
-
-### Literature Management
-Access to our shared `Zotero` library provides curated collections of relevant research papers and references.
-
-## Project Timeline and Reporting
-
-### Documentation
-Begin preparing your final report in the first month, starting with conclusions and working backward—this approach often clarifies research direction and objectives.
-
-**Recommended Resources:**
-- Magnusson's essay on ["Writing Backwards"](https://dl.dropboxusercontent.com/u/4512522/Magnusson_1996-How_to_write_backwards.pdf)
-- Simon Peyton Jones's lectures on [writing](http://sms.cam.ac.uk/media/1464870) and [presentations](http://research.microsoft.com/apps/video/default.aspx?id=168648)
-
-### Progress Monitoring
-Master's and PhD students provide monthly LaTeX report updates, developing toward publication-quality manuscripts.
-
-## Getting Started
-
-### Initial Requirements
-New members should provide:
-- Current CV and academic transcript
-- Professional photograph for group website
-- Contact information (email and phone)
-
-### First Month Objectives
-- Draft initial project report focusing on expected outcomes and methodology
-- Review existing group code repositories on GitLab
-- Develop proficiency with essential tools: Fortran/Python, Git, and GitHub
-- Study provided literature covering relevant computational methods (AIMD, DFT, Monte Carlo simulations)
-
-### Time Commitment
-Research projects require substantial time investment:
-- **Project students:** Minimum 10 hours/week during coursework period, full-time during thesis semester
-- **PhD students:** Full-time research commitment (40+ hours/week)
-
-Time allocations should align with university policies and departmental requirements.
-
-This guide serves as an introduction to MAVENs group practices. We welcome feedback and questions as you begin your research journey with our team.
+In your first month, review the group's GitHub repositories, get the tools above installed and working, and read the literature your supervisor assigns. Ask questions in Chat, not in private messages — others benefit from the answers.

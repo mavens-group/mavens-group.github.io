@@ -1,8 +1,4 @@
-# Chapter 7: Advanced MCMC & Free Energy Methods
-
-*Class 12*
-
----
+# Advanced MCMC & Free Energy Methods
 
 ## 7.1 The Free Energy Problem
 

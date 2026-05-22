@@ -1,8 +1,4 @@
-# Chapter 2: Sampling Methods
-
-*Classes 3–4*
-
----
+# Sampling Methods
 
 ## 2.1 The Sampling Problem
 

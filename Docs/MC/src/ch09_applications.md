@@ -1,8 +1,4 @@
-# Chapter 9: Applications, Error Analysis & Special Topics
-
-*Class 15*
-
----
+# Applications, Error Analysis & Special Topics
 
 ## 9.1 Statistical Error Analysis in MC
 

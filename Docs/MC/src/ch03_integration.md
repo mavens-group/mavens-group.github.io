@@ -1,8 +1,4 @@
-# Chapter 3: Monte Carlo Integration
-
-*Classes 5–6*
-
----
+# Monte Carlo Integration
 
 ## 3.1 The Basic Estimator
 

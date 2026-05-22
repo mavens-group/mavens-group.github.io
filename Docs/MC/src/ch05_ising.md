@@ -1,8 +1,4 @@
-# Chapter 5: The Ising Model & Statistical Mechanics
-
-*Classes 9–10*
-
----
+# The Ising Model & Statistical Mechanics
 
 ## 5.1 The Ising Model
 
