@@ -2,8 +2,8 @@
 title: Guide for New Members
 show_date: false
 profile: true
-summary: Beginner's guide for students who are interested in project (BSc/MSc) or PhD
- with [me](https://mavens-group.github.io/author/rudra-banerjee/).
+weight: 2
+summary: For students joining MAVENs — how things work, the tools we use, and what the first few months look like.
 ---
 Welcome to MAVENs. This page covers what you need to know before your first week and what we expect through your time here.
 
