@@ -15,6 +15,32 @@
         <meta charset="UTF-8">
         <meta name="robots" content="noindex">
         <!-- Custom HTML head -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+        
+        <script>
+        window.MathJax = {
+          tex: {
+            inlineMath:  [['\\(', '\\)']],
+            displayMath: [['\\[', '\\]'], ['$$', '$$']],
+            tags: 'ams',
+            processEscapes:      true,
+            processEnvironments: true,
+          },
+          options: {
+            skipHtmlTags: ['script','noscript','style','textarea','pre','code'],
+          },
+          startup: {
+            ready() {
+              MathJax.startup.defaultReady();
+              MathJax.startup.promise.then(() => MathJax.typesetPromise());
+            }
+          }
+        };
+        </script>
+        
+        <script id="MathJax-script" async
+          src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+        </script>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff">
         <link rel="stylesheet" href="css/variables-8adf115d.css">
@@ -24,8 +50,9 @@
         <!-- Fonts -->
         <link rel="stylesheet" href="fonts/fonts-9644e21d.css">
         <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="src/custom-5f363160.css">
     </head>
     <body class="sidebar-iframe-inner">
-        <ol class="chapter"><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="intro.html" target="_parent">Introduction</a></span></li><li class="chapter-item expanded "><li class="spacer"></li></li><li class="chapter-item expanded "><li class="part-title">Course Chapters</li></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="ch01_foundations.html" target="_parent"><strong aria-hidden="true">1.</strong> Foundations of Probability &amp; Randomness</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="ch02_sampling.html" target="_parent"><strong aria-hidden="true">2.</strong> Sampling Methods</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="ch03_integration.html" target="_parent"><strong aria-hidden="true">3.</strong>  Monte Carlo Integration</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="ch04_mcmc.html" target="_parent"><strong aria-hidden="true">4.</strong> Markov Chain Monte Carlo</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="ch05_ising.html" target="_parent"><strong aria-hidden="true">5.</strong> The Ising Model &amp; Statistical Mechanics</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="ch06_heisenberg.html" target="_parent"><strong aria-hidden="true">6.</strong> The Heisenberg Model &amp; Classical Spin Systems</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="ch07_free_energy.html" target="_parent"><strong aria-hidden="true">7.</strong> Advanced MCMC &amp; Free Energy Methods</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="ch08_kmc.html" target="_parent"><strong aria-hidden="true">8.</strong> Kinetic Monte Carlo</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="ch09_applications.html" target="_parent"><strong aria-hidden="true">9.</strong> Applications, Error Analysis &amp; Special Topics</a></span></li><li class="chapter-item expanded "><li class="spacer"></li></li><li class="chapter-item expanded "><li class="part-title">Appendices</li></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="appendix_a_python.html" target="_parent"><strong aria-hidden="true">10.</strong> Appendix A: Python Reference for Monte Carlo</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="appendix_b_formulas.html" target="_parent"><strong aria-hidden="true">11.</strong> Appendix B: Key Statistical Mechanics Formulas</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="appendix_c_pseudocode.html" target="_parent"><strong aria-hidden="true">12.</strong> Appendix C: Algorithm Pseudocode</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="appendix_d_references.html" target="_parent"><strong aria-hidden="true">13.</strong> Appendix D: Further Reading &amp; References</a></span></li></ol>
+        <ol class="chapter"><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="index.html" target="_parent">Cover</a></span></li><li class="chapter-item expanded "><li class="part-title">Course Chapters</li></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="ch01_foundations.html" target="_parent"><strong aria-hidden="true">1.</strong> Foundations of Probability &amp; Randomness</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="ch02_sampling.html" target="_parent"><strong aria-hidden="true">2.</strong> Sampling Methods</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="ch03_integration.html" target="_parent"><strong aria-hidden="true">3.</strong>  Monte Carlo Integration</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="ch04_mcmc.html" target="_parent"><strong aria-hidden="true">4.</strong> Markov Chain Monte Carlo</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="ch05_ising.html" target="_parent"><strong aria-hidden="true">5.</strong> The Ising Model &amp; Statistical Mechanics</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="ch06_heisenberg.html" target="_parent"><strong aria-hidden="true">6.</strong> The Heisenberg Model &amp; Classical Spin Systems</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="ch07_free_energy.html" target="_parent"><strong aria-hidden="true">7.</strong> Advanced MCMC &amp; Free Energy Methods</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="ch08_kmc.html" target="_parent"><strong aria-hidden="true">8.</strong> Kinetic Monte Carlo</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="ch09_applications.html" target="_parent"><strong aria-hidden="true">9.</strong> Applications, Error Analysis &amp; Special Topics</a></span></li><li class="chapter-item expanded "><li class="spacer"></li></li><li class="chapter-item expanded "><li class="part-title">Appendices</li></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="appendix_a_python.html" target="_parent"><strong aria-hidden="true">10.</strong> Appendix A: Python Reference for Monte Carlo</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="appendix_b_formulas.html" target="_parent"><strong aria-hidden="true">11.</strong> Appendix B: Key Statistical Mechanics Formulas</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="appendix_c_pseudocode.html" target="_parent"><strong aria-hidden="true">12.</strong> Appendix C: Algorithm Pseudocode</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="appendix_d_references.html" target="_parent"><strong aria-hidden="true">13.</strong> Appendix D: Further Reading &amp; References</a></span></li></ol>
     </body>
 </html>

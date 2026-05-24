@@ -7,6 +7,32 @@
 
 
         <!-- Custom HTML head -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+        
+        <script>
+        window.MathJax = {
+          tex: {
+            inlineMath:  [['\\(', '\\)']],
+            displayMath: [['\\[', '\\]'], ['$$', '$$']],
+            tags: 'ams',
+            processEscapes:      true,
+            processEnvironments: true,
+          },
+          options: {
+            skipHtmlTags: ['script','noscript','style','textarea','pre','code'],
+          },
+          startup: {
+            ready() {
+              MathJax.startup.defaultReady();
+              MathJax.startup.promise.then(() => MathJax.typesetPromise());
+            }
+          }
+        };
+        </script>
+        
+        <script id="MathJax-script" async
+          src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+        </script>
 
         <meta name="description" content="A graduate-level course on Monte Carlo methods with applications in physics and chemistry">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -28,6 +54,7 @@
         <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="ayu-highlight-3fdfc3ac.css">
 
         <!-- Custom theme stylesheets -->
+        <link rel="stylesheet" href="src/custom-5f363160.css">
 
         <!-- MathJax -->
         <script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
@@ -37,10 +64,10 @@
             const path_to_root = "";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "searchindex-b4449181.js";
+            window.path_to_searchindex_js = "searchindex-376f4310.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="toc-675388d6.js"></script>
+        <script src="toc-ae1aa5cc.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -336,6 +363,7 @@ $$A = \min!\left(1, e^{(\beta_k - \beta_{k+1})(E_k - E_{k+1})}\right)$$</p>
         <script src="book-c22b7243.js"></script>
 
         <!-- Custom JS scripts -->
+        <script src="src/custom-cd58eebe.js"></script>
 
 
 
