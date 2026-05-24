@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="92.180832mm"
+   height="106.46831mm"
+   viewBox="0 0 92.180832 106.46831"
+   version="1.1"
+   id="svg1"
+   inkscape:version="1.4.4 (dcaf3e7d9e, 2026-05-05)"
+   sodipodi:docname="dz2.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm"
+     inkscape:zoom="0.84007435"
+     inkscape:cx="173.79414"
+     inkscape:cy="198.19674"
+     inkscape:window-width="1920"
+     inkscape:window-height="1168"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs1" />
+  <style
+     id="style1">
+      :root {
+        color: #000000; /* Default color for light mode */
+      }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          color: #ffffff; /* Color for system dark mode */
+        }
+      }
+    </style>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-58.909584,-96.008459)">
+    <line
+       class="lpd"
+       x1="59.227085"
+       y1="122.78429"
+       x2="105"
+       y2="96.325958"
+       id="line56"
+       style="opacity:0.7;fill:none;stroke:currentColor;stroke-width:0.423333;stroke-dasharray:1.32292, 1.05833" />
+    <line
+       class="lpd"
+       x1="105"
+       y1="96.325958"
+       x2="150.77292"
+       y2="122.78429"
+       id="line57"
+       style="opacity:0.7;fill:none;stroke:currentColor;stroke-width:0.423333;stroke-dasharray:1.32292, 1.05833" />
+    <line
+       class="lpd"
+       x1="59.227085"
+       y1="122.78429"
+       x2="59.227085"
+       y2="175.70096"
+       id="line58"
+       style="opacity:0.7;fill:none;stroke:currentColor;stroke-width:0.423333;stroke-dasharray:1.32292, 1.05833" />
+    <g
+       id="die_edges"
+       fill="none"
+       stroke="currentColor"
+       stroke-width="2.4"
+       stroke-linecap="round"
+       stroke-linejoin="round"
+       transform="matrix(0.26458333,0,0,0.26458333,105,149.24262)">
+      <!-- top rhombus outline -->
+      <polygon
+         points="0,0 -173,-100 0,-200 173,-100 "
+         id="polygon58" />
+      <!-- left face outline -->
+      <polygon
+         points="0,200 -173,100 -173,-100 0,0 "
+         id="polygon59" />
+      <!-- right face outline -->
+      <polygon
+         points="173,100 0,200 0,0 173,-100 "
+         id="polygon60" />
+    </g>
+    <circle
+       class="pip"
+       cx="105"
+       cy="122.78429"
+       r="3.7041667"
+       id="circle60"
+       style="fill:currentColor;stroke:currentColor;stroke-width:0.370417" />
+    <g
+       id="left_pips"
+       transform="matrix(0.26458333,0,0,0.26458333,105,149.24262)">
+      <circle
+         class="pip"
+         cx="-130"
+         cy="22"
+         r="12"
+         id="circle61"
+         style="fill:currentColor;stroke:currentColor;stroke-width:1.4" />
+      <circle
+         class="pip"
+         cx="-43"
+         cy="78"
+         r="12"
+         id="circle62"
+         style="fill:currentColor;stroke:currentColor;stroke-width:1.4" />
+    </g>
+    <g
+       id="right_pips"
+       transform="matrix(0.26458333,0,0,0.26458333,105,149.24262)">
+      <circle
+         class="pip"
+         cx="43"
+         cy="22"
+         r="11"
+         id="circle63"
+         style="fill:currentColor;stroke:currentColor;stroke-width:1.4" />
+      <circle
+         class="pip"
+         cx="86"
+         cy="50"
+         r="11"
+         id="circle64"
+         style="fill:currentColor;stroke:currentColor;stroke-width:1.4" />
+      <circle
+         class="pip"
+         cx="130"
+         cy="78"
+         r="11"
+         id="circle65"
+         style="fill:currentColor;stroke:currentColor;stroke-width:1.4" />
+    </g>
+  </g>
+</svg>

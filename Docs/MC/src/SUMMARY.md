@@ -1,7 +1,7 @@
 # Summary
 
-[Introduction](./intro.md)
-
+<!-- [Introduction](./intro.md) -->
+[Cover](README.md)
 ---
 
 # Course Chapters

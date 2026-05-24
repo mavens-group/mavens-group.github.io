@@ -1,7 +1,7 @@
 ---
 _build:
-  render: never
-  list: never
+  render: always
+  list: always
 
 title: Project Position
 summary: Multiple project positions available in the group.
