@@ -1,190 +1,654 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" width="680" height="780" viewBox="0 0 680 780" font-family="Georgia, 'Times New Roman', serif">
-
-  <rect width="680" height="780" fill="#fafaf8"/>
-
-  <!-- Title -->
-  <text x="340" y="32" text-anchor="middle" font-size="17" font-weight="bold" fill="#2c2c2c">DFT Self-Consistent Field (SCF) Cycle</text>
-  <text x="340" y="52" text-anchor="middle" font-size="12" fill="#666" font-style="italic">Outer loop: density self-consistency. Inner loop: eigenvalue solver.</text>
-
-  <!-- Arrow marker definitions -->
-  <defs>
-    <marker id="arr" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
-      <polygon points="0 0, 10 4, 0 8" fill="#444"/>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   width="501.87"
+   height="750"
+   viewBox="0 0 501.87 750"
+   font-family="Georgia, 'Times New Roman', serif"
+   version="1.1"
+   id="svg31"
+   sodipodi:docname="scf_flowchart.svg"
+   inkscape:version="1.4.4 (dcaf3e7d9e, 2026-05-05)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview31"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     showgrid="true"
+     inkscape:zoom="1.2573333"
+     inkscape:cx="251.32556"
+     inkscape:cy="375"
+     inkscape:window-width="1920"
+     inkscape:window-height="1168"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg31">
+    <inkscape:grid
+       id="grid46"
+       units="px"
+       originx="0"
+       originy="0"
+       spacingx="1"
+       spacingy="1"
+       empcolor="#0099e5"
+       empopacity="0.30196078"
+       color="#0099e5"
+       opacity="0.14901961"
+       empspacing="5"
+       enabled="true"
+       visible="true" />
+  </sodipodi:namedview>
+  <rect
+     width="501.87"
+     height="750"
+     fill="#fafaf8"
+     id="rect1" />
+  <!-- Arrow markers -->
+  <defs
+     id="defs4">
+    <marker
+       style="overflow:visible"
+       id="marker51"
+       refX="0"
+       refY="0"
+       orient="auto-start-reverse"
+       inkscape:stockid="Triangle arrow"
+       markerWidth="1"
+       markerHeight="1"
+       viewBox="0 0 1 1"
+       inkscape:isstock="true"
+       inkscape:collect="always"
+       preserveAspectRatio="xMidYMid">
+      <path
+         transform="scale(0.5)"
+         style="fill:context-stroke;fill-rule:evenodd;stroke:context-stroke;stroke-width:1pt"
+         d="M 5.77,0 -2.88,5 V -5 Z"
+         id="path51" />
     </marker>
-    <marker id="arrLoop" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
-      <polygon points="0 0, 10 4, 0 8" fill="#7a5c8a"/>
+    <marker
+       style="overflow:visible"
+       id="Triangle"
+       refX="0"
+       refY="0"
+       orient="auto-start-reverse"
+       inkscape:stockid="Triangle arrow"
+       markerWidth="1"
+       markerHeight="1"
+       viewBox="0 0 1 1"
+       inkscape:isstock="true"
+       inkscape:collect="always"
+       preserveAspectRatio="xMidYMid">
+      <path
+         transform="scale(0.5)"
+         style="fill:context-stroke;fill-rule:evenodd;stroke:context-stroke;stroke-width:1pt"
+         d="M 5.77,0 -2.88,5 V -5 Z"
+         id="path135" />
     </marker>
-    <marker id="arrInner" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
-      <polygon points="0 0, 10 4, 0 8" fill="#4a7fa5"/>
+    <marker
+       id="arr"
+       markerWidth="10"
+       markerHeight="8"
+       refX="9"
+       refY="4"
+       orient="auto">
+      <polygon
+         points="0,8 0,0 10,4"
+         fill="#444444"
+         id="polygon1" />
     </marker>
-    <marker id="arrConv" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
-      <polygon points="0 0, 10 4, 0 8" fill="#6a9e7a"/>
+    <marker
+       id="arrLoop"
+       markerWidth="10"
+       markerHeight="8"
+       refX="9"
+       refY="4"
+       orient="auto">
+      <polygon
+         points="0,8 0,0 10,4"
+         fill="#7a5c8a"
+         id="polygon2" />
+    </marker>
+    <marker
+       id="arrInner"
+       markerWidth="10"
+       markerHeight="8"
+       refX="9"
+       refY="4"
+       orient="auto">
+      <polygon
+         points="0,8 0,0 10,4"
+         fill="#4a7fa5"
+         id="polygon3" />
+    </marker>
+    <marker
+       id="arrConv"
+       markerWidth="10"
+       markerHeight="8"
+       refX="9"
+       refY="4"
+       orient="auto">
+      <polygon
+         points="0,8 0,0 10,4"
+         fill="#6a9e7a"
+         id="polygon4" />
     </marker>
   </defs>
-
-  <!-- ===========================================================
-       OUTER LOOP DASHED BORDER (the SCF cycle box)
-  =========================================================== -->
-  <rect x="30" y="90" width="500" height="600" rx="10" fill="none" stroke="#7a5c8a" stroke-width="1.8" stroke-dasharray="8,4"/>
-  <text x="40" y="108" font-size="11.5" fill="#7a5c8a" font-weight="bold">OUTER LOOP — SCF (density self-consistency)</text>
-  <text x="40" y="124" font-size="10.5" fill="#7a5c8a" font-style="italic">Fixed-point iteration: ρ → V[ρ] → solve → new ρ</text>
-
-  <!-- ===========================================================
-       NODES (top to bottom)
-  =========================================================== -->
-
-  <!-- Start: Initial density -->
-  <rect x="160" y="140" width="240" height="56" rx="8" fill="#6a9e7a" fill-opacity="0.22" stroke="#3a6a4a" stroke-width="2"/>
-  <text x="280" y="162" text-anchor="middle" font-size="13" font-weight="bold" fill="#2c4030">START</text>
-  <text x="280" y="180" text-anchor="middle" font-size="12" fill="#3a6a4a">Initial guess: ρ⁽⁰⁾(r)</text>
-  <text x="280" y="192" text-anchor="middle" font-size="10" fill="#666" font-style="italic">(superposition of atomic densities)</text>
-
-  <!-- Arrow down -->
-  <line x1="280" y1="200" x2="280" y2="222" stroke="#444" stroke-width="2" marker-end="url(#arr)"/>
-
-  <!-- Node 1: Build effective potential -->
-  <rect x="125" y="226" width="310" height="60" rx="6" fill="#b8963e" fill-opacity="0.18" stroke="#b8963e" stroke-width="2"/>
-  <text x="280" y="248" text-anchor="middle" font-size="12.5" font-weight="bold" fill="#6a4a10">1. Build effective potential</text>
-  <text x="280" y="266" text-anchor="middle" font-size="12" fill="#444">V_eff(r) = V_ext + V_H[ρ] + V_xc[ρ]</text>
-  <text x="280" y="280" text-anchor="middle" font-size="10" fill="#666" font-style="italic">Hartree + XC depend on current ρ</text>
-
-  <!-- Arrow down -->
-  <line x1="280" y1="290" x2="280" y2="318" stroke="#444" stroke-width="2" marker-end="url(#arr)"/>
-
-  <!-- ===========================================================
-       INNER LOOP BOX (eigenvalue solver)
-  =========================================================== -->
-  <rect x="95" y="322" width="370" height="148" rx="8" fill="#4a7fa5" fill-opacity="0.08" stroke="#4a7fa5" stroke-width="1.5" stroke-dasharray="6,3"/>
-  <text x="106" y="340" font-size="11" fill="#2a5f85" font-weight="bold">INNER LOOP — Eigenvalue solver (linear)</text>
-  <text x="106" y="354" font-size="10" fill="#2a5f85" font-style="italic">Davidson / RMM-DIIS / CG: Aψ = εψ at fixed V_eff</text>
-
-  <!-- Node 2: Diagonalise KS Hamiltonian -->
-  <rect x="125" y="364" width="310" height="56" rx="6" fill="#4a7fa5" fill-opacity="0.20" stroke="#2a5f85" stroke-width="2"/>
-  <text x="280" y="386" text-anchor="middle" font-size="12.5" font-weight="bold" fill="#1a4565">2. Diagonalise KS Hamiltonian</text>
-  <text x="280" y="404" text-anchor="middle" font-size="12" fill="#444">[ −½∇² + V_eff(r) ] φᵢ = εᵢ φᵢ</text>
-
-  <!-- Inner loop self-arrow (iterative solver internal cycle) -->
-  <path d="M 435 392 Q 480 392 480 405 Q 480 420 460 420 L 440 420" fill="none" stroke="#4a7fa5" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#arrInner)"/>
-  <text x="495" y="410" font-size="10" fill="#2a5f85" font-style="italic">iterates internally</text>
-
-  <!-- Arrow down -->
-  <line x1="280" y1="424" x2="280" y2="446" stroke="#444" stroke-width="2" marker-end="url(#arr)"/>
-
-  <!-- Node 3: Compute density (inside inner loop box for clarity) -->
-  <rect x="125" y="446" width="310" height="22" rx="6" fill="#4a7fa5" fill-opacity="0.13" stroke="#2a5f85" stroke-width="1.5"/>
-  <text x="280" y="461" text-anchor="middle" font-size="11.5" fill="#1a4565">→ {φᵢ, εᵢ} at every k-point</text>
-
-  <!-- Arrow exiting inner loop box -->
-  <line x1="280" y1="478" x2="280" y2="500" stroke="#444" stroke-width="2" marker-end="url(#arr)"/>
-
-  <!-- Node 4: Construct new density -->
-  <rect x="125" y="504" width="310" height="50" rx="6" fill="#b8963e" fill-opacity="0.18" stroke="#b8963e" stroke-width="2"/>
-  <text x="280" y="525" text-anchor="middle" font-size="12.5" font-weight="bold" fill="#6a4a10">3. Compute new density</text>
-  <text x="280" y="544" text-anchor="middle" font-size="12" fill="#444">ρ_out(r) = Σᵢ fᵢ |φᵢ(r)|²</text>
-
-  <!-- Arrow down -->
-  <line x1="280" y1="558" x2="280" y2="580" stroke="#444" stroke-width="2" marker-end="url(#arr)"/>
-
-  <!-- Node 5: Convergence check (diamond) -->
-  <polygon points="280,582 408,624 280,666 152,624" fill="#a0522d" fill-opacity="0.16" stroke="#a0522d" stroke-width="2"/>
-  <text x="280" y="617" text-anchor="middle" font-size="12.5" font-weight="bold" fill="#6a3210">4. Converged?</text>
-  <text x="280" y="635" text-anchor="middle" font-size="11" fill="#444">‖ρ_out − ρ_in‖ &lt; ε ?</text>
-
-  <!-- YES arrow: go down to END -->
-  <line x1="280" y1="668" x2="280" y2="700" stroke="#6a9e7a" stroke-width="2.5" marker-end="url(#arrConv)"/>
-  <text x="293" y="687" font-size="12" fill="#3a6a4a" font-weight="bold">YES</text>
-
-  <!-- NO arrow: go left and up (back to mixing) -->
-  <line x1="152" y1="624" x2="68" y2="624" stroke="#7a5c8a" stroke-width="2.5"/>
-  <line x1="68"  y1="624" x2="68" y2="350" stroke="#7a5c8a" stroke-width="2.5"/>
-  <line x1="68"  y1="350" x2="68" y2="256" stroke="#7a5c8a" stroke-width="2.5"/>
-  <text x="115" y="615" font-size="12" fill="#7a5c8a" font-weight="bold">NO</text>
-
-  <!-- Mixing box on the return path -->
-  <rect x="20" y="345" width="96" height="60" rx="6" fill="#7a5c8a" fill-opacity="0.18" stroke="#7a5c8a" stroke-width="2"/>
-  <text x="68" y="365" text-anchor="middle" font-size="11.5" font-weight="bold" fill="#4a2a5a">5. Mix</text>
-  <text x="68" y="381" text-anchor="middle" font-size="10" fill="#444">ρ_in ← α ρ_out</text>
-  <text x="68" y="394" text-anchor="middle" font-size="10" fill="#444">+ (1−α) ρ_in</text>
-
-  <!-- Re-enter the cycle (top of node 1) -->
-  <line x1="68" y1="256" x2="123" y2="256" stroke="#7a5c8a" stroke-width="2.5" marker-end="url(#arrLoop)"/>
-
-  <!-- Loop label -->
-  <text x="70" y="540" font-size="10.5" fill="#7a5c8a" font-style="italic" transform="rotate(-90,70,540)">Pulay / Broyden / Kerker mixing</text>
-
-  <!-- END node -->
-  <rect x="160" y="704" width="240" height="50" rx="8" fill="#6a9e7a" fill-opacity="0.30" stroke="#3a6a4a" stroke-width="2"/>
-  <text x="280" y="725" text-anchor="middle" font-size="13" font-weight="bold" fill="#2c4030">CONVERGED</text>
-  <text x="280" y="744" text-anchor="middle" font-size="11" fill="#3a6a4a">Output: ρ*(r), E_total, {φᵢ, εᵢ}, forces</text>
-
-  <!-- ===========================================================
-       RIGHT-SIDE LEGEND / GLOSSARY
-  =========================================================== -->
-  <rect x="550" y="100" width="115" height="660" rx="6" fill="#f4f4f0" stroke="#ccc" stroke-width="1"/>
-  <text x="607" y="120" text-anchor="middle" font-size="12" font-weight="bold" fill="#444">Block colours</text>
-
-  <!-- Green: start/end -->
-  <rect x="562" y="135" width="20" height="14" fill="#6a9e7a" fill-opacity="0.25" stroke="#3a6a4a"/>
-  <text x="587" y="146" font-size="10.5" fill="#444">Init / output</text>
-
-  <!-- Gold: density/potential -->
-  <rect x="562" y="158" width="20" height="14" fill="#b8963e" fill-opacity="0.25" stroke="#b8963e"/>
-  <text x="587" y="169" font-size="10.5" fill="#444">Density /</text>
-  <text x="587" y="181" font-size="10.5" fill="#444">potential ops</text>
-
-  <!-- Blue: inner loop -->
-  <rect x="562" y="194" width="20" height="14" fill="#4a7fa5" fill-opacity="0.25" stroke="#2a5f85"/>
-  <text x="587" y="205" font-size="10.5" fill="#444">Eigenvalue</text>
-  <text x="587" y="217" font-size="10.5" fill="#444">solver (inner)</text>
-
-  <!-- Plum: outer mixing -->
-  <rect x="562" y="230" width="20" height="14" fill="#7a5c8a" fill-opacity="0.25" stroke="#7a5c8a"/>
-  <text x="587" y="241" font-size="10.5" fill="#444">SCF mixing</text>
-  <text x="587" y="253" font-size="10.5" fill="#444">(outer)</text>
-
-  <!-- Terracotta: decision -->
-  <polygon points="562,267 582,267 572,277 562,277 562,267" fill="#a0522d" fill-opacity="0.20" stroke="#a0522d"/>
-  <text x="587" y="278" font-size="10.5" fill="#444">Decision /</text>
-  <text x="587" y="290" font-size="10.5" fill="#444">test</text>
-
-  <!-- Separator -->
-  <line x1="560" y1="305" x2="660" y2="305" stroke="#bbb"/>
-
-  <!-- Convergence criteria -->
-  <text x="607" y="322" text-anchor="middle" font-size="11" font-weight="bold" fill="#444">Typical tolerances</text>
-  <text x="560" y="340" font-size="10" fill="#444">EDIFF (energy):</text>
-  <text x="560" y="354" font-size="10" fill="#444">  10⁻⁵ to 10⁻⁸ eV</text>
-  <text x="560" y="370" font-size="10" fill="#444">ρ change:</text>
-  <text x="560" y="384" font-size="10" fill="#444">  10⁻⁴ to 10⁻⁶</text>
-  <text x="560" y="400" font-size="10" fill="#444">Inner (eigenval):</text>
-  <text x="560" y="414" font-size="10" fill="#444">  10⁻⁴ × EDIFF</text>
-
-  <!-- Separator -->
-  <line x1="560" y1="430" x2="660" y2="430" stroke="#bbb"/>
-
-  <!-- Cost note -->
-  <text x="607" y="448" text-anchor="middle" font-size="11" font-weight="bold" fill="#444">Typical cycle counts</text>
-  <text x="560" y="466" font-size="10" fill="#444">Outer SCF iters:</text>
-  <text x="560" y="480" font-size="10" fill="#444">  20–80</text>
-  <text x="560" y="496" font-size="10" fill="#444">Inner solver iters</text>
-  <text x="560" y="510" font-size="10" fill="#444">per SCF step:</text>
-  <text x="560" y="524" font-size="10" fill="#444">  3–8 (Davidson)</text>
-
-  <!-- Separator -->
-  <line x1="560" y1="540" x2="660" y2="540" stroke="#bbb"/>
-
-  <!-- The key insight -->
-  <text x="607" y="558" text-anchor="middle" font-size="11" font-weight="bold" fill="#444">Key insight</text>
-  <text x="560" y="576" font-size="9.5" fill="#444" font-style="italic">SCF: non-linear</text>
-  <text x="560" y="589" font-size="9.5" fill="#444" font-style="italic">  fixed-point</text>
-  <text x="560" y="602" font-size="9.5" fill="#444" font-style="italic">  ρ = F[ρ]</text>
-  <text x="560" y="622" font-size="9.5" fill="#444" font-style="italic">Inner: linear</text>
-  <text x="560" y="635" font-size="9.5" fill="#444" font-style="italic">  eigenvalue</text>
-  <text x="560" y="648" font-size="9.5" fill="#444" font-style="italic">  Aψ = εψ</text>
-  <text x="560" y="668" font-size="9.5" fill="#444" font-style="italic">Both iterative</text>
-  <text x="560" y="681" font-size="9.5" fill="#444" font-style="italic">but solve</text>
-  <text x="560" y="694" font-size="9.5" fill="#444" font-style="italic">different math</text>
-  <text x="560" y="707" font-size="9.5" fill="#444" font-style="italic">problems.</text>
-
+  <!-- OUTER LOOP DASHED BORDER -->
+  <rect
+     x="1"
+     y="1"
+     width="500"
+     height="736"
+     rx="10"
+     fill="none"
+     stroke="#7a5c8a"
+     stroke-width="1.8"
+     stroke-dasharray="8,4"
+     id="rect4" />
+  <text
+     x="11"
+     y="17"
+     font-size="11.5"
+     fill="#7a5c8a"
+     font-weight="bold"
+     id="text4">OUTER LOOP — SCF (density self-consistency)</text>
+  <text
+     x="11"
+     y="31"
+     font-size="10.5"
+     fill="#7a5c8a"
+     font-style="italic"
+     id="text5">Fixed-point iteration: ρ → V[ρ] → solve → new ρ</text>
+  <!-- ── GAP=18, ARROW=18 throughout ─────────────────────────────
+       Block layout (top / centre / bottom):
+         START ellipse      top=42   cy=54    bot=66
+         gap 18  arrow 18
+         Input  para        top=84   bot=122
+         gap 18  arrow 18
+         Build Veff rect    top=140  bot=200
+         gap 18  arrow 18
+         Inner loop box     top=218  bot=378
+           Diag rect        top=238  bot=294
+           arrow inside
+           Output strip     top=312  bot=334
+         gap 18  arrow 18
+         Construct rho rect top=396  bot=446
+         gap 18  arrow 18
+         Diamond            top=464  cy=506   bot=548
+         gap 18  arrow 18
+         Output para        top=566  bot=610
+         gap 18  arrow 18
+         END ellipse        top=628  cy=640   bot=652
+  ─────────────────────────────────────────────────────────────── -->
+  <!-- START — terminal ellipse, cy=54 -->
+  <g
+     id="g31"
+     transform="translate(2.3860021,-21.474019)">
+    <ellipse
+       cx="250"
+       cy="54"
+       rx="80"
+       ry="26"
+       fill="#6a9e7a"
+       fill-opacity="0.22"
+       stroke="#3a6a4a"
+       stroke-width="2"
+       id="ellipse5" />
+    <text
+       x="250"
+       y="59"
+       text-anchor="middle"
+       font-size="13px"
+       font-weight="bold"
+       fill="#2c4030"
+       id="text6">START</text>
+  </g>
+  <!-- arrow 66→84 -->
+  <!-- INPUT — parallelogram, top=84, bot=122, h=38 -->
+  <g
+     id="g32"
+     transform="translate(0,13.460233)">
+    <polygon
+       points="131,84 371,84 351,122 111,122 "
+       fill="#6a9e7a"
+       fill-opacity="0.22"
+       stroke="#3a6a4a"
+       stroke-width="2"
+       id="polygon6" />
+    <text
+       x="250"
+       y="100"
+       text-anchor="middle"
+       font-size="12px"
+       fill="#3a6a4a"
+       font-weight="bold"
+       id="text7">Initial guess: ρ⁽⁰⁾(r)</text>
+    <text
+       x="250"
+       y="116"
+       text-anchor="middle"
+       font-size="10px"
+       fill="#666666"
+       font-style="italic"
+       id="text8">(superposition of atomic densities)</text>
+  </g>
+  <rect
+     x="96"
+     y="170.39449"
+     width="310"
+     height="60"
+     rx="6"
+     fill="#b8963e"
+     fill-opacity="0.18"
+     stroke="#b8963e"
+     stroke-width="2"
+     id="rect8" />
+  <!-- arrow 122→140 -->
+  <!-- PROCESS 1 — Build V_eff, top=140, h=60, bot=200 -->
+  <!-- arrow 200→218 -->
+  <!-- INNER LOOP BOX, top=218, h=160, bot=378 -->
+  <rect
+     x="66"
+     y="244"
+     width="370"
+     height="160"
+     rx="8"
+     fill="#4a7fa5"
+     fill-opacity="0.08"
+     stroke="#4a7fa5"
+     stroke-width="1.5"
+     stroke-dasharray="6, 3"
+     id="rect11" />
+  <g
+     id="g40"
+     transform="rotate(90,279.74121,424.24829)">
+    <text
+       x="77"
+       y="234"
+       font-size="11px"
+       fill="#2a5f85"
+       font-weight="bold"
+       id="text12">INNER LOOP — Eigenvalue solver (linear)</text>
+    <text
+       x="77"
+       y="248"
+       font-size="10px"
+       fill="#2a5f85"
+       font-style="italic"
+       id="text13">Davidson / RMM-DIIS / CG: Aψ = εψ at fixed V_eff</text>
+  </g>
+  <!-- PROCESS 2 — Diagonalise, top=254, h=56, bot=310 -->
+  <g
+     id="g34"
+     transform="translate(0,2.3287381)">
+    <rect
+       x="96"
+       y="254"
+       width="310"
+       height="56"
+       rx="6"
+       fill="#4a7fa5"
+       fill-opacity="0.2"
+       stroke="#2a5f85"
+       stroke-width="2"
+       id="rect13" />
+    <text
+       x="250"
+       y="276"
+       text-anchor="middle"
+       font-size="12.5px"
+       font-weight="bold"
+       fill="#1a4565"
+       id="text14">2. Diagonalise KS Hamiltonian</text>
+    <text
+       x="250"
+       y="294"
+       text-anchor="middle"
+       font-size="12px"
+       fill="#444444"
+       id="text15">[ −½∇² + V_eff(r) ] φᵢ = εᵢ φᵢ</text>
+  </g>
+  <!-- inner self-arrow -->
+  <path
+     d="m 406,268 q 45,0 45,13 0,15 -20,15 h -20"
+     fill="none"
+     stroke="#4a7fa5"
+     stroke-width="1.5"
+     stroke-dasharray="4, 3"
+     marker-end="url(#arrInner)"
+     id="path15" />
+  <text
+     x="465"
+     y="305"
+     font-size="10"
+     fill="#2a5f85"
+     font-style="italic"
+     transform="rotate(90,282,461.5)"
+     id="text16">iterates internally</text>
+  <!-- arrow 310→328 -->
+  <!-- strip inside inner loop, top=328, h=22, bot=350 -->
+  <g
+     id="g35"
+     transform="translate(0,26.26299)">
+    <rect
+       x="96"
+       y="328"
+       width="310"
+       height="28"
+       rx="6"
+       fill="#4a7fa5"
+       fill-opacity="0.13"
+       stroke="#2a5f85"
+       stroke-width="1.5"
+       id="rect16" />
+    <text
+       x="250"
+       y="347"
+       text-anchor="middle"
+       font-size="11.5px"
+       fill="#1a4565"
+       id="text17">→ {φᵢ, εᵢ} at every k-point</text>
+  </g>
+  <!-- arrow exiting inner loop 356→378 (exits inner box at bot=378) -->
+  <line
+     x1="252.386"
+     y1="314.64264"
+     x2="252.386"
+     y2="352.64264"
+     stroke="#444444"
+     stroke-width="2"
+     marker-end="url(#arr)"
+     id="line17" />
+  <!-- PROCESS 3 — Construct density, top=396, h=50, bot=446 -->
+  <g
+     id="g36"
+     transform="translate(0,31.197243)">
+    <rect
+       x="96"
+       y="396"
+       width="310"
+       height="50"
+       rx="6"
+       fill="#b8963e"
+       fill-opacity="0.18"
+       stroke="#b8963e"
+       stroke-width="2"
+       id="rect17" />
+    <text
+       x="250"
+       y="417"
+       text-anchor="middle"
+       font-size="12.5px"
+       font-weight="bold"
+       fill="#6a4a10"
+       id="text18">3. Compute new density</text>
+    <text
+       x="250"
+       y="436"
+       text-anchor="middle"
+       font-size="12px"
+       fill="#444444"
+       id="text19">ρ_out(r) = Σᵢ fᵢ |φᵢ(r)|²</text>
+  </g>
+  <!-- arrow 446→464 -->
+  <!-- DECISION — diamond, cy=506, top=464, bot=548 -->
+  <g
+     id="g37"
+     transform="translate(0,30.131495)">
+    <polygon
+       points="250,548 122,506 250,464 378,506 "
+       fill="#a0522d"
+       fill-opacity="0.16"
+       stroke="#a0522d"
+       stroke-width="2"
+       id="polygon19" />
+    <text
+       x="250"
+       y="500"
+       text-anchor="middle"
+       font-size="12.5px"
+       font-weight="bold"
+       fill="#6a3210"
+       id="text20">4. Converged?</text>
+    <text
+       x="250"
+       y="518"
+       text-anchor="middle"
+       font-size="11px"
+       fill="#444444"
+       id="text21">‖ρ_out − ρ_in‖ &lt; ε ?</text>
+  </g>
+  <!-- YES arrow 548→566 -->
+  <text
+     x="263"
+     y="559"
+     font-size="12"
+     fill="#3a6a4a"
+     font-weight="bold"
+     id="text22">YES</text>
+  <!-- OUTPUT — parallelogram, top=566, bot=610, h=44 -->
+  <g
+     id="g38"
+     transform="translate(0,32.065748)">
+    <polygon
+       points="111,566 371,566 351,610 91,610 "
+       fill="#6a9e7a"
+       fill-opacity="0.3"
+       stroke="#3a6a4a"
+       stroke-width="2"
+       id="polygon22" />
+    <text
+       x="250"
+       y="584"
+       text-anchor="middle"
+       font-size="13px"
+       font-weight="bold"
+       fill="#2c4030"
+       id="text23">CONVERGED</text>
+    <text
+       x="250"
+       y="601"
+       text-anchor="middle"
+       font-size="11px"
+       fill="#3a6a4a"
+       id="text24">Output: ρ*(r), E_total, {φᵢ, εᵢ}, forces</text>
+  </g>
+  <!-- arrow 610→628 -->
+  <!-- END — terminal ellipse, cy=640 -->
+  <g
+     id="g39"
+     transform="translate(0,64)">
+    <ellipse
+       cx="250"
+       cy="640"
+       rx="60"
+       ry="22"
+       fill="#6a9e7a"
+       fill-opacity="0.3"
+       stroke="#3a6a4a"
+       stroke-width="2"
+       id="ellipse24" />
+    <text
+       x="250"
+       y="646"
+       text-anchor="middle"
+       font-size="13px"
+       font-weight="bold"
+       fill="#2c4030"
+       id="text25">END</text>
+  </g>
+  <!-- ── NO FEEDBACK PATH — left side ────────────────────────── -->
+  <!-- from diamond left vertex (122, 506) → left to x=39 → up to y=103 (mid input para) → right into para left edge -->
+  <text
+     x="250"
+     y="192.39449"
+     text-anchor="middle"
+     font-size="12.5px"
+     font-weight="bold"
+     fill="#6a4a10"
+     id="text9">1. Build effective potential</text>
+  <text
+     x="251.31293"
+     y="204.03181"
+     text-anchor="middle"
+     font-size="12px"
+     fill="#444444"
+     id="text10">V_eff(r) = V_ext + V_H[ρ] + V_xc[ρ]</text>
+  <text
+     x="250"
+     y="224.39449"
+     text-anchor="middle"
+     font-size="10px"
+     fill="#666666"
+     font-style="italic"
+     id="text11">Hartree + XC depend on current ρ</text>
+  <line
+     x1="122"
+     y1="536"
+     x2="39"
+     y2="536"
+     stroke="#7a5c8a"
+     stroke-width="2.5"
+     id="line25" />
+  <g
+     id="line26"
+     style="opacity:1">
+    <path
+       style="baseline-shift:baseline;display:inline;overflow:visible;vector-effect:none;enable-background:accumulate;stop-color:#000000;stop-opacity:1"
+       d="M 39,536 V 196"
+       id="path45" />
+  </g>
+  <line
+     x1="39"
+     y1="196.39449"
+     x2="94"
+     y2="196.39449"
+     stroke="#7a5c8a"
+     stroke-width="2.5"
+     marker-end="url(#arrLoop)"
+     id="line27"
+     style="stroke-width:2;stroke-dasharray:none" />
+  <text
+     x="80"
+     y="498"
+     font-size="12"
+     fill="#7a5c8a"
+     font-weight="bold"
+     id="text27">NO</text>
+  <!-- Mixing box on left rail, centred around y=340 -->
+  <g
+     id="g44"
+     transform="rotate(-90,51,350)">
+    <rect
+       x="20"
+       y="303"
+       width="96"
+       height="60"
+       rx="6"
+       fill="#7a5c8a"
+       fill-opacity="0.18"
+       stroke="#7a5c8a"
+       stroke-width="2"
+       id="rect27" />
+    <text
+       x="68"
+       y="323"
+       text-anchor="middle"
+       font-size="11.5px"
+       font-weight="bold"
+       fill="#4a2a5a"
+       id="text28">5. Mix</text>
+    <text
+       x="68"
+       y="339"
+       text-anchor="middle"
+       font-size="10px"
+       fill="#444444"
+       id="text29">ρ_in ← α ρ_out</text>
+    <text
+       x="68"
+       y="352"
+       text-anchor="middle"
+       font-size="10px"
+       fill="#444444"
+       id="text30">+ (1−α) ρ_in</text>
+  </g>
+  <!-- loop label -->
+  <text
+     x="31"
+     y="-460"
+     font-size="10.5"
+     fill="#7a5c8a"
+     font-style="italic"
+     transform="rotate(90)"
+     id="text31">Pulay / Broyden / Kerker mixing</text>
+  <line
+     x1="251.59067"
+     y1="383.8367"
+     x2="251.59067"
+     y2="421.8367"
+     stroke="#444444"
+     stroke-width="2"
+     marker-end="url(#arr)"
+     id="line40" />
+  <line
+     x1="250.79533"
+     y1="642.32025"
+     x2="250.79533"
+     y2="680.32025"
+     stroke="#444444"
+     stroke-width="2"
+     marker-end="url(#arr)"
+     id="line41" />
+  <line
+     x1="254.31906"
+     y1="228.43629"
+     x2="254.31906"
+     y2="256.67828"
+     stroke="#444444"
+     stroke-width="1.72419"
+     marker-end="url(#arr)"
+     id="line42" />
+  <line
+     x1="255.90973"
+     y1="134.89716"
+     x2="255.90973"
+     y2="169.31921"
+     stroke="#444444"
+     stroke-width="1.90352"
+     marker-end="url(#arr)"
+     id="line43" />
+  <line
+     x1="254.772"
+     y1="59.340424"
+     x2="254.772"
+     y2="97.340424"
+     stroke="#444444"
+     stroke-width="2"
+     marker-end="url(#arr)"
+     id="line44" />
+  <path
+     style="fill:none;fill-opacity:0.65;stroke-width:2;stroke-linejoin:round;stroke:#7a5c8a;stroke-opacity:1;stroke-dasharray:none"
+     d="m 122.35763,535.95663 -87.614106,-0.30212 0.302118,-153.77786 v 0"
+     id="path46" />
+  <path
+     style="fill:none;fill-opacity:0.65;stroke:#7a5c8a;stroke-width:2;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
+     d="m 34.934048,284.05969 v -87.86443 h 5.645907 v 0"
+     id="path47" />
+  <path
+     style="fill:none;fill-opacity:0.65;stroke:#7a5c8a;stroke-width:2;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#Triangle)"
+     d="m 250.28443,477.62898 v 14.38023"
+     id="path48" />
+  <path
+     style="fill:none;fill-opacity:0.65;stroke:#7a5c8a;stroke-width:1.70453;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#marker51)"
+     d="m 250.62682,578.29057 v 13.92696"
+     id="path50" />
 </svg>
