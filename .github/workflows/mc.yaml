@@ -8,11 +8,6 @@ on:
       - 'Docs/MC/**'
       - '.github/workflows/mc.yaml'
   workflow_dispatch:
-    inputs:
-      reason:
-        description: 'mc* - manual trigger reason'
-        required: false
-        default: 'mc-manual'
 
 permissions:
   contents: write

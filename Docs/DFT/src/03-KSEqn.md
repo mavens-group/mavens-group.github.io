@@ -4,15 +4,18 @@ The Hohenberg–Kohn theorems establish that the ground-state density \\(\rho_0(
 uniquely determines all ground-state properties, and that the total energy \\(E[\rho]\\) is minimised
 by \\(\rho_0\\). However, they say nothing about *how* to compute the universal functional \\(F[\rho]\\),
 and in particular how to evaluate the kinetic energy \\(T[\rho]\\) as a functional of the density
-alone. Attempts to write \\(T\\) purely in terms of \\(\rho\\) (as in the Thomas–Fermi model) lead to
-poor accuracy.
+alone. As we saw with the Thomas–Fermi model in Chapter 1.6, attempts to write \\(T\\) purely in
+terms of \\(\rho\\) using a local UEG ansatz lead to qualitative failures: no molecular binding,
+wrong asymptotic decay, no shell structure.
 
 The **Kohn–Sham (KS) formalism**, introduced by Walter Kohn and Lu Jeu Sham in 1965, provides
 an elegant and highly accurate solution: introduce a fictitious system of **non-interacting
 electrons** that, by construction, reproduces the exact ground-state density of the true
-interacting system. This maps the intractable many-body problem onto a set of effective
-single-particle equations — the Kohn–Sham equations — which are computationally feasible while
-remaining formally exact.
+interacting system. By reintroducing single-particle orbitals — but only as a computational
+device for the kinetic energy — KS theory salvages the rigour of the Hohenberg–Kohn theorems
+while sidestepping the local-functional pitfalls of Thomas–Fermi. The result is a set of
+effective single-particle equations — the Kohn–Sham equations — that are computationally
+feasible while remaining formally exact.
 
 
 ## Decomposition of the Energy Functional
@@ -54,11 +57,10 @@ where each term has a specific physical meaning:
 \end{equation}
 </div>
 
-  This includes the quantum exchange energy (from the antisymmetry of the wavefunction, as seen
-  in the Hartree–Fock discussion in Chapter 1), all Coulomb correlation effects beyond the
-  Hartree level, and the correction to the kinetic energy from the interacting nature of the true
-  system. \\(E_{\mathrm{xc}}\\) is the only term that must be approximated; its exact form is
-  unknown.
+  This includes the quantum exchange energy (the \\(K_{ij}\\) integrals introduced in
+  Chapter 1.5.2), all Coulomb correlation effects beyond the Hartree level, and the correction
+  to the kinetic energy from the interacting nature of the true system. \\(E_{\mathrm{xc}}\\) is
+  the only term that must be approximated; its exact form is unknown.
 
 - \\(\int V_{\mathrm{ext}}(\mathbf{r})\,\rho(\mathbf{r})\,d\mathbf{r}\\) is the **interaction with
   the external potential** (the nuclear attraction and any applied fields), treated exactly.
@@ -127,20 +129,22 @@ functional derivative with respect to \\(\phi_i^*(\mathbf{r})\\) and setting it 
 \end{equation}
 </div>
 
-Applying the chain rule to the left-hand side:
+Applying the chain rule to the left-hand side — \\(T_s\\) is an explicit functional of the
+orbitals, while \\(E_{\rm H}\\), \\(E_{\rm xc}\\), and \\(E_{\rm ext}\\) depend on the orbitals only
+through the density \\(\rho(\mathbf{r}') = \sum_j|\phi_j(\mathbf{r}')|^2\\):
 
 <div>
 \begin{equation}
-    \frac{\delta E[\rho]}{\delta \phi_i^*(\mathbf{r})} = \frac{\delta T_s}{\delta \phi_i^*} + \int \frac{\delta (E_{\mathrm{H}} + E_{\mathrm{xc}} + E_{\mathrm{ext}})}{\delta \rho(\mathbf{r}')} \frac{\delta \rho(\mathbf{r}')}{\delta \phi_i^*(\mathbf{r})} \, d\mathbf{r}'.
+    \frac{\delta E[\rho]}{\delta \phi_i^*(\mathbf{r})} = \frac{\delta T_s}{\delta \phi_i^*(\mathbf{r})} + \int \frac{\delta (E_{\mathrm{H}} + E_{\mathrm{xc}} + E_{\mathrm{ext}})}{\delta \rho(\mathbf{r}')} \frac{\delta \rho(\mathbf{r}')}{\delta \phi_i^*(\mathbf{r})} \, d\mathbf{r}'.
 \end{equation}
 </div>
 
 Evaluating the individual derivatives:
-1. \\(\frac{\delta T_s}{\delta \phi_i^*(\mathbf{r})} = -\frac{1}{2}\nabla^2 \phi_i(\mathbf{r})\\)
-2. \\(\frac{\delta \rho(\mathbf{r}')}{\delta \phi_i^*(\mathbf{r})} = \delta(\mathbf{r} - \mathbf{r}')\phi_i(\mathbf{r}')\\)
-3. \\(\frac{\delta E_{\mathrm{ext}}}{\delta \rho(\mathbf{r})} = V_{\mathrm{ext}}(\mathbf{r})\\)
-4. \\(\frac{\delta E_{\mathrm{H}}}{\delta \rho(\mathbf{r})} = \int \frac{\rho(\mathbf{r}')}{|\mathbf{r}-\mathbf{r}'|}\,d\mathbf{r}' \equiv V_{\mathrm{H}}(\mathbf{r})\\)
-5. \\(\frac{\delta E_{\mathrm{xc}}}{\delta \rho(\mathbf{r})} \equiv V_{\mathrm{xc}}(\mathbf{r})\\)
+1. \\(\frac{\delta T_s}{\delta \phi_i^*(\mathbf{r})} = -\frac{1}{2}\nabla^2 \phi_i(\mathbf{r})\\) — standard variation of \\(T_s = -\tfrac{1}{2}\sum_j \int \phi_j^*\nabla^2\phi_j\,d\mathbf{r}\\).
+2. \\(\frac{\delta \rho(\mathbf{r}')}{\delta \phi_i^*(\mathbf{r})} = \phi_i(\mathbf{r}')\delta(\mathbf{r}-\mathbf{r}')\\) — from \\(\rho(\mathbf{r}') = \sum_j |\phi_j(\mathbf{r}')|^2\\), differentiating with respect to \\(\phi_i^*(\mathbf{r})\\) picks out the \\(j = i\\) term and localises it at \\(\mathbf{r}' = \mathbf{r}\\).
+3. \\(\frac{\delta E_{\mathrm{ext}}}{\delta \rho(\mathbf{r})} = V_{\mathrm{ext}}(\mathbf{r})\\) — from \\(E_{\rm ext} = \int V_{\rm ext}\rho\,d\mathbf{r}\\).
+4. \\(\frac{\delta E_{\mathrm{H}}}{\delta \rho(\mathbf{r})} = \int \frac{\rho(\mathbf{r}')}{|\mathbf{r}-\mathbf{r}'|}\,d\mathbf{r}' \equiv V_{\mathrm{H}}(\mathbf{r})\\) — differentiating the symmetric double integral and exploiting symmetry to cancel the factor \\(\tfrac{1}{2}\\).
+5. \\(\frac{\delta E_{\mathrm{xc}}}{\delta \rho(\mathbf{r})} \equiv V_{\mathrm{xc}}(\mathbf{r})\\) — by definition; this is the *exchange-correlation potential* whose explicit form is the subject of Chapter 4.
 
 This defines the **Kohn–Sham effective potential**:
 
@@ -223,15 +227,21 @@ reconstructed by subtracting the double-counting terms:
 ### The KS Orbitals and Eigenvalues
 
 In exact DFT, the fictitious KS orbitals \\(\phi_i\\) and their energies \\(\epsilon_i\\) have **no
-strict physical meaning**, with one exception: Janak's theorem and related rigorous results
-show that the **highest occupied KS eigenvalue** corresponds exactly to the negative of the
-first ionisation energy (or chemical potential) of the exact many-body system:
+strict physical meaning**, with one exception: the **highest occupied KS eigenvalue** equals
+the negative of the first ionisation energy of the exact many-body system:
 
 <div>
 \begin{equation}
     \epsilon_{\mathrm{HOMO}}^{\mathrm{exact}} = -I.
 \end{equation}
 </div>
+
+This **IP theorem** was established independently by Almbladh and von Barth (1985) and
+Levy–Perdew–Sahni (1984) using the asymptotic form of the exact density at large \\(|\mathbf{r}|\\). The result is *not* a direct consequence of Janak's theorem (Janak 1978), which states the
+distinct identity \\(\epsilon_i = \partial E/\partial f_i\\) (the KS eigenvalue is the derivative
+of the total energy with respect to its occupation number). Janak's theorem applied at integer
+\\(N\\) gives the chemical potential, and combined with the long-range behaviour of the exact
+density yields \\(\epsilon_{\rm HOMO} = -I\\); both ingredients are required.
 
 The other eigenvalues \\(\epsilon_i\\) do not formally correspond to electron removal or addition
 energies (quasiparticle excitations). The KS "band gap" (\\(\epsilon_{\mathrm{LUMO}} - \epsilon_{\mathrm{HOMO}}\\)) systematically underestimates the true fundamental gap, even if the

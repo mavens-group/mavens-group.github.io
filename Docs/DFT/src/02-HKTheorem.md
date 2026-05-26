@@ -30,18 +30,21 @@ where
 * \\(\hat{V}\_{ext} = \sum_{i=1}^N V_{\rm ext}(r_i) \\) is the external potential due to the nuclei or
   any applied field — it is the same for all systems considered in the proofs below.
 
-The **electron density** \\(\rho(r)\\) is defined as the probability of finding any one electron at
-position \\(r\\), integrated over all other electron coordinates:
+The **electron density** \\(\rho(\mathbf{r})\\) is the **number density** of electrons at
+position \\(\mathbf{r}\\) — not the probability density \\(|\Psi|^2\\) itself, but the marginal
+single-particle density obtained by integrating out the coordinates of all other electrons and
+multiplying by \\(N\\) to account for the fact that any of the \\(N\\) indistinguishable electrons
+can be found at \\(\mathbf{r}\\):
 
 <div>
 \begin{equation}
-\rho(r)=N\int |\Psi(r_1,r_2\cdots r_N)|^2 \,dr_2\,dr_3\cdots dr_N
+\rho(\mathbf{r}) = N\int |\Psi(\mathbf{r},\mathbf{r}_2,\ldots,\mathbf{r}_N)|^2\,d\mathbf{r}_2\,d\mathbf{r}_3\cdots d\mathbf{r}_N.
 \label{eq:charge-wf}
 \end{equation}
 </div>
 
-\eqref{eq:charge-wf}
-Note that \\(\int \rho(r)\,dr = N\\).
+By construction \\(\int \rho(\mathbf{r})\,d\mathbf{r} = N\\): the density integrates to the total
+number of electrons, not unity. \\(\rho(\mathbf{r})\\) is the central variable of DFT.
 
 
 ### The First Hohenberg–Kohn Theorem
@@ -80,9 +83,10 @@ Let the two Hamiltonians and their ground states be:
 \end{aligned}
 \\]
 
-We apply the **Rayleigh–Ritz variational principle**, which states that the true ground-state
-energy minimises the energy expectation value: any trial state \\(|\tilde{\Psi}\rangle \neq |\Psi_0\rangle\\)
-satisfies \\(\langle\tilde{\Psi}|\hat{H}|\tilde{\Psi}\rangle > E_0\\).
+We apply the **Rayleigh–Ritz variational principle** (Chapter 1.4), which states that the true
+ground-state energy minimises the energy expectation value: any trial state
+\\(|\tilde{\Psi}\rangle \neq |\Psi_0\rangle\\) satisfies
+\\(\langle\tilde{\Psi}|\hat{H}|\tilde{\Psi}\rangle > E_0\\).
 
 Using \\(\Psi'\\) as a trial state for \\(\hat{H}\\):
 
@@ -107,7 +111,7 @@ Adding the two inequalities \eqref{eq:ineq1} and \eqref{eq:ineq2}:
 
 \\[
 \begin{align}
-	E\_0 + E'\_0 & \leq E'\_0 + E\_0 + \int \underbrace{\left[ V\_{\rm ext} - V'\_{\rm ext} + V\'_{\rm ext} - V\_{\rm ext} \right]}\_{=\,0} \rho(\mathbf{r}) \, d\mathbf{r}, \\\\
+	E\_0 + E'\_0 & \leq E'\_0 + E\_0 + \int \underbrace{\left[ V\_{\rm ext} - V'\_{\rm ext} + V'\_{\rm ext} - V\_{\rm ext} \right]}\_{=\,0} \rho(\mathbf{r}) \, d\mathbf{r}, \\\\
 	E\_0 + E'\_0 & \leq E\_0 + E'\_0.
 \end{align}
 \\]
@@ -183,7 +187,7 @@ By the First HK Theorem, every *v*-representable density \\(\tilde{\rho}\\) uniq
 E[\tilde{\rho}] = \langle \tilde{\Psi}[\tilde{\rho}] | \hat{T} + \hat{V}\_{ee} + \hat{V}\_{\rm ext} | \tilde{\Psi}[\tilde{\rho}] \rangle = F[\tilde{\rho}] + \int V_{\rm ext}(\mathbf{r})\tilde{\rho}(\mathbf{r}) d\mathbf{r}
 \\]
 
-Now consider the true ground state \\(|\Psi_0\rangle\\) with density \\(\rho_0\\) and energy \\(E_0\\). For any trial density \\(\tilde{\rho} \neq \rho_0\\), the associated wavefunction \\(\tilde{\Psi}\\) is *different* from \\(\Psi_0\\) (again by the First HK Theorem). Since \\(\Psi_0\\) is the true ground state of \\(\hat{H}\\), the **Rayleigh–Ritz variational principle** gives:
+Now consider the true ground state \\(|\Psi_0\rangle\\) with density \\(\rho_0\\) and energy \\(E_0\\). For any trial density \\(\tilde{\rho} \neq \rho_0\\), the associated wavefunction \\(\tilde{\Psi}\\) is *different* from \\(\Psi_0\\) (again by the First HK Theorem). Since \\(\Psi_0\\) is the true ground state of \\(\hat{H}\\), the **Rayleigh–Ritz variational principle** (Chapter 1.4) gives:
 
 \\[
 E_0 = \langle \Psi_0 | \hat{H} | \Psi_0 \rangle \leq \langle \tilde{\Psi} | \hat{H} | \tilde{\Psi} \rangle.
@@ -217,15 +221,37 @@ and that a universal energy functional \\(E[\rho]\\) exists, they do **not** pro
 for the universal functional \\(F[\rho]\\). In particular, the kinetic energy \\(T[\rho]\\) and the
 electron–electron interaction \\(V_{ee}[\rho]\\) are unknown functionals of \\(\rho\\).
 
-**A note on \\(v\\)-representability.** The HK proof assumes that the trial density \\(\tilde{\rho}\\) is *\\(v\\)-representable* — that it is the ground-state density of *some* external potential \\(\tilde{V}_{\rm ext}\\). Not all non-negative, normalised densities satisfy this condition. Lieb (1983) resolved this by reformulating DFT via a Legendre transform, defining the universal functional as:
+**The Levy constrained-search formulation.** The original HK derivation defines \\(F[\rho]\\)
+only for densities that are ground-state densities of *some* external potential — the
+**\\(v\\)-representable** densities. Not every smooth non-negative \\(\rho\\) with
+\\(\int\rho\,d\mathbf{r} = N\\) satisfies this; characterising the set of \\(v\\)-representable
+densities is in fact an open problem. Levy (1979) and Lieb (1983) eliminated this concern by
+recasting the universal functional as a *constrained search* over wavefunctions:
 
-\\[
-F[\rho] = \sum_{V_{\rm ext}} \left( E[V_{\rm ext}] - \int V_{\rm ext}(\mathbf{r})\,\rho(\mathbf{r})\,d\mathbf{r} \right),
-\\]
+<div>
+\begin{equation}
+    F[\rho] = \min_{\Psi \to \rho}\,\langle\Psi|\hat{T} + \hat{V}_{ee}|\Psi\rangle,
+\label{eq:Levy}
+\end{equation}
+</div>
 
-which is well-defined for all non-negative \\(\rho\\) with \\(\int\rho d\mathbf{r} = N\\) — a larger class called *ensemble \\(v\\)-representable* densities. For the Kohn–Sham scheme specifically, the relevant condition is *non-interacting \\(v\\)-representability*: the ground-state density of the interacting system must also be the ground-state density of some non-interacting system in an effective potential. This is assumed to hold throughout the KS construction (Chapter 3) and is believed to be satisfied for all physically relevant ground-state densities, though a general proof remains an open problem.
+where the minimisation runs over all antisymmetric \\(N\\)-electron wavefunctions \\(\Psi\\) that
+yield the given density \\(\rho(\mathbf{r})\\) via equation \eqref{eq:charge-wf}. Two features
+make this definition powerful:
 
-Computing \\(F[\rho]\\) accurately is the central challenge of DFT in practice. The **Kohn–Sham
-equations**, developed in the next chapter, provide a practical path forward by introducing a
-fictitious system of non-interacting electrons designed to reproduce the exact ground-state density
-— sidestepping the need to evaluate \\(F[\rho]\\) directly.
+- It is well-defined for **any** non-negative \\(\rho\\) integrating to \\(N\\) — the larger class of
+  *\\(N\\)-representable* densities — sidestepping the \\(v\\)-representability question entirely.
+- The minimisation principle of the second HK theorem follows directly: for any trial density
+  \\(\tilde\rho\\), \\(E[\tilde\rho] = F[\tilde\rho] + \int V_{\rm ext}\tilde\rho\,d\mathbf{r} \geq E_0\\), because the inner search over \\(\Psi\\) is itself a Rayleigh–Ritz minimisation.
+
+In the Kohn–Sham scheme (Chapter 3), an analogous *non-interacting* constrained search defines
+\\(T_s[\rho] = \min_{\Psi \to \rho}\langle\Psi|\hat{T}|\Psi\rangle\\) over Slater determinants
+yielding \\(\rho\\). The existence of a Slater determinant for any reasonable \\(\rho\\) is called
+*non-interacting \\(v\\)-representability* and is believed to hold for all physically relevant
+ground-state densities, though a general proof remains an open problem.
+
+**Practical takeaway.** The universal functional \\(F[\rho]\\) is well-defined and unique, but its
+explicit form is unknown. Computing it accurately is the central challenge of DFT in practice.
+The **Kohn–Sham equations**, developed in the next chapter, provide a practical path forward by
+introducing a fictitious system of non-interacting electrons designed to reproduce the exact
+ground-state density — sidestepping the need to evaluate \\(F[\rho]\\) directly.
