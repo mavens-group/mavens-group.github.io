@@ -41,8 +41,8 @@
         <link rel="icon" href="favicon-de23e50b.svg">
         <link rel="shortcut icon" href="favicon-8114d1fc.png">
         <link rel="stylesheet" href="css/variables-8adf115d.css">
-        <link rel="stylesheet" href="css/general-2459343d.css">
-        <link rel="stylesheet" href="css/chrome-ae938929.css">
+        <link rel="stylesheet" href="css/general-0392ca55.css">
+        <link rel="stylesheet" href="css/chrome-fc474251.css">
         <link rel="stylesheet" href="css/print-9e4910d8.css" media="print">
 
         <!-- Fonts -->
@@ -62,10 +62,10 @@
             const path_to_root = "";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "searchindex-1496153c.js";
+            window.path_to_searchindex_js = "searchindex-9848e808.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="toc-e07c914a.js"></script>
+        <script src="toc-07d7df44.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -206,14 +206,17 @@
 uniquely determines all ground-state properties, and that the total energy \(E[\rho]\) is minimised
 by \(\rho_0\). However, they say nothing about <em>how</em> to compute the universal functional \(F[\rho]\),
 and in particular how to evaluate the kinetic energy \(T[\rho]\) as a functional of the density
-alone. Attempts to write \(T\) purely in terms of \(\rho\) (as in the Thomas–Fermi model) lead to
-poor accuracy.</p>
+alone. As we saw with the Thomas–Fermi model in Chapter 1.6, attempts to write \(T\) purely in
+terms of \(\rho\) using a local UEG ansatz lead to qualitative failures: no molecular binding,
+wrong asymptotic decay, no shell structure.</p>
 <p>The <strong>Kohn–Sham (KS) formalism</strong>, introduced by Walter Kohn and Lu Jeu Sham in 1965, provides
 an elegant and highly accurate solution: introduce a fictitious system of <strong>non-interacting
 electrons</strong> that, by construction, reproduces the exact ground-state density of the true
-interacting system. This maps the intractable many-body problem onto a set of effective
-single-particle equations — the Kohn–Sham equations — which are computationally feasible while
-remaining formally exact.</p>
+interacting system. By reintroducing single-particle orbitals — but only as a computational
+device for the kinetic energy — KS theory salvages the rigour of the Hohenberg–Kohn theorems
+while sidestepping the local-functional pitfalls of Thomas–Fermi. The result is a set of
+effective single-particle equations — the Kohn–Sham equations — that are computationally
+feasible while remaining formally exact.</p>
 <h2 id="decomposition-of-the-energy-functional"><a class="header" href="#decomposition-of-the-energy-functional">Decomposition of the Energy Functional</a></h2>
 <p>The key idea is to split the unknown universal functional \(F[\rho]\) into parts that can be
 handled accurately and a remainder that must be approximated:</p>
@@ -254,11 +257,10 @@ that is missing from the above terms:</li>
 \end{equation}
 </div>
 
-<p>This includes the quantum exchange energy (from the antisymmetry of the wavefunction, as seen
-in the Hartree–Fock discussion in Chapter 1), all Coulomb correlation effects beyond the
-Hartree level, and the correction to the kinetic energy from the interacting nature of the true
-system. \(E_{\mathrm{xc}}\) is the only term that must be approximated; its exact form is
-unknown.</p>
+<p>This includes the quantum exchange energy (the \(K_{ij}\) integrals introduced in
+Chapter 1.5.2), all Coulomb correlation effects beyond the Hartree level, and the correction
+to the kinetic energy from the interacting nature of the true system. \(E_{\mathrm{xc}}\) is
+the only term that must be approximated; its exact form is unknown.</p>
 <ul>
 <li>\(\int V_{\mathrm{ext}}(\mathbf{r}),\rho(\mathbf{r}),d\mathbf{r}\) is the <strong>interaction with
 the external potential</strong> (the nuclear attraction and any applied fields), treated exactly.</li>
@@ -315,20 +317,22 @@ functional derivative with respect to \(\phi_i^*(\mathbf{r})\) and setting it to
 \end{equation}
 </div>
 
-<p>Applying the chain rule to the left-hand side:</p>
+<p>Applying the chain rule to the left-hand side — \(T_s\) is an explicit functional of the
+orbitals, while \(E_{\rm H}\), \(E_{\rm xc}\), and \(E_{\rm ext}\) depend on the orbitals only
+through the density \(\rho(\mathbf{r}‘) = \sum_j|\phi_j(\mathbf{r}’)|^2\):</p>
 <div>
 \begin{equation}
-    \frac{\delta E[\rho]}{\delta \phi_i^*(\mathbf{r})} = \frac{\delta T_s}{\delta \phi_i^*} + \int \frac{\delta (E_{\mathrm{H}} + E_{\mathrm{xc}} + E_{\mathrm{ext}})}{\delta \rho(\mathbf{r}')} \frac{\delta \rho(\mathbf{r}')}{\delta \phi_i^*(\mathbf{r})} \, d\mathbf{r}'.
+    \frac{\delta E[\rho]}{\delta \phi_i^*(\mathbf{r})} = \frac{\delta T_s}{\delta \phi_i^*(\mathbf{r})} + \int \frac{\delta (E_{\mathrm{H}} + E_{\mathrm{xc}} + E_{\mathrm{ext}})}{\delta \rho(\mathbf{r}')} \frac{\delta \rho(\mathbf{r}')}{\delta \phi_i^*(\mathbf{r})} \, d\mathbf{r}'.
 \end{equation}
 </div>
 
 <p>Evaluating the individual derivatives:</p>
 <ol>
-<li>\(\frac{\delta T_s}{\delta \phi_i^*(\mathbf{r})} = -\frac{1}{2}\nabla^2 \phi_i(\mathbf{r})\)</li>
-<li>\(\frac{\delta \rho(\mathbf{r}‘)}{\delta \phi_i^*(\mathbf{r})} = \delta(\mathbf{r} - \mathbf{r}’)\phi_i(\mathbf{r}’)\)</li>
-<li>\(\frac{\delta E_{\mathrm{ext}}}{\delta \rho(\mathbf{r})} = V_{\mathrm{ext}}(\mathbf{r})\)</li>
-<li>\(\frac{\delta E_{\mathrm{H}}}{\delta \rho(\mathbf{r})} = \int \frac{\rho(\mathbf{r}‘)}{|\mathbf{r}-\mathbf{r}’|},d\mathbf{r}’ \equiv V_{\mathrm{H}}(\mathbf{r})\)</li>
-<li>\(\frac{\delta E_{\mathrm{xc}}}{\delta \rho(\mathbf{r})} \equiv V_{\mathrm{xc}}(\mathbf{r})\)</li>
+<li>\(\frac{\delta T_s}{\delta \phi_i^<em>(\mathbf{r})} = -\frac{1}{2}\nabla^2 \phi_i(\mathbf{r})\) — standard variation of \(T_s = -\tfrac{1}{2}\sum_j \int \phi_j^</em>\nabla^2\phi_j,d\mathbf{r}\).</li>
+<li>\(\frac{\delta \rho(\mathbf{r}‘)}{\delta \phi_i^<em>(\mathbf{r})} = \phi_i(\mathbf{r}’)\delta(\mathbf{r}-\mathbf{r}‘)\) — from \(\rho(\mathbf{r}’) = \sum_j |\phi_j(\mathbf{r}‘)|^2\), differentiating with respect to \(\phi_i^</em>(\mathbf{r})\) picks out the \(j = i\) term and localises it at \(\mathbf{r}’ = \mathbf{r}\).</li>
+<li>\(\frac{\delta E_{\mathrm{ext}}}{\delta \rho(\mathbf{r})} = V_{\mathrm{ext}}(\mathbf{r})\) — from \(E_{\rm ext} = \int V_{\rm ext}\rho,d\mathbf{r}\).</li>
+<li>\(\frac{\delta E_{\mathrm{H}}}{\delta \rho(\mathbf{r})} = \int \frac{\rho(\mathbf{r}‘)}{|\mathbf{r}-\mathbf{r}’|},d\mathbf{r}’ \equiv V_{\mathrm{H}}(\mathbf{r})\) — differentiating the symmetric double integral and exploiting symmetry to cancel the factor \(\tfrac{1}{2}\).</li>
+<li>\(\frac{\delta E_{\mathrm{xc}}}{\delta \rho(\mathbf{r})} \equiv V_{\mathrm{xc}}(\mathbf{r})\) — by definition; this is the <em>exchange-correlation potential</em> whose explicit form is the subject of Chapter 4.</li>
 </ol>
 <p>This defines the <strong>Kohn–Sham effective potential</strong>:</p>
 <div>
@@ -396,15 +400,20 @@ reconstructed by subtracting the double-counting terms:</p>
 
 <h3 id="the-ks-orbitals-and-eigenvalues"><a class="header" href="#the-ks-orbitals-and-eigenvalues">The KS Orbitals and Eigenvalues</a></h3>
 <p>In exact DFT, the fictitious KS orbitals \(\phi_i\) and their energies \(\epsilon_i\) have <strong>no
-strict physical meaning</strong>, with one exception: Janak’s theorem and related rigorous results
-show that the <strong>highest occupied KS eigenvalue</strong> corresponds exactly to the negative of the
-first ionisation energy (or chemical potential) of the exact many-body system:</p>
+strict physical meaning</strong>, with one exception: the <strong>highest occupied KS eigenvalue</strong> equals
+the negative of the first ionisation energy of the exact many-body system:</p>
 <div>
 \begin{equation}
     \epsilon_{\mathrm{HOMO}}^{\mathrm{exact}} = -I.
 \end{equation}
 </div>
 
+<p>This <strong>IP theorem</strong> was established independently by Almbladh and von Barth (1985) and
+Levy–Perdew–Sahni (1984) using the asymptotic form of the exact density at large \(|\mathbf{r}|\). The result is <em>not</em> a direct consequence of Janak’s theorem (Janak 1978), which states the
+distinct identity \(\epsilon_i = \partial E/\partial f_i\) (the KS eigenvalue is the derivative
+of the total energy with respect to its occupation number). Janak’s theorem applied at integer
+\(N\) gives the chemical potential, and combined with the long-range behaviour of the exact
+density yields \(\epsilon_{\rm HOMO} = -I\); both ingredients are required.</p>
 <p>The other eigenvalues \(\epsilon_i\) do not formally correspond to electron removal or addition
 energies (quasiparticle excitations). The KS “band gap” (\(\epsilon_{\mathrm{LUMO}} - \epsilon_{\mathrm{HOMO}}\)) systematically underestimates the true fundamental gap, even if the
 exact XC functional were used. This is due to the <strong>derivative discontinuity</strong> of the exact XC
@@ -482,11 +491,11 @@ solving the KS equations for real materials.</p>
 
         <script src="elasticlunr-ef4e11c1.min.js"></script>
         <script src="mark-09e88c2c.min.js"></script>
-        <script src="searcher-c2a407aa.js"></script>
+        <script src="searcher-09f2665d.js"></script>
 
         <script src="clipboard-1626706a.min.js"></script>
         <script src="highlight-abc7f01d.js"></script>
-        <script src="book-a0b12cfe.js"></script>
+        <script src="book-c22b7243.js"></script>
 
         <!-- Custom JS scripts -->
         <script src="src/custom-cd58eebe.js"></script>

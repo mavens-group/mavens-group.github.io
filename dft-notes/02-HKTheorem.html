@@ -41,8 +41,8 @@
         <link rel="icon" href="favicon-de23e50b.svg">
         <link rel="shortcut icon" href="favicon-8114d1fc.png">
         <link rel="stylesheet" href="css/variables-8adf115d.css">
-        <link rel="stylesheet" href="css/general-2459343d.css">
-        <link rel="stylesheet" href="css/chrome-ae938929.css">
+        <link rel="stylesheet" href="css/general-0392ca55.css">
+        <link rel="stylesheet" href="css/chrome-fc474251.css">
         <link rel="stylesheet" href="css/print-9e4910d8.css" media="print">
 
         <!-- Fonts -->
@@ -62,10 +62,10 @@
             const path_to_root = "";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "searchindex-1496153c.js";
+            window.path_to_searchindex_js = "searchindex-9848e808.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="toc-e07c914a.js"></script>
+        <script src="toc-07d7df44.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -228,17 +228,20 @@ many-body Hamiltonian is:</p>
 <li>\(\hat{V}_{ext} = \sum_{i=1}^N V_{\rm ext}(r_i) \) is the external potential due to the nuclei or
 any applied field — it is the same for all systems considered in the proofs below.</li>
 </ul>
-<p>The <strong>electron density</strong> \(\rho(r)\) is defined as the probability of finding any one electron at
-position \(r\), integrated over all other electron coordinates:</p>
+<p>The <strong>electron density</strong> \(\rho(\mathbf{r})\) is the <strong>number density</strong> of electrons at
+position \(\mathbf{r}\) — not the probability density \(|\Psi|^2\) itself, but the marginal
+single-particle density obtained by integrating out the coordinates of all other electrons and
+multiplying by \(N\) to account for the fact that any of the \(N\) indistinguishable electrons
+can be found at \(\mathbf{r}\):</p>
 <div>
 \begin{equation}
-\rho(r)=N\int |\Psi(r_1,r_2\cdots r_N)|^2 \,dr_2\,dr_3\cdots dr_N
+\rho(\mathbf{r}) = N\int |\Psi(\mathbf{r},\mathbf{r}_2,\ldots,\mathbf{r}_N)|^2\,d\mathbf{r}_2\,d\mathbf{r}_3\cdots d\mathbf{r}_N.
 \label{eq:charge-wf}
 \end{equation}
 </div>
 
-<p>\eqref{eq:charge-wf}
-Note that \(\int \rho(r),dr = N\).</p>
+<p>By construction \(\int \rho(\mathbf{r}),d\mathbf{r} = N\): the density integrates to the total
+number of electrons, not unity. \(\rho(\mathbf{r})\) is the central variable of DFT.</p>
 <h3 id="the-first-hohenbergkohn-theorem"><a class="header" href="#the-first-hohenbergkohn-theorem">The First Hohenberg–Kohn Theorem</a></h3>
 <div class="theorem">
 For any system of interacting particles in an external potential \(V_{\rm ext}(r)\),
@@ -267,9 +270,10 @@ V_{\rm ext}(\mathbf{r}) \neq V'_{\rm ext}(\mathbf{r}) + \text{const.},
 \hat{H}’ &amp; = \hat{T} + \hat{V}_{\rm ee} + \hat{V}‘_{\rm ext}, &amp; \hat{H}’|\Psi’\rangle = E’_0|\Psi’\rangle.
 \end{aligned}
 \]</p>
-<p>We apply the <strong>Rayleigh–Ritz variational principle</strong>, which states that the true ground-state
-energy minimises the energy expectation value: any trial state \(|\tilde{\Psi}\rangle \neq |\Psi_0\rangle\)
-satisfies \(\langle\tilde{\Psi}|\hat{H}|\tilde{\Psi}\rangle &gt; E_0\).</p>
+<p>We apply the <strong>Rayleigh–Ritz variational principle</strong> (Chapter 1.4), which states that the true
+ground-state energy minimises the energy expectation value: any trial state
+\(|\tilde{\Psi}\rangle \neq |\Psi_0\rangle\) satisfies
+\(\langle\tilde{\Psi}|\hat{H}|\tilde{\Psi}\rangle &gt; E_0\).</p>
 <p>Using \(\Psi’\) as a trial state for \(\hat{H}\):</p>
 <div>
 \begin{align}
@@ -290,7 +294,7 @@ satisfies \(\langle\tilde{\Psi}|\hat{H}|\tilde{\Psi}\rangle &gt; E_0\).</p>
 <p>Adding the two inequalities \eqref{eq:ineq1} and \eqref{eq:ineq2}:</p>
 <p>\[
 \begin{align}
-E_0 + E’_0 &amp; \leq E’_0 + E_0 + \int \underbrace{\left[ V_{\rm ext} - V’_{\rm ext} + V'_{\rm ext} - V_{\rm ext} \right]}_{=,0} \rho(\mathbf{r}) , d\mathbf{r}, \\
+E_0 + E’_0 &amp; \leq E’_0 + E_0 + \int \underbrace{\left[ V_{\rm ext} - V’_{\rm ext} + V’_{\rm ext} - V_{\rm ext} \right]}_{=,0} \rho(\mathbf{r}) , d\mathbf{r}, \\
 E_0 + E’_0 &amp; \leq E_0 + E’_0.
 \end{align}
 \]</p>
@@ -350,7 +354,7 @@ The true ground-state density \(\rho_0(\mathbf{r})\) minimises the total energy 
 <p>\[
 E[\tilde{\rho}] = \langle \tilde{\Psi}[\tilde{\rho}] | \hat{T} + \hat{V}_{ee} + \hat{V}_{\rm ext} | \tilde{\Psi}[\tilde{\rho}] \rangle = F[\tilde{\rho}] + \int V_{\rm ext}(\mathbf{r})\tilde{\rho}(\mathbf{r}) d\mathbf{r}
 \]</p>
-<p>Now consider the true ground state \(|\Psi_0\rangle\) with density \(\rho_0\) and energy \(E_0\). For any trial density \(\tilde{\rho} \neq \rho_0\), the associated wavefunction \(\tilde{\Psi}\) is <em>different</em> from \(\Psi_0\) (again by the First HK Theorem). Since \(\Psi_0\) is the true ground state of \(\hat{H}\), the <strong>Rayleigh–Ritz variational principle</strong> gives:</p>
+<p>Now consider the true ground state \(|\Psi_0\rangle\) with density \(\rho_0\) and energy \(E_0\). For any trial density \(\tilde{\rho} \neq \rho_0\), the associated wavefunction \(\tilde{\Psi}\) is <em>different</em> from \(\Psi_0\) (again by the First HK Theorem). Since \(\Psi_0\) is the true ground state of \(\hat{H}\), the <strong>Rayleigh–Ritz variational principle</strong> (Chapter 1.4) gives:</p>
 <p>\[
 E_0 = \langle \Psi_0 | \hat{H} | \Psi_0 \rangle \leq \langle \tilde{\Psi} | \hat{H} | \tilde{\Psi} \rangle.
 \]</p>
@@ -375,15 +379,38 @@ dimensions. This is the promise of DFT.</p>
 and that a universal energy functional \(E[\rho]\) exists, they do <strong>not</strong> provide an explicit form
 for the universal functional \(F[\rho]\). In particular, the kinetic energy \(T[\rho]\) and the
 electron–electron interaction \(V_{ee}[\rho]\) are unknown functionals of \(\rho\).</p>
-<p><strong>A note on \(v\)-representability.</strong> The HK proof assumes that the trial density \(\tilde{\rho}\) is <em>\(v\)-representable</em> — that it is the ground-state density of <em>some</em> external potential \(\tilde{V}_{\rm ext}\). Not all non-negative, normalised densities satisfy this condition. Lieb (1983) resolved this by reformulating DFT via a Legendre transform, defining the universal functional as:</p>
-<p>\[
-F[\rho] = \sum_{V_{\rm ext}} \left( E[V_{\rm ext}] - \int V_{\rm ext}(\mathbf{r}),\rho(\mathbf{r}),d\mathbf{r} \right),
-\]</p>
-<p>which is well-defined for all non-negative \(\rho\) with \(\int\rho d\mathbf{r} = N\) — a larger class called <em>ensemble \(v\)-representable</em> densities. For the Kohn–Sham scheme specifically, the relevant condition is <em>non-interacting \(v\)-representability</em>: the ground-state density of the interacting system must also be the ground-state density of some non-interacting system in an effective potential. This is assumed to hold throughout the KS construction (Chapter 3) and is believed to be satisfied for all physically relevant ground-state densities, though a general proof remains an open problem.</p>
-<p>Computing \(F[\rho]\) accurately is the central challenge of DFT in practice. The <strong>Kohn–Sham
-equations</strong>, developed in the next chapter, provide a practical path forward by introducing a
-fictitious system of non-interacting electrons designed to reproduce the exact ground-state density
-— sidestepping the need to evaluate \(F[\rho]\) directly.</p>
+<p><strong>The Levy constrained-search formulation.</strong> The original HK derivation defines \(F[\rho]\)
+only for densities that are ground-state densities of <em>some</em> external potential — the
+<strong>\(v\)-representable</strong> densities. Not every smooth non-negative \(\rho\) with
+\(\int\rho,d\mathbf{r} = N\) satisfies this; characterising the set of \(v\)-representable
+densities is in fact an open problem. Levy (1979) and Lieb (1983) eliminated this concern by
+recasting the universal functional as a <em>constrained search</em> over wavefunctions:</p>
+<div>
+\begin{equation}
+    F[\rho] = \min_{\Psi \to \rho}\,\langle\Psi|\hat{T} + \hat{V}_{ee}|\Psi\rangle,
+\label{eq:Levy}
+\end{equation}
+</div>
+
+<p>where the minimisation runs over all antisymmetric \(N\)-electron wavefunctions \(\Psi\) that
+yield the given density \(\rho(\mathbf{r})\) via equation \eqref{eq:charge-wf}. Two features
+make this definition powerful:</p>
+<ul>
+<li>It is well-defined for <strong>any</strong> non-negative \(\rho\) integrating to \(N\) — the larger class of
+<em>\(N\)-representable</em> densities — sidestepping the \(v\)-representability question entirely.</li>
+<li>The minimisation principle of the second HK theorem follows directly: for any trial density
+\(\tilde\rho\), \(E[\tilde\rho] = F[\tilde\rho] + \int V_{\rm ext}\tilde\rho,d\mathbf{r} \geq E_0\), because the inner search over \(\Psi\) is itself a Rayleigh–Ritz minimisation.</li>
+</ul>
+<p>In the Kohn–Sham scheme (Chapter 3), an analogous <em>non-interacting</em> constrained search defines
+\(T_s[\rho] = \min_{\Psi \to \rho}\langle\Psi|\hat{T}|\Psi\rangle\) over Slater determinants
+yielding \(\rho\). The existence of a Slater determinant for any reasonable \(\rho\) is called
+<em>non-interacting \(v\)-representability</em> and is believed to hold for all physically relevant
+ground-state densities, though a general proof remains an open problem.</p>
+<p><strong>Practical takeaway.</strong> The universal functional \(F[\rho]\) is well-defined and unique, but its
+explicit form is unknown. Computing it accurately is the central challenge of DFT in practice.
+The <strong>Kohn–Sham equations</strong>, developed in the next chapter, provide a practical path forward by
+introducing a fictitious system of non-interacting electrons designed to reproduce the exact
+ground-state density — sidestepping the need to evaluate \(F[\rho]\) directly.</p>
 
                     </main>
 
@@ -429,11 +456,11 @@ fictitious system of non-interacting electrons designed to reproduce the exact g
 
         <script src="elasticlunr-ef4e11c1.min.js"></script>
         <script src="mark-09e88c2c.min.js"></script>
-        <script src="searcher-c2a407aa.js"></script>
+        <script src="searcher-09f2665d.js"></script>
 
         <script src="clipboard-1626706a.min.js"></script>
         <script src="highlight-abc7f01d.js"></script>
-        <script src="book-a0b12cfe.js"></script>
+        <script src="book-c22b7243.js"></script>
 
         <!-- Custom JS scripts -->
         <script src="src/custom-cd58eebe.js"></script>
