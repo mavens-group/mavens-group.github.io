@@ -236,7 +236,7 @@ quantity is converged, and why is iterative solution necessary?
 **Answer Hint.** The SCF loop: (1) Start with an initial guess \\(\rho^{(0)}\\). (2) Construct
 \\(V_{\rm eff}[\rho]\\). (3) Solve the KS eigenvalue problem to get \\(\{\phi_i, \epsilon_i\}\\). (4)
 Compute the output density \\(\rho^{\rm out} = \sum_i f_i |\phi_i|^2\\). (5) Mix \\(\rho^{\rm in}\\) and
-\\(\rho^{\rm out}\\) to form the new input. Repeat until \\(|\rho^{\rm out} - \rho^{\rm in}| < \epsilon_{\rm tol}\\).
+\\(\rho^{\rm out}\\) to form the new input. Repeat until \\(|\rho^{\rm out} - \rho^{\rm in}| \lt \epsilon_{\rm tol}\\).
 Iteration is necessary because \\(V_{\rm eff}\\) depends on \\(\rho\\), which in turn depends on the
 eigenstates of \\(V_{\rm eff}\\) — a nonlinear self-consistency condition.
 </div>
@@ -576,12 +576,12 @@ limitation of DFT+U.
 of the instability and state which mixing scheme was designed to suppress it.
 
 <div class="remark">
-**Answer Hint.** In metals, a small perturbation of the density at long wavelength (small
+<strong>Answer Hint.</strong> In metals, a small perturbation of the density at long wavelength (small
 \\(\mathbf{G}\\)) produces a large response (diverging dielectric screening as \\(G \to 0\\)). Simple
-linear mixing \\(\rho^{\rm in}_{n+1} = \rho^{\rm in}_n + \alpha(\rho^{\rm out}_n - \rho^{\rm in}_n)\\)
+linear mixing \\(\rho^{\rm in}\_{n+1} = \rho^{\rm in}\_n + \alpha(\rho^{\rm out}\_n - \rho^{\rm in}\_n)\\)
 amplifies these long-wavelength modes: the correction at small \\(G\\) is too large, causing the
 density to oscillate between iterations. **Kerker preconditioning** suppresses this by
-multiplying the residual by \\(G^2/(G^2 + k_0^2)\\), damping corrections at \\(G < k_0\\), where
+multiplying the residual by \\(G^2/(G^2 + k\_0^2)\\), damping corrections at \\(G \lt k\_0\\), where
 \\(k_0\\) is the Thomas–Fermi screening wavevector.
 </div>
 
