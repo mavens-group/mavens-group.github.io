@@ -62,10 +62,10 @@
             const path_to_root = "";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "searchindex-9848e808.js";
+            window.path_to_searchindex_js = "searchindex-44ca2d5d.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="toc-07d7df44.js"></script>
+        <script src="toc-06779d97.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -250,12 +250,17 @@ in <strong>plane waves</strong> labelled by reciprocal lattice vectors \(\mathbf
 </div>
 
 <p>where \(\Omega\) is the unit cell volume. The basis is truncated at a <strong>kinetic energy cutoff</strong>
-\(E_{\rm cut}\). In atomic units (Hartree), the condition is:</p>
+\(E_{\rm cut}\). In Hartree atomic units the condition is:</p>
 <p>\[
 \frac{1}{2}|\mathbf{k}+\mathbf{G}|^2 \leq E_{\rm cut},
 \]</p>
 <p>equivalently \(\frac{\hbar^2}{2m_e}|\mathbf{k}+\mathbf{G}|^2 \leq E_{\rm cut}\) in SI notation.
-Codes typically quote \(E_{\rm cut}\) in eV (VASP) or Ry (Quantum ESPRESSO); 1 Hartree = 27.2 eV = 2 Ry.</p>
+Codes quote \(E_{\rm cut}\) in different units: <strong>VASP</strong> uses eV, <strong>Quantum ESPRESSO</strong> uses Ry,
+and the underlying expressions assume Hartree. Conversions:
+\(1,\mathrm{Ha} = 27.2114,\mathrm{eV} = 2,\mathrm{Ry}\), so a VASP input of \(\texttt{ENCUT}=500\) eV
+corresponds to \(\sim 18.4,\mathrm{Ha}\), while \(\texttt{ecutwfc}=60\) Ry in QE corresponds to
+\(30,\mathrm{Ha} = 816,\mathrm{eV}\). When evaluating \(\tfrac{1}{2}|\mathbf{G}|^2\) by hand,
+keep \(\mathbf{G}\) in inverse bohr and \(E_{\rm cut}\) in Hartree to avoid factor-of-13.6 errors.</p>
 <p><strong>Advantages of plane waves:</strong></p>
 <ul>
 <li><strong>Systematic completeness</strong>: increasing \(E_{\rm cut}\) improves the basis in a controlled,
@@ -289,7 +294,10 @@ norm-conserving PPs; transition metal oxides and \(f\)-electron systems often re
 values.</p>
 <h2 id="k-point-sampling"><a class="header" href="#k-point-sampling">\(k\)-Point Sampling</a></h2>
 <p>In a periodic solid, the KS equations must be solved at every \(\mathbf{k}\)-point in the first
-Brillouin zone (BZ). Physical observables involve BZ integrals, e.g.:</p>
+Brillouin zone (BZ). This section summarises the essential ideas needed to set up a basis-set
+calculation; the detailed treatment of smearing, the tetrahedron method, and the convergence
+rates of BZ integrals for metals is deferred to Chapter 9.</p>
+<p>Physical observables involve BZ integrals, e.g.:</p>
 <div>
 \begin{equation}
     \rho(\mathbf{r}) = \frac{\Omega}{(2\pi)^3}\sum_i \int_{\rm BZ} |\phi_{i\mathbf{k}}(\mathbf{r})|^2\,d\mathbf{k}.
@@ -402,9 +410,22 @@ nodeless function.</p>
 <p>USPP is available in Quantum ESPRESSO and CASTEP and offers an excellent cost-to-accuracy ratio
 for most elements.</p>
 <h3 id="projector-augmented-wave-paw-method"><a class="header" href="#projector-augmented-wave-paw-method">Projector Augmented Wave (PAW) Method</a></h3>
-<p>The <strong>PAW method</strong> (Blöchl, 1994) is the most rigorous of the pseudopotential-like approaches
+<figure>
+<img src="images/paw_sphere.svg" alt="PAW method showing all-electron and pseudo wavefunctions and the augmentation sphere" style="max-width:700px; display:block; margin:1.5em auto;" />
+<figcaption style="text-align:center; font-size:0.9em; color:#555;">
+<p><strong>Figure 5.1.</strong> <em>(a)</em> All-electron (AE, terracotta) and pseudo (PS, blue dashed) wavefunctions
+as a function of \(r\). Inside the augmentation sphere \(r &lt; r_c\), the AE wavefunction has
+nodes and a Coulomb singularity at the nucleus; the PS wavefunction is nodeless and smooth.
+Outside \(r_c\), they are identical. <em>(b)</em> The PAW transformation
+\(\hat{T} = 1 + \sum_n (|\phi_n\rangle - |\tilde\phi_n\rangle)\langle\tilde{p}_n|\)
+maps the smooth PS density \(\tilde\rho\) to the full AE density \(\rho = \tilde\rho + \rho^1 - \tilde\rho^1\),
+where the on-site corrections are computed inside the augmentation sphere from the AE and
+PS partial waves.</p>
+</figcaption>
+</figure>
+The **PAW method** (Blöchl, 1994) is the most rigorous of the pseudopotential-like approaches
 and is now the default in most major plane-wave codes. It can be understood as a generalisation
-of USPP that is formally equivalent to an all-electron calculation.</p>
+of USPP that is formally equivalent to an all-electron calculation.
 <h4 id="the-paw-transformation"><a class="header" href="#the-paw-transformation">The PAW Transformation</a></h4>
 <p>PAW introduces a <strong>linear transformation operator</strong> \(\hat{\mathcal{T}}\) that maps smooth,
 computationally convenient <strong>pseudo-wavefunctions</strong> \(|\tilde{\Psi}_i\rangle\) onto the true
@@ -437,6 +458,20 @@ outside \(r_c^a\) but are nodeless and smooth inside.</li>
 <li>\(\langle\tilde{p}_n^a|\) are <strong>projector functions</strong> localised inside \(r_c^a\), dual to the
 pseudo partial waves: \(\langle\tilde{p}_n^a|\tilde{\phi}<em>m^a\rangle = \delta</em>{nm}\).</li>
 </ul>
+<p><strong>Constructing the projectors.</strong> The duality relation does not uniquely fix
+\(|\tilde{p}_n^a\rangle\); it is a <em>biorthogonality condition</em> with the pseudo partial waves.
+The standard construction (Blöchl 1994; Kresse–Joubert 1999) starts from auxiliary functions
+\(|\chi_n^a\rangle\) that are localised inside \(r_c^a\) and have the same angular character as
+\(|\tilde{\phi}_n^a\rangle\) — typically obtained by acting on \(|\tilde{\phi}<em>n^a\rangle\) with
+the operator \((\epsilon</em>{\rm ref} - \hat{T} - \tilde{V})\), which annihilates the pseudo partial
+wave outside the sphere. The projectors are then <strong>biorthogonalised</strong>:</p>
+<p>\[
+|\tilde{p}<em>n^a\rangle = \sum_m |\chi_m^a\rangle (B^{-1})</em>{mn},
+\qquad B_{mn} = \langle\chi_m^a|\tilde{\phi}_n^a\rangle,
+\]</p>
+<p>which guarantees \(\langle\tilde{p}_n^a|\tilde{\phi}<em>m^a\rangle = \delta</em>{nm}\) by construction.
+The construction is performed once per element during PAW dataset generation; the user only sees
+the finished projector–partial-wave set in the POTCAR (VASP) or UPF (QE) file.</p>
 <p>The transformation acts as follows: when \(\hat{\mathcal{T}}\) is applied to \(|\tilde{\Psi}_i\rangle\),
 the projectors \(\langle\tilde{p}_n^a|\) measure the overlap of the smooth wavefunction with the
 partial waves in each augmentation sphere, and the difference \((|\phi_n^a\rangle - |\tilde{\phi}_n^a\rangle)\) restores the all-electron character inside that sphere. Outside all augmentation
@@ -496,6 +531,45 @@ this functional take the form of a <strong>generalised eigenvalue problem</stron
 <p>where \(\hat{\tilde{H}}\) is the smooth KS Hamiltonian (including on-site corrections) and
 \(\hat{S} = \mathbf{1} + \sum_a\sum_{nm}({\langle\tilde{p}<em>n^a|\tilde{p}<em>m^a\rangle</em>{\rm AE} - \delta</em>{nm}})|\tilde{p}_m^a\rangle\langle\tilde{p}_n^a|\) is the <strong>overlap operator</strong> that enforces
 the correct normalisation of the all-electron wavefunctions.</p>
+<h4 id="frozen-core-and-semi-core-states"><a class="header" href="#frozen-core-and-semi-core-states">Frozen Core and Semi-Core States</a></h4>
+<p>A PAW dataset (or any pseudopotential) requires a decision about which electrons are “core”
+(treated as a frozen reference contribution to the potential) and which are “valence” (treated
+explicitly in the SCF loop). The choice is not always obvious: a state labelled chemically as
+“core” may polarise significantly under chemical bonding or magnetic ordering, and must then be
+promoted to valence. These promoted states are called <strong>semi-core</strong> states.</p>
+<p>The most common cases requiring semi-core treatment are:</p>
+<ul>
+<li>
+<p><strong>\(3d\) transition metals</strong>: the \(3p\) (and sometimes \(3s\)) states overlap energetically with
+the \(3d\) and \(4s\) valence states. In compounds with short metal–oxygen bonds, with large
+magnetic moments, or under high pressure, the \(3p\) electrons polarise and must be included.
+VASP provides <code>Fe_pv</code> (\(3p\) in valence) and <code>Fe_sv</code> (both \(3s\) and \(3p\) in valence) for such
+cases.</p>
+</li>
+<li>
+<p><strong>\(4d\) and \(5d\) transition metals</strong>: the \(4p\)/\(5p\) semi-core states are even more
+important. Standard VASP recommendations: use <code>Mo_pv</code>, <code>Nb_pv</code>, <code>Ta_pv</code>, <code>W_pv</code> rather than
+the plain potentials for most production work.</p>
+</li>
+<li>
+<p><strong>Alkali and alkaline earths</strong>: \(2s/2p\) semi-core states are needed for Na, Mg, K, Ca.
+Standard names: <code>Na_pv</code>, <code>K_sv</code>, <code>Ca_sv</code>.</p>
+</li>
+<li>
+<p><strong>Rare earths and actinides</strong>: \(5s5p\) (for \(4f\) elements) or \(6s6p\) (for \(5f\) elements)
+are routinely promoted to valence to capture the contraction of the \(f\) shell under bonding.</p>
+</li>
+</ul>
+<p>The trade-off is computational: each promoted semi-core state increases the number of bands
+\(N_{\rm bands}\) and typically requires a larger \(E_{\rm cut}\) because the semi-core
+wavefunctions oscillate more rapidly than valence states. Typical numbers: <code>Fe</code> (standard)
+needs \(E_{\rm cut} = 270\) eV; <code>Fe_pv</code> needs \(\sim 295\) eV; <code>Fe_sv</code> needs \(\sim 320\) eV. The
+accuracy gain is largest for total-energy differences (cohesive energies, phase stability,
+magnetic ordering energies); single-point band structure is less sensitive.</p>
+<p><strong>Recommendation:</strong> Start with the standard PAW potential and switch to <code>_pv</code>/<code>_sv</code> variants if
+(i) computing energy differences sensitive to inner-shell polarisation, (ii) treating compressed
+or strongly hybridised environments, or (iii) the VASP wiki / QE pseudopotential library
+explicitly recommends the semi-core variant for your element.</p>
 <h4 id="strengths-of-paw"><a class="header" href="#strengths-of-paw">Strengths of PAW</a></h4>
 <ul>
 <li><strong>Formally all-electron</strong>: The full all-electron density is available in the augmentation

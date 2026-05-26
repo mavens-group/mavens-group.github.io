@@ -62,10 +62,10 @@
             const path_to_root = "";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "searchindex-9848e808.js";
+            window.path_to_searchindex_js = "searchindex-44ca2d5d.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="toc-07d7df44.js"></script>
+        <script src="toc-06779d97.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -222,8 +222,9 @@ progressively more sophisticated strategies for reaching the fixed point.</p>
 <h2 id="the-self-consistency-problem-revisited"><a class="header" href="#the-self-consistency-problem-revisited">The Self-Consistency Problem Revisited</a></h2>
 <h3 id="the-fixed-point-formulation"><a class="header" href="#the-fixed-point-formulation">The Fixed-Point Formulation</a></h3>
 <p>The SCF cycle of Chapter 3 (Section 3.3) consists of three computational steps: constructing
-\(V_{\rm eff}[\rho]\) from equation (3.xx), diagonalising \(\hat{h}<em>{\rm KS}\), and assembling
-\(\rho</em>{\rm out} = \sum_i f_i |\phi_i|^2\). We now recast this cycle as a <strong>fixed-point
+\(V_{\rm eff}[\rho]\) from the Kohn–Sham equation \eqref{eq:KS-eqn}, diagonalising
+\(\hat{h}_{\rm KS}\), and assembling
+\(\rho_{\rm out} = \sum_i f_i |\phi_i|^2\). We now recast this cycle as a <strong>fixed-point
 problem</strong> whose convergence properties can be analysed rigorously. Define the map \(F\) that takes
 an input density \(\rho_{\rm in}\) and returns the output density obtained by one full KS cycle:</p>
 <div>
@@ -714,11 +715,12 @@ other pieces of numerical machinery that have been treated as black boxes so far
 <strong>eigenvalue solver</strong> that produces the KS orbitals and eigenvalues at each iteration, and the
 <strong>occupation scheme</strong> that assigns electrons to states near the Fermi level. Both can fail
 independently of the mixing, and both introduce their own convergence parameters.</p>
-<p>The next chapter develops these two topics. Section 9.1 treats smearing and partial occupancies
-— the regularisation of Brillouin zone integrals over the discontinuous Fermi surface.
-Section 10.2 derives the iterative diagonalisation methods (Davidson and RMM-DIIS) that make the
-KS eigenvalue problem tractable for large systems. Section 10.3 ties everything together with
-convergence diagnostics and a worked example on bcc Fe.</p>
+<p>The next two chapters develop these two topics. <strong>Chapter 9</strong> treats smearing and partial
+occupancies — the regularisation of Brillouin zone integrals over the discontinuous Fermi surface
+— through Gaussian, Fermi–Dirac, Methfessel–Paxton, and tetrahedron schemes. <strong>Chapter 10</strong>
+derives the iterative diagonalisation methods (Davidson and RMM-DIIS) that make the KS eigenvalue
+problem tractable for large systems, and closes with convergence diagnostics and a worked
+example on bcc Fe that ties together all the numerical machinery developed in Chapters 8–10.</p>
 
                     </main>
 

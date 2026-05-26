@@ -62,10 +62,10 @@
             const path_to_root = "";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "searchindex-9848e808.js";
+            window.path_to_searchindex_js = "searchindex-44ca2d5d.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="toc-07d7df44.js"></script>
+        <script src="toc-06779d97.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -202,6 +202,26 @@
                 <div id="mdbook-content" class="content">
                     <main>
                         <h1 id="eigenvalue-solvers"><a class="header" href="#eigenvalue-solvers">Eigenvalue Solvers</a></h1>
+<p>The Kohn–Sham SCF loop developed in Chapter 8 has three computational hot spots, each handled
+by a specialised algorithm:</p>
+<ol>
+<li><strong>Density mixing</strong> (Chapter 8) — converges the outer self-consistency cycle.</li>
+<li><strong>Brillouin zone integration</strong> (Chapter 9) — assembles the density from band energies and
+occupations at each \(\mathbf{k}\)-point.</li>
+<li><strong>Eigenvalue solver</strong> — at every SCF iteration and every \(\mathbf{k}\)-point, solves
+\(\hat{h}<em>{\rm KS}\phi_i = \epsilon_i\phi_i\) for the lowest \(N</em>{\rm bands}\) eigenpairs.</li>
+</ol>
+<p>This chapter develops the third. The Kohn–Sham eigenvalue problem is the <em>inner</em> loop of DFT:
+it is called \(N_{\rm SCF} \times N_{\mathbf{k}}\) times per total-energy evaluation, so even
+factor-of-two improvements in its cost translate into substantial wall-clock savings. Because
+the matrix is too large to diagonalise directly (\(N_{\rm PW} \sim 10^4\)–\(10^5\)) but only
+the lowest \(N_{\rm bands} \sim 10^2\)–\(10^3\) eigenpairs are needed, the methods used in
+practice are <strong>iterative subspace algorithms</strong>: Davidson, RMM-DIIS, and conjugate-gradient
+minimisation. These trade off robustness, memory, and convergence rate, and the choice depends
+on system size and band-structure character.</p>
+<p>The chapter concludes with a section on <strong>parallelisation</strong>, which is essential for any
+production calculation, and with the diagnostic toolkit and worked-example workflow on bcc Fe
+that ties together everything from Chapters 8–10.</p>
 <h2 id="iterative-diagonalisation"><a class="header" href="#iterative-diagonalisation">Iterative Diagonalisation</a></h2>
 <h3 id="the-eigenvalue-problem-and-its-cost"><a class="header" href="#the-eigenvalue-problem-and-its-cost">The Eigenvalue Problem and Its Cost</a></h3>
 <p>At each SCF step, we must solve the Kohn–Sham eigenvalue equation:</p>
@@ -392,6 +412,61 @@ the other methods fail to converge (e.g., systems with extremely flat potential 
 or near-degenerate states), when memory is limited (CG requires minimal subspace storage), or
 for the first few SCF steps of a difficult system where a reliable initial eigenspace must be
 established before switching to faster methods.</p>
+<h3 id="parallelisation"><a class="header" href="#parallelisation">Parallelisation</a></h3>
+<p>The eigenvalue solver is also where DFT calculations spend most of their wall-clock time, so
+its parallelisation determines the scalability of the whole calculation. Plane-wave DFT codes
+exploit four levels of parallelism, listed in roughly the order they should be increased as the
+number of cores grows:</p>
+<p><strong>1. \(\mathbf{k}\)-point parallelism.</strong> Different \(\mathbf{k}\)-points are independent of each
+other at fixed potential — they communicate only through the density and total energy. This is
+the most efficient parallelisation: nearly perfect scaling, minimal communication. Limited by the
+number of irreducible \(\mathbf{k}\)-points in the BZ. Controlled by <code>KPAR</code> (VASP) or
+<code>-npool</code> (Quantum ESPRESSO).</p>
+<p><strong>2. Band parallelism.</strong> Different bands (eigenpairs) within a single \(\mathbf{k}\)-point are
+distributed across cores. Requires communication for orthogonalisation
+(\(\mathcal{O}(N_{\rm bands}^2 \cdot N_{\rm PW})\)) and for subspace diagonalisation. Scales well
+up to a few dozen cores per \(\mathbf{k}\)-point, then orthogonalisation overhead becomes
+limiting. Controlled by <code>NCORE</code> and <code>NPAR</code> (VASP) or <code>-nband</code> (QE).</p>
+<p><strong>3. Plane-wave (\(\mathbf{G}\)-vector) parallelism.</strong> The plane-wave coefficients of each band
+are distributed across cores. Required for very large unit cells where bands cannot fit in
+single-node memory. Requires FFT communication at every Hamiltonian application, which is the
+dominant cost; the FFT slabs are distributed and 3D transposes are performed at each step.
+Typically used in combination with band parallelism: cores are arranged in a 2D grid, with
+\(P_{\rm band} \times P_{\mathbf{G}}\) processes per \(\mathbf{k}\)-point. In QE this is <code>-ntg</code>
+(task groups for FFT).</p>
+<p><strong>4. Subspace-diagonalisation parallelism.</strong> The dense \(N_{\rm bands} \times N_{\rm bands}\)
+subspace matrix is diagonalised at each iteration. For \(N_{\rm bands} &gt; 1000\), this becomes a
+bottleneck and is parallelised via ScaLAPACK or ELPA. Controlled by <code>LSCALAPACK</code> and <code>LSCAAWARE</code>
+(VASP) or <code>-ndiag</code> (QE).</p>
+<p><strong>Choosing the decomposition.</strong> A practical rule of thumb for \(N_{\rm cores}\) total cores:</p>
+<ul>
+<li>Set \(P_{\mathbf{k}} = N_{\rm irr.,k}\) or a divisor thereof (one pool per \(\mathbf{k}\)).</li>
+<li>Set \(P_{\rm band} \cdot P_{\mathbf{G}} = N_{\rm cores} / P_{\mathbf{k}}\) per pool, with
+\(P_{\rm band}\) chosen so that each rank holds \(\sim 5\)–\(20\) bands.</li>
+<li>Use <code>-ndiag</code> (QE) or the <code>LSCALAPACK</code> route (VASP) only when the subspace diagonalisation
+shows up significantly in profiling.</li>
+</ul>
+<p>For example, a 200-atom magnetic supercell with 8 irreducible \(\mathbf{k}\)-points and
+\(N_{\rm bands} = 600\), running on 256 cores, might use \(P_{\mathbf{k}} = 8\),
+\(P_{\rm band} = 8\), \(P_{\mathbf{G}} = 4\), giving \(\sim 75\) bands per band-group and
+\(\sim 15,000\) \(\mathbf{G}\)-vectors per FFT-group — a balanced point.</p>
+<p><strong>Concrete code settings:</strong></p>
+<div class="table-wrapper">
+<table>
+<thead>
+<tr><th>Parallelism level</th><th>VASP</th><th>Quantum ESPRESSO</th></tr>
+</thead>
+<tbody>
+<tr><td>\(\mathbf{k}\)-points</td><td><code>KPAR = P_k</code></td><td><code>-npool P_k</code></td></tr>
+<tr><td>Bands</td><td><code>NCORE = P_b / NPAR</code> (NCORE = cores per band group)</td><td><code>-nband P_b</code></td></tr>
+<tr><td>Plane waves / FFT</td><td>Coupled to <code>NCORE</code></td><td><code>-ntg P_g</code></td></tr>
+<tr><td>Subspace diag.</td><td><code>LSCALAPACK = .TRUE.</code></td><td><code>-ndiag P_d</code> (must be a perfect square)</td></tr>
+</tbody>
+</table>
+</div>
+<p>For hybrid-functional or DFT+U calculations, the exact-exchange and Hubbard contributions add
+additional MPI/OpenMP communication patterns; <code>LHFCALC = .TRUE.</code> calculations in VASP often
+benefit from larger <code>NCORE</code> (more cores per band group) to overlap communication with FFT work.</p>
 <h3 id="computational-scaling"><a class="header" href="#computational-scaling">Computational Scaling</a></h3>
 <p>The dominant costs at each SCF step are:</p>
 <div class="table-wrapper">
@@ -412,12 +487,6 @@ diagonalisation costs dominate, giving an effective scaling of \(\mathcal{O}(N^3
 size \(N\). This cubic wall is the fundamental limit of conventional KS-DFT and is the motivation
 for linear-scaling (\(\mathcal{O}(N)\)) methods, which require localised basis sets and are not
 yet standard for plane-wave calculations.</p>
-<p><strong>Parallelisation.</strong> The three levels of parallelism available in a plane-wave DFT calculation
-are: over \(\mathbf{k}\)-points (trivially parallel — no communication), over bands
-(moderate communication for orthogonalisation), and over plane waves (requires FFT
-communication). The optimal decomposition depends on the system: \(\mathbf{k}\)-point
-parallelism is most efficient for small unit cells with dense \(\mathbf{k}\)-meshes;
-band/plane-wave parallelism is needed for large supercells with few \(\mathbf{k}\)-points.</p>
 <details>
 <summary><b>Code Notes: VASP and Quantum ESPRESSO Parameters</b></summary>
 <p><strong>VASP:</strong></p>
@@ -686,6 +755,9 @@ potential energy surface). These topics are the subject of the next chapter.</p>
                                 <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
                             </a>
 
+                            <a rel="next prefetch" href="EX-ExamQA.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                            </a>
 
                         <div style="clear: both"></div>
                     </nav>
@@ -697,6 +769,9 @@ potential energy surface). These topics are the subject of the next chapter.</p>
                         <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
                     </a>
 
+                    <a rel="next prefetch" href="EX-ExamQA.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
+                    </a>
             </nav>
 
         </div>
