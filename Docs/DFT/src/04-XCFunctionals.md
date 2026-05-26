@@ -20,6 +20,50 @@ These two series are orthogonal: the first improves the *local* description of t
 shape; the second improves its *non-local* content. Understanding their structure turns the
 choice of functional from a matter of recipe-following into a matter of physics.
 
+### Jacob's Ladder of Functionals
+
+<figure>
+<img src="images/jacobs_ladder.svg" alt="Jacob's ladder of XC functionals showing five rungs from LDA to fully non-local RPA, organised by gradient and coupling-constant series" style="max-width:640px; display:block; margin:1.5em auto;"/>
+<figcaption style="text-align:center; font-size:0.9em; color:#555;">
+
+**Figure 4.1.** Jacob's ladder of XC functionals. Left rail: gradient expansion series
+(LDA → GGA → meta-GGA). Right rail: coupling-constant series (hybrid → double-hybrid).
+The two rails are orthogonal improvements; meta-hybrid functionals (SCAN0) sit at their crossing.
+Computational cost increases by roughly one order of magnitude per rung.
+
+</figcaption>
+</figure>
+
+Perdew's **Jacob's ladder** organises XC functionals by the local ingredients each rung is
+allowed to use — and parallel to it, the coupling-constant series organises them by how much
+of the exact \\(\lambda = 0\\) endpoint they retain. The chapter develops both:
+
+```
+  Rung 5  ┃ Fully non-local correlation         ┃ ↑ Heaven (exact XC)
+          ┃   (RPA, ACFD)                        ┃
+  ────────┃──────────────────────────────────────┃
+  Rung 4  ┃ Hyper-GGA / double-hybrid            ┃ + E_c^{GL2}     [coupling]
+          ┃   (B2PLYP, PBE-QIDH)                 ┃
+  ────────┃──────────────────────────────────────┃
+  Rung 3  ┃ Hybrid (global / range-separated)    ┃ + E_x^{exact}   [coupling]
+          ┃   (PBE0, B3LYP, HSE06, ωB97X-V)      ┃
+  ────────┃──────────────────────────────────────┃
+  Rung 2  ┃ meta-GGA                             ┃ + τ, α          [gradient]
+          ┃   (SCAN, r²SCAN, TPSS)               ┃
+  ────────┃──────────────────────────────────────┃
+  Rung 1  ┃ GGA                                  ┃ + ∇ρ            [gradient]
+          ┃   (PBE, PBEsol, BLYP)                ┃
+  ────────┃──────────────────────────────────────┃
+  Rung 0  ┃ LDA / LSDA                           ┃   ρ             [gradient]
+          ┃   (PW92, VWN)                        ┃
+          ┃                                      ┃ ↓ Earth (Hartree)
+```
+
+The left half (rungs 0–2) ascends the gradient series; the right half (rungs 3–4) ascends the
+coupling-constant series. Meta-hybrid functionals (e.g. SCAN0) live at the crossing of the two.
+Computational cost grows roughly tenfold per rung; predictive accuracy improves accordingly for
+the right class of problem, but no rung is uniformly best.
+
 
 ## Formal Definition and the Two Reference Points
 
@@ -55,6 +99,18 @@ one unit of charge from its neighbourhood. Approximations that satisfy this cons
 benefit from systematic error cancellation even when the detailed shape of the hole is wrong,
 which explains the surprising accuracy of LDA despite its crude derivation.
 
+<figure>
+<img src="images/xc_hole.svg" alt="Schematic of the exchange hole, correlation hole, and XC hole as a function of electron-electron separation" style="max-width:660px; display:block; margin:1.5em auto;"/>
+<figcaption style="text-align:center; font-size:0.9em; color:#555;">
+
+**Figure 4.2.** Schematic XC hole \\(n_{\rm xc}(\mathbf{r},\mathbf{r}')\\) as a function of
+\\(|\mathbf{r}'-\mathbf{r}|\\). The exchange hole (blue dashed) has a cusp at \\(r'=r\\) and
+a long \\(-1/r\\) tail for finite systems. The correlation hole (terracotta dotted) deepens the
+total hole at short range and integrates to zero. The XC hole (plum solid) satisfies the exact
+sum rule \\(\int n_{\rm xc}\,d\mathbf{r}' = -1\\).
+
+</figcaption>
+</figure>
 ### The Two Exactly-Known Limits
 
 Two limits of \\(E_{\rm xc}\\) are known exactly and serve as expansion points.
@@ -82,6 +138,21 @@ where \\(\Psi^\lambda\\) is the ground state with the same density \\(\rho\\) bu
 \\(\lambda\\). At \\(\lambda = 0\\), \\(\Psi^0\\) is the KS Slater determinant and
 \\(W_{\rm xc}^0 = E_{\rm x}^{\rm exact}\\) is known analytically. This is the natural anchor for a
 Taylor series in *interaction strength*.
+
+**Derivation.** Define a one-parameter family of Hamiltonians \\(\hat{H}^\lambda = \hat{T} + \lambda\hat{V}_{ee} + \hat{V}_{\rm ext}^\lambda\\), where the external potential \\(V_{\rm ext}^\lambda\\) is adjusted at each \\(\lambda\\) so that the ground-state density remains fixed at the physical \\(\rho(\mathbf{r})\\). The endpoints are the KS system (\\(\lambda=0\\)) and the physical system (\\(\lambda=1\\)). Applying the Hellmann–Feynman theorem to \\(E^\lambda = \langle\Psi^\lambda|\hat{H}^\lambda|\Psi^\lambda\rangle\\):
+
+\\[
+    \frac{dE^\lambda}{d\lambda} = \langle\Psi^\lambda|\hat{V}_{ee}|\Psi^\lambda\rangle
+    + \int \frac{dV_{\rm ext}^\lambda}{d\lambda}\,\rho(\mathbf{r})\,d\mathbf{r}.
+\\]
+
+Integrating from \\(\lambda = 0\\) to \\(\lambda = 1\\) gives \\(E^1 - E^0 = \int_0^1\langle\hat{V}_{ee}\rangle^\lambda\,d\lambda + \int(V_{\rm ext}^1 - V_{\rm ext}^0)\rho\,d\mathbf{r}\\). Using \\(E^1 = T + V_{ee} + \int V_{\rm ext}\rho\\) and \\(E^0 = T_s + \int V_{\rm KS}\rho\\), and the KS decomposition \\(V_{ee} = E_{\rm H} + E_{\rm xc} - (T - T_s)\\), the external-potential boundary terms cancel exactly, leaving:
+
+\\[
+    E_{\rm xc} = \int_0^1 \left(\langle\Psi^\lambda|\hat{V}_{ee}|\Psi^\lambda\rangle - E_{\rm H}[\rho]\right)d\lambda \equiv \int_0^1 W_{\rm xc}^\lambda\,d\lambda,
+\\]
+
+which is \eqref{eq:adiabatic}. The kinetic energy correction \\(T - T_s\\) is absorbed into the integral by the way the external potential is adjusted along the path — this is what makes \\(W_{\rm xc}^\lambda\\), rather than just \\(\langle V_{ee}\rangle^\lambda\\), the right quantity to integrate.
 
 
 ## The First Taylor Series: Gradient Expansion and Semi-Local Functionals
@@ -207,20 +278,6 @@ E_{\rm xc}[\rho] \geq -C_{\rm LO}\int \rho(\mathbf{r})^{4/3}\,d\mathbf{r}, \qqua
 
 Physically this bound says that the XC energy cannot be more negative than a multiple of the exchange energy of a fully spin-polarised UEG at the same density — it bounds how much the XC hole can deepen the energy. The numerical constant \\(C_{\rm LO} = 1.679\\) was obtained by Lieb and Oxford from analysis of the indirect part of the Coulomb energy. PBE's exchange enhancement factor is explicitly constructed to satisfy this bound for all \\(s\\), which is one of its 11 exact constraints. LDA satisfies the bound locally; GEA violates it at large \\(s\\).
 
-**The GL4 argument for \\(a = 1/4\\).** The fraction of exact exchange in PBE0 is not empirical but follows from fourth-order Görling–Levy (GL) perturbation theory (Perdew, Ernzerhof, Burke, 1996). The GL expansion of the adiabatic connection integrand gives:
-
-\\[
-W_{\rm xc}^\lambda = E_{\rm x}^{\rm exact} + 2\lambda E_{\rm c}^{\rm GL2} + 3\lambda^2 E_{\rm c}^{\rm GL3} + \cdots
-\\]
-
-Integrating over \\(\lambda \in [0,1]\\) with only the zeroth- and second-order terms:
-
-\\[
-E_{\rm xc}^{\rm GL4} \approx E_{\rm x}^{\rm exact} + E_{\rm c}^{\rm GL2}.
-\\]
-
-Since GGA already approximates \\(E_{\rm c}^{\rm GL2}\\) partially (capturing the short-range correlation at the GGA level), the optimal fraction of exact exchange that avoids double-counting the correlation already in the GGA is estimated by requiring that the hybrid reproduces GL4 for weakly correlated systems. This gives \\(a = 1/4\\) as the parameter-free choice. Systems with stronger correlation (larger \\(\lambda\\) dependence of \\(W_{\rm xc}^\lambda\\)) would prefer smaller \\(a\\), while weakly correlated systems near the UEG prefer larger \\(a\\) — this is the physical reason why one value of \\(a\\) cannot be universally optimal.
-
 ### Rung 2: Meta-GGA — Encoding \\(\mathcal{O}(s^4)\\) Through \\(\tau\\)
 
 The gradient expansion can in principle be extended to \\(\mathcal{O}(s^4)\\), which involves second spatial derivatives \\(\nabla^2\rho\\). However, \\(\nabla^2\rho\\) included directly reintroduces oscillatory behaviour in the density tails. The **kinetic energy density**:
@@ -267,7 +324,34 @@ The meta-GGA energy functional is:
 E_{\rm xc}^{\rm mGGA}[\rho] = \int \varepsilon_{\rm xc}(\rho,\,s,\,\alpha)\,\rho\,d\mathbf{r}.
 \\]
 
-**SCAN** (Strongly Constrained and Appropriately Normed; Sun, Ruzsinszky, Perdew, 2015) satisfies all 17 known exact constraints applicable to a semi-local functional simultaneously. **r²SCAN** (Furness et al., 2020) is a numerically regularised variant preferred in plane-wave codes.
+**SCAN** (Strongly Constrained and Appropriately Normed; Sun, Ruzsinszky, Perdew, 2015)
+satisfies all 17 known exact constraints applicable to a semi-local functional simultaneously
+— more than any earlier functional. The constraints are conditions the exact \\(E_{\rm xc}\\)
+provably obeys; satisfying them forces SCAN to approximate the exact functional in
+mathematically controlled ways. A representative set:
+
+- **Correct UEG limit:** \\(E_{\rm xc} \to E_{\rm xc}^{\rm UEG}\\) when \\(\rho\\) is uniform.
+- **Lieb–Oxford bound:** \\(E_{\rm xc}[\rho] \geq -C_{\rm LO}\int\rho^{4/3}d\mathbf{r}\\) for all
+  densities and all spin polarisations.
+- **Uniform coordinate scaling:** under \\(\rho(\mathbf{r}) \to \gamma^3\rho(\gamma\mathbf{r})\\),
+  the exchange energy scales as \\(E_{\rm x}[\rho_\gamma] = \gamma E_{\rm x}[\rho]\\) — a rigorous
+  consequence of the form of the Coulomb operator.
+- **One-electron self-interaction freedom in the appropriate norm:** for any one-electron
+  density (signalled by \\(\alpha = 0\\) at every \\(\mathbf{r}\\)), SCAN's exchange–correlation hole
+  reduces to the exact single-electron form, eliminating most of the LDA/GGA self-interaction
+  error in this limit.
+- **\\(\tau^W/\tau \to 1\\) for one-orbital regions:** the iso-orbital indicator \\(\alpha\\) goes
+  to zero in single-orbital regions (covalent bonds, core), and SCAN's enhancement factor
+  responds correctly.
+
+The remaining constraints govern asymptotic behaviour at low and high density, second-order
+gradient expansion coefficients, and spin-scaling. Crucially, the constraints fix all of SCAN's
+parameters: it is *constrained*, not *fitted*. The "appropriately normed" half of the name
+refers to choosing the small number of free parameters to reproduce *norms* — exactly soluble or
+benchmark systems like the H atom, the He isoelectronic series, and the jellium surface — rather
+than fitting to a large empirical database. **r²SCAN** (Furness et al., 2020) is a numerically
+regularised variant that preserves all the constraints but removes numerical oscillations in the
+exchange–correlation potential; it is the preferred form in plane-wave codes (VASP, QE).
 
 
 ## The Second Taylor Series: Coupling-Constant Expansion and Non-Local Functionals

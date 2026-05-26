@@ -26,7 +26,8 @@ progressively more sophisticated strategies for reaching the fixed point.
 ### The Fixed-Point Formulation
 
 The SCF cycle of Chapter 3 (Section 3.3) consists of three computational steps: constructing
-\\(V_{\rm eff}[\rho]\\) from equation (3.xx), diagonalising \\(\hat{h}_{\rm KS}\\), and assembling
+\\(V\_{\rm eff}[\rho]\\) from the Kohn–Sham equation \eqref{eq:KS-eqn}, diagonalising
+\\(\hat{h}\_{\rm KS}\\), and assembling
 \\(\rho_{\rm out} = \sum_i f_i |\phi_i|^2\\). We now recast this cycle as a **fixed-point
 problem** whose convergence properties can be analysed rigorously. Define the map \\(F\\) that takes
 an input density \\(\rho_{\rm in}\\) and returns the output density obtained by one full KS cycle:
@@ -567,8 +568,9 @@ other pieces of numerical machinery that have been treated as black boxes so far
 **occupation scheme** that assigns electrons to states near the Fermi level. Both can fail
 independently of the mixing, and both introduce their own convergence parameters.
 
-The next chapter develops these two topics. Section 9.1 treats smearing and partial occupancies
-— the regularisation of Brillouin zone integrals over the discontinuous Fermi surface.
-Section 10.2 derives the iterative diagonalisation methods (Davidson and RMM-DIIS) that make the
-KS eigenvalue problem tractable for large systems. Section 10.3 ties everything together with
-convergence diagnostics and a worked example on bcc Fe.
+The next two chapters develop these two topics. **Chapter 9** treats smearing and partial
+occupancies — the regularisation of Brillouin zone integrals over the discontinuous Fermi surface
+— through Gaussian, Fermi–Dirac, Methfessel–Paxton, and tetrahedron schemes. **Chapter 10**
+derives the iterative diagonalisation methods (Davidson and RMM-DIIS) that make the KS eigenvalue
+problem tractable for large systems, and closes with convergence diagnostics and a worked
+example on bcc Fe that ties together all the numerical machinery developed in Chapters 8–10.

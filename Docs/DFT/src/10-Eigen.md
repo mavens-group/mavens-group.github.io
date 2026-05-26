@@ -1,5 +1,28 @@
 # Eigenvalue Solvers
 
+The Kohn–Sham SCF loop developed in Chapter 8 has three computational hot spots, each handled
+by a specialised algorithm:
+
+1. **Density mixing** (Chapter 8) — converges the outer self-consistency cycle.
+2. **Brillouin zone integration** (Chapter 9) — assembles the density from band energies and
+   occupations at each \\(\mathbf{k}\\)-point.
+3. **Eigenvalue solver** — at every SCF iteration and every \\(\mathbf{k}\\)-point, solves
+   \\(\hat{h}_{\rm KS}\phi_i = \epsilon_i\phi_i\\) for the lowest \\(N_{\rm bands}\\) eigenpairs.
+
+This chapter develops the third. The Kohn–Sham eigenvalue problem is the *inner* loop of DFT:
+it is called \\(N_{\rm SCF} \times N_{\mathbf{k}}\\) times per total-energy evaluation, so even
+factor-of-two improvements in its cost translate into substantial wall-clock savings. Because
+the matrix is too large to diagonalise directly (\\(N_{\rm PW} \sim 10^4\\)–\\(10^5\\)) but only
+the lowest \\(N_{\rm bands} \sim 10^2\\)–\\(10^3\\) eigenpairs are needed, the methods used in
+practice are **iterative subspace algorithms**: Davidson, RMM-DIIS, and conjugate-gradient
+minimisation. These trade off robustness, memory, and convergence rate, and the choice depends
+on system size and band-structure character.
+
+The chapter concludes with a section on **parallelisation**, which is essential for any
+production calculation, and with the diagnostic toolkit and worked-example workflow on bcc Fe
+that ties together everything from Chapters 8–10.
+
+
 ## Iterative Diagonalisation
 
 ### The Eigenvalue Problem and Its Cost
@@ -225,6 +248,64 @@ or near-degenerate states), when memory is limited (CG requires minimal subspace
 for the first few SCF steps of a difficult system where a reliable initial eigenspace must be
 established before switching to faster methods.
 
+### Parallelisation
+
+The eigenvalue solver is also where DFT calculations spend most of their wall-clock time, so
+its parallelisation determines the scalability of the whole calculation. Plane-wave DFT codes
+exploit four levels of parallelism, listed in roughly the order they should be increased as the
+number of cores grows:
+
+**1. \\(\mathbf{k}\\)-point parallelism.** Different \\(\mathbf{k}\\)-points are independent of each
+other at fixed potential — they communicate only through the density and total energy. This is
+the most efficient parallelisation: nearly perfect scaling, minimal communication. Limited by the
+number of irreducible \\(\mathbf{k}\\)-points in the BZ. Controlled by `KPAR` (VASP) or
+`-npool` (Quantum ESPRESSO).
+
+**2. Band parallelism.** Different bands (eigenpairs) within a single \\(\mathbf{k}\\)-point are
+distributed across cores. Requires communication for orthogonalisation
+(\\(\mathcal{O}(N_{\rm bands}^2 \cdot N_{\rm PW})\\)) and for subspace diagonalisation. Scales well
+up to a few dozen cores per \\(\mathbf{k}\\)-point, then orthogonalisation overhead becomes
+limiting. Controlled by `NCORE` and `NPAR` (VASP) or `-nband` (QE).
+
+**3. Plane-wave (\\(\mathbf{G}\\)-vector) parallelism.** The plane-wave coefficients of each band
+are distributed across cores. Required for very large unit cells where bands cannot fit in
+single-node memory. Requires FFT communication at every Hamiltonian application, which is the
+dominant cost; the FFT slabs are distributed and 3D transposes are performed at each step.
+Typically used in combination with band parallelism: cores are arranged in a 2D grid, with
+\\(P\_{\rm band} \times P\_{\mathbf{G}}\\) processes per \\(\mathbf{k}\\)-point. In QE this is `-ntg`
+(task groups for FFT).
+
+**4. Subspace-diagonalisation parallelism.** The dense \\(N_{\rm bands} \times N_{\rm bands}\\)
+subspace matrix is diagonalised at each iteration. For \\(N_{\rm bands} > 1000\\), this becomes a
+bottleneck and is parallelised via ScaLAPACK or ELPA. Controlled by `LSCALAPACK` and `LSCAAWARE`
+(VASP) or `-ndiag` (QE).
+
+**Choosing the decomposition.** A practical rule of thumb for \\(N_{\rm cores}\\) total cores:
+
+- Set \\(P\_{\mathbf{k}} = N\_{\rm irr.\,k}\\) or a divisor thereof (one pool per \\(\mathbf{k}\\)).
+- Set \\(P\_{\rm band} \cdot P\_{\mathbf{G}} = N_{\rm cores} / P\_{\mathbf{k}}\\) per pool, with
+  \\(P\_{\rm band}\\) chosen so that each rank holds \\(\sim 5\\)–\\(20\\) bands.
+- Use `-ndiag` (QE) or the `LSCALAPACK` route (VASP) only when the subspace diagonalisation
+  shows up significantly in profiling.
+
+For example, a 200-atom magnetic supercell with 8 irreducible \\(\mathbf{k}\\)-points and
+\\(N_{\rm bands} = 600\\), running on 256 cores, might use \\(P\_{\mathbf{k}} = 8\\),
+\\(P\_{\rm band} = 8\\), \\(P\_{\mathbf{G}} = 4\\), giving \\(\sim 75\\) bands per band-group and
+\\(\sim 15\,000\\) \\(\mathbf{G}\\)-vectors per FFT-group — a balanced point.
+
+**Concrete code settings:**
+
+| Parallelism level | VASP | Quantum ESPRESSO |
+|---|---|---|
+| \\(\mathbf{k}\\)-points | `KPAR = P_k` | `-npool P_k` |
+| Bands | `NCORE = P_b / NPAR` (NCORE = cores per band group) | `-nband P_b` |
+| Plane waves / FFT | Coupled to `NCORE` | `-ntg P_g` |
+| Subspace diag. | `LSCALAPACK = .TRUE.` | `-ndiag P_d` (must be a perfect square) |
+
+For hybrid-functional or DFT+U calculations, the exact-exchange and Hubbard contributions add
+additional MPI/OpenMP communication patterns; `LHFCALC = .TRUE.` calculations in VASP often
+benefit from larger `NCORE` (more cores per band group) to overlap communication with FFT work.
+
 ### Computational Scaling
 
 The dominant costs at each SCF step are:
@@ -241,13 +322,6 @@ diagonalisation costs dominate, giving an effective scaling of \\(\mathcal{O}(N^
 size \\(N\\). This cubic wall is the fundamental limit of conventional KS-DFT and is the motivation
 for linear-scaling (\\(\mathcal{O}(N)\\)) methods, which require localised basis sets and are not
 yet standard for plane-wave calculations.
-
-**Parallelisation.** The three levels of parallelism available in a plane-wave DFT calculation
-are: over \\(\mathbf{k}\\)-points (trivially parallel — no communication), over bands
-(moderate communication for orthogonalisation), and over plane waves (requires FFT
-communication). The optimal decomposition depends on the system: \\(\mathbf{k}\\)-point
-parallelism is most efficient for small unit cells with dense \\(\mathbf{k}\\)-meshes;
-band/plane-wave parallelism is needed for large supercells with few \\(\mathbf{k}\\)-points.
 
 <details>
 <summary><b>Code Notes: VASP and Quantum ESPRESSO Parameters</b></summary>

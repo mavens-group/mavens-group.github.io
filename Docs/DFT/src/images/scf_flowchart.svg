@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="680" height="780" viewBox="0 0 680 780" font-family="Georgia, 'Times New Roman', serif">
+
+  <rect width="680" height="780" fill="#fafaf8"/>
+
+  <!-- Title -->
+  <text x="340" y="32" text-anchor="middle" font-size="17" font-weight="bold" fill="#2c2c2c">DFT Self-Consistent Field (SCF) Cycle</text>
+  <text x="340" y="52" text-anchor="middle" font-size="12" fill="#666" font-style="italic">Outer loop: density self-consistency. Inner loop: eigenvalue solver.</text>
+
+  <!-- Arrow marker definitions -->
+  <defs>
+    <marker id="arr" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+      <polygon points="0 0, 10 4, 0 8" fill="#444"/>
+    </marker>
+    <marker id="arrLoop" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+      <polygon points="0 0, 10 4, 0 8" fill="#7a5c8a"/>
+    </marker>
+    <marker id="arrInner" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+      <polygon points="0 0, 10 4, 0 8" fill="#4a7fa5"/>
+    </marker>
+    <marker id="arrConv" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto">
+      <polygon points="0 0, 10 4, 0 8" fill="#6a9e7a"/>
+    </marker>
+  </defs>
+
+  <!-- ===========================================================
+       OUTER LOOP DASHED BORDER (the SCF cycle box)
+  =========================================================== -->
+  <rect x="30" y="90" width="500" height="600" rx="10" fill="none" stroke="#7a5c8a" stroke-width="1.8" stroke-dasharray="8,4"/>
+  <text x="40" y="108" font-size="11.5" fill="#7a5c8a" font-weight="bold">OUTER LOOP — SCF (density self-consistency)</text>
+  <text x="40" y="124" font-size="10.5" fill="#7a5c8a" font-style="italic">Fixed-point iteration: ρ → V[ρ] → solve → new ρ</text>
+
+  <!-- ===========================================================
+       NODES (top to bottom)
+  =========================================================== -->
+
+  <!-- Start: Initial density -->
+  <rect x="160" y="140" width="240" height="56" rx="8" fill="#6a9e7a" fill-opacity="0.22" stroke="#3a6a4a" stroke-width="2"/>
+  <text x="280" y="162" text-anchor="middle" font-size="13" font-weight="bold" fill="#2c4030">START</text>
+  <text x="280" y="180" text-anchor="middle" font-size="12" fill="#3a6a4a">Initial guess: ρ⁽⁰⁾(r)</text>
+  <text x="280" y="192" text-anchor="middle" font-size="10" fill="#666" font-style="italic">(superposition of atomic densities)</text>
+
+  <!-- Arrow down -->
+  <line x1="280" y1="200" x2="280" y2="222" stroke="#444" stroke-width="2" marker-end="url(#arr)"/>
+
+  <!-- Node 1: Build effective potential -->
+  <rect x="125" y="226" width="310" height="60" rx="6" fill="#b8963e" fill-opacity="0.18" stroke="#b8963e" stroke-width="2"/>
+  <text x="280" y="248" text-anchor="middle" font-size="12.5" font-weight="bold" fill="#6a4a10">1. Build effective potential</text>
+  <text x="280" y="266" text-anchor="middle" font-size="12" fill="#444">V_eff(r) = V_ext + V_H[ρ] + V_xc[ρ]</text>
+  <text x="280" y="280" text-anchor="middle" font-size="10" fill="#666" font-style="italic">Hartree + XC depend on current ρ</text>
+
+  <!-- Arrow down -->
+  <line x1="280" y1="290" x2="280" y2="318" stroke="#444" stroke-width="2" marker-end="url(#arr)"/>
+
+  <!-- ===========================================================
+       INNER LOOP BOX (eigenvalue solver)
+  =========================================================== -->
+  <rect x="95" y="322" width="370" height="148" rx="8" fill="#4a7fa5" fill-opacity="0.08" stroke="#4a7fa5" stroke-width="1.5" stroke-dasharray="6,3"/>
+  <text x="106" y="340" font-size="11" fill="#2a5f85" font-weight="bold">INNER LOOP — Eigenvalue solver (linear)</text>
+  <text x="106" y="354" font-size="10" fill="#2a5f85" font-style="italic">Davidson / RMM-DIIS / CG: Aψ = εψ at fixed V_eff</text>
+
+  <!-- Node 2: Diagonalise KS Hamiltonian -->
+  <rect x="125" y="364" width="310" height="56" rx="6" fill="#4a7fa5" fill-opacity="0.20" stroke="#2a5f85" stroke-width="2"/>
+  <text x="280" y="386" text-anchor="middle" font-size="12.5" font-weight="bold" fill="#1a4565">2. Diagonalise KS Hamiltonian</text>
+  <text x="280" y="404" text-anchor="middle" font-size="12" fill="#444">[ −½∇² + V_eff(r) ] φᵢ = εᵢ φᵢ</text>
+
+  <!-- Inner loop self-arrow (iterative solver internal cycle) -->
+  <path d="M 435 392 Q 480 392 480 405 Q 480 420 460 420 L 440 420" fill="none" stroke="#4a7fa5" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#arrInner)"/>
+  <text x="495" y="410" font-size="10" fill="#2a5f85" font-style="italic">iterates internally</text>
+
+  <!-- Arrow down -->
+  <line x1="280" y1="424" x2="280" y2="446" stroke="#444" stroke-width="2" marker-end="url(#arr)"/>
+
+  <!-- Node 3: Compute density (inside inner loop box for clarity) -->
+  <rect x="125" y="446" width="310" height="22" rx="6" fill="#4a7fa5" fill-opacity="0.13" stroke="#2a5f85" stroke-width="1.5"/>
+  <text x="280" y="461" text-anchor="middle" font-size="11.5" fill="#1a4565">→ {φᵢ, εᵢ} at every k-point</text>
+
+  <!-- Arrow exiting inner loop box -->
+  <line x1="280" y1="478" x2="280" y2="500" stroke="#444" stroke-width="2" marker-end="url(#arr)"/>
+
+  <!-- Node 4: Construct new density -->
+  <rect x="125" y="504" width="310" height="50" rx="6" fill="#b8963e" fill-opacity="0.18" stroke="#b8963e" stroke-width="2"/>
+  <text x="280" y="525" text-anchor="middle" font-size="12.5" font-weight="bold" fill="#6a4a10">3. Compute new density</text>
+  <text x="280" y="544" text-anchor="middle" font-size="12" fill="#444">ρ_out(r) = Σᵢ fᵢ |φᵢ(r)|²</text>
+
+  <!-- Arrow down -->
+  <line x1="280" y1="558" x2="280" y2="580" stroke="#444" stroke-width="2" marker-end="url(#arr)"/>
+
+  <!-- Node 5: Convergence check (diamond) -->
+  <polygon points="280,582 408,624 280,666 152,624" fill="#a0522d" fill-opacity="0.16" stroke="#a0522d" stroke-width="2"/>
+  <text x="280" y="617" text-anchor="middle" font-size="12.5" font-weight="bold" fill="#6a3210">4. Converged?</text>
+  <text x="280" y="635" text-anchor="middle" font-size="11" fill="#444">‖ρ_out − ρ_in‖ &lt; ε ?</text>
+
+  <!-- YES arrow: go down to END -->
+  <line x1="280" y1="668" x2="280" y2="700" stroke="#6a9e7a" stroke-width="2.5" marker-end="url(#arrConv)"/>
+  <text x="293" y="687" font-size="12" fill="#3a6a4a" font-weight="bold">YES</text>
+
+  <!-- NO arrow: go left and up (back to mixing) -->
+  <line x1="152" y1="624" x2="68" y2="624" stroke="#7a5c8a" stroke-width="2.5"/>
+  <line x1="68"  y1="624" x2="68" y2="350" stroke="#7a5c8a" stroke-width="2.5"/>
+  <line x1="68"  y1="350" x2="68" y2="256" stroke="#7a5c8a" stroke-width="2.5"/>
+  <text x="115" y="615" font-size="12" fill="#7a5c8a" font-weight="bold">NO</text>
+
+  <!-- Mixing box on the return path -->
+  <rect x="20" y="345" width="96" height="60" rx="6" fill="#7a5c8a" fill-opacity="0.18" stroke="#7a5c8a" stroke-width="2"/>
+  <text x="68" y="365" text-anchor="middle" font-size="11.5" font-weight="bold" fill="#4a2a5a">5. Mix</text>
+  <text x="68" y="381" text-anchor="middle" font-size="10" fill="#444">ρ_in ← α ρ_out</text>
+  <text x="68" y="394" text-anchor="middle" font-size="10" fill="#444">+ (1−α) ρ_in</text>
+
+  <!-- Re-enter the cycle (top of node 1) -->
+  <line x1="68" y1="256" x2="123" y2="256" stroke="#7a5c8a" stroke-width="2.5" marker-end="url(#arrLoop)"/>
+
+  <!-- Loop label -->
+  <text x="70" y="540" font-size="10.5" fill="#7a5c8a" font-style="italic" transform="rotate(-90,70,540)">Pulay / Broyden / Kerker mixing</text>
+
+  <!-- END node -->
+  <rect x="160" y="704" width="240" height="50" rx="8" fill="#6a9e7a" fill-opacity="0.30" stroke="#3a6a4a" stroke-width="2"/>
+  <text x="280" y="725" text-anchor="middle" font-size="13" font-weight="bold" fill="#2c4030">CONVERGED</text>
+  <text x="280" y="744" text-anchor="middle" font-size="11" fill="#3a6a4a">Output: ρ*(r), E_total, {φᵢ, εᵢ}, forces</text>
+
+  <!-- ===========================================================
+       RIGHT-SIDE LEGEND / GLOSSARY
+  =========================================================== -->
+  <rect x="550" y="100" width="115" height="660" rx="6" fill="#f4f4f0" stroke="#ccc" stroke-width="1"/>
+  <text x="607" y="120" text-anchor="middle" font-size="12" font-weight="bold" fill="#444">Block colours</text>
+
+  <!-- Green: start/end -->
+  <rect x="562" y="135" width="20" height="14" fill="#6a9e7a" fill-opacity="0.25" stroke="#3a6a4a"/>
+  <text x="587" y="146" font-size="10.5" fill="#444">Init / output</text>
+
+  <!-- Gold: density/potential -->
+  <rect x="562" y="158" width="20" height="14" fill="#b8963e" fill-opacity="0.25" stroke="#b8963e"/>
+  <text x="587" y="169" font-size="10.5" fill="#444">Density /</text>
+  <text x="587" y="181" font-size="10.5" fill="#444">potential ops</text>
+
+  <!-- Blue: inner loop -->
+  <rect x="562" y="194" width="20" height="14" fill="#4a7fa5" fill-opacity="0.25" stroke="#2a5f85"/>
+  <text x="587" y="205" font-size="10.5" fill="#444">Eigenvalue</text>
+  <text x="587" y="217" font-size="10.5" fill="#444">solver (inner)</text>
+
+  <!-- Plum: outer mixing -->
+  <rect x="562" y="230" width="20" height="14" fill="#7a5c8a" fill-opacity="0.25" stroke="#7a5c8a"/>
+  <text x="587" y="241" font-size="10.5" fill="#444">SCF mixing</text>
+  <text x="587" y="253" font-size="10.5" fill="#444">(outer)</text>
+
+  <!-- Terracotta: decision -->
+  <polygon points="562,267 582,267 572,277 562,277 562,267" fill="#a0522d" fill-opacity="0.20" stroke="#a0522d"/>
+  <text x="587" y="278" font-size="10.5" fill="#444">Decision /</text>
+  <text x="587" y="290" font-size="10.5" fill="#444">test</text>
+
+  <!-- Separator -->
+  <line x1="560" y1="305" x2="660" y2="305" stroke="#bbb"/>
+
+  <!-- Convergence criteria -->
+  <text x="607" y="322" text-anchor="middle" font-size="11" font-weight="bold" fill="#444">Typical tolerances</text>
+  <text x="560" y="340" font-size="10" fill="#444">EDIFF (energy):</text>
+  <text x="560" y="354" font-size="10" fill="#444">  10⁻⁵ to 10⁻⁸ eV</text>
+  <text x="560" y="370" font-size="10" fill="#444">ρ change:</text>
+  <text x="560" y="384" font-size="10" fill="#444">  10⁻⁴ to 10⁻⁶</text>
+  <text x="560" y="400" font-size="10" fill="#444">Inner (eigenval):</text>
+  <text x="560" y="414" font-size="10" fill="#444">  10⁻⁴ × EDIFF</text>
+
+  <!-- Separator -->
+  <line x1="560" y1="430" x2="660" y2="430" stroke="#bbb"/>
+
+  <!-- Cost note -->
+  <text x="607" y="448" text-anchor="middle" font-size="11" font-weight="bold" fill="#444">Typical cycle counts</text>
+  <text x="560" y="466" font-size="10" fill="#444">Outer SCF iters:</text>
+  <text x="560" y="480" font-size="10" fill="#444">  20–80</text>
+  <text x="560" y="496" font-size="10" fill="#444">Inner solver iters</text>
+  <text x="560" y="510" font-size="10" fill="#444">per SCF step:</text>
+  <text x="560" y="524" font-size="10" fill="#444">  3–8 (Davidson)</text>
+
+  <!-- Separator -->
+  <line x1="560" y1="540" x2="660" y2="540" stroke="#bbb"/>
+
+  <!-- The key insight -->
+  <text x="607" y="558" text-anchor="middle" font-size="11" font-weight="bold" fill="#444">Key insight</text>
+  <text x="560" y="576" font-size="9.5" fill="#444" font-style="italic">SCF: non-linear</text>
+  <text x="560" y="589" font-size="9.5" fill="#444" font-style="italic">  fixed-point</text>
+  <text x="560" y="602" font-size="9.5" fill="#444" font-style="italic">  ρ = F[ρ]</text>
+  <text x="560" y="622" font-size="9.5" fill="#444" font-style="italic">Inner: linear</text>
+  <text x="560" y="635" font-size="9.5" fill="#444" font-style="italic">  eigenvalue</text>
+  <text x="560" y="648" font-size="9.5" fill="#444" font-style="italic">  Aψ = εψ</text>
+  <text x="560" y="668" font-size="9.5" fill="#444" font-style="italic">Both iterative</text>
+  <text x="560" y="681" font-size="9.5" fill="#444" font-style="italic">but solve</text>
+  <text x="560" y="694" font-size="9.5" fill="#444" font-style="italic">different math</text>
+  <text x="560" y="707" font-size="9.5" fill="#444" font-style="italic">problems.</text>
+
+</svg>

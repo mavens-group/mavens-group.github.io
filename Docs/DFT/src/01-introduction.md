@@ -130,9 +130,9 @@ Equality holds only when \\(c_n = 0\\) for all \\(n\\) with \\(E_n > E_0\\), i.e
 
 </div>
 
-**Strategy.** Choose a *parametrised* family of trial states \\(|\tilde{\Psi}_\alpha\rangle\\)
+**Strategy.** Choose a *parametrised* family of trial states \\(|\tilde{\Psi}\_\alpha\rangle\\)
 depending on one or more parameters \\(\alpha\\), compute
-\\(E(\alpha) = \langle\tilde{\Psi}_\alpha|\hat{H}|\tilde{\Psi}_\alpha\rangle\\), and minimise
+\\(E(\alpha) = \langle\tilde{\Psi}_\alpha|\hat{H}|\tilde{\Psi}\_\alpha\rangle\\), and minimise
 over \\(\alpha\\). The result is the best estimate of \\(E_0\\) accessible within the chosen family.
 The narrower the family, the looser the bound; the richer the family, the closer to \\(E_0\\) — at
 greater computational cost.

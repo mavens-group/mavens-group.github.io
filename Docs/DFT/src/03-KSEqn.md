@@ -177,17 +177,110 @@ These are single-particle Schrödinger-like equations. The eigenvalues \\(\epsil
 ## The Self-Consistent Field (SCF) Cycle
 
 The Kohn–Sham equations are non-linear: the effective potential \\(V_{\mathrm{eff}}(\mathbf{r})\\)
-depends on \\(V_{\mathrm{H}}\\) and \\(V_{\mathrm{xc}}\\), which in turn depend on the density \\(\rho(\mathbf{r})\\), which is computed from the orbitals \\(\phi_i(\mathbf{r})\\) that are the
-solutions to the KS equations themselves.
+depends on \\(V_{\mathrm{H}}\\) and \\(V_{\mathrm{xc}}\\), which in turn depend on the density
+\\(\rho(\mathbf{r})\\), which is computed from the orbitals \\(\phi_i(\mathbf{r})\\) that are the
+solutions to the KS equations themselves. There is no way to write down the solution in closed
+form: the equations must be solved **self-consistently** through iteration.
 
-Therefore, they must be solved iteratively using the **Self-Consistent Field (SCF)** method:
+### SCF vs. Iterative Methods: Two Different Iterations
 
-1. **Initial guess**: Provide a starting guess for the electron density \\(\rho^{(0)}(\mathbf{r})\\) (often a superposition of atomic densities).
-2. **Construct potential**: Calculate \\(V_{\mathrm{H}}[\rho]\\) and \\(V_{\mathrm{xc}}[\rho]\\), and form \\(V_{\mathrm{eff}}(\mathbf{r})\\).
-3. **Solve KS equations**: Diagonalise the KS Hamiltonian to find the new orbitals \\(\phi_i^{(1)}(\mathbf{r})\\).
-4. **Calculate new density**: Form the new density \\(\rho^{(1)}(\mathbf{r}) = \sum_i |\phi_i^{(1)}|^2\\).
-5. **Check convergence**: If \\(|\rho^{(1)} - \rho^{(0)}| < \text{tolerance}\\), stop.
-6. **Mixing**: If not converged, generate a new input density by mixing the old and new densities (e.g. using Broyden or Pulay mixing) to prevent numerical oscillations, and return to Step 2.
+The term "iterative" is often used loosely in DFT, but two fundamentally different iterative
+procedures are involved, and distinguishing them is essential for understanding how a calculation
+actually runs.
+
+**The SCF cycle is a fixed-point iteration.** The mathematical problem is to find a density
+\\(\rho^*(\mathbf{r})\\) such that
+
+\\[
+    \rho^* = F[\rho^*], \qquad F[\rho] \equiv \sum_i |\phi_i[\rho](\mathbf{r})|^2,
+\\]
+
+where the right-hand side is constructed by (i) building \\(V_{\rm eff}[\rho]\\), (ii) solving the
+KS equations for the orbitals, and (iii) summing the orbital densities. The map \\(F\\) is
+**non-linear** in \\(\rho\\) — \\(V_{\rm H}\\) and \\(V_{\rm xc}\\) are non-linear functionals of the
+density — so the fixed point cannot be found by direct linear algebra. Instead it is found by
+iteration: \\(\rho^{(n+1)} = F[\rho^{(n)}]\\), possibly with mixing to ensure convergence (Chapter
+8). The number of SCF iterations is typically 20–80 for a converged calculation.
+
+**The eigenvalue solver is a linear iterative method.** Inside step (ii) of each SCF iteration,
+the **linear** problem
+\\[
+    \hat{h}_{\rm KS}\,\phi_i = \epsilon_i\,\phi_i, \qquad \hat{h}_{\rm KS} = -\tfrac{1}{2}\nabla^2 + V_{\rm eff}(\mathbf{r}),
+\\]
+must be solved at fixed \\(V_{\rm eff}\\). This is a standard generalised eigenvalue problem, but
+the matrix dimension \\(N_{\rm PW} \sim 10^4\\)–\\(10^5\\) is too large for direct diagonalisation
+when only the lowest \\(N_{\rm bands} \sim 10^2\\)–\\(10^3\\) eigenpairs are needed. The practical
+algorithms — Davidson, RMM-DIIS, conjugate gradients — are **iterative subspace methods**
+(Chapter 10) that build up the desired eigenspace through successive matrix-vector products
+\\(\hat{h}_{\rm KS}|\psi\rangle\\). They typically converge in 3–8 inner iterations per SCF step.
+
+The two iterations are **nested**: the outer SCF loop calls the inner eigenvalue solver as a
+subroutine at every step. They share the property of being iterative and producing convergence
+plots, but they solve different mathematical problems with different convergence theories:
+
+| Feature | SCF (outer) | Eigenvalue solver (inner) |
+|---|---|---|
+| Mathematical problem | Non-linear fixed point \\(\rho = F[\rho]\\) | Linear eigenvalue \\(A\mathbf{x} = \lambda\mathbf{x}\\) |
+| Variable | Density \\(\rho(\mathbf{r})\\) | Orbital coefficients \\(\{c_{\mathbf{G},i}\}\\) |
+| Convergence theory | Banach fixed-point + spectral analysis of Jacobian | Krylov subspace / Rayleigh–Ritz |
+| Acceleration | Pulay/Broyden mixing (Chapter 8) | Davidson/RMM-DIIS subspace expansion (Chapter 10) |
+| Diagnostic | "SCF iteration N: ΔE = ..." | "RMM-DIIS: rms = ..."  per band |
+| Failure mode | Charge sloshing, oscillation | Band mixing, eigenvalue stalling |
+| Typical iter. count | 20–80 | 3–8 per SCF step |
+
+A typical DFT calculation therefore performs \\(\mathcal{O}(100–500)\\) inner eigenvalue
+iterations in total. Both must converge for the calculation to succeed; failure of one
+manifests differently from failure of the other.
+
+### The SCF Algorithm
+
+In practice, the SCF procedure is:
+
+1. **Initial guess**: Provide a starting density \\(\rho^{(0)}(\mathbf{r})\\), typically a
+   superposition of atomic densities (VASP `ICHARG = 2`, QE `startingpot = 'atomic'`).
+2. **Construct effective potential**: Calculate \\(V_{\mathrm{H}}[\rho]\\) (via the Poisson
+   equation, usually in reciprocal space) and \\(V_{\mathrm{xc}}[\rho]\\) (by evaluating the XC
+   functional on the real-space grid). Assemble
+   \\(V_{\rm eff}(\mathbf{r}) = V_{\rm ext} + V_{\rm H} + V_{\rm xc}\\).
+3. **Solve KS equations (inner loop)**: Diagonalise the KS Hamiltonian at each
+   \\(\mathbf{k}\\)-point via an iterative subspace method (Davidson, RMM-DIIS), obtaining
+   the orbitals \\(\phi_i^{(n+1)}(\mathbf{r})\\) and energies \\(\epsilon_i\\). This step is
+   itself iterative — see the "inner loop" terminology above.
+4. **Construct new density**: Determine occupations \\(f_i\\) from the Fermi level (Chapter 9
+   smearing), and form
+   \\(\rho_{\rm out}^{(n+1)}(\mathbf{r}) = \sum_i f_i\,|\phi_i^{(n+1)}(\mathbf{r})|^2\\).
+5. **Check convergence**: If the total energy change \\(|E^{(n+1)} - E^{(n)}|\\) and the density
+   change \\(\|\rho_{\rm out} - \rho_{\rm in}\|\\) are both below their respective tolerances
+   (typically \\(10^{-5}\\)–\\(10^{-8}\\) eV for energy), stop and report the converged ground
+   state.
+6. **Mix** (if not converged): Construct the input density for the next SCF iteration as a
+   weighted combination of input and output densities using Pulay, Broyden, or Kerker mixing
+   (Chapter 8), then return to step 2.
+
+This procedure is shown schematically in Figure 3.1.
+
+<figure>
+<img src="images/scf_flowchart.svg" alt="Flowchart of the DFT SCF cycle showing nested outer (density self-consistency) and inner (eigenvalue solver) iterative loops" style="max-width:680px; display:block; margin:1.5em auto;"/>
+<figcaption style="text-align:center; font-size:0.9em; color:#555;">
+
+**Figure 3.1.** The DFT SCF cycle. The **outer loop** (purple dashed border) implements
+density self-consistency: a non-linear fixed-point iteration \\(\rho = F[\rho]\\) accelerated
+by mixing schemes. The **inner loop** (blue dashed border) implements the linear eigenvalue
+solver \\(\hat{h}_{\rm KS}\phi = \epsilon\phi\\) at fixed effective potential, itself an
+iterative method (Davidson, RMM-DIIS) that builds the eigenspace through matrix-vector
+products. The two iterations are nested: a typical calculation requires 20–80 outer SCF steps,
+each invoking the inner solver for 3–8 iterations per \\(\mathbf{k}\\)-point. The blocks are
+colour-coded by role: green for initialisation and output, gold for density/potential
+operations, blue for the eigenvalue solver, plum for SCF mixing, and terracotta for the
+convergence test.
+
+</figcaption>
+</figure>
+
+The details of the mixing algorithms in step 6 and the inner eigenvalue solver in step 3 are
+sufficiently involved that they receive their own chapters: Chapter 8 develops density mixing
+schemes (linear, Kerker, Pulay/DIIS, Broyden), and Chapter 10 develops iterative
+diagonalisation (Davidson, RMM-DIIS, conjugate gradients).
 
 
 ## Physical Meaning of Kohn–Sham Quantities

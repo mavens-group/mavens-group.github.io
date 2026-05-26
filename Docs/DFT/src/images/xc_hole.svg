@@ -1,0 +1,160 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="660" height="480" viewBox="0 0 660 480" font-family="Georgia, 'Times New Roman', serif">
+
+  <rect width="660" height="480" fill="#fafaf8"/>
+
+  <!-- Title -->
+  <text x="330" y="30" text-anchor="middle" font-size="16" font-weight="bold" fill="#2c2c2c">The Exchange-Correlation Hole</text>
+  <text x="330" y="50" text-anchor="middle" font-size="12" fill="#555" font-style="italic">Depletion of electron density at r′ caused by an electron at r</text>
+
+  <!-- ============================================================
+       AXES  — origin at (90, 310)
+  ============================================================ -->
+  <defs>
+    <marker id="arr" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#444"/>
+    </marker>
+    <marker id="arr2" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#4a7fa5"/>
+    </marker>
+    <marker id="arr3" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#a0522d"/>
+    </marker>
+  </defs>
+
+  <!-- x axis -->
+  <line x1="80" y1="310" x2="590" y2="310" stroke="#444" stroke-width="1.5" marker-end="url(#arr)"/>
+  <!-- y axis -->
+  <line x1="90" y1="370" x2="90" y2="75" stroke="#444" stroke-width="1.5" marker-end="url(#arr)"/>
+
+  <!-- axis labels -->
+  <text x="595" y="314" font-size="13" fill="#444">|r′ − r|</text>
+  <text x="94" y="72" font-size="13" fill="#444">n<tspan font-size="9" dy="3">xc</tspan></text>
+  <text x="88" y="320" text-anchor="middle" font-size="12" fill="#444">0</text>
+
+  <!-- Zero line (y=0 is at y=310) -->
+  <!-- A faint dashed zero -->
+  <line x1="90" y1="310" x2="580" y2="310" stroke="#ccc" stroke-width="1" stroke-dasharray="4,3"/>
+
+  <!-- Reference level label -->
+  <text x="88" y="313" text-anchor="end" font-size="11" fill="#888">0</text>
+
+  <!-- ============================================================
+       CURVES
+       Origin: x0=90, y0=310. 
+       Negative values go UP in SVG (y decreases).
+       We want:
+         - Exchange hole: sharp cusp at r=0, goes to 0 slowly (exchange hole is long-range)
+         - Correlation hole: small positive oscillation + negative at short range, decays faster
+         - XC hole = sum: deeper at origin, faster decay than exchange alone
+       
+       x coordinate: xc = x0 + r * 90  (so r=0 at x=90, r=5 at x=540)
+       y coordinate: yc = y0 - value * 90  (negative hole → positive SVG y offset → goes up)
+       
+       Exchange hole (negative, cusp at 0, slow decay):
+         n_x(r) ≈ -0.9 * exp(-0.5*r)   (schematic)
+       
+       Correlation hole: at short range negative (deepens xc), long range slightly positive
+         n_c(r) ≈ -0.5*exp(-1.5*r) + 0.12*exp(-0.4*r)
+         
+       XC hole = n_x + n_c (more negative at short range, slightly faster decay)
+       
+       Sum rule: integral of n_xc = -1 (shown as shaded area)
+  ============================================================ -->
+
+  <!-- Shaded region under XC hole (sum rule area) -->
+  <!-- approximate the xc hole area with a polygon -->
+  <polygon points="
+    90,310
+    90,227
+    108,203
+    126,192
+    144,186
+    162,183
+    198,181
+    234,184
+    270,191
+    306,200
+    360,213
+    414,226
+    468,238
+    522,248
+    576,255
+    576,310
+  " fill="#7a5c8a" fill-opacity="0.10"/>
+
+  <!-- EXCHANGE HOLE  n_x  — steel blue, dashed -->
+  <!-- n_x(r) ≈ -0.75 exp(-0.4 r), cusp at 0 -->
+  <path d="
+    M 90 242
+    C 100 220, 115 208, 135 202
+    C 155 197, 180 195, 210 196
+    C 240 198, 270 202, 310 210
+    C 360 220, 420 233, 480 244
+    C 530 254, 570 260, 580 263
+  " stroke="#4a7fa5" stroke-width="2" fill="none" stroke-dasharray="7,4"/>
+
+  <!-- CORRELATION HOLE n_c — terracotta, dotted -->
+  <!-- starts very negative at r=0, crosses zero, small positive hump, decays to 0 -->
+  <path d="
+    M 90 268
+    C 100 255, 115 248, 135 247
+    C 150 247, 165 248, 185 252
+    C 205 257, 230 265, 260 274
+    C 290 282, 330 294, 380 303
+    C 420 309, 460 311, 510 311
+    C 540 311, 565 310, 580 310
+  " stroke="#a0522d" stroke-width="2" fill="none" stroke-dasharray="3,3"/>
+
+  <!-- XC HOLE n_xc — plum, solid, thicker -->
+  <!-- deeper at origin, decays somewhat faster -->
+  <path d="
+    M 90 226
+    C 100 200, 116 188, 138 183
+    C 160 179, 190 180, 220 184
+    C 250 188, 285 197, 325 209
+    C 370 222, 425 237, 480 249
+    C 525 258, 560 264, 580 266
+  " stroke="#7a5c8a" stroke-width="2.5" fill="none"/>
+
+  <!-- ============================================================
+       REFERENCE ELECTRON at r=0
+  ============================================================ -->
+  <circle cx="90" cy="310" r="5" fill="#e74c3c"/>
+  <text x="90" y="335" text-anchor="middle" font-size="11.5" fill="#c0392b" font-style="italic">electron at r</text>
+
+  <!-- ============================================================
+       SUM RULE ANNOTATION
+  ============================================================ -->
+  <!-- Brace-like annotation for sum rule -->
+  <line x1="240" y1="270" x2="400" y2="230" stroke="#7a5c8a" stroke-width="1" stroke-dasharray="3,3"/>
+  <text x="405" y="225" font-size="12" fill="#7a5c8a">∫ n<tspan font-size="9" dy="3">xc</tspan><tspan dy="-3">(r,r′) dr′ = −1</tspan></text>
+  <text x="405" y="243" font-size="11" fill="#7a5c8a">(sum rule)</text>
+
+  <!-- Cusp label -->
+  <line x1="90" y1="220" x2="140" y2="170" stroke="#7a5c8a" stroke-width="1" stroke-dasharray="2,2"/>
+  <text x="145" y="167" font-size="11.5" fill="#7a5c8a">cusp at r′ = r</text>
+
+  <!-- Asymptote label (exchange) -->
+  <text x="540" y="252" font-size="11" fill="#4a7fa5">n<tspan font-size="9" dy="3">x</tspan><tspan dy="-3"> → 0</tspan></text>
+
+  <!-- ============================================================
+       LEGEND
+  ============================================================ -->
+  <rect x="90" y="385" width="470" height="78" rx="5" fill="#f4f4f0" stroke="#ccc" stroke-width="1"/>
+
+  <!-- Exchange hole -->
+  <line x1="110" y1="406" x2="155" y2="406" stroke="#4a7fa5" stroke-width="2" stroke-dasharray="7,4"/>
+  <text x="162" y="410" font-size="12.5" fill="#4a7fa5" font-weight="bold">Exchange hole n<tspan font-size="9" dy="3">x</tspan></text>
+  <text x="162" y="425" font-size="11" fill="#666">Pauli exclusion: same-spin depletion, long-range (−1/r tail for finite systems)</text>
+
+  <!-- Correlation hole -->
+  <line x1="110" y1="443" x2="155" y2="443" stroke="#a0522d" stroke-width="2" stroke-dasharray="3,3"/>
+  <text x="162" y="447" font-size="12.5" fill="#a0522d" font-weight="bold">Correlation hole n<tspan font-size="9" dy="3">c</tspan></text>
+  <text x="162" y="462" font-size="11" fill="#666">Dynamical avoidance: deepens xc hole at short range, integrates to 0</text>
+
+  <!-- XC hole -->
+  <line x1="360" y1="406" x2="405" y2="406" stroke="#7a5c8a" stroke-width="2.5"/>
+  <text x="412" y="410" font-size="12.5" fill="#7a5c8a" font-weight="bold">XC hole n<tspan font-size="9" dy="3">xc</tspan><tspan dy="-3"> = n</tspan><tspan font-size="9" dy="3">x</tspan><tspan dy="-3"> + n</tspan><tspan font-size="9" dy="3">c</tspan></text>
+  <text x="412" y="425" font-size="11" fill="#666">Satisfies sum rule ∫n<tspan font-size="9" dy="2">xc</tspan><tspan dy="-2">dr′ = −1 exactly</tspan></text>
+
+</svg>

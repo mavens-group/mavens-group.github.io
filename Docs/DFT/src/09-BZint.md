@@ -2,14 +2,157 @@
 
 Chapter 8 addressed the outer loop of the SCF cycle: how to update the density from one
 iteration to the next so that the fixed-point equation \\(F[\rho^*] = \rho^*\\) is satisfied
-efficiently. This chapter addresses the two pieces of numerical machinery that operate *within*
-each SCF step: how the KS eigenvalue problem is solved (Section 9.2), and how the resulting
-eigenvalues are used to assign occupations and perform Brillouin zone integrals (Section 9.1).
-We treat BZ integration first because the choice of smearing scheme affects the effective
-smoothness of the energy landscape seen by the eigenvalue solver.
+efficiently. This chapter addresses two pieces of numerical machinery that operate *within*
+each SCF step: how the BZ integral is discretised onto a finite \\(\mathbf{k}\\)-point mesh
+(Section: Monkhorst–Pack Sampling), and how the occupation function near the Fermi level is
+regularised to achieve rapid convergence for metals (Section: Smearing). The eigenvalue solver
+that produces the orbitals and energies at each \\(\mathbf{k}\\)-point is treated separately in
+Chapter 10. BZ integration is covered first because the choice of \\(\mathbf{k}\\)-mesh and
+smearing scheme affects the effective smoothness of the energy landscape seen by the SCF cycle.
+
+
+## Monkhorst–Pack \\(k\\)-Point Sampling
+
+<figure>
+<img src="images/mp_mesh.svg" alt="Monkhorst-Pack k-point mesh in the Brillouin zone and smearing of the Fermi level" style="max-width:700px; display:block; margin:1.5em auto;"/>
+<figcaption style="text-align:center; font-size:0.9em; color:#555;">
+
+**Figure 9.1.** *(a)* A 6×6 Monkhorst–Pack mesh in a 2D square Brillouin zone. Green points
+are the irreducible k-points (related by symmetry to the full set); blue points are the
+symmetry-equivalent reducible set. The irreducible wedge (shaded green) reduces the
+computational cost by the order of the point group. *(b)* Occupation function \\(f(\epsilon)\\)
+and density of states \\(D(\epsilon)\\) near the Fermi level for a metal. The step function
+(grey dashed) requires infinite k-point density; Fermi–Dirac (terracotta) and
+Methfessel–Paxton (plum) smearings regularise the integral at the cost of a finite broadening
+\\(\sigma\\), which must be corrected or extrapolated to zero.
+
+</figcaption>
+</figure>
+In a periodic solid, all physical observables require integration over the first Brillouin zone.
+The electron density, total energy, and density of states are all BZ integrals of the form:
+
+<div>
+\begin{equation}
+    \langle A \rangle = \frac{\Omega_{\rm BZ}}{(2\pi)^3}\int_{\rm BZ} A(\mathbf{k})\,d\mathbf{k}
+    \approx \sum_{\mathbf{k} \in \mathcal{S}} w_{\mathbf{k}}\,A(\mathbf{k}),
+    \label{eq:BZ-integral}
+\end{equation}
+</div>
+
+where the continuous integral is replaced by a weighted sum over a discrete set
+\\(\mathcal{S}\\) of \\(\mathbf{k}\\)-points with weights \\(w_{\mathbf{k}}\\) summing to unity.
+The central question is: how to choose \\(\mathcal{S}\\) so that the sum converges to the
+integral as rapidly as possible?
+
+### The Monkhorst–Pack Grid
+
+The **Monkhorst–Pack (MP) scheme** (Monkhorst and Pack, 1976) places a uniform grid of
+\\(N_1 \times N_2 \times N_3\\) \\(\mathbf{k}\\)-points in the BZ, centred so as to avoid the
+\\(\Gamma\\) point (which is often a high-symmetry point requiring special treatment):
+
+<div>
+\begin{equation}
+    \mathbf{k}_{n_1 n_2 n_3} = \sum_{i=1}^{3} \frac{2n_i - N_i - 1}{2N_i}\,\mathbf{b}_i,
+    \qquad n_i = 1,\ldots,N_i,
+    \label{eq:MP-grid}
+\end{equation}
+</div>
+
+where \\(\mathbf{b}_i\\) are the primitive reciprocal lattice vectors. For an odd \\(N_i\\), the grid
+includes \\(\Gamma\\); for even \\(N_i\\), it is shifted by half a grid spacing and avoids \\(\Gamma\\).
+The total number of \\(\mathbf{k}\\)-points in the full BZ is \\(N_{\rm tot} = N_1 N_2 N_3\\).
+
+**Reducing by symmetry.** The crystal point group \\(G\\) maps each \\(\mathbf{k}\\) to a set of
+symmetry-equivalent points. Only the **irreducible \\(\mathbf{k}\\)-points** — one representative
+from each equivalence class — need to be computed explicitly; the rest contribute through their
+multiplicity weights \\(w_{\mathbf{k}} = |\text{orbit}(\mathbf{k})|/N_{\rm tot}\\). For a cubic
+crystal with \\(N \times N \times N\\) MP grid, the full BZ has \\(N^3\\) points but the irreducible
+wedge contains only \\(\sim N^3/48\\) (for Oh symmetry). A \\(12 \times 12 \times 12\\) mesh has
+1728 points total but only \\(\sim 72\\) irreducible \\(\mathbf{k}\\)-points for bcc Fe — a factor-of-24
+saving.
+
+**Convergence rate.** For a smooth, periodic integrand (insulators, gapped systems), the
+trapezoidal rule on a uniform grid converges **exponentially** with \\(N\\). For metals with a
+Fermi surface discontinuity, convergence degrades to \\(\mathcal{O}(1/N^2)\\) at best and is
+oscillatory — this is the problem that smearing methods resolve.
+
+### Convergence Testing
+
+The \\(\mathbf{k}\\)-point convergence of a calculation must always be tested explicitly. The
+standard protocol:
+
+1. Fix all other parameters (\\(E_{\rm cut}\\), \\(\sigma\\), geometry).
+2. Compute the total energy for a sequence of meshes: \\(4^3, 6^3, 8^3, 10^3, 12^3, \ldots\\)
+3. Plot the energy per atom vs. \\(1/N_k\\) (or \\(1/N_k^{1/3}\\)). For insulators, convergence
+   is exponential and the curve drops quickly; for metals, it is a slower power law.
+4. Declare convergence when the energy change between successive meshes is below your target
+   threshold (typically \\(1\\)–\\(5\\) meV/atom for structural properties; \\(<1\\) meV/atom for
+   energy differences and phase stability).
+
+Typical converged meshes by system type:
+
+| System type | Typical mesh | k-points (irreducible) |
+|---|---|---|
+| Insulator / semiconductor (primitive cell) | \\(6\times6\times6\\) | \\(\sim 16\\)–\\(32\\) |
+| Simple metal (primitive cell) | \\(12\times12\times12\\) | \\(\sim 72\\)–\\(120\\) |
+| Transition metal (bcc/fcc primitive) | \\(16\times16\times16\\) | \\(\sim 120\\)–\\(200\\) |
+| Magnetic supercell (\\(\sim 50\\) atoms) | \\(4\times4\times4\\) | \\(\sim 8\\)–\\(20\\) |
+| Surface slab | \\(12\times12\times1\\) | \\(\sim 40\\)–\\(80\\) |
+| Molecular (large box) | \\(\Gamma\\)-only | \\(1\\) |
+
+For supercells, the BZ folds: a \\(2\times2\times2\\) supercell of a primitive-cell calculation
+with an \\(N\times N\times N\\) mesh is equivalent in k-point density to an
+\\((N/2)\times(N/2)\times(N/2)\\) mesh of the primitive cell. Always compare meshes at the same
+**k-point density** (points per unit length in reciprocal space), not the same grid indices.
+
+<figure>
+<img src="figures/mp_mesh.svg" alt="Monkhorst-Pack k-point mesh in the Brillouin zone and smearing of the Fermi level" style="max-width:700px; display:block; margin:1.5em auto;"/>
+<figcaption style="text-align:center; font-size:0.9em; color:#555;">
+
+**Figure 9.1.** *(a)* A 6×6 Monkhorst–Pack mesh on a 2D square Brillouin zone. Green points
+are the irreducible \\(\mathbf{k}\\)-points; blue points are symmetry-equivalent images.
+The irreducible wedge (shaded) reduces the number of SCF diagonalisations by the order of
+the point group. *(b)* Occupation function \\(f(\epsilon)\\) near \\(\epsilon_F\\) for a metal.
+The ideal step function (grey dashed) converges slowly; Fermi–Dirac (terracotta) and
+Methfessel–Paxton \\(N=1\\) (plum) smearings regularise the integral at the cost of a
+broadening \\(\sigma\\) that must be converged or corrected.
+
+</figcaption>
+</figure>
+
+<details>
+<summary><b>Code Notes: k-point setup in VASP and Quantum ESPRESSO</b></summary>
+
+**VASP** — the `KPOINTS` file controls the mesh. The most common format for an automatic MP grid:
+
+```
+Automatic
+0
+Monkhorst-Pack
+ 12 12 12
+  0  0  0
+```
+
+The last line is the shift (0 0 0 = grid includes Γ; 1 1 1 = shifted half a step, avoids Γ
+for even-numbered grids). For hexagonal systems, use `Gamma`-centred grids (replace
+`Monkhorst-Pack` with `Gamma`) to preserve the 3-fold symmetry.
+
+**Quantum ESPRESSO** — set in the `&K_POINTS` card of `pw.x`:
+
+```
+K_POINTS automatic
+12 12 12  0 0 0
+```
+
+The three integers are \\(N_1 N_2 N_3\\); the last three are shifts (0 = no shift, 1 = shift by
+\\(1/(2N_i)\\)). Use `K_POINTS gamma` for \\(\Gamma\\)-only calculations (molecules, large
+supercells).
+
+</details>
 
 
 ## Smearing and Partial Occupancies
+
 
 ### The Problem with Sharp Occupation
 
@@ -251,31 +394,74 @@ takes a fundamentally different approach: it performs the BZ integral *exactly* 
 linear interpolation of the band energies \\(\epsilon_i(\mathbf{k})\\), without introducing any
 broadening parameter.
 
-The BZ is decomposed into tetrahedra (typically by subdividing each parallelepiped of the
-\\(\mathbf{k}\\)-mesh into six tetrahedra). Within each tetrahedron, \\(\epsilon_i(\mathbf{k})\\) is
-interpolated linearly from its values at the four vertices. The integral of the step function
-\\(\theta(\epsilon_F - \epsilon_i(\mathbf{k}))\\) over a tetrahedron with a linearly varying
-integrand can be evaluated analytically — the result is a known function of \\(\epsilon_F\\) and
-the four vertex energies, involving only elementary algebra.
+**Decomposition.** The BZ is partitioned into a regular \\(\mathbf{k}\\)-mesh. Each parallelepiped
+of the mesh is subdivided into six congruent tetrahedra (the natural simplicial decomposition
+of a 3D cell). Within each tetrahedron \\(T\\) with vertices \\(\mathbf{k}_1,\ldots,\mathbf{k}_4\\)
+and band energies \\(\epsilon_n = \epsilon_i(\mathbf{k}_n)\\) (sorted so \\(\epsilon_1 \leq \epsilon_2 \leq \epsilon_3 \leq \epsilon_4\\)), the band energy is **linearly interpolated**:
 
-The **Blöchl correction** (Blöchl et al., 1994) adds a quadratic correction term that accounts
-for the curvature of \\(\epsilon_i(\mathbf{k})\\) beyond the linear interpolation, improving the
-accuracy from \\(\mathcal{O}(1/N_k^2)\\) to \\(\mathcal{O}(1/N_k^4)\\) for the same mesh density.
-This corrected tetrahedron method is the gold standard for BZ integration accuracy.
+\\[
+    \tilde\epsilon_i(\mathbf{k}) = \sum_{n=1}^{4} \alpha_n(\mathbf{k})\,\epsilon_n,
+    \qquad \mathbf{k} \in T,
+\\]
+
+where \\(\alpha_n(\mathbf{k})\\) are the barycentric coordinates of \\(\mathbf{k}\\) in \\(T\\), with
+\\(\sum_n \alpha_n = 1\\). The integration of the step function \\(\theta(\epsilon_F - \tilde\epsilon)\\)
+over the linear interpolant inside \\(T\\) is then a purely geometric problem: the level set
+\\(\tilde\epsilon = \epsilon_F\\) is a plane that cuts \\(T\\) into two polyhedra.
+
+**Analytic weights.** Carrying out the integral analytically gives the **tetrahedron weights**
+\\(w_n(\epsilon_F)\\), which depend on where \\(\epsilon_F\\) sits relative to the four vertex
+energies \\(\epsilon_n\\). The standard results (Blöchl 1994; for the volume integral
+\\(\int_T \theta(\epsilon_F - \tilde\epsilon)/V_T\\)) are:
+
+| Regime | Filled fraction of \\(T\\) |
+|---|---|
+| \\(\epsilon_F < \epsilon_1\\) | \\(0\\) (tetrahedron empty) |
+| \\(\epsilon_1 \leq \epsilon_F < \epsilon_2\\) | \\(\dfrac{(\epsilon_F - \epsilon_1)^3}{(\epsilon_2-\epsilon_1)(\epsilon_3-\epsilon_1)(\epsilon_4-\epsilon_1)}\\) |
+| \\(\epsilon_2 \leq \epsilon_F < \epsilon_3\\) | piecewise cubic in \\(\epsilon_F\\) (one truncated corner) |
+| \\(\epsilon_3 \leq \epsilon_F < \epsilon_4\\) | \\(1 - \dfrac{(\epsilon_4 - \epsilon_F)^3}{(\epsilon_4-\epsilon_1)(\epsilon_4-\epsilon_2)(\epsilon_4-\epsilon_3)}\\) |
+| \\(\epsilon_F \geq \epsilon_4\\) | \\(1\\) (tetrahedron full) |
+
+The vertex weights \\(w_n\\) (the fraction of the integration measure attributable to vertex \\(n\\))
+follow by differentiation: \\(w_n = \partial[\text{filled fraction}]/\partial\epsilon_n\\). The total
+electron count is then \\(N_{\rm el} = \sum_{i,T}\sum_n w_n^{i,T}(\epsilon_F)\\), and the Fermi
+energy \\(\epsilon_F\\) is determined by the implicit equation \\(N_{\rm el}(\epsilon_F) = N\\).
+Solving for \\(\epsilon_F\\) is done by bisection over a sorted list of all vertex energies; the
+resulting integration is **exact** for any function that is piecewise linear on the tetrahedral
+mesh.
+
+**The Blöchl correction.** The linear interpolant misses the curvature of \\(\epsilon_i(\mathbf{k})\\)
+within each tetrahedron. The dominant correction is the second-derivative contribution that
+arises from the Taylor expansion of the true band energy around the tetrahedron centroid.
+Blöchl, Jepsen, and Andersen (1994) showed that adding the correction
+
+\\[
+    \Delta w_n = \frac{1}{40}\sum_T D_T(\epsilon_F)\!\sum_{m=1}^4 (\epsilon_m - \epsilon_n),
+\\]
+
+where \\(D_T(\epsilon_F)\\) is the density of states from tetrahedron \\(T\\) at \\(\epsilon_F\\),
+restores fourth-order accuracy: the integration error scales as \\(\mathcal{O}(N_k^{-4})\\) rather
+than the \\(\mathcal{O}(N_k^{-2})\\) of the uncorrected linear interpolation. The correction is
+the second-derivative analogue of Simpson's rule for the BZ integral — it costs essentially
+nothing extra (the DOS at \\(\epsilon_F\\) is already computed) and reduces the \\(\mathbf{k}\\)-mesh
+density needed for a target accuracy by a factor of 2–3 in each direction. This corrected
+tetrahedron method is the gold standard for BZ integration accuracy and is selected in VASP by
+`ISMEAR = -5` (`tetrahedra_opt` in QE).
 
 **Advantages:** No smearing parameter to choose or converge. No entropy correction needed. Exact
-for any quantity that depends linearly on \\(\epsilon_i(\mathbf{k})\\) within each tetrahedron.
-Produces smooth, non-oscillatory convergence with \\(\mathbf{k}\\)-mesh density.
+for any quantity that depends linearly on \\(\epsilon_i(\mathbf{k})\\) within each tetrahedron;
+fourth-order accurate with the Blöchl correction. Produces smooth, non-oscillatory convergence
+with \\(\mathbf{k}\\)-mesh density.
 
 **Limitations:** The tetrahedron method requires the BZ integral to be performed over a regular
-mesh — it cannot be used with symmetry-reduced or randomly shifted \\(\mathbf{k}\\)-sets. More
-importantly, the analytic integration assumes a fixed band structure: the Fermi energy and the
-tetrahedron weights are computed *after* the eigenvalues are known, so there is no smooth
-dependence of the total energy on atomic positions. This means the forces computed from a
-tetrahedron-method calculation contain small but non-zero discontinuities when an eigenvalue
-crosses \\(\epsilon_F\\) as atoms move, making the tetrahedron method **unsuitable for geometry
-optimisation or molecular dynamics** of metallic systems. For these tasks, MP smearing
-(\\(N = 1\\)) is preferred.
+mesh — it cannot be used with symmetry-reduced or randomly shifted \\(\mathbf{k}\\)-sets without
+additional care. More importantly, the analytic integration assumes a fixed band structure: the
+Fermi energy and the tetrahedron weights are computed *after* the eigenvalues are known, so
+there is no smooth dependence of the total energy on atomic positions. This means the forces
+computed from a tetrahedron-method calculation contain small but non-zero discontinuities when
+an eigenvalue crosses \\(\epsilon_F\\) as atoms move, making the tetrahedron method **unsuitable
+for geometry optimisation or molecular dynamics** of metallic systems. For these tasks, MP
+smearing (\\(N = 1\\)) is preferred.
 
 The tetrahedron method is, however, the optimal choice for:
 fixed-geometry total energy calculations, density of states (DOS) and projected DOS, optical

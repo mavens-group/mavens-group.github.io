@@ -1,0 +1,130 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="700" height="560" viewBox="0 0 700 560" font-family="Georgia, 'Times New Roman', serif">
+
+  <rect width="700" height="560" fill="#fafaf8"/>
+
+  <!-- Title -->
+  <text x="350" y="28" text-anchor="middle" font-size="16" font-weight="bold" fill="#2c2c2c">PAW: Projector Augmented Wave Method</text>
+
+  <!-- ============================================================
+       TOP PANEL: Wavefunction comparison
+       Show AE (wiggly, nodal) and PS (smooth) wavefunctions
+       as function of r, with the augmentation sphere boundary at rc
+       
+       Axes: origin (60, 290), x goes right (r), y goes up (ψ)
+       rc at x=60+160=220 (left boundary of interstitial)
+  ============================================================ -->
+
+  <text x="350" y="52" text-anchor="middle" font-size="13" font-weight="bold" fill="#2c3e50">(a) All-electron vs. pseudo wavefunction</text>
+
+  <!-- Shaded augmentation region -->
+  <rect x="60" y="80" width="160" height="230" rx="0" fill="#b8963e" fill-opacity="0.12"/>
+  <rect x="220" y="80" width="390" height="230" rx="0" fill="#4a7fa5" fill-opacity="0.07"/>
+
+  <!-- Region labels -->
+  <text x="140" y="100" text-anchor="middle" font-size="12" fill="#8a6a1a" font-weight="bold">Augmentation</text>
+  <text x="140" y="115" text-anchor="middle" font-size="12" fill="#8a6a1a" font-weight="bold">sphere  (r &lt; r_c)</text>
+  <text x="415" y="100" text-anchor="middle" font-size="12" fill="#2a5f85" font-weight="bold">Interstitial  (r &gt; r_c)</text>
+
+  <!-- Axes -->
+  <defs>
+    <marker id="axarr" markerWidth="7" markerHeight="5" refX="6" refY="2.5" orient="auto">
+      <polygon points="0 0, 7 2.5, 0 5" fill="#444"/>
+    </marker>
+  </defs>
+  <line x1="55"  y1="290" x2="620" y2="290" stroke="#444" stroke-width="1.5" marker-end="url(#axarr)"/>
+  <line x1="60"  y1="325" x2="60"  y2="75"  stroke="#444" stroke-width="1.5" marker-end="url(#axarr)"/>
+  <text x="625" y="294" font-size="13" fill="#444">r</text>
+  <text x="64"  y="72"  font-size="13" fill="#444">ψ</text>
+  <text x="57"  y="294" text-anchor="end" font-size="11" fill="#666">0</text>
+
+  <!-- rc line -->
+  <line x1="220" y1="80" x2="220" y2="340" stroke="#8a6a1a" stroke-width="1.8" stroke-dasharray="6,4"/>
+  <text x="220" y="348" text-anchor="middle" font-size="13" fill="#8a6a1a" font-style="italic">r<tspan font-size="9" dy="3">c</tspan></text>
+
+  <!-- Nucleus marker -->
+  <circle cx="60" cy="290" r="5" fill="#c0392b"/>
+  <text x="60" y="338" text-anchor="middle" font-size="11" fill="#c0392b">nucleus</text>
+
+  <!-- AE wavefunction: wiggly inside rc, smooth outside (continues as PS outside) -->
+  <!-- Inside augmentation sphere: oscillatory with a node around r=80 -->
+  <path d="
+    M 60,195
+    C 65,180 70,165 80,170
+    C 90,175 95,185 100,210
+    C 105,230 108,250 112,265
+    C 116,278 120,285 128,288
+    C 135,290 142,288 150,284
+    C 158,280 165,272 175,265
+    C 185,258 195,250 208,243
+    C 215,240 218,239 220,239
+    C 240,235 270,228 300,220
+    C 340,210 390,200 440,195
+    C 490,191 540,190 590,190
+  " stroke="#a0522d" stroke-width="2.2" fill="none"/>
+
+  <!-- PS wavefunction: smooth everywhere, matches AE outside rc -->
+  <path d="
+    M 60,255
+    C 80,248 100,243 120,241
+    C 150,238 180,239 210,240
+    C 215,240 218,239 220,239
+    C 240,235 270,228 300,220
+    C 340,210 390,200 440,195
+    C 490,191 540,190 590,190
+  " stroke="#4a7fa5" stroke-width="2.2" fill="none" stroke-dasharray="7,4"/>
+
+  <!-- Legend -->
+  <line x1="70" y1="355" x2="115" y2="355" stroke="#a0522d" stroke-width="2.2"/>
+  <text x="122" y="359" font-size="12.5" fill="#a0522d">All-electron ψ<tspan font-size="9" dy="3">AE</tspan><tspan dy="-3"> (nodal, correct near nucleus)</tspan></text>
+  <line x1="70" y1="374" x2="115" y2="374" stroke="#4a7fa5" stroke-width="2.2" stroke-dasharray="7,4"/>
+  <text x="122" y="378" font-size="12.5" fill="#4a7fa5">Pseudo ψ<tspan font-size="9" dy="3">PS</tspan><tspan dy="-3"> (nodeless, smooth everywhere)</tspan></text>
+  <text x="122" y="396" font-size="11.5" fill="#666">ψ<tspan font-size="8" dy="2">AE</tspan><tspan dy="-2"> ≡ ψ</tspan><tspan font-size="8" dy="2">PS</tspan><tspan dy="-2"> for r &gt; r</tspan><tspan font-size="8" dy="2">c</tspan><tspan dy="-2">  (they coincide outside the sphere)</tspan></text>
+
+  <!-- ============================================================
+       BOTTOM PANEL: Schematic of the PAW transformation 
+       The augmentation sphere with AE core, PS smooth region,
+       and the interstitial plane waves
+  ============================================================ -->
+
+  <text x="350" y="422" text-anchor="middle" font-size="13" font-weight="bold" fill="#2c3e50">(b) PAW density reconstruction</text>
+
+  <!-- Atom circle (augmentation sphere cross-section) -->
+  <circle cx="200" cy="490" r="55" fill="#b8963e" fill-opacity="0.20" stroke="#b8963e" stroke-width="2"/>
+  <circle cx="200" cy="490" r="8"  fill="#c0392b"/>
+  <text x="200" y="470" text-anchor="middle" font-size="11" fill="#8a6a1a" font-weight="bold">Augmentation</text>
+  <text x="200" y="484" text-anchor="middle" font-size="11" fill="#8a6a1a" font-weight="bold">sphere</text>
+  <text x="200" y="514" text-anchor="middle" font-size="10" fill="#8a6a1a">AE partial waves φ</text>
+  <text x="200" y="527" text-anchor="middle" font-size="10" fill="#8a6a1a">+ PS partial waves φ̃</text>
+
+  <!-- Arrow: PAW transformation -->
+  <defs>
+    <marker id="bigArr" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#7a5c8a"/>
+    </marker>
+  </defs>
+  <line x1="262" y1="490" x2="348" y2="490" stroke="#7a5c8a" stroke-width="2.5" marker-end="url(#bigArr)"/>
+  <text x="305" y="480" text-anchor="middle" font-size="11.5" fill="#7a5c8a">T̂ = 1 + Σ (|φ⟩−|φ̃⟩)⟨p̃|</text>
+
+  <!-- Full AE density circle -->
+  <circle cx="420" cy="490" r="55" fill="#6a9e7a" fill-opacity="0.20" stroke="#6a9e7a" stroke-width="2"/>
+  <text x="420" y="470" text-anchor="middle" font-size="11" fill="#3a6a4a" font-weight="bold">Full AE density</text>
+  <text x="420" y="484" text-anchor="middle" font-size="11" fill="#3a6a4a">ρ(r) = ρ̃(r)</text>
+  <text x="420" y="499" text-anchor="middle" font-size="11" fill="#3a6a4a">  + ρ¹(r) − ρ̃¹(r)</text>
+  <text x="420" y="518" text-anchor="middle" font-size="10" fill="#3a6a4a">(smooth + AE core</text>
+  <text x="420" y="531" text-anchor="middle" font-size="10" fill="#3a6a4a">− PS on-site)</text>
+
+  <!-- Interstitial / plane-wave region -->
+  <rect x="490" y="435" width="185" height="110" rx="6" fill="#4a7fa5" fill-opacity="0.12" stroke="#4a7fa5" stroke-width="1.5"/>
+  <!-- PW squiggles -->
+  <path d="M 500,470 C 510,460 520,480 530,470 C 540,460 550,480 560,470 C 570,460 580,480 590,470 C 600,460 610,480 620,470 C 630,460 640,480 650,470 C 660,460 668,478 670,472" stroke="#4a7fa5" stroke-width="1.5" fill="none"/>
+  <path d="M 500,490 C 510,480 520,500 530,490 C 540,480 550,500 560,490 C 570,480 580,500 590,490 C 600,480 610,500 620,490 C 630,480 640,500 650,490 C 660,480 668,498 670,492" stroke="#4a7fa5" stroke-width="1.5" fill="none"/>
+  <path d="M 500,510 C 510,500 520,520 530,510 C 540,500 550,520 560,510 C 570,500 580,520 590,510 C 600,500 610,520 620,510 C 630,500 640,520 650,510 C 660,500 668,518 670,512" stroke="#4a7fa5" stroke-width="1.5" fill="none"/>
+  <text x="582" y="455" text-anchor="middle" font-size="11" fill="#2a5f85" font-weight="bold">Interstitial</text>
+  <text x="582" y="540" text-anchor="middle" font-size="10" fill="#2a5f85">Smooth pseudo</text>
+  <text x="582" y="553" text-anchor="middle" font-size="10" fill="#2a5f85">density ρ̃(r)</text>
+
+  <!-- Projector annotation -->
+  <line x1="200" y1="435" x2="200" y2="420" stroke="#8a6a1a" stroke-width="1.2"/>
+  <text x="200" y="414" text-anchor="middle" font-size="10.5" fill="#8a6a1a">Projectors p̃_n: ⟨p̃_n|φ̃_m⟩ = δ_nm</text>
+
+</svg>
