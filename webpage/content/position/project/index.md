@@ -2,35 +2,52 @@
 _build:
   render: always
   list: always
-
 title: Project Position
-summary: Multiple project positions available in the group.
-date: 2024-07-01
+summary: BSc/MSc project positions in computational materials physics and machine learning.
+weight: 3
+date: 2026-05-23
 profile: false
 show_date: false
+image:
+  focal_point: "Center"
 banner:
   image: group.webp
 ---
-## BSc/MSc semester project in Computational Physics and Machine Learning
 
-<!--more-->
-### Project Topics
-- First Principles and DFT based study of MXene.
-- Materials discovery using machine learning.
+## BSc/MSc Project Positions
+
+Project positions are open in the MAVENs group for students in the penultimate years of their BSc or MSc.
+
+### Project Areas
+
+Projects are available across the group's current research directions:
+
+- First-principles and DFT-based studies of 2D materials, including MXenes
+- Heusler alloys, magnetocaloric materials, and spintronic systems
+- Machine-learning-aided materials discovery and property prediction
+
+The specific project will be decided after an initial discussion.
 
 ### Eligibility
-- Minimum 70% in the last university exam.
-- Ongoing Bachelor's or Master's degree (or equivalent) in Physics, Materials Science, Chemistry, or Computer Science.
-- Strong background and theoretical understanding of materials science or numerical methods.
-- Experience in Python programming is a plus.
 
-### Responsibilities
-- The applicants should be enthusiastic and motivated. (S)He should be able to take forward the project.
-- The students will work on one of the following areas:
-- Machine learning aided material discovery
-- First principle calculations on 2D materials and molecules for applications like  green hydrogen and magnetocaloric materials.
+- Ongoing BSc or MSc (or equivalent) in Physics, Materials Science, Chemistry, or Computer Science
+- Some exposure to quantum mechanics, statistical mechanics, or numerical methods
+- Familiarity with Python is helpful but not required — you will pick it up if you don't have it
 
-### Application
-Interested candidates should fill out [this form](https://forms.gle/oKHCcX8RGuG3u4pD9).
-### Last date of application
-For project submission on 2026, apply for the position before January 30, 2025
+### What We Expect
+
+- A minimum commitment of three semesters. We do not take students for a single semester — see the [joining page](../before) for why.
+- Willingness to read difficult material, debug things that break, and write up your work as you go.
+- Honesty about what you do and don't understand.
+
+### How to Apply
+
+Write to me with your details and a short note on what about the group's work interests you.
+
+Before applying, read
+- [Joining MAVENs](../before/) page — it covers what working here actually looks like.
+- [Getting Started](../start/) page — it covers what is expected from you.
+
+### Deadline
+
+For projects starting in the 2027 academic year, apply by **30 June 2026**.

@@ -1,14 +1,27 @@
 ---
 title: Open Positions
-
-# Listing view
-view: compact
-
-# Optional banner image (relative to `assets/media/` folder).
+summary: Project, PhD, and joining information for MAVENs.
+view: card
 banner:
   caption: ''
   image: 'group.webp'
   title: "Open Positions"
+
+sections:
+  - block: markdown
+    id: header
+    content:
+      text: 'Check out my recent blog posts below!'
+  - block: collection
+    id: posts
+    content:
+      count: 5
+      filters:
+        folders:
+          - post
+      offset: 0
+      sort_by: 'Date'
+      sort_ascending: false
+    design:
+      view: card
 ---
-## No Open Positions at the Moment
-Thank you for your interest in joining our group! While we don't have any open positions right now, we’re always growing and evolving. Please check back soon — this page will be updated as soon as new opportunities become available.<br> You can check the beginner's guide below to find out what is expected from you in our group.

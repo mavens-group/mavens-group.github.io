@@ -1,4 +1,7 @@
 ---
+_build:
+  render: always
+  list: always
 title: Joining MAVENs
 show_date: false
 profile: true

@@ -1,8 +1,11 @@
 ---
+_build:
+  render: always
+  list: always
 title: Guide for New Members
 show_date: false
 profile: true
-weight: 2
+weight: 4
 summary: For students joining MAVENs — how things work, the tools we use, and what the first few months look like.
 ---
 Welcome to MAVENs. This page covers what you need to know before your first week and what we expect through your time here.

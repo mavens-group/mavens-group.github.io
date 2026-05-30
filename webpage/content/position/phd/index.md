@@ -3,6 +3,7 @@ _build:
   render: never
   list: never
 
+weight: 2
 title: PhD Position
 summary: Join the MAVENs Research Group at SRMIST
 profile: false
