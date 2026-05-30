@@ -15,7 +15,7 @@ categories:
   - Courses
   - Physics
 image:
-  focal_point: 'top'
+  focal_point: 'Top'
   alt_text: 'Visualization of electron density and electronic structure in Density Functional Theory'
 type: post
 listing:

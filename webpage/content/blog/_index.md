@@ -3,7 +3,7 @@ title: Lectures and Tutorials
 subtitle: Tutorials and Lecture Notes
 
 # Listing view
-view: compact
+view: card
 summary: Tutorial and Lecture notes on Computational Materials Science related topics.
 
 # Optional banner image (relative to `assets/media/` folder).
