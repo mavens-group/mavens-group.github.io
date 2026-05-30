@@ -1,8 +1,13 @@
 # data/fonts/custom.toml
+# name = "custom"
+# [[font_set]]
+  # heading_font = "Fira Sans Condensed"
+  # body_font    = "Fira Sans Condensed"
+  # nav_font     = "Fira Sans Condensed"
+  # mono_font    = "Fira Code"
 name = "custom"
-
 [[font_set]]
-  heading_font = "Roboto Condensed"
-  body_font = "Roboto Condensed"
-  nav_font = "Roboto Condensed"
-  mono_font = "Lucida Console"
+  heading_font = "Fira Sans Extra Condensed"
+  body_font    = "Fira Sans Extra Condensed"
+  nav_font     = "Fira Sans Extra Condensed"
+  mono_font    = "Fira Code"

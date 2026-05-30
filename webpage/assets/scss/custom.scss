@@ -1,36 +1,145 @@
 /* ==========================================================================
-   FONT FACES
-   Roboto Condensed loaded locally across four weights (100–600).
-   STIX Two Text faces are kept commented out for future use.
+   FONT FACES — Fira Sans Extra Condensed (self-hosted)
+   100 (Thin) reserved for large display/banner headings only.
+   300/400 for body; 600 for bold; 400 italic for real italics.
    ========================================================================== */
 @font-face {
-  font-family: 'Roboto Condensed';
-  src: url('/fonts/roboto-condensed-100.woff2') format('woff2');
+  font-family: 'Fira Sans Extra Condensed';
+  src: url('/fonts/fira-sans-extra-condensed-100.woff2') format('woff2');
   font-weight: 100;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
-  font-family: 'Roboto Condensed';
-  src: url('/fonts/roboto-condensed-300.woff2') format('woff2');
+  font-family: 'Fira Sans Extra Condensed';
+  src: url('/fonts/fira-sans-extra-condensed-300.woff2') format('woff2');
   font-weight: 300;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
-  font-family: 'Roboto Condensed';
-  src: url('/fonts/roboto-condensed-400.woff2') format('woff2');
+  font-family: 'Fira Sans Extra Condensed';
+  src: url('/fonts/fira-sans-extra-condensed-400.woff2') format('woff2');
   font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
-  font-family: 'Roboto Condensed';
-  src: url('/fonts/roboto-condensed-600.woff2') format('woff2');
+  font-family: 'Fira Sans Extra Condensed';
+  src: url('/fonts/fira-sans-extra-condensed-400italic.woff2') format('woff2');
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Fira Sans Extra Condensed';
+  src: url('/fonts/fira-sans-extra-condensed-600.woff2') format('woff2');
   font-weight: 600;
   font-style: normal;
   font-display: swap;
 }
+@font-face {
+  font-family: 'Fira Code';
+  src: url('/fonts/fira-code-400.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Fira Code';
+  src: url('/fonts/fira-code-600.woff2') format('woff2');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ==========================================================================
+   FONT FACES — Fira Sans Condensed (self-hosted)
+   100 (Thin) reserved for large display/banner headings only.
+   300/400 for body; 600 for bold; 400 italic for real italics.
+   ========================================================================== */
+// @font-face {
+  // font-family: 'Fira Sans Condensed';
+  // src: url('/fonts/fira-sans-condensed-100.woff2') format('woff2');
+  // font-weight: 100;
+  // font-style: normal;
+  // font-display: swap;
+// }
+// @font-face {
+  // font-family: 'Fira Sans Condensed';
+  // src: url('/fonts/fira-sans-condensed-300.woff2') format('woff2');
+  // font-weight: 300;
+  // font-style: normal;
+  // font-display: swap;
+// }
+// @font-face {
+  // font-family: 'Fira Sans Condensed';
+  // src: url('/fonts/fira-sans-condensed-400.woff2') format('woff2');
+  // font-weight: 400;
+  // font-style: normal;
+  // font-display: swap;
+// }
+// @font-face {
+  // font-family: 'Fira Sans Condensed';
+  // src: url('/fonts/fira-sans-condensed-400italic.woff2') format('woff2');
+  // font-weight: 400;
+  // font-style: italic;
+  // font-display: swap;
+// }
+// @font-face {
+  // font-family: 'Fira Sans Condensed';
+  // src: url('/fonts/fira-sans-condensed-600.woff2') format('woff2');
+  // font-weight: 600;
+  // font-style: normal;
+  // font-display: swap;
+// }
+// @font-face {
+  // font-family: 'Fira Code';
+  // src: url('/fonts/fira-code-400.woff2') format('woff2');
+  // font-weight: 400;
+  // font-style: normal;
+  // font-display: swap;
+// }
+// @font-face {
+  // font-family: 'Fira Code';
+  // src: url('/fonts/fira-code-600.woff2') format('woff2');
+  // font-weight: 600;
+  // font-style: normal;
+  // font-display: swap;
+// }
+/* ==========================================================================
+   FONT FACES
+   Roboto Condensed loaded locally across four weights (100–600).
+   STIX Two Text faces are kept commented out for future use.
+   ========================================================================== */
+// @font-face {
+  // font-family: 'Roboto Condensed';
+  // src: url('/fonts/roboto-condensed-100.woff2') format('woff2');
+  // font-weight: 100;
+  // font-style: normal;
+  // font-display: swap;
+// }
+// @font-face {
+  // font-family: 'Roboto Condensed';
+  // src: url('/fonts/roboto-condensed-300.woff2') format('woff2');
+  // font-weight: 300;
+  // font-style: normal;
+  // font-display: swap;
+// }
+// @font-face {
+  // font-family: 'Roboto Condensed';
+  // src: url('/fonts/roboto-condensed-400.woff2') format('woff2');
+  // font-weight: 400;
+  // font-style: normal;
+  // font-display: swap;
+// }
+// @font-face {
+  // font-family: 'Roboto Condensed';
+  // src: url('/fonts/roboto-condensed-600.woff2') format('woff2');
+  // font-weight: 600;
+  // font-style: normal;
+  // font-display: swap;
+// }
 
 // @font-face {
 //   font-family: 'STIX Two Text';
@@ -61,13 +170,13 @@
    Also resets the CSS counter used by the publication list.
    ========================================================================== */
 body {
-  font-family: 'Roboto Condensed', sans-serif;
+  font-family: 'Fira Sans Extra Condensed', sans-serif;
   font-weight: 300;
   counter-reset: pub-counter; /* Reset publication counter once per page */
 }
 
 h1, h2, h3, h4 {
-  font-family: 'Roboto Condensed', sans-serif;
+  font-family: 'Fira Sans Extra Condensed', sans-serif;
   font-weight: 300;
 }
 
@@ -278,7 +387,7 @@ h1, h2, h3, h4 {
    ------------------------------------------------------------------ */
 .carousel-item:first-child {
   h1 span {
-    font-family: 'Roboto Condensed', sans-serif !important;
+    font-family: 'Fira Sans Extra Condensed', sans-serif !important;
     font-weight: 400 !important;
     letter-spacing: 0.35rem !important;
     font-size: 4rem !important;
@@ -289,7 +398,7 @@ h1, h2, h3, h4 {
   }
 
   p {
-    font-family: 'Roboto Condensed', sans-serif !important;
+    font-family: 'Fira Sans Extra Condensed', sans-serif !important;
     font-weight: 300 !important;
     letter-spacing: 0.1rem;
     font-size: 1.4rem;
