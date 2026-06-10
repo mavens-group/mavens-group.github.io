@@ -850,6 +850,9 @@ h1, h2, h3, h4 {
   }
 }
 
+.research-themes-grid--two {
+  grid-template-columns: repeat(2, 1fr);
+}
 /* ==========================================================================
    HIGHLIGHT LIST GRID
    Tighter 2-column grid on desktop; single column on mobile.

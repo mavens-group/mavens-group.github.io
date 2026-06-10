@@ -13,13 +13,35 @@ image:
 banner:
   image: group.webp
 ---
+
 ## PhD in Computational Condensed Matter Physics
 
 PhD positions in the MAVENs group are filled through SRMIST's regular admission cycle. The next call is expected around October 2026. This page covers what is specific to a PhD here; for what working in the group is actually like — the day-to-day, what you would gain, and what I look for in temperament — read the [Joining MAVENs](../before/) page first.
 
 ## What You Would Be Working On
 
-A PhD in this group is in computational condensed matter physics: open problems in magnetism, disorder, and quantum materials, approached with density functional theory, KKR-CPA, Monte Carlo simulations, and increasingly machine learning. The problems are physics problems; the materials — Heusler alloys, MXenes, quantum systems — are the testbed, not the subject. See the [research pages](/research/) for the specific directions.
+A PhD here is in computational condensed matter physics — open problems in magnetism, disorder, and coherence, approached with density functional theory, KKR-CPA, Monte Carlo, and machine learning. The materials are the testbed, not the subject. Current directions:
+
+<div class="research-themes-grid research-themes-grid--two">
+  <div class="theme-card">
+    <a class="theme-title" href="/research/post/quantum/">Finite-Temperature Magnetism in Disordered Heusler Alloys</a>
+    <span class="theme-desc">Can the Curie temperature of a disordered alloy be predicted from its composition — closing the loop from KKR-CPA exchange interactions to a Monte Carlo estimate of T<sub>c</sub>?</span>
+  </div>
+  <div class="theme-card">
+    <a class="theme-title" href="/research/post/energy/">Magnetocaloric Materials from First Principles</a>
+    <span class="theme-desc">Which electronic and structural features maximise the magnetic entropy change near a transition — and can we screen candidates for solid-state cooling before they are ever synthesised?</span>
+  </div>
+  <div class="theme-card">
+    <a class="theme-title" href="/research/post/quantum/">Magnetism and Disorder in 2D MXenes</a>
+    <span class="theme-desc">What survives contact with reality: how do surface terminations and vacancies switch magnetic order on and off in MXenes predicted to be magnetic on idealised structures?</span>
+  </div>
+  <div class="theme-card">
+    <a class="theme-title" href="/research/post/quantum/">Spin Coherence of Defects in 2D Materials</a>
+    <span class="theme-desc">What limits how long a spin defect stays coherent — and can we identify host materials and defect types whose coherence survives their nuclear-spin and phonon environment?</span>
+  </div>
+</div>
+
+The exact problem is shaped to the student over the first months.
 
 ## Eligibility
 
