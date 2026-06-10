@@ -1,6 +1,6 @@
 ---
 _build:
-  render: never
+  render: always
   list: never
 title: PhD Position
 summary: PhD positions in computational condensed matter physics — next call expected October 2026. Enquiries from strong candidates welcome year-round.
