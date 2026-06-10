@@ -16,6 +16,8 @@ Work in the group is computational. You would be running first-principles calcul
 
 What this looks like day to day: reading papers, setting up and running calculations on our compute resources, debugging when they fail (they will), analysing output, writing up what you find, and discussing it with the group. You will spend more time thinking and reading than you might expect, and that is the point.
 
+Research does not move in a straight line. You will spend stretches not knowing what to do next, calculations will break, and things you were sure of will turn out to be wrong. This is what research feels like from the inside, for everyone — it is not a sign that you are not cut out for it. What helps is reading more widely than your immediate problem, talking to senior students before bringing it to me, and letting a stuck problem sit overnight before deciding it is hopeless.
+
 ## What You Would Gain
 
 By the end of a project or PhD with us, you would have:

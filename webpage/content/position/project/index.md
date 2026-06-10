@@ -13,7 +13,6 @@ image:
 banner:
   image: group.webp
 ---
-
 ## BSc/MSc Project Positions
 
 Project positions are open in the MAVENs group for students in the penultimate years of their BSc or MSc.
@@ -36,17 +35,13 @@ The specific project will be decided after an initial discussion.
 
 ### What We Expect
 
-- A minimum commitment of three semesters. We do not take students for a single semester — see the [joining page](../before) for why.
+- A minimum commitment of three semesters. We do not take students for a single semester — meaningful research is not possible on that timescale, and it is not fair to either of us to start something we cannot finish.
 - Willingness to read difficult material, debug things that break, and write up your work as you go.
 - Honesty about what you do and don't understand.
 
 ### How to Apply
 
-Write to me with your details and a short note on what about the group's work interests you.
-
-Before applying, read
-- [Joining MAVENs](../before/) page — it covers what working here actually looks like.
-- [Getting Started](../start/) page — it covers what is expected from you.
+Write to me with your details and a short note on what about the group's work interests you. Before applying, read the [Joining MAVENs](../before/) page — it covers what working here actually looks like.
 
 ### Deadline
 
