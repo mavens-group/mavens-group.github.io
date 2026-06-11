@@ -942,3 +942,157 @@ h1, h2, h3, h4 {
     padding: 1rem 0.5rem;
   }
 }
+
+/* ==========================================================================
+   PHD APPLICATION TIMELINE
+   Two stacked horizontal phases (with-me / SRMIST), connected vertically.
+   Collapses to a left-aligned vertical stack on mobile.
+   Paired with the markup in position/phd/index.md.
+   ========================================================================== */
+.phd-timeline {
+  --tl-accent: #0066cc;
+  --tl-phase1: #0f6e56;
+  --tl-spine: rgba(128, 128, 128, 0.3);
+  --tl-disc-text: #ffffff;
+  margin: 1.5rem 0;
+  font-family: 'Fira Sans Extra Condensed', sans-serif;
+
+  .phd-timeline__legend {
+    display: flex;
+    gap: 1.5rem;
+    margin-bottom: 1.25rem;
+    font-size: 0.9rem;
+    font-weight: 300;
+    opacity: 0.75;
+
+    span {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+    }
+  }
+
+  .phd-timeline__key {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    flex: 0 0 12px;
+  }
+
+  .phd-phase-label {
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    opacity: 0.55;
+    margin-bottom: 0.6rem;
+  }
+
+  .phd-row {
+    position: relative;
+    display: flex;
+    gap: 1rem;
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: 13px;
+      left: var(--inset);
+      right: var(--inset);
+      height: 1.5px;
+      background: var(--tl-spine);
+      z-index: 0;
+    }
+  }
+
+  .phd-step {
+    position: relative;
+    z-index: 1;
+    flex: 1;
+    text-align: center;
+    padding: 0 0.25rem;
+
+    &--phase1 .phd-step__num {
+      background: var(--tl-phase1);
+    }
+  }
+
+  .phd-step__num {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--tl-accent);
+    color: var(--tl-disc-text);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.85rem;
+    font-weight: 600;
+    line-height: 1;
+    margin: 0 auto 0.5rem;
+    box-sizing: border-box;
+  }
+
+  .phd-step__title {
+    font-size: 1rem;
+    font-weight: 600;
+    line-height: 1.3;
+  }
+
+  .phd-step__note {
+    font-size: 0.85rem;
+    font-weight: 300;
+    opacity: 0.7;
+    margin-top: 0.15rem;
+
+    a {
+      color: var(--tl-accent);
+      text-decoration: underline;
+    }
+  }
+
+  .phd-connector {
+    width: 1.5px;
+    height: 26px;
+    background: var(--tl-spine);
+    margin: 0.5rem auto;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .phd-timeline {
+    --tl-spine: rgba(255, 255, 255, 0.2);
+    --tl-accent: #6ea8e0;
+    --tl-phase1: #5dcaa5;
+    --tl-disc-text: #1a1a1a;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .phd-timeline {
+    .phd-row {
+      flex-direction: column;
+      gap: 1.25rem;
+
+      &::before {
+        display: none;
+      }
+    }
+
+    .phd-step {
+      text-align: left;
+      display: grid;
+      grid-template-columns: 28px 1fr;
+      gap: 0 0.75rem;
+    }
+
+    .phd-step__num {
+      margin: 0;
+    }
+
+    .phd-step__title,
+    .phd-step__note {
+      grid-column: 2;
+    }
+  }
+}
