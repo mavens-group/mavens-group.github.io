@@ -20,11 +20,12 @@ superuser: false
 
 # Role/position
 role: PG Project (2025-26)
-
+mrole: Reanult Nissan
 # Organizations/Affiliations
 organizations:
-  - name: SRM Institute of Science and Technology
-    url: 'https://www.srmist.edu.in/'
+  - name: Intern (AI and Computer Vision)
+    url: ''
+
 
 # Short bio (displayed in user profile at end of posts)
 bio: I work on Monte Carlo methods on Bravis Lattice.
@@ -38,7 +39,7 @@ education:
   courses:
     - course: MSc in Physics
       institution: SRM Institute of Science and Technology
-      year: (2024 -)
+      year: (2026)
     - course: BSc in Physics
       institution: Dwaraka Doss Goverdhan Doss Vaishnav college
       year: 2024

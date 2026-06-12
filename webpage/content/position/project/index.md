@@ -19,13 +19,13 @@ Project positions are open in the MAVENs group for students in the penultimate y
 
 ### Project Areas
 
-Projects are available across the group's current research directions:
+All projects in the group map onto one of three active research pillars:
 
-- First-principles and DFT-based studies of 2D materials, including MXenes
-- Heusler alloys, magnetocaloric materials, and spintronic systems
-- Machine-learning-aided materials discovery and property prediction
+- **Disorder and magnetism** — DFT and KKR-CPA calculations of exchange interactions, magnetic transition temperatures, and magnetocaloric response in disordered alloys. Entry point for most new students; the method stack is validated and the problems are well-posed.
+- **Disorder and coherence** — first-principles electronic structure of defect centres in oxide materials, feeding into spin Hamiltonian extraction and coherence modelling. Requires comfort with DFT+U and multi-tool workflows.
+- **Disorder and catalysis in MXenes** — special quasirandom structure generation and ensemble DFT to study how configurational disorder shifts catalytic properties. Computationally intensive but methodologically straightforward.
 
-The specific project will be decided after an initial discussion.
+Every project is mapped to one of these pillars before it starts. The specific problem is decided after an initial discussion based on your background and the group's current priorities.
 
 ### Eligibility
 

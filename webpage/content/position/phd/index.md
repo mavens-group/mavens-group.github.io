@@ -33,20 +33,20 @@ Open problems in magnetism, disorder, and coherence, approached with density fun
 
 <div class="research-themes-grid research-themes-grid--two">
   <div class="theme-card">
-    <a class="theme-title" href="/research/post/quantum/">Finite-Temperature Magnetism in Disordered Heusler Alloys</a>
-    <span class="theme-desc">Can the Curie temperature of a disordered alloy be predicted from its composition? Getting this right is what separates a promising alloy on paper from one that works at room temperature.</span>
+    <a class="theme-title" href="/research/post/quantum/">Exchange Interactions and T<sub>c</sub> in Disordered Magnets</a>
+    <span class="theme-desc">How does chemical disorder reshape exchange pathways — and with them, the magnetic transition temperature — in metallic alloys? The goal is a validated first-principles pipeline from composition to T<sub>c</sub>: KKR-CPA → Lichtenstein J<sub>ij</sub> → Monte Carlo. This is the group's methodology flagship and the highest-leverage project on the current plan.</span>
   </div>
   <div class="theme-card">
-    <a class="theme-title" href="/research/post/energy/">Magnetocaloric Materials from First Principles</a>
-    <span class="theme-desc">Which electronic and structural features maximise the magnetic entropy change near a transition? The answer feeds directly into solid-state cooling — refrigeration without greenhouse gases.</span>
+    <a class="theme-title" href="/research/post/energy/">Finite-Temperature Magnetism and Magnetocaloric Response</a>
+    <span class="theme-desc">In FeRh and disordered Heusler alloys, off-stoichiometry and disorder shift the metamagnetic transition and the magnetic entropy change in ways that matter for solid-state cooling. This project applies the disordered-magnetism pipeline — DLM, SOC, CPA, Monte Carlo — to predict transition temperatures and ΔS<sub>M</sub> and connect them to measurable experimental benchmarks.</span>
   </div>
   <div class="theme-card">
-    <a class="theme-title" href="/research/post/quantum/">Magnetism and Disorder in 2D MXenes</a>
-    <span class="theme-desc">How do surface terminations and vacancies switch magnetic order on and off in MXenes predicted to be magnetic on idealised structures? This is where clean theory meets the messiness of real samples.</span>
+    <a class="theme-title" href="/research/post/quantum/">Disorder-Limited Spin Coherence in Oxide Qubits</a>
+    <span class="theme-desc">Vacancies in CeO₂ produce Ce³⁺ spin centres whose coherence time T<sub>2</sub> is limited by the surrounding disordered electron-spin bath — not the nuclear bath, which is sparse in natural Ce. This project computes the Ce³⁺ spin Hamiltonian via TB2J and propagates it through a cluster-correlation expansion to predict how vacancy concentration controls T<sub>2</sub> and what material changes protect it. The group's highest-reach project; assigned to the strongest student after a scoping calculation.</span>
   </div>
   <div class="theme-card">
-    <a class="theme-title" href="/research/post/quantum/">Spin Coherence of Defects in 2D Materials</a>
-    <span class="theme-desc">What limits how long a spin defect stays coherent? Coherence time is the currency of quantum sensing and computing — understanding what destroys it is the first step to protecting it.</span>
+    <a class="theme-title" href="/research/post/energy/">Disorder and Catalysis in High-Entropy MXenes</a>
+    <span class="theme-desc">In doped and high-entropy MXenes, configurational disorder spreads the hydrogen adsorption energy into a distribution rather than a single value. Using special quasirandom structures and ensemble DFT, this project asks which compositions centre that distribution on the catalytic optimum — treating disorder as the design parameter, not a defect to be minimised.</span>
   </div>
 </div>
 

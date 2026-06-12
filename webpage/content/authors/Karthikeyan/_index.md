@@ -38,7 +38,7 @@ education:
   courses:
     - course: MSc in Physics
       institution: SRM Institute of Science and Technology
-      year: (2024 -)
+      year: (2026)
     - course: BSc in Physics
       institution: SRM Institute of Science and Technology
       year: 2022
