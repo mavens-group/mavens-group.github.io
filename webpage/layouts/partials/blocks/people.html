@@ -33,6 +33,10 @@
     {{ $sort_ascending := $block.content.sort_ascending | default true }}
     {{ $sort_order := cond $sort_ascending "asc" "desc" }}
     {{ $query = sort $query $sort_by $sort_order }}
+    {{/* Alumni groups: override sort to join date descending (most recent first) */}}
+    {{ if in . "Alumni" }}
+      {{ $query = sort $query "Params.join" "desc" }}
+    {{ end }}
 
     {{if $query | and (gt (len $block.content.user_groups) 1) }}
       <div class="col-md-12">

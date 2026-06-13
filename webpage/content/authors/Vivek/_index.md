@@ -10,7 +10,7 @@ title: Vivek P
 # Full name (for SEO)
 first_name: Vivek
 last_name: P
-join: -2023
+join: 2023
 
 # Username (this should match the folder name)
 authors:

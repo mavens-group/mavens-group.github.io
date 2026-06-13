@@ -9,7 +9,7 @@ title: Harshaa V
 # Full name (for SEO)
 first_name: Harshaa
 last_name: V
-join: -2026
+join: 2025
 
 # Username (this should match the folder name)
 authors:

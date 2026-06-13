@@ -9,7 +9,7 @@ title: Gurusriram
 # Full name (for SEO)
 first_name: Gurusriram
 last_name: R
-join: -2021
+join: 2021
 
 # Username (this should match the folder name)
 authors: Gurusriram

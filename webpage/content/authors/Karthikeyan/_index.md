@@ -9,7 +9,7 @@ title: Karthikeyan C A
 # Full name (for SEO)
 first_name: Karthikeyan
 last_name: C A
-join: -2026
+join: 2026
 
 # Username (this should match the folder name)
 authors:

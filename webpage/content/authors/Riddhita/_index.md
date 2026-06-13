@@ -7,7 +7,7 @@ title: Riddhita Banerjee
 # Full name (for SEO)
 first_name: Riddhita
 last_name: Banerjee
-join: 2023
+join: 2026
 # Username (this should match the folder name)
 authors:
   - Riddhita
@@ -51,8 +51,10 @@ social:
   - icon: envelope-square
     icon_pack: fas
     link: 'mailto:rb8793@srmist.edu.in'
-user_groups:
-  - Grad Students
+#user_groups:
+#  - Grad Students
+user_groups: ["Alumni (Grad)"]
+css_class: alumni-grad
 ---
 Riddhita is a B.Tech student in the [Department of Computer Science](https://www.srmist.edu.in/department/department-of-computing-technologies/) at [SRM Institute of Science and Technology](https://www.srmist.edu.in/) with a strong interest in applying computational methods to interdisciplinary problems. Her work lies at the intersection of computer science, data-driven techniques, and scientific computing.
 

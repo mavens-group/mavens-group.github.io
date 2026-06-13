@@ -9,7 +9,7 @@ title: Keerthipriya T
 # Full name (for SEO)
 first_name: Keerthirpriya
 last_name: Thirunavukkarasu
-join: -2024
+join: 2024
 
 # Username (this should match the folder name)
 authors:

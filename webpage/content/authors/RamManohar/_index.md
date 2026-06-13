@@ -10,7 +10,7 @@ title: Ram Manohar T K
 # Full name (for SEO)
 first_name: Ram Manohar
 last_name: T K
-join: -2023
+join: 2023
 
 # Username (this should match the folder name)
 authors:
