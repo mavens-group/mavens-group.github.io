@@ -5,10 +5,6 @@ view: card
 banner:
     image: 'group.webp'
 sections:
-  - block: markdown
-    id: header
-    content:
-      text: 'Check out my recent blog posts below!'
   - block: collection
     id: posts
     content:
@@ -17,8 +13,8 @@ sections:
         folders:
           - post
       offset: 0
-      sort_by: 'Date'
-      sort_ascending: false
+      sort_by: 'Weight'
+      sort_ascending: true
     design:
       view: card
 ---
@@ -28,7 +24,7 @@ A magnetic moment may produce a paramagnet rather than a ferromagnet. A chemical
 
 Local electronic features are necessary for functionality, but they are rarely sufficient for it.
 
-What decides whether a local feature survives into a macroscopic response is usually not the feature itself, but the larger physical structure it inhabits: the topology of exchange pathways, the statistics of disorder, the connectivity of defect networks, or the dimensionality of an interacting phase.
+What decides whether a local feature survives into a macroscopic response is usually not the feature itself, but the larger physical structure it inhabits — and most often, the disorder within it: the topology of exchange pathways, the statistics of substitution, the geometry of a defect network, the way randomness reshapes a coupling. Disorder is not noise to be averaged away in this picture. It is frequently the variable that decides the outcome.
 
 
 <div class="callout-question">This intermediate scale — the physical bridge between local structure and collective response — is the central focus of our research.</div>
@@ -38,7 +34,7 @@ What decides whether a local feature survives into a macroscopic response is usu
 
 ## Isolating the Intermediate Scale
 
-We choose systems — substitutional alloys, layered surfaces, defect-bearing semiconductors, two-dimensional magnets — where the intermediate scale takes a specific, computationally tractable form, and where one variable at a time can be cleanly isolated. The recurring question across these systems is the same:
+We choose systems — substitutional magnetic alloys, defect-bearing oxides, disordered catalytic surfaces — where the intermediate scale takes a specific, computationally tractable form, and where one variable at a time can be cleanly isolated. The recurring question across these systems is the same:
 
 
 <div class="callout-question">When does a local descriptor remain predictive, and when does an intermediate scale become decisive?</div>
@@ -50,9 +46,10 @@ Methods enter only when a question requires them.
 
 We use:
 
-- **Density functional theory** for electronic and magnetic structure, primarily through plane wave and  Green's-function coherent potential approximation based methods.
+- **Density functional theory** for electronic and magnetic structure, primarily through plane wave and Green's-function coherent potential approximation based methods.
 - **First-principles exchange interactions** extracted through the Lichtenstein formalism, preserving the topology of competing magnetic pathways when mapping finite-temperature behaviour onto effective spin models.
 - **Classical Monte Carlo simulations** to study ordering temperatures, phase competition, and magnetocaloric response.
+- **Spin-dynamics and coherence modelling**, carrying first-principles hyperfine and exchange couplings into cluster-correlation-expansion estimates of coherence times.
 - **Machine learning constrained by physically interpretable descriptors** when compositional spaces become too large for direct first-principles exploration.
 
 Part of what we report is where local descriptors succeed — and where they fail. That boundary is often where the intermediate scale becomes physically important.
