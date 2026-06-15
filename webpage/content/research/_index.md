@@ -20,7 +20,7 @@ sections:
 ---
 At [MAVENs](../), we study how local electronic structure evolves into collective material behaviour — and why that transition so often determines whether a material ultimately functions.
 
-A magnetic moment may produce a paramagnet rather than a ferromagnet. A chemically ideal adsorption site may sit in a matrix that suppresses catalytic turnover. A defect with the correct spin state may still fail to support coherent transport if the surrounding defect network does not percolate.
+A magnetic moment may produce a paramagnet rather than a ferromagnet. A chemically ideal adsorption site may sit in a matrix that suppresses catalytic turnover. A defect with the correct spin state may still lose its coherence if the disorder around it is arranged the wrong way.
 
 Local electronic features are necessary for functionality, but they are rarely sufficient for it.
 

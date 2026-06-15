@@ -23,7 +23,7 @@ We pair machine learning tightly with first-principles validation, building mode
 
 This commitment imposes a real cost: we accept lower predictive accuracy where the trade is interpretability for opacity. The justification is that a marginal gain in F1 score on a held-out test set is worth less than a model whose governing descriptors can be read, criticised, and used to guide the next round of screening or synthesis. It also makes the method a natural partner to the group's disorder work: when a training set is built from disordered configurations, an interpretable model is what lets the resulting descriptor be checked against the underlying physics rather than taken on faith.
 
-### Key Insights & Achievements
+### Findings
 - **Interpretable models for defect-based qubits.** Machine-learning frameworks designed around physically meaningful descriptors identify candidate defect–host systems analogous to NV centres in diamond, achieving F1 scores above 0.98 and Matthews correlation coefficients above 0.90 on imbalanced datasets without sacrificing the descriptor-level interpretability that makes the predictions chemically meaningful.
 - **Roadmaps for room-temperature qubit arrays.** Predicted defect–host combinations point to candidate platforms for qubit arrays with long coherence times at room temperature, providing a concrete target list for experimental validation rather than an abstract performance ceiling.
 - **Cross-domain screening from a single methodological core.** The same interpretable-ML approach extends from quantum-information host materials to catalytic surfaces and compositionally complex alloys, identifying physically plausible candidates in each domain and demonstrating that the method generalises across functional contexts.
