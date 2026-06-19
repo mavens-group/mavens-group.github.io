@@ -63,7 +63,7 @@ sections:
           </footer>
         </blockquote>
 
-        **MAVENs** (*Materials Advancing a Viable ENergy Future*), led by [Dr. Rudra Banerjee](https://mavens-group.github.io/author/rudra-banerjee/), is based in the [Department of Physics and Nanotechnology](https://www.srmist.edu.in/department/department-of-physics-and-nanotechnology/) at the [SRM Institute of Science and Technology](https://srmist.edu.in).
+        **MAVENs** (*Materials Advancing a Viable ENergy Future*), led by [Dr. Rudra Banerjee](./author/rudra-banerjee/), is based in the [Department of Physics and Nanotechnology](https://www.srmist.edu.in/department/department-of-physics-and-nanotechnology/) at the [SRM Institute of Science and Technology](https://srmist.edu.in).
 
         Bloch's theorem rewards a perfect crystal with clean, classifiable states — and almost no real material obliges. Substitution, vacancies, and chemical mixing are not blemishes on an ideal lattice; they are what the material actually is. Disorder is intrinsic, and it is often the thing that decides whether a material works.
 

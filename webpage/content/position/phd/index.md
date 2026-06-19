@@ -117,6 +117,7 @@ The formal route is SRMIST's PhD admission cycle, opening September 2026 for the
     </div>
   </div>
 </div>
-When you write, bring your CV and transcripts, your NET/GATE/JEST status if you have it, and a short note on what in the group's work draws you in — look at the [research pages](/research/) and at least one recent publication first. A message that could have gone to any computational group tells me you have not thought about why this one.
+
+When you write, bring your CV and transcripts, your NET/GATE/JEST status if you have it, and a short note on what in the group's work draws you in — look at the [research pages](../../research/) and at least one recent [publication](../../publication) first. A message that could have gone to any computational group tells me you have not thought about why this one.
 
 I read every message. If there is a potential fit, we will talk before the formal cycle opens — and I can guide you through the departmental requirements once we are in contact.
