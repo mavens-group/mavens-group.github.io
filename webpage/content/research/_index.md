@@ -72,4 +72,4 @@ Current collaborations include:
 - [Dr Payel Bandyopadhyay, SRMIST](https://sites.google.com/srmist.edu.in/primelab/) — polymers and soft materials
 - [Dr Pralay K. Santra, CeNS](https://www.santragroup.in/group/pralay-k-santra) — two-dimensional materials
 
-## Research Themes
+## Research Pillars
