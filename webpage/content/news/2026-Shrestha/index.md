@@ -3,7 +3,7 @@ title: Shrestha Dutta successfully defends her PhD synopsis
 date: 2026-06-23
 profile: false
 ---
-We are delighted to share that [Shrestha Dutta](../../author/shrestha-dutta), a Research Scholar from the MAVENs Group, has successfully defended her synopsis and is on her way to submitting her doctoral thesis titled:
+We are delighted to share that [Shrestha Dutta](../../author/shrestha-dutta), the third Research Scholar from the MAVENs Group, has successfully defended her synopsis and is on her way to submitting her doctoral thesis titled:
 <!--more-->
 
 > "Beyond Pristine 2D Materials: Effect of Point Defects on Electronic and Magnetic Properties"
