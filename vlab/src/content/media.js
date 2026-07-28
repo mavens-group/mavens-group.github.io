@@ -22,7 +22,9 @@ export const MEDIA_MANIFEST = {
     'pxrd_3.mp4',
   ],
   ftir: [
-    // 'ftir_1.mp4',
+    'ftir_1.mp4',
+    'ftir_2.mp4',
+    'ftir_3.mp4',
   ],
   uvvis: [
     'uvvis_1.mp4',
