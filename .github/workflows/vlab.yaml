@@ -1,0 +1,48 @@
+name: Deploy vlab
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'vlab/**'
+      - '.github/workflows/vlab.yaml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: "vlab-pages"
+  cancel-in-progress: false
+
+jobs:
+  deploy-vlab:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+          cache-dependency-path: vlab/package-lock.json
+
+      - name: Install dependencies
+        working-directory: ./vlab
+        run: npm ci
+
+      - name: Build vlab
+        working-directory: ./vlab
+        run: npm run build
+
+      - name: Deploy to GitHub Pages Subdirectory
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_branch: gh-pages
+          publish_dir: ./vlab/dist
+          destination_dir: vlab
+          keep_files: true
