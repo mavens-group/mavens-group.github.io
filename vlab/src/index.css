@@ -1,0 +1,12 @@
+@import "tailwindcss";
+@import "./theme/theme.css";
+
+/* Theme tokens need a value before React mounts and sets data-theme/data-accent,
+   otherwise there's a flash of unstyled/wrong-color content on first paint. */
+html {
+  color-scheme: dark;
+}
+html:not([data-theme]),
+[data-theme="dark"] {
+  background: #020617;
+}

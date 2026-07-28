@@ -1,0 +1,64 @@
+<svg viewBox="0 0 660 320" xmlns="http://www.w3.org/2000/svg" font-family="Georgia, 'Times New Roman', serif">
+  <defs>
+    <marker id="uvArrowRed" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#b91c1c" />
+    </marker>
+    <marker id="uvArrowGray" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#334155" />
+    </marker>
+  </defs>
+
+  <rect x="0" y="0" width="660" height="320" fill="#ffffff" rx="12" />
+
+  <!-- ================= Panel 1: Direct (axes span x=50..290) ================= -->
+  <text x="170" y="28" text-anchor="middle" font-size="15" font-weight="600" fill="#1e293b">Direct transition &#8212; n = 2</text>
+
+  <line x1="50" y1="235" x2="290" y2="235" stroke="#334155" stroke-width="1.5" marker-end="url(#uvArrowGray)" />
+  <line x1="50" y1="235" x2="50" y2="45" stroke="#334155" stroke-width="1.5" marker-end="url(#uvArrowGray)" />
+  <text x="292" y="240" font-size="13" fill="#334155" font-style="italic">k</text>
+  <text x="38" y="45" font-size="13" fill="#334155" font-style="italic">E</text>
+
+  <!-- CB: P0=(65,80) P2=(275,80) control=(170,120) -> true min at (170,100) -->
+  <path d="M 65,80 Q 170,120 275,80" fill="none" stroke="#334155" stroke-width="2" />
+  <text x="277" y="72" font-size="11.5" fill="#334155">CB</text>
+  <!-- VB: P0=(65,215) P2=(275,215) control=(170,165) -> true max at (170,190) -->
+  <path d="M 65,215 Q 170,165 275,215" fill="none" stroke="#334155" stroke-width="2" />
+  <text x="277" y="226" font-size="11.5" fill="#334155">VB</text>
+
+  <!-- vertical transition at same k=170, between the true curve points -->
+  <line x1="170" y1="190" x2="170" y2="100" stroke="#b91c1c" stroke-width="2" marker-end="url(#uvArrowRed)" />
+  <circle cx="170" cy="190" r="3.2" fill="#b91c1c" />
+  <circle cx="170" cy="100" r="3.2" fill="#b91c1c" />
+  <text x="180" y="148" font-size="12.5" fill="#b91c1c">h&#957;</text>
+  <text x="170" y="255" text-anchor="middle" font-size="12" fill="#475569">&#916;k = 0 (no phonon needed)</text>
+
+  <!-- ================= Panel 2: Indirect (axes span x=380..620, same width) ================= -->
+  <text x="500" y="28" text-anchor="middle" font-size="15" font-weight="600" fill="#1e293b">Indirect transition &#8212; n = 1/2</text>
+
+  <line x1="380" y1="235" x2="620" y2="235" stroke="#334155" stroke-width="1.5" marker-end="url(#uvArrowGray)" />
+  <line x1="380" y1="235" x2="380" y2="45" stroke="#334155" stroke-width="1.5" marker-end="url(#uvArrowGray)" />
+  <text x="622" y="240" font-size="13" fill="#334155" font-style="italic">k</text>
+  <text x="368" y="45" font-size="13" fill="#334155" font-style="italic">E</text>
+
+  <!-- CB: P0=(395,80) P2=(605,80) control=(500,120) -> true min at (500,100) -->
+  <path d="M 395,80 Q 500,120 605,80" fill="none" stroke="#334155" stroke-width="2" />
+  <text x="607" y="72" font-size="11.5" fill="#334155">CB</text>
+  <!-- VB: P0=(395,215) P2=(545,215) control=(470,165) -> true max at (470,190) -->
+  <path d="M 395,215 Q 470,165 545,215" fill="none" stroke="#334155" stroke-width="2" />
+  <text x="547" y="226" font-size="11.5" fill="#334155">VB</text>
+
+  <!-- bent transition: vertical photon hop (470,190)->(470,100), then horizontal phonon kick (470,100)->(500,100) -->
+  <line x1="470" y1="190" x2="470" y2="100" stroke="#b91c1c" stroke-width="2" stroke-dasharray="4 3" />
+  <line x1="470" y1="100" x2="500" y2="100" stroke="#b91c1c" stroke-width="2" marker-end="url(#uvArrowRed)" stroke-dasharray="4 3" />
+  <circle cx="470" cy="190" r="3.2" fill="#b91c1c" />
+  <circle cx="500" cy="100" r="3.2" fill="#b91c1c" />
+  <text x="478" y="148" font-size="12.5" fill="#b91c1c">h&#957;</text>
+  <text x="466" y="90" font-size="11.5" fill="#b91c1c">+ phonon</text>
+  <text x="500" y="255" text-anchor="middle" font-size="12" fill="#475569">&#916;k &#8800; 0 (needs a phonon)</text>
+
+  <line x1="335" y1="20" x2="335" y2="270" stroke="#e2e8f0" stroke-width="1.5" />
+
+  <text x="330" y="298" text-anchor="middle" font-size="12" fill="#64748b" font-style="italic">
+    In this lab, ZnO, CeO&#8322; and Fe&#8323;O&#8324; are treated as direct (n = 2); anatase TiO&#8322; as indirect (n = 1/2).
+  </text>
+</svg>

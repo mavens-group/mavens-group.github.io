@@ -1,0 +1,153 @@
+/* ==========================================================================
+   Central theme tokens
+   One axis, set as an attribute on <html>:
+     data-theme = "dark" | "light"
+
+   Accent is fixed per mode (teal in dark, a blue-grey in light) rather
+   than user-selectable — see ThemeContext.jsx / ThemeSwitcher.jsx.
+
+   Every lab component should read colors from these variables (via
+   Tailwind arbitrary values like `bg-[var(--bg-surface)]`, or directly as
+   `"var(--accent)"` for chart/SVG color props) instead of hardcoding
+   Tailwind color utilities. This file is the single place theme changes.
+   ========================================================================== */
+
+[data-theme="dark"] {
+  --bg-canvas: #020617;      /* page background            (was slate-950) */
+  --bg-surface: #0f172a;     /* card background             (was slate-900) */
+  --bg-surface-2: #1e293b;   /* nested / hover background   (was slate-800) */
+  --border: #1e293b;         /* card / divider border       (was slate-800) */
+  --border-soft: rgba(30, 41, 59, 0.6);
+
+  --text-primary: #f8fafc;   /* headings, key values        (was slate-50/100) */
+  --text-secondary: #cbd5e1; /* card labels                 (was slate-300) */
+  --text-tertiary: #94a3b8;  /* body / captions             (was slate-400) */
+  --text-quaternary: #64748b;/* de-emphasized                (was slate-500) */
+  --text-muted: #475569;     /* faint / disabled            (was slate-600) */
+
+  --text-on-accent: #020617; /* text sitting on a solid accent background */
+  --text-on-warn: #020617;
+  --shadow-color: 0deg 0% 0%;
+
+  /* fixed accent — teal */
+  --accent: #2dd4bf;
+  --accent-soft: #5eead4;
+  --accent-strong: #14b8a6;
+  --accent-glow: rgba(45, 212, 191, 0.15);
+
+  /* fixed semantic status colors */
+  --warn: #fbbf24;      /* amber-400 */
+  --warn-strong: #f59e0b;
+  --warn-soft: rgba(251, 191, 36, 0.15);
+  --danger: #fb7185;    /* rose-400 */
+  --danger-soft: rgba(251, 113, 133, 0.15);
+  --danger-border: rgba(159, 18, 57, 0.5);
+  --success: #34d399;   /* emerald-400 */
+  --success-border: rgba(6, 95, 70, 0.5);
+
+  /* a bright, mode-inverted "neutral" chip — used where a control needs to
+     read as neutral/selected without borrowing the accent or warn color */
+  --surface-inverse: #f1f5f9;
+  --surface-inverse-hover: #ffffff;
+  --text-on-inverse: #020617;
+}
+
+[data-theme="light"] {
+  --bg-canvas: #f1f5f9;      /* slate-100 */
+  --bg-surface: #ffffff;
+  --bg-surface-2: #f1f5f9;   /* slate-100 */
+  --border: #e2e8f0;         /* slate-200 */
+  --border-soft: rgba(226, 232, 240, 0.8);
+
+  --text-primary: #0f172a;   /* slate-900 */
+  --text-secondary: #334155; /* slate-700 */
+  --text-tertiary: #64748b;  /* slate-500 */
+  --text-quaternary: #94a3b8;/* slate-400 */
+  --text-muted: #94a3b8;     /* slate-400 */
+
+  --text-on-accent: #f8fafc;
+  --text-on-warn: #451a03;
+  --shadow-color: 220deg 40% 60%;
+
+  /* fixed accent — requested blue-grey */
+  --accent: #37474f;
+  --accent-soft: #546e7a;
+  --accent-strong: #263238;
+  --accent-glow: rgba(55, 71, 79, 0.15);
+
+  --warn: #d97706;      /* amber-600 */
+  --warn-strong: #b45309;
+  --warn-soft: rgba(217, 119, 6, 0.12);
+  --danger: #e11d48;    /* rose-600 */
+  --danger-soft: rgba(225, 29, 72, 0.1);
+  --danger-border: rgba(225, 29, 72, 0.3);
+  --success: #059669;   /* emerald-600 */
+  --success-border: rgba(5, 150, 105, 0.35);
+
+  --surface-inverse: #0f172a;
+  --surface-inverse-hover: #1e293b;
+  --text-on-inverse: #f8fafc;
+}
+
+/* ---------------------------------------------------------------------- */
+/* Markdown panel styling for Documentation / Record Book tabs            */
+/* ---------------------------------------------------------------------- */
+.prose-lab {
+  color: var(--text-secondary);
+  font-size: 0.9375rem;
+  line-height: 1.7;
+}
+.prose-lab h1, .prose-lab h2, .prose-lab h3 {
+  color: var(--text-primary);
+  font-weight: 600;
+  margin-top: 1.6em;
+  margin-bottom: 0.6em;
+}
+.prose-lab h1 { font-size: 1.5rem; margin-top: 0; }
+.prose-lab h2 { font-size: 1.2rem; border-bottom: 1px solid var(--border); padding-bottom: 0.4em; }
+.prose-lab h3 { font-size: 1.05rem; color: var(--accent); }
+.prose-lab p { margin: 0.9em 0; }
+.prose-lab ul, .prose-lab ol { margin: 0.9em 0; padding-left: 1.4em; }
+.prose-lab li { margin: 0.3em 0; }
+.prose-lab code {
+  background: var(--bg-surface-2);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 0.1em 0.4em;
+  font-size: 0.85em;
+  color: var(--accent-soft);
+}
+.prose-lab pre {
+  background: var(--bg-surface-2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1em;
+  overflow-x: auto;
+}
+.prose-lab pre code { background: none; border: none; padding: 0; color: var(--text-secondary); }
+.prose-lab table { width: 100%; border-collapse: collapse; margin: 1em 0; font-size: 0.875em; }
+.prose-lab th, .prose-lab td {
+  border: 1px solid var(--border);
+  padding: 0.5em 0.75em;
+  text-align: left;
+}
+.prose-lab th { color: var(--text-primary); background: var(--bg-surface-2); }
+.prose-lab blockquote {
+  border-left: 3px solid var(--accent);
+  margin: 1em 0;
+  padding: 0.2em 1em;
+  color: var(--text-tertiary);
+}
+.prose-lab strong { color: var(--text-primary); }
+.prose-lab hr { border: none; border-top: 1px solid var(--border); margin: 1.6em 0; }
+
+/* KaTeX math should inherit our text color (its default CSS doesn't
+   force black) and scroll horizontally on narrow screens rather than
+   overflow/clip a long equation. */
+.prose-lab .katex { color: inherit; font-size: 1.05em; }
+.prose-lab .katex-display {
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 0.3em 0;
+  margin: 1em 0;
+}
