@@ -1,0 +1,57 @@
+<svg viewBox="0 0 640 500" xmlns="http://www.w3.org/2000/svg" font-family="Arial, Helvetica, sans-serif">
+  <defs>
+    <marker id="wfArrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#334155" />
+    </marker>
+  </defs>
+
+  <rect x="0" y="0" width="640" height="500" fill="#ffffff" rx="12" />
+
+  <!-- main vertical chain -->
+  <g>
+    <rect x="30" y="20" width="230" height="58" rx="8" fill="#dbeafe" stroke="#3b82f6" stroke-width="1.5" />
+    <text x="145" y="44" text-anchor="middle" font-size="12.5" font-weight="600" fill="#1e3a8a">1. Raw PXRD Data</text>
+    <text x="145" y="61" text-anchor="middle" font-size="11.5" fill="#1e3a8a">(2&#952; vs. Intensity)</text>
+
+    <rect x="30" y="110" width="230" height="58" rx="8" fill="#dbeafe" stroke="#3b82f6" stroke-width="1.5" />
+    <text x="145" y="134" text-anchor="middle" font-size="12.5" font-weight="600" fill="#1e3a8a">2. Background Subtraction</text>
+    <text x="145" y="151" text-anchor="middle" font-size="11.5" fill="#1e3a8a">&amp; K&#945;&#8322; Stripping</text>
+
+    <rect x="30" y="200" width="230" height="58" rx="8" fill="#dbeafe" stroke="#3b82f6" stroke-width="1.5" />
+    <text x="145" y="224" text-anchor="middle" font-size="12.5" font-weight="600" fill="#1e3a8a">3. Phase Identification</text>
+    <text x="145" y="241" text-anchor="middle" font-size="11.5" fill="#1e3a8a">(Search-Match via ICDD/COD)</text>
+
+    <rect x="30" y="290" width="230" height="58" rx="8" fill="#dbeafe" stroke="#3b82f6" stroke-width="1.5" />
+    <text x="145" y="314" text-anchor="middle" font-size="12.5" font-weight="600" fill="#1e3a8a">4. Peak Fitting</text>
+    <text x="145" y="331" text-anchor="middle" font-size="11.5" fill="#1e3a8a">(Pseudo-Voigt/Gaussian)</text>
+
+    <rect x="30" y="380" width="230" height="58" rx="8" fill="#dbeafe" stroke="#3b82f6" stroke-width="1.5" />
+    <text x="145" y="404" text-anchor="middle" font-size="12.5" font-weight="600" fill="#1e3a8a">5. Profile Analysis</text>
+    <text x="145" y="421" text-anchor="middle" font-size="11.5" fill="#1e3a8a">(Scherrer, Williamson&#8211;Hall)</text>
+  </g>
+
+  <!-- branch: Rietveld -->
+  <g>
+    <rect x="370" y="200" width="240" height="58" rx="8" fill="#fef3c7" stroke="#d97706" stroke-width="1.5" />
+    <text x="490" y="224" text-anchor="middle" font-size="12.5" font-weight="600" fill="#78350f">Whole-Pattern</text>
+    <text x="490" y="241" text-anchor="middle" font-size="12.5" font-weight="600" fill="#78350f">Rietveld Refinement</text>
+
+    <rect x="370" y="290" width="240" height="58" rx="8" fill="#fef3c7" stroke="#d97706" stroke-width="1.5" />
+    <text x="490" y="312" text-anchor="middle" font-size="12" fill="#78350f">Refined Lattice Params,</text>
+    <text x="490" y="328" text-anchor="middle" font-size="12" fill="#78350f">Coordinates &amp; Texture</text>
+  </g>
+
+  <!-- vertical arrows down the main chain -->
+  <line x1="145" y1="78" x2="145" y2="107" stroke="#334155" stroke-width="1.75" marker-end="url(#wfArrow)" />
+  <line x1="145" y1="168" x2="145" y2="197" stroke="#334155" stroke-width="1.75" marker-end="url(#wfArrow)" />
+  <line x1="145" y1="258" x2="145" y2="287" stroke="#334155" stroke-width="1.75" marker-end="url(#wfArrow)" />
+  <line x1="145" y1="348" x2="145" y2="377" stroke="#334155" stroke-width="1.75" marker-end="url(#wfArrow)" />
+
+  <!-- branch arrows -->
+  <line x1="260" y1="229" x2="367" y2="229" stroke="#334155" stroke-width="1.75" marker-end="url(#wfArrow)" />
+  <line x1="490" y1="258" x2="490" y2="287" stroke="#334155" stroke-width="1.75" marker-end="url(#wfArrow)" />
+
+  <text x="320" y="475" text-anchor="middle" font-size="12.5" fill="#475569" font-style="italic">
+    Standard PXRD data-analysis workflow: single-peak line-profile analysis (left) vs. whole-pattern Rietveld refinement (right)
+  </text>
+</svg>

@@ -1,0 +1,44 @@
+<svg viewBox="0 0 620 340" xmlns="http://www.w3.org/2000/svg" font-family="Georgia, 'Times New Roman', serif">
+  <defs>
+    <marker id="tfArrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#1e293b" />
+    </marker>
+  </defs>
+
+  <rect x="0" y="0" width="620" height="340" fill="#ffffff" rx="12" />
+  <text x="310" y="30" text-anchor="middle" font-size="16" font-weight="600" fill="#1e293b">Thin-Film Interference</text>
+
+  <!-- substrate -->
+  <rect x="120" y="220" width="380" height="70" fill="#e2e8f0" stroke="#334155" stroke-width="1.3" />
+  <text x="310" y="260" text-anchor="middle" font-size="13" fill="#334155">substrate (glass)</text>
+
+  <!-- thin film -->
+  <rect x="120" y="196" width="380" height="24" fill="#a7f3d0" stroke="#0f766e" stroke-width="1.3" />
+  <text x="310" y="212" text-anchor="middle" font-size="12" fill="#0f766e">film (index n, thickness t)</text>
+
+  <!-- incident ray -->
+  <line x1="200" y1="90" x2="270" y2="196" stroke="#1e293b" stroke-width="1.8" marker-end="url(#tfArrow)" />
+  <text x="175" y="85" font-size="12" fill="#1e293b">incident light</text>
+
+  <!-- ray 1: reflects immediately off top surface -->
+  <line x1="270" y1="196" x2="230" y2="120" stroke="#b91c1c" stroke-width="1.8" marker-end="url(#tfArrow)" />
+
+  <!-- ray continues into film, reflects off film/substrate interface, exits top surface -->
+  <line x1="270" y1="196" x2="310" y2="220" stroke="#1e293b" stroke-width="1.6" stroke-dasharray="3 2" />
+  <line x1="310" y1="220" x2="350" y2="196" stroke="#1e293b" stroke-width="1.6" stroke-dasharray="3 2" />
+  <line x1="350" y1="196" x2="315" y2="115" stroke="#b91c1c" stroke-width="1.8" marker-end="url(#tfArrow)" />
+
+  <!-- interference bracket between the two emerging rays -->
+  <path d="M 218,108 Q 272,80 320,105" fill="none" stroke="#d97706" stroke-width="1.5" stroke-dasharray="2 3" />
+  <text x="270" y="72" text-anchor="middle" font-size="12" fill="#78350f">rays interfere</text>
+
+  <text x="235" y="150" font-size="11" fill="#b91c1c">ray 1</text>
+  <text x="352" y="160" font-size="11" fill="#b91c1c">ray 2</text>
+
+  <!-- path length label -->
+  <line x1="500" y1="196" x2="500" y2="220" stroke="#0f766e" stroke-width="1" />
+  <text x="507" y="212" font-size="11" fill="#0f766e">t</text>
+
+  <rect x="30" y="300" width="560" height="34" rx="6" fill="#fef3c7" stroke="#d97706" stroke-width="1.2" />
+  <text x="310" y="322" text-anchor="middle" font-size="13" fill="#78350f">constructive interference when 2nt = m&#955; &#8212; the fringe spacing shrinks toward shorter &#955;</text>
+</svg>

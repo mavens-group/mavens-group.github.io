@@ -1,0 +1,51 @@
+<svg viewBox="0 0 640 500" xmlns="http://www.w3.org/2000/svg" font-family="Georgia, 'Times New Roman', serif">
+  <defs>
+    <marker id="wfArrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#334155" />
+    </marker>
+  </defs>
+
+  <rect x="0" y="0" width="640" height="500" fill="#ffffff" rx="12" />
+  <text x="320" y="32" text-anchor="middle" font-size="16" font-weight="600" fill="#1e293b">UV-Vis Analysis Workflow</text>
+
+  <!-- Box 1 -->
+  <rect x="150" y="55" width="340" height="52" rx="8" fill="#eef2f7" stroke="#334155" stroke-width="1.3" />
+  <text x="320" y="76" text-anchor="middle" font-size="13" font-weight="600" fill="#1e293b">1. Record intensity spectrum I(&#955;)</text>
+  <text x="320" y="94" text-anchor="middle" font-size="11" fill="#475569">250&#8211;800 nm, referenced against a blank</text>
+
+  <line x1="320" y1="107" x2="320" y2="132" stroke="#334155" stroke-width="1.6" marker-end="url(#wfArrow)" />
+
+  <!-- Box 2 -->
+  <rect x="120" y="133" width="400" height="52" rx="8" fill="#eef2f7" stroke="#334155" stroke-width="1.3" />
+  <text x="320" y="154" text-anchor="middle" font-size="13" font-weight="600" fill="#1e293b">2. Convert h&#957; = 1240/&#955;; form Tauc plot</text>
+  <text x="320" y="172" text-anchor="middle" font-size="11" fill="#475569">(I&#183;h&#957;)&#8319; &#8212; try both n = 2 and n = 1/2</text>
+
+  <line x1="320" y1="185" x2="320" y2="210" stroke="#334155" stroke-width="1.6" marker-end="url(#wfArrow)" />
+
+  <!-- Box 3 -->
+  <rect x="120" y="211" width="400" height="52" rx="8" fill="#eef2f7" stroke="#334155" stroke-width="1.3" />
+  <text x="320" y="232" text-anchor="middle" font-size="13" font-weight="600" fill="#1e293b">3. Fit the linear rising edge</text>
+  <text x="320" y="250" text-anchor="middle" font-size="11" fill="#475569">keep whichever n gives the higher R&#178;</text>
+
+  <line x1="320" y1="263" x2="320" y2="288" stroke="#334155" stroke-width="1.6" marker-end="url(#wfArrow)" />
+
+  <!-- Box 4: Eg result -->
+  <rect x="170" y="289" width="300" height="52" rx="8" fill="#fef3c7" stroke="#d97706" stroke-width="1.3" />
+  <text x="320" y="310" text-anchor="middle" font-size="13" font-weight="600" fill="#78350f">4. Extrapolate to axis</text>
+  <text x="320" y="328" text-anchor="middle" font-size="12" fill="#78350f">&#8594; band gap E&#8262;(fit)</text>
+
+  <!-- branch down to step 5 -->
+  <line x1="320" y1="341" x2="320" y2="366" stroke="#334155" stroke-width="1.6" marker-end="url(#wfArrow)" />
+
+  <!-- Box 5: compare to bulk -->
+  <rect x="130" y="367" width="380" height="52" rx="8" fill="#eef2f7" stroke="#334155" stroke-width="1.3" />
+  <text x="320" y="388" text-anchor="middle" font-size="13" font-weight="600" fill="#1e293b">5. &#916;E = E&#8262;(fit) &#8722; E&#8262;(bulk, literature)</text>
+  <text x="320" y="406" text-anchor="middle" font-size="11" fill="#475569">the quantum-confinement blue-shift</text>
+
+  <line x1="320" y1="419" x2="320" y2="444" stroke="#334155" stroke-width="1.6" marker-end="url(#wfArrow)" />
+
+  <!-- Box 6: particle size -->
+  <rect x="150" y="445" width="340" height="46" rx="8" fill="#fef3c7" stroke="#d97706" stroke-width="1.3" />
+  <text x="320" y="464" text-anchor="middle" font-size="13" font-weight="600" fill="#78350f">6. If &#916;E &gt; 0: confinement model</text>
+  <text x="320" y="480" text-anchor="middle" font-size="12" fill="#78350f">&#8594; particle size R</text>
+</svg>
