@@ -68,6 +68,11 @@ export default function LabShell({ docs, docsPdf, record, media = [], children }
 }
 
 function PdfPanel({ src }) {
+  // Resolve absolute paths for PDFs to handle deployment sub-paths
+  const resolvedSrc = src && src.startsWith('/')
+    ? `${import.meta.env.BASE_URL}${src.slice(1)}`
+    : src;
+
   return (
     <div className="max-w-5xl mx-auto p-6 md:p-10">
       <div className="flex items-center justify-between mb-2">
@@ -75,7 +80,7 @@ function PdfPanel({ src }) {
           If this doesn't display inline, your browser may be set to download PDFs automatically.
         </span>
         <a
-          href={src}
+          href={resolvedSrc}
           target="_blank"
           rel="noopener noreferrer"
           className="text-xs font-medium text-[var(--accent)] hover:text-[var(--accent-soft)] whitespace-nowrap ml-4"
@@ -84,7 +89,7 @@ function PdfPanel({ src }) {
         </a>
       </div>
       <div className="bg-[var(--bg-surface)] border border-[var(--border)] rounded-2xl overflow-hidden h-[85vh]">
-        <iframe title="Lab documentation" src={src} className="w-full h-full" />
+        <iframe title="Lab documentation" src={resolvedSrc} className="w-full h-full" />
       </div>
     </div>
   );
@@ -95,7 +100,21 @@ function MarkdownPanel({ content, fallback }) {
     <div className="max-w-4xl mx-auto p-6 md:p-10">
       <article className="prose-lab bg-[var(--bg-surface)] border border-[var(--border)] rounded-2xl p-6 md:p-10">
         {content ? (
-          <ReactMarkdown remarkPlugins={[remarkGfm, remarkMath]} rehypePlugins={[rehypeKatex]}>
+          <ReactMarkdown
+            remarkPlugins={[remarkGfm, remarkMath]}
+            rehypePlugins={[rehypeKatex]}
+            components={{
+              // Intercept image rendering to fix absolute paths from the markdown
+              img: ({ node, ...props }) => {
+                let imgSrc = props.src;
+                if (imgSrc && imgSrc.startsWith('/')) {
+                  // Remove the leading slash so it appends cleanly to BASE_URL
+                  imgSrc = `${import.meta.env.BASE_URL}${imgSrc.slice(1)}`;
+                }
+                return <img {...props} src={imgSrc} alt={props.alt || ""} className="max-w-full h-auto rounded-lg my-4" />;
+              }
+            }}
+          >
             {content}
           </ReactMarkdown>
         ) : (
@@ -132,7 +151,11 @@ function MediaPanel({ files }) {
           <div className="text-sm font-medium text-[var(--text-secondary)] mb-3">
             Video {i + 1} of {files.length}
           </div>
-          <video controls className="w-full rounded-lg bg-black" src={`/media/${file}`}>
+          <video
+            controls
+            className="w-full rounded-lg bg-black"
+            src={`${import.meta.env.BASE_URL}media/${file}`}
+          >
             Your browser doesn't support embedded video playback.
           </video>
         </div>

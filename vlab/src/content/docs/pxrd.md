@@ -1,4 +1,4 @@
-# Powder X-ray Diffraction (PXRD): A State-of-the-Art Guide for Physics Students
+# Powder X-ray Diffraction (PXRD) 
 
 *Rudra Banerjee — Department of Physics and Nanotechnology, SRM Institute of Science and Technology*
 
