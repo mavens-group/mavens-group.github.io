@@ -1,109 +1,98 @@
 # ATR-FTIR Spectroscopy
 
-*Graduate-level reference notes. This lab simulates an ATR-FTIR spectrum
-(400–4000 cm⁻¹) of a metal-oxide nanoparticle capped with an organic
-surfactant/polymer, and is meant to build systematic band-assignment and
-evidence-based reasoning, not to substitute for a normal-mode
-calculation.*
+*Graduate-level reference notes. This lab simulates an ATR-FTIR spectrum (400–4000 cm⁻¹) of a metal-oxide nanoparticle capped with an organic surfactant/polymer, and is meant to build systematic band-assignment and evidence-based reasoning, not to substitute for a normal-mode calculation.*
 
-## 1. Physical basis
+## 1. Introduction to Infrared Spectroscopy
 
-A molecule with *N* atoms has 3N−6 (3N−5 if linear) normal vibrational
-modes. A mode is IR-active only if it produces a **change in dipole
-moment** along the normal coordinate, ∂μ/∂Q ≠ 0 — this selection rule is
-why symmetric, non-polar bonds (e.g. a symmetric C–C stretch in a
-non-polar environment) are IR-silent or very weak, while polar/
-partially-polar bonds (O–H, N–H, C=O, C–O–C, M–O) absorb strongly. In
-the harmonic approximation, a bond's fundamental frequency scales as
+Infrared spectroscopy is an analytical technique based on the interaction between matter and light. The electromagnetic spectrum encompasses all possible frequencies of radiation, with the infrared region being divided into three primary categories:
 
-```
-ν̃ = (1/2πc) √(k/μ)
-```
+*   **Near-infrared (12820–4000 cm⁻¹):** Consists of overtones and combination bands resulting from mid-infrared vibrations.
+*   **Mid-infrared (4000–400 cm⁻¹):** Provides the most critical structural information for a wide variety of organic molecules.
+*   **Far-infrared (400–33 cm⁻¹):** Utilized for studying crystal lattice vibrations, molecular skeleton torsions, and molecules containing heavy atoms.
 
-with *k* the force constant and μ the reduced mass — the basis for the
-"group frequency" approach used throughout this lab: a given functional
-group absorbs in a characteristic, largely *transferable* range across
-different molecules, with the exact position perturbed by conjugation,
-hydrogen bonding, ring strain, and electronic/inductive effects from
-neighboring groups.
+## 2. Physical Basis and Molecular Vibrations
 
-## 2. ATR geometry and its practical consequences
+A molecule containing N atoms has $3N-6$ normal vibrational modes, or $3N-5$ if the molecule is linear.
 
-Attenuated total reflectance works via an evanescent wave that decays
-exponentially into the sample from the crystal/sample interface. The
-**penetration depth**,
+*   A vibrational mode is IR-active only if it produces a change in the dipole moment along the normal coordinate.
+*   Symmetrical, non-polar bonds are typically IR-silent or exhibit very weak absorbance.
+*   Polar or partially-polar bonds (such as O–H, C=O, and M–O) absorb IR radiation strongly.
+*   The simplest IR-active modes of vibration include stretching (symmetrical and antisymmetrical) and bending (scissoring, rocking, wagging, and twisting).
 
-```
-d_p = λ / (2π n₁ √(sin²θ − (n₂/n₁)²))
-```
+In the harmonic approximation, a chemical bond can be treated as a simple harmonic oscillator. The fundamental vibrational frequency scales according to Hooke's Law:
 
-(n₁ = crystal refractive index, n₂ = sample refractive index, θ = angle
-of incidence) is **wavenumber-dependent** — lower wavenumber (longer λ)
-probes deeper into the sample. Two practical consequences worth knowing,
-neither of which this simplified simulation reproduces:
+$$ \overline{v} = \frac{1}{2\pi c} \sqrt{\frac{k}{\mu}} $$
 
-- Raw ATR spectra are systematically intensity-distorted relative to a
-  transmission spectrum (stronger relative absorbance at low
-  wavenumber) and are normally corrected with an **ATR correction**
-  algorithm before comparison to transmission-mode reference libraries.
-- Very thin surface layers (e.g. a capping-agent monolayer) can be
-  under- or over-represented relative to bulk core material depending
-  on the probe depth at the wavenumber of interest — relevant when
-  judging capping-agent coverage from relative peak depths.
+*   The variable $k$ represents the force constant of the bond.
+*   The variable $\mu$ represents the reduced mass of the atoms involved.
+*   Vibrational frequency increases as the bond strength increases.
+*   Vibrational frequency also increases as the reduced mass decreases.
+*   This mathematical relationship provides the basis for the "group frequency" approach, where a given functional group absorbs in a largely transferable range across different molecules.
 
-## 3. Reading a spectrum — beyond single-band lookup
+## 3. Absorption and The IR Spectrum
 
-- **Position** identifies the vibration; **absence** of an expected band
-  is frequently as diagnostic as presence (e.g. no ether C–O–C rules out
-  a simple polyether capping agent).
-- **Carboxylate coordination mode** is a classic quantitative use of
-  band position: the separation Δν = ν_asym(COO⁻) − ν_sym(COO⁻)
-  distinguishes unidentate (Δν large, >200 cm⁻¹, close to free ionic
-  carboxylate), bridging (Δν ≈ 140–190 cm⁻¹), and chelating bidentate
-  (Δν small, <110 cm⁻¹) coordination of an oleate/carboxylate ligand to
-  a metal-oxide surface — a direct, quantitative way to argue *how* a
-  ligand is chemisorbed, not just *that* it is present.
-- **Metal–oxide lattice bands** below ~700 cm⁻¹ are IR-active
-  transverse-optical (TO) phonon modes of the extended lattice, not a
-  single-bond vibration; they are typically broad in nanoparticles due
-  to a finite size distribution and surface/subsurface bond disorder,
-  and their exact position is somewhat oxide-morphology-dependent
-  relative to bulk single-crystal values.
+The amount of infrared radiation absorbed by a sample is most commonly evaluated by measuring transmittance.
 
-## 4. Using this lab
+*   Transmittance is the percentage of the incident IR radiation that successfully passes through the sample and reaches the detector.
+*   Absorbance is mathematically related to transmittance by the equation $A = 2 - \log(\%T)$.
+*   Absorbance is directly related to sample concentration via the Beer-Lambert law, $A = \epsilon lc$.
+*   A typical IR spectrum plots the percent transmittance against the wavenumber, conventionally plotted in decreasing order from left to right.
 
-1. **Explore mode** — choose a metal oxide and capping agent, and
-   observe realistic band overlap in the combined spectrum.
-2. **Unknown mode** — assign bands on an unlabelled spectrum using the
-   functional-group reference table, decide on capping agent and oxide
-   core, then reveal the answer.
-3. Build your reasoning as a **process of elimination** using both
-   presence and absence of bands together, the way the built-in
-   per-agent "clues" are constructed — this mirrors real spectral
-   interpretation far more than matching a single strongest peak.
+## 4. FTIR Instrumentation
 
-## 5. Limitations of this simulation (state these in any report)
+Modern Fourier Transform Infrared (FTIR) spectrometers consist of an IR source, a sample cell, a detector, an internal laser, and a crucial optical device known as an interferometer.
 
-- No ATR-depth correction, Fresnel/dispersion artifacts, or Christiansen
-  effect are modeled.
-- No baseline drift, atmospheric CO₂ (~2350 cm⁻¹) / H₂O vapor
-  interference, or instrument apodization artifacts are included.
-- No overtone/combination bands or Fermi resonance are modeled — real
-  spectra, particularly in the 1900–2500 cm⁻¹ region, often show weak
-  combination bands absent here.
-- Band positions/depths are representative literature-typical values
-  chosen for teaching, not fit to a specific measured reference
-  spectrum or computed via DFT normal-mode analysis.
+![Michelson Interferometer Schematic](/diagrams/ftir-interferometer-diagram.svg)
 
-## Further reading
+*Figure 1 — Schematic representation of a Michelson Interferometer used in modern FTIR spectrometers.*
 
-- G. Socrates, *Infrared and Raman Characteristic Group Frequencies*,
-  3rd ed.
-- P. R. Griffiths & J. A. de Haseth, *Fourier Transform Infrared
-  Spectrometry*, 2nd ed.
-- K. Nakamoto, *Infrared and Raman Spectra of Inorganic and
-  Coordination Compounds*, Part B (metal–ligand and carboxylate
-  coordination modes).
-- M. Milosevic, *Internal Reflection and ATR Spectroscopy*.
-- G. B. Deacon & R. J. Phillips, *Coord. Chem. Rev.* 33 (1980) 227–250
-  (carboxylate coordination modes from IR Δν).
+*   The interferometer utilizes a beam splitter to divide the incident beam, sending one half to a fixed mirror and the other half to a rapidly moving mirror.
+*   When these beams recombine, they interfere to produce an interferogram, which contains information regarding every emitted infrared frequency.
+*   A mathematical algorithm called a Fourier transformation converts this raw interferogram into a standard IR spectrum.
+*   **Felgett Advantage (Speed):** All IR frequencies are measured simultaneously, allowing data collection in seconds rather than minutes.
+*   **Jacquinot Advantage (Sensitivity):** Photonic detectors utilized in FTIR systems are highly sensitive, resulting in excellent signal-to-noise ratios.
+*   **Connes Advantage (Calibration):** An internal Helium-Neon laser continuously calibrates the exact position of the moving mirror, providing supreme wavelength accuracy.
+
+## 5. Attenuated Total Reflectance (ATR) Geometry
+
+Attenuated Total Reflectance (ATR) is a sampling technique that measures changes in a totally internally reflected IR beam when it is in contact with a sample. It is heavily favored over transmission methods due to a lack of necessary sample preparation.
+
+![ATR Crystal Schematic](/diagrams/atr-crystal-diagram.svg)
+
+*Figure 2 — The geometry of an Attenuated Total Reflectance (ATR) crystal, illustrating total internal reflection and the generation of the evanescent wave.*
+
+*   The IR beam enters an optically dense crystal, reflecting internally and producing an evanescent wave that extends beyond the crystal surface.
+*   This evanescent wave decays exponentially into the sample at the crystal interface.
+*   The penetration depth of this wave typically ranges between 0.5 and 2 µm.
+*   The penetration depth is highly wavenumber-dependent, meaning lower wavenumbers probe much deeper into the sample.
+*   Because of this depth variance, raw ATR spectra are systematically intensity-distorted (showing stronger relative absorbance at low wavenumbers) and normally require an ATR correction algorithm before they can be compared to transmission-mode reference libraries.
+*   Very thin surface layers, such as a capping-agent monolayer on a nanoparticle, can be under- or over-represented relative to the bulk core material depending on the probe depth at specific wavenumbers.
+
+### Common ATR Crystal Materials
+
+| Material | Wavelength Range (cm⁻¹) | Refractive Index | Application Notes |
+| :--- | :--- | :--- | :--- |
+| **Zinc Selenide (ZnSe)** | 20,000 – 500 | 2.43 | Suitable for liquids and non-abrasive pastes with a working pH range of 5–9. |
+| **Germanium (Ge)** | 5,000 – 600 | 4.01 | Robust against weak acids and alkalis with a broader working pH range of 1–14. |
+| **Diamond** | 45,000 – 10 | 2.40 | Exhibits greater durability and robustness for high-pressure single reflection analysis. |
+
+## 6. Reading a Spectrum — Beyond Single-Band Lookup
+
+*   **Position and Absence:** The position of a band identifies the specific vibration, but the absolute absence of an expected band is frequently just as diagnostic as its presence.
+*   **Carboxylate Coordination Mode:** The wavenumber separation $\Delta\nu$ between asymmetric and symmetric carboxylate stretches directly distinguishes unidentate, bridging, and chelating bidentate coordination.
+*   **Metal–Oxide Lattice Bands:** Bands located below ~700 cm⁻¹ are IR-active transverse-optical (TO) phonon modes of the extended lattice rather than single-bond vibrations.
+
+## 7. Using This Virtual Lab
+
+*   **Explore Mode:** Choose a metal oxide and a capping agent to visually observe realistic band overlap in the combined spectrum.
+*   **Unknown Mode:** Assign specific bands on an unlabelled spectrum using the functional-group reference table, decide on the capping agent and oxide core, and then reveal the answer.
+*   **Process of Elimination:** Build your analytical reasoning by evaluating both the presence and absence of structural bands together.
+
+## 8. Limitations of This Simulation
+
+*(Note: State these limitations in any formal lab report)*
+
+*   No ATR-depth corrections, Christiansen effects, or Fresnel/dispersion artifacts are actively modeled.
+*   No baseline drift, atmospheric CO₂, or H₂O vapor interferences are included.
+*   No overtone bands, combination bands, or Fermi resonance are modeled.
+*   Band positions and peak depths are representative, literature-typical values chosen primarily for teaching rather than being computed via DFT normal-mode analysis.

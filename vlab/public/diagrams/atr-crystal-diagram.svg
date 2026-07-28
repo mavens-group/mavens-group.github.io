@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 300" width="100%" height="100%">
+  <rect width="600" height="300" fill="#ffffff"/>
+  
+  <!-- ATR Crystal -->
+  <polygon points="150,200 450,200 500,100 100,100" fill="#e2e3e5" stroke="#6c757d" stroke-width="2"/>
+  <text x="300" y="160" font-family="sans-serif" font-size="16" font-weight="bold" fill="#495057" text-anchor="middle">ATR Crystal (High Refractive Index)</text>
+  
+  <!-- Sample -->
+  <rect x="150" y="70" width="300" height="30" fill="#ffc107" opacity="0.6"/>
+  <text x="300" y="90" font-family="sans-serif" font-size="14" font-weight="bold" fill="#333" text-anchor="middle">Sample Material</text>
+  
+  <!-- IR Beam -->
+  <path d="M 50 250 L 125 100 L 225 200 L 300 100 L 400 200 L 475 100 L 550 250" fill="none" stroke="#dc3545" stroke-width="4"/>
+  <polygon points="540,230 550,250 530,245" fill="#dc3545"/> <!-- Simple Arrowhead -->
+  <polygon points="80,190 70,210 90,205" fill="#dc3545" transform="rotate(-65 80 190)"/>
+
+  <!-- Evanescent Waves -->
+  <path d="M 125 100 Q 125 80 135 80 T 145 100" fill="none" stroke="#007bff" stroke-width="2"/>
+  <path d="M 300 100 Q 300 80 310 80 T 320 100" fill="none" stroke="#007bff" stroke-width="2"/>
+  <path d="M 475 100 Q 475 80 485 80 T 495 100" fill="none" stroke="#007bff" stroke-width="2"/>
+  
+  <text x="315" y="60" font-family="sans-serif" font-size="12" fill="#007bff" font-style="italic">Evanescent Wave</text>
+  
+  <text x="50" y="270" font-family="sans-serif" font-size="14" fill="#333" font-weight="bold">IR In</text>
+  <text x="530" y="270" font-family="sans-serif" font-size="14" fill="#333" font-weight="bold">IR Out</text>
+</svg>
