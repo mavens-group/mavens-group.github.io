@@ -63,6 +63,8 @@ social:
 user_groups:
   - Researchers
 ---
-Chithresh T M is a Research Scholar in the MAVENs Group at the [Department of Physics and Nanotechnology](https://www.srmist.edu.in/department/department-of-physics-and-nanotechnology/), [SRMIST, KTR](https://www.srmist.edu.in). His research focuses on computational investigation of quantum materials, particularly evaluating and optimizing spin coherence time (T₂) for qubit applications.
+Chithresh T M is a Research Scholar in the MAVENs Group at the [Department of Physics and Nanotechnology, SRMIST, KTR](https://www.srmist.edu.in/department/department-of-physics-and-nanotechnology/).
 
-He employs density functional theory (DFT) and density functional perturbation theory (DFPT) to analyze electronic and vibrational properties that impact T₂. His work targets materials with enhanced quantum coherence for quantum technology applications.
+His work addresses what limits the lifetime of a spin state in a solid. A defect spin used as a qubit loses coherence through coupling to its surroundings — lattice vibrations, nearby nuclear spins, and the local disorder of the host lattice. The resulting coherence time T₂ is therefore a property of the host material as much as of the defect itself.
+
+He uses density functional theory and density functional perturbation theory to compute the electronic and vibrational structure that governs these relaxation channels, with the aim of predicting which hosts sustain long coherence.

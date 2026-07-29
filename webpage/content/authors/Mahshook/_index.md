@@ -70,8 +70,8 @@ social:
 user_groups:
   - Researchers
 ---
-Mohammed Mahshook is a Research Scholar in the MAVENs group at the [Department of Physics and Nanotechnology](https://www.srmist.edu.in/department/department-of-physics-and-nanotechnology/), [SRMIST, KTR](https://www.srmist.edu.in). His research applies machine learning techniques to understand structure–activity relationships in materials for quantum information processing.
+Mohammed Mahshook is a Research Scholar in the MAVENs group at the [Department of Physics and Nanotechnology, SRMIST, KTR](https://www.srmist.edu.in/department/department-of-physics-and-nanotechnology/).
 
-He develops predictive models to identify candidate materials and analyze their structural and emergent properties. Mahshook focuses on materials capable of hosting deep-level centers — point defects that create isolated electronic states within the bandgap, essential for semiconductor-based quantum technologies including quantum computing, secure communication, and precision sensing.
+His work addresses which host–defect combinations produce usable quantum states. A deep-level centre — a point defect whose electronic states sit isolated within the bandgap — can act as a spin qubit, but only a small fraction of possible defect–host pairs satisfy the requirements on level position, charge-state stability, and spin multiplicity at once. The combinatorial space is far too large to search by direct calculation.
 
-He uses data-driven models to predict host–defect combinations that meet quantum compatibility requirements, working at the interface of data science and condensed matter physics.
+He builds predictive models trained on computed and experimental data to identify candidate pairs and to isolate the structural and electronic features that determine whether a defect level falls in the useful range.

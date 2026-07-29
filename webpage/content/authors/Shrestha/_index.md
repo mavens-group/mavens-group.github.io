@@ -65,8 +65,10 @@ social:
 user_groups:
   - Researchers
 ---
-Shrestha Dutta is a Research Scholar in the [Department of Physics and Nanotechnology](https://www.srmist.edu.in/department/department-of-physics-and-nanotechnology/) at [SRMIST](https://www.srmist.edu.in), where she uses density functional theory to predict the electronic and magnetic properties of 2D transition-metal carbides and nitrides (MXenes) for hydrogen evolution catalysis.
+Shrestha Dutta is a Research Scholar in the MAVENs group at the [Department of Physics and Nanotechnology, SRMIST](https://www.srmist.edu.in/department/department-of-physics-and-nanotechnology/).
 
-Her work focuses on computational screening of MXene and ceramics compositions to identify materials with optimal hydrogen adsorption energies for water splitting. She uses plane-wave DFT to compute site-resolved electronic structure and assess catalytic activity, targeting noble-metal-free alternatives for sustainable hydrogen production.
+Her work addresses what controls catalytic activity at a compositionally disordered surface. Hydrogen evolution requires an adsorption free energy near thermoneutral, and on MXene surfaces that quantity is set by the local chemical environment of each site — the mix of surface terminations, the arrangement of substituted metal atoms — rather than by the nominal composition.
 
-Recent work has identified Zr-doped Ti₃C₂ and Ti₃CN as promising HER catalysts with near-thermoneutral adsorption energies, outperforming pristine Ti₃C₂. Her current projects investigate the role of surface functionalization and bimetallic substitution in tuning catalytic performance, with ongoing exploration of machine learning approaches to accelerate materials screening.
+She uses plane-wave density functional theory to compute site-resolved electronic structure and hydrogen adsorption energies across MXene and ceramic compositions, targeting noble-metal-free alternatives to platinum.
+
+Recent work identified Zr-doped Ti₃C₂ and Ti₃CN as HER catalysts with near-thermoneutral adsorption energies, outperforming pristine Ti₃C₂. Current projects examine how surface functionalisation and bimetallic substitution tune activity, with machine learning applied to extend screening beyond what direct calculation covers.
