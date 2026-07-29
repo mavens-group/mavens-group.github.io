@@ -1,7 +1,7 @@
 @import "tailwindcss";
 @import "./theme/theme.css";
 
-/* Theme tokens need a value before React mounts and sets data-theme/data-accent,
+/* Theme tokens need a value before React mounts and sets data-theme,
    otherwise there's a flash of unstyled/wrong-color content on first paint. */
 html {
   color-scheme: dark;
@@ -9,4 +9,15 @@ html {
 html:not([data-theme]),
 [data-theme="dark"] {
   background: #020617;
+}
+
+/* Safety net: nothing in this app should intentionally cause the whole
+   page to scroll horizontally (only specific containers like the header
+   and tab bar do, via their own overflow-x:auto). This guards against
+   any element that overflows its container on a narrow screen dragging
+   the entire page into horizontal scroll instead of just wrapping/
+   clipping locally. */
+html, body, #root {
+  max-width: 100vw;
+  overflow-x: hidden;
 }

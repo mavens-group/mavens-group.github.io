@@ -151,3 +151,15 @@
   padding: 0.3em 0;
   margin: 1em 0;
 }
+
+/* Hides the scrollbar on an overflow-x:auto container while keeping it
+   scrollable — used as a mobile fallback for the header and tab bar so
+   that if content still doesn't fit a narrow screen, it scrolls locally
+   instead of forcing the whole page to scroll horizontally. */
+.no-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}

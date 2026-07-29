@@ -34,19 +34,19 @@ export default function LabShell({ docs, docsPdf, record, media = [], children }
   return (
     <div className="min-h-screen bg-[var(--bg-canvas)]">
       <div className="max-w-6xl mx-auto px-4 md:px-6 pt-4">
-        <div className="flex gap-1.5 bg-[var(--bg-surface)] border border-[var(--border)] rounded-xl p-1 w-fit">
+        <div className="flex gap-1 sm:gap-1.5 bg-[var(--bg-surface)] border border-[var(--border)] rounded-xl p-1 w-fit max-w-full overflow-x-auto no-scrollbar">
           {TABS.map(({ id, label, icon: Icon }) => (
             <button
               key={id}
               onClick={() => setTab(id)}
-              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm font-medium transition-colors ${
+              className={`flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-lg text-xs sm:text-sm font-medium transition-colors whitespace-nowrap flex-shrink-0 ${
                 tab === id
                   ? "bg-[var(--accent)] text-[var(--text-on-accent)]"
                   : "text-[var(--text-tertiary)] hover:text-[var(--text-secondary)]"
               }`}
             >
               <Icon size={14} />
-              {label}
+              <span className="hidden sm:inline">{label}</span>
             </button>
           ))}
         </div>

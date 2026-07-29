@@ -64,34 +64,35 @@ function AppShell() {
   return (
     <div className="min-h-screen bg-[var(--bg-canvas)] text-[var(--text-primary)] font-sans">
       {/* Global Navigation Header */}
-      <header className="bg-[var(--bg-surface)] border-b border-[var(--border)] px-6 py-4 sticky top-0 z-50 flex items-center justify-between shadow-lg">
-        <div className="flex items-center gap-3 cursor-pointer" onClick={() => setActiveAppId(null)}>
-          <div className="w-9 h-9 rounded-lg bg-[var(--accent)]/10 border border-[var(--accent)]/30 flex items-center justify-center p-1.5">
+      <header className="bg-[var(--bg-surface)] border-b border-[var(--border)] px-4 sm:px-6 py-3 sm:py-4 sticky top-0 z-50 flex items-center justify-between gap-2 shadow-lg overflow-x-auto no-scrollbar">
+        <div className="flex items-center gap-2 sm:gap-3 cursor-pointer flex-shrink-0" onClick={() => setActiveAppId(null)}>
+          <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-lg bg-[var(--accent)]/10 border border-[var(--accent)]/30 flex items-center justify-center p-1.5 flex-shrink-0">
             <MavensLogo className="w-full h-full" />
           </div>
           <div>
-            <h1 className="text-base font-bold text-[var(--text-primary)] tracking-tight leading-none">
+            <h1 className="text-sm sm:text-base font-bold text-[var(--text-primary)] tracking-tight leading-none whitespace-nowrap">
               Virtual Lab Suite
             </h1>
-            <p className="text-xs text-[var(--text-quaternary)] mt-0.5">Interactive Scientific Benchtop</p>
+            <p className="hidden sm:block text-xs text-[var(--text-quaternary)] mt-0.5">Interactive Scientific Benchtop</p>
           </div>
         </div>
 
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2 sm:gap-3 flex-shrink-0">
           {/* Top bar quick switcher */}
           {activeAppId && (
             <>
               <button
                 onClick={() => setActiveAppId(null)}
-                className="text-xs font-medium px-3 py-1.5 rounded-md bg-[var(--bg-surface-2)] hover:bg-[var(--border)] text-[var(--text-secondary)] transition-colors"
+                className="text-xs font-medium px-2.5 sm:px-3 py-1.5 rounded-md bg-[var(--bg-surface-2)] hover:bg-[var(--border)] text-[var(--text-secondary)] transition-colors whitespace-nowrap flex-shrink-0"
               >
-                ← Back to Dashboard
+                <span className="sm:hidden">← Back</span>
+                <span className="hidden sm:inline">← Back to Dashboard</span>
               </button>
-              <div className="h-4 w-px bg-[var(--border)]" />
+              <div className="hidden sm:block h-4 w-px bg-[var(--border)] flex-shrink-0" />
               <select
                 value={activeAppId}
                 onChange={(e) => setActiveAppId(e.target.value)}
-                className="bg-[var(--bg-surface-2)] border border-[var(--border)] text-[var(--text-secondary)] text-xs rounded-md px-2 py-1.5 outline-none focus:border-[var(--accent)]"
+                className="bg-[var(--bg-surface-2)] border border-[var(--border)] text-[var(--text-secondary)] text-xs rounded-md px-2 py-1.5 outline-none focus:border-[var(--accent)] max-w-[100px] sm:max-w-none flex-shrink-0"
               >
                 {APPS.map((app) => (
                   <option key={app.id} value={app.id}>
@@ -99,7 +100,7 @@ function AppShell() {
                   </option>
                 ))}
               </select>
-              <div className="h-4 w-px bg-[var(--border)]" />
+              <div className="hidden sm:block h-4 w-px bg-[var(--border)] flex-shrink-0" />
             </>
           )}
 
