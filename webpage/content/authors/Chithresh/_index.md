@@ -56,7 +56,7 @@ skills:
 social:
   - icon: envelope-square
     icon_pack: fas
-    link: 'mailto:'
+    link: 'mailto:ct1062@srmist.edu.in'
   - icon: github-square
     icon_pack: fab
     link: 'https://github.com/chithresh-phy'
