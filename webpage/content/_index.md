@@ -18,9 +18,9 @@ sections:
             position: center
             color: '#666'
 
-        - title: Disorder and Coherence
+        - title: Disorder and Magnetism
           content: |
-            When does a local electronic feature survive into a collective response, and when does the disorder around it take over? We track how symmetry breaking — a vacancy, a substitutional site, a defect cluster — propagates from local descriptor to spin-dependent behaviour and spin coherence.<br><small>doi: [10.1016/j.jssc.2024.124602](https://doi.org/10.1016/j.jssc.2024.124602)<br>doi: [10.1063/5.0238199](https://doi.org/10.1063/5.0238199)<br>doi: [10.1016/j.jpcs.2024.111914](https://doi.org/10.1016/j.jpcs.2024.111914)</small>
+            Given the electronic structure of a disordered magnetic alloy, what decides whether it orders, at what temperature, and how much of its magnetisation survives? We track how doping redistributes competing exchange pathways and shifts the Fermi level relative to the spin-resolved pseudogap — the control variables behind Curie-temperature engineering and magnetocaloric response in Heusler alloys. <br><small>doi: [10.1016/j.jssc.2024.124602](https://doi.org/10.1016/j.jssc.2024.124602)<br>doi: [10.1063/5.0238199](https://doi.org/10.1063/5.0238199)<br>doi: [10.1016/j.jpcs.2024.111914](https://doi.org/10.1016/j.jpcs.2024.111914)</small>
           align: left
           background:
             image:
@@ -30,13 +30,25 @@ sections:
             position: center
             color: '#555'
 
-        - title: Disorder and Magnetism
+        - title: Disorder and Catalysis
           content: |
-            Which features of the electronic structure survive the complexity of a real, disordered material? We isolate the control variables — d-band filling, Fermi-level position, exchange topology — that make compositional design predictive rather than exploratory.<br><small>doi: [10.1016/j.physb.2025.417148](https://doi.org/10.1016/j.physb.2025.417148)</small>
+            In a compositionally disordered catalyst, what actually sets where hydrogen adsorption falls relative to the thermoneutral point? We find that site-resolved d-band asymmetry, not a sublattice-averaged descriptor, governs adsorption in bimetallic Janus MXenes, and that targeted doping brings layered carbides into the thermoneutral window without platinum-group metals. <br><small>doi: [10.1016/j.physb.2025.417148](https://doi.org/10.1016/j.physb.2025.417148)<br>doi: [10.1039/d6ra02989b](https://doi.org/10.1039/d6ra02989b)</small>
           align: left
           background:
             image:
               filename: mxene.webp
+              filters:
+                brightness: 0.5
+            position: center
+            color: '#555'
+
+        - title: Disorder and Coherence
+          content: |
+            A spin centre only works as a qubit while it holds phase, and it's the disorder around it that erases that phase. In oxygen-reduced CeO₂, we show the geometry of neighbouring vacancies — not just their concentration — sets the sign of the inter-spin exchange and leaves a distinct hyperfine-anisotropy fingerprint: the couplings a coherence-time calculation needs, computed directly rather than assumed. <br><small>doi: [https://doi.org/10.1103/bt3b-hp18](https://doi.org/10.1103/bt3b-hp18)</small>
+          align: left
+          background:
+            image:
+              filename: spin_coherence.webp
               filters:
                 brightness: 0.5
             position: center
