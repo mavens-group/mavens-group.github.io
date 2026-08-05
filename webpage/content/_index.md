@@ -20,7 +20,7 @@ sections:
 
         - title: Disorder and Magnetism
           content: |
-            Given the electronic structure of a disordered magnetic alloy, what decides whether it orders, at what temperature, and how much of its magnetisation survives? We track how doping redistributes competing exchange pathways and shifts the Fermi level relative to the spin-resolved pseudogap — the control variables behind Curie-temperature engineering and magnetocaloric response in Heusler alloys. <br><small>doi: [10.1016/j.jssc.2024.124602](https://doi.org/10.1016/j.jssc.2024.124602)<br>doi: [10.1063/5.0238199](https://doi.org/10.1063/5.0238199)<br>doi: [10.1016/j.jpcs.2024.111914](https://doi.org/10.1016/j.jpcs.2024.111914)</small>
+            What decides whether a disordered magnet orders, at what temperature, and how much magnetisation survives? In substituted FeRh, $d$-band filling — not lattice parameter — sets magnetic stability; in vacancy-doped TiS$_2$, half-metallic ferromagnetism appears only once the defect network percolates. <br><small>doi: [10.1016/j.jmmm.2026.174435](https://doi.org/10.1016/j.jmmm.2026.174435)<br>doi: [10.1103/nt5p-5n1p](https://doi.org/10.1103/nt5p-5n1p)</small>
           align: left
           background:
             image:
@@ -32,7 +32,7 @@ sections:
 
         - title: Disorder and Catalysis
           content: |
-            In a compositionally disordered catalyst, what actually sets where hydrogen adsorption falls relative to the thermoneutral point? We find that site-resolved d-band asymmetry, not a sublattice-averaged descriptor, governs adsorption in bimetallic Janus MXenes, and that targeted doping brings layered carbides into the thermoneutral window without platinum-group metals. <br><small>doi: [10.1016/j.physb.2025.417148](https://doi.org/10.1016/j.physb.2025.417148)<br>doi: [10.1039/d6ra02989b](https://doi.org/10.1039/d6ra02989b)</small>
+            What sets where hydrogen binding falls relative to thermoneutrality on a disordered surface? In Janus MXenes, breaking sublattice symmetry brings the V/Nb pair within 0.03 eV of thermoneutral, and site-resolved $d$-band asymmetry predicts binding — until magnetic exchange splitting breaks the descriptor. <br><small>doi: [10.1039/d6ra02989b](https://doi.org/10.1039/d6ra02989b)<br>doi: [10.1016/j.physb.2025.417148](https://doi.org/10.1016/j.physb.2025.417148)</small>
           align: left
           background:
             image:
@@ -44,7 +44,7 @@ sections:
 
         - title: Disorder and Coherence
           content: |
-            A spin centre only works as a qubit while it holds phase, and it's the disorder around it that erases that phase. In oxygen-reduced CeO₂, we show the geometry of neighbouring vacancies — not just their concentration — sets the sign of the inter-spin exchange and leaves a distinct hyperfine-anisotropy fingerprint: the couplings a coherence-time calculation needs, computed directly rather than assumed. <br><small>doi: [https://doi.org/10.1103/bt3b-hp18](https://doi.org/10.1103/bt3b-hp18)</small>
+            Which hosts let a spin defect keep its phase long enough to matter? Screening ~45,000 stable compounds with interpretable machine learning recovers every experimentally verified host and adds 122 candidates beyond diamond, with dielectric screening validated against measured coherence times. <br><small>doi: [10.1103/bt3b-hp18](https://doi.org/10.1103/bt3b-hp18)</small>
           align: left
           background:
             image:
