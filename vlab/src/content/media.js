@@ -32,4 +32,5 @@ export const MEDIA_MANIFEST = {
     // 'uvvis_3.mp4',
     'uvvis_4.mp4',
   ],
+  qe: [],
 };

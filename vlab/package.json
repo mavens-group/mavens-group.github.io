@@ -4,7 +4,9 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "node server/dev.mjs",
+    "dev:vite": "vite",
+    "qe-server": "node server/qe-server.mjs",
     "build": "vite build",
     "lint": "oxlint",
     "preview": "vite preview"

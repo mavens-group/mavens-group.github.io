@@ -1,3 +1,25 @@
+# Virtual Lab Suite
+
+## Running the Quantum ESPRESSO lab
+
+The normal development command starts both Vite and the local Quantum ESPRESSO bridge:
+
+```bash
+npm run dev
+```
+
+To run the services separately, use `npm run qe-server` and `npm run dev:vite` in two terminals.
+
+The bridge listens only on `127.0.0.1:8787`. It discovers executable `pw.x` files on `PATH`; additional trusted executables can be exposed with the platform path separator:
+
+```bash
+QE_PW_PATHS=/opt/qe/bin/pw.x npm run qe-server
+```
+
+Set `ESPRESSO_PSEUDO` or `QE_PSEUDO_DIR` to make a pseudopotential directory appear automatically. The lab also accepts an existing Quantum ESPRESSO `.out` file and parses it entirely in the browser.
+
+Real jobs run in isolated temporary directories, use one OpenMP thread by default, have an execution timeout, and can be cancelled from the interface. The selected pseudopotential files must match the filenames shown in the generated input.
+
 # React + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.

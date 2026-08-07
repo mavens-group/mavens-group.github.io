@@ -9,6 +9,7 @@ import MavensLogo from './components/MavensLogo';
 import PXRDLab from './components/PXRD';
 import FTIRLab from './components/FTIR';
 import UVVisLab from './components/UVVIS'; // <-- CASE MUST MATCH the actual filename exactly
+import QuantumEspressoLab from './components/QuantumEspresso';
 
 // 2. Import each lab's documentation + sample record book (?raw loads the
 //    markdown file's text content at build time via Vite)
@@ -18,6 +19,8 @@ import ftirDocs from './content/docs/ftir.md?raw';
 import ftirRecord from './content/records/ftir.md?raw';
 import uvvisDocs from './content/docs/uvvis.md?raw';
 import uvvisRecord from './content/records/uvvis.md?raw';
+import qeDocs from './content/docs/qe.md?raw';
+import qeRecord from './content/records/qe.md?raw';
 import { MEDIA_MANIFEST } from './content/media';
 
 // 3. Register all available apps in this array
@@ -52,6 +55,16 @@ const APPS = [
     docs: uvvisDocs,
     record: uvvisRecord,
     media: MEDIA_MANIFEST.uvvis,
+  },
+  {
+    id: 'qe',
+    name: 'Quantum ESPRESSO Lab',
+    description: 'DFT Frontier Orbitals & HOMO–LUMO Gap',
+    component: QuantumEspressoLab,
+    category: 'Computational Chemistry',
+    docs: qeDocs,
+    record: qeRecord,
+    media: MEDIA_MANIFEST.qe,
   },
 ];
 
