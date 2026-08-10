@@ -1,8 +1,8 @@
 # Quantum ESPRESSO: HOMO–LUMO Gap of an Isolated Molecule
 
-*This virtual lab teaches the workflow used to obtain frontier-orbital energies from a plane-wave DFT calculation. Simulation mode uses representative teaching data; Real mode can execute a locally installed Quantum ESPRESSO binary.*
+*This virtual lab teaches the workflow used to obtain frontier-orbital energies and a density of states from a plane-wave DFT calculation using completed Quantum ESPRESSO 7.5 runs.*
 
-The **Simulation** mode uses representative teaching data. **Real pw.x** mode connects to the local VLab execution bridge, runs a discovered Quantum ESPRESSO executable, and parses its actual standard output. The bridge must be started separately with `npm run qe-server`; the Vite site alone cannot execute a native program. Existing `.out` files can also be imported and parsed without the bridge.
+The lab bundles real `pw.x` eigenvalues and `dos.x` output for benzene, ethylene, formaldehyde, and ammonia, so it works on static hosting. The SCF and DOS tabs show the corresponding inputs with portable paths. Clicking **Run calculation** does not execute Quantum ESPRESSO in the browser; it loads and plots the matching completed dataset immediately.
 
 ## 1. Objective
 
@@ -39,6 +39,10 @@ For a non-spin-polarized, closed-shell system with fixed occupations, every occu
 
 Metals, open-shell molecules, fractional occupations, charged systems, and spin-polarized calculations require separate treatment. For spin-polarized systems, inspect both spin channels and define frontier levels using their occupations.
 
+### Density of states
+
+After SCF, `dos.x` reads the saved eigenvalues and writes the total electronic density of states. The reference calculations use a 0.02 Ry Gaussian broadening. For a finite molecule the underlying spectrum is discrete, so the apparent peak widths are controlled by that numerical broadening and should not be interpreted as molecular lifetimes. The integrated DOS counts the states accumulated up to a given energy.
+
 ### Visualizing the orbitals
 
 An orbital isosurface is a surface of constant Kohn–Sham wavefunction amplitude. The two colors conventionally show opposite mathematical phases ($+$ and $-$), not positive and negative electric charge. Nodes occur where the wavefunction changes sign. In a real Quantum ESPRESSO workflow, run `pp.x` after the SCF calculation, select the desired Kohn–Sham state, export a three-dimensional grid (for example in cube or XSF format), and inspect it in a scientific visualizer. The browser lab uses qualitative, symmetry-inspired shapes; it does not reconstruct wavefunctions from the teaching eigenvalues.
@@ -55,18 +59,18 @@ Semilocal functionals such as PBE commonly underestimate excitation gaps because
 ## 7. Procedure
 
 1. Select a molecule and inspect its valence-electron count.
-2. Set `ecutwfc` and the cubic cell length.
-3. Increase each independently until the reported gap is stable.
-4. Run SCF and confirm `JOB DONE` and electronic convergence.
-5. Locate the highest occupied and first unoccupied eigenvalues.
-6. Subtract the HOMO energy from the LUMO energy and report settings, pseudopotentials, functional, and convergence tolerance.
+2. Inspect the prepared SCF and DOS inputs.
+3. Click **Run calculation** to load the completed result for the selected molecule.
+4. Compare the HOMO–LUMO ladder with the broadened DOS and integrated DOS.
+5. Download the level and DOS CSV files if numerical analysis is required.
+6. Locate the highest occupied and first unoccupied eigenvalues, subtract them, and report the recorded settings, pseudopotentials, and functional.
 
-## 8. Limitations of this simulation
+## 8. Limitations
 
-- Values are generated from representative reference levels with a pedagogical convergence error model; no real Quantum ESPRESSO executable runs in the browser.
+- Values are fixed results of completed 30 Ry, 14 Å PBE/PAW calculations; clicking Run loads the stored result and no native executable runs in the browser.
 - Molecular geometries are fixed and are not relaxed.
 - Only neutral, closed-shell, non-spin-polarized molecules are included.
-- PBE/PAW and $\Gamma$-point sampling are assumed.
+- PBE/PAW and $\Gamma$-point sampling are used.
 - Charged-cell corrections, dipole corrections, spin–orbit coupling, and symmetry effects are omitted.
 
 ## Further reading

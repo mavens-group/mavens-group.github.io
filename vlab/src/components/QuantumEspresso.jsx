@@ -1,18 +1,26 @@
-import React, { useEffect, useMemo, useRef, useState } from "react";
+import React, { useMemo, useState } from "react";
 import {
   Atom,
   Play,
   RotateCcw,
   Terminal,
   CheckCircle2,
-  AlertTriangle,
   Cpu,
   Copy,
-  Upload,
-  Square,
-  RefreshCw,
+  Download,
 } from "lucide-react";
-import { parseQuantumEspressoOutput } from "../utils/qeParser";
+import {
+  Area,
+  CartesianGrid,
+  ComposedChart,
+  Line,
+  ReferenceLine,
+  ResponsiveContainer,
+  Tooltip,
+  XAxis,
+  YAxis,
+} from "recharts";
+import { QE_REFERENCE_DATA } from "../data/qeReferenceData";
 
 const SYSTEMS = {
   benzene: {
@@ -34,40 +42,6 @@ const SYSTEMS = {
   formaldehyde: { label: "Formaldehyde", formula: "CH₂O", electrons: 12, homo: -6.74, lumo: -2.91, gap: 3.83, prefix: "formaldehyde", atoms: ["C 0.0000 0.0000 0.0000", "O 1.2080 0.0000 0.0000", "H -0.5950 0.9370 0.0000", "H -0.5950 -0.9370 0.0000"] },
   ammonia: { label: "Ammonia", formula: "NH₃", electrons: 8, homo: -5.96, lumo: 0.63, gap: 6.59, prefix: "ammonia", atoms: ["N 0.0000 0.0000 0.1170", "H 0.0000 0.9380 -0.2730", "H 0.8120 -0.4690 -0.2730", "H -0.8120 -0.4690 -0.2730"] },
 };
-
-function pseudoFor(symbol) {
-  return `${symbol}.pbe-n-kjpaw_psl.1.0.0.UPF`;
-}
-
-function buildInput(system, ecut, vacuum, pseudoDir = "./pseudo", pseudoFiles = {}) {
-  const species = [...new Set(system.atoms.map((line) => line.trim()[0]))];
-  return `&CONTROL
-  calculation = 'scf'
-  prefix = '${system.prefix}'
-  pseudo_dir = '${pseudoDir}'
-  outdir = './tmp'
-/
-&SYSTEM
-  ibrav = 1, celldm(1) = ${(vacuum * 1.889726).toFixed(3)}
-  nat = ${system.atoms.length}, ntyp = ${species.length}
-  ecutwfc = ${ecut}, ecutrho = ${ecut * 8}
-  occupations = 'fixed'
-  nbnd = ${Math.ceil(system.electrons / 2) + 4}
-/
-&ELECTRONS
-  conv_thr = 1.0d-8
-  mixing_beta = 0.3
-/
-ATOMIC_SPECIES
-${species.map((s) => `${s}  ${s === "H" ? "1.008" : s === "C" ? "12.011" : s === "N" ? "14.007" : "15.999"}  ${pseudoFiles[s] || pseudoFor(s)}`).join("\n")}
-ATOMIC_POSITIONS angstrom
-${system.atoms.join("\n")}
-K_POINTS gamma`;
-}
-
-function convergenceError(ecut, vacuum) {
-  return 1.1 * Math.exp(-(ecut - 20) / 13) + 1.8 * Math.exp(-(vacuum - 8) / 3.8);
-}
 
 function parseAtoms(system) {
   return system.atoms.map((line, id) => {
@@ -162,9 +136,13 @@ function OrbitalView({ system, kind }) {
   );
 }
 
-function EnergyDiagram({ homo, lumo, electronPairs }) {
-  const occupied = [homo - 4.3, homo - 2.7, homo - 1.45, homo];
-  const empty = [lumo, lumo + 1.2, lumo + 2.1];
+function EnergyDiagram({ homo, lumo, electronPairs, levels = [] }) {
+  const occupied = levels.length
+    ? levels.filter((level) => level.occupied && level.energy >= homo - 6).map((level) => level.energy)
+    : [homo - 4.3, homo - 2.7, homo - 1.45, homo];
+  const empty = levels.length
+    ? levels.filter((level) => !level.occupied && level.energy <= lumo + 3).map((level) => level.energy)
+    : [lumo, lumo + 1.2, lumo + 2.1];
   const all = [...occupied, ...empty];
   const min = Math.min(...all) - 0.8;
   const max = Math.max(...all) + 0.8;
@@ -173,8 +151,8 @@ function EnergyDiagram({ homo, lumo, electronPairs }) {
     <svg viewBox="0 0 440 290" className="w-full h-[290px]" role="img" aria-label="Molecular orbital energy diagram">
       <line x1="54" y1="22" x2="54" y2="264" stroke="var(--text-muted)" strokeWidth="1" />
       <text x="16" y="20" fill="var(--text-quaternary)" fontSize="10">Energy</text>
-      {occupied.map((e, i) => <g key={`o${i}`}><line x1="105" x2="235" y1={y(e)} y2={y(e)} stroke="var(--accent)" strokeWidth={i === 3 ? 4 : 2}/><text x="244" y={y(e) + 4} fill="var(--text-tertiary)" fontSize="11">{i === 3 ? `HOMO  ${e.toFixed(2)} eV` : `occupied  ${e.toFixed(2)}`}</text><text x="151" y={y(e)-5} fill="var(--accent-soft)" fontSize="12">↑↓</text></g>)}
-      {empty.map((e, i) => <g key={`u${i}`}><line x1="105" x2="235" y1={y(e)} y2={y(e)} stroke={i === 0 ? "var(--warn)" : "var(--text-muted)"} strokeWidth={i === 0 ? 4 : 2}/><text x="244" y={y(e) + 4} fill="var(--text-tertiary)" fontSize="11">{i === 0 ? `LUMO  ${e.toFixed(2)} eV` : `empty  ${e.toFixed(2)}`}</text></g>)}
+      {occupied.map((e, i) => <g key={`o${i}`}><line x1="105" x2="235" y1={y(e)} y2={y(e)} stroke="var(--accent)" strokeWidth={i === occupied.length - 1 ? 4 : 2}/>{i === occupied.length - 1 && <text x="244" y={y(e) + 4} fill="var(--text-tertiary)" fontSize="11">{`HOMO  ${e.toFixed(3)} eV`}</text>}<text x="151" y={y(e)-4} fill="var(--accent-soft)" fontSize="10">↑↓</text></g>)}
+      {empty.map((e, i) => <g key={`u${i}`}><line x1="105" x2="235" y1={y(e)} y2={y(e)} stroke={i === 0 ? "var(--warn)" : "var(--text-muted)"} strokeWidth={i === 0 ? 4 : 2}/>{i === 0 && <text x="244" y={y(e) + 4} fill="var(--text-tertiary)" fontSize="11">{`LUMO  ${e.toFixed(3)} eV`}</text>}</g>)}
       <line x1="86" x2="86" y1={y(homo)} y2={y(lumo)} stroke="var(--warn)" strokeDasharray="4 3" />
       <text x="67" y={(y(homo)+y(lumo))/2} fill="var(--warn)" fontSize="11" textAnchor="middle" transform={`rotate(-90 67 ${(y(homo)+y(lumo))/2})`}>ΔE = {(lumo-homo).toFixed(2)} eV</text>
       <text x="105" y="282" fill="var(--text-quaternary)" fontSize="10">{electronPairs} occupied orbital pairs in the complete calculation</text>
@@ -182,113 +160,66 @@ function EnergyDiagram({ homo, lumo, electronPairs }) {
   );
 }
 
+function DosChart({ reference, system }) {
+  return (
+    <div className="space-y-4">
+      <div className="rounded-xl bg-[var(--bg-canvas)] border border-[var(--border)] p-3">
+        <div className="flex flex-wrap items-center justify-between gap-2 px-1 mb-2">
+          <div>
+            <h3 className="text-sm font-semibold text-[var(--text-primary)]">Electronic density of states</h3>
+            <p className="text-[10px] text-[var(--text-quaternary)]">Gaussian broadening 0.02 Ry · absolute Kohn–Sham energy scale</p>
+          </div>
+          <div className="flex gap-3 text-[10px] text-[var(--text-quaternary)]">
+            <span><i className="inline-block w-2.5 h-2.5 rounded-sm bg-[var(--accent)] mr-1"/>DOS</span>
+            <span><i className="inline-block w-2.5 h-0.5 bg-[var(--warn)] mr-1 align-middle"/>Integrated DOS</span>
+          </div>
+        </div>
+        <ResponsiveContainer width="100%" height={360}>
+          <ComposedChart data={reference.dos} margin={{ top: 18, right: 20, bottom: 10, left: 0 }}>
+            <CartesianGrid stroke="var(--border)" vertical={false}/>
+            <XAxis dataKey="energy" type="number" domain={["dataMin", "dataMax"]} tickCount={9} stroke="var(--text-muted)" tick={{ fill: "var(--text-quaternary)", fontSize: 10, fontFamily: "monospace" }} label={{ value: "Energy (eV)", position: "insideBottom", offset: -7, fill: "var(--text-quaternary)", fontSize: 11 }}/>
+            <YAxis yAxisId="dos" stroke="var(--text-muted)" tick={{ fill: "var(--text-quaternary)", fontSize: 10, fontFamily: "monospace" }} label={{ value: "DOS (states/eV)", angle: -90, position: "insideLeft", fill: "var(--text-quaternary)", fontSize: 10 }}/>
+            <YAxis yAxisId="integrated" orientation="right" stroke="var(--warn)" tick={{ fill: "var(--text-quaternary)", fontSize: 10, fontFamily: "monospace" }} label={{ value: "Integrated states", angle: 90, position: "insideRight", fill: "var(--text-quaternary)", fontSize: 10 }}/>
+            <Tooltip contentStyle={{ background: "var(--bg-surface)", border: "1px solid var(--border)", borderRadius: 8, fontFamily: "monospace", fontSize: 11 }} labelFormatter={(value) => `Energy ${Number(value).toFixed(3)} eV`} formatter={(value, name) => [Number(value).toFixed(4), name === "dos" ? "DOS" : "Integrated DOS"]}/>
+            <ReferenceLine yAxisId="dos" x={reference.homo} stroke="var(--accent)" strokeDasharray="4 3" label={{ value: "HOMO", fill: "var(--accent-soft)", fontSize: 10, position: "top" }}/>
+            <ReferenceLine yAxisId="dos" x={reference.lumo} stroke="var(--warn)" strokeDasharray="4 3" label={{ value: "LUMO", fill: "var(--warn)", fontSize: 10, position: "top" }}/>
+            <Area yAxisId="dos" type="monotone" dataKey="dos" stroke="var(--accent)" fill="var(--accent)" fillOpacity={0.2} strokeWidth={1.5} dot={false} isAnimationActive={false}/>
+            <Line yAxisId="integrated" type="monotone" dataKey="integratedDos" stroke="var(--warn)" strokeWidth={1.25} dot={false} isAnimationActive={false}/>
+          </ComposedChart>
+        </ResponsiveContainer>
+      </div>
+      <div className="grid sm:grid-cols-3 gap-3">
+        <div className="rounded-xl border border-[var(--border)] bg-[var(--bg-surface-2)] p-3"><span className="text-[10px] uppercase tracking-wider text-[var(--text-quaternary)]">HOMO</span><div className="font-mono text-sm text-[var(--accent-soft)] mt-1">{reference.homo.toFixed(4)} eV</div></div>
+        <div className="rounded-xl border border-[var(--border)] bg-[var(--bg-surface-2)] p-3"><span className="text-[10px] uppercase tracking-wider text-[var(--text-quaternary)]">LUMO</span><div className="font-mono text-sm text-[var(--warn)] mt-1">{reference.lumo.toFixed(4)} eV</div></div>
+        <div className="rounded-xl border border-[var(--border)] bg-[var(--bg-surface-2)] p-3"><span className="text-[10px] uppercase tracking-wider text-[var(--text-quaternary)]">DOS samples</span><div className="font-mono text-sm text-[var(--text-primary)] mt-1">{reference.dos.length.toLocaleString()}</div></div>
+      </div>
+      <p className="text-[10px] text-[var(--text-quaternary)] leading-relaxed">The finite {system.label} molecule has discrete levels. The continuous-looking DOS is produced by the selected Gaussian broadening; peak width is not a molecular lifetime.</p>
+    </div>
+  );
+}
+
 export default function QuantumEspressoLab() {
   const [systemKey, setSystemKey] = useState("benzene");
-  const [ecut, setEcut] = useState(50);
-  const [vacuum, setVacuum] = useState(18);
   const [status, setStatus] = useState("ready");
   const [copied, setCopied] = useState(false);
-  const [executionMode, setExecutionMode] = useState(() => localStorage.getItem("vlab.qe.mode") || "simulation");
-  const [bridge, setBridge] = useState({ loading: false, online: false, executables: [], pseudoDirs: [], error: "" });
-  const [selectedExecutable, setSelectedExecutable] = useState(() => localStorage.getItem("vlab.qe.executable") || "");
-  const [manualExecutable, setManualExecutable] = useState("");
-  const [pseudoDir, setPseudoDir] = useState(() => localStorage.getItem("vlab.qe.pseudoDir") || "./pseudo");
-  const [pseudoScan, setPseudoScan] = useState({ loading: false, fileCount: null, matches: {}, error: "" });
-  const [realOutput, setRealOutput] = useState("");
-  const [parsedResult, setParsedResult] = useState(null);
-  const [jobId, setJobId] = useState(null);
-  const [resultSource, setResultSource] = useState("simulation");
-  const activeJob = useRef(null);
+  const [inputTab, setInputTab] = useState("scf");
+  const [analysisTab, setAnalysisTab] = useState("frontier");
   const system = SYSTEMS[systemKey];
-  const error = convergenceError(ecut, vacuum);
-  const converged = ecut >= 45 && vacuum >= 15;
-  const shift = error * 0.22;
-  const homo = system.homo - shift * 0.45;
-  const lumo = system.lumo + shift * 0.55;
-  const requiredElements = useMemo(() => [...new Set(parseAtoms(system).map((atom) => atom.symbol))], [system]);
-  const pseudoFiles = useMemo(() => Object.fromEntries(Object.entries(pseudoScan.matches).map(([element, match]) => [element, match.selected]).filter(([, file]) => file)), [pseudoScan.matches]);
-  const missingPseudos = executionMode === "real" ? requiredElements.filter((element) => !pseudoFiles[element]) : [];
-  const input = useMemo(() => buildInput(system, ecut, vacuum, executionMode === "real" ? pseudoDir : "./pseudo", executionMode === "real" ? pseudoFiles : {}), [system, ecut, vacuum, executionMode, pseudoDir, pseudoFiles]);
-  const finished = status === "done" || status === "imported";
-  const displayHomo = resultSource !== "simulation" && parsedResult?.homo != null ? parsedResult.homo : homo;
-  const displayLumo = resultSource !== "simulation" && parsedResult?.lumo != null ? parsedResult.lumo : lumo;
-
-  useEffect(() => () => { if (activeJob.current) fetch(`${import.meta.env.BASE_URL}api/qe/jobs/${activeJob.current}`, { method: "DELETE" }).catch(() => {}); }, []);
-  useEffect(() => { localStorage.setItem("vlab.qe.mode", executionMode); }, [executionMode]);
-  useEffect(() => { if (selectedExecutable) localStorage.setItem("vlab.qe.executable", selectedExecutable); }, [selectedExecutable]);
-  useEffect(() => { if (pseudoDir) localStorage.setItem("vlab.qe.pseudoDir", pseudoDir); }, [pseudoDir]);
-  useEffect(() => { if (executionMode === "real") discoverBridge(); }, [executionMode]);
-  useEffect(() => {
-    if (executionMode !== "real" || !bridge.online || !pseudoDir) return;
-    const timer = window.setTimeout(async () => {
-      setPseudoScan((old) => ({ ...old, loading: true, error: "" }));
-      try {
-        const response = await fetch(`${import.meta.env.BASE_URL}api/qe/config/pseudopotentials`, { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ directory: pseudoDir, elements: requiredElements }) });
-        const data = await response.json(); if (!response.ok) throw new Error(data.error || "Unable to scan directory");
-        setPseudoScan({ loading: false, fileCount: data.fileCount, matches: data.matches || {}, error: "" });
-      } catch (error) { setPseudoScan({ loading: false, fileCount: null, matches: {}, error: error.message }); }
-    }, 400);
-    return () => window.clearTimeout(timer);
-  }, [executionMode, bridge.online, pseudoDir, requiredElements]);
-
-  async function discoverBridge() {
-    setBridge((old) => ({ ...old, loading: true, error: "" }));
-    try {
-      const response = await fetch(`${import.meta.env.BASE_URL}api/qe/config`);
-      if (!response.ok) throw new Error("Local execution bridge did not respond");
-      const data = await response.json();
-      setBridge({ loading: false, online: true, executables: data.executables || [], pseudoDirs: data.pseudoDirs || [], error: "" });
-      if (data.executables?.length) setSelectedExecutable((old) => data.executables.some((item) => item.path === old) ? old : data.executables[0].path);
-      if (data.pseudoDirs?.length) setPseudoDir((old) => old === "./pseudo" ? data.pseudoDirs[0] : old);
-    } catch { setBridge({ loading: false, online: false, executables: [], pseudoDirs: [], error: "Local bridge is offline. Stop the old dev server and restart with: npm run dev" }); }
-  }
-
-  async function addExecutable() {
-    if (!manualExecutable.trim()) return;
-    setBridge((old) => ({ ...old, loading: true, error: "" }));
-    try {
-      const response = await fetch(`${import.meta.env.BASE_URL}api/qe/config/executable`, { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ path: manualExecutable.trim() }) });
-      const data = await response.json(); if (!response.ok) throw new Error(data.error || "Executable validation failed");
-      setBridge((old) => ({ ...old, loading: false, online: true, executables: data.executables || [], error: "" }));
-      setSelectedExecutable(data.path); setManualExecutable("");
-    } catch (error) { setBridge((old) => ({ ...old, loading: false, error: error.message })); }
-  }
-
-  function applyOutput(output, source = "real") {
-    const parsed = parseQuantumEspressoOutput(output);
-    setRealOutput(output); setParsedResult(parsed); setResultSource(source);
-    setStatus(parsed.homo != null && parsed.lumo != null ? (source === "import" ? "imported" : "done") : "failed");
-    return parsed;
-  }
+  const reference = QE_REFERENCE_DATA[systemKey];
+  const displayedInput = inputTab === "scf" ? reference.scfInput : reference.dosInput;
+  const finished = status === "done";
 
   function runScf() {
-    if (executionMode === "real") { runRealScf(); return; }
-    setResultSource("simulation"); setParsedResult(null); setRealOutput("");
-    setStatus("running");
-    window.setTimeout(() => setStatus("done"), 850);
+    setStatus("done");
   }
-  async function runRealScf() {
-    if (!selectedExecutable || missingPseudos.length || pseudoScan.loading) return;
-    setStatus("running"); setRealOutput(""); setParsedResult(null); setResultSource("real");
-    try {
-      const response = await fetch(`${import.meta.env.BASE_URL}api/qe/run`, { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ executable: selectedExecutable, input, timeoutMs: 180000, threads: 1 }) });
-      const data = await response.json(); if (!response.ok) throw new Error(data.error || "Unable to start pw.x");
-      setJobId(data.jobId); activeJob.current = data.jobId;
-      while (activeJob.current === data.jobId) {
-        await new Promise((resolve) => window.setTimeout(resolve, 700));
-        const poll = await fetch(`${import.meta.env.BASE_URL}api/qe/jobs/${data.jobId}`); const job = await poll.json();
-        if (!poll.ok) throw new Error(job.error || "Lost contact with pw.x job");
-        setRealOutput(job.output || "");
-        if (job.status !== "running") { activeJob.current = null; setJobId(null); const parsed = applyOutput(job.output || "", "real"); if (job.status !== "completed" || !parsed.jobDone) setStatus(parsed.homo != null && parsed.lumo != null ? "done" : "failed"); break; }
-      }
-    } catch (error) { setRealOutput((old) => `${old}\nBridge error: ${error.message}`); setStatus("failed"); activeJob.current = null; setJobId(null); }
-  }
-  async function cancelJob() { if (!jobId) return; await fetch(`${import.meta.env.BASE_URL}api/qe/jobs/${jobId}`, { method: "DELETE" }).catch(() => {}); activeJob.current = null; setJobId(null); setStatus("cancelled"); }
-  async function importOutput(event) { const file = event.target.files?.[0]; if (!file) return; applyOutput(await file.text(), "import"); event.target.value = ""; }
-  function selectSystem(key) { setSystemKey(key); setStatus("ready"); setCopied(false); setParsedResult(null); setRealOutput(""); }
-  function reset() { setEcut(50); setVacuum(18); setStatus("ready"); setCopied(false); setParsedResult(null); setRealOutput(""); }
+  function selectSystem(key) { setSystemKey(key); setStatus("ready"); setCopied(false); }
+  function reset() { setStatus("ready"); setCopied(false); setAnalysisTab("frontier"); }
   async function copyInput() {
-    try { await navigator.clipboard.writeText(input); setCopied(true); window.setTimeout(() => setCopied(false), 1200); } catch { setCopied(false); }
+    try { await navigator.clipboard.writeText(displayedInput); setCopied(true); window.setTimeout(() => setCopied(false), 1200); } catch { setCopied(false); }
+  }
+  function downloadText(filename, text) {
+    const url = URL.createObjectURL(new Blob([text], { type: "text/plain;charset=utf-8" }));
+    const anchor = document.createElement("a"); anchor.href = url; anchor.download = filename; anchor.click(); URL.revokeObjectURL(url);
   }
 
   return (
@@ -298,66 +229,52 @@ export default function QuantumEspressoLab() {
           <div>
             <div className="flex items-center gap-2 text-[var(--accent)] text-xs font-mono tracking-widest uppercase mb-1"><Atom size={14}/> Plane-wave DFT workbench</div>
             <h1 className="text-2xl md:text-3xl font-semibold">Quantum ESPRESSO — HOMO–LUMO Gap</h1>
-            <p className="text-[var(--text-tertiary)] text-sm mt-1 max-w-2xl">Prepare an isolated molecule, converge the basis and supercell, run a simulated PWscf calculation, then identify frontier orbitals from the Kohn–Sham eigenvalues.</p>
+            <p className="text-[var(--text-tertiary)] text-sm mt-1 max-w-2xl">Select a molecule, inspect the prepared inputs, and click Run to reveal its stored Quantum ESPRESSO results.</p>
           </div>
-          <div className="font-mono text-xs text-right text-[var(--text-quaternary)]"><div>PWscf / PBE · {executionMode === "real" ? "REAL EXECUTION" : "SIMULATION"}</div><div className={finished ? "text-[var(--success)]" : status === "running" ? "text-[var(--warn)]" : status === "failed" ? "text-[var(--danger)]" : "text-[var(--accent)]"}>● {status === "done" ? "JOB DONE" : status === "imported" ? "OUTPUT IMPORTED" : status === "running" ? "PW.X RUNNING" : status === "failed" ? "RUN FAILED" : status === "cancelled" ? "CANCELLED" : "INPUT READY"}</div></div>
+          <div className="font-mono text-xs text-right text-[var(--text-quaternary)]"><div>PWscf + DOS / PBE</div><div className={finished ? "text-[var(--success)]" : "text-[var(--accent)]"}>● {finished ? "RESULTS LOADED" : "INPUT READY"}</div></div>
         </div>
 
         <div className="flex flex-wrap gap-2 mb-6">
           {Object.entries(SYSTEMS).map(([key, item]) => <button key={key} onClick={() => selectSystem(key)} className={`px-3 py-2 rounded-lg border text-sm transition-colors ${systemKey === key ? "bg-[var(--accent)] text-[var(--text-on-accent)] border-[var(--accent)]" : "bg-[var(--bg-surface)] text-[var(--text-tertiary)] border-[var(--border)] hover:text-[var(--text-primary)]"}`}>{item.label} <span className="opacity-70">{item.formula}</span></button>)}
         </div>
 
-        <section className="bg-[var(--bg-surface)] border border-[var(--border)] rounded-2xl p-4 mb-5">
-          <div className="flex flex-wrap items-center gap-3">
-            <div className="flex p-1 rounded-lg bg-[var(--bg-surface-2)] border border-[var(--border)]">
-              <button onClick={() => { setExecutionMode("simulation"); setStatus("ready"); }} className={`px-3 py-1.5 rounded-md text-xs font-medium ${executionMode === "simulation" ? "bg-[var(--surface-inverse)] text-[var(--text-on-inverse)]" : "text-[var(--text-tertiary)]"}`}>Simulation</button>
-              <button onClick={() => { setExecutionMode("real"); setStatus("ready"); }} className={`px-3 py-1.5 rounded-md text-xs font-medium ${executionMode === "real" ? "bg-[var(--accent)] text-[var(--text-on-accent)]" : "text-[var(--text-tertiary)]"}`}>Real pw.x</button>
-            </div>
-            {executionMode === "real" && <>
-              <select value={selectedExecutable} onChange={(e)=>setSelectedExecutable(e.target.value)} className="min-w-[250px] flex-1 bg-[var(--bg-surface-2)] border border-[var(--border)] rounded-lg px-3 py-2 text-xs text-[var(--text-secondary)]" disabled={!bridge.executables.length}><option value="">{bridge.loading ? "Searching for pw.x…" : bridge.executables.length ? "Select executable" : "No pw.x executable discovered"}</option>{bridge.executables.map((item)=><option key={item.path} value={item.path}>{item.label}</option>)}</select>
-              <button onClick={discoverBridge} title="Refresh executable discovery" className="p-2 rounded-lg border border-[var(--border)] text-[var(--text-tertiary)]"><RefreshCw size={15} className={bridge.loading ? "animate-spin" : ""}/></button>
-              <label className="cursor-pointer flex items-center gap-2 px-3 py-2 rounded-lg border border-[var(--border)] text-xs text-[var(--text-secondary)] hover:text-[var(--accent)]"><Upload size={14}/>Import `.out`<input type="file" accept=".out,.txt,.log" className="hidden" onChange={importOutput}/></label>
-            </>}
-          </div>
-          {executionMode === "real" && <div className="mt-3 space-y-3"><div className="grid md:grid-cols-[1fr_auto] gap-2 items-end"><label className="text-xs text-[var(--text-tertiary)]">Executable path, if not found on PATH<input value={manualExecutable} onChange={(e)=>setManualExecutable(e.target.value)} onKeyDown={(e)=>{if(e.key === "Enter") addExecutable();}} placeholder="/usr/bin/pw.x or /opt/qe/bin/pw.x" className="mt-1 w-full bg-[var(--bg-canvas)] border border-[var(--border)] rounded-lg px-3 py-2 font-mono text-xs text-[var(--text-secondary)]"/></label><button onClick={addExecutable} disabled={!bridge.online || !manualExecutable.trim() || bridge.loading} className="px-3 py-2 rounded-lg border border-[var(--accent)] text-xs text-[var(--accent)] disabled:opacity-40">Validate &amp; add</button></div><div className="grid md:grid-cols-[1fr_auto] gap-3 items-end"><label className="text-xs text-[var(--text-tertiary)]">Pseudopotential directory<input value={pseudoDir} onChange={(e)=>setPseudoDir(e.target.value)} list="qe-pseudo-dirs" className="mt-1 w-full bg-[var(--bg-canvas)] border border-[var(--border)] rounded-lg px-3 py-2 font-mono text-xs text-[var(--text-secondary)]"/><datalist id="qe-pseudo-dirs">{bridge.pseudoDirs.map((dir)=><option key={dir} value={dir}/>)}</datalist></label><span className={`text-xs pb-2 ${bridge.online ? "text-[var(--success)]" : "text-[var(--danger)]"}`}>{bridge.online ? `Bridge online · ${bridge.executables.length} executable(s) found` : bridge.error || "Restart with npm run dev"}</span></div>{bridge.online && <div className={`rounded-lg border p-3 text-xs ${missingPseudos.length ? "border-[var(--danger-border)] bg-[var(--danger-soft)]" : "border-[var(--success-border)] bg-[var(--accent-glow)]"}`}><div className="flex items-center gap-2 mb-2">{pseudoScan.loading ? <RefreshCw size={14} className="animate-spin text-[var(--accent)]"/> : missingPseudos.length ? <AlertTriangle size={14} className="text-[var(--danger)]"/> : <CheckCircle2 size={14} className="text-[var(--success)]"/>}<strong className="text-[var(--text-primary)]">{pseudoScan.loading ? "Scanning .UPF files…" : pseudoScan.error ? pseudoScan.error : missingPseudos.length ? `Missing pseudopotentials: ${missingPseudos.join(", ")}` : `${pseudoScan.fileCount} .UPF files scanned`}</strong></div>{!pseudoScan.loading && Object.entries(pseudoScan.matches).map(([element, match])=><div key={element} className="grid grid-cols-[24px_1fr] gap-2 py-1 font-mono text-[11px]"><span className="text-[var(--accent)]">{element}</span><span className={match.selected ? "text-[var(--text-secondary)]" : "text-[var(--danger)]"}>{match.selected || "No matching .UPF file"}{match.candidates?.length > 1 ? ` · selected from ${match.candidates.length} matches` : ""}</span></div>)}</div>}<p className="text-[10px] text-[var(--text-quaternary)]">The bridge scans the selected directory and writes the best matching real filenames into <code>ATOMIC_SPECIES</code>. It prefers PBE PAW files when several variants exist.</p></div>}
-        </section>
-
         <section className="bg-[var(--bg-surface)] border border-[var(--border)] rounded-2xl p-5 mb-5">
-          <div className="flex flex-wrap items-start justify-between gap-2 mb-4"><div><h2 className="font-semibold">Molecular structure &amp; periodic supercell</h2><p className="text-xs text-[var(--text-tertiary)] mt-1">Rotate the model and vary the cubic cell below to inspect the vacuum separating periodic images.</p></div><span className="font-mono text-xs text-[var(--accent)]">CELL {vacuum} × {vacuum} × {vacuum} Å³</span></div>
-          <StructureViewer system={system} cellLength={vacuum}/>
+          <div className="flex flex-wrap items-start justify-between gap-2 mb-4"><div><h2 className="font-semibold">Molecular structure &amp; periodic supercell</h2><p className="text-xs text-[var(--text-tertiary)] mt-1">The prepared geometry is centered in the 14 Å cubic cell used for the stored calculation.</p></div><span className="font-mono text-xs text-[var(--accent)]">CELL 14 × 14 × 14 Å³</span></div>
+          <StructureViewer system={system} cellLength={14}/>
         </section>
 
         <div className="grid lg:grid-cols-3 gap-5">
           <section className="bg-[var(--bg-surface)] border border-[var(--border)] rounded-2xl p-5">
-            <div className="flex items-center gap-2 mb-5"><Cpu size={17} className="text-[var(--accent)]"/><h2 className="font-semibold">1. Convergence setup</h2></div>
-            <label className="block text-xs text-[var(--text-tertiary)] mb-2">Wavefunction cutoff <span className="float-right font-mono text-[var(--text-primary)]">{ecut} Ry</span></label>
-            <input className="w-full accent-[var(--accent)]" type="range" min="20" max="80" step="5" value={ecut} onChange={(e) => { setEcut(+e.target.value); setStatus("ready"); }}/>
-            <label className="block text-xs text-[var(--text-tertiary)] mt-5 mb-2">Cubic cell length <span className="float-right font-mono text-[var(--text-primary)]">{vacuum} Å</span></label>
-            <input className="w-full accent-[var(--accent)]" type="range" min="8" max="25" step="1" value={vacuum} onChange={(e) => { setVacuum(+e.target.value); setStatus("ready"); }}/>
-            <div className={`mt-5 rounded-xl border p-3 text-xs ${converged ? "border-[var(--success-border)] bg-[var(--accent-glow)]" : "border-[var(--danger-border)] bg-[var(--danger-soft)]"}`}>
-              <div className="flex gap-2 items-start">{converged ? <CheckCircle2 size={16} className="text-[var(--success)] shrink-0"/> : <AlertTriangle size={16} className="text-[var(--danger)] shrink-0"/>}<div><strong className="text-[var(--text-primary)]">{converged ? "Converged settings" : "Convergence risk"}</strong><p className="text-[var(--text-tertiary)] mt-1">Estimated frontier-level error: ±{error.toFixed(2)} eV. {converged ? "Suitable for this teaching calculation." : "Increase cutoff and cell size before trusting the gap."}</p></div></div>
+            <div className="flex items-center gap-2 mb-5"><Cpu size={17} className="text-[var(--accent)]"/><h2 className="font-semibold">1. Calculation setup</h2></div>
+            <div className="space-y-3 text-sm">
+              {[["Wavefunction cutoff", `${reference.ecutwfc} Ry`], ["Density cutoff", `${reference.ecutrho} Ry`], ["Cubic cell", `${reference.cellAngstrom} Å`], ["Sampling", "Γ point"]].map(([label, value]) => <div key={label} className="flex justify-between gap-3 border-b border-[var(--border)] pb-2"><span className="text-[var(--text-tertiary)]">{label}</span><span className="font-mono text-[var(--text-primary)]">{value}</span></div>)}
             </div>
-            <div className="flex gap-2 mt-5"><button onClick={runScf} title={executionMode === "real" && missingPseudos.length ? `Missing .UPF files for ${missingPseudos.join(", ")}` : ""} disabled={status === "running" || (executionMode === "real" && (!selectedExecutable || missingPseudos.length > 0 || pseudoScan.loading))} className="flex-1 flex items-center justify-center gap-2 rounded-lg bg-[var(--accent)] text-[var(--text-on-accent)] py-2 text-sm font-semibold disabled:opacity-60"><Play size={15}/>{status === "running" ? "Running pw.x…" : executionMode === "real" ? "Run real SCF" : "Run SCF"}</button>{status === "running" && executionMode === "real" && <button onClick={cancelJob} title="Cancel pw.x" className="p-2 rounded-lg border border-[var(--danger-border)] text-[var(--danger)]"><Square size={15}/></button>}<button onClick={reset} aria-label="Reset settings" className="p-2 rounded-lg border border-[var(--border)] text-[var(--text-tertiary)] hover:text-[var(--text-primary)]"><RotateCcw size={16}/></button></div>
+            <div className="mt-5 rounded-xl border border-[var(--success-border)] bg-[var(--accent-glow)] p-3 text-xs"><div className="flex gap-2 items-start"><CheckCircle2 size={16} className="text-[var(--success)] shrink-0"/><div><strong className="text-[var(--text-primary)]">Inputs prepared</strong><p className="text-[var(--text-tertiary)] mt-1">The demonstration loads the stored output instead of executing Quantum ESPRESSO in the browser.</p></div></div></div>
+            <div className="flex gap-2 mt-5"><button onClick={runScf} className="flex-1 flex items-center justify-center gap-2 rounded-lg bg-[var(--accent)] text-[var(--text-on-accent)] py-2 text-sm font-semibold"><Play size={15}/>{finished ? "Run again" : "Run calculation"}</button><button onClick={reset} aria-label="Reset demonstration" className="p-2 rounded-lg border border-[var(--border)] text-[var(--text-tertiary)] hover:text-[var(--text-primary)]"><RotateCcw size={16}/></button></div>
           </section>
 
           <section className="lg:col-span-2 bg-[var(--bg-surface)] border border-[var(--border)] rounded-2xl p-5">
-            <div className="flex items-center justify-between mb-3"><div className="flex items-center gap-2"><Terminal size={17} className="text-[var(--accent)]"/><h2 className="font-semibold">2. pw.x input</h2></div><button onClick={copyInput} className="flex items-center gap-1.5 text-xs text-[var(--text-tertiary)] hover:text-[var(--accent)]"><Copy size={13}/>{copied ? "Copied" : "Copy"}</button></div>
-            <pre className="h-[330px] overflow-auto rounded-xl bg-[var(--bg-canvas)] border border-[var(--border)] p-4 text-[11px] leading-relaxed text-[var(--text-secondary)] font-mono whitespace-pre">{input}</pre>
-            {executionMode === "real" && <><div className="flex items-center justify-between mt-4 mb-2"><h3 className="text-xs font-semibold text-[var(--text-secondary)]">Live pw.x output</h3><span className="font-mono text-[10px] text-[var(--text-quaternary)]">{realOutput.length.toLocaleString()} chars</span></div><pre className="h-[210px] overflow-auto rounded-xl bg-black border border-[var(--border)] p-4 text-[11px] leading-relaxed text-emerald-300 font-mono whitespace-pre-wrap">{realOutput || "Output will appear here after execution, or import an existing .out file."}</pre></>}
+            <div className="flex flex-wrap items-center justify-between gap-3 mb-3"><div className="flex items-center gap-2"><Terminal size={17} className="text-[var(--accent)]"/><h2 className="font-semibold">2. Quantum ESPRESSO inputs</h2></div><div className="flex items-center gap-3"><button onClick={() => downloadText(`${system.prefix}.${inputTab}.in`, displayedInput)} className="flex items-center gap-1.5 text-xs text-[var(--text-tertiary)] hover:text-[var(--accent)]"><Download size={13}/>Download</button><button onClick={copyInput} className="flex items-center gap-1.5 text-xs text-[var(--text-tertiary)] hover:text-[var(--accent)]"><Copy size={13}/>{copied ? "Copied" : "Copy"}</button></div></div>
+            <div className="flex items-center gap-1 mb-3 p-1 rounded-lg bg-[var(--bg-surface-2)] border border-[var(--border)] w-fit" role="tablist" aria-label="Quantum ESPRESSO input files">
+              <button role="tab" aria-selected={inputTab === "scf"} onClick={() => { setInputTab("scf"); setCopied(false); }} className={`px-3 py-1.5 rounded-md text-xs font-medium ${inputTab === "scf" ? "bg-[var(--accent)] text-[var(--text-on-accent)]" : "text-[var(--text-tertiary)]"}`}>SCF · pw.x</button>
+              <button role="tab" aria-selected={inputTab === "dos"} onClick={() => { setInputTab("dos"); setCopied(false); }} className={`px-3 py-1.5 rounded-md text-xs font-medium ${inputTab === "dos" ? "bg-[var(--accent)] text-[var(--text-on-accent)]" : "text-[var(--text-tertiary)]"}`}>DOS · dos.x</button>
+            </div>
+            <pre className="h-[330px] overflow-auto rounded-xl bg-[var(--bg-canvas)] border border-[var(--border)] p-4 text-[11px] leading-relaxed text-[var(--text-secondary)] font-mono whitespace-pre">{displayedInput}</pre>
+            <p className="mt-2 text-[10px] text-[var(--text-quaternary)]">{inputTab === "scf" ? "Run with: pw.x -in scf.in" : "Run after SCF with: dos.x -in dos.in. It reads the saved charge density and eigenvalues from ./tmp."}</p>
           </section>
         </div>
 
         <div className="grid lg:grid-cols-3 gap-5 mt-5">
           <section className="lg:col-span-2 bg-[var(--bg-surface)] border border-[var(--border)] rounded-2xl p-5">
-            <h2 className="font-semibold mb-1">3. Frontier orbital analysis</h2>
-            <p className="text-xs text-[var(--text-tertiary)] mb-4">The isosurfaces show orbital amplitude and phase; the ladder places the same frontier states in the calculated energy spectrum.</p>
-            {!finished ? <div className="h-[420px] flex flex-col items-center justify-center text-center text-[var(--text-quaternary)]"><Atom size={38} className={status === "running" ? "animate-spin text-[var(--accent)]" : "mb-3"}/><p className="text-sm mt-3">{status === "running" ? "Diagonalizing the Kohn–Sham Hamiltonian…" : status === "failed" ? "No complete HOMO/LUMO pair could be parsed. Inspect the output console." : "Run the SCF calculation or import output to reveal orbital shapes and energies."}</p></div> : <div className="space-y-4"><div className="grid md:grid-cols-2 gap-4"><OrbitalView system={system} kind="homo"/><OrbitalView system={system} kind="lumo"/></div><div className="rounded-xl bg-[var(--bg-canvas)] border border-[var(--border)]"><div className="px-3 py-2 border-b border-[var(--border)] text-xs font-semibold text-[var(--text-secondary)]">Kohn–Sham energy ladder · {resultSource === "simulation" ? "simulated" : resultSource === "import" ? "parsed from imported output" : "parsed from pw.x"}</div><EnergyDiagram homo={displayHomo} lumo={displayLumo} electronPairs={(parsedResult?.electrons || system.electrons) / 2}/></div><p className="text-[10px] text-[var(--text-quaternary)] leading-relaxed">Orbital isosurfaces remain qualitative, symmetry-inspired teaching graphics even in real execution mode. The energies are parsed from the real output; quantitative surfaces require a subsequent <code className="text-[var(--accent-soft)]">pp.x</code> volumetric export.</p></div>}
+            <div className="flex flex-wrap items-start justify-between gap-3 mb-4"><div><h2 className="font-semibold mb-1">3. Electronic structure analysis</h2><p className="text-xs text-[var(--text-tertiary)]">Compare frontier levels with the complete broadened density of states.</p></div><div className="flex items-center gap-1 p-1 rounded-lg bg-[var(--bg-surface-2)] border border-[var(--border)]" role="tablist" aria-label="Electronic structure analysis"><button role="tab" aria-selected={analysisTab === "frontier"} onClick={() => setAnalysisTab("frontier")} className={`px-3 py-1.5 rounded-md text-xs font-medium ${analysisTab === "frontier" ? "bg-[var(--accent)] text-[var(--text-on-accent)]" : "text-[var(--text-tertiary)]"}`}>HOMO–LUMO</button><button role="tab" aria-selected={analysisTab === "dos"} onClick={() => setAnalysisTab("dos")} className={`px-3 py-1.5 rounded-md text-xs font-medium ${analysisTab === "dos" ? "bg-[var(--accent)] text-[var(--text-on-accent)]" : "text-[var(--text-tertiary)]"}`}>Density of states</button></div></div>
+            {!finished ? <div className="h-[420px] flex flex-col items-center justify-center text-center text-[var(--text-quaternary)]"><Atom size={38} className="mb-3"/><p className="text-sm mt-3">Click Run calculation to reveal the stored HOMO–LUMO and DOS data.</p></div> : analysisTab === "dos" ? <DosChart reference={reference} system={system}/> : <div className="space-y-4"><div className="grid md:grid-cols-2 gap-4"><OrbitalView system={system} kind="homo"/><OrbitalView system={system} kind="lumo"/></div><div className="rounded-xl bg-[var(--bg-canvas)] border border-[var(--border)]"><div className="px-3 py-2 border-b border-[var(--border)] text-xs font-semibold text-[var(--text-secondary)]">Kohn–Sham energy ladder · stored pw.x eigenvalues</div><EnergyDiagram homo={reference.homo} lumo={reference.lumo} electronPairs={system.electrons / 2} levels={reference.levels}/></div><p className="text-[10px] text-[var(--text-quaternary)] leading-relaxed">Orbital isosurfaces remain qualitative, symmetry-inspired teaching graphics. Quantitative surfaces require a subsequent <code className="text-[var(--accent-soft)]">pp.x</code> volumetric export.</p></div>}
           </section>
           <section className="bg-[var(--bg-surface)] border border-[var(--border)] rounded-2xl p-5">
             <h2 className="font-semibold mb-4">Results</h2>
             <div className="space-y-3">
-              {[['HOMO', finished ? `${displayHomo.toFixed(3)} eV` : '—'], ['LUMO', finished ? `${displayLumo.toFixed(3)} eV` : '—'], ['Gap, Eₗ − Eₕ', finished ? `${(displayLumo-displayHomo).toFixed(3)} eV` : '—'], ['SCF cycles', finished ? (resultSource === "simulation" ? (converged ? '8' : '15') : parsedResult?.scfIterations ?? 'not reported') : '—'], ['Total energy', finished && parsedResult?.totalEnergyRy != null ? `${parsedResult.totalEnergyRy.toFixed(6)} Ry` : '—']].map(([a,b]) => <div key={a} className="flex justify-between gap-4 border-b border-[var(--border)] pb-2 text-sm"><span className="text-[var(--text-tertiary)]">{a}</span><span className="font-mono text-[var(--text-primary)]">{b}</span></div>)}
+              {[["HOMO", finished ? `${reference.homo.toFixed(4)} eV` : "—"], ["LUMO", finished ? `${reference.lumo.toFixed(4)} eV` : "—"], ["Gap, Eₗ − Eₕ", finished ? `${reference.gap.toFixed(4)} eV` : "—"], ["SCF cycles", finished ? reference.iterations : "—"], ["Total energy", finished ? `${reference.totalEnergyRy.toFixed(6)} Ry` : "—"]].map(([a,b]) => <div key={a} className="flex justify-between gap-4 border-b border-[var(--border)] pb-2 text-sm"><span className="text-[var(--text-tertiary)]">{a}</span><span className="font-mono text-[var(--text-primary)]">{b}</span></div>)}
             </div>
+            {finished && <div className="mt-5 rounded-xl border border-[var(--border)] bg-[var(--bg-surface-2)] p-3"><div className="text-[10px] uppercase tracking-wider text-[var(--text-quaternary)] mb-2">Calculation record</div><div className="space-y-1 text-[11px] text-[var(--text-tertiary)]"><div>{reference.program}</div><div>{reference.method}</div><div><span className="font-mono">conv_thr = {reference.convThr}</span></div></div><div className="grid grid-cols-2 gap-2 mt-3"><button onClick={() => downloadText(`${system.prefix}_levels.csv`, reference.levelsCsv)} className="flex items-center justify-center gap-1.5 rounded-lg border border-[var(--border)] px-2 py-2 text-[10px] text-[var(--text-secondary)] hover:text-[var(--accent)]"><Download size={12}/>Levels CSV</button><button onClick={() => downloadText(`${system.prefix}_dos.csv`, reference.dosCsv)} className="flex items-center justify-center gap-1.5 rounded-lg border border-[var(--border)] px-2 py-2 text-[10px] text-[var(--text-secondary)] hover:text-[var(--accent)]"><Download size={12}/>DOS CSV</button></div></div>}
             {finished && <div className="mt-5 rounded-xl bg-[var(--warn-soft)] border border-[var(--warn)]/30 p-3 text-xs text-[var(--text-tertiary)]"><strong className="text-[var(--warn)]">Interpret carefully.</strong> This is a PBE Kohn–Sham eigenvalue gap, not the experimental fundamental or optical gap. Semilocal DFT usually underestimates excitation gaps.</div>}
             <div className="mt-5 text-xs text-[var(--text-quaternary)] leading-relaxed">For a closed-shell molecule with fixed occupations, the HOMO is the highest occupied eigenvalue and the LUMO is the next unoccupied state at Γ.</div>
           </section>

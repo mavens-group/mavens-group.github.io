@@ -2,13 +2,15 @@
 
 ## Running the Quantum ESPRESSO lab
 
-The normal development command starts both Vite and the local Quantum ESPRESSO bridge:
+The Quantum ESPRESSO demonstration is fully static and includes precomputed Quantum ESPRESSO 7.5 SCF eigenvalues, DOS curves, and portable input files for all four molecules. Clicking Run loads the matching stored data, so it works in GitLab Pages without `pw.x` or pseudopotentials on the web host.
+
+The normal development command starts the static Vite application:
 
 ```bash
 npm run dev
 ```
 
-To run the services separately, use `npm run qe-server` and `npm run dev:vite` in two terminals.
+The current classroom demonstration does not call the execution bridge. For bridge development, use `npm run dev:full`, or run `npm run qe-server` and `npm run dev:vite` separately.
 
 The bridge listens only on `127.0.0.1:8787`. It discovers executable `pw.x` files on `PATH`; additional trusted executables can be exposed with the platform path separator:
 

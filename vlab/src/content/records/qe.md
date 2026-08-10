@@ -2,27 +2,24 @@
 
 **System:** Benzene (C₆H₆)  
 **Method:** PBE/PAW, plane-wave DFT  
-**Code:** Quantum ESPRESSO `pw.x` (simulated)  
-**Boundary condition:** 18 Å cubic supercell, $\Gamma$ point
+**Code:** Quantum ESPRESSO 7.5 (`pw.x` and `dos.x`)  
+**Boundary condition:** 14 Å cubic supercell, $\Gamma$ point
 
 ## 1. Objective
 
 Determine the converged Kohn–Sham HOMO–LUMO gap of neutral, closed-shell benzene.
 
-## 2. Convergence study
+## 2. Recorded calculation
 
-| $E_\mathrm{cut}^{\mathrm{wfc}}$ (Ry) | Cell (Å) | Gap (eV) | Change (eV) |
-|---:|---:|---:|---:|
-| 30 | 18 | 4.91 | — |
-| 40 | 18 | 4.81 | 0.10 |
-| 50 | 18 | 4.77 | 0.04 |
-| 60 | 18 | 4.76 | 0.01 |
+| $E_\mathrm{cut}^{\mathrm{wfc}}$ (Ry) | Cell (Å) | Gap (eV) |
+|---:|---:|---:|
+| 30 | 14 | 5.1050 |
 
-The wavefunction cutoff was accepted at 50 Ry for a 0.05 eV tolerance. A separate cell-size test gave changes below 0.05 eV from 16 to 18 Å.
+This bundled reference is one completed calculation, not by itself a convergence study. Before using the value quantitatively, repeat the calculation at larger cutoffs and cell sizes and document the change in the gap.
 
 ## 3. SCF settings
 
-`ecutwfc = 50 Ry`, `ecutrho = 400 Ry`, `conv_thr = 1.0d-8`, fixed occupations, 19 bands, and PBE PAW pseudopotentials for C and H.
+`ecutwfc = 30 Ry`, `ecutrho = 240 Ry`, `conv_thr = 1.0d-6`, fixed occupations, 21 bands, and PBE PAW pseudopotentials for C and H. The SCF calculation converged in 8 iterations to a total energy of −117.63020777 Ry.
 
 ## 4. Frontier eigenvalues
 
@@ -30,13 +27,13 @@ The wavefunction cutoff was accepted at 50 Ry for a 0.05 eV tolerance. A separat
 |---|---:|
 | Valence electrons | 30 |
 | Occupied orbital pairs | 15 |
-| HOMO eigenvalue | −6.20 eV |
-| LUMO eigenvalue | −1.43 eV |
-| $\varepsilon_\mathrm{LUMO}-\varepsilon_\mathrm{HOMO}$ | **4.77 eV** |
+| HOMO eigenvalue | −6.0902 eV |
+| LUMO eigenvalue | −0.9852 eV |
+| $\varepsilon_\mathrm{LUMO}-\varepsilon_\mathrm{HOMO}$ | **5.1050 eV** |
 
 ## 5. Conclusion
 
-The converged PBE Kohn–Sham HOMO–LUMO gap is **4.77 eV** at the stated numerical settings. This value must not be presented as an experimental optical gap: it is a ground-state Kohn–Sham eigenvalue difference and is functional-dependent.
+The recorded PBE Kohn–Sham HOMO–LUMO gap is **5.1050 eV** at the stated numerical settings. The `dos.x` result uses 0.02 Ry Gaussian broadening. This value must not be presented as an experimental optical gap: it is a ground-state Kohn–Sham eigenvalue difference and is functional-dependent.
 
 ## 6. Precautions
 
