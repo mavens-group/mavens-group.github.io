@@ -1,0 +1,10 @@
+&DOS
+  prefix = 'ethylene'
+  outdir = './tmp'
+  fildos = 'ethylene.dos'
+  Emin = -23.739
+  Emax = 5.261
+  DeltaE = 0.02
+  degauss = 0.02
+  ngauss = 0
+/

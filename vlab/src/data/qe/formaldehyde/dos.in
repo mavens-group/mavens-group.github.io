@@ -1,0 +1,10 @@
+&DOS
+  prefix = 'formaldehyde'
+  outdir = './tmp'
+  fildos = 'formaldehyde.dos'
+  Emin = -31.926
+  Emax = 5.290
+  DeltaE = 0.02
+  degauss = 0.02
+  ngauss = 0
+/

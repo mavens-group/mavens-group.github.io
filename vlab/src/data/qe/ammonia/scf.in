@@ -1,0 +1,30 @@
+&control
+  calculation = 'scf'
+  prefix = 'ammonia'
+  outdir = './tmp'
+  pseudo_dir = './pseudo'
+  verbosity = 'high'
+/
+&system
+  ibrav = 1
+  celldm(1) = 26.456166
+  nat = 4
+  ntyp = 2
+  ecutwfc = 30.0
+  ecutrho = 240.0
+  occupations = 'fixed'
+  nbnd = 10
+/
+&electrons
+  conv_thr = 1.0d-6
+  mixing_beta = 0.4
+/
+ATOMIC_SPECIES
+  H  1.008  H.pbe-kjpaw_psl.1.0.0.UPF
+  N  14.007  N.pbe-n-kjpaw_psl.1.0.0.UPF
+ATOMIC_POSITIONS angstrom
+  N  7.000000  7.000000  7.116000
+  H  7.000000  7.939000  6.729000
+  H  7.813000  6.531000  6.729000
+  H  6.187000  6.531000  6.729000
+K_POINTS gamma

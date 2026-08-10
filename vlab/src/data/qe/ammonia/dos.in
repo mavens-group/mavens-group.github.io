@@ -1,0 +1,10 @@
+&DOS
+  prefix = 'ammonia'
+  outdir = './tmp'
+  fildos = 'ammonia.dos'
+  Emin = -26.230
+  Emax = 5.458
+  DeltaE = 0.02
+  degauss = 0.02
+  ngauss = 0
+/

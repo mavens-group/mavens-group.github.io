@@ -1,0 +1,10 @@
+&DOS
+  prefix = 'benzene'
+  outdir = './tmp'
+  fildos = 'benzene.dos'
+  Emin = -25.993
+  Emax = 5.140
+  DeltaE = 0.02
+  degauss = 0.02
+  ngauss = 0
+/

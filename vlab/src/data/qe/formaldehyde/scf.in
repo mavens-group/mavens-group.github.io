@@ -1,0 +1,31 @@
+&control
+  calculation = 'scf'
+  prefix = 'formaldehyde'
+  outdir = './tmp'
+  pseudo_dir = './pseudo'
+  verbosity = 'high'
+/
+&system
+  ibrav = 1
+  celldm(1) = 26.456166
+  nat = 4
+  ntyp = 3
+  ecutwfc = 30.0
+  ecutrho = 240.0
+  occupations = 'fixed'
+  nbnd = 12
+/
+&electrons
+  conv_thr = 1.0d-6
+  mixing_beta = 0.4
+/
+ATOMIC_SPECIES
+  C  12.011  C.pbe-n-kjpaw_psl.1.0.0.UPF
+  H  1.008  H.pbe-kjpaw_psl.1.0.0.UPF
+  O  15.999  O.pbe-n-kjpaw_psl.1.0.0.UPF
+ATOMIC_POSITIONS angstrom
+  C  7.000000  7.000000  7.000000
+  O  7.000000  7.000000  8.208000
+  H  7.000000  7.938000  6.412000
+  H  7.000000  6.062000  6.412000
+K_POINTS gamma

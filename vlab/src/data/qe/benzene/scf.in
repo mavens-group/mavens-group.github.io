@@ -1,0 +1,38 @@
+&control
+  calculation = 'scf'
+  prefix = 'benzene'
+  outdir = './tmp'
+  pseudo_dir = './pseudo'
+  verbosity = 'high'
+/
+&system
+  ibrav = 1
+  celldm(1) = 26.456166
+  nat = 12
+  ntyp = 2
+  ecutwfc = 30.0
+  ecutrho = 240.0
+  occupations = 'fixed'
+  nbnd = 21
+/
+&electrons
+  conv_thr = 1.0d-6
+  mixing_beta = 0.4
+/
+ATOMIC_SPECIES
+  C  12.011  C.pbe-n-kjpaw_psl.1.0.0.UPF
+  H  1.008  H.pbe-kjpaw_psl.1.0.0.UPF
+ATOMIC_POSITIONS angstrom
+  C  8.397000  7.000000  7.000000
+  C  7.698500  8.209837  7.000000
+  C  6.301500  8.209837  7.000000
+  C  5.603000  7.000000  7.000000
+  C  6.301500  5.790163  7.000000
+  C  7.698500  5.790163  7.000000
+  H  9.484000  7.000000  7.000000
+  H  8.242000  9.151207  7.000000
+  H  5.758000  9.151207  7.000000
+  H  4.516000  7.000000  7.000000
+  H  5.758000  4.848793  7.000000
+  H  8.242000  4.848793  7.000000
+K_POINTS gamma
