@@ -33,4 +33,5 @@ export const MEDIA_MANIFEST = {
     'uvvis_4.mp4',
   ],
   qe: [],
+  schrodinger: [],
 };

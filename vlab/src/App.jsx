@@ -10,6 +10,7 @@ import PXRDLab from './components/PXRD';
 import FTIRLab from './components/FTIR';
 import UVVisLab from './components/UVVIS'; // <-- CASE MUST MATCH the actual filename exactly
 import QuantumEspressoLab from './components/QuantumEspresso';
+import SchrodingerLab from './components/Schrodinger';
 
 // 2. Import each lab's documentation + sample record book (?raw loads the
 //    markdown file's text content at build time via Vite)
@@ -21,6 +22,8 @@ import uvvisDocs from './content/docs/uvvis.md?raw';
 import uvvisRecord from './content/records/uvvis.md?raw';
 import qeDocs from './content/docs/qe.md?raw';
 import qeRecord from './content/records/qe.md?raw';
+import schrodingerDocs from './content/docs/schrodinger.md?raw';
+import schrodingerRecord from './content/records/schrodinger.md?raw';
 import { MEDIA_MANIFEST } from './content/media';
 
 // 3. Register all available apps in this array
@@ -65,6 +68,16 @@ const APPS = [
     docs: qeDocs,
     record: qeRecord,
     media: MEDIA_MANIFEST.qe,
+  },
+  {
+    id: 'schrodinger',
+    name: 'Schrödinger Equation Lab',
+    description: 'Numerov Solutions for a Potential Well & 1D Harmonic Oscillator',
+    component: SchrodingerLab,
+    category: 'Quantum Mechanics',
+    docs: schrodingerDocs,
+    record: schrodingerRecord,
+    media: MEDIA_MANIFEST.schrodinger,
   },
 ];
 
