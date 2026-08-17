@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import {
   CartesianGrid,
   Legend,
@@ -18,6 +18,10 @@ import {
   Grid3X3,
   RotateCcw,
   Sigma,
+  Pause,
+  Play,
+  StepForward,
+  Target,
   Waves,
 } from "lucide-react";
 import { solveHarmonicOscillator, solveInfiniteWell } from "../utils/numerov";
@@ -62,6 +66,198 @@ function makePotentialPlot(problem, solution, width, omega) {
     potential: point.potential,
     shiftedPsi: solution.energy + point.psi * omega * 0.38,
   }));
+}
+
+// This deliberately uses a modest grid. It is a separate, visible Numerov
+// experiment: students can inspect every value, rather than watching the
+// production solver silently generate a finished eigenfunction.
+function makeTeachingGrid(intervals = 80) {
+  return Array.from({ length: intervals + 1 }, (_, index) => index / intervals);
+}
+
+function teachingNumerovStep(x, psi, index, energy) {
+  const h = x[1] - x[0];
+  const k = -2 * energy; // V(x) = 0 in the interior of the infinite well.
+  const h2 = h * h;
+  const a = 2 * (1 + (5 * h2 * k) / 12);
+  const b = 1 - (h2 * k) / 12;
+  const c = b;
+  const numerator = a * psi[index] - b * psi[index - 1];
+  return { next: numerator / c, a, b, c, numerator, k, h };
+}
+
+function propagateTeachingTrial(energy, x) {
+  const h = x[1] - x[0];
+  const psi = new Array(x.length).fill(0);
+  psi[0] = 0;
+  psi[1] = h;
+  for (let index = 1; index < x.length - 1; index += 1) {
+    psi[index + 1] = teachingNumerovStep(x, psi, index, energy).next;
+  }
+  return psi;
+}
+
+function normalizeTeachingWavefunction(x, psi) {
+  const h = x[1] - x[0];
+  let integral = 0;
+  for (let index = 0; index < psi.length - 1; index += 1) {
+    integral += 0.5 * h * (psi[index] ** 2 + psi[index + 1] ** 2);
+  }
+  return integral > 0 ? psi.map((value) => value / Math.sqrt(integral)) : psi;
+}
+
+function teachingEigenvalueForState(targetState, x) {
+  const residual = (trialEnergy) => propagateTeachingTrial(trialEnergy, x).at(-1);
+  const low = 0.1;
+  const high = 80;
+  const increment = 0.08;
+  const brackets = [];
+  let left = low;
+  let leftResidual = residual(left);
+  for (let right = low + increment; right <= high; right += increment) {
+    const rightResidual = residual(right);
+    if (leftResidual * rightResidual < 0) brackets.push([left, right]);
+    left = right;
+    leftResidual = rightResidual;
+  }
+  if (!brackets.length) return null;
+  let [a, b] = brackets.reduce((best, bracket) => (
+    Math.abs((bracket[0] + bracket[1]) / 2 - ((targetState ** 2 * Math.PI ** 2) / 2)) < Math.abs((best[0] + best[1]) / 2 - ((targetState ** 2 * Math.PI ** 2) / 2))
+      ? bracket
+      : best
+  ));
+  let fa = residual(a);
+  for (let iteration = 0; iteration < 60; iteration += 1) {
+    const middle = (a + b) / 2;
+    const fm = residual(middle);
+    if (fa * fm <= 0) b = middle;
+    else { a = middle; fa = fm; }
+  }
+  return (a + b) / 2;
+}
+
+function NumerovWalkthrough() {
+  const [intervals, setIntervals] = useState(80);
+  const [targetState, setTargetState] = useState(1);
+  const x = useMemo(() => makeTeachingGrid(intervals), [intervals]);
+  const h = x[1] - x[0];
+  const [energy, setEnergy] = useState((Math.PI ** 2) / 2);
+  const [psi, setPsi] = useState(() => {
+    const initial = new Array(x.length).fill(0);
+    initial[1] = h;
+    return initial;
+  });
+  const [index, setIndex] = useState(1);
+  const [stepInfo, setStepInfo] = useState(null);
+  const [running, setRunning] = useState(false);
+  const timer = useRef(null);
+
+  const reset = useCallback(() => {
+    setRunning(false);
+    const initial = new Array(x.length).fill(0);
+    initial[1] = h;
+    setPsi(initial);
+    setIndex(1);
+    setStepInfo(null);
+  }, [h, x.length]);
+
+  useEffect(() => { reset(); }, [energy, reset]); // A different E is a new shooting experiment.
+
+  const step = useCallback(() => {
+    if (index >= x.length - 1) { setRunning(false); return; }
+    const info = teachingNumerovStep(x, psi, index, energy);
+    setPsi((oldPsi) => {
+      const nextPsi = [...oldPsi];
+      nextPsi[index + 1] = info.next;
+      return nextPsi;
+    });
+    setStepInfo({ ...info, index, previous: psi[index - 1], current: psi[index], nextX: x[index + 1] });
+    setIndex((oldIndex) => oldIndex + 1);
+  }, [energy, index, psi, x]);
+
+  useEffect(() => {
+    if (!running) return undefined;
+    timer.current = window.setInterval(step, 75);
+    return () => window.clearInterval(timer.current);
+  }, [running, step]);
+
+  const complete = () => {
+    setPsi(propagateTeachingTrial(energy, x));
+    setIndex(x.length - 1);
+    setRunning(false);
+  };
+  const mismatch = index === x.length - 1 ? psi.at(-1) : null;
+  const exactEnergy = (targetState ** 2 * Math.PI ** 2) / 2;
+  const displayedPsi = index === x.length - 1 ? normalizeTeachingWavefunction(x, psi) : psi;
+  const plotData = x.map((position, pointIndex) => ({
+    x: position,
+    propagated: pointIndex <= index ? displayedPsi[pointIndex] : null,
+    exact: index === x.length - 1 ? Math.sqrt(2) * Math.sin(targetState * Math.PI * position) : null,
+  }));
+
+  return (
+    <section className="bg-[var(--bg-surface)] border border-[var(--border)] rounded-2xl p-4 mt-4">
+      <div className="flex flex-wrap items-start justify-between gap-3 mb-4">
+        <div>
+          <div className="flex items-center gap-2 text-sm font-medium text-[var(--text-secondary)]"><StepForward size={15} className="text-[var(--warn)]" /> Numerov, one grid point at a time</div>
+          <p className="text-xs text-[var(--text-quaternary)] mt-1 max-w-2xl">A small infinite well from x₀ = 0 to x_N = L = 1. Start with ψ₀ = 0 and ψ₁ = h, then make each yellow point from the two preceding points.</p>
+        </div>
+        <span className="font-data text-[10px] text-[var(--warn)]">TEACHING MODE</span>
+      </div>
+
+      <div className="grid grid-cols-1 xl:grid-cols-[minmax(0,1fr)_310px] gap-4">
+        <div>
+          <ResponsiveContainer width="100%" height={270}>
+            <LineChart data={plotData} margin={{ top: 10, right: 12, bottom: 18, left: 0 }}>
+              <CartesianGrid stroke="var(--border)" vertical={false} />
+              <XAxis dataKey="x" type="number" domain={[0, 1]} tickCount={5} stroke="var(--text-muted)" tick={{ fill: "var(--text-quaternary)", fontSize: 10 }} label={{ value: "x / L", position: "insideBottom", offset: -10, fill: "var(--text-quaternary)", fontSize: 11 }} />
+              <YAxis stroke="var(--text-muted)" tick={{ fill: "var(--text-quaternary)", fontSize: 10 }} />
+              <ReferenceLine y={0} stroke="var(--text-muted)" />
+              <ReferenceLine x={x[index]} stroke="var(--warn)" strokeDasharray="4 3" />
+              <Line name={index === x.length - 1 ? "Normalized Numerov ψ" : "Numerov points"} dataKey="propagated" type="linear" stroke="var(--accent)" strokeWidth={2.2} dot={{ r: 2, fill: "var(--accent)" }} isAnimationActive={false} connectNulls={false} />
+              {index === x.length - 1 && <Line name="Exact ψₙ" dataKey="exact" type="monotone" stroke="var(--text-quaternary)" strokeWidth={1.5} strokeDasharray="5 4" dot={false} isAnimationActive={false} />}
+            </LineChart>
+          </ResponsiveContainer>
+          <div className="flex flex-wrap gap-2 mt-3">
+            <button onClick={step} disabled={index >= x.length - 1} className="flex items-center gap-1.5 rounded-lg bg-[var(--accent)] px-3 py-2 text-xs font-medium text-[var(--text-on-accent)] disabled:opacity-40"><StepForward size={14} /> Step</button>
+            <button onClick={() => setRunning((value) => !value)} disabled={index >= x.length - 1} className="flex items-center gap-1.5 rounded-lg bg-[var(--bg-surface-2)] border border-[var(--border)] px-3 py-2 text-xs text-[var(--text-secondary)] disabled:opacity-40">{running ? <Pause size={14} /> : <Play size={14} />}{running ? "Pause" : "Run"}</button>
+            <button onClick={complete} className="rounded-lg bg-[var(--bg-surface-2)] border border-[var(--border)] px-3 py-2 text-xs text-[var(--text-secondary)]">Finish propagation</button>
+            <button onClick={reset} className="rounded-lg px-3 py-2 text-xs text-[var(--text-quaternary)] hover:text-[var(--text-primary)]">Reset</button>
+          </div>
+        </div>
+
+        <div className="rounded-xl bg-[var(--bg-surface-2)] border border-[var(--border)] p-3">
+          <label className="flex justify-between text-xs text-[var(--text-tertiary)] mb-2">Trial energy E <span className="font-data text-[var(--accent-soft)]">{energy.toFixed(4)}</span></label>
+          <input type="range" min={0.5} max={80} step={0.05} value={energy} onChange={(event) => setEnergy(Number(event.target.value))} className="w-full" />
+          <label className="flex justify-between text-xs text-[var(--text-tertiary)] mb-2 mt-4">Grid divisions <span className="font-data text-[var(--accent-soft)]">{intervals}</span></label>
+          <input type="range" min={20} max={200} step={10} value={intervals} onChange={(event) => setIntervals(Number(event.target.value))} className="w-full" />
+          <div className="mt-4">
+            <div className="flex justify-between text-xs text-[var(--text-tertiary)] mb-2"><span>Target quantum number n</span><span className="font-data text-[var(--accent-soft)]">n = {targetState}</span></div>
+            <div className="grid grid-cols-4 gap-1.5">
+              {[1, 2, 3, 4].map((state) => <button key={state} onClick={() => { setTargetState(state); setEnergy((state ** 2 * Math.PI ** 2) / 2); }} className={`rounded-md py-1.5 font-data text-xs ${targetState === state ? "bg-[var(--accent)] text-[var(--text-on-accent)]" : "bg-[var(--bg-surface)] border border-[var(--border)] text-[var(--text-tertiary)]"}`}>{state}</button>)}
+            </div>
+          </div>
+          <div className="mt-4 space-y-2 font-data text-[11px]">
+            <div className="flex justify-between"><span className="text-[var(--text-quaternary)]">grid relation</span><span>x₁ − x₀ = h</span></div>
+            <div className="flex justify-between"><span className="text-[var(--text-quaternary)]">spacing h</span><span>{h.toFixed(5)}</span></div>
+            <div className="flex justify-between"><span className="text-[var(--text-quaternary)]">active point</span><span>i = {index} / {x.length - 1}</span></div>
+            <div className="flex justify-between"><span className="text-[var(--text-quaternary)]">xᵢ</span><span>{x[index].toFixed(5)}</span></div>
+            <div className="flex justify-between"><span className="text-[var(--text-quaternary)]">kᵢ = 2(V − E)</span><span>{(-2 * energy).toFixed(5)}</span></div>
+            <div className="pt-2 border-t border-[var(--border)] flex justify-between"><span className="text-[var(--text-quaternary)]">target exact Eₙ</span><span>{exactEnergy.toFixed(5)}</span></div>
+          </div>
+          <button onClick={() => { const root = teachingEigenvalueForState(targetState, x); if (root !== null) setEnergy(root); }} className="w-full mt-4 flex justify-center items-center gap-1.5 rounded-lg border border-[var(--accent)]/40 px-3 py-2 text-xs text-[var(--accent-soft)]"><Target size={14} /> Find E for target n</button>
+          {mismatch !== null && <div className={`mt-3 rounded-lg p-2 font-data text-[11px] ${Math.abs(mismatch) < 1e-5 ? "bg-[var(--success)]/10 text-[var(--success)]" : "bg-[var(--danger)]/10 text-[var(--danger)]"}`}>ψ(L) = {formatScientific(mismatch)}</div>}
+        </div>
+      </div>
+
+      <div className="mt-4 grid grid-cols-1 lg:grid-cols-[0.75fr_1.25fr] gap-3 text-xs">
+        <div className="rounded-xl border border-[var(--border)] p-3 text-[var(--text-tertiary)] leading-relaxed"><span className="font-data text-[var(--accent)]">Grid map</span><br />x₀ = 0 → x₁ = h → x₂ = 2h → … → xᵢ = {index}h = {x[index].toFixed(5)} → x₍{intervals}₎ = L. The recurrence can only begin once ψ₀ and ψ₁ are supplied.</div>
+        <div className="rounded-xl border border-[var(--border)] p-3 font-data leading-relaxed overflow-x-auto">
+          {stepInfo ? <><span className="text-[var(--text-quaternary)]">At i = {stepInfo.index}: ψᵢ₊₁ = [Aψᵢ − Bψᵢ₋₁] / C</span><br />A = {formatScientific(stepInfo.a)}, B = {formatScientific(stepInfo.b)}, C = {formatScientific(stepInfo.c)}<br />[{formatScientific(stepInfo.a)} × {formatScientific(stepInfo.current)} − {formatScientific(stepInfo.b)} × {formatScientific(stepInfo.previous)}] / {formatScientific(stepInfo.c)}<br /><span className="text-[var(--warn)]">ψ{stepInfo.index + 1} = {formatScientific(stepInfo.next)}</span></> : <span className="text-[var(--text-quaternary)]">Press Step: the first calculation uses x₀, x₁ and produces ψ₂.</span>}
+        </div>
+      </div>
+    </section>
+  );
 }
 
 function ScientificTooltip({ active, payload, label, potentialView, scaledEnergy }) {
@@ -176,7 +372,9 @@ export default function SchrodingerLab() {
           </button>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
+        {problem === "well" && <NumerovWalkthrough />}
+
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 mt-4">
           <div className="lg:col-span-2 space-y-4">
             <div className="bg-[var(--bg-surface)] border border-[var(--border)] rounded-2xl p-4">
               <div className="flex flex-wrap items-center justify-between gap-3 mb-4">
