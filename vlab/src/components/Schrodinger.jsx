@@ -338,12 +338,18 @@ export default function SchrodingerLab() {
             </div>
 
             <div className="bg-[var(--bg-surface)] border border-[var(--border)] rounded-2xl p-4">
-              <div className="text-sm font-medium text-[var(--text-secondary)] mb-3">Numerov workflow</div>
+              <div className="text-sm font-medium text-[var(--text-secondary)] mb-1">Numerov algorithm</div>
+              <p className="text-[10px] text-[var(--text-muted)] mb-3">
+                Input: V(x), state n, domain, grid and energy bracket → Output: Eₙ and normalized ψₙ(x)
+              </p>
               <ol className="space-y-2 text-xs text-[var(--text-tertiary)]">
-                <li><span className="font-data text-[var(--accent)] mr-2">01</span>Discretize x and evaluate q(x) = 2[V(x) − E].</li>
-                <li><span className="font-data text-[var(--accent)] mr-2">02</span>Propagate ψ with the sixth-order Numerov recurrence.</li>
-                <li><span className="font-data text-[var(--accent)] mr-2">03</span>Bisect E until the far-boundary residual changes to zero.</li>
-                <li><span className="font-data text-[var(--accent)] mr-2">04</span>Normalize ψ and verify its node count.</li>
+                <li><span className="font-data text-[var(--accent)] mr-2">01</span>Build the uniform grid xᵢ and set h = xᵢ₊₁ − xᵢ.</li>
+                <li><span className="font-data text-[var(--accent)] mr-2">02</span>For a trial E, evaluate qᵢ = 2[V(xᵢ) − E].</li>
+                <li><span className="font-data text-[var(--accent)] mr-2">03</span>Set ψ₀, ψ₁ from {problem === "well" ? "the left-wall Taylor series" : `the ${quantumNumber % 2 === 0 ? "even" : "odd"}-parity origin series`}.</li>
+                <li><span className="font-data text-[var(--accent)] mr-2">04</span>Propagate ψᵢ₊₁ with the Numerov recurrence to the far boundary.</li>
+                <li><span className="font-data text-[var(--accent)] mr-2">05</span>Scan E for adjacent residuals R(E) with opposite signs.</li>
+                <li><span className="font-data text-[var(--accent)] mr-2">06</span>Bisect that bracket until ΔE &lt; 10⁻¹⁴, then propagate again.</li>
+                <li><span className="font-data text-[var(--accent)] mr-2">07</span>{problem === "well" ? "Retain the full-domain solution" : "Reflect the half-domain solution with the required parity"}, normalize by the trapezoidal rule, and verify nodes and residual.</li>
               </ol>
               <div className="mt-3 pt-3 border-t border-[var(--border)] font-data text-[10px] text-[var(--text-muted)]">
                 {solution.method}

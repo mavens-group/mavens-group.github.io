@@ -145,49 +145,150 @@ The second starting value is obtained from a Taylor expansion consistent with th
 
 ---
 
-## 3. Complete eigenvalue-shooting algorithm
+## 3. Complete Numerov eigenvalue algorithm
 
-For a chosen state and potential, the browser performs the following calculation:
+### 3.1 Inputs and outputs
 
-1. Construct a uniform spatial grid and evaluate $V_i=V(x_i)$.
-2. Choose a trial energy $E$ and calculate $q_i=2(V_i-E)$.
-3. Apply the physical boundary condition to obtain $\psi_0$ and $\psi_1$.
-4. Propagate the recurrence across the grid.
-5. Define the far-boundary residual
+**Inputs:** potential $V(x)$; requested state index $n$; spatial interval $[x_0,x_N]$; number of intervals $N$; energy search interval $[E_{\min},E_{\max}]$; and the boundary or parity condition.
 
-   $$
-   R(E)=\psi(x_{\mathrm{far}};E).
-   $$
+**Outputs:** numerical eigenvalue $E_n$; normalized grid values $\{\psi_i\}_{i=0}^{N}$; boundary residual; and interior-node count.
 
-6. Scan the energy interval for two energies $E_a$ and $E_b$ satisfying
+The calculation has three nested parts: `SHOOT(E)` propagates one trial wavefunction, the energy search repeatedly calls `SHOOT(E)` to locate a zero of its boundary residual, and post-processing constructs and normalizes the final state.
 
-   $$
-   R(E_a)R(E_b)<0.
-   $$
+### 3.2 Trial-energy propagation: `SHOOT(E)`
 
-   This sign change brackets one zero of the residual.
-7. Bisect the bracket:
+For each trial energy, carry out the following steps:
 
-   $$
-   E_c=\frac{E_a+E_b}{2}.
-   $$
+1. Construct the uniform grid
 
-   Replace the endpoint having the same residual sign as $E_c$, then repeat. The implementation stops after at most 90 iterations or when the energy bracket is narrower than $10^{-14}$.
-8. Propagate once more using the converged energy.
-9. Normalize the wavefunction numerically with the trapezoidal rule:
+   $$x_i=x_0+ih,\qquad h=\frac{x_N-x_0}{N}.$$
+
+2. Evaluate
+
+   $$V_i=V(x_i),\qquad q_i=2(V_i-E)$$
+
+   at every grid point.
+3. Set $\psi_0$ and $\psi_1$ from the appropriate starting series:
+   - left-wall Dirichlet series for the infinite well;
+   - even-parity origin series for even oscillator states; or
+   - odd-parity origin series for odd oscillator states.
+4. For $i=1,2,\ldots,N-1$, propagate
 
    $$
-   I
-   \approx
-   \sum_{i=1}^{N}
-   \frac{h}{2}\left(\psi_{i-1}^2+\psi_i^2\right),
-   \qquad
-   \psi_i^{(\mathrm{norm})}=\frac{\psi_i}{\sqrt{I}}.
+   \psi_{i+1}
+   =
+   \frac{
+   2\left(1+\frac{5h^2q_i}{12}\right)\psi_i
+   -\left(1-\frac{h^2q_{i-1}}{12}\right)\psi_{i-1}
+   }{
+   1-\frac{h^2q_{i+1}}{12}
+   }.
    $$
 
-10. Verify the state using its parity, interior-node count, far-boundary residual, and comparison with the analytic eigenvalue.
+5. Return the complete trial array and the far-boundary residual
 
-The shooting amplitude is arbitrary, so the raw residual has amplitude-dependent units. Its approach to zero—not its absolute scale—is the eigenvalue condition.
+   $$R(E)=\psi_N.$$
+
+The trial amplitude is arbitrary. Therefore only the zero and sign of $R(E)$ are relevant during the energy search; its raw magnitude depends on the selected starting amplitude.
+
+### 3.3 Bracket an eigenvalue
+
+Divide $[E_{\min},E_{\max}]$ into $M=240$ equal energy subintervals. Evaluate `SHOOT(E)` successively and store every adjacent pair $(E_j,E_{j+1})$ satisfying
+
+$$R(E_j)R(E_{j+1})<0.$$
+
+Each sign change brackets a zero of the shooting residual. The teaching implementation uses the known neighboring analytic levels to define a narrow safe search interval, and if more than one sign change is found, chooses the bracket whose midpoint is nearest the requested state’s reference energy. For a potential with no known spectrum, scan a wider interval in increasing energy and identify states by their node count.
+
+### 3.4 Refine the root by bisection
+
+Let $a$ and $b$ be the selected bracket and let $R_a=R(a)$. Repeat:
+
+1. Set
+
+   $$c=\frac{a+b}{2}$$
+
+   and calculate $R_c=R(c)$ with a complete Numerov propagation.
+2. If $R_aR_c\le0$, the root lies in $[a,c]$, so set $b\leftarrow c$.
+3. Otherwise, the root lies in $[c,b]$, so set $a\leftarrow c$ and $R_a\leftarrow R_c$.
+4. Stop when $b-a<10^{-14}$ or after 90 bisection iterations.
+5. Take
+
+   $$E_n=\frac{a+b}{2}$$
+
+   and call `SHOOT(E_n)` once more to generate the final unnormalized state.
+
+Bisection is used because the residual can vary steeply and even diverge away from an eigenvalue, whereas a valid sign-changing bracket makes bisection robust.
+
+### 3.5 Reconstruct, normalize, and validate
+
+For the well, the propagated array already spans the complete domain. For the oscillator, reflect the positive-half array using the required parity before normalization. Evaluate the norm with the composite trapezoidal rule:
+
+$$
+I
+\approx
+\sum_{i=1}^{N}
+\frac{x_i-x_{i-1}}{2}
+\left(\psi_{i-1}^2+\psi_i^2\right),
+\qquad
+\psi_i^{(\mathrm{norm})}=\frac{\psi_i}{\sqrt{I}}.
+$$
+
+Choose an overall phase convention if desired; multiplying an eigenfunction by $-1$ does not change the physical state. Finally verify:
+
+- $|R(E_n)|$ is small;
+- the wavefunction obeys its wall condition or parity;
+- the well state has $n-1$ interior nodes, or oscillator state $n$ has $n$ nodes; and
+- refining the spatial grid does not materially change $E_n$.
+
+### 3.6 Pseudocode
+
+```text
+NUMEROV_EIGENSTATE(V, state n, domain, N, energy_range, boundary_type)
+    h  ← (x_end - x_start) / N
+    xᵢ ← x_start + i h                         for i = 0 ... N
+
+    function SHOOT(E)
+        qᵢ ← 2 [V(xᵢ) - E]                    for i = 0 ... N
+        (ψ₀, ψ₁) ← START_VALUES(E, h, boundary_type)
+
+        for i ← 1 ... N - 1
+            A ← 1 - h² qᵢ₋₁ / 12
+            B ← 2 (1 + 5 h² qᵢ / 12)
+            C ← 1 - h² qᵢ₊₁ / 12
+            ψᵢ₊₁ ← (B ψᵢ - A ψᵢ₋₁) / C
+        end for
+
+        return (ψ, R = ψ_N)
+    end function
+
+    brackets ← empty list
+    split energy_range into M = 240 adjacent intervals
+    for each adjacent pair (Eⱼ, Eⱼ₊₁)
+        if SHOOT(Eⱼ).R × SHOOT(Eⱼ₊₁).R < 0
+            append (Eⱼ, Eⱼ₊₁) to brackets
+        end if
+    end for
+
+    (a, b) ← bracket corresponding to state n
+    Rₐ ← SHOOT(a).R
+
+    repeat at most 90 times
+        c  ← (a + b) / 2
+        R꜀ ← SHOOT(c).R
+        if Rₐ R꜀ ≤ 0 then b ← c
+        else a ← c; Rₐ ← R꜀
+    until b - a < 10⁻¹⁴
+
+    Eₙ ← (a + b) / 2
+    ψ  ← SHOOT(Eₙ).ψ
+    if half-domain shooting then reflect ψ with parity (-1)ⁿ
+    ψ  ← ψ / sqrt(TRAPEZOIDAL_INTEGRAL(|ψ|²))
+    verify residual, boundary/parity, node count, and grid convergence
+    return (Eₙ, ψ)
+END
+```
+
+This pseudocode separates the differential-equation propagation from the eigenvalue search. That distinction is essential: Numerov computes $\psi(x)$ for a supplied $E$; the shooting-and-bisection loop is what determines the allowed energy.
 
 ---
 

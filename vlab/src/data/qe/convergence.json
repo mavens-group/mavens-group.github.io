@@ -1,0 +1,5169 @@
+{
+  "benzene": {
+    "cutoffSweep": [
+      {
+        "cutoffRy": 20,
+        "cellAngstrom": 14,
+        "totalEnergyRy": -117.17032737,
+        "homo": -6.0711,
+        "lumo": -0.9298,
+        "gap": 5.1413,
+        "electrons": 30,
+        "levels": [
+          {
+            "index": 1,
+            "energy": -21.2526,
+            "occupied": true
+          },
+          {
+            "index": 2,
+            "energy": -18.444,
+            "occupied": true
+          },
+          {
+            "index": 3,
+            "energy": -18.4433,
+            "occupied": true
+          },
+          {
+            "index": 4,
+            "energy": -14.716,
+            "occupied": true
+          },
+          {
+            "index": 5,
+            "energy": -14.7158,
+            "occupied": true
+          },
+          {
+            "index": 6,
+            "energy": -12.6311,
+            "occupied": true
+          },
+          {
+            "index": 7,
+            "energy": -10.9944,
+            "occupied": true
+          },
+          {
+            "index": 8,
+            "energy": -10.6049,
+            "occupied": true
+          },
+          {
+            "index": 9,
+            "energy": -9.92,
+            "occupied": true
+          },
+          {
+            "index": 10,
+            "energy": -9.9149,
+            "occupied": true
+          },
+          {
+            "index": 11,
+            "energy": -8.825,
+            "occupied": true
+          },
+          {
+            "index": 12,
+            "energy": -7.8893,
+            "occupied": true
+          },
+          {
+            "index": 13,
+            "energy": -7.8868,
+            "occupied": true
+          },
+          {
+            "index": 14,
+            "energy": -6.0722,
+            "occupied": true
+          },
+          {
+            "index": 15,
+            "energy": -6.0711,
+            "occupied": true
+          },
+          {
+            "index": 16,
+            "energy": -0.9298,
+            "occupied": false
+          },
+          {
+            "index": 17,
+            "energy": -0.9278,
+            "occupied": false
+          },
+          {
+            "index": 18,
+            "energy": -0.5994,
+            "occupied": false
+          },
+          {
+            "index": 19,
+            "energy": 0.1412,
+            "occupied": false
+          },
+          {
+            "index": 20,
+            "energy": 0.1418,
+            "occupied": false
+          },
+          {
+            "index": 21,
+            "energy": 0.1615,
+            "occupied": false
+          }
+        ],
+        "iterations": 8,
+        "seconds": 24.19,
+        "converged": true,
+        "jobDone": true,
+        "trace": [
+          {
+            "iteration": 1,
+            "energyRy": -117.10615561,
+            "accuracyRy": 1.25510242
+          },
+          {
+            "iteration": 2,
+            "energyRy": -117.16604591,
+            "accuracyRy": 0.16007217
+          },
+          {
+            "iteration": 3,
+            "energyRy": -117.16858917,
+            "accuracyRy": 0.02242068
+          },
+          {
+            "iteration": 4,
+            "energyRy": -117.17013244,
+            "accuracyRy": 0.00071747
+          },
+          {
+            "iteration": 5,
+            "energyRy": -117.17029679,
+            "accuracyRy": 0.00007829
+          },
+          {
+            "iteration": 6,
+            "energyRy": -117.17031666,
+            "accuracyRy": 0.00000703
+          },
+          {
+            "iteration": 7,
+            "energyRy": -117.17032354,
+            "accuracyRy": 0.00000179
+          },
+          {
+            "iteration": 8,
+            "energyRy": -117.17032737,
+            "accuracyRy": 1e-7
+          }
+        ]
+      },
+      {
+        "cutoffRy": 25,
+        "cellAngstrom": 14,
+        "totalEnergyRy": -117.51668318,
+        "homo": -6.0822,
+        "lumo": -0.9715,
+        "gap": 5.1107000000000005,
+        "electrons": 30,
+        "levels": [
+          {
+            "index": 1,
+            "energy": -21.0616,
+            "occupied": true
+          },
+          {
+            "index": 2,
+            "energy": -18.2707,
+            "occupied": true
+          },
+          {
+            "index": 3,
+            "energy": -18.2707,
+            "occupied": true
+          },
+          {
+            "index": 4,
+            "energy": -14.6197,
+            "occupied": true
+          },
+          {
+            "index": 5,
+            "energy": -14.6197,
+            "occupied": true
+          },
+          {
+            "index": 6,
+            "energy": -12.6399,
+            "occupied": true
+          },
+          {
+            "index": 7,
+            "energy": -10.9652,
+            "occupied": true
+          },
+          {
+            "index": 8,
+            "energy": -10.6555,
+            "occupied": true
+          },
+          {
+            "index": 9,
+            "energy": -9.9645,
+            "occupied": true
+          },
+          {
+            "index": 10,
+            "energy": -9.9634,
+            "occupied": true
+          },
+          {
+            "index": 11,
+            "energy": -8.8216,
+            "occupied": true
+          },
+          {
+            "index": 12,
+            "energy": -7.9749,
+            "occupied": true
+          },
+          {
+            "index": 13,
+            "energy": -7.9747,
+            "occupied": true
+          },
+          {
+            "index": 14,
+            "energy": -6.0823,
+            "occupied": true
+          },
+          {
+            "index": 15,
+            "energy": -6.0822,
+            "occupied": true
+          },
+          {
+            "index": 16,
+            "energy": -0.9715,
+            "occupied": false
+          },
+          {
+            "index": 17,
+            "energy": -0.9708,
+            "occupied": false
+          },
+          {
+            "index": 18,
+            "energy": -0.7753,
+            "occupied": false
+          },
+          {
+            "index": 19,
+            "energy": -0.034,
+            "occupied": false
+          },
+          {
+            "index": 20,
+            "energy": -0.0334,
+            "occupied": false
+          },
+          {
+            "index": 21,
+            "energy": -0.0266,
+            "occupied": false
+          }
+        ],
+        "iterations": 7,
+        "seconds": 29.4,
+        "converged": true,
+        "jobDone": true,
+        "trace": [
+          {
+            "iteration": 1,
+            "energyRy": -117.43690001,
+            "accuracyRy": 1.38114985
+          },
+          {
+            "iteration": 2,
+            "energyRy": -117.51181178,
+            "accuracyRy": 0.16549577
+          },
+          {
+            "iteration": 3,
+            "energyRy": -117.51471225,
+            "accuracyRy": 0.02383728
+          },
+          {
+            "iteration": 4,
+            "energyRy": -117.51649419,
+            "accuracyRy": 0.00081651
+          },
+          {
+            "iteration": 5,
+            "energyRy": -117.51665432,
+            "accuracyRy": 0.00013267
+          },
+          {
+            "iteration": 6,
+            "energyRy": -117.51667914,
+            "accuracyRy": 0.00000592
+          },
+          {
+            "iteration": 7,
+            "energyRy": -117.51668318,
+            "accuracyRy": 5.7e-7
+          }
+        ]
+      },
+      {
+        "cutoffRy": 30,
+        "cellAngstrom": 14,
+        "totalEnergyRy": -117.63020776,
+        "homo": -6.0902,
+        "lumo": -0.9852,
+        "gap": 5.105,
+        "electrons": 30,
+        "levels": [
+          {
+            "index": 1,
+            "energy": -20.9933,
+            "occupied": true
+          },
+          {
+            "index": 2,
+            "energy": -18.2113,
+            "occupied": true
+          },
+          {
+            "index": 3,
+            "energy": -18.211,
+            "occupied": true
+          },
+          {
+            "index": 4,
+            "energy": -14.5904,
+            "occupied": true
+          },
+          {
+            "index": 5,
+            "energy": -14.5901,
+            "occupied": true
+          },
+          {
+            "index": 6,
+            "energy": -12.6435,
+            "occupied": true
+          },
+          {
+            "index": 7,
+            "energy": -10.9563,
+            "occupied": true
+          },
+          {
+            "index": 8,
+            "energy": -10.6377,
+            "occupied": true
+          },
+          {
+            "index": 9,
+            "energy": -9.9723,
+            "occupied": true
+          },
+          {
+            "index": 10,
+            "energy": -9.9717,
+            "occupied": true
+          },
+          {
+            "index": 11,
+            "energy": -8.8221,
+            "occupied": true
+          },
+          {
+            "index": 12,
+            "energy": -7.9732,
+            "occupied": true
+          },
+          {
+            "index": 13,
+            "energy": -7.9732,
+            "occupied": true
+          },
+          {
+            "index": 14,
+            "energy": -6.0906,
+            "occupied": true
+          },
+          {
+            "index": 15,
+            "energy": -6.0902,
+            "occupied": true
+          },
+          {
+            "index": 16,
+            "energy": -0.9852,
+            "occupied": false
+          },
+          {
+            "index": 17,
+            "energy": -0.9848,
+            "occupied": false
+          },
+          {
+            "index": 18,
+            "energy": -0.6105,
+            "occupied": false
+          },
+          {
+            "index": 19,
+            "energy": 0.1235,
+            "occupied": false
+          },
+          {
+            "index": 20,
+            "energy": 0.1247,
+            "occupied": false
+          },
+          {
+            "index": 21,
+            "energy": 0.1402,
+            "occupied": false
+          }
+        ],
+        "iterations": 8,
+        "seconds": 43.48,
+        "converged": true,
+        "jobDone": true,
+        "trace": [
+          {
+            "iteration": 1,
+            "energyRy": -117.54691587,
+            "accuracyRy": 1.42444227
+          },
+          {
+            "iteration": 2,
+            "energyRy": -117.62448477,
+            "accuracyRy": 0.16970807
+          },
+          {
+            "iteration": 3,
+            "energyRy": -117.62784492,
+            "accuracyRy": 0.02514401
+          },
+          {
+            "iteration": 4,
+            "energyRy": -117.62995298,
+            "accuracyRy": 0.00102843
+          },
+          {
+            "iteration": 5,
+            "energyRy": -117.63014477,
+            "accuracyRy": 0.00028039
+          },
+          {
+            "iteration": 6,
+            "energyRy": -117.63020649,
+            "accuracyRy": 0.00001009
+          },
+          {
+            "iteration": 7,
+            "energyRy": -117.63020728,
+            "accuracyRy": 0.00000167
+          },
+          {
+            "iteration": 8,
+            "energyRy": -117.63020776,
+            "accuracyRy": 1.5e-7
+          }
+        ]
+      },
+      {
+        "cutoffRy": 40,
+        "cellAngstrom": 14,
+        "totalEnergyRy": -117.68291395,
+        "homo": -6.0962,
+        "lumo": -0.9941,
+        "gap": 5.1021,
+        "electrons": 30,
+        "levels": [
+          {
+            "index": 1,
+            "energy": -20.9664,
+            "occupied": true
+          },
+          {
+            "index": 2,
+            "energy": -18.1879,
+            "occupied": true
+          },
+          {
+            "index": 3,
+            "energy": -18.1878,
+            "occupied": true
+          },
+          {
+            "index": 4,
+            "energy": -14.5781,
+            "occupied": true
+          },
+          {
+            "index": 5,
+            "energy": -14.5781,
+            "occupied": true
+          },
+          {
+            "index": 6,
+            "energy": -12.6441,
+            "occupied": true
+          },
+          {
+            "index": 7,
+            "energy": -10.9533,
+            "occupied": true
+          },
+          {
+            "index": 8,
+            "energy": -10.6428,
+            "occupied": true
+          },
+          {
+            "index": 9,
+            "energy": -9.976,
+            "occupied": true
+          },
+          {
+            "index": 10,
+            "energy": -9.976,
+            "occupied": true
+          },
+          {
+            "index": 11,
+            "energy": -8.8235,
+            "occupied": true
+          },
+          {
+            "index": 12,
+            "energy": -7.9828,
+            "occupied": true
+          },
+          {
+            "index": 13,
+            "energy": -7.9827,
+            "occupied": true
+          },
+          {
+            "index": 14,
+            "energy": -6.0963,
+            "occupied": true
+          },
+          {
+            "index": 15,
+            "energy": -6.0962,
+            "occupied": true
+          },
+          {
+            "index": 16,
+            "energy": -0.9941,
+            "occupied": false
+          },
+          {
+            "index": 17,
+            "energy": -0.9936,
+            "occupied": false
+          },
+          {
+            "index": 18,
+            "energy": -0.4963,
+            "occupied": false
+          },
+          {
+            "index": 19,
+            "energy": 0.2307,
+            "occupied": false
+          },
+          {
+            "index": 20,
+            "energy": 0.2318,
+            "occupied": false
+          },
+          {
+            "index": 21,
+            "energy": 0.2805,
+            "occupied": false
+          }
+        ],
+        "iterations": 8,
+        "seconds": 59.27,
+        "converged": true,
+        "jobDone": true,
+        "trace": [
+          {
+            "iteration": 1,
+            "energyRy": -117.60206599,
+            "accuracyRy": 1.43359838
+          },
+          {
+            "iteration": 2,
+            "energyRy": -117.67534899,
+            "accuracyRy": 0.1739185
+          },
+          {
+            "iteration": 3,
+            "energyRy": -117.68041403,
+            "accuracyRy": 0.0254598
+          },
+          {
+            "iteration": 4,
+            "energyRy": -117.68261309,
+            "accuracyRy": 0.00120412
+          },
+          {
+            "iteration": 5,
+            "energyRy": -117.68283958,
+            "accuracyRy": 0.00035159
+          },
+          {
+            "iteration": 6,
+            "energyRy": -117.68291402,
+            "accuracyRy": 0.00001106
+          },
+          {
+            "iteration": 7,
+            "energyRy": -117.68291362,
+            "accuracyRy": 0.00000337
+          },
+          {
+            "iteration": 8,
+            "energyRy": -117.68291395,
+            "accuracyRy": 1.7e-7
+          }
+        ]
+      },
+      {
+        "cutoffRy": 50,
+        "cellAngstrom": 14,
+        "totalEnergyRy": -117.68735485,
+        "homo": -6.0973,
+        "lumo": -0.9955,
+        "gap": 5.1018,
+        "electrons": 30,
+        "levels": [
+          {
+            "index": 1,
+            "energy": -20.9678,
+            "occupied": true
+          },
+          {
+            "index": 2,
+            "energy": -18.1896,
+            "occupied": true
+          },
+          {
+            "index": 3,
+            "energy": -18.1895,
+            "occupied": true
+          },
+          {
+            "index": 4,
+            "energy": -14.5798,
+            "occupied": true
+          },
+          {
+            "index": 5,
+            "energy": -14.5798,
+            "occupied": true
+          },
+          {
+            "index": 6,
+            "energy": -12.6457,
+            "occupied": true
+          },
+          {
+            "index": 7,
+            "energy": -10.9558,
+            "occupied": true
+          },
+          {
+            "index": 8,
+            "energy": -10.6447,
+            "occupied": true
+          },
+          {
+            "index": 9,
+            "energy": -9.9782,
+            "occupied": true
+          },
+          {
+            "index": 10,
+            "energy": -9.9781,
+            "occupied": true
+          },
+          {
+            "index": 11,
+            "energy": -8.8244,
+            "occupied": true
+          },
+          {
+            "index": 12,
+            "energy": -7.9856,
+            "occupied": true
+          },
+          {
+            "index": 13,
+            "energy": -7.9856,
+            "occupied": true
+          },
+          {
+            "index": 14,
+            "energy": -6.0974,
+            "occupied": true
+          },
+          {
+            "index": 15,
+            "energy": -6.0973,
+            "occupied": true
+          },
+          {
+            "index": 16,
+            "energy": -0.9955,
+            "occupied": false
+          },
+          {
+            "index": 17,
+            "energy": -0.995,
+            "occupied": false
+          },
+          {
+            "index": 18,
+            "energy": -0.4598,
+            "occupied": false
+          },
+          {
+            "index": 19,
+            "energy": 0.2644,
+            "occupied": false
+          },
+          {
+            "index": 20,
+            "energy": 0.2657,
+            "occupied": false
+          },
+          {
+            "index": 21,
+            "energy": 0.3378,
+            "occupied": false
+          }
+        ],
+        "iterations": 8,
+        "seconds": 77.62,
+        "converged": true,
+        "jobDone": true,
+        "trace": [
+          {
+            "iteration": 1,
+            "energyRy": -117.61243957,
+            "accuracyRy": 1.41664503
+          },
+          {
+            "iteration": 2,
+            "energyRy": -117.67695407,
+            "accuracyRy": 0.1784944
+          },
+          {
+            "iteration": 3,
+            "energyRy": -117.68484335,
+            "accuracyRy": 0.02494637
+          },
+          {
+            "iteration": 4,
+            "energyRy": -117.68711698,
+            "accuracyRy": 0.00103964
+          },
+          {
+            "iteration": 5,
+            "energyRy": -117.68732789,
+            "accuracyRy": 0.00016328
+          },
+          {
+            "iteration": 6,
+            "energyRy": -117.68735406,
+            "accuracyRy": 0.00000837
+          },
+          {
+            "iteration": 7,
+            "energyRy": -117.68735431,
+            "accuracyRy": 0.00000678
+          },
+          {
+            "iteration": 8,
+            "energyRy": -117.68735485,
+            "accuracyRy": 3.2e-7
+          }
+        ]
+      }
+    ],
+    "cellSweep": [
+      {
+        "cutoffRy": 30,
+        "cellAngstrom": 10,
+        "totalEnergyRy": -117.63110973,
+        "homo": -5.6891,
+        "lumo": -0.5907,
+        "gap": 5.0984,
+        "electrons": 30,
+        "levels": [
+          {
+            "index": 1,
+            "energy": -20.5917,
+            "occupied": true
+          },
+          {
+            "index": 2,
+            "energy": -17.8106,
+            "occupied": true
+          },
+          {
+            "index": 3,
+            "energy": -17.8106,
+            "occupied": true
+          },
+          {
+            "index": 4,
+            "energy": -14.1914,
+            "occupied": true
+          },
+          {
+            "index": 5,
+            "energy": -14.1914,
+            "occupied": true
+          },
+          {
+            "index": 6,
+            "energy": -12.2455,
+            "occupied": true
+          },
+          {
+            "index": 7,
+            "energy": -10.5592,
+            "occupied": true
+          },
+          {
+            "index": 8,
+            "energy": -10.2391,
+            "occupied": true
+          },
+          {
+            "index": 9,
+            "energy": -9.5728,
+            "occupied": true
+          },
+          {
+            "index": 10,
+            "energy": -9.5723,
+            "occupied": true
+          },
+          {
+            "index": 11,
+            "energy": -8.4188,
+            "occupied": true
+          },
+          {
+            "index": 12,
+            "energy": -7.5772,
+            "occupied": true
+          },
+          {
+            "index": 13,
+            "energy": -7.5736,
+            "occupied": true
+          },
+          {
+            "index": 14,
+            "energy": -5.6898,
+            "occupied": true
+          },
+          {
+            "index": 15,
+            "energy": -5.6891,
+            "occupied": true
+          },
+          {
+            "index": 16,
+            "energy": -0.5907,
+            "occupied": false
+          },
+          {
+            "index": 17,
+            "energy": -0.5788,
+            "occupied": false
+          },
+          {
+            "index": 18,
+            "energy": -0.4741,
+            "occupied": false
+          },
+          {
+            "index": 19,
+            "energy": 0.8332,
+            "occupied": false
+          },
+          {
+            "index": 20,
+            "energy": 1.0095,
+            "occupied": false
+          },
+          {
+            "index": 21,
+            "energy": 1.0366,
+            "occupied": false
+          }
+        ],
+        "iterations": 8,
+        "seconds": 19.33,
+        "converged": true,
+        "jobDone": true,
+        "trace": [
+          {
+            "iteration": 1,
+            "energyRy": -117.54673944,
+            "accuracyRy": 1.42769887
+          },
+          {
+            "iteration": 2,
+            "energyRy": -117.62538402,
+            "accuracyRy": 0.17063736
+          },
+          {
+            "iteration": 3,
+            "energyRy": -117.62905895,
+            "accuracyRy": 0.02435454
+          },
+          {
+            "iteration": 4,
+            "energyRy": -117.6309493,
+            "accuracyRy": 0.00088303
+          },
+          {
+            "iteration": 5,
+            "energyRy": -117.63108765,
+            "accuracyRy": 0.00012159
+          },
+          {
+            "iteration": 6,
+            "energyRy": -117.63110831,
+            "accuracyRy": 0.00000652
+          },
+          {
+            "iteration": 7,
+            "energyRy": -117.6311092,
+            "accuracyRy": 0.000001
+          },
+          {
+            "iteration": 8,
+            "energyRy": -117.63110973,
+            "accuracyRy": 5e-8
+          }
+        ]
+      },
+      {
+        "cutoffRy": 30,
+        "cellAngstrom": 12,
+        "totalEnergyRy": -117.63032696,
+        "homo": -5.9541,
+        "lumo": -0.8506,
+        "gap": 5.1035,
+        "electrons": 30,
+        "levels": [
+          {
+            "index": 1,
+            "energy": -20.8575,
+            "occupied": true
+          },
+          {
+            "index": 2,
+            "energy": -18.0756,
+            "occupied": true
+          },
+          {
+            "index": 3,
+            "energy": -18.0756,
+            "occupied": true
+          },
+          {
+            "index": 4,
+            "energy": -14.4552,
+            "occupied": true
+          },
+          {
+            "index": 5,
+            "energy": -14.455,
+            "occupied": true
+          },
+          {
+            "index": 6,
+            "energy": -12.5091,
+            "occupied": true
+          },
+          {
+            "index": 7,
+            "energy": -10.8216,
+            "occupied": true
+          },
+          {
+            "index": 8,
+            "energy": -10.5029,
+            "occupied": true
+          },
+          {
+            "index": 9,
+            "energy": -9.8372,
+            "occupied": true
+          },
+          {
+            "index": 10,
+            "energy": -9.8371,
+            "occupied": true
+          },
+          {
+            "index": 11,
+            "energy": -8.6857,
+            "occupied": true
+          },
+          {
+            "index": 12,
+            "energy": -7.8388,
+            "occupied": true
+          },
+          {
+            "index": 13,
+            "energy": -7.8385,
+            "occupied": true
+          },
+          {
+            "index": 14,
+            "energy": -5.9544,
+            "occupied": true
+          },
+          {
+            "index": 15,
+            "energy": -5.9541,
+            "occupied": true
+          },
+          {
+            "index": 16,
+            "energy": -0.8506,
+            "occupied": false
+          },
+          {
+            "index": 17,
+            "energy": -0.8485,
+            "occupied": false
+          },
+          {
+            "index": 18,
+            "energy": -0.5739,
+            "occupied": false
+          },
+          {
+            "index": 19,
+            "energy": 0.4248,
+            "occupied": false
+          },
+          {
+            "index": 20,
+            "energy": 0.4314,
+            "occupied": false
+          },
+          {
+            "index": 21,
+            "energy": 0.4341,
+            "occupied": false
+          }
+        ],
+        "iterations": 8,
+        "seconds": 29.37,
+        "converged": true,
+        "jobDone": true,
+        "trace": [
+          {
+            "iteration": 1,
+            "energyRy": -117.54633236,
+            "accuracyRy": 1.42580152
+          },
+          {
+            "iteration": 2,
+            "energyRy": -117.62469978,
+            "accuracyRy": 0.16989622
+          },
+          {
+            "iteration": 3,
+            "energyRy": -117.6279968,
+            "accuracyRy": 0.02510989
+          },
+          {
+            "iteration": 4,
+            "energyRy": -117.63009842,
+            "accuracyRy": 0.00099314
+          },
+          {
+            "iteration": 5,
+            "energyRy": -117.63027774,
+            "accuracyRy": 0.00022482
+          },
+          {
+            "iteration": 6,
+            "energyRy": -117.63032577,
+            "accuracyRy": 0.00000922
+          },
+          {
+            "iteration": 7,
+            "energyRy": -117.63032636,
+            "accuracyRy": 0.00000153
+          },
+          {
+            "iteration": 8,
+            "energyRy": -117.63032696,
+            "accuracyRy": 1e-7
+          }
+        ]
+      },
+      {
+        "cutoffRy": 30,
+        "cellAngstrom": 14,
+        "totalEnergyRy": -117.63020776,
+        "homo": -6.0902,
+        "lumo": -0.9852,
+        "gap": 5.105,
+        "electrons": 30,
+        "levels": [
+          {
+            "index": 1,
+            "energy": -20.9933,
+            "occupied": true
+          },
+          {
+            "index": 2,
+            "energy": -18.2113,
+            "occupied": true
+          },
+          {
+            "index": 3,
+            "energy": -18.211,
+            "occupied": true
+          },
+          {
+            "index": 4,
+            "energy": -14.5904,
+            "occupied": true
+          },
+          {
+            "index": 5,
+            "energy": -14.5901,
+            "occupied": true
+          },
+          {
+            "index": 6,
+            "energy": -12.6435,
+            "occupied": true
+          },
+          {
+            "index": 7,
+            "energy": -10.9563,
+            "occupied": true
+          },
+          {
+            "index": 8,
+            "energy": -10.6377,
+            "occupied": true
+          },
+          {
+            "index": 9,
+            "energy": -9.9723,
+            "occupied": true
+          },
+          {
+            "index": 10,
+            "energy": -9.9717,
+            "occupied": true
+          },
+          {
+            "index": 11,
+            "energy": -8.8221,
+            "occupied": true
+          },
+          {
+            "index": 12,
+            "energy": -7.9732,
+            "occupied": true
+          },
+          {
+            "index": 13,
+            "energy": -7.9732,
+            "occupied": true
+          },
+          {
+            "index": 14,
+            "energy": -6.0906,
+            "occupied": true
+          },
+          {
+            "index": 15,
+            "energy": -6.0902,
+            "occupied": true
+          },
+          {
+            "index": 16,
+            "energy": -0.9852,
+            "occupied": false
+          },
+          {
+            "index": 17,
+            "energy": -0.9848,
+            "occupied": false
+          },
+          {
+            "index": 18,
+            "energy": -0.6105,
+            "occupied": false
+          },
+          {
+            "index": 19,
+            "energy": 0.1235,
+            "occupied": false
+          },
+          {
+            "index": 20,
+            "energy": 0.1247,
+            "occupied": false
+          },
+          {
+            "index": 21,
+            "energy": 0.1402,
+            "occupied": false
+          }
+        ],
+        "iterations": 8,
+        "seconds": 43.48,
+        "converged": true,
+        "jobDone": true,
+        "trace": [
+          {
+            "iteration": 1,
+            "energyRy": -117.54691587,
+            "accuracyRy": 1.42444227
+          },
+          {
+            "iteration": 2,
+            "energyRy": -117.62448477,
+            "accuracyRy": 0.16970807
+          },
+          {
+            "iteration": 3,
+            "energyRy": -117.62784492,
+            "accuracyRy": 0.02514401
+          },
+          {
+            "iteration": 4,
+            "energyRy": -117.62995298,
+            "accuracyRy": 0.00102843
+          },
+          {
+            "iteration": 5,
+            "energyRy": -117.63014477,
+            "accuracyRy": 0.00028039
+          },
+          {
+            "iteration": 6,
+            "energyRy": -117.63020649,
+            "accuracyRy": 0.00001009
+          },
+          {
+            "iteration": 7,
+            "energyRy": -117.63020728,
+            "accuracyRy": 0.00000167
+          },
+          {
+            "iteration": 8,
+            "energyRy": -117.63020776,
+            "accuracyRy": 1.5e-7
+          }
+        ]
+      },
+      {
+        "cutoffRy": 30,
+        "cellAngstrom": 16,
+        "totalEnergyRy": -117.63044641,
+        "homo": -6.1672,
+        "lumo": -1.0609,
+        "gap": 5.1063,
+        "electrons": 30,
+        "levels": [
+          {
+            "index": 1,
+            "energy": -21.0694,
+            "occupied": true
+          },
+          {
+            "index": 2,
+            "energy": -18.2873,
+            "occupied": true
+          },
+          {
+            "index": 3,
+            "energy": -18.2872,
+            "occupied": true
+          },
+          {
+            "index": 4,
+            "energy": -14.6668,
+            "occupied": true
+          },
+          {
+            "index": 5,
+            "energy": -14.6664,
+            "occupied": true
+          },
+          {
+            "index": 6,
+            "energy": -12.7199,
+            "occupied": true
+          },
+          {
+            "index": 7,
+            "energy": -11.0328,
+            "occupied": true
+          },
+          {
+            "index": 8,
+            "energy": -10.7144,
+            "occupied": true
+          },
+          {
+            "index": 9,
+            "energy": -10.0483,
+            "occupied": true
+          },
+          {
+            "index": 10,
+            "energy": -10.0481,
+            "occupied": true
+          },
+          {
+            "index": 11,
+            "energy": -8.8981,
+            "occupied": true
+          },
+          {
+            "index": 12,
+            "energy": -8.0498,
+            "occupied": true
+          },
+          {
+            "index": 13,
+            "energy": -8.0496,
+            "occupied": true
+          },
+          {
+            "index": 14,
+            "energy": -6.1673,
+            "occupied": true
+          },
+          {
+            "index": 15,
+            "energy": -6.1672,
+            "occupied": true
+          },
+          {
+            "index": 16,
+            "energy": -1.0609,
+            "occupied": false
+          },
+          {
+            "index": 17,
+            "energy": -1.0608,
+            "occupied": false
+          },
+          {
+            "index": 18,
+            "energy": -0.6216,
+            "occupied": false
+          },
+          {
+            "index": 19,
+            "energy": -0.0568,
+            "occupied": false
+          },
+          {
+            "index": 20,
+            "energy": -0.0426,
+            "occupied": false
+          },
+          {
+            "index": 21,
+            "energy": -0.0415,
+            "occupied": false
+          }
+        ],
+        "iterations": 8,
+        "seconds": 55.98,
+        "converged": true,
+        "jobDone": true,
+        "trace": [
+          {
+            "iteration": 1,
+            "energyRy": -117.54744279,
+            "accuracyRy": 1.42389723
+          },
+          {
+            "iteration": 2,
+            "energyRy": -117.62463586,
+            "accuracyRy": 0.1696697
+          },
+          {
+            "iteration": 3,
+            "energyRy": -117.62808043,
+            "accuracyRy": 0.02514833
+          },
+          {
+            "iteration": 4,
+            "energyRy": -117.6301827,
+            "accuracyRy": 0.00104126
+          },
+          {
+            "iteration": 5,
+            "energyRy": -117.63038051,
+            "accuracyRy": 0.00029586
+          },
+          {
+            "iteration": 6,
+            "energyRy": -117.63044518,
+            "accuracyRy": 0.00001033
+          },
+          {
+            "iteration": 7,
+            "energyRy": -117.63044613,
+            "accuracyRy": 0.00000153
+          },
+          {
+            "iteration": 8,
+            "energyRy": -117.63044641,
+            "accuracyRy": 1.2e-7
+          }
+        ]
+      },
+      {
+        "cutoffRy": 30,
+        "cellAngstrom": 18,
+        "totalEnergyRy": -117.62975454,
+        "homo": -6.2137,
+        "lumo": -1.1074,
+        "gap": 5.1063,
+        "electrons": 30,
+        "levels": [
+          {
+            "index": 1,
+            "energy": -21.1164,
+            "occupied": true
+          },
+          {
+            "index": 2,
+            "energy": -18.3342,
+            "occupied": true
+          },
+          {
+            "index": 3,
+            "energy": -18.3342,
+            "occupied": true
+          },
+          {
+            "index": 4,
+            "energy": -14.7133,
+            "occupied": true
+          },
+          {
+            "index": 5,
+            "energy": -14.7132,
+            "occupied": true
+          },
+          {
+            "index": 6,
+            "energy": -12.7666,
+            "occupied": true
+          },
+          {
+            "index": 7,
+            "energy": -11.0791,
+            "occupied": true
+          },
+          {
+            "index": 8,
+            "energy": -10.7611,
+            "occupied": true
+          },
+          {
+            "index": 9,
+            "energy": -10.0947,
+            "occupied": true
+          },
+          {
+            "index": 10,
+            "energy": -10.0947,
+            "occupied": true
+          },
+          {
+            "index": 11,
+            "energy": -8.9447,
+            "occupied": true
+          },
+          {
+            "index": 12,
+            "energy": -8.096,
+            "occupied": true
+          },
+          {
+            "index": 13,
+            "energy": -8.096,
+            "occupied": true
+          },
+          {
+            "index": 14,
+            "energy": -6.2138,
+            "occupied": true
+          },
+          {
+            "index": 15,
+            "energy": -6.2137,
+            "occupied": true
+          },
+          {
+            "index": 16,
+            "energy": -1.1074,
+            "occupied": false
+          },
+          {
+            "index": 17,
+            "energy": -1.1073,
+            "occupied": false
+          },
+          {
+            "index": 18,
+            "energy": -0.6247,
+            "occupied": false
+          },
+          {
+            "index": 19,
+            "energy": -0.1768,
+            "occupied": false
+          },
+          {
+            "index": 20,
+            "energy": -0.1404,
+            "occupied": false
+          },
+          {
+            "index": 21,
+            "energy": -0.1401,
+            "occupied": false
+          }
+        ],
+        "iterations": 8,
+        "seconds": 78.22,
+        "converged": true,
+        "jobDone": true,
+        "trace": [
+          {
+            "iteration": 1,
+            "energyRy": -117.54690574,
+            "accuracyRy": 1.42315477
+          },
+          {
+            "iteration": 2,
+            "energyRy": -117.62392909,
+            "accuracyRy": 0.16967194
+          },
+          {
+            "iteration": 3,
+            "energyRy": -117.6273872,
+            "accuracyRy": 0.02514287
+          },
+          {
+            "iteration": 4,
+            "energyRy": -117.62949494,
+            "accuracyRy": 0.00103182
+          },
+          {
+            "iteration": 5,
+            "energyRy": -117.62969259,
+            "accuracyRy": 0.00028329
+          },
+          {
+            "iteration": 6,
+            "energyRy": -117.62975337,
+            "accuracyRy": 0.00000979
+          },
+          {
+            "iteration": 7,
+            "energyRy": -117.62975404,
+            "accuracyRy": 0.00000172
+          },
+          {
+            "iteration": 8,
+            "energyRy": -117.62975454,
+            "accuracyRy": 1.1e-7
+          }
+        ]
+      }
+    ],
+    "referenceTrace": [
+      {
+        "iteration": 1,
+        "energyRy": -117.54691587,
+        "accuracyRy": 1.42444227
+      },
+      {
+        "iteration": 2,
+        "energyRy": -117.62448477,
+        "accuracyRy": 0.16970807
+      },
+      {
+        "iteration": 3,
+        "energyRy": -117.62784492,
+        "accuracyRy": 0.02514401
+      },
+      {
+        "iteration": 4,
+        "energyRy": -117.62995298,
+        "accuracyRy": 0.00102843
+      },
+      {
+        "iteration": 5,
+        "energyRy": -117.63014477,
+        "accuracyRy": 0.00028039
+      },
+      {
+        "iteration": 6,
+        "energyRy": -117.63020649,
+        "accuracyRy": 0.00001009
+      },
+      {
+        "iteration": 7,
+        "energyRy": -117.63020728,
+        "accuracyRy": 0.00000167
+      },
+      {
+        "iteration": 8,
+        "energyRy": -117.63020776,
+        "accuracyRy": 1.5e-7
+      }
+    ]
+  },
+  "ethylene": {
+    "cutoffSweep": [
+      {
+        "cutoffRy": 20,
+        "cellAngstrom": 14,
+        "totalEnergyRy": -41.34958222,
+        "homo": -6.6505,
+        "lumo": -0.9547,
+        "gap": 5.6958,
+        "electrons": 12,
+        "levels": [
+          {
+            "index": 1,
+            "energy": -18.9763,
+            "occupied": true
+          },
+          {
+            "index": 2,
+            "energy": -14.305,
+            "occupied": true
+          },
+          {
+            "index": 3,
+            "energy": -11.3451,
+            "occupied": true
+          },
+          {
+            "index": 4,
+            "energy": -10.0074,
+            "occupied": true
+          },
+          {
+            "index": 5,
+            "energy": -8.3546,
+            "occupied": true
+          },
+          {
+            "index": 6,
+            "energy": -6.6505,
+            "occupied": true
+          },
+          {
+            "index": 7,
+            "energy": -0.9547,
+            "occupied": false
+          },
+          {
+            "index": 8,
+            "energy": -0.5663,
+            "occupied": false
+          },
+          {
+            "index": 9,
+            "energy": 0.1012,
+            "occupied": false
+          },
+          {
+            "index": 10,
+            "energy": 0.1087,
+            "occupied": false
+          },
+          {
+            "index": 11,
+            "energy": 0.1344,
+            "occupied": false
+          },
+          {
+            "index": 12,
+            "energy": 0.2783,
+            "occupied": false
+          }
+        ],
+        "iterations": 8,
+        "seconds": 18.48,
+        "converged": true,
+        "jobDone": true,
+        "trace": [
+          {
+            "iteration": 1,
+            "energyRy": -41.30754747,
+            "accuracyRy": 0.66025751
+          },
+          {
+            "iteration": 2,
+            "energyRy": -41.34948104,
+            "accuracyRy": 0.07029473
+          },
+          {
+            "iteration": 3,
+            "energyRy": -41.34838818,
+            "accuracyRy": 0.0131177
+          },
+          {
+            "iteration": 4,
+            "energyRy": -41.34948947,
+            "accuracyRy": 0.00050622
+          },
+          {
+            "iteration": 5,
+            "energyRy": -41.34957231,
+            "accuracyRy": 0.00002689
+          },
+          {
+            "iteration": 6,
+            "energyRy": -41.3495777,
+            "accuracyRy": 0.00000777
+          },
+          {
+            "iteration": 7,
+            "energyRy": -41.3495808,
+            "accuracyRy": 0.00000397
+          },
+          {
+            "iteration": 8,
+            "energyRy": -41.34958222,
+            "accuracyRy": 3e-8
+          }
+        ]
+      },
+      {
+        "cutoffRy": 25,
+        "cellAngstrom": 14,
+        "totalEnergyRy": -41.48232531,
+        "homo": -6.6561,
+        "lumo": -0.9899,
+        "gap": 5.6662,
+        "electrons": 12,
+        "levels": [
+          {
+            "index": 1,
+            "energy": -18.8011,
+            "occupied": true
+          },
+          {
+            "index": 2,
+            "energy": -14.2095,
+            "occupied": true
+          },
+          {
+            "index": 3,
+            "energy": -11.3701,
+            "occupied": true
+          },
+          {
+            "index": 4,
+            "energy": -10.0943,
+            "occupied": true
+          },
+          {
+            "index": 5,
+            "energy": -8.413,
+            "occupied": true
+          },
+          {
+            "index": 6,
+            "energy": -6.6561,
+            "occupied": true
+          },
+          {
+            "index": 7,
+            "energy": -0.9899,
+            "occupied": false
+          },
+          {
+            "index": 8,
+            "energy": -0.7262,
+            "occupied": false
+          },
+          {
+            "index": 9,
+            "energy": -0.0411,
+            "occupied": false
+          },
+          {
+            "index": 10,
+            "energy": -0.029,
+            "occupied": false
+          },
+          {
+            "index": 11,
+            "energy": -0.0264,
+            "occupied": false
+          },
+          {
+            "index": 12,
+            "energy": 0.1117,
+            "occupied": false
+          }
+        ],
+        "iterations": 8,
+        "seconds": 25.04,
+        "converged": true,
+        "jobDone": true,
+        "trace": [
+          {
+            "iteration": 1,
+            "energyRy": -41.42996105,
+            "accuracyRy": 0.7253701
+          },
+          {
+            "iteration": 2,
+            "energyRy": -41.48212688,
+            "accuracyRy": 0.07380466
+          },
+          {
+            "iteration": 3,
+            "energyRy": -41.48137579,
+            "accuracyRy": 0.01310781
+          },
+          {
+            "iteration": 4,
+            "energyRy": -41.48227335,
+            "accuracyRy": 0.00020319
+          },
+          {
+            "iteration": 5,
+            "energyRy": -41.48232253,
+            "accuracyRy": 0.00001632
+          },
+          {
+            "iteration": 6,
+            "energyRy": -41.48232313,
+            "accuracyRy": 0.000004
+          },
+          {
+            "iteration": 7,
+            "energyRy": -41.48232445,
+            "accuracyRy": 0.00000283
+          },
+          {
+            "iteration": 8,
+            "energyRy": -41.48232531,
+            "accuracyRy": 4e-8
+          }
+        ]
+      },
+      {
+        "cutoffRy": 30,
+        "cellAngstrom": 14,
+        "totalEnergyRy": -41.5295426,
+        "homo": -6.6623,
+        "lumo": -0.9992,
+        "gap": 5.6631,
+        "electrons": 12,
+        "levels": [
+          {
+            "index": 1,
+            "energy": -18.7391,
+            "occupied": true
+          },
+          {
+            "index": 2,
+            "energy": -14.1828,
+            "occupied": true
+          },
+          {
+            "index": 3,
+            "energy": -11.3818,
+            "occupied": true
+          },
+          {
+            "index": 4,
+            "energy": -10.103,
+            "occupied": true
+          },
+          {
+            "index": 5,
+            "energy": -8.4314,
+            "occupied": true
+          },
+          {
+            "index": 6,
+            "energy": -6.6623,
+            "occupied": true
+          },
+          {
+            "index": 7,
+            "energy": -0.9992,
+            "occupied": false
+          },
+          {
+            "index": 8,
+            "energy": -0.5719,
+            "occupied": false
+          },
+          {
+            "index": 9,
+            "energy": 0.1,
+            "occupied": false
+          },
+          {
+            "index": 10,
+            "energy": 0.1049,
+            "occupied": false
+          },
+          {
+            "index": 11,
+            "energy": 0.1239,
+            "occupied": false
+          },
+          {
+            "index": 12,
+            "energy": 0.2613,
+            "occupied": false
+          }
+        ],
+        "iterations": 8,
+        "seconds": 34.95,
+        "converged": true,
+        "jobDone": true,
+        "trace": [
+          {
+            "iteration": 1,
+            "energyRy": -41.47418224,
+            "accuracyRy": 0.74932426
+          },
+          {
+            "iteration": 2,
+            "energyRy": -41.52920583,
+            "accuracyRy": 0.07635106
+          },
+          {
+            "iteration": 3,
+            "energyRy": -41.52854933,
+            "accuracyRy": 0.01332514
+          },
+          {
+            "iteration": 4,
+            "energyRy": -41.52949636,
+            "accuracyRy": 0.0002228
+          },
+          {
+            "iteration": 5,
+            "energyRy": -41.5295422,
+            "accuracyRy": 0.00002659
+          },
+          {
+            "iteration": 6,
+            "energyRy": -41.52954099,
+            "accuracyRy": 0.00000576
+          },
+          {
+            "iteration": 7,
+            "energyRy": -41.52954265,
+            "accuracyRy": 0.00000319
+          },
+          {
+            "iteration": 8,
+            "energyRy": -41.5295426,
+            "accuracyRy": 3.4e-7
+          }
+        ]
+      },
+      {
+        "cutoffRy": 40,
+        "cellAngstrom": 14,
+        "totalEnergyRy": -41.55044227,
+        "homo": -6.6674,
+        "lumo": -1.0057,
+        "gap": 5.6617,
+        "electrons": 12,
+        "levels": [
+          {
+            "index": 1,
+            "energy": -18.7174,
+            "occupied": true
+          },
+          {
+            "index": 2,
+            "energy": -14.1747,
+            "occupied": true
+          },
+          {
+            "index": 3,
+            "energy": -11.3871,
+            "occupied": true
+          },
+          {
+            "index": 4,
+            "energy": -10.1065,
+            "occupied": true
+          },
+          {
+            "index": 5,
+            "energy": -8.4397,
+            "occupied": true
+          },
+          {
+            "index": 6,
+            "energy": -6.6674,
+            "occupied": true
+          },
+          {
+            "index": 7,
+            "energy": -1.0057,
+            "occupied": false
+          },
+          {
+            "index": 8,
+            "energy": -0.4547,
+            "occupied": false
+          },
+          {
+            "index": 9,
+            "energy": 0.2052,
+            "occupied": false
+          },
+          {
+            "index": 10,
+            "energy": 0.2105,
+            "occupied": false
+          },
+          {
+            "index": 11,
+            "energy": 0.2346,
+            "occupied": false
+          },
+          {
+            "index": 12,
+            "energy": 0.4009,
+            "occupied": false
+          }
+        ],
+        "iterations": 8,
+        "seconds": 47.53,
+        "converged": true,
+        "jobDone": true,
+        "trace": [
+          {
+            "iteration": 1,
+            "energyRy": -41.49617793,
+            "accuracyRy": 0.75475782
+          },
+          {
+            "iteration": 2,
+            "energyRy": -41.54951319,
+            "accuracyRy": 0.07570593
+          },
+          {
+            "iteration": 3,
+            "energyRy": -41.54918841,
+            "accuracyRy": 0.01398188
+          },
+          {
+            "iteration": 4,
+            "energyRy": -41.55038687,
+            "accuracyRy": 0.00030919
+          },
+          {
+            "iteration": 5,
+            "energyRy": -41.55044039,
+            "accuracyRy": 0.00002621
+          },
+          {
+            "iteration": 6,
+            "energyRy": -41.55043809,
+            "accuracyRy": 0.00001451
+          },
+          {
+            "iteration": 7,
+            "energyRy": -41.55044234,
+            "accuracyRy": 0.0000042
+          },
+          {
+            "iteration": 8,
+            "energyRy": -41.55044227,
+            "accuracyRy": 5.3e-7
+          }
+        ]
+      },
+      {
+        "cutoffRy": 50,
+        "cellAngstrom": 14,
+        "totalEnergyRy": -41.55270859,
+        "homo": -6.6672,
+        "lumo": -1.0057,
+        "gap": 5.6615,
+        "electrons": 12,
+        "levels": [
+          {
+            "index": 1,
+            "energy": -18.7177,
+            "occupied": true
+          },
+          {
+            "index": 2,
+            "energy": -14.1762,
+            "occupied": true
+          },
+          {
+            "index": 3,
+            "energy": -11.388,
+            "occupied": true
+          },
+          {
+            "index": 4,
+            "energy": -10.1076,
+            "occupied": true
+          },
+          {
+            "index": 5,
+            "energy": -8.4417,
+            "occupied": true
+          },
+          {
+            "index": 6,
+            "energy": -6.6672,
+            "occupied": true
+          },
+          {
+            "index": 7,
+            "energy": -1.0057,
+            "occupied": false
+          },
+          {
+            "index": 8,
+            "energy": -0.4164,
+            "occupied": false
+          },
+          {
+            "index": 9,
+            "energy": 0.2384,
+            "occupied": false
+          },
+          {
+            "index": 10,
+            "energy": 0.2476,
+            "occupied": false
+          },
+          {
+            "index": 11,
+            "energy": 0.271,
+            "occupied": false
+          },
+          {
+            "index": 12,
+            "energy": 0.4506,
+            "occupied": false
+          }
+        ],
+        "iterations": 8,
+        "seconds": 75.99,
+        "converged": true,
+        "jobDone": true,
+        "trace": [
+          {
+            "iteration": 1,
+            "energyRy": -41.50150264,
+            "accuracyRy": 0.748083
+          },
+          {
+            "iteration": 2,
+            "energyRy": -41.55100673,
+            "accuracyRy": 0.0773381
+          },
+          {
+            "iteration": 3,
+            "energyRy": -41.55144963,
+            "accuracyRy": 0.01380291
+          },
+          {
+            "iteration": 4,
+            "energyRy": -41.55260977,
+            "accuracyRy": 0.00043591
+          },
+          {
+            "iteration": 5,
+            "energyRy": -41.55271017,
+            "accuracyRy": 0.00002712
+          },
+          {
+            "iteration": 6,
+            "energyRy": -41.55270343,
+            "accuracyRy": 0.00001765
+          },
+          {
+            "iteration": 7,
+            "energyRy": -41.55270869,
+            "accuracyRy": 0.00000383
+          },
+          {
+            "iteration": 8,
+            "energyRy": -41.55270859,
+            "accuracyRy": 5.5e-7
+          }
+        ]
+      }
+    ],
+    "cellSweep": [
+      {
+        "cutoffRy": 30,
+        "cellAngstrom": 10,
+        "totalEnergyRy": -41.5299778,
+        "homo": -6.501,
+        "lumo": -0.8304,
+        "gap": 5.6706,
+        "electrons": 12,
+        "levels": [
+          {
+            "index": 1,
+            "energy": -18.5778,
+            "occupied": true
+          },
+          {
+            "index": 2,
+            "energy": -14.0228,
+            "occupied": true
+          },
+          {
+            "index": 3,
+            "energy": -11.2222,
+            "occupied": true
+          },
+          {
+            "index": 4,
+            "energy": -9.9427,
+            "occupied": true
+          },
+          {
+            "index": 5,
+            "energy": -8.2721,
+            "occupied": true
+          },
+          {
+            "index": 6,
+            "energy": -6.501,
+            "occupied": true
+          },
+          {
+            "index": 7,
+            "energy": -0.8304,
+            "occupied": false
+          },
+          {
+            "index": 8,
+            "energy": -0.6033,
+            "occupied": false
+          },
+          {
+            "index": 9,
+            "energy": 0.6414,
+            "occupied": false
+          },
+          {
+            "index": 10,
+            "energy": 0.6556,
+            "occupied": false
+          },
+          {
+            "index": 11,
+            "energy": 0.7566,
+            "occupied": false
+          },
+          {
+            "index": 12,
+            "energy": 0.8993,
+            "occupied": false
+          }
+        ],
+        "iterations": 8,
+        "seconds": 17.83,
+        "converged": true,
+        "jobDone": true,
+        "trace": [
+          {
+            "iteration": 1,
+            "energyRy": -41.47440224,
+            "accuracyRy": 0.75036038
+          },
+          {
+            "iteration": 2,
+            "energyRy": -41.53016145,
+            "accuracyRy": 0.07344206
+          },
+          {
+            "iteration": 3,
+            "energyRy": -41.52885226,
+            "accuracyRy": 0.01396513
+          },
+          {
+            "iteration": 4,
+            "energyRy": -41.52992088,
+            "accuracyRy": 0.00028333
+          },
+          {
+            "iteration": 5,
+            "energyRy": -41.52997659,
+            "accuracyRy": 0.00002361
+          },
+          {
+            "iteration": 6,
+            "energyRy": -41.52997664,
+            "accuracyRy": 0.00000465
+          },
+          {
+            "iteration": 7,
+            "energyRy": -41.52997784,
+            "accuracyRy": 0.00000196
+          },
+          {
+            "iteration": 8,
+            "energyRy": -41.5299778,
+            "accuracyRy": 2.8e-7
+          }
+        ]
+      },
+      {
+        "cutoffRy": 30,
+        "cellAngstrom": 12,
+        "totalEnergyRy": -41.52979067,
+        "homo": -6.6074,
+        "lumo": -0.9432,
+        "gap": 5.6642,
+        "electrons": 12,
+        "levels": [
+          {
+            "index": 1,
+            "energy": -18.6841,
+            "occupied": true
+          },
+          {
+            "index": 2,
+            "energy": -14.1286,
+            "occupied": true
+          },
+          {
+            "index": 3,
+            "energy": -11.3282,
+            "occupied": true
+          },
+          {
+            "index": 4,
+            "energy": -10.049,
+            "occupied": true
+          },
+          {
+            "index": 5,
+            "energy": -8.3778,
+            "occupied": true
+          },
+          {
+            "index": 6,
+            "energy": -6.6074,
+            "occupied": true
+          },
+          {
+            "index": 7,
+            "energy": -0.9432,
+            "occupied": false
+          },
+          {
+            "index": 8,
+            "energy": -0.5939,
+            "occupied": false
+          },
+          {
+            "index": 9,
+            "energy": 0.2907,
+            "occupied": false
+          },
+          {
+            "index": 10,
+            "energy": 0.308,
+            "occupied": false
+          },
+          {
+            "index": 11,
+            "energy": 0.3662,
+            "occupied": false
+          },
+          {
+            "index": 12,
+            "energy": 0.5026,
+            "occupied": false
+          }
+        ],
+        "iterations": 8,
+        "seconds": 27.66,
+        "converged": true,
+        "jobDone": true,
+        "trace": [
+          {
+            "iteration": 1,
+            "energyRy": -41.47411278,
+            "accuracyRy": 0.75001245
+          },
+          {
+            "iteration": 2,
+            "energyRy": -41.52955857,
+            "accuracyRy": 0.07623251
+          },
+          {
+            "iteration": 3,
+            "energyRy": -41.52876814,
+            "accuracyRy": 0.01337068
+          },
+          {
+            "iteration": 4,
+            "energyRy": -41.52973878,
+            "accuracyRy": 0.0002149
+          },
+          {
+            "iteration": 5,
+            "energyRy": -41.52978993,
+            "accuracyRy": 0.0000265
+          },
+          {
+            "iteration": 6,
+            "energyRy": -41.5297888,
+            "accuracyRy": 0.00000582
+          },
+          {
+            "iteration": 7,
+            "energyRy": -41.52979057,
+            "accuracyRy": 0.00000296
+          },
+          {
+            "iteration": 8,
+            "energyRy": -41.52979067,
+            "accuracyRy": 2.7e-7
+          }
+        ]
+      },
+      {
+        "cutoffRy": 30,
+        "cellAngstrom": 14,
+        "totalEnergyRy": -41.5295426,
+        "homo": -6.6623,
+        "lumo": -0.9992,
+        "gap": 5.6631,
+        "electrons": 12,
+        "levels": [
+          {
+            "index": 1,
+            "energy": -18.7391,
+            "occupied": true
+          },
+          {
+            "index": 2,
+            "energy": -14.1828,
+            "occupied": true
+          },
+          {
+            "index": 3,
+            "energy": -11.3818,
+            "occupied": true
+          },
+          {
+            "index": 4,
+            "energy": -10.103,
+            "occupied": true
+          },
+          {
+            "index": 5,
+            "energy": -8.4314,
+            "occupied": true
+          },
+          {
+            "index": 6,
+            "energy": -6.6623,
+            "occupied": true
+          },
+          {
+            "index": 7,
+            "energy": -0.9992,
+            "occupied": false
+          },
+          {
+            "index": 8,
+            "energy": -0.5719,
+            "occupied": false
+          },
+          {
+            "index": 9,
+            "energy": 0.1,
+            "occupied": false
+          },
+          {
+            "index": 10,
+            "energy": 0.1049,
+            "occupied": false
+          },
+          {
+            "index": 11,
+            "energy": 0.1239,
+            "occupied": false
+          },
+          {
+            "index": 12,
+            "energy": 0.2613,
+            "occupied": false
+          }
+        ],
+        "iterations": 8,
+        "seconds": 34.95,
+        "converged": true,
+        "jobDone": true,
+        "trace": [
+          {
+            "iteration": 1,
+            "energyRy": -41.47418224,
+            "accuracyRy": 0.74932426
+          },
+          {
+            "iteration": 2,
+            "energyRy": -41.52920583,
+            "accuracyRy": 0.07635106
+          },
+          {
+            "iteration": 3,
+            "energyRy": -41.52854933,
+            "accuracyRy": 0.01332514
+          },
+          {
+            "iteration": 4,
+            "energyRy": -41.52949636,
+            "accuracyRy": 0.0002228
+          },
+          {
+            "iteration": 5,
+            "energyRy": -41.5295422,
+            "accuracyRy": 0.00002659
+          },
+          {
+            "iteration": 6,
+            "energyRy": -41.52954099,
+            "accuracyRy": 0.00000576
+          },
+          {
+            "iteration": 7,
+            "energyRy": -41.52954265,
+            "accuracyRy": 0.00000319
+          },
+          {
+            "iteration": 8,
+            "energyRy": -41.5295426,
+            "accuracyRy": 3.4e-7
+          }
+        ]
+      },
+      {
+        "cutoffRy": 30,
+        "cellAngstrom": 16,
+        "totalEnergyRy": -41.52966019,
+        "homo": -6.6921,
+        "lumo": -1.0293,
+        "gap": 5.6628,
+        "electrons": 12,
+        "levels": [
+          {
+            "index": 1,
+            "energy": -18.7689,
+            "occupied": true
+          },
+          {
+            "index": 2,
+            "energy": -14.2126,
+            "occupied": true
+          },
+          {
+            "index": 3,
+            "energy": -11.4124,
+            "occupied": true
+          },
+          {
+            "index": 4,
+            "energy": -10.1328,
+            "occupied": true
+          },
+          {
+            "index": 5,
+            "energy": -8.4617,
+            "occupied": true
+          },
+          {
+            "index": 6,
+            "energy": -6.6921,
+            "occupied": true
+          },
+          {
+            "index": 7,
+            "energy": -1.0293,
+            "occupied": false
+          },
+          {
+            "index": 8,
+            "energy": -0.5485,
+            "occupied": false
+          },
+          {
+            "index": 9,
+            "energy": -0.0494,
+            "occupied": false
+          },
+          {
+            "index": 10,
+            "energy": -0.0092,
+            "occupied": false
+          },
+          {
+            "index": 11,
+            "energy": 0.0146,
+            "occupied": false
+          },
+          {
+            "index": 12,
+            "energy": 0.1168,
+            "occupied": false
+          }
+        ],
+        "iterations": 8,
+        "seconds": 53.44,
+        "converged": true,
+        "jobDone": true,
+        "trace": [
+          {
+            "iteration": 1,
+            "energyRy": -41.47434018,
+            "accuracyRy": 0.74930603
+          },
+          {
+            "iteration": 2,
+            "energyRy": -41.52931305,
+            "accuracyRy": 0.0763661
+          },
+          {
+            "iteration": 3,
+            "energyRy": -41.52866475,
+            "accuracyRy": 0.01333962
+          },
+          {
+            "iteration": 4,
+            "energyRy": -41.52961939,
+            "accuracyRy": 0.00020024
+          },
+          {
+            "iteration": 5,
+            "energyRy": -41.52965981,
+            "accuracyRy": 0.00002366
+          },
+          {
+            "iteration": 6,
+            "energyRy": -41.52965889,
+            "accuracyRy": 0.00000496
+          },
+          {
+            "iteration": 7,
+            "energyRy": -41.52966029,
+            "accuracyRy": 0.00000164
+          },
+          {
+            "iteration": 8,
+            "energyRy": -41.52966019,
+            "accuracyRy": 3.1e-7
+          }
+        ]
+      },
+      {
+        "cutoffRy": 30,
+        "cellAngstrom": 18,
+        "totalEnergyRy": -41.52945617,
+        "homo": -6.7097,
+        "lumo": -1.047,
+        "gap": 5.6627,
+        "electrons": 12,
+        "levels": [
+          {
+            "index": 1,
+            "energy": -18.7863,
+            "occupied": true
+          },
+          {
+            "index": 2,
+            "energy": -14.2309,
+            "occupied": true
+          },
+          {
+            "index": 3,
+            "energy": -11.4301,
+            "occupied": true
+          },
+          {
+            "index": 4,
+            "energy": -10.1505,
+            "occupied": true
+          },
+          {
+            "index": 5,
+            "energy": -8.4796,
+            "occupied": true
+          },
+          {
+            "index": 6,
+            "energy": -6.7097,
+            "occupied": true
+          },
+          {
+            "index": 7,
+            "energy": -1.047,
+            "occupied": false
+          },
+          {
+            "index": 8,
+            "energy": -0.5279,
+            "occupied": false
+          },
+          {
+            "index": 9,
+            "energy": -0.1405,
+            "occupied": false
+          },
+          {
+            "index": 10,
+            "energy": -0.0772,
+            "occupied": false
+          },
+          {
+            "index": 11,
+            "energy": -0.0544,
+            "occupied": false
+          },
+          {
+            "index": 12,
+            "energy": 0.0517,
+            "occupied": false
+          }
+        ],
+        "iterations": 8,
+        "seconds": 75.1,
+        "converged": true,
+        "jobDone": true,
+        "trace": [
+          {
+            "iteration": 1,
+            "energyRy": -41.47422267,
+            "accuracyRy": 0.74894256
+          },
+          {
+            "iteration": 2,
+            "energyRy": -41.52907627,
+            "accuracyRy": 0.07667193
+          },
+          {
+            "iteration": 3,
+            "energyRy": -41.52840958,
+            "accuracyRy": 0.01338448
+          },
+          {
+            "iteration": 4,
+            "energyRy": -41.52941088,
+            "accuracyRy": 0.00020337
+          },
+          {
+            "iteration": 5,
+            "energyRy": -41.52945586,
+            "accuracyRy": 0.00002364
+          },
+          {
+            "iteration": 6,
+            "energyRy": -41.52945464,
+            "accuracyRy": 0.000005
+          },
+          {
+            "iteration": 7,
+            "energyRy": -41.52945595,
+            "accuracyRy": 0.00000312
+          },
+          {
+            "iteration": 8,
+            "energyRy": -41.52945617,
+            "accuracyRy": 1.1e-7
+          }
+        ]
+      }
+    ],
+    "referenceTrace": [
+      {
+        "iteration": 1,
+        "energyRy": -41.47418224,
+        "accuracyRy": 0.74932426
+      },
+      {
+        "iteration": 2,
+        "energyRy": -41.52920583,
+        "accuracyRy": 0.07635106
+      },
+      {
+        "iteration": 3,
+        "energyRy": -41.52854933,
+        "accuracyRy": 0.01332514
+      },
+      {
+        "iteration": 4,
+        "energyRy": -41.52949636,
+        "accuracyRy": 0.0002228
+      },
+      {
+        "iteration": 5,
+        "energyRy": -41.5295422,
+        "accuracyRy": 0.00002659
+      },
+      {
+        "iteration": 6,
+        "energyRy": -41.52954099,
+        "accuracyRy": 0.00000576
+      },
+      {
+        "iteration": 7,
+        "energyRy": -41.52954265,
+        "accuracyRy": 0.00000319
+      },
+      {
+        "iteration": 8,
+        "energyRy": -41.5295426,
+        "accuracyRy": 3.4e-7
+      }
+    ]
+  },
+  "formaldehyde": {
+    "cutoffSweep": [
+      {
+        "cutoffRy": 20,
+        "cellAngstrom": 14,
+        "totalEnergyRy": -60.38779991,
+        "homo": -5.6679,
+        "lumo": -2.0032,
+        "gap": 3.6647000000000003,
+        "electrons": 12,
+        "levels": [
+          {
+            "index": 1,
+            "energy": -31.5456,
+            "occupied": true
+          },
+          {
+            "index": 2,
+            "energy": -16.4535,
+            "occupied": true
+          },
+          {
+            "index": 3,
+            "energy": -12.0937,
+            "occupied": true
+          },
+          {
+            "index": 4,
+            "energy": -11.0634,
+            "occupied": true
+          },
+          {
+            "index": 5,
+            "energy": -10.1402,
+            "occupied": true
+          },
+          {
+            "index": 6,
+            "energy": -5.6679,
+            "occupied": true
+          },
+          {
+            "index": 7,
+            "energy": -2.0032,
+            "occupied": false
+          },
+          {
+            "index": 8,
+            "energy": -0.6467,
+            "occupied": false
+          },
+          {
+            "index": 9,
+            "energy": -0.0341,
+            "occupied": false
+          },
+          {
+            "index": 10,
+            "energy": 0.0418,
+            "occupied": false
+          },
+          {
+            "index": 11,
+            "energy": 0.1321,
+            "occupied": false
+          },
+          {
+            "index": 12,
+            "energy": 0.2065,
+            "occupied": false
+          }
+        ],
+        "iterations": 7,
+        "seconds": 23.95,
+        "converged": true,
+        "jobDone": true,
+        "trace": [
+          {
+            "iteration": 1,
+            "energyRy": -60.18165109,
+            "accuracyRy": 0.98234931
+          },
+          {
+            "iteration": 2,
+            "energyRy": -60.38166331,
+            "accuracyRy": 0.19810786
+          },
+          {
+            "iteration": 3,
+            "energyRy": -60.38524543,
+            "accuracyRy": 0.03686045
+          },
+          {
+            "iteration": 4,
+            "energyRy": -60.38730672,
+            "accuracyRy": 0.00218704
+          },
+          {
+            "iteration": 5,
+            "energyRy": -60.38776854,
+            "accuracyRy": 0.00007296
+          },
+          {
+            "iteration": 6,
+            "energyRy": -60.38778813,
+            "accuracyRy": 0.0000302
+          },
+          {
+            "iteration": 7,
+            "energyRy": -60.38779991,
+            "accuracyRy": 8.9e-7
+          }
+        ]
+      },
+      {
+        "cutoffRy": 25,
+        "cellAngstrom": 14,
+        "totalEnergyRy": -61.79622528,
+        "homo": -6.0423,
+        "lumo": -2.4236,
+        "gap": 3.6187,
+        "electrons": 12,
+        "levels": [
+          {
+            "index": 1,
+            "energy": -27.9668,
+            "occupied": true
+          },
+          {
+            "index": 2,
+            "energy": -15.8889,
+            "occupied": true
+          },
+          {
+            "index": 3,
+            "energy": -12.1067,
+            "occupied": true
+          },
+          {
+            "index": 4,
+            "energy": -11.092,
+            "occupied": true
+          },
+          {
+            "index": 5,
+            "energy": -10.0824,
+            "occupied": true
+          },
+          {
+            "index": 6,
+            "energy": -6.0423,
+            "occupied": true
+          },
+          {
+            "index": 7,
+            "energy": -2.4236,
+            "occupied": false
+          },
+          {
+            "index": 8,
+            "energy": -0.7267,
+            "occupied": false
+          },
+          {
+            "index": 9,
+            "energy": -0.1256,
+            "occupied": false
+          },
+          {
+            "index": 10,
+            "energy": 0.0469,
+            "occupied": false
+          },
+          {
+            "index": 11,
+            "energy": 0.0832,
+            "occupied": false
+          },
+          {
+            "index": 12,
+            "energy": 0.1642,
+            "occupied": false
+          }
+        ],
+        "iterations": 8,
+        "seconds": 34.62,
+        "converged": true,
+        "jobDone": true,
+        "trace": [
+          {
+            "iteration": 1,
+            "energyRy": -61.79831659,
+            "accuracyRy": 0.25612133
+          },
+          {
+            "iteration": 2,
+            "energyRy": -61.79363095,
+            "accuracyRy": 0.05440297
+          },
+          {
+            "iteration": 3,
+            "energyRy": -61.79551756,
+            "accuracyRy": 0.00965119
+          },
+          {
+            "iteration": 4,
+            "energyRy": -61.79597581,
+            "accuracyRy": 0.00153541
+          },
+          {
+            "iteration": 5,
+            "energyRy": -61.79617002,
+            "accuracyRy": 0.00022587
+          },
+          {
+            "iteration": 6,
+            "energyRy": -61.79622266,
+            "accuracyRy": 0.00001414
+          },
+          {
+            "iteration": 7,
+            "energyRy": -61.79622456,
+            "accuracyRy": 0.00000261
+          },
+          {
+            "iteration": 8,
+            "energyRy": -61.79622528,
+            "accuracyRy": 3.4e-7
+          }
+        ]
+      },
+      {
+        "cutoffRy": 30,
+        "cellAngstrom": 14,
+        "totalEnergyRy": -62.2566154,
+        "homo": -6.1445,
+        "lumo": -2.5708,
+        "gap": 3.5736999999999997,
+        "electrons": 12,
+        "levels": [
+          {
+            "index": 1,
+            "energy": -26.926,
+            "occupied": true
+          },
+          {
+            "index": 2,
+            "energy": -15.7235,
+            "occupied": true
+          },
+          {
+            "index": 3,
+            "energy": -12.0932,
+            "occupied": true
+          },
+          {
+            "index": 4,
+            "energy": -10.9492,
+            "occupied": true
+          },
+          {
+            "index": 5,
+            "energy": -10.0224,
+            "occupied": true
+          },
+          {
+            "index": 6,
+            "energy": -6.1445,
+            "occupied": true
+          },
+          {
+            "index": 7,
+            "energy": -2.5708,
+            "occupied": false
+          },
+          {
+            "index": 8,
+            "energy": -0.5991,
+            "occupied": false
+          },
+          {
+            "index": 9,
+            "energy": -0.0126,
+            "occupied": false
+          },
+          {
+            "index": 10,
+            "energy": 0.1911,
+            "occupied": false
+          },
+          {
+            "index": 11,
+            "energy": 0.2467,
+            "occupied": false
+          },
+          {
+            "index": 12,
+            "energy": 0.2902,
+            "occupied": false
+          }
+        ],
+        "iterations": 8,
+        "seconds": 45.78,
+        "converged": true,
+        "jobDone": true,
+        "trace": [
+          {
+            "iteration": 1,
+            "energyRy": -62.23601579,
+            "accuracyRy": 0.34257784
+          },
+          {
+            "iteration": 2,
+            "energyRy": -62.24977627,
+            "accuracyRy": 0.06908265
+          },
+          {
+            "iteration": 3,
+            "energyRy": -62.25601216,
+            "accuracyRy": 0.0156752
+          },
+          {
+            "iteration": 4,
+            "energyRy": -62.25630595,
+            "accuracyRy": 0.00226753
+          },
+          {
+            "iteration": 5,
+            "energyRy": -62.2565825,
+            "accuracyRy": 0.00020179
+          },
+          {
+            "iteration": 6,
+            "energyRy": -62.25661462,
+            "accuracyRy": 0.00001057
+          },
+          {
+            "iteration": 7,
+            "energyRy": -62.25661529,
+            "accuracyRy": 0.00000804
+          },
+          {
+            "iteration": 8,
+            "energyRy": -62.2566154,
+            "accuracyRy": 8e-7
+          }
+        ]
+      },
+      {
+        "cutoffRy": 40,
+        "cellAngstrom": 14,
+        "totalEnergyRy": -62.38127806,
+        "homo": -6.1747,
+        "lumo": -2.6221,
+        "gap": 3.5525999999999995,
+        "electrons": 12,
+        "levels": [
+          {
+            "index": 1,
+            "energy": -26.6463,
+            "occupied": true
+          },
+          {
+            "index": 2,
+            "energy": -15.6877,
+            "occupied": true
+          },
+          {
+            "index": 3,
+            "energy": -12.095,
+            "occupied": true
+          },
+          {
+            "index": 4,
+            "energy": -10.8816,
+            "occupied": true
+          },
+          {
+            "index": 5,
+            "energy": -10.005,
+            "occupied": true
+          },
+          {
+            "index": 6,
+            "energy": -6.1747,
+            "occupied": true
+          },
+          {
+            "index": 7,
+            "energy": -2.6221,
+            "occupied": false
+          },
+          {
+            "index": 8,
+            "energy": -0.5088,
+            "occupied": false
+          },
+          {
+            "index": 9,
+            "energy": 0.0806,
+            "occupied": false
+          },
+          {
+            "index": 10,
+            "energy": 0.2986,
+            "occupied": false
+          },
+          {
+            "index": 11,
+            "energy": 0.3616,
+            "occupied": false
+          },
+          {
+            "index": 12,
+            "energy": 0.4762,
+            "occupied": false
+          }
+        ],
+        "iterations": 8,
+        "seconds": 61.81,
+        "converged": true,
+        "jobDone": true,
+        "trace": [
+          {
+            "iteration": 1,
+            "energyRy": -62.34755956,
+            "accuracyRy": 0.35538821
+          },
+          {
+            "iteration": 2,
+            "energyRy": -62.37196605,
+            "accuracyRy": 0.0788803
+          },
+          {
+            "iteration": 3,
+            "energyRy": -62.37939578,
+            "accuracyRy": 0.01688057
+          },
+          {
+            "iteration": 4,
+            "energyRy": -62.38096321,
+            "accuracyRy": 0.00211708
+          },
+          {
+            "iteration": 5,
+            "energyRy": -62.38123028,
+            "accuracyRy": 0.00028767
+          },
+          {
+            "iteration": 6,
+            "energyRy": -62.38126779,
+            "accuracyRy": 0.00003341
+          },
+          {
+            "iteration": 7,
+            "energyRy": -62.38127749,
+            "accuracyRy": 0.00000415
+          },
+          {
+            "iteration": 8,
+            "energyRy": -62.38127806,
+            "accuracyRy": 7.1e-7
+          }
+        ]
+      },
+      {
+        "cutoffRy": 50,
+        "cellAngstrom": 14,
+        "totalEnergyRy": -62.38527107,
+        "homo": -6.1837,
+        "lumo": -2.629,
+        "gap": 3.5547,
+        "electrons": 12,
+        "levels": [
+          {
+            "index": 1,
+            "energy": -26.6472,
+            "occupied": true
+          },
+          {
+            "index": 2,
+            "energy": -15.6911,
+            "occupied": true
+          },
+          {
+            "index": 3,
+            "energy": -12.0989,
+            "occupied": true
+          },
+          {
+            "index": 4,
+            "energy": -10.8883,
+            "occupied": true
+          },
+          {
+            "index": 5,
+            "energy": -10.0105,
+            "occupied": true
+          },
+          {
+            "index": 6,
+            "energy": -6.1837,
+            "occupied": true
+          },
+          {
+            "index": 7,
+            "energy": -2.629,
+            "occupied": false
+          },
+          {
+            "index": 8,
+            "energy": -0.4792,
+            "occupied": false
+          },
+          {
+            "index": 9,
+            "energy": 0.1181,
+            "occupied": false
+          },
+          {
+            "index": 10,
+            "energy": 0.3353,
+            "occupied": false
+          },
+          {
+            "index": 11,
+            "energy": 0.3994,
+            "occupied": false
+          },
+          {
+            "index": 12,
+            "energy": 0.4762,
+            "occupied": false
+          }
+        ],
+        "iterations": 9,
+        "seconds": 86.07,
+        "converged": true,
+        "jobDone": true,
+        "trace": [
+          {
+            "iteration": 1,
+            "energyRy": -62.32724308,
+            "accuracyRy": 0.38649694
+          },
+          {
+            "iteration": 2,
+            "energyRy": -62.37154807,
+            "accuracyRy": 0.09723629
+          },
+          {
+            "iteration": 3,
+            "energyRy": -62.38029164,
+            "accuracyRy": 0.01936783
+          },
+          {
+            "iteration": 4,
+            "energyRy": -62.38416897,
+            "accuracyRy": 0.00500665
+          },
+          {
+            "iteration": 5,
+            "energyRy": -62.38502485,
+            "accuracyRy": 0.00147132
+          },
+          {
+            "iteration": 6,
+            "energyRy": -62.38522255,
+            "accuracyRy": 0.00012059
+          },
+          {
+            "iteration": 7,
+            "energyRy": -62.38526659,
+            "accuracyRy": 0.00001151
+          },
+          {
+            "iteration": 8,
+            "energyRy": -62.38527057,
+            "accuracyRy": 0.0000021
+          },
+          {
+            "iteration": 9,
+            "energyRy": -62.38527107,
+            "accuracyRy": 3.2e-7
+          }
+        ]
+      }
+    ],
+    "cellSweep": [
+      {
+        "cutoffRy": 30,
+        "cellAngstrom": 10,
+        "totalEnergyRy": -62.25957339,
+        "homo": -5.9971,
+        "lumo": -2.4185,
+        "gap": 3.5786,
+        "electrons": 12,
+        "levels": [
+          {
+            "index": 1,
+            "energy": -26.7738,
+            "occupied": true
+          },
+          {
+            "index": 2,
+            "energy": -15.5687,
+            "occupied": true
+          },
+          {
+            "index": 3,
+            "energy": -11.9432,
+            "occupied": true
+          },
+          {
+            "index": 4,
+            "energy": -10.8042,
+            "occupied": true
+          },
+          {
+            "index": 5,
+            "energy": -9.8767,
+            "occupied": true
+          },
+          {
+            "index": 6,
+            "energy": -5.9971,
+            "occupied": true
+          },
+          {
+            "index": 7,
+            "energy": -2.4185,
+            "occupied": false
+          },
+          {
+            "index": 8,
+            "energy": -0.6153,
+            "occupied": false
+          },
+          {
+            "index": 9,
+            "energy": 0.538,
+            "occupied": false
+          },
+          {
+            "index": 10,
+            "energy": 0.7515,
+            "occupied": false
+          },
+          {
+            "index": 11,
+            "energy": 0.842,
+            "occupied": false
+          },
+          {
+            "index": 12,
+            "energy": 1.0037,
+            "occupied": false
+          }
+        ],
+        "iterations": 8,
+        "seconds": 20.37,
+        "converged": true,
+        "jobDone": true,
+        "trace": [
+          {
+            "iteration": 1,
+            "energyRy": -62.23948658,
+            "accuracyRy": 0.34191671
+          },
+          {
+            "iteration": 2,
+            "energyRy": -62.25197294,
+            "accuracyRy": 0.06796726
+          },
+          {
+            "iteration": 3,
+            "energyRy": -62.259224,
+            "accuracyRy": 0.01403932
+          },
+          {
+            "iteration": 4,
+            "energyRy": -62.25921066,
+            "accuracyRy": 0.0023958
+          },
+          {
+            "iteration": 5,
+            "energyRy": -62.25953631,
+            "accuracyRy": 0.00023285
+          },
+          {
+            "iteration": 6,
+            "energyRy": -62.25956948,
+            "accuracyRy": 0.00001566
+          },
+          {
+            "iteration": 7,
+            "energyRy": -62.25957345,
+            "accuracyRy": 0.00000465
+          },
+          {
+            "iteration": 8,
+            "energyRy": -62.25957339,
+            "accuracyRy": 5.5e-7
+          }
+        ]
+      },
+      {
+        "cutoffRy": 30,
+        "cellAngstrom": 12,
+        "totalEnergyRy": -62.25734643,
+        "homo": -6.0961,
+        "lumo": -2.5202,
+        "gap": 3.5759,
+        "electrons": 12,
+        "levels": [
+          {
+            "index": 1,
+            "energy": -26.8763,
+            "occupied": true
+          },
+          {
+            "index": 2,
+            "energy": -15.672,
+            "occupied": true
+          },
+          {
+            "index": 3,
+            "energy": -12.0438,
+            "occupied": true
+          },
+          {
+            "index": 4,
+            "energy": -10.9001,
+            "occupied": true
+          },
+          {
+            "index": 5,
+            "energy": -9.9744,
+            "occupied": true
+          },
+          {
+            "index": 6,
+            "energy": -6.0961,
+            "occupied": true
+          },
+          {
+            "index": 7,
+            "energy": -2.5202,
+            "occupied": false
+          },
+          {
+            "index": 8,
+            "energy": -0.6119,
+            "occupied": false
+          },
+          {
+            "index": 9,
+            "energy": 0.1882,
+            "occupied": false
+          },
+          {
+            "index": 10,
+            "energy": 0.3903,
+            "occupied": false
+          },
+          {
+            "index": 11,
+            "energy": 0.4616,
+            "occupied": false
+          },
+          {
+            "index": 12,
+            "energy": 0.5354,
+            "occupied": false
+          }
+        ],
+        "iterations": 8,
+        "seconds": 31.28,
+        "converged": true,
+        "jobDone": true,
+        "trace": [
+          {
+            "iteration": 1,
+            "energyRy": -62.23646874,
+            "accuracyRy": 0.34315207
+          },
+          {
+            "iteration": 2,
+            "energyRy": -62.25183567,
+            "accuracyRy": 0.06889334
+          },
+          {
+            "iteration": 3,
+            "energyRy": -62.2567986,
+            "accuracyRy": 0.01625875
+          },
+          {
+            "iteration": 4,
+            "energyRy": -62.25709667,
+            "accuracyRy": 0.00212807
+          },
+          {
+            "iteration": 5,
+            "energyRy": -62.25732919,
+            "accuracyRy": 0.0001055
+          },
+          {
+            "iteration": 6,
+            "energyRy": -62.25734515,
+            "accuracyRy": 0.00000911
+          },
+          {
+            "iteration": 7,
+            "energyRy": -62.25734625,
+            "accuracyRy": 0.00000578
+          },
+          {
+            "iteration": 8,
+            "energyRy": -62.25734643,
+            "accuracyRy": 5.7e-7
+          }
+        ]
+      },
+      {
+        "cutoffRy": 30,
+        "cellAngstrom": 14,
+        "totalEnergyRy": -62.2566154,
+        "homo": -6.1445,
+        "lumo": -2.5708,
+        "gap": 3.5736999999999997,
+        "electrons": 12,
+        "levels": [
+          {
+            "index": 1,
+            "energy": -26.926,
+            "occupied": true
+          },
+          {
+            "index": 2,
+            "energy": -15.7235,
+            "occupied": true
+          },
+          {
+            "index": 3,
+            "energy": -12.0932,
+            "occupied": true
+          },
+          {
+            "index": 4,
+            "energy": -10.9492,
+            "occupied": true
+          },
+          {
+            "index": 5,
+            "energy": -10.0224,
+            "occupied": true
+          },
+          {
+            "index": 6,
+            "energy": -6.1445,
+            "occupied": true
+          },
+          {
+            "index": 7,
+            "energy": -2.5708,
+            "occupied": false
+          },
+          {
+            "index": 8,
+            "energy": -0.5991,
+            "occupied": false
+          },
+          {
+            "index": 9,
+            "energy": -0.0126,
+            "occupied": false
+          },
+          {
+            "index": 10,
+            "energy": 0.1911,
+            "occupied": false
+          },
+          {
+            "index": 11,
+            "energy": 0.2467,
+            "occupied": false
+          },
+          {
+            "index": 12,
+            "energy": 0.2902,
+            "occupied": false
+          }
+        ],
+        "iterations": 8,
+        "seconds": 45.78,
+        "converged": true,
+        "jobDone": true,
+        "trace": [
+          {
+            "iteration": 1,
+            "energyRy": -62.23601579,
+            "accuracyRy": 0.34257784
+          },
+          {
+            "iteration": 2,
+            "energyRy": -62.24977627,
+            "accuracyRy": 0.06908265
+          },
+          {
+            "iteration": 3,
+            "energyRy": -62.25601216,
+            "accuracyRy": 0.0156752
+          },
+          {
+            "iteration": 4,
+            "energyRy": -62.25630595,
+            "accuracyRy": 0.00226753
+          },
+          {
+            "iteration": 5,
+            "energyRy": -62.2565825,
+            "accuracyRy": 0.00020179
+          },
+          {
+            "iteration": 6,
+            "energyRy": -62.25661462,
+            "accuracyRy": 0.00001057
+          },
+          {
+            "iteration": 7,
+            "energyRy": -62.25661529,
+            "accuracyRy": 0.00000804
+          },
+          {
+            "iteration": 8,
+            "energyRy": -62.2566154,
+            "accuracyRy": 8e-7
+          }
+        ]
+      },
+      {
+        "cutoffRy": 30,
+        "cellAngstrom": 16,
+        "totalEnergyRy": -62.25681985,
+        "homo": -6.1747,
+        "lumo": -2.6003,
+        "gap": 3.5744,
+        "electrons": 12,
+        "levels": [
+          {
+            "index": 1,
+            "energy": -26.9566,
+            "occupied": true
+          },
+          {
+            "index": 2,
+            "energy": -15.7538,
+            "occupied": true
+          },
+          {
+            "index": 3,
+            "energy": -12.1247,
+            "occupied": true
+          },
+          {
+            "index": 4,
+            "energy": -10.9776,
+            "occupied": true
+          },
+          {
+            "index": 5,
+            "energy": -10.0531,
+            "occupied": true
+          },
+          {
+            "index": 6,
+            "energy": -6.1747,
+            "occupied": true
+          },
+          {
+            "index": 7,
+            "energy": -2.6003,
+            "occupied": false
+          },
+          {
+            "index": 8,
+            "energy": -0.5872,
+            "occupied": false
+          },
+          {
+            "index": 9,
+            "energy": -0.1267,
+            "occupied": false
+          },
+          {
+            "index": 10,
+            "energy": 0.0736,
+            "occupied": false
+          },
+          {
+            "index": 11,
+            "energy": 0.1191,
+            "occupied": false
+          },
+          {
+            "index": 12,
+            "energy": 0.1455,
+            "occupied": false
+          }
+        ],
+        "iterations": 8,
+        "seconds": 60.22,
+        "converged": true,
+        "jobDone": true,
+        "trace": [
+          {
+            "iteration": 1,
+            "energyRy": -62.23581136,
+            "accuracyRy": 0.3431032
+          },
+          {
+            "iteration": 2,
+            "energyRy": -62.25166311,
+            "accuracyRy": 0.06842523
+          },
+          {
+            "iteration": 3,
+            "energyRy": -62.25620551,
+            "accuracyRy": 0.01611856
+          },
+          {
+            "iteration": 4,
+            "energyRy": -62.25659675,
+            "accuracyRy": 0.00197654
+          },
+          {
+            "iteration": 5,
+            "energyRy": -62.25680383,
+            "accuracyRy": 0.00006523
+          },
+          {
+            "iteration": 6,
+            "energyRy": -62.25681753,
+            "accuracyRy": 0.00000963
+          },
+          {
+            "iteration": 7,
+            "energyRy": -62.2568191,
+            "accuracyRy": 0.00000541
+          },
+          {
+            "iteration": 8,
+            "energyRy": -62.25681985,
+            "accuracyRy": 1.1e-7
+          }
+        ]
+      },
+      {
+        "cutoffRy": 30,
+        "cellAngstrom": 18,
+        "totalEnergyRy": -62.25496422,
+        "homo": -6.191,
+        "lumo": -2.6167,
+        "gap": 3.5743,
+        "electrons": 12,
+        "levels": [
+          {
+            "index": 1,
+            "energy": -26.9769,
+            "occupied": true
+          },
+          {
+            "index": 2,
+            "energy": -15.7717,
+            "occupied": true
+          },
+          {
+            "index": 3,
+            "energy": -12.1416,
+            "occupied": true
+          },
+          {
+            "index": 4,
+            "energy": -10.9945,
+            "occupied": true
+          },
+          {
+            "index": 5,
+            "energy": -10.0701,
+            "occupied": true
+          },
+          {
+            "index": 6,
+            "energy": -6.191,
+            "occupied": true
+          },
+          {
+            "index": 7,
+            "energy": -2.6167,
+            "occupied": false
+          },
+          {
+            "index": 8,
+            "energy": -0.5806,
+            "occupied": false
+          },
+          {
+            "index": 9,
+            "energy": -0.1888,
+            "occupied": false
+          },
+          {
+            "index": 10,
+            "energy": -0.0019,
+            "occupied": false
+          },
+          {
+            "index": 11,
+            "energy": 0.0374,
+            "occupied": false
+          },
+          {
+            "index": 12,
+            "energy": 0.0496,
+            "occupied": false
+          }
+        ],
+        "iterations": 8,
+        "seconds": 80.51,
+        "converged": true,
+        "jobDone": true,
+        "trace": [
+          {
+            "iteration": 1,
+            "energyRy": -62.23408799,
+            "accuracyRy": 0.3423982
+          },
+          {
+            "iteration": 2,
+            "energyRy": -62.2493862,
+            "accuracyRy": 0.06840214
+          },
+          {
+            "iteration": 3,
+            "energyRy": -62.25446927,
+            "accuracyRy": 0.01583732
+          },
+          {
+            "iteration": 4,
+            "energyRy": -62.25474472,
+            "accuracyRy": 0.0019943
+          },
+          {
+            "iteration": 5,
+            "energyRy": -62.25495068,
+            "accuracyRy": 0.00007287
+          },
+          {
+            "iteration": 6,
+            "energyRy": -62.25496363,
+            "accuracyRy": 0.00000724
+          },
+          {
+            "iteration": 7,
+            "energyRy": -62.25496384,
+            "accuracyRy": 0.00000434
+          },
+          {
+            "iteration": 8,
+            "energyRy": -62.25496422,
+            "accuracyRy": 1.2e-7
+          }
+        ]
+      }
+    ],
+    "referenceTrace": [
+      {
+        "iteration": 1,
+        "energyRy": -62.23601579,
+        "accuracyRy": 0.34257784
+      },
+      {
+        "iteration": 2,
+        "energyRy": -62.24977627,
+        "accuracyRy": 0.06908265
+      },
+      {
+        "iteration": 3,
+        "energyRy": -62.25601216,
+        "accuracyRy": 0.0156752
+      },
+      {
+        "iteration": 4,
+        "energyRy": -62.25630595,
+        "accuracyRy": 0.00226753
+      },
+      {
+        "iteration": 5,
+        "energyRy": -62.2565825,
+        "accuracyRy": 0.00020179
+      },
+      {
+        "iteration": 6,
+        "energyRy": -62.25661462,
+        "accuracyRy": 0.00001057
+      },
+      {
+        "iteration": 7,
+        "energyRy": -62.25661529,
+        "accuracyRy": 0.00000804
+      },
+      {
+        "iteration": 8,
+        "energyRy": -62.2566154,
+        "accuracyRy": 8e-7
+      }
+    ]
+  },
+  "ammonia": {
+    "cutoffSweep": [
+      {
+        "cutoffRy": 20,
+        "cellAngstrom": 14,
+        "totalEnergyRy": -31.5209728,
+        "homo": -6.1521,
+        "lumo": -0.8844,
+        "gap": 5.2677,
+        "electrons": 8,
+        "levels": [
+          {
+            "index": 1,
+            "energy": -21.7108,
+            "occupied": true
+          },
+          {
+            "index": 2,
+            "energy": -11.1684,
+            "occupied": true
+          },
+          {
+            "index": 3,
+            "energy": -11.1647,
+            "occupied": true
+          },
+          {
+            "index": 4,
+            "energy": -6.1521,
+            "occupied": true
+          },
+          {
+            "index": 5,
+            "energy": -0.8844,
+            "occupied": false
+          },
+          {
+            "index": 6,
+            "energy": -0.1952,
+            "occupied": false
+          },
+          {
+            "index": 7,
+            "energy": 0.1731,
+            "occupied": false
+          },
+          {
+            "index": 8,
+            "energy": 0.1743,
+            "occupied": false
+          },
+          {
+            "index": 9,
+            "energy": 0.2368,
+            "occupied": false
+          },
+          {
+            "index": 10,
+            "energy": 0.2867,
+            "occupied": false
+          }
+        ],
+        "iterations": 7,
+        "seconds": 19.33,
+        "converged": true,
+        "jobDone": true,
+        "trace": [
+          {
+            "iteration": 1,
+            "energyRy": -31.46166226,
+            "accuracyRy": 0.46466464
+          },
+          {
+            "iteration": 2,
+            "energyRy": -31.52442462,
+            "accuracyRy": 0.03618512
+          },
+          {
+            "iteration": 3,
+            "energyRy": -31.52017515,
+            "accuracyRy": 0.01235088
+          },
+          {
+            "iteration": 4,
+            "energyRy": -31.52091293,
+            "accuracyRy": 0.00021647
+          },
+          {
+            "iteration": 5,
+            "energyRy": -31.52096614,
+            "accuracyRy": 0.00003273
+          },
+          {
+            "iteration": 6,
+            "energyRy": -31.52097162,
+            "accuracyRy": 0.00000605
+          },
+          {
+            "iteration": 7,
+            "energyRy": -31.5209728,
+            "accuracyRy": 7.6e-7
+          }
+        ]
+      },
+      {
+        "cutoffRy": 25,
+        "cellAngstrom": 14,
+        "totalEnergyRy": -31.69517735,
+        "homo": -6.1451,
+        "lumo": -0.8486,
+        "gap": 5.2965,
+        "electrons": 8,
+        "levels": [
+          {
+            "index": 1,
+            "energy": -21.3644,
+            "occupied": true
+          },
+          {
+            "index": 2,
+            "energy": -11.2114,
+            "occupied": true
+          },
+          {
+            "index": 3,
+            "energy": -11.2074,
+            "occupied": true
+          },
+          {
+            "index": 4,
+            "energy": -6.1451,
+            "occupied": true
+          },
+          {
+            "index": 5,
+            "energy": -0.8486,
+            "occupied": false
+          },
+          {
+            "index": 6,
+            "energy": -0.1645,
+            "occupied": false
+          },
+          {
+            "index": 7,
+            "energy": 0.1888,
+            "occupied": false
+          },
+          {
+            "index": 8,
+            "energy": 0.1893,
+            "occupied": false
+          },
+          {
+            "index": 9,
+            "energy": 0.26,
+            "occupied": false
+          },
+          {
+            "index": 10,
+            "energy": 0.2935,
+            "occupied": false
+          }
+        ],
+        "iterations": 7,
+        "seconds": 25.85,
+        "converged": true,
+        "jobDone": true,
+        "trace": [
+          {
+            "iteration": 1,
+            "energyRy": -31.60077834,
+            "accuracyRy": 0.58919559
+          },
+          {
+            "iteration": 2,
+            "energyRy": -31.6985669,
+            "accuracyRy": 0.03755525
+          },
+          {
+            "iteration": 3,
+            "energyRy": -31.69430201,
+            "accuracyRy": 0.01256682
+          },
+          {
+            "iteration": 4,
+            "energyRy": -31.69513085,
+            "accuracyRy": 0.00025196
+          },
+          {
+            "iteration": 5,
+            "energyRy": -31.69516745,
+            "accuracyRy": 0.00005063
+          },
+          {
+            "iteration": 6,
+            "energyRy": -31.69517577,
+            "accuracyRy": 0.00001041
+          },
+          {
+            "iteration": 7,
+            "energyRy": -31.69517735,
+            "accuracyRy": 7.9e-7
+          }
+        ]
+      },
+      {
+        "cutoffRy": 30,
+        "cellAngstrom": 14,
+        "totalEnergyRy": -31.76301568,
+        "homo": -6.1379,
+        "lumo": -0.7726,
+        "gap": 5.3653,
+        "electrons": 8,
+        "levels": [
+          {
+            "index": 1,
+            "energy": -21.2302,
+            "occupied": true
+          },
+          {
+            "index": 2,
+            "energy": -11.2261,
+            "occupied": true
+          },
+          {
+            "index": 3,
+            "energy": -11.2219,
+            "occupied": true
+          },
+          {
+            "index": 4,
+            "energy": -6.1379,
+            "occupied": true
+          },
+          {
+            "index": 5,
+            "energy": -0.7726,
+            "occupied": false
+          },
+          {
+            "index": 6,
+            "energy": -0.0324,
+            "occupied": false
+          },
+          {
+            "index": 7,
+            "energy": 0.3272,
+            "occupied": false
+          },
+          {
+            "index": 8,
+            "energy": 0.328,
+            "occupied": false
+          },
+          {
+            "index": 9,
+            "energy": 0.4168,
+            "occupied": false
+          },
+          {
+            "index": 10,
+            "energy": 0.4579,
+            "occupied": false
+          }
+        ],
+        "iterations": 7,
+        "seconds": 36.56,
+        "converged": true,
+        "jobDone": true,
+        "trace": [
+          {
+            "iteration": 1,
+            "energyRy": -31.65232301,
+            "accuracyRy": 0.64783042
+          },
+          {
+            "iteration": 2,
+            "energyRy": -31.76625065,
+            "accuracyRy": 0.03846857
+          },
+          {
+            "iteration": 3,
+            "energyRy": -31.76193863,
+            "accuracyRy": 0.01329131
+          },
+          {
+            "iteration": 4,
+            "energyRy": -31.76300516,
+            "accuracyRy": 0.00059863
+          },
+          {
+            "iteration": 5,
+            "energyRy": -31.76298741,
+            "accuracyRy": 0.00010941
+          },
+          {
+            "iteration": 6,
+            "energyRy": -31.76301201,
+            "accuracyRy": 0.00002684
+          },
+          {
+            "iteration": 7,
+            "energyRy": -31.76301568,
+            "accuracyRy": 4.6e-7
+          }
+        ]
+      },
+      {
+        "cutoffRy": 40,
+        "cellAngstrom": 14,
+        "totalEnergyRy": -31.79309228,
+        "homo": -6.1358,
+        "lumo": -0.7436,
+        "gap": 5.3922,
+        "electrons": 8,
+        "levels": [
+          {
+            "index": 1,
+            "energy": -21.173,
+            "occupied": true
+          },
+          {
+            "index": 2,
+            "energy": -11.2326,
+            "occupied": true
+          },
+          {
+            "index": 3,
+            "energy": -11.2282,
+            "occupied": true
+          },
+          {
+            "index": 4,
+            "energy": -6.1358,
+            "occupied": true
+          },
+          {
+            "index": 5,
+            "energy": -0.7436,
+            "occupied": false
+          },
+          {
+            "index": 6,
+            "energy": 0.0374,
+            "occupied": false
+          },
+          {
+            "index": 7,
+            "energy": 0.391,
+            "occupied": false
+          },
+          {
+            "index": 8,
+            "energy": 0.3923,
+            "occupied": false
+          },
+          {
+            "index": 9,
+            "energy": 0.489,
+            "occupied": false
+          },
+          {
+            "index": 10,
+            "energy": 0.5408,
+            "occupied": false
+          }
+        ],
+        "iterations": 7,
+        "seconds": 48.89,
+        "converged": true,
+        "jobDone": true,
+        "trace": [
+          {
+            "iteration": 1,
+            "energyRy": -31.67449746,
+            "accuracyRy": 0.6762748
+          },
+          {
+            "iteration": 2,
+            "energyRy": -31.79619626,
+            "accuracyRy": 0.03946848
+          },
+          {
+            "iteration": 3,
+            "energyRy": -31.79194954,
+            "accuracyRy": 0.01356755
+          },
+          {
+            "iteration": 4,
+            "energyRy": -31.79307934,
+            "accuracyRy": 0.00069138
+          },
+          {
+            "iteration": 5,
+            "energyRy": -31.79305914,
+            "accuracyRy": 0.00012012
+          },
+          {
+            "iteration": 6,
+            "energyRy": -31.79308732,
+            "accuracyRy": 0.00003352
+          },
+          {
+            "iteration": 7,
+            "energyRy": -31.79309228,
+            "accuracyRy": 4.6e-7
+          }
+        ]
+      },
+      {
+        "cutoffRy": 50,
+        "cellAngstrom": 14,
+        "totalEnergyRy": -31.79529733,
+        "homo": -6.1369,
+        "lumo": -0.7359,
+        "gap": 5.401,
+        "electrons": 8,
+        "levels": [
+          {
+            "index": 1,
+            "energy": -21.1725,
+            "occupied": true
+          },
+          {
+            "index": 2,
+            "energy": -11.2351,
+            "occupied": true
+          },
+          {
+            "index": 3,
+            "energy": -11.2305,
+            "occupied": true
+          },
+          {
+            "index": 4,
+            "energy": -6.1369,
+            "occupied": true
+          },
+          {
+            "index": 5,
+            "energy": -0.7359,
+            "occupied": false
+          },
+          {
+            "index": 6,
+            "energy": 0.0691,
+            "occupied": false
+          },
+          {
+            "index": 7,
+            "energy": 0.4158,
+            "occupied": false
+          },
+          {
+            "index": 8,
+            "energy": 0.4173,
+            "occupied": false
+          },
+          {
+            "index": 9,
+            "energy": 0.5185,
+            "occupied": false
+          },
+          {
+            "index": 10,
+            "energy": 0.5777,
+            "occupied": false
+          }
+        ],
+        "iterations": 7,
+        "seconds": 59.45,
+        "converged": true,
+        "jobDone": true,
+        "trace": [
+          {
+            "iteration": 1,
+            "energyRy": -31.67641852,
+            "accuracyRy": 0.67747706
+          },
+          {
+            "iteration": 2,
+            "energyRy": -31.79837913,
+            "accuracyRy": 0.03907395
+          },
+          {
+            "iteration": 3,
+            "energyRy": -31.79419548,
+            "accuracyRy": 0.01358686
+          },
+          {
+            "iteration": 4,
+            "energyRy": -31.7952856,
+            "accuracyRy": 0.00069293
+          },
+          {
+            "iteration": 5,
+            "energyRy": -31.79526078,
+            "accuracyRy": 0.00012166
+          },
+          {
+            "iteration": 6,
+            "energyRy": -31.79529158,
+            "accuracyRy": 0.00003922
+          },
+          {
+            "iteration": 7,
+            "energyRy": -31.79529733,
+            "accuracyRy": 7.1e-7
+          }
+        ]
+      }
+    ],
+    "cellSweep": [
+      {
+        "cutoffRy": 30,
+        "cellAngstrom": 10,
+        "totalEnergyRy": -31.76351701,
+        "homo": -6.0444,
+        "lumo": -0.83,
+        "gap": 5.2144,
+        "electrons": 8,
+        "levels": [
+          {
+            "index": 1,
+            "energy": -21.1336,
+            "occupied": true
+          },
+          {
+            "index": 2,
+            "energy": -11.1319,
+            "occupied": true
+          },
+          {
+            "index": 3,
+            "energy": -11.1271,
+            "occupied": true
+          },
+          {
+            "index": 4,
+            "energy": -6.0444,
+            "occupied": true
+          },
+          {
+            "index": 5,
+            "energy": -0.83,
+            "occupied": false
+          },
+          {
+            "index": 6,
+            "energy": 0.5265,
+            "occupied": false
+          },
+          {
+            "index": 7,
+            "energy": 0.8287,
+            "occupied": false
+          },
+          {
+            "index": 8,
+            "energy": 0.8404,
+            "occupied": false
+          },
+          {
+            "index": 9,
+            "energy": 1.0152,
+            "occupied": false
+          },
+          {
+            "index": 10,
+            "energy": 1.0462,
+            "occupied": false
+          }
+        ],
+        "iterations": 8,
+        "seconds": 17.13,
+        "converged": true,
+        "jobDone": true,
+        "trace": [
+          {
+            "iteration": 1,
+            "energyRy": -31.65253969,
+            "accuracyRy": 0.64853947
+          },
+          {
+            "iteration": 2,
+            "energyRy": -31.76674839,
+            "accuracyRy": 0.03843749
+          },
+          {
+            "iteration": 3,
+            "energyRy": -31.76245956,
+            "accuracyRy": 0.01334351
+          },
+          {
+            "iteration": 4,
+            "energyRy": -31.76352651,
+            "accuracyRy": 0.00060008
+          },
+          {
+            "iteration": 5,
+            "energyRy": -31.76348467,
+            "accuracyRy": 0.00012153
+          },
+          {
+            "iteration": 6,
+            "energyRy": -31.76351163,
+            "accuracyRy": 0.00003489
+          },
+          {
+            "iteration": 7,
+            "energyRy": -31.76351709,
+            "accuracyRy": 0.00000106
+          },
+          {
+            "iteration": 8,
+            "energyRy": -31.76351701,
+            "accuracyRy": 1.2e-7
+          }
+        ]
+      },
+      {
+        "cutoffRy": 30,
+        "cellAngstrom": 12,
+        "totalEnergyRy": -31.76316748,
+        "homo": -6.1094,
+        "lumo": -0.7892,
+        "gap": 5.3202,
+        "electrons": 8,
+        "levels": [
+          {
+            "index": 1,
+            "energy": -21.2009,
+            "occupied": true
+          },
+          {
+            "index": 2,
+            "energy": -11.197,
+            "occupied": true
+          },
+          {
+            "index": 3,
+            "energy": -11.1927,
+            "occupied": true
+          },
+          {
+            "index": 4,
+            "energy": -6.1094,
+            "occupied": true
+          },
+          {
+            "index": 5,
+            "energy": -0.7892,
+            "occupied": false
+          },
+          {
+            "index": 6,
+            "energy": 0.1465,
+            "occupied": false
+          },
+          {
+            "index": 7,
+            "energy": 0.5131,
+            "occupied": false
+          },
+          {
+            "index": 8,
+            "energy": 0.5152,
+            "occupied": false
+          },
+          {
+            "index": 9,
+            "energy": 0.6457,
+            "occupied": false
+          },
+          {
+            "index": 10,
+            "energy": 0.7433,
+            "occupied": false
+          }
+        ],
+        "iterations": 7,
+        "seconds": 22.56,
+        "converged": true,
+        "jobDone": true,
+        "trace": [
+          {
+            "iteration": 1,
+            "energyRy": -31.65227472,
+            "accuracyRy": 0.64822191
+          },
+          {
+            "iteration": 2,
+            "energyRy": -31.7663942,
+            "accuracyRy": 0.0387113
+          },
+          {
+            "iteration": 3,
+            "energyRy": -31.76210219,
+            "accuracyRy": 0.01329884
+          },
+          {
+            "iteration": 4,
+            "energyRy": -31.76317605,
+            "accuracyRy": 0.00056187
+          },
+          {
+            "iteration": 5,
+            "energyRy": -31.76313475,
+            "accuracyRy": 0.00012533
+          },
+          {
+            "iteration": 6,
+            "energyRy": -31.76316218,
+            "accuracyRy": 0.00003132
+          },
+          {
+            "iteration": 7,
+            "energyRy": -31.76316748,
+            "accuracyRy": 6.4e-7
+          }
+        ]
+      },
+      {
+        "cutoffRy": 30,
+        "cellAngstrom": 14,
+        "totalEnergyRy": -31.76301568,
+        "homo": -6.1379,
+        "lumo": -0.7726,
+        "gap": 5.3653,
+        "electrons": 8,
+        "levels": [
+          {
+            "index": 1,
+            "energy": -21.2302,
+            "occupied": true
+          },
+          {
+            "index": 2,
+            "energy": -11.2261,
+            "occupied": true
+          },
+          {
+            "index": 3,
+            "energy": -11.2219,
+            "occupied": true
+          },
+          {
+            "index": 4,
+            "energy": -6.1379,
+            "occupied": true
+          },
+          {
+            "index": 5,
+            "energy": -0.7726,
+            "occupied": false
+          },
+          {
+            "index": 6,
+            "energy": -0.0324,
+            "occupied": false
+          },
+          {
+            "index": 7,
+            "energy": 0.3272,
+            "occupied": false
+          },
+          {
+            "index": 8,
+            "energy": 0.328,
+            "occupied": false
+          },
+          {
+            "index": 9,
+            "energy": 0.4168,
+            "occupied": false
+          },
+          {
+            "index": 10,
+            "energy": 0.4579,
+            "occupied": false
+          }
+        ],
+        "iterations": 7,
+        "seconds": 36.56,
+        "converged": true,
+        "jobDone": true,
+        "trace": [
+          {
+            "iteration": 1,
+            "energyRy": -31.65232301,
+            "accuracyRy": 0.64783042
+          },
+          {
+            "iteration": 2,
+            "energyRy": -31.76625065,
+            "accuracyRy": 0.03846857
+          },
+          {
+            "iteration": 3,
+            "energyRy": -31.76193863,
+            "accuracyRy": 0.01329131
+          },
+          {
+            "iteration": 4,
+            "energyRy": -31.76300516,
+            "accuracyRy": 0.00059863
+          },
+          {
+            "iteration": 5,
+            "energyRy": -31.76298741,
+            "accuracyRy": 0.00010941
+          },
+          {
+            "iteration": 6,
+            "energyRy": -31.76301201,
+            "accuracyRy": 0.00002684
+          },
+          {
+            "iteration": 7,
+            "energyRy": -31.76301568,
+            "accuracyRy": 4.6e-7
+          }
+        ]
+      },
+      {
+        "cutoffRy": 30,
+        "cellAngstrom": 16,
+        "totalEnergyRy": -31.7629956,
+        "homo": -6.1558,
+        "lumo": -0.7697,
+        "gap": 5.3861,
+        "electrons": 8,
+        "levels": [
+          {
+            "index": 1,
+            "energy": -21.2491,
+            "occupied": true
+          },
+          {
+            "index": 2,
+            "energy": -11.2451,
+            "occupied": true
+          },
+          {
+            "index": 3,
+            "energy": -11.2406,
+            "occupied": true
+          },
+          {
+            "index": 4,
+            "energy": -6.1558,
+            "occupied": true
+          },
+          {
+            "index": 5,
+            "energy": -0.7697,
+            "occupied": false
+          },
+          {
+            "index": 6,
+            "energy": -0.1198,
+            "occupied": false
+          },
+          {
+            "index": 7,
+            "energy": 0.2081,
+            "occupied": false
+          },
+          {
+            "index": 8,
+            "energy": 0.2084,
+            "occupied": false
+          },
+          {
+            "index": 9,
+            "energy": 0.2701,
+            "occupied": false
+          },
+          {
+            "index": 10,
+            "energy": 0.3062,
+            "occupied": false
+          }
+        ],
+        "iterations": 7,
+        "seconds": 45.78,
+        "converged": true,
+        "jobDone": true,
+        "trace": [
+          {
+            "iteration": 1,
+            "energyRy": -31.65223746,
+            "accuracyRy": 0.64799561
+          },
+          {
+            "iteration": 2,
+            "energyRy": -31.76621389,
+            "accuracyRy": 0.0383178
+          },
+          {
+            "iteration": 3,
+            "energyRy": -31.76194378,
+            "accuracyRy": 0.01329591
+          },
+          {
+            "iteration": 4,
+            "energyRy": -31.76299349,
+            "accuracyRy": 0.00060427
+          },
+          {
+            "iteration": 5,
+            "energyRy": -31.76296311,
+            "accuracyRy": 0.00011931
+          },
+          {
+            "iteration": 6,
+            "energyRy": -31.76299127,
+            "accuracyRy": 0.00003074
+          },
+          {
+            "iteration": 7,
+            "energyRy": -31.7629956,
+            "accuracyRy": 7.2e-7
+          }
+        ]
+      },
+      {
+        "cutoffRy": 30,
+        "cellAngstrom": 18,
+        "totalEnergyRy": -31.76266447,
+        "homo": -6.1644,
+        "lumo": -0.7708,
+        "gap": 5.393599999999999,
+        "electrons": 8,
+        "levels": [
+          {
+            "index": 1,
+            "energy": -21.258,
+            "occupied": true
+          },
+          {
+            "index": 2,
+            "energy": -11.2532,
+            "occupied": true
+          },
+          {
+            "index": 3,
+            "energy": -11.2489,
+            "occupied": true
+          },
+          {
+            "index": 4,
+            "energy": -6.1644,
+            "occupied": true
+          },
+          {
+            "index": 5,
+            "energy": -0.7708,
+            "occupied": false
+          },
+          {
+            "index": 6,
+            "energy": -0.1622,
+            "occupied": false
+          },
+          {
+            "index": 7,
+            "energy": 0.1262,
+            "occupied": false
+          },
+          {
+            "index": 8,
+            "energy": 0.1262,
+            "occupied": false
+          },
+          {
+            "index": 9,
+            "energy": 0.1737,
+            "occupied": false
+          },
+          {
+            "index": 10,
+            "energy": 0.1964,
+            "occupied": false
+          }
+        ],
+        "iterations": 7,
+        "seconds": 64.54,
+        "converged": true,
+        "jobDone": true,
+        "trace": [
+          {
+            "iteration": 1,
+            "energyRy": -31.65201773,
+            "accuracyRy": 0.64765204
+          },
+          {
+            "iteration": 2,
+            "energyRy": -31.76592839,
+            "accuracyRy": 0.03793386
+          },
+          {
+            "iteration": 3,
+            "energyRy": -31.76161744,
+            "accuracyRy": 0.01333904
+          },
+          {
+            "iteration": 4,
+            "energyRy": -31.76264271,
+            "accuracyRy": 0.00063027
+          },
+          {
+            "iteration": 5,
+            "energyRy": -31.76264253,
+            "accuracyRy": 0.00009318
+          },
+          {
+            "iteration": 6,
+            "energyRy": -31.7626628,
+            "accuracyRy": 0.00001556
+          },
+          {
+            "iteration": 7,
+            "energyRy": -31.76266447,
+            "accuracyRy": 4e-7
+          }
+        ]
+      }
+    ],
+    "referenceTrace": [
+      {
+        "iteration": 1,
+        "energyRy": -31.65232301,
+        "accuracyRy": 0.64783042
+      },
+      {
+        "iteration": 2,
+        "energyRy": -31.76625065,
+        "accuracyRy": 0.03846857
+      },
+      {
+        "iteration": 3,
+        "energyRy": -31.76193863,
+        "accuracyRy": 0.01329131
+      },
+      {
+        "iteration": 4,
+        "energyRy": -31.76300516,
+        "accuracyRy": 0.00059863
+      },
+      {
+        "iteration": 5,
+        "energyRy": -31.76298741,
+        "accuracyRy": 0.00010941
+      },
+      {
+        "iteration": 6,
+        "energyRy": -31.76301201,
+        "accuracyRy": 0.00002684
+      },
+      {
+        "iteration": 7,
+        "energyRy": -31.76301568,
+        "accuracyRy": 4.6e-7
+      }
+    ]
+  }
+}

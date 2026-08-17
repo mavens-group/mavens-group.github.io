@@ -1,80 +1,143 @@
-# Quantum ESPRESSO: HOMO–LUMO Gap of an Isolated Molecule
+# Quantum ESPRESSO: Molecular HOMO–LUMO Gap
 
-*This virtual lab teaches the workflow used to obtain frontier-orbital energies and a density of states from a plane-wave DFT calculation using completed Quantum ESPRESSO 7.5 runs.*
+*This virtual lab is an offline workbench built from completed Quantum ESPRESSO 7.5 calculations. It teaches the calculation, convergence, diagnosis, and interpretation workflow without claiming that a static web page can execute `pw.x`.*
 
-The lab bundles real `pw.x` eigenvalues and `dos.x` output for benzene, ethylene, formaldehyde, and ammonia, so it works on static hosting. The SCF and DOS tabs show the corresponding inputs with portable paths. Clicking **Run calculation** does not execute Quantum ESPRESSO in the browser; it loads and plots the matching completed dataset immediately.
+> For the full density-functional theory course treatment, use the companion **[DFT Class Notes](https://mavens-group.github.io/dft-notes/)** alongside this virtual lab.
 
-## 1. Objective
+## 1. Objectives
 
-Prepare a finite molecule in a periodic supercell, converge the plane-wave basis and cell size, run a self-consistent field (SCF) calculation with `pw.x`, and calculate
+After completing the lab, a student should be able to:
 
-$$E_{\mathrm{gap}}^{\mathrm{KS}} = \varepsilon_{\mathrm{LUMO}} - \varepsilon_{\mathrm{HOMO}}.$$
+1. construct an isolated-molecule calculation in a periodic supercell;
+2. converge the plane-wave cutoff and vacuum size independently;
+3. recognize SCF convergence in an iteration trace;
+4. obtain the HOMO, LUMO, and Kohn–Sham gap from occupied and empty eigenvalues;
+5. explain how Gaussian broadening converts discrete levels into a plotted DOS; and
+6. parse a locally produced `pw.x` output and identify common failures.
 
-## 2. Why a supercell is needed
+## 2. Kohn–Sham calculation
 
-Quantum ESPRESSO uses periodic boundary conditions. An isolated molecule is therefore represented by one molecule in a large cubic cell. Vacuum separates its periodic images. Too little vacuum produces artificial electrostatic and orbital interactions; increasing the cell until frontier eigenvalues stop changing is essential.
+Kohn–Sham density-functional theory replaces the interacting-electron problem by one-electron equations
 
-Only the $\Gamma$ point is needed for a sufficiently isolated molecule. A crystalline solid is different: its band gap must be found across a converged $k$-point mesh, and the valence-band maximum and conduction-band minimum may occur at different $k$ points.
+$$
+\left[-\frac{1}{2}\nabla^2+V_{\mathrm{ion}}(\mathbf r)+V_H[n](\mathbf r)+V_{\mathrm{xc}}[n](\mathbf r)\right]\psi_i(\mathbf r)
+=\varepsilon_i\psi_i(\mathbf r).
+$$
 
-## 3. Plane-wave and density cutoffs
+The electron density is reconstructed for a closed-shell system as
 
-`ecutwfc` truncates the plane-wave basis. A low cutoff makes the total energy and eigenvalues basis-dependent. `ecutrho` controls the charge-density basis and depends on pseudopotential type; the lab uses $8\,E_\mathrm{cut}^{\mathrm{wfc}}$ as a conservative teaching value for PAW data.
+$$n(\mathbf r)=2\sum_{i=1}^{N_e/2}|\psi_i(\mathbf r)|^2.$$
 
-Convergence must be demonstrated, not assumed: repeat calculations while increasing one parameter at a time and require the HOMO–LUMO gap to change by less than a chosen tolerance (for example, 0.05 eV).
+Because $V_H$ and $V_{\mathrm{xc}}$ depend on $n$, the equations are solved self-consistently:
 
-## 4. Input sections
+1. choose an initial density $n^{(0)}$;
+2. construct the Kohn–Sham potential;
+3. solve for $\psi_i$ and $\varepsilon_i$;
+4. form an output density $n_{\mathrm{out}}$;
+5. mix input and output densities; and
+6. repeat until the residual and energy meet `conv_thr`.
 
-- `&CONTROL` selects an SCF calculation and file locations.
-- `&SYSTEM` specifies the cell, atom count, cutoffs, occupations, and number of bands.
-- `&ELECTRONS` controls electronic convergence.
-- `ATOMIC_SPECIES` maps elements to consistent PBE pseudopotentials.
-- `ATOMIC_POSITIONS angstrom` supplies molecular geometry.
-- `K_POINTS gamma` performs the isolated-supercell calculation at $\Gamma$.
+The lab’s **Replay SCF trace** control reveals the total energy from each genuine archived iteration. It replays stored output; it does not simulate an SCF algorithm or execute QE in JavaScript.
 
-There must be at least one unoccupied band in `nbnd`; otherwise no LUMO is calculated.
+## 3. Plane waves, cutoffs, and pseudopotentials
 
-## 5. Identifying HOMO and LUMO
+Under periodic boundary conditions, each orbital is expanded in plane waves,
 
-For a non-spin-polarized, closed-shell system with fixed occupations, every occupied Kohn–Sham orbital contains two electrons. With $N_e$ valence electrons, orbital $N_e/2$ is the HOMO and the next orbital is the LUMO. In actual output, inspect the bands listed after `End of self-consistent calculation` or use `bands.x`/post-processing tools.
+$$\psi_i(\mathbf r)=\sum_{\mathbf G}c_{i\mathbf G}e^{i\mathbf G\cdot\mathbf r},$$
 
-Metals, open-shell molecules, fractional occupations, charged systems, and spin-polarized calculations require separate treatment. For spin-polarized systems, inspect both spin channels and define frontier levels using their occupations.
+retaining terms whose kinetic energy satisfies
 
-### Density of states
+$$\frac{1}{2}|\mathbf G|^2\le E_{\mathrm{cut}}^{\mathrm{wfc}}.$$
 
-After SCF, `dos.x` reads the saved eigenvalues and writes the total electronic density of states. The reference calculations use a 0.02 Ry Gaussian broadening. For a finite molecule the underlying spectrum is discrete, so the apparent peak widths are controlled by that numerical broadening and should not be interpreted as molecular lifetimes. The integrated DOS counts the states accumulated up to a given energy.
+Increasing `ecutwfc` enlarges the basis. `ecutrho` controls the charge-density grid; these PAW teaching inputs use $E_{\mathrm{cut}}^{\mathrm{rho}}=8E_{\mathrm{cut}}^{\mathrm{wfc}}$. A cutoff is acceptable only after the target observable—not merely whether the job finishes—has stabilized. Pseudopotentials must match the exchange–correlation functional and their recommended cutoffs must be checked for production work.
 
-### Visualizing the orbitals
+## 4. Isolated molecule in a periodic code
 
-An orbital isosurface is a surface of constant Kohn–Sham wavefunction amplitude. The two colors conventionally show opposite mathematical phases ($+$ and $-$), not positive and negative electric charge. Nodes occur where the wavefunction changes sign. In a real Quantum ESPRESSO workflow, run `pp.x` after the SCF calculation, select the desired Kohn–Sham state, export a three-dimensional grid (for example in cube or XSF format), and inspect it in a scientific visualizer. The browser lab uses qualitative, symmetry-inspired shapes; it does not reconstruct wavefunctions from the teaching eigenvalues.
+Quantum ESPRESSO repeats the unit cell. A molecule is approximated as isolated by centering it in a sufficiently large cubic cell. If the cell is too small, neighboring images interact and shift both total energy and frontier levels.
 
-## 6. What the result means
+The cutoff study holds the cell at 14 Å. The vacuum study holds `ecutwfc` at 30 Ry and changes the cell from 10 to 18 Å. This one-variable-at-a-time design makes the cause of each trend interpretable. A practical report should state a tolerance, for example
 
-The result is a **Kohn–Sham eigenvalue gap**. It is not automatically equal to either:
+$$|E_g(p_j)-E_g(p_{j-1})|<0.05\ \mathrm{eV},$$
 
-- the fundamental gap $I-A$ (ionization potential minus electron affinity), or
-- the optical excitation energy, which also includes electron–hole interaction and selection rules.
+and justify the cheapest parameter value satisfying it. A molecule in a large cell needs only the $\Gamma$ point; crystalline solids require a separately converged $k$-point mesh.
 
-Semilocal functionals such as PBE commonly underestimate excitation gaps because of self-interaction and the missing derivative discontinuity. More defensible comparisons may require $\Delta$SCF, hybrid functionals, GW, or time-dependent DFT, depending on the target observable.
+## 5. Reading the input
 
-## 7. Procedure
+- `&CONTROL` selects an SCF calculation and defines the prefix and working directories.
+- `&SYSTEM` defines the cell, atom and species counts, cutoffs, occupations, and number of bands.
+- `&ELECTRONS` sets the SCF threshold and mixing.
+- `ATOMIC_SPECIES` maps each species to a pseudopotential.
+- `ATOMIC_POSITIONS angstrom` supplies the centered geometry.
+- `K_POINTS gamma` samples the isolated supercell at $\Gamma$.
 
-1. Select a molecule and inspect its valence-electron count.
-2. Inspect the prepared SCF and DOS inputs.
-3. Click **Run calculation** to load the completed result for the selected molecule.
-4. Compare the HOMO–LUMO ladder with the broadened DOS and integrated DOS.
-5. Download the level and DOS CSV files if numerical analysis is required.
-6. Locate the highest occupied and first unoccupied eigenvalues, subtract them, and report the recorded settings, pseudopotentials, and functional.
+There must be enough `nbnd` values to include unoccupied orbitals. Otherwise the HOMO can be printed but the LUMO cannot be determined.
 
-## 8. Limitations
+## 6. HOMO, LUMO, and gap
 
-- Values are fixed results of completed 30 Ry, 14 Å PBE/PAW calculations; clicking Run loads the stored result and no native executable runs in the browser.
-- Molecular geometries are fixed and are not relaxed.
+For a neutral, non-spin-polarized, closed-shell molecule with fixed occupations, each orbital holds two electrons. The occupied orbital count is $N_e/2$. Therefore
+
+$$
+\varepsilon_{\mathrm{HOMO}}=\varepsilon_{N_e/2},\qquad
+\varepsilon_{\mathrm{LUMO}}=\varepsilon_{N_e/2+1},
+$$
+
+and the plotted quantity is
+
+$$E_g^{\mathrm{KS}}=\varepsilon_{\mathrm{LUMO}}-\varepsilon_{\mathrm{HOMO}}.$$
+
+Open-shell, spin-polarized, charged, fractionally occupied, and metallic systems need a more careful occupation analysis. The simple indexing rule used here does not apply unchanged.
+
+## 7. Density of states and broadening
+
+An ideal molecular spectrum is a sum of delta functions. The interactive plot replaces every level by a normalized Gaussian,
+
+$$
+D_\sigma(E)=2\sum_i\frac{1}{\sigma\sqrt{2\pi}}
+\exp\left[-\frac{(E-\varepsilon_i)^2}{2\sigma^2}\right].
+$$
+
+The factor two counts spin degeneracy. Its integral,
+
+$$N(E)=\int_{-\infty}^{E}D_\sigma(E')\,dE',$$
+
+approaches two additional states after crossing each non-degenerate orbital. Moving the broadening slider recomputes this curve in the browser from the archived eigenvalues. Broader peaks improve visual continuity but reduce spectral resolution; their width is not a molecular lifetime.
+
+The generated `dos.x` input expresses broadening as `degauss` in Ry, using $1\ \mathrm{Ry}=13.605693\ \mathrm{eV}$.
+
+## 8. Orbitals
+
+The two colors of an orbital isosurface represent opposite wavefunction phases, not positive and negative charge. Nodes are regions where the wavefunction changes sign. The browser’s orbital panels are intentionally labeled **qualitative**: eigenvalues alone cannot reconstruct a three-dimensional wavefunction.
+
+For quantitative surfaces, run `pp.x` after SCF, select the Kohn–Sham state (wavefunction contribution), export a cube or XSF grid, and inspect that volumetric data in a scientific visualizer.
+
+## 9. Using the workbench
+
+1. Select a molecule.
+2. Open **Cutoff study** and compare the gap and total-energy difference. Select an acceptable cutoff.
+3. Open **Vacuum study** and repeat for cell length.
+4. Inspect or download the generated `pw.x` and `dos.x` inputs.
+5. Replay the selected run’s archived SCF trace and verify convergence.
+6. Compare the occupied/unoccupied ladder with the interactive DOS.
+7. Change $\sigma$ and describe which features change and which do not.
+8. If you have a QE output, use **Import .out**. Parsing is local and no file leaves the browser.
+9. Use **Troubleshoot** to connect symptoms to input or convergence remedies.
+
+## 10. What the result does—and does not—mean
+
+The result is a ground-state PBE Kohn–Sham eigenvalue difference. It is not automatically the fundamental gap $I-A$, nor an optical excitation energy. Semilocal functionals omit the exact derivative discontinuity and commonly underestimate excitation gaps. Depending on the intended observable, a more defensible calculation may require $\Delta$SCF, a hybrid functional, GW, or time-dependent DFT.
+
+## 11. Reproducibility and limitations
+
+- The bundled sweep points are completed QE 7.5 PBE/PAW, $\Gamma$-point calculations; replay does not invoke a native executable.
+- Geometries are fixed rather than relaxed.
 - Only neutral, closed-shell, non-spin-polarized molecules are included.
-- PBE/PAW and $\Gamma$-point sampling are used.
-- Charged-cell corrections, dipole corrections, spin–orbit coupling, and symmetry effects are omitted.
+- The sweep is designed for teaching; production values must follow the chosen pseudopotential’s recommendations and a stated tolerance.
+- Qualitative orbital drawings are not volumetric QE results.
+- Charged-cell corrections, dipole corrections, spin–orbit coupling, and finite-temperature occupations are outside this lab.
 
 ## Further reading
 
+- MAVENs Group, **[Density Functional Theory Class Notes](https://mavens-group.github.io/dft-notes/)**.
 - P. Giannozzi *et al.*, *J. Phys.: Condens. Matter* **21**, 395502 (2009).
 - P. Giannozzi *et al.*, *J. Phys.: Condens. Matter* **29**, 465901 (2017).
-- Quantum ESPRESSO documentation for `pw.x`, `bands.x`, and pseudopotential selection.
+- Quantum ESPRESSO input documentation for `pw.x`, `dos.x`, and `pp.x`.

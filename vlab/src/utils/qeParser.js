@@ -19,6 +19,18 @@ export function parseQuantumEspressoOutput(text) {
   const totalEnergyMatch = lastMatch(output, /^!\s+total energy\s+=\s*([-+\d.Ee]+)\s+Ry/gim);
   const iterations = [...output.matchAll(/iteration #\s*(\d+)/gi)].map((m) => Number(m[1]));
 
+  const iterationHeaders = [...output.matchAll(/iteration #\s*(\d+)/gi)];
+  const scfTrace = iterationHeaders.map((match, index) => {
+    const block = output.slice(match.index, iterationHeaders[index + 1]?.index ?? output.length);
+    const energy = block.match(/total energy\s+=\s*([-+\d.Ee]+)\s+Ry/i);
+    const accuracy = block.match(/estimated scf accuracy\s+<\s*([-+\d.Ee]+)\s+Ry/i);
+    return {
+      iteration: Number(match[1]),
+      energyRy: energy ? Number(energy[1]) : null,
+      accuracyRy: accuracy ? Number(accuracy[1]) : null,
+    };
+  }).filter((point) => point.energyRy != null);
+
   let eigenvalues = [];
   const bandHeaders = [...output.matchAll(/bands \(ev\):\s*\n/gi)];
   if (bandHeaders.length) {
@@ -39,17 +51,22 @@ export function parseQuantumEspressoOutput(text) {
   }
 
   const errors = output.split("\n").filter((line) => /(?:Error in routine|%%%%%%%%%%%%|stopping \.\.\.|convergence NOT achieved)/i.test(line)).slice(-8);
+  const warnings = output.split("\n").filter((line) => /warning:/i.test(line)).slice(-8);
+  const occupiedCount = electrons == null ? 0 : Math.ceil(electrons / 2);
   return {
     program: output.match(/Program\s+PWSCF\s+v\.?(\S+)/i)?.[1] || null,
     jobDone: /JOB DONE\./i.test(output),
     scfConverged: /convergence has been achieved/i.test(output),
     electrons,
     eigenvalues,
+    levels: eigenvalues.map((energy, index) => ({ index: index + 1, energy, occupied: index < occupiedCount })),
     homo,
     lumo,
     gap: homo != null && lumo != null ? lumo - homo : null,
     totalEnergyRy: totalEnergyMatch ? Number(totalEnergyMatch[1]) : null,
     scfIterations: iterations.length ? Math.max(...iterations) : null,
+    scfTrace,
     errors,
+    warnings,
   };
 }
