@@ -246,73 +246,80 @@ export default function SchrodingerLab() {
               </p>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div className="bg-[var(--bg-surface)] border border-[var(--border)] rounded-2xl p-4">
-                <div className="flex items-center gap-2 text-sm font-medium text-[var(--text-secondary)] mb-3">
-                  <Sigma size={15} className="text-[var(--accent)]" /> Eigenvalue result
-                </div>
-                <div className="space-y-2 font-data text-xs">
-                  <div className="flex justify-between gap-3"><span className="text-[var(--text-quaternary)]">Numerov E</span><span>{solution.energy.toFixed(8)}</span></div>
-                  <div className="flex justify-between gap-3"><span className="text-[var(--text-quaternary)]">Analytic E</span><span>{solution.exactEnergy.toFixed(8)}</span></div>
-                  <div className="flex justify-between gap-3"><span className="text-[var(--text-quaternary)]">Relative error</span><span className="text-[var(--success)]">{formatScientific(solution.relativeError)}</span></div>
-                  <div className="flex justify-between gap-3"><span className="text-[var(--text-quaternary)]">Boundary residual</span><span>{formatScientific(solution.boundaryResidual)}</span></div>
-                </div>
+            <div className="bg-[var(--bg-surface)] border border-[var(--border)] rounded-2xl p-4">
+              <div className="flex items-center gap-2 text-sm font-medium text-[var(--text-secondary)] mb-4">
+                <Grid3X3 size={15} className="text-[var(--accent)]" /> Problem controls
               </div>
-              <div className="bg-[var(--bg-surface)] border border-[var(--border)] rounded-2xl p-4">
-                <div className="flex items-center gap-2 text-sm font-medium text-[var(--text-secondary)] mb-3">
-                  <CheckCircle2 size={15} className="text-[var(--success)]" /> State checks
+              <div className="grid grid-cols-1 md:grid-cols-[minmax(0,1fr)_minmax(240px,0.8fr)] gap-4 items-start">
+                <div>
+                  <label className="text-xs text-[var(--text-tertiary)] block mb-2">Quantum state</label>
+                  <div className="grid grid-cols-6 gap-1.5 mb-5">
+                    {levelStates.map((state) => (
+                      <button
+                        key={state}
+                        onClick={() => problem === "well" ? setWellState(state) : setOscillatorState(state)}
+                        className={`rounded-lg py-1.5 font-data text-xs transition-colors ${quantumNumber === state ? "bg-[var(--accent)] text-[var(--text-on-accent)]" : "bg-[var(--bg-surface-2)] text-[var(--text-tertiary)] hover:text-[var(--text-primary)]"}`}
+                      >
+                        {state}
+                      </button>
+                    ))}
+                  </div>
+
+                  {problem === "well" ? (
+                    <>
+                      <label className="flex justify-between text-xs text-[var(--text-tertiary)] mb-2">
+                        Well width L <span className="font-data text-[var(--accent-soft)]">{width.toFixed(2)}</span>
+                      </label>
+                      <input type="range" min={1} max={4} step={0.05} value={width} onChange={(event) => setWidth(Number(event.target.value))} className="w-full" />
+                    </>
+                  ) : (
+                    <>
+                      <label className="flex justify-between text-xs text-[var(--text-tertiary)] mb-2">
+                        Angular frequency ω <span className="font-data text-[var(--accent-soft)]">{omega.toFixed(2)}</span>
+                      </label>
+                      <input type="range" min={0.5} max={2} step={0.05} value={omega} onChange={(event) => setOmega(Number(event.target.value))} className="w-full" />
+                    </>
+                  )}
                 </div>
-                <div className="space-y-2 font-data text-xs">
-                  <div className="flex justify-between gap-3"><span className="text-[var(--text-quaternary)]">State</span><span>{problem === "well" ? `n = ${quantumNumber}` : `n = ${quantumNumber} (${quantumNumber % 2 === 0 ? "even" : "odd"})`}</span></div>
-                  <div className="flex justify-between gap-3"><span className="text-[var(--text-quaternary)]">Interior nodes</span><span>{solution.nodes}</span></div>
-                  <div className="flex justify-between gap-3"><span className="text-[var(--text-quaternary)]">Grid spacing Δx</span><span>{solution.step.toFixed(5)}</span></div>
-                  <div className="flex justify-between gap-3"><span className="text-[var(--text-quaternary)]">Normalization</span><span className="text-[var(--success)]">∫|ψ|²dx = 1</span></div>
-                </div>
+
+                {problem === "well" ? (
+                  <div className="rounded-xl bg-[var(--bg-surface-2)] border border-[var(--border)] p-3 text-xs text-[var(--text-tertiary)] leading-relaxed">
+                    <strong className="text-[var(--text-primary)]">Infinite square well</strong><br />
+                    V(x) = 0 for |x| &lt; L/2 and V(x) → ∞ outside. Allowed energies scale as n²/L².
+                  </div>
+                ) : (
+                  <div className="rounded-xl bg-[var(--bg-surface-2)] border border-[var(--border)] p-3 text-xs text-[var(--text-tertiary)] leading-relaxed">
+                    <strong className="text-[var(--text-primary)]">Harmonic oscillator</strong><br />
+                    V(x) = ½ω²x². Even and odd parity states are shot from x = 0 toward a finite approximation to infinity.
+                  </div>
+                )}
               </div>
             </div>
           </div>
 
           <div className="space-y-4">
             <div className="bg-[var(--bg-surface)] border border-[var(--border)] rounded-2xl p-4">
-              <div className="flex items-center gap-2 text-sm font-medium text-[var(--text-secondary)] mb-4">
-                <Grid3X3 size={15} className="text-[var(--accent)]" /> Problem controls
+              <div className="flex items-center gap-2 text-sm font-medium text-[var(--text-secondary)] mb-3">
+                <Sigma size={15} className="text-[var(--accent)]" /> Eigenvalue result
               </div>
-              <label className="text-xs text-[var(--text-tertiary)] block mb-2">Quantum state</label>
-              <div className="grid grid-cols-6 gap-1.5 mb-5">
-                {levelStates.map((state) => (
-                  <button
-                    key={state}
-                    onClick={() => problem === "well" ? setWellState(state) : setOscillatorState(state)}
-                    className={`rounded-lg py-1.5 font-data text-xs transition-colors ${quantumNumber === state ? "bg-[var(--accent)] text-[var(--text-on-accent)]" : "bg-[var(--bg-surface-2)] text-[var(--text-tertiary)] hover:text-[var(--text-primary)]"}`}
-                  >
-                    {state}
-                  </button>
-                ))}
+              <div className="space-y-2 font-data text-xs">
+                <div className="flex justify-between gap-3"><span className="text-[var(--text-quaternary)]">Numerov E</span><span>{solution.energy.toFixed(8)}</span></div>
+                <div className="flex justify-between gap-3"><span className="text-[var(--text-quaternary)]">Analytic E</span><span>{solution.exactEnergy.toFixed(8)}</span></div>
+                <div className="flex justify-between gap-3"><span className="text-[var(--text-quaternary)]">Relative error</span><span className="text-[var(--success)]">{formatScientific(solution.relativeError)}</span></div>
+                <div className="flex justify-between gap-3"><span className="text-[var(--text-quaternary)]">Boundary residual</span><span>{formatScientific(solution.boundaryResidual)}</span></div>
               </div>
+            </div>
 
-              {problem === "well" ? (
-                <>
-                  <label className="flex justify-between text-xs text-[var(--text-tertiary)] mb-2">
-                    Well width L <span className="font-data text-[var(--accent-soft)]">{width.toFixed(2)}</span>
-                  </label>
-                  <input type="range" min={1} max={4} step={0.05} value={width} onChange={(event) => setWidth(Number(event.target.value))} className="w-full mb-4" />
-                  <div className="rounded-xl bg-[var(--bg-surface-2)] border border-[var(--border)] p-3 text-xs text-[var(--text-tertiary)] leading-relaxed">
-                    <strong className="text-[var(--text-primary)]">Infinite square well</strong><br />
-                    V(x) = 0 for |x| &lt; L/2 and V(x) → ∞ outside. Allowed energies scale as n²/L².
-                  </div>
-                </>
-              ) : (
-                <>
-                  <label className="flex justify-between text-xs text-[var(--text-tertiary)] mb-2">
-                    Angular frequency ω <span className="font-data text-[var(--accent-soft)]">{omega.toFixed(2)}</span>
-                  </label>
-                  <input type="range" min={0.5} max={2} step={0.05} value={omega} onChange={(event) => setOmega(Number(event.target.value))} className="w-full mb-4" />
-                  <div className="rounded-xl bg-[var(--bg-surface-2)] border border-[var(--border)] p-3 text-xs text-[var(--text-tertiary)] leading-relaxed">
-                    <strong className="text-[var(--text-primary)]">Harmonic oscillator</strong><br />
-                    V(x) = ½ω²x². Even and odd parity states are shot from x = 0 toward a finite approximation to infinity.
-                  </div>
-                </>
-              )}
+            <div className="bg-[var(--bg-surface)] border border-[var(--border)] rounded-2xl p-4">
+              <div className="flex items-center gap-2 text-sm font-medium text-[var(--text-secondary)] mb-3">
+                <CheckCircle2 size={15} className="text-[var(--success)]" /> State checks
+              </div>
+              <div className="space-y-2 font-data text-xs">
+                <div className="flex justify-between gap-3"><span className="text-[var(--text-quaternary)]">State</span><span>{problem === "well" ? `n = ${quantumNumber}` : `n = ${quantumNumber} (${quantumNumber % 2 === 0 ? "even" : "odd"})`}</span></div>
+                <div className="flex justify-between gap-3"><span className="text-[var(--text-quaternary)]">Interior nodes</span><span>{solution.nodes}</span></div>
+                <div className="flex justify-between gap-3"><span className="text-[var(--text-quaternary)]">Grid spacing Δx</span><span>{solution.step.toFixed(5)}</span></div>
+                <div className="flex justify-between gap-3"><span className="text-[var(--text-quaternary)]">Normalization</span><span className="text-[var(--success)]">∫|ψ|²dx = 1</span></div>
+              </div>
             </div>
 
             <div className="bg-[var(--bg-surface)] border border-[var(--border)] rounded-2xl p-4">
