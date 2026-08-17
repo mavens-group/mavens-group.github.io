@@ -20,6 +20,7 @@ import {
   SunMedium,
   CheckCircle2,
   XCircle,
+  Download,
 } from "lucide-react";
 
 // ---------------------------------------------------------------------------
@@ -175,6 +176,15 @@ export default function UVVisLab() {
     ];
   }, [fitResult]);
 
+  const fitAudit = useMemo(() => {
+    if (!fitResult) return null;
+    const width = fitResult.hi - fitResult.lo;
+    const linear = fitResult.r2 >= 0.985;
+    const sensibleWidth = width >= 0.18 && width <= 0.75;
+    const positiveShift = fitResult.EgFit > mat.EgBulk;
+    return { width, linear, sensibleWidth, positiveShift, score: [linear, sensibleWidth, positiveShift].filter(Boolean).length };
+  }, [fitResult, mat.EgBulk]);
+
   const handleTaucClick = useCallback((hvClicked) => {
     setFitRange((prev) => {
       if (prev.start == null) return { start: hvClicked, end: null };
@@ -208,6 +218,15 @@ export default function UVVisLab() {
     setRevealed(false);
     setTypeGuess(null);
     setFitRange({ start: null, end: null });
+  }
+
+  function downloadText(filename, text) {
+    const url = URL.createObjectURL(new Blob([text], { type: "text/csv;charset=utf-8" }));
+    const anchor = document.createElement("a");
+    anchor.href = url;
+    anchor.download = filename;
+    anchor.click();
+    URL.revokeObjectURL(url);
   }
 
   const trueType = mat.n === 2 ? "direct" : "indirect";
@@ -290,10 +309,7 @@ export default function UVVisLab() {
           <div className="lg:col-span-2 space-y-4">
             {/* Intensity spectrum */}
             <div className="bg-[var(--bg-surface,#0f172a)] border border-[var(--border,#1e293b)] rounded-2xl p-4">
-              <div className="flex items-center gap-2 text-[var(--text-secondary,#cbd5e1)] text-sm font-medium mb-2">
-                <Crosshair size={15} className="text-[var(--accent,#2dd4bf)]" />
-                Absorbance (au)
-              </div>
+              <div className="flex flex-wrap items-center justify-between gap-2 mb-2"><div className="flex items-center gap-2 text-[var(--text-secondary,#cbd5e1)] text-sm font-medium"><Crosshair size={15} className="text-[var(--accent,#2dd4bf)]" />Absorbance (au)</div><button onClick={() => downloadText(`${materialKey}_${mode}_spectrum.csv`, `wavelength_nm,photon_energy_ev,absorbance_au\n${data.map((point) => `${point.x},${point.hv.toFixed(5)},${point.y.toFixed(5)}`).join("\n")}\n`)} className="flex items-center gap-1 text-xs text-[var(--text-quaternary,#64748b)] hover:text-[var(--accent,#2dd4bf)]"><Download size={12}/>Export CSV</button></div>
               <ResponsiveContainer width="100%" height={260}>
                 <LineChart data={data} margin={{ top: 8, right: 16, bottom: 4, left: -12 }}>
                   <CartesianGrid stroke="var(--border, #1e293b)" vertical={false} />
@@ -398,6 +414,11 @@ export default function UVVisLab() {
                   ? "Fit line extrapolates to the x-axis at the band gap."
                   : "That region isn't linear enough — try again, or toggle n."}
               </p>
+            </div>
+
+            <div className="bg-[var(--bg-surface,#0f172a)] border border-[var(--border,#1e293b)] rounded-2xl p-4">
+              <div className="text-[var(--text-secondary,#cbd5e1)] text-sm font-medium mb-3">Fit-quality audit</div>
+              {fitAudit ? <div className="space-y-2 text-xs"><div className="flex justify-between"><span className="text-[var(--text-tertiary,#94a3b8)]">fit-window width</span><span className={fitAudit.sensibleWidth ? "text-[var(--success,#34d399)] font-data" : "text-[var(--warn,#fbbf24)] font-data"}>{fitAudit.width.toFixed(3)} eV</span></div><div className="flex justify-between"><span className="text-[var(--text-tertiary,#94a3b8)]">linearity</span><span className={fitAudit.linear ? "text-[var(--success,#34d399)]" : "text-[var(--warn,#fbbf24)]"}>{fitAudit.linear ? "R² ≥ 0.985" : "check fit range"}</span></div><div className="flex justify-between"><span className="text-[var(--text-tertiary,#94a3b8)]">confinement check</span><span className={fitAudit.positiveShift ? "text-[var(--success,#34d399)]" : "text-[var(--warn,#fbbf24)]"}>{fitAudit.positiveShift ? "Eg > bulk gap" : "no positive shift"}</span></div><p className="pt-2 border-t border-[var(--border,#1e293b)] text-[var(--text-muted,#475569)]">Quality score: {fitAudit.score}/3. A high R² alone does not validate an unphysical fit window or size estimate.</p></div> : <p className="text-xs text-[var(--text-quaternary,#64748b)]">Choose a Tauc exponent and click two edge points to audit the fit before revealing the sample.</p>}
             </div>
           </div>
 
@@ -538,7 +559,7 @@ export default function UVVisLab() {
                 <div className={`flex items-center gap-2 text-sm font-medium mb-1 ${typeCorrect ? "text-[var(--success,#34d399)]" : "text-[var(--danger,#fb7185)]"}`}>
                   <Info size={14} /> {typeCorrect ? "Correct transition type" : "Not quite"} — {mat.label} is {trueType}
                 </div>
-                <p className="text-xs text-[var(--text-tertiary,#94a3b8)]">n (true) = {mat.n} for this material.</p>
+                <p className="text-xs text-[var(--text-tertiary,#94a3b8)]">n (true) = {nTrue}; selected n = {nSel}. {nSel === nTrue ? "The transform agrees with the transition assignment." : "Compare both transforms before accepting the fit."}</p>
               </div>
             )}
           </div>

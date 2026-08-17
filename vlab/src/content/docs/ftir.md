@@ -88,6 +88,16 @@ Attenuated Total Reflectance (ATR) is a sampling technique that measures changes
 *   **Unknown Mode:** Assign specific bands on an unlabelled spectrum using the functional-group reference table, decide on the capping agent and oxide core, and then reveal the answer.
 *   **Process of Elimination:** Build your analytical reasoning by evaluating both the presence and absence of structural bands together.
 
+### Evidence-first unknown-sample algorithm
+
+1. Measure at least three absorption minima, including one below 700 cm⁻¹ when a metal-oxide core assignment is required.
+2. Classify bands as organic-group evidence, lattice evidence, or non-diagnostic overlap.
+3. Form a capping-agent hypothesis from a **set** of bands and missing expected bands; no single broad O–H/N–H feature is decisive.
+4. Form a core hypothesis from the M–O region, while noting that this band alone is broad and should be treated as supporting evidence.
+5. Record both hypotheses before revealing the answer, then export the measured-band table for the record book.
+
+The unknown mode deliberately hides both the organic capping agent and the oxide core. It is therefore an identification exercise, not merely a functional-group lookup.
+
 ## 8. Limitations of This Simulation
 
 *(Note: State these limitations in any formal lab report)*

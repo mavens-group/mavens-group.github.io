@@ -15,10 +15,12 @@ import {
   RotateCcw,
   Eye,
   RefreshCw,
-  Info,
   X,
   FlaskConical,
   Radio,
+  Download,
+  CheckCircle2,
+  XCircle,
 } from "lucide-react";
 
 // ---------------------------------------------------------------------------
@@ -216,7 +218,19 @@ function linReg(points) {
   if (Math.abs(denom) < 1e-12) return null;
   const slope = (n * sxy - sx * sy) / denom;
   const intercept = (sy - slope * sx) / n;
-  return { slope, intercept };
+  const meanY = sy / n;
+  const ssTot = points.reduce((sum, point) => sum + (point.y - meanY) ** 2, 0);
+  const ssRes = points.reduce((sum, point) => sum + (point.y - (slope * point.x + intercept)) ** 2, 0);
+  return { slope, intercept, r2: ssTot < 1e-12 ? 0 : 1 - ssRes / ssTot };
+}
+
+function meanAndStd(values) {
+  if (!values.length) return null;
+  const mean = values.reduce((sum, value) => sum + value, 0) / values.length;
+  const variance = values.length > 1
+    ? values.reduce((sum, value) => sum + (value - mean) ** 2, 0) / (values.length - 1)
+    : 0;
+  return { mean, std: Math.sqrt(variance) };
 }
 
 function fitLattice(system, points) {
@@ -255,6 +269,7 @@ export default function PXRDLab() {
 
   const [seed, setSeed] = useState(7);
   const [unknown, setUnknown] = useState({ D: 18, strainPct: 0.32, impurity: null });
+  const [phaseGuess, setPhaseGuess] = useState(null);
   const [revealed, setRevealed] = useState(false);
   const [measured, setMeasured] = useState([]);
 
@@ -322,8 +337,9 @@ export default function PXRDLab() {
   );
 
   const whFit = useMemo(() => {
-    if (measured.length < 2) return null;
-    const pts = measured.map((m) => ({
+    const primaryMeasurements = measured.filter((measurement) => !measurement.isImpurity);
+    if (primaryMeasurements.length < 2) return null;
+    const pts = primaryMeasurements.map((m) => ({
       x: 4 * Math.sin(m.thetaRad),
       y: m.betaRad * Math.cos(m.thetaRad),
     }));
@@ -335,8 +351,14 @@ export default function PXRDLab() {
       points: pts,
       slope: r.slope,
       intercept: r.intercept,
+      r2: r.r2,
     };
   }, [measured]);
+
+  const scherrerStats = useMemo(
+    () => meanAndStd(measured.filter((measurement) => !measurement.isImpurity).map((measurement) => measurement.scherrerD)),
+    [measured],
+  );
 
   const latticeFit = useMemo(() => {
     const pts = measured
@@ -374,6 +396,7 @@ export default function PXRDLab() {
     });
     setSeed(Math.floor(rng() * 1e6));
     setRevealed(false);
+    setPhaseGuess(null);
     setMeasured([]);
   }
 
@@ -381,6 +404,7 @@ export default function PXRDLab() {
     setMode(m);
     setMeasured([]);
     setRevealed(false);
+    setPhaseGuess(null);
     if (m === "unknown") newUnknownSample();
   }
 
@@ -388,8 +412,20 @@ export default function PXRDLab() {
     setMaterialKey(k);
     setMeasured([]);
     setRevealed(false);
+    setPhaseGuess(null);
     setShowImpurityDemo(false);
   }
+
+  function downloadText(filename, text) {
+    const url = URL.createObjectURL(new Blob([text], { type: "text/csv;charset=utf-8" }));
+    const anchor = document.createElement("a");
+    anchor.href = url;
+    anchor.download = filename;
+    anchor.click();
+    URL.revokeObjectURL(url);
+  }
+
+  const phaseCorrect = revealed && phaseGuess === (unknown.impurity ? "impure" : "pure");
 
   return (
     <div className="min-h-screen bg-[var(--bg-canvas)] text-[var(--text-primary)] font-body">
@@ -595,8 +631,9 @@ export default function PXRDLab() {
 
             {/* Peak table */}
             <div className="bg-[var(--bg-surface)] border border-[var(--border)] rounded-2xl p-4">
-              <div className="text-[var(--text-secondary)] text-sm font-medium mb-3">
-                Measured peaks ({measured.length})
+              <div className="flex flex-wrap items-center justify-between gap-2 mb-3">
+                <div className="text-[var(--text-secondary)] text-sm font-medium">Measured peaks ({measured.length})</div>
+                {measured.length > 0 && <button onClick={() => downloadText(`${materialKey}_${mode}_peaks.csv`, `hkl,two_theta_deg,fwhm_measured_deg,fwhm_corrected_deg,scherrer_nm,assignment\n${measured.map((m) => `${m.hkl ? m.hkl.join("") : "unassigned"},${m.twoTheta.toFixed(4)},${m.fwhmDeg.toFixed(5)},${m.corrDeg.toFixed(5)},${m.scherrerD.toFixed(4)},${m.isImpurity ? "secondary" : "primary"}`).join("\n")}\n`)} className="flex items-center gap-1 text-xs text-[var(--text-quaternary)] hover:text-[var(--accent)]"><Download size={12}/>Export CSV</button>}
               </div>
               {measured.length === 0 ? (
                 <p className="text-sm text-[var(--text-quaternary)]">
@@ -719,19 +756,20 @@ export default function PXRDLab() {
                     <RefreshCw size={14} /> Generate new sample
                   </button>
                   <button
-                    disabled={measured.length < 2}
+                    disabled={measured.length < 3 || !phaseGuess}
                     onClick={() => setRevealed(true)}
                     className={`w-full flex items-center justify-center gap-2 text-sm font-medium rounded-lg py-2 transition-colors ${
-                      measured.length < 2
+                      measured.length < 3 || !phaseGuess
                         ? "bg-[var(--bg-surface-2)] text-[var(--text-muted)] cursor-not-allowed"
                         : "bg-[var(--surface-inverse)] text-[var(--text-on-inverse)] hover:bg-[var(--surface-inverse-hover)]"
                     }`}
                   >
                     <Eye size={14} /> Reveal ground truth
                   </button>
-                  {measured.length < 2 && (
-                    <p className="text-[11px] text-[var(--text-muted)] mt-2">Measure at least 2 peaks to reveal.</p>
-                  )}
+                  <div className="grid grid-cols-2 gap-1.5 mt-3">
+                    {["pure", "impure"].map((choice) => <button key={choice} onClick={() => setPhaseGuess(choice)} className={`rounded-lg py-1.5 text-xs font-medium ${phaseGuess === choice ? "bg-[var(--surface-inverse)] text-[var(--text-on-inverse)]" : "bg-[var(--bg-surface-2)] text-[var(--text-tertiary)]"}`}>{choice === "pure" ? "Phase-pure" : "Secondary phase"}</button>)}
+                  </div>
+                  {(measured.length < 3 || !phaseGuess) && <p className="text-[11px] text-[var(--text-muted)] mt-2">Measure at least 3 peaks and record a phase-purity hypothesis to reveal.</p>}
                 </>
               )}
             </div>
@@ -748,6 +786,10 @@ export default function PXRDLab() {
                   <div className="flex justify-between">
                     <span className="text-[var(--text-quaternary)]">&epsilon; (strain, W-H)</span>
                     <span className="text-[var(--text-primary)]">{whFit.strainPct.toFixed(3)}%</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-[var(--text-quaternary)]">linearity R²</span>
+                    <span className={whFit.r2 >= 0.98 ? "text-[var(--success)]" : "text-[var(--warn)]"}>{whFit.r2.toFixed(4)}</span>
                   </div>
                   {(mode === "explore" || revealed) && (
                     <div className="pt-2 mt-2 border-t border-[var(--border)] text-xs text-[var(--text-quaternary)]">
@@ -768,6 +810,17 @@ export default function PXRDLab() {
                   strain broadening.
                 </p>
               )}
+            </div>
+
+            <div className="bg-[var(--bg-surface)] border border-[var(--border)] rounded-2xl p-4">
+              <div className="text-[var(--text-secondary)] text-sm font-medium mb-3">Measurement consistency</div>
+              {scherrerStats ? (
+                <div className="space-y-2 font-data text-sm">
+                  <div className="flex justify-between"><span className="text-[var(--text-quaternary)]">mean Scherrer D</span><span>{scherrerStats.mean.toFixed(1)} nm</span></div>
+                  <div className="flex justify-between"><span className="text-[var(--text-quaternary)]">peak-to-peak SD</span><span className={scherrerStats.std / scherrerStats.mean < 0.15 ? "text-[var(--success)]" : "text-[var(--warn)]"}>{scherrerStats.std.toFixed(2)} nm</span></div>
+                  <p className="text-[11px] font-sans text-[var(--text-muted)]">A large spread flags overlap, anisotropic broadening, poor FWHM picks, or an invalid single-size assumption.</p>
+                </div>
+              ) : <p className="text-xs text-[var(--text-quaternary)]">Measure two primary peaks to compare their individual Scherrer sizes before trusting the Williamson–Hall fit.</p>}
             </div>
 
             {/* Lattice parameter */}
@@ -799,9 +852,9 @@ export default function PXRDLab() {
             </div>
 
             {mode === "unknown" && revealed && (
-              <div className="bg-[var(--bg-surface)] border border-[var(--success-border)] rounded-2xl p-4">
-                <div className="flex items-center gap-2 text-[var(--success)] text-sm font-medium mb-2">
-                  <Info size={14} /> Ground truth
+              <div className={`bg-[var(--bg-surface)] border rounded-2xl p-4 ${phaseCorrect ? "border-[var(--success-border)]" : "border-[var(--danger-border)]"}`}>
+                <div className={`flex items-center gap-2 text-sm font-medium mb-2 ${phaseCorrect ? "text-[var(--success)]" : "text-[var(--danger)]"}`}>
+                  {phaseCorrect ? <CheckCircle2 size={14} /> : <XCircle size={14} />} {phaseCorrect ? "Phase call supported" : "Revisit the phase call"}
                 </div>
                 <div className="text-xs text-[var(--text-tertiary)] space-y-1 font-data">
                   <div>D = {unknown.D} nm, &epsilon; = {unknown.strainPct}%</div>

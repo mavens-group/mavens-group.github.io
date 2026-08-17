@@ -49,3 +49,10 @@ flat pre-edge region, which pulled the intercept down and gave an
 unphysically small $E_g$. Restricting the fit strictly to the visibly
 linear rising portion of the Tauc plot (and checking $R^2$) fixed this —
 a reminder that the fit window matters as much as the data itself.
+
+## 6. Submission quality check
+
+- Attach the exported wavelength–energy–absorbance CSV.
+- State the selected Tauc exponent, fit window, slope, intercept, and $R^2$.
+- Explain why the fit window is physically appropriate, not merely linear.
+- Report the simplified confinement assumption and why the optical size need not equal PXRD crystallite size.

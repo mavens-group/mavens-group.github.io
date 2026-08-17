@@ -43,3 +43,10 @@ The unknown sample is assessed as **chitosan-capped ZnO** nanoparticles.
 The absence of a clear carbonyl band was the deciding clue here — it's
 easy to over-focus on which bands are present and forget that a missing
 band can be just as diagnostic.
+
+## 6. Submission quality check
+
+- Attach the exported measured-band CSV.
+- Include at least two organic-region observations and one lattice-region observation.
+- State both the capping-agent and oxide-core hypotheses before disclosure.
+- Separate direct evidence from supporting evidence and identify a plausible alternative that was ruled out.

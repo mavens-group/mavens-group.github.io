@@ -29,7 +29,7 @@ export const MEDIA_MANIFEST = {
   uvvis: [
     'uvvis_1.mp4',
     'uvvis_2.mp4',
-    // 'uvvis_3.mp4',
+    'uvvis_3.mp4',
     'uvvis_4.mp4',
   ],
   qe: [],

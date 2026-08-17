@@ -162,6 +162,17 @@ size via the confinement shift.*
    scale vs. a coherently-diffracting domain size — and needn't agree
    exactly even for a real, well-behaved sample.
 
+### Fit-quality gate
+
+Before accepting a Tauc intercept, use the displayed audit rather than $R^2$ alone:
+
+1. choose the transform ($n=2$ or $n=1/2$) with physically defensible linear behavior;
+2. use a finite rising-edge window, typically around 0.2–0.6 eV wide rather than the entire curve;
+3. check that the extrapolated gap and inferred blue shift are physically compatible with the simplified confinement model; and
+4. export the raw spectrum and state the selected transform, fit interval, $R^2$, $E_g$, and size estimate in the record book.
+
+A numerical line can be fitted to many parts of a spectrum. The audit makes the modelling assumptions visible before an answer is revealed.
+
 ## 6. Limitations of this simulation (state these in any report)
 
 - The core signal is generated directly from the ideal Tauc power law,

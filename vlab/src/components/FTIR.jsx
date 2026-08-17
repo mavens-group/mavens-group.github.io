@@ -21,6 +21,7 @@ import {
   Waves,
   CheckCircle2,
   XCircle,
+  Download,
 } from "lucide-react";
 
 // ---------------------------------------------------------------------------
@@ -203,24 +204,26 @@ export default function FTIRLab() {
   const [noiseOn, setNoiseOn] = useState(true);
 
   const [seed, setSeed] = useState(11);
-  const [unknown, setUnknown] = useState({ cappingKey: "OleicAcid", coverage: 1 });
+  const [unknown, setUnknown] = useState({ metalKey: "ZnO", cappingKey: "OleicAcid", coverage: 1 });
   const [guess, setGuess] = useState(null);
+  const [coreGuess, setCoreGuess] = useState(null);
   const [revealed, setRevealed] = useState(false);
   const [measured, setMeasured] = useState([]);
 
   const activeCappingKey = mode === "explore" ? cappingKey : unknown.cappingKey;
   const activeCoverage = mode === "explore" ? coverage : unknown.coverage;
+  const activeMetalKey = mode === "explore" ? metalKey : unknown.metalKey;
 
   const { data } = useMemo(
     () =>
       generateSpectrum({
-        metalKey,
+        metalKey: activeMetalKey,
         cappingKey: activeCappingKey,
         coverage: activeCoverage,
         noiseOn: mode === "unknown" ? true : noiseOn,
         seed,
       }),
-    [metalKey, activeCappingKey, activeCoverage, noiseOn, mode, seed]
+    [activeMetalKey, activeCappingKey, activeCoverage, noiseOn, mode, seed]
   );
 
   const handleMeasure = useCallback(
@@ -240,9 +243,11 @@ export default function FTIRLab() {
   function newUnknownSample() {
     const rng = makeRng(Date.now() % 100000);
     const key = CAP_KEYS[Math.floor(rng() * CAP_KEYS.length)];
-    setUnknown({ cappingKey: key, coverage: +(0.7 + rng() * 0.7).toFixed(2) });
+    const core = MAT_KEYS[Math.floor(rng() * MAT_KEYS.length)];
+    setUnknown({ metalKey: core, cappingKey: key, coverage: +(0.7 + rng() * 0.7).toFixed(2) });
     setSeed(Math.floor(rng() * 1e6));
     setGuess(null);
+    setCoreGuess(null);
     setRevealed(false);
     setMeasured([]);
   }
@@ -252,6 +257,7 @@ export default function FTIRLab() {
     setMeasured([]);
     setRevealed(false);
     setGuess(null);
+    setCoreGuess(null);
     if (m === "unknown") newUnknownSample();
   }
 
@@ -260,9 +266,20 @@ export default function FTIRLab() {
     setMeasured([]);
     setRevealed(false);
     setGuess(null);
+    setCoreGuess(null);
   }
 
-  const guessCorrect = revealed && guess === unknown.cappingKey;
+  const guessCorrect = revealed && guess === unknown.cappingKey && coreGuess === unknown.metalKey;
+  const hasLatticeMeasurement = measured.some((measurement) => measurement.center <= 700);
+
+  function downloadText(filename, text) {
+    const url = URL.createObjectURL(new Blob([text], { type: "text/csv;charset=utf-8" }));
+    const anchor = document.createElement("a");
+    anchor.href = url;
+    anchor.download = filename;
+    anchor.click();
+    URL.revokeObjectURL(url);
+  }
 
   return (
     <div className="min-h-screen bg-[var(--bg-canvas,#020617)] text-[var(--text-primary,#f1f5f9)] font-body">
@@ -306,9 +323,9 @@ export default function FTIRLab() {
             {MAT_KEYS.map((k) => (
               <button
                 key={k}
-                onClick={() => switchMetal(k)}
+                onClick={() => mode === "unknown" ? setCoreGuess(k) : switchMetal(k)}
                 className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-colors ${
-                  metalKey === k ? "bg-[var(--accent,#2dd4bf)] text-[var(--text-on-accent,#020617)]" : "text-[var(--text-tertiary,#94a3b8)] hover:text-[var(--text-primary,#f1f5f9)]"
+                  (mode === "unknown" ? coreGuess === k : metalKey === k) ? "bg-[var(--accent,#2dd4bf)] text-[var(--text-on-accent,#020617)]" : "text-[var(--text-tertiary,#94a3b8)] hover:text-[var(--text-primary,#f1f5f9)]"
                 }`}
               >
                 {METAL_OXIDES_IR[k].label}
@@ -334,7 +351,7 @@ export default function FTIRLab() {
             </button>
           </div>
           <span className="text-xs text-[var(--text-quaternary,#64748b)] font-data">
-            core: {METAL_OXIDES_IR[metalKey].full}
+            {mode === "unknown" ? "select a core hypothesis" : `core: ${METAL_OXIDES_IR[metalKey].full}`}
           </span>
         </div>
 
@@ -441,8 +458,9 @@ export default function FTIRLab() {
 
             {/* Peak table */}
             <div className="bg-[var(--bg-surface,#0f172a)] border border-[var(--border,#1e293b)] rounded-2xl p-4">
-              <div className="text-[var(--text-secondary,#cbd5e1)] text-sm font-medium mb-3">
-                Measured bands ({measured.length})
+              <div className="flex flex-wrap items-center justify-between gap-2 mb-3">
+                <div className="text-[var(--text-secondary,#cbd5e1)] text-sm font-medium">Measured bands ({measured.length})</div>
+                {measured.length > 0 && <button onClick={() => downloadText(`ftir_${mode}_bands.csv`, `center_cm-1,transmittance_percent,width_cm-1,assignment\n${measured.map((m) => `${m.center},${m.transmittance.toFixed(3)},${m.widthCm.toFixed(3)},${m.group?.label || "unassigned"}`).join("\n")}\n`)} className="flex items-center gap-1 text-xs text-[var(--text-quaternary,#64748b)] hover:text-[var(--accent,#2dd4bf)]"><Download size={12}/>Export CSV</button>}
               </div>
               {measured.length === 0 ? (
                 <p className="text-sm text-[var(--text-quaternary,#64748b)]">
@@ -560,8 +578,8 @@ export default function FTIRLab() {
                     Unknown sample
                   </div>
                   <p className="text-xs text-[var(--text-tertiary,#94a3b8)] mb-4">
-                    A batch of {METAL_OXIDES_IR[metalKey].label} nanoparticles was capped with an
-                    unidentified stabiliser during synthesis. Measure the spectrum and identify it.
+                    An unknown metal-oxide nanoparticle was capped with an unknown stabiliser. Measure
+                    organic and lattice bands, then identify both components.
                   </p>
                   <button
                     onClick={newUnknownSample}
@@ -591,19 +609,19 @@ export default function FTIRLab() {
                     ))}
                   </div>
                   <button
-                    disabled={measured.length < 2 || !guess}
+                    disabled={measured.length < 3 || !hasLatticeMeasurement || !guess || !coreGuess}
                     onClick={() => setRevealed(true)}
                     className={`w-full flex items-center justify-center gap-2 text-sm font-medium rounded-lg py-2 transition-colors ${
-                      measured.length < 2 || !guess
+                      measured.length < 3 || !hasLatticeMeasurement || !guess || !coreGuess
                         ? "bg-[var(--bg-surface-2,#1e293b)] text-[var(--text-muted,#475569)] cursor-not-allowed"
                         : "bg-[var(--surface-inverse,#f1f5f9)] text-[var(--text-on-inverse,#020617)] hover:bg-[var(--surface-inverse-hover,#ffffff)]"
                     }`}
                   >
                     <Eye size={14} /> Reveal answer
                   </button>
-                  {(measured.length < 2 || !guess) && (
+                  {(measured.length < 3 || !hasLatticeMeasurement || !guess || !coreGuess) && (
                     <p className="text-[11px] text-[var(--text-muted,#475569)] mt-2">
-                      Measure at least 2 bands and pick a guess to reveal.
+                      Measure at least 3 bands, including an M–O lattice band below 700 cm⁻¹, and record both hypotheses.
                     </p>
                   )}
                 </>
@@ -622,8 +640,7 @@ export default function FTIRLab() {
                   }`}
                 >
                   <Info size={14} />
-                  {guessCorrect ? "Correct" : "Not quite"} — it was{" "}
-                  {CAPPING_AGENTS[unknown.cappingKey].label}
+                  {guessCorrect ? "Complete identification correct" : "Revisit the evidence"} — it was {CAPPING_AGENTS[unknown.cappingKey].label}-capped {METAL_OXIDES_IR[unknown.metalKey].label}
                 </div>
                 <p className="text-xs text-[var(--text-tertiary,#94a3b8)]">{CAPPING_AGENTS[unknown.cappingKey].clue}</p>
               </div>

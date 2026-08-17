@@ -99,6 +99,17 @@ Extracting high-precision lattice parameters is confounded by angle-dependent sy
 
 *Figure 2 — Standard data analysis workflow for PXRD.*
 
+### Evidence-first workflow in this lab
+
+1. Measure at least three well-separated primary reflections and export the peak table.
+2. Check the individual Scherrer sizes before fitting: a large peak-to-peak spread warns that a single-size model is inadequate.
+3. Use the Williamson–Hall intercept for size and slope for microstrain; record the displayed $R^2$ rather than treating any two-point line as proof.
+4. Exclude assigned secondary-phase peaks from the Williamson–Hall and lattice fits.
+5. In an unknown, state a **phase-pure** or **secondary-phase present** hypothesis before revealing the result. Support it using unmatched/reflection evidence, not only peak broadening.
+6. Report the Cu K$\alpha_1$ wavelength, instrumental FWHM correction, measured peaks, fit quality, and limitations with every result.
+
+The CSV export is intended as the raw-data attachment for the record book. A plausible numerical answer without the measurement trail is not a defensible diffraction result.
+
 ## Advanced Techniques and Future Directions
 
 *   **Rietveld Refinement:** Fits the entire diffraction pattern rather than individual peaks, refining lattice constants, atomic coordinates, thermal factors, and preferred orientation (e.g., using the March–Dollase model).

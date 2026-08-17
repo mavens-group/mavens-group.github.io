@@ -49,3 +49,10 @@ The (102) peak gave a slightly larger apparent size than the others —
 worth remembering that a single mis-measured peak can skew a Williamson–Hall
 fit, which is why measuring several widely-spaced peaks matters more than
 measuring many clustered ones.
+
+## 7. Submission quality check
+
+- Attach the exported peak CSV and identify the reflections used in the Williamson–Hall fit.
+- State the W–H $R^2$, mean single-peak Scherrer size, and its spread.
+- State a phase-purity hypothesis before disclosure and justify it with peak evidence.
+- Distinguish crystallite size from particle or grain size.
