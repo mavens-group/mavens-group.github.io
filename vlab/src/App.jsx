@@ -11,6 +11,8 @@ import FTIRLab from './components/FTIR';
 import UVVisLab from './components/UVVIS'; // <-- CASE MUST MATCH the actual filename exactly
 import QuantumEspressoLab from './components/QuantumEspresso';
 import SchrodingerLab from './components/Schrodinger';
+import NonlinearBVPLab from './components/NonlinearBVP';
+import HallEffectLab from './components/HallEffect';
 
 // 2. Import each lab's documentation + sample record book (?raw loads the
 //    markdown file's text content at build time via Vite)
@@ -24,6 +26,10 @@ import qeDocs from './content/docs/qe.md?raw';
 import qeRecord from './content/records/qe.md?raw';
 import schrodingerDocs from './content/docs/schrodinger.md?raw';
 import schrodingerRecord from './content/records/schrodinger.md?raw';
+import nonlinearBvpDocs from './content/docs/nonlinear-bvp.md?raw';
+import nonlinearBvpRecord from './content/records/nonlinear-bvp.md?raw';
+import hallDocs from './content/docs/hall-effect.md?raw';
+import hallRecord from './content/records/hall-effect.md?raw';
 import { MEDIA_MANIFEST } from './content/media';
 
 // 3. Register all available apps in this array
@@ -78,6 +84,26 @@ const APPS = [
     docs: schrodingerDocs,
     record: schrodingerRecord,
     media: MEDIA_MANIFEST.schrodinger,
+  },
+  {
+    id: 'nonlinear-ode',
+    name: 'Non-linear ODE',
+    description: 'Large-Angle Pendulum, SHM Limit & Lorenz Attractor',
+    component: NonlinearBVPLab,
+    category: 'Numerical Methods',
+    docs: nonlinearBvpDocs,
+    record: nonlinearBvpRecord,
+    media: MEDIA_MANIFEST.nonlinearOde,
+  },
+  {
+    id: 'hall-effect',
+    name: 'Hall Effect Semiconductor Lab',
+    description: 'Hall Coefficient, Carrier Density & Mobility',
+    component: HallEffectLab,
+    category: 'Solid State Physics',
+    docs: hallDocs,
+    record: hallRecord,
+    media: MEDIA_MANIFEST.hallEffect,
   },
 ];
 
