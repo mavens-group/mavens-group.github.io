@@ -7,6 +7,58 @@ const PENDULUM_DEFAULTS = { angle: 45, length: 1, duration: 12 };
 const LORENZ_DEFAULTS = { sigma: 10, rho: 28, beta: 8 / 3, duration: 32 };
 const format = (value, digits = 3) => (Number.isFinite(value) ? value.toFixed(digits) : "—");
 
+const BVP_PYTHON = `import numpy as np
+import matplotlib.pyplot as plt
+from scipy.integrate import solve_bvp
+
+g, L = 9.81, 1.0
+theta0 = np.deg2rad(45.0)
+T = 2 * np.pi * np.sqrt(L / g)
+t = np.linspace(0, T / 4, 200)
+
+# y[0] = theta and y[1] = dtheta/dt
+def pendulum_bvp(t, y):
+    return np.vstack((y[1], -(g / L) * np.sin(y[0])))
+
+# Boundary conditions: angle theta0 at t=0 and zero angle at t=T/4.
+def boundary(ya, yb):
+    return np.array([ya[0] - theta0, yb[0]])
+
+guess = np.vstack((theta0 * (1 - t / t[-1]), -theta0 / t[-1] * np.ones_like(t)))
+solution = solve_bvp(pendulum_bvp, boundary, t, guess)
+if not solution.success:
+    raise RuntimeError(solution.message)
+
+tt = np.linspace(t[0], t[-1], 1000)
+theta = solution.sol(tt)[0]
+plt.plot(tt, np.rad2deg(theta))
+plt.xlabel("time (s)"); plt.ylabel("angle (degree)")
+plt.title("Nonlinear pendulum — BVP")
+plt.grid(); plt.show()`;
+
+const IVP_PYTHON = `import numpy as np
+import matplotlib.pyplot as plt
+from scipy.integrate import solve_ivp
+
+sigma, rho, beta = 10.0, 28.0, 8.0 / 3.0
+
+def lorenz(t, state):
+    x, y, z = state
+    return [sigma * (y - x), x * (rho - z) - y, x * y - beta * z]
+
+time = (0.0, 32.0)
+t_eval = np.linspace(*time, 6400)
+solution = solve_ivp(lorenz, time, [0.1, 0.0, 0.0], t_eval=t_eval,
+                     rtol=1e-8, atol=1e-10)
+if not solution.success:
+    raise RuntimeError(solution.message)
+
+x, y, z = solution.y
+plt.plot(x, z, lw=0.7)
+plt.xlabel("x"); plt.ylabel("z")
+plt.title("Lorenz attractor — IVP")
+plt.grid(); plt.show()`;
+
 function rk4(state, h, f) {
   const sum = (a, b, k = 1) => a.map((v, i) => v + k * b[i]);
   const k1 = f(state), k2 = f(sum(state, k1, h / 2)), k3 = f(sum(state, k2, h / 2)), k4 = f(sum(state, k3, h));
@@ -54,6 +106,9 @@ function Tip({ active, payload, label, unit = "" }) {
   if (!active || !payload?.length) return null;
   return <div className="rounded-lg border border-[var(--border)] bg-[var(--bg-surface)] px-3 py-2 font-data text-[11px] shadow-xl"><div className="mb-1 text-[var(--text-quaternary)]">t = {Number(label).toFixed(3)} s</div>{payload.map((p) => <div key={p.dataKey} className="flex justify-between gap-4" style={{ color: p.color }}><span>{p.name}</span><span>{Number(p.value).toFixed(4)}{unit}</span></div>)}</div>;
 }
+function PythonCode({ title, code }) {
+  return <section className="rounded-2xl border border-[var(--border)] bg-[var(--bg-surface)] p-4 md:p-5"><div className="mb-2 flex items-center justify-between gap-3"><div className="text-sm font-medium text-[var(--text-secondary)]">{title}</div><span className="font-data text-[10px] uppercase tracking-wider text-[var(--text-quaternary)]">Python · SciPy</span></div><p className="mb-3 text-xs text-[var(--text-quaternary)]">Run this companion script locally with <span className="font-data">numpy scipy matplotlib</span> installed.</p><pre className="max-h-[430px] overflow-auto rounded-xl border border-[var(--border)] bg-[var(--bg-canvas)] p-4 font-data text-[11px] leading-relaxed text-[var(--text-secondary)]"><code>{code}</code></pre></section>;
+}
 function Range({ children, value, change, min, max, step, suffix = "" }) { return <label className="block"><span className="mb-2 flex justify-between text-xs text-[var(--text-tertiary)]">{children}<span className="font-data text-[var(--accent-soft)]">{value.toFixed(step < 1 ? 2 : 0)}{suffix}</span></span><input className="ode-range w-full" type="range" min={min} max={max} step={step} value={value} onChange={(e) => change(Number(e.target.value))} /></label>; }
 
 function Pendulum() {
@@ -78,5 +133,5 @@ function Lorenz() {
 
 export default function NonlinearODELab() {
   const [tab, setTab] = useState("bvp");
-  return <div className="min-h-screen bg-[var(--bg-canvas)] text-[var(--text-primary)] font-body"><style>{`.font-body{font-family:Inter,ui-sans-serif,system-ui,sans-serif}.font-display{font-family:"Space Grotesk",Inter,ui-sans-serif,system-ui,sans-serif}.font-data{font-family:"JetBrains Mono",ui-monospace,monospace}.ode-range{accent-color:var(--accent)}.ode-range::-webkit-slider-runnable-track{height:4px;border-radius:9999px;background:var(--border)}.ode-range::-webkit-slider-thumb{-webkit-appearance:none;margin-top:-5px;width:14px;height:14px;border-radius:9999px;border:2px solid var(--bg-surface);background:var(--accent);box-shadow:0 0 0 3px var(--accent-glow)}`}</style><div className="mx-auto max-w-6xl p-4 md:p-7 lg:p-8"><header className="mb-5 flex flex-wrap items-start justify-between gap-4"><div><div className="mb-1 flex items-center gap-2 font-data text-xs uppercase tracking-[.16em] text-[var(--accent)]"><CircleDot size={14} /> Dynamics & nonlinear systems studio</div><h1 className="font-display text-2xl font-semibold tracking-tight md:text-3xl">Non-linear ODE</h1><p className="mt-1 max-w-2xl text-sm leading-relaxed text-[var(--text-tertiary)]">Explore nonlinear pendulum motion and its SHM limit, then move to deterministic chaos in a coupled initial-value system.</p></div><Badge><ArrowRight size={12} /> TWO EXPERIMENTS · ONE LAB</Badge></header><div className="mb-5 inline-flex rounded-xl border border-[var(--border)] bg-[var(--bg-surface)] p-1"><button onClick={() => setTab("bvp")} className={`flex items-center gap-2 rounded-lg px-4 py-2 text-sm font-medium ${tab === "bvp" ? "bg-[var(--accent)] text-[var(--text-on-accent)]" : "text-[var(--text-tertiary)] hover:text-[var(--text-primary)]"}`}><Orbit size={15} /> BVP · Pendulum</button><button onClick={() => setTab("ivp")} className={`flex items-center gap-2 rounded-lg px-4 py-2 text-sm font-medium ${tab === "ivp" ? "bg-[var(--accent)] text-[var(--text-on-accent)]" : "text-[var(--text-tertiary)] hover:text-[var(--text-primary)]"}`}><GitBranch size={15} /> IVP · Lorenz attractor</button></div>{tab === "bvp" ? <Pendulum /> : <Lorenz />}</div></div>;
+  return <div className="min-h-screen bg-[var(--bg-canvas)] text-[var(--text-primary)] font-body"><style>{`.font-body{font-family:Inter,ui-sans-serif,system-ui,sans-serif}.font-display{font-family:"Space Grotesk",Inter,ui-sans-serif,system-ui,sans-serif}.font-data{font-family:"JetBrains Mono",ui-monospace,monospace}.ode-range{accent-color:var(--accent)}.ode-range::-webkit-slider-runnable-track{height:4px;border-radius:9999px;background:var(--border)}.ode-range::-webkit-slider-thumb{-webkit-appearance:none;margin-top:-5px;width:14px;height:14px;border-radius:9999px;border:2px solid var(--bg-surface);background:var(--accent);box-shadow:0 0 0 3px var(--accent-glow)}`}</style><div className="mx-auto max-w-6xl p-4 md:p-7 lg:p-8"><header className="mb-5 flex flex-wrap items-start justify-between gap-4"><div><div className="mb-1 flex items-center gap-2 font-data text-xs uppercase tracking-[.16em] text-[var(--accent)]"><CircleDot size={14} /> Dynamics & nonlinear systems studio</div><h1 className="font-display text-2xl font-semibold tracking-tight md:text-3xl">Non-linear ODE</h1><p className="mt-1 max-w-2xl text-sm leading-relaxed text-[var(--text-tertiary)]">Explore nonlinear pendulum motion and its SHM limit, then move to deterministic chaos in a coupled initial-value system.</p></div><Badge><ArrowRight size={12} /> TWO EXPERIMENTS · ONE LAB</Badge></header><div className="mb-5 inline-flex rounded-xl border border-[var(--border)] bg-[var(--bg-surface)] p-1"><button onClick={() => setTab("bvp")} className={`flex items-center gap-2 rounded-lg px-4 py-2 text-sm font-medium ${tab === "bvp" ? "bg-[var(--accent)] text-[var(--text-on-accent)]" : "text-[var(--text-tertiary)] hover:text-[var(--text-primary)]"}`}><Orbit size={15} /> BVP · Pendulum</button><button onClick={() => setTab("ivp")} className={`flex items-center gap-2 rounded-lg px-4 py-2 text-sm font-medium ${tab === "ivp" ? "bg-[var(--accent)] text-[var(--text-on-accent)]" : "text-[var(--text-tertiary)] hover:text-[var(--text-primary)]"}`}><GitBranch size={15} /> IVP · Lorenz attractor</button></div>{tab === "bvp" ? <><Pendulum /><PythonCode title="Python companion: nonlinear pendulum BVP" code={BVP_PYTHON} /></> : <><Lorenz /><PythonCode title="Python companion: Lorenz IVP" code={IVP_PYTHON} /></>}</div></div>;
 }

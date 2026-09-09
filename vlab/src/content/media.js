@@ -34,6 +34,8 @@ export const MEDIA_MANIFEST = {
   qe: [],
   schrodinger: [],
   nonlinearOde: [],
-  hallEffect: ['hall_1.mp4',
-  'hall_2.mp4'],
+  hallEffect: [
+    'hall_1.mp4',
+    'hall_2.mp4'
+  ],
 };
