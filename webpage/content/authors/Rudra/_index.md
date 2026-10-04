@@ -1,6 +1,6 @@
 ---
 # Rudra Banerjee
-_build:
+build:
   render: always
   list: always
 

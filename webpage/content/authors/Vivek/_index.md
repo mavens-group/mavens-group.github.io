@@ -1,6 +1,6 @@
 ﻿---
 
-_build:
+build:
   render: always
   list: always
 

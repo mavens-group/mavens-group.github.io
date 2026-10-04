@@ -1,5 +1,5 @@
 ---
-_build:
+build:
   render: always
   list: always
 title: PhD Position
