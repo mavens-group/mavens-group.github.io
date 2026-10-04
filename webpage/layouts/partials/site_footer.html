@@ -1,5 +1,35 @@
 <footer class="site-footer">
-  <p class="powered-by">
-    &copy; {{ now.Year }} MAVENs Group
-  </p>
+  <div class="mf-grid">
+    <div class="mf-col">
+      <div class="mf-brand">MAVENs</div>
+      <p>Materials Advancing a Viable ENergy Future</p>
+      <p><a href="mailto:rudrab@srmist.edu.in">rudrab@srmist.edu.in</a></p>
+    </div>
+
+    <div class="mf-col">
+      <div class="mf-head">Address</div>
+      <p>
+        Department of Physics and Nanotechnology<br>
+        SRM Institute of Science and Technology<br>
+        Kattankulathur, Tamil Nadu 603 203, India
+      </p>
+    </div>
+
+    <nav class="mf-col" aria-label="Footer">
+      <div class="mf-head">Explore</div>
+      <ul class="mf-links">
+        {{- range site.Menus.main }}
+          {{- if .HasChildren }}
+            {{- range .Children }}
+        <li><a href="{{ .URL | relLangURL }}">{{ .Name }}</a></li>
+            {{- end }}
+          {{- else if ne .URL "/" }}
+        <li><a href="{{ .URL | relLangURL }}">{{ .Name }}</a></li>
+          {{- end }}
+        {{- end }}
+      </ul>
+    </nav>
+  </div>
+
+  <p class="mf-copy">&copy; {{ now.Year }} MAVENs Group</p>
 </footer>

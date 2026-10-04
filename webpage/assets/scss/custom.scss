@@ -171,7 +171,7 @@
    ========================================================================== */
 body {
   font-family: 'Fira Sans Extra Condensed', sans-serif;
-  font-weight: 300;
+  font-weight: 400;
   counter-reset: pub-counter; /* Reset publication counter once per page */
 }
 
@@ -190,6 +190,24 @@ h2, h3, h4 {
   font-size: 1.5rem;
   margin-top: 2.25rem;
   margin-bottom: 0.9rem;
+}
+
+/* Page title on banner-less single pages (h2 from layouts/partials/page_header.html):
+   sized like the other page titles rather than a section heading */
+.article > .article-container > h2:first-child {
+  font-size: 2.25rem;
+  font-weight: 300;
+  line-height: 1.2;
+  margin: 1.5rem 0 0.25rem;
+}
+
+/* The metadata block under it is empty on research posts; drop its spacing */
+.article > .article-container > h2:first-child + .article-container.pt-3 {
+  padding-top: 0 !important;
+}
+
+.article-metadata:empty {
+  display: none;
 }
 
 /* Centre the heading inside the universal (research page) content wrapper */
@@ -437,7 +455,7 @@ a:focus,
   }
 
   .portrait-title h3 {
-    font-size: 0.85rem !important;
+    font-size: 0.7rem !important; /* same as the theme's role size on full-size cards */
   }
 
   .people-interests {
@@ -737,9 +755,63 @@ a:focus,
   display: none;
 }
 
+/* ==========================================================================
+   SITE FOOTER (layouts/partials/site_footer.html)
+   ========================================================================== */
 .site-footer {
-  margin: 1rem 0 0;
+  margin: 3rem 0 0;
+  padding: 2.25rem 0 1.5rem;
+  border-top: 1px solid color-mix(in srgb, var(--m-outline) 20%, transparent);
   font-size: 0.85rem;
+  line-height: 1.55;
+  text-align: left;
+
+  p { margin: 0 0 0.5rem; text-align: left; font-size: inherit; }
+
+  .mf-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 1.4fr 1.4fr;
+    gap: 1.5rem 2.5rem;
+  }
+
+  .mf-brand {
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--m-on-surface);
+    margin-bottom: 0.25rem;
+  }
+
+  .mf-head {
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+  }
+
+  .mf-links {
+    font-size: inherit;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    columns: 2;
+    column-gap: 1.5rem;
+
+    li { font-size: inherit; margin-bottom: 0.3rem; break-inside: avoid; }
+    a { text-decoration: none; }
+    a:hover { text-decoration: underline; }
+  }
+
+  .mf-copy {
+    margin-top: 1.75rem;
+    font-size: 0.75rem;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .site-footer .mf-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 /* 1. The container link */
