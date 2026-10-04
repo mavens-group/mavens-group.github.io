@@ -1,8 +1,4 @@
-// MathJax Configuration
-//
-// v2 to v3 upgrade notes:
-// - The CommonHTML.linebreaks option is not yet implemented (but may be in a future release)
-// - The TeX.noUndefined.attributes option is not yet implemented (but may be in a future release)
+// Overrides Hugo Blox's config: adds the Fira math font so math matches the site's Fira Sans text.
 window.MathJax = {
   options: {
     // Don't render math in mindmaps as Markmap has its own math renderer.
@@ -22,5 +18,8 @@ window.MathJax = {
   },
   loader: {
     load: ['[tex]/noerrors'],
+  },
+  output: {
+    font: 'mathjax-fira',
   },
 };
