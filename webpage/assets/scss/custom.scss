@@ -186,7 +186,7 @@ h2, h3, h4 {
 }
 
 /* Home section titles (### in markdown blocks) match inner-page h2 size */
-.home-section:not(.wg-slider) h3 {
+.home-section.wg-markdown h3 {
   font-size: 1.5rem;
   margin-top: 2.25rem;
   margin-bottom: 0.9rem;
