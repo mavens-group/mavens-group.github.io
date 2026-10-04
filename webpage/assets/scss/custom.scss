@@ -180,6 +180,18 @@ h1, h2, h3, h4 {
   font-weight: 300;
 }
 
+/* h1 stays Light as display type; section headings get Regular for hierarchy */
+h2, h3, h4 {
+  font-weight: 400;
+}
+
+/* Home section titles (### in markdown blocks) match inner-page h2 size */
+.home-section:not(.wg-slider) h3 {
+  font-size: 1.5rem;
+  margin-top: 2.25rem;
+  margin-bottom: 0.9rem;
+}
+
 /* Centre the heading inside the universal (research page) content wrapper */
 .universal-wrapper h1 {
   text-align: center;
@@ -189,6 +201,135 @@ h1, h2, h3, h4 {
 /* Centre CTA button groups site-wide */
 .cta-group {
   justify-content: center;
+}
+
+
+/* ==========================================================================
+   M3 TOKENS
+   Seed #1565c0 via @material/material-color-utilities 0.3.0 (one-off script).
+   Dark surfaces lifted to neutral N12/N15/N17 to keep the existing dark-page lightness.
+   ========================================================================== */
+:root {
+  --m-primary: #005db7;
+  --m-on-primary: #ffffff;
+  --m-primary-container: #d6e3ff;
+  --m-on-primary-container: #001b3d;
+  --m-surface: #ffffff;
+  --m-on-surface: #191c21;
+  --m-surface-low: #f2f3fb;
+  --m-surface-mid: #ecedf6;
+  --m-outline: #727783;
+  --m-radius: 12px;
+
+  --primary: var(--m-primary);
+}
+
+body.dark {
+  --m-primary: #a9c7ff;
+  --m-on-primary: #003063;
+  --m-primary-container: #00468c;
+  --m-on-primary-container: #d6e3ff;
+  --m-surface: #1d2025;
+  --m-on-surface: #e1e2ea;
+  --m-surface-low: #23262c;
+  --m-surface-mid: #272a30;
+  --m-outline: #8c919d;
+
+  background-color: var(--m-surface);
+}
+
+.dark .navbar {
+  background: var(--m-surface);
+}
+
+.dark .dropdown-menu,
+.dark .dropdown-item {
+  background-color: var(--m-surface-low) !important;
+}
+
+/* ── Links ── */
+a,
+.dark a,
+h3.article-title a:hover,
+.dark h3.article-title a:hover,
+a:hover,
+a:focus,
+.dark a:not(.btn):hover,
+.dark a:not(.btn):focus {
+  color: var(--m-primary);
+}
+
+/* Theme's `a.summary-link { color: unset }` only won over `.dark a` by source order */
+.dark a.summary-link {
+  color: unset;
+}
+
+/* ── Buttons: filled (primary) and outlined ── */
+.btn-primary,
+.btn-outline-primary {
+  border-radius: var(--m-radius);
+  font-weight: 400;
+
+  strong, b { font-weight: inherit; }
+
+  &:not(.btn-sm) { font-size: 0.9rem; }
+}
+
+/* `.dark` selectors beat Hugo Blox's `.dark .btn-primary { color: initial }` */
+.btn-primary,
+.dark .btn-primary,
+.dark .btn.btn-primary.active {
+  color: var(--m-on-primary);
+  background-color: var(--m-primary);
+  border-color: var(--m-primary);
+}
+
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary.focus,
+.btn-primary:not(:disabled):not(.disabled):active,
+.btn-primary:not(:disabled):not(.disabled).active {
+  color: var(--m-on-primary);
+  background-color: color-mix(in srgb, var(--m-primary) 88%, var(--m-on-primary));
+  border-color: color-mix(in srgb, var(--m-primary) 88%, var(--m-on-primary));
+}
+
+.btn-outline-primary {
+  color: var(--m-primary);
+  background-color: transparent;
+  border-color: var(--m-outline);
+}
+
+.btn-outline-primary:hover,
+.btn-outline-primary:focus,
+.btn-outline-primary.focus,
+.btn-outline-primary:not(:disabled):not(.disabled):active,
+.btn-outline-primary:not(:disabled):not(.disabled).active {
+  color: var(--m-primary);
+  background-color: color-mix(in srgb, var(--m-primary) 8%, transparent);
+  border-color: var(--m-outline);
+}
+
+.btn-primary:focus,
+.btn-primary.focus,
+.btn-primary:not(:disabled):not(.disabled):active:focus,
+.btn-outline-primary:focus,
+.btn-outline-primary.focus,
+.btn-outline-primary:not(:disabled):not(.disabled):active:focus {
+  box-shadow: 0 0 0 0.2rem color-mix(in srgb, var(--m-primary) 40%, transparent);
+}
+
+/* ── Cards (research pillars on /research) ── */
+.card-simple,
+.dark .card-simple {
+  background: var(--m-surface-low);
+  border: none;
+  border-radius: var(--m-radius);
+  box-shadow: none;
+}
+
+.card-simple .img-hover-zoom {
+  border-radius: calc(var(--m-radius) / 2);
 }
 
 
@@ -221,6 +362,11 @@ h1, h2, h3, h4 {
   display: flex !important;
 }
 
+/* Out-ranks the logo's own inline `#mavens-logo` colour */
+.navbar #mavens-logo {
+  color: var(--m-on-surface);
+}
+
 
 /* ==========================================================================
    PUBLICATION LIST COUNTER
@@ -238,6 +384,23 @@ h1, h2, h3, h4 {
   position: absolute;
   left: 0;
   font-weight: 200;
+}
+
+/* Alternating rows on /publication. Isotope filtering hides items in place, so stripes can repeat while a filter is active. */
+#container-publications {
+  .pub-list-item.view-citation {
+    margin-bottom: 0 !important; /* inline 1rem gap would break the stripes */
+    padding: 0.6rem 0.75rem 0.6rem 2.75em;
+    border-radius: var(--m-radius);
+
+    &::before {
+      left: 0.75rem;
+    }
+  }
+
+  > .isotope-item:nth-child(even) .pub-list-item.view-citation {
+    background: var(--m-surface-mid);
+  }
 }
 
 
@@ -290,6 +453,25 @@ h1, h2, h3, h4 {
    Overrides Bootstrap's default slide translation with an opacity
    fade. All items are stacked absolutely; only .active is visible.
    ------------------------------------------------------------------ */
+
+/* ------------------------------------------------------------------
+   Scrims: text gets a dark gradient instead of dimming the whole image.
+   Photo slide: from the bottom, behind the title. Figure slides: from the
+   left, behind the left-aligned text, leaving the figures on the right clear.
+   ------------------------------------------------------------------ */
+.slider-fade .carousel-item > .position-absolute {
+  background: linear-gradient(90deg, rgba(0, 0, 0, 0.78) 0%, rgba(0, 0, 0, 0.55) 50%, rgba(0, 0, 0, 0.12) 100%);
+}
+
+.slider-fade .carousel-item:first-child > .position-absolute {
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.6) 0%, rgba(0, 0, 0, 0) 60%);
+}
+
+@media (max-width: 768px) {
+  .slider-fade .carousel-item:not(:first-child) > .position-absolute {
+    background: rgba(0, 0, 0, 0.68);
+  }
+}
 
 /* Hide prev/next arrow controls */
 .carousel-control-prev,
@@ -478,28 +660,26 @@ h1, h2, h3, h4 {
 
 
 /* ==========================================================================
-   MOBILE VIEWPORT FIX
-   Uses dvh (dynamic viewport height) to account for the browser address
-   bar on mobile, preventing the fullscreen hero from being clipped.
-   Falls back gracefully to the vh-based rules in _base.scss on older
-   browsers that do not support dvh.
+   HERO HEIGHT
+   ~72% of the viewport on desktop so content starts above the fold; taller on
+   phones where the figure slides' paragraphs need the room. dvh tracks the
+   mobile address bar; the vh lines are the fallback.
    ========================================================================== */
-@supports (min-height: 1dvh) {
+.home-section.fullscreen,
+.fullscreen,
+.no-navbar .home-section.fullscreen,
+.no-navbar .fullscreen {
+  min-height: 72vh;
+  min-height: 72dvh;
+}
+
+@media (max-width: 991.98px) {
   .home-section.fullscreen,
-  .fullscreen {
-    min-height: calc(100dvh - 70px);
-  }
-
-  @media (max-width: 768px) {
-    .home-section.fullscreen,
-    .fullscreen {
-      min-height: calc(100dvh - 50px);
-    }
-  }
-
+  .fullscreen,
   .no-navbar .home-section.fullscreen,
   .no-navbar .fullscreen {
-    min-height: 100dvh;
+    min-height: 82vh;
+    min-height: 82dvh;
   }
 }
 
@@ -515,15 +695,8 @@ h1, h2, h3, h4 {
 
   &:hover {
   transform: translateX(6px); /* Smooth slide to the right */
-  color: #007bff; /* Optional: change color on hover to match your link theme */
+  color: var(--m-primary);
   }
-}
-
-.home-section:nth-of-type(even) {
-  background: $sta-home-section-odd !important;
-}
-.dark .home-section:nth-of-type(even) {
-  background: $sta-dark-home-section-odd !important;
 }
 
 /* --- Reduce padding on all home sections --- */
@@ -535,17 +708,19 @@ h1, h2, h3, h4 {
   padding-top: 0 !important;  /* slider needs no top padding */
 }
 
-/* --- Uniform background --- */
-.home-section:nth-of-type(even) {
-  background: $sta-home-section-odd !important;
+/* Breathing room between the hero and the first content block, and before the footer */
+.home-section.wg-slider + .home-section {
+  padding-top: 2.5rem !important;
 }
 
-.dark .home-section:nth-of-type(even) {
-  background: $sta-dark-home-section-odd !important;
+/* --- Uniform background --- */
+.home-section,
+.dark .home-section {
+  background-color: var(--m-surface) !important;
 }
 
 .home-section:last-of-type {
-  padding-bottom: none !important;
+  padding-bottom: 3rem !important;
 }
 
 .universal-wrapper:empty {
@@ -599,7 +774,7 @@ h1, h2, h3, h4 {
   &:hover svg.feather,
   &:hover i[data-feather] {
     transform: translateX(5px);
-    color: #007bff;
+    color: var(--m-primary);
   }
 }
 
@@ -625,7 +800,7 @@ h1, h2, h3, h4 {
     transform: translateX(4px);
   }
   &:focus-visible {
-    outline: 2px solid #0066cc;
+    outline: 2px solid var(--m-primary);
     outline-offset: 2px;
     border-radius: 2px;
   }
@@ -655,8 +830,8 @@ h1, h2, h3, h4 {
     width: 78vw;
     max-width: 300px;
 
-    background: #ffffff;
-    color: #212529;
+    background: var(--m-surface);
+    color: var(--m-on-surface);
     border-right: 1px solid rgba(0, 0, 0, 0.08);
     box-shadow: 2px 0 12px rgba(0, 0, 0, 0.08);
 
@@ -685,14 +860,14 @@ h1, h2, h3, h4 {
     .nav-link {
       padding: 14px 24px !important;
       font-size: 1rem;
-      color: #212529 !important;
+      color: var(--m-on-surface) !important;
       border-radius: 0 !important;
       border-left: 3px solid transparent;
       transition: background 0.15s ease, border-left-color 0.15s ease;
 
       &:hover { background: rgba(0, 0, 0, 0.03); }
       &.active {
-        border-left-color: #0066cc;
+        border-left-color: var(--m-primary);
         background: rgba(0, 0, 0, 0.02);
         font-weight: 500;
       }
@@ -714,7 +889,7 @@ h1, h2, h3, h4 {
       .dropdown-item {
         padding: 11px 24px 11px 40px;
         font-size: 0.94rem;
-        color: #212529 !important;
+        color: var(--m-on-surface) !important;
         background: transparent;
         border-bottom: 1px solid rgba(0, 0, 0, 0.04);
         border-left: 3px solid transparent;
@@ -725,10 +900,10 @@ h1, h2, h3, h4 {
 
         /* Active submenu item highlight */
         &.active {
-          border-left-color: #0066cc;
-          background: rgba(0, 102, 204, 0.06);
+          border-left-color: var(--m-primary);
+          background: color-mix(in srgb, var(--m-primary) 8%, transparent);
           font-weight: 500;
-          color: #0066cc !important;
+          color: var(--m-primary) !important;
         }
       }
     }
@@ -739,32 +914,22 @@ h1, h2, h3, h4 {
     }
   }
 
-  /* ── Dark mode drawer (keyed off JS-added .drawer-dark class) ── */
+  /* ── Dark mode drawer: colours come from tokens; only overlays flip to white ── */
+  .dark .navbar-collapse,
   .navbar-collapse.drawer-dark {
-    background: #1e2433;
-    color: #d8dde6;
+    background: var(--m-surface); /* beats Hugo Blox's .dark .navbar-collapse */
     border-right: 1px solid rgba(255, 255, 255, 0.12);
     box-shadow: 4px 0 24px rgba(0, 0, 0, 0.7);
 
     .nav-item { border-bottom-color: rgba(255, 255, 255, 0.07); }
     .nav-link {
-      color: #d8dde6 !important;
       &:hover  { background: rgba(255, 255, 255, 0.04); }
-      &.active {
-        border-left-color: #6ea8e0;
-        background: rgba(255, 255, 255, 0.04);
-      }
+      &.active { background: rgba(255, 255, 255, 0.04); }
     }
     .dropdown-menu { background: rgba(255, 255, 255, 0.04); }
     .dropdown-item {
-      color: #d8dde6 !important;
       border-bottom-color: rgba(255, 255, 255, 0.05);
       &:hover, &:focus { background: rgba(255, 255, 255, 0.07); }
-      &.active {
-        border-left-color: #6ea8e0;
-        background: rgba(110, 168, 224, 0.12);
-        color: #6ea8e0 !important;
-      }
     }
   }
 
@@ -817,14 +982,8 @@ h1, h2, h3, h4 {
   flex-direction: column;
   gap: 0.35rem;
   padding: 0.9rem 1rem;
-  border-left: 2px solid currentColor;
-  opacity: 0.9;
-  transition: opacity 0.2s ease, border-left-width 0.2s ease;
-
-  &:hover {
-    opacity: 1;
-    border-left-width: 3px;
-  }
+  background: var(--m-surface-low);
+  border-radius: var(--m-radius);
 
   .theme-title {
     font-weight: 600;
@@ -843,15 +1002,17 @@ h1, h2, h3, h4 {
   }
 }
 
+.research-themes-grid--two {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+/* After the --two modifier so the single column wins on small screens */
 @media (max-width: 991.98px) {
-  .research-themes-grid {
+  .research-themes-grid,
+  .research-themes-grid--two {
     grid-template-columns: 1fr;
     gap: 0.75rem;
   }
-}
-
-.research-themes-grid--two {
-  grid-template-columns: repeat(2, 1fr);
 }
 /* ==========================================================================
    HIGHLIGHT LIST GRID
@@ -861,27 +1022,26 @@ h1, h2, h3, h4 {
 .highlight-list {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  column-gap: 1.25rem;
-  row-gap: 0;
-  margin-top: 0.25rem;
+  column-gap: 2.5rem;
+  margin-top: 0.5rem;
+  padding: 0.35rem 1.25rem;
+  background: var(--m-surface-low);
+  border-radius: var(--m-radius);
 }
 
 .highlight-item {
   display: flex;
   align-items: baseline;
   gap: 0.75rem;
-  padding: 0.3rem 0;
-  border-bottom: 1px solid rgba(128, 128, 128, 0.14);
+  padding: 0.6rem 0;
+  border-bottom: 1px solid color-mix(in srgb, var(--m-outline) 20%, transparent);
   font-size: 0.9rem;
   line-height: 1.35;
 
-  /* Vertical divider: sits to the right of every left-column item */
-  &:nth-child(odd) {
-    padding-right: 0.6rem;
-    border-right: 1px solid rgba(128, 128, 128, 0.14);
-  }
-  &:nth-child(even) {
-    padding-left: 0.5rem;
+  /* Last row (one or two items) has no divider */
+  &:last-child,
+  &:nth-last-child(2):nth-child(odd) {
+    border-bottom: none;
   }
 
   .highlight-date {
@@ -900,15 +1060,10 @@ h1, h2, h3, h4 {
 @media (max-width: 767.98px) {
   .highlight-list {
     grid-template-columns: 1fr;
-    column-gap: 0;
+    padding: 0.25rem 1rem;
   }
-  /* No divider when stacked to one column */
-  .highlight-item:nth-child(odd) {
-    padding-right: 0;
-    border-right: none;
-  }
-  .highlight-item:nth-child(even) {
-    padding-left: 0;
+  .highlight-item:nth-last-child(2):nth-child(odd) {
+    border-bottom: 1px solid color-mix(in srgb, var(--m-outline) 20%, transparent);
   }
 }
 
@@ -950,10 +1105,10 @@ h1, h2, h3, h4 {
    Paired with the markup in position/phd/index.md.
    ========================================================================== */
 .phd-timeline {
-  --tl-accent: #0066cc;
+  --tl-accent: var(--m-primary);
   --tl-phase1: #0f6e56;
   --tl-spine: rgba(128, 128, 128, 0.3);
-  --tl-disc-text: #ffffff;
+  --tl-disc-text: var(--m-on-primary);
   margin: 1.5rem 0;
   font-family: 'Fira Sans Extra Condensed', sans-serif;
 
@@ -1059,13 +1214,9 @@ h1, h2, h3, h4 {
   }
 }
 
-@media (prefers-color-scheme: dark) {
-  .phd-timeline {
-    --tl-spine: rgba(255, 255, 255, 0.2);
-    --tl-accent: #6ea8e0;
-    --tl-phase1: #5dcaa5;
-    --tl-disc-text: #1a1a1a;
-  }
+.dark .phd-timeline {
+  --tl-spine: rgba(255, 255, 255, 0.2);
+  --tl-phase1: #5dcaa5;
 }
 
 @media (max-width: 767.98px) {

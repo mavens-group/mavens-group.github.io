@@ -6,7 +6,6 @@
   # nav_font     = "Fira Sans Condensed"
   # mono_font    = "Fira Code"
 name = "custom"
-[[font_set]]
   heading_font = "Fira Sans Extra Condensed"
   body_font    = "Fira Sans Extra Condensed"
   nav_font     = "Fira Sans Extra Condensed"

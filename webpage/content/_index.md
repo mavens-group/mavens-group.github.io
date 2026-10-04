@@ -25,8 +25,6 @@ sections:
           background:
             image:
               filename: heusler.webp
-              filters:
-                brightness: 0.5
             position: center
             color: '#555'
 
@@ -37,8 +35,6 @@ sections:
           background:
             image:
               filename: mxene.webp
-              filters:
-                brightness: 0.5
             position: center
             color: '#555'
 
@@ -49,8 +45,6 @@ sections:
           background:
             image:
               filename: spin_coherence.webp
-              filters:
-                brightness: 0.5
             position: center
             color: '#555'
 
