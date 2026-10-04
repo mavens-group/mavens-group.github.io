@@ -224,6 +224,16 @@ h2, h3, h4 {
   --primary: var(--m-primary);
 }
 
+/* Declaring the scheme stops Chrome's "auto dark mode for web contents" from
+   repainting our own dark theme (it turned on-primary button text pale). */
+:root {
+  color-scheme: only light;
+}
+
+:root:has(body.dark) {
+  color-scheme: dark;
+}
+
 body.dark {
   --m-primary: #a9c7ff;
   --m-on-primary: #003063;
