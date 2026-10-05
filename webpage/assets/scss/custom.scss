@@ -972,56 +972,85 @@ a.mv-btn {
   }
 }
 /* ==========================================================================
-   HIGHLIGHT LIST GRID
-   Tighter 2-column grid on desktop; single column on mobile.
+   HIGHLIGHT CARDS
+   3-column card grid (2 on tablets, 1 on phones); the whole card is
+   clickable through a stretched title link.
    Paired with layouts/shortcodes/highlight-list.html (emits these classes).
    ========================================================================== */
 .highlight-list {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  column-gap: 2.5rem;
-  margin-top: 0.5rem;
-  padding: 0.35rem 1.25rem;
-  background: var(--m-surface-low);
-  border-radius: var(--m-radius);
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin: 1rem 0 2.5rem;
 }
 
 .highlight-item {
+  position: relative;
   display: flex;
-  align-items: baseline;
-  gap: 0.75rem;
-  padding: 0.6rem 0;
-  border-bottom: 1px solid color-mix(in srgb, var(--m-outline) 20%, transparent);
-  font-size: 0.9rem;
-  line-height: 1.35;
+  flex-direction: column;
+  gap: 0.35rem;
+  padding: 1rem 1.1rem 1.1rem;
+  background: var(--m-surface-low);
+  border-radius: var(--m-radius);
+  transition: background 0.15s;
 
-  /* Last row (one or two items) has no divider */
-  &:last-child,
-  &:nth-last-child(2):nth-child(odd) {
-    border-bottom: none;
-  }
+  &:hover { background: var(--m-surface-mid); }
 
   .highlight-date {
-    flex: 0 0 4.5rem;        /* fixed-width date column: titles wrap clean */
     font-size: 0.78rem;
     opacity: 0.75;
-    white-space: nowrap;
   }
 
   .highlight-link {
+    font-weight: 600;
+    font-size: 1rem;
+    line-height: 1.3;
     text-decoration: none;
+
+    &::after {               /* stretch the link over the card */
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+    }
     &:hover { text-decoration: underline; }
+    &:focus-visible { outline: none; }
+    &:focus-visible::after { outline: 2px solid var(--m-primary); outline-offset: 2px; }
+  }
+
+  .highlight-summary {
+    margin: 0;
+    font-size: 0.85rem;
+    line-height: 1.5;
+    opacity: 0.8;
   }
 }
 
-@media (max-width: 767.98px) {
-  .highlight-list {
-    grid-template-columns: 1fr;
-    padding: 0.25rem 1rem;
-  }
-  .highlight-item:nth-last-child(2):nth-child(odd) {
-    border-bottom: 1px solid color-mix(in srgb, var(--m-outline) 20%, transparent);
-  }
+@media (max-width: 991.98px) {
+  .highlight-list { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 575.98px) {
+  .highlight-list { grid-template-columns: 1fr; gap: 0.75rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .highlight-item { transition: none; }
+}
+
+/* ==========================================================================
+   HOME SECTION LEDES AND INTRO
+   One-line descriptions under the home section headings, and a readable
+   measure for the intro paragraphs that bridge the hero and the themes.
+   ========================================================================== */
+.section-lede {
+  margin: -0.25rem 0 0;
+  font-size: 0.95rem;
+  opacity: 0.8;
+}
+
+#intro p {
+  max-width: 75ch;
 }
 
 /* ==========================================================================

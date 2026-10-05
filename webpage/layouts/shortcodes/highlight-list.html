@@ -50,9 +50,10 @@
 {{ $pages = $pages | first 6 }}
 <div class="highlight-list">
 {{ range $pages }}
-  <div class="highlight-item">
+  <article class="highlight-item">
     <span class="highlight-date">{{ .Date.Format "Jan 2006" }}</span>
     <a class="highlight-link" href="{{ .RelPermalink }}">{{ .Title }}</a>
-  </div>
+    {{ with .Summary | plainify | htmlUnescape | strings.TrimSpace }}<p class="highlight-summary">{{ . | truncate 120 }}</p>{{ end }}
+  </article>
 {{ end }}
 </div>
