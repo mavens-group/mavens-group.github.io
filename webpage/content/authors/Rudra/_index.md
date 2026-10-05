@@ -104,3 +104,11 @@ His work uses *ab-initio* DFT and Monte Carlo simulations to compute electronic 
 He currently leads a group of four PhD researchers and three project students, and has graduated one PhD and eight MSc/BSc project students — with work spanning Heusler alloys, 2D catalysis, and qubit materials design.
 
 He teaches classical mechanics, mathematical physics, and computational physics at BSc/MSc level, and has developed a graduate-level monograph on [Density Functional Theory](../../blog/2024-07-dft) for PhD coursework — covering everything from the Hohenberg–Kohn theorem to practical implementation.
+
+<blockquote style="text-align:center; font-size: 2rem; font-style: italic; margin: 0; padding: 0;">
+  You may say <b>we</b> are dreamers
+  <footer style="text-align:center; font-size: 0.9rem; margin-top: 0.2rem;
+  margin-bottom:.2rem">
+    — <cite>John Lennon</cite>, <em>Imagine</em> (slightly modified)
+  </footer>
+</blockquote>
