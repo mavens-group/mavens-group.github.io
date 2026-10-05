@@ -367,6 +367,17 @@ a:focus,
   border-radius: calc(var(--m-radius) / 2);
 }
 
+/* Theme gives the title a 1rem top margin on top of the card's 15px padding,
+   leaving ~36px above the title against 20px at the sides */
+.card-simple .section-subheading.article-title {
+  margin-top: 0;
+}
+
+/* Summary sat 2px under the image; give it the same breathing room as the title */
+.card-simple .summary-link .article-style {
+  margin-top: 0.5rem;
+}
+
 
 /* ==========================================================================
    NAVBAR

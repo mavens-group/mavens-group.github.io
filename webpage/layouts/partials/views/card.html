@@ -21,7 +21,7 @@
 {{ end }}
 
 <div class="card-simple view-card">
-  <div class="section-subheading article-title mb-1 mt-3">
+  <div class="section-subheading article-title mb-2">
     <a href="{{ $link }}" {{ $target | safeHTMLAttr }}>{{ $item.Title }}</a>
   </div>
   {{ $resource := partial "blox-core/functions/get_featured_image.html" $item }}
