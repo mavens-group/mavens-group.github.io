@@ -6,54 +6,23 @@ date: 2022-10-24
 type: landing
 
 sections:
-  - block: slider
+  # ── Hero ───────────────────────────────────────────────────────────────────
+  - block: mv-hero
+    id: hero
     content:
-      slides:
-        - title: '<span style="display: inline-block; margin-top: 35vh;">MAVENs</span>'
-          content: Materials Advancing a Viable ENergy future
-          align: center
-          background:
-            image:
-              filename: group.webp
-            position: center
-            color: '#666'
-
-        - title: Disorder and Magnetism
-          content: |
-            What decides whether a disordered magnet orders, at what temperature, and how much magnetisation survives? In substituted FeRh, $d$-band filling — not lattice parameter — sets magnetic stability; in vacancy-doped TiS$_2$, half-metallic ferromagnetism appears only once the defect network percolates. <br><small>doi: [10.1016/j.jmmm.2026.174435](https://doi.org/10.1016/j.jmmm.2026.174435)<br>doi: [10.1103/nt5p-5n1p](https://doi.org/10.1103/nt5p-5n1p)</small>
-          align: left
-          background:
-            image:
-              filename: heusler.webp
-            position: center
-            color: '#555'
-
-        - title: Disorder and Catalysis
-          content: |
-            What sets where hydrogen binding falls relative to thermoneutrality on a disordered surface? In Janus MXenes, breaking sublattice symmetry brings the V/Nb pair within 0.03 eV of thermoneutral, and site-resolved $d$-band asymmetry predicts binding — until magnetic exchange splitting breaks the descriptor. <br><small>doi: [10.1039/d6ra02989b](https://doi.org/10.1039/d6ra02989b)<br>doi: [10.1016/j.physb.2025.417148](https://doi.org/10.1016/j.physb.2025.417148)</small>
-          align: left
-          background:
-            image:
-              filename: mxene.webp
-            position: center
-            color: '#555'
-
-        - title: Disorder and Coherence
-          content: |
-            Which hosts let a spin defect keep its phase long enough to matter? Screening ~45,000 stable compounds with interpretable machine learning recovers every experimentally verified host and adds 122 candidates beyond diamond, with dielectric screening validated against measured coherence times. <br><small>doi: [10.1103/bt3b-hp18](https://doi.org/10.1103/bt3b-hp18)</small>
-          align: left
-          background:
-            image:
-              filename: spin_coherence.webp
-            position: center
-            color: '#555'
-
-    design:
-      is_fullscreen: true
-      slide_height: ''
-      loop: true
-      interval: 5000
-      css_class: "slider-fade"
+      title: MAVENs
+      tagline: Materials Advancing a Viable ENergy future
+      thesis: Predicting how disorder controls functional behaviour, from first principles.
+      text: |
+        Led by [Dr. Rudra Banerjee](/author/rudra-banerjee/), [Department of Physics and Nanotechnology](https://www.srmist.edu.in/department/department-of-physics-and-nanotechnology/), [SRM Institute of Science and Technology](https://srmist.edu.in).
+      buttons:
+        - text: See our research
+          url: /research/
+          style: fill
+        - text: Open positions
+          url: /position/
+          style: tonal
+      caption: Host sites, substitutions, vacancies
 
   # ── About ──────────────────────────────────────────────────────────────────
   - block: markdown
