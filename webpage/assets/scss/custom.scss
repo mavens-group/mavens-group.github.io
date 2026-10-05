@@ -487,7 +487,7 @@ a:focus,
 
   h1 {
     font-size: clamp(2.6rem, 6vw, 4rem);
-    font-weight: 600;
+    font-weight: 300;                      /* matches the light page titles site-wide */
     line-height: 1;
     margin: 0 0 0.35rem;
   }
@@ -508,7 +508,7 @@ a:focus,
 }
 
 .mv-thesis {
-  font-weight: 600;
+  font-weight: 400;
   font-size: clamp(1.45rem, 2.8vw, 1.95rem);
   line-height: 1.2;
   max-width: 26ch;
@@ -533,7 +533,7 @@ a.mv-btn {
   display: inline-block;
   padding: 0.7rem 1.4rem;
   border-radius: 999px;
-  font-weight: 600;
+  font-weight: 400;                        /* same as .btn-primary site-wide */
   text-decoration: none;
   transition: filter 0.15s;
 
@@ -1016,13 +1016,6 @@ a.mv-btn {
     &:hover { text-decoration: underline; }
     &:focus-visible { outline: none; }
     &:focus-visible::after { outline: 2px solid var(--m-primary); outline-offset: 2px; }
-  }
-
-  .highlight-summary {
-    margin: 0;
-    font-size: 0.85rem;
-    line-height: 1.5;
-    opacity: 0.8;
   }
 }
 

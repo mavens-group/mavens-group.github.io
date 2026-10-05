@@ -19,8 +19,8 @@ sections:
         - text: See our research
           url: /research/
           style: fill
-        - text: Open positions
-          url: /position/
+        - text: Meet the group
+          url: /people/
           style: tonal
       caption: Host sites, substitutions, vacancies
 
@@ -43,7 +43,7 @@ sections:
       text: |
         ### Research Themes
 
-        <p class="section-lede">Three questions about what disorder does to a material, and the machine learning that lets us ask them at scale.</p>
+        <p class="section-lede">Three questions about what disorder does to a material, and the machine learning we use when there are too many compositions to compute directly.</p>
 
         <div class="research-themes-grid research-themes-grid--two">
           <div class="theme-card">

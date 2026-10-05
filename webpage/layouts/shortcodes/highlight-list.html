@@ -53,7 +53,6 @@
   <article class="highlight-item">
     <span class="highlight-date">{{ .Date.Format "Jan 2006" }}</span>
     <a class="highlight-link" href="{{ .RelPermalink }}">{{ .Title }}</a>
-    {{ with .Summary | plainify | htmlUnescape | strings.TrimSpace }}<p class="highlight-summary">{{ . | truncate 120 }}</p>{{ end }}
   </article>
 {{ end }}
 </div>
