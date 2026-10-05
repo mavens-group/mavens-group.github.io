@@ -22,10 +22,12 @@ sections:
         - text: Meet the group
           url: /people/
           style: outline-primary
-      # Figure: a file in assets/media/. Remove `image` to fall back to the lattice.
-      image: hero-charge-density.webp
-      image_alt: Charge-density isosurface
-      caption: Charge-density isosurface
+      # Figure: without `image` the hero shows the built-in lattice. To use a
+      # picture instead, put it in assets/media/ and set, e.g.:
+      # image: hero-charge-density.webp
+      # image_alt: Short description of the figure
+      # image_dark: optional-dark-variant.webp
+      caption: Host sites, substitutions, vacancies
 
   # ── Why disorder (bridge between hero and themes) ──────────────────────────
   - block: markdown
