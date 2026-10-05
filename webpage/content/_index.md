@@ -22,7 +22,10 @@ sections:
         - text: Meet the group
           url: /people/
           style: outline-primary
-      caption: Host sites, substitutions, vacancies
+      # Figure: a file in assets/media/. Remove `image` to fall back to the lattice.
+      image: hero-charge-density.webp
+      image_alt: Charge-density isosurface
+      caption: Charge-density isosurface
 
   # ── Why disorder (bridge between hero and themes) ──────────────────────────
   - block: markdown

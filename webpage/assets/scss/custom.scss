@@ -560,6 +560,30 @@ a:focus,
   }
 }
 
+.mv-hero-img {
+  display: block;
+  width: 100%;
+  max-width: 420px;
+  height: auto;
+  margin-left: auto;                       /* right-aligned in its column, like the caption */
+  border-radius: var(--m-radius);
+}
+
+.mv-hero-img-dark,
+body.dark .mv-hero-img-light { display: none; }
+body.dark .mv-hero-img-dark  { display: block; }
+
+.mv-hero-art:has(.mv-hero-img) figcaption {
+  max-width: 420px;
+  margin-left: auto;
+}
+
+/* Phones: a square figure at full width pushes the title below the fold */
+@media (max-width: 820px) {
+  .mv-hero-img,
+  .mv-hero-art:has(.mv-hero-img) figcaption { margin-left: 0; max-width: 240px; }
+}
+
 .mv-lattice {
   display: block;
   width: 100%;

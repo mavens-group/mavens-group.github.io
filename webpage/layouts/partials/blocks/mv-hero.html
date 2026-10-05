@@ -1,5 +1,7 @@
-{{/* MAVENs home hero: identity + thesis on the left, lattice figure on the right.
-     Copy lives in content/_index.md; the SVG is static (generated once, seed 3). */}}
+{{/* MAVENs home hero: identity + thesis on the left, figure on the right.
+     Copy lives in content/_index.md. The figure is `content.image` (a file in
+     assets/media/, optional `image_dark` for dark mode, `image_alt` for alt
+     text); without `image`, the static lattice SVG below is used (seed 3). */}}
 {{ $page := .wcPage }}
 {{ $c := .wcBlock.content }}
 <div class="mv-hero">
@@ -15,6 +17,24 @@
     {{ end }}
   </div>
   <figure class="mv-hero-art">
+    {{ with $c.image }}
+      {{ $img := resources.Get (printf "media/%s" .) }}
+      {{ if not $img }}{{ errorf "mv-hero: image `%s` not found in assets/media/" . }}{{ end }}
+      {{ $alt := $c.image_alt | default "" }}
+      {{ if ne $img.MediaType.SubType "svg" }}{{ $img = $img.Resize "1000x webp" }}{{ end }}
+      {{ $dark := "" }}
+      {{ with $c.image_dark }}
+        {{ $dark = resources.Get (printf "media/%s" .) }}
+        {{ if not $dark }}{{ errorf "mv-hero: image_dark `%s` not found in assets/media/" . }}{{ end }}
+        {{ if ne $dark.MediaType.SubType "svg" }}{{ $dark = $dark.Resize "1000x webp" }}{{ end }}
+      {{ end }}
+      <img class="mv-hero-img{{ with $dark }} mv-hero-img-light{{ end }}" src="{{ $img.RelPermalink }}"
+           {{ if ne $img.MediaType.SubType "svg" }}width="{{ $img.Width }}" height="{{ $img.Height }}"{{ end }} alt="{{ $alt }}" fetchpriority="high">
+      {{ with $dark }}
+      <img class="mv-hero-img mv-hero-img-dark" src="{{ .RelPermalink }}"
+           {{ if ne .MediaType.SubType "svg" }}width="{{ .Width }}" height="{{ .Height }}"{{ end }} alt="{{ $alt }}">
+      {{ end }}
+    {{ else }}
 <svg class="mv-lattice" viewBox="0 0 440 320" role="img" aria-label="A square lattice with substituted and vacant sites">
 <g class="mv-bonds">
 <line x1="20" y1="20" x2="60" y2="20"/>
@@ -264,6 +284,7 @@
 <circle class="mv-host" cx="380" cy="300" r="7"/>
 <circle class="mv-vac" cx="420" cy="300" r="8"/>
 </svg>
+    {{ end }}
     {{ with $c.caption }}<figcaption>{{ . }}</figcaption>{{ end }}
   </figure>
 </div>
