@@ -10,7 +10,7 @@
     {{ with $c.text }}<div class="mv-affil">{{ . | $page.RenderString }}</div>{{ end }}
     {{ with $c.buttons }}
     <div class="mv-actions">
-      {{ range . }}<a class="mv-btn mv-btn-{{ .style | default "fill" }}" href="{{ .url | relURL }}">{{ .text }}</a>{{ end }}
+      {{ range . }}<a class="btn btn-{{ .style | default "primary" }}" href="{{ .url | relURL }}">{{ .text }}</a>{{ end }}
     </div>
     {{ end }}
   </div>

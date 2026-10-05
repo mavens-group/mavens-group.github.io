@@ -303,6 +303,13 @@ a:focus,
   &:not(.btn-sm) { font-size: 0.9rem; }
 }
 
+/* One button height site-wide. Templates (cta shortcode, research list,
+   people block) add Bootstrap's `px-3 py-3`, whose !important 1rem padding
+   made buttons tall for their text; only !important can undo a utility. */
+.btn.py-3 {
+  padding: 0.55rem 1.25rem !important;
+}
+
 /* `.dark` selectors beat Hugo Blox's `.dark .btn-primary { color: initial }` */
 .btn-primary,
 .dark .btn-primary,
@@ -527,33 +534,8 @@ a:focus,
   display: flex;
   flex-wrap: wrap;
   gap: 0.75rem;
-}
 
-a.mv-btn {
-  display: inline-block;
-  padding: 0.7rem 1.4rem;
-  border-radius: 999px;
-  font-weight: 400;                        /* same as .btn-primary site-wide */
-  text-decoration: none;
-  transition: filter 0.15s;
-
-  &:hover, &:focus { text-decoration: none; filter: brightness(1.08); }
-  &:focus-visible { outline: 2px solid var(--m-primary); outline-offset: 3px; }
-}
-
-/* .mv-actions prefix: 0,3,1 + later source beats `.dark a:not(.btn):hover` */
-.mv-actions a.mv-btn-fill,
-.mv-actions a.mv-btn-fill:hover,
-.mv-actions a.mv-btn-fill:focus {
-  background: var(--m-primary);
-  color: var(--m-on-primary);
-}
-
-.mv-actions a.mv-btn-tonal,
-.mv-actions a.mv-btn-tonal:hover,
-.mv-actions a.mv-btn-tonal:focus {
-  background: color-mix(in srgb, var(--m-primary) 10%, transparent);
-  color: var(--m-primary);
+  .btn { padding: 0.55rem 1.25rem; }       /* same size as the site's CTAs */
 }
 
 .mv-hero-art {
@@ -576,10 +558,6 @@ a.mv-btn {
   .mv-host  { fill: color-mix(in srgb, var(--m-outline) 55%, var(--m-surface)); }
   .mv-sub   { fill: var(--m-primary); }
   .mv-vac   { fill: none; stroke: var(--m-outline); stroke-width: 1.5; stroke-dasharray: 3 3; }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  a.mv-btn { transition: none; }
 }
 
 

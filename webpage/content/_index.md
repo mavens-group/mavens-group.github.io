@@ -18,10 +18,10 @@ sections:
       buttons:
         - text: See our research
           url: /research/
-          style: fill
+          style: primary
         - text: Meet the group
           url: /people/
-          style: tonal
+          style: outline-primary
       caption: Host sites, substitutions, vacancies
 
   # ── Why disorder (bridge between hero and themes) ──────────────────────────
