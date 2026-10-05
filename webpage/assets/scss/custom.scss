@@ -266,8 +266,12 @@ body.dark {
   background-color: var(--m-surface);
 }
 
+/* The theme's dark navbar shadow is white (rgba 255/0.11), a pale glow on the
+   dark page; a hairline in the outline tone separates it instead */
 .dark .navbar {
   background: var(--m-surface);
+  box-shadow: none;
+  border-bottom: 1px solid color-mix(in srgb, var(--m-outline) 25%, transparent);
 }
 
 .dark .dropdown-menu,
@@ -390,7 +394,7 @@ a:focus,
   color: inherit;
 
   .navbar-logo-svg svg {
-    height: 40px;
+    height: 32px;
     width: auto;
     margin-right: 12px;
   }
@@ -402,6 +406,12 @@ a:focus,
     color: inherit;
     white-space: nowrap;
   }
+}
+
+/* Theme fixes the bar at 70px around a 40px logo; 56px (M3 compact top app
+   bar) with a 32px logo. The header is sticky, so content follows the height. */
+.navbar {
+  height: 56px;
 }
 
 .navbar-brand-mobile-wrapper .navbar-brand {
