@@ -1460,24 +1460,17 @@ body.dark .mv-hero-img-dark  { display: block; }
   > .mv-person { flex: 0 0 160px; }
 }
 
-/* Alumni > PhD: three cards a row on desktop (phones keep two) */
-@media (min-width: 576px) {
-  .mv-people-group--alumni-researchers .mv-people-grid > .mv-person {
-    flex-basis: calc((100% - 2rem) / 3);
-  }
-}
-
-/* People > Researchers: photo as a panel at the card's edge instead of a
-   circle. Phones: photo full width on top, text below (two cards a row).
-   From 768px: two cards a row, photo filling the left ~40% of the card at
-   full card height, text on the right. */
-.mv-people-group--researchers .mv-people-grid > .mv-person {
+/* Panel cards (PI, Researchers, PhD alumni; .mv-person--panel): the photo
+   sits at the card edge instead of in a circle. Phones: photo full width on
+   top, text below, two cards a row. From 768px: two cards a row, photo
+   filling the left 40% at full card height, text on the right. */
+.mv-people-grid > .mv-person--panel {
   padding: 0;
   overflow: hidden;                        /* the card's radius clips the photo */
   align-items: stretch;
 }
 
-.mv-people-group--researchers .mv-person-photo {
+.mv-person--panel .mv-person-photo {
   display: block;
   width: 100%;
   height: auto;
@@ -1488,18 +1481,18 @@ body.dark .mv-hero-img-dark  { display: block; }
   object-position: 50% 25%;                /* keep heads in frame */
 }
 
-.mv-people-group--researchers .mv-person-text {
+.mv-person--panel .mv-person-text {
   padding: 0.9rem 0.75rem 0.75rem;
 }
 
 @media (min-width: 768px) {
-  .mv-people-group--researchers .mv-people-grid > .mv-person {
+  .mv-people-grid > .mv-person--panel {
     flex-basis: calc((100% - 1rem) / 2);
     flex-direction: row;
     text-align: left;
   }
 
-  .mv-people-group--researchers .mv-person-photo {
+  .mv-person--panel .mv-person-photo {
     flex: 0 0 40%;
     width: 40%;
     height: auto;
@@ -1507,12 +1500,12 @@ body.dark .mv-hero-img-dark  { display: block; }
     aspect-ratio: auto;
   }
 
-  .mv-people-group--researchers .mv-person-text {
+  .mv-person--panel .mv-person-text {
     align-self: center;
     padding: 1.25rem 1.25rem 1rem;
   }
 
-  .mv-people-group--researchers .mv-person-social {
+  .mv-person--panel .mv-person-social {
     justify-content: flex-start;
     margin-left: -6px;                     /* icon hit-area padding, so the glyph lines up with the text */
   }
@@ -1613,21 +1606,36 @@ body.dark .mv-hero-img-dark  { display: block; }
   }
 }
 
-/* PI: one wide card, photo beside name, role and bio */
+/* PI: one wide panel card, photo panel left, name, role and bio right.
+   Phones: photo on top in 4:3 (a full-width square would fill the screen). */
 .mv-people-grid--lead > .mv-person {
   flex-basis: 100%;
 }
 
 .mv-person--lead {
-  flex-direction: row;
-  align-items: center;
-  gap: 1.5rem;
-  padding: 1.5rem;
-  text-align: left;
-
-  .mv-person-photo { flex: 0 0 160px; width: 160px; height: 160px; margin: 0; }
   .mv-person-name { font-size: 1.35rem; }
-  .mv-person-social { justify-content: flex-start; margin-left: -6px; }
+}
+
+@media (min-width: 768px) {
+  .mv-people-grid--lead > .mv-person--panel {
+    min-height: 240px;
+  }
+
+  .mv-person--lead .mv-person-photo {
+    flex-basis: 30%;
+    width: 30%;
+  }
+
+  .mv-person--lead .mv-person-text {
+    padding: 1.5rem 1.75rem;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .mv-person--lead .mv-person-photo {
+    aspect-ratio: 4 / 3;
+    object-position: 50% 0%;               /* trim the 4:3 crop from the bottom, keep the head */
+  }
 }
 
 .mv-person-bio {
@@ -1663,17 +1671,8 @@ body.dark .mv-hero-img-dark  { display: block; }
 
   .mv-people-grid { gap: 0.75rem; }
 
-  .mv-person { padding: 1rem 0.6rem 0.75rem; }
-  .mv-person-photo,
-  .mv-person.alumni-grad .mv-person-photo { width: 96px; height: 96px; }
-
-  .mv-person--lead {
-    flex-direction: column;
-    text-align: center;
-
-    .mv-person-photo { flex-basis: auto; width: 128px; height: 128px; }
-    .mv-person-social { justify-content: center; margin-left: 0; }
-  }
+  .mv-person:not(.mv-person--panel) { padding: 1rem 0.6rem 0.75rem; }
+  .mv-person:not(.mv-person--panel) .mv-person-photo { width: 96px; height: 96px; }
 }
 
 @media (prefers-reduced-motion: reduce) {

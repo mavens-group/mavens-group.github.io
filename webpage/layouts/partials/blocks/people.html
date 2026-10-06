@@ -62,6 +62,9 @@
     {{ end }}
 
     {{ $is_lead := eq $group $lead_group }}
+    {{/* Photo as a panel at the card edge (PI, researchers, PhD alumni);
+         project students keep small circles */}}
+    {{ $is_panel := or $is_lead (in (slice "Researchers" "Alumni (Researchers)") $group) }}
 
     {{ with $query }}
     <section class="mv-people-group mv-people-group--{{ $group | urlize }}">
@@ -76,10 +79,10 @@
         {{ with site.GetPage (printf "/authors/%s" (path.Base .File.Dir)) }}
           {{ $link = .RelPermalink }}
         {{ end }}
-        {{/* Researchers show the photo as a large panel, so they get a bigger source */}}
-        {{ $size := cond $is_lead 320 (cond (eq $group "Researchers") 560 270) }}
+        {{/* Panels are large, so they get a bigger source image */}}
+        {{ $size := cond $is_lead 640 (cond $is_panel 560 270) }}
 
-        <article class="mv-person{{ if $is_lead }} mv-person--lead{{ end }}{{ with .Params.css_class }} {{ . }}{{ end }}">
+        <article class="mv-person{{ if $is_panel }} mv-person--panel{{ end }}{{ if $is_lead }} mv-person--lead{{ end }}{{ with .Params.css_class }} {{ . }}{{ end }}">
           {{ if $avatar }}
             {{ $img := $avatar.Fill (printf "%dx%d Center webp" $size $size) }}{{/* Center as on main: Smart zoomed into square photos */}}
             <img class="mv-person-photo" src="{{ $img.RelPermalink }}" width="{{ $img.Width }}" height="{{ $img.Height }}" alt="" loading="lazy">
