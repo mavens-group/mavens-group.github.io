@@ -1385,11 +1385,15 @@ body.dark .mv-hero-img-dark  { display: block; }
    The lead group (the PI) is one wide card with the short bio.
    ========================================================================== */
 .mv-people {
-  max-width: 960px;                        /* five cards a row; photo, PI card and grid share one width */
+  max-width: 760px;                        /* same 720px column as every other page (+20px padding) */
   margin: 0 auto;
-  padding-bottom: 3rem;
+  padding: 0 20px 3rem;
+}
 
-  .mv-page-header { margin-bottom: 1.75rem; }
+/* The landing page's .container already pads 15px; on narrow screens match
+   the 20px page gutter of the other pages */
+@media (max-width: 789.98px) {
+  .mv-people { padding-left: 5px; padding-right: 5px; }
 }
 
 .mv-people-photo {
@@ -1415,7 +1419,7 @@ body.dark .mv-hero-img-dark  { display: block; }
 
 .mv-people-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
   gap: 1rem;
 }
 
@@ -1539,7 +1543,12 @@ body.dark .mv-hero-img-dark  { display: block; }
 
 /* Alumni project students: denser grid, smaller photos */
 .mv-people-grid:has(.alumni-grad) {
-  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+}
+
+.mv-person.alumni-grad {
+  padding-left: 0.5rem;                    /* room for "PG Project (2023–24)" on one line */
+  padding-right: 0.5rem;
 }
 
 .mv-person.alumni-grad .mv-person-photo {
