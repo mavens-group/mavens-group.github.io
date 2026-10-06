@@ -1671,3 +1671,173 @@ video.mv-video {
   background: var(--m-surface-mid);
   border-radius: 4px;
 }
+
+
+/* ==========================================================================
+   CONTACT PAGE
+   ========================================================================== */
+.mv-contact-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.25rem;
+  margin: 1.75rem 0;
+}
+
+.mv-contact-card {
+  display: flex;
+  flex-direction: column;
+  background: var(--m-surface-low);
+  border-radius: var(--m-radius);
+  padding: 1.4rem 1.4rem 1.25rem;
+  border: 1px solid color-mix(in srgb, var(--m-outline) 20%, transparent);
+  transition: background 0.15s;
+
+  &:hover {
+    background: var(--m-surface-mid);
+  }
+}
+
+.mv-contact-card--full {
+  grid-column: 1 / -1;
+}
+
+.mv-contact-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.mv-contact-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: var(--m-primary-container);
+  color: var(--m-on-primary-container);
+  font-size: 1rem;
+  flex-shrink: 0;
+}
+
+.mv-contact-title {
+  margin: 0;
+  font-size: 1.15rem;
+  font-weight: 500;
+  color: var(--m-on-surface);
+}
+
+.mv-contact-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  font-size: 0.95rem;
+  line-height: 1.45;
+
+  li {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+  }
+
+  .mv-contact-label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    opacity: 0.65;
+    font-weight: 500;
+  }
+
+  .mv-contact-value {
+    color: var(--m-on-surface);
+
+    a {
+      color: var(--m-primary);
+      text-decoration: none;
+      font-weight: 500;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}
+
+.mv-contact-transit {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.1rem;
+  margin-top: 0.25rem;
+
+  .mv-transit-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+
+    strong {
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+      color: var(--m-primary);
+      font-weight: 500;
+      font-size: 0.92rem;
+    }
+
+    p {
+      margin: 0;
+      font-size: 0.88rem;
+      line-height: 1.45;
+      opacity: 0.85;
+    }
+  }
+}
+
+.mv-contact-map-card {
+  margin-top: 1.75rem;
+  margin-bottom: 2.5rem;
+  border-radius: var(--m-radius);
+  overflow: hidden;
+  border: 1px solid color-mix(in srgb, var(--m-outline) 20%, transparent);
+  background: var(--m-surface-low);
+
+  iframe {
+    display: block;
+    width: 100%;
+    height: 380px;
+    border: none;
+  }
+}
+
+.mv-contact-map-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.85rem 1.25rem;
+  border-bottom: 1px solid color-mix(in srgb, var(--m-outline) 15%, transparent);
+  font-size: 0.9rem;
+  background: var(--m-surface-mid);
+
+  .mv-contact-map-title {
+    font-weight: 500;
+    color: var(--m-on-surface);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  a {
+    color: var(--m-primary);
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 500;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
