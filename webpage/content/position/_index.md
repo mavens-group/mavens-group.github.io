@@ -5,10 +5,6 @@ subtitle: PhD and project positions, and what to expect when you join.
 view: card
 # Text-only cards: the four illustrations were near-duplicates
 card_images: false
-banner:
-  caption: ''
-  image: 'group.webp'
-  title: "Open Positions"
 
 sections:
   - block: markdown
