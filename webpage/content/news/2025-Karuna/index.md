@@ -2,9 +2,10 @@
 title: Karunakaran submitted his doctoral thesis
 
 date: 2025-05-27
+summary: Karunakaran M, the first PhD scholar from the MAVENs group, has submitted his thesis, *Electronic and Magnetic Properties of Disordered Heusler Alloys*.
 profile: false
 ---
-We are delighted to share that [Karunakaran M](../../authors/dr-karunakaran-m), the first PhD scholar from the MAVENs Group, has successfully submitted his doctoral thesis titled:
+We are delighted to share that [Karunakaran M](../../author/dr-karunakaran-m), the first PhD scholar from the MAVENs Group, has successfully submitted his doctoral thesis titled:
 <!--more-->
 
 > "Electronic and Magnetic Properties of Disordered Heusler Alloys"

@@ -2,6 +2,7 @@
 title: "New Paper in PRM: Machine Learning for Quantum Defect Hosts"
 
 date: 2026-05-12
+summary: Md Mahshook A's first paper, on interpretable machine learning for quantum-defect host materials, is out in Physical Review Materials.
 profile: false
 tags: [highlight]
 ---

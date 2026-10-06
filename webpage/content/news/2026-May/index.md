@@ -2,6 +2,7 @@
 title: "Mensis Mirabilis of MAVENs"
 
 date: 2026-05-31
+summary: MAVENs closed May 2026 with four Q1 papers, in Physical Review B, Physical Review Materials, ACS Applied Energy Materials and RSC Advances.
 profile: false
 tags: [highlight]
 ---

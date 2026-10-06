@@ -2,6 +2,7 @@
 title: "MAVENs research featured by Quantum Zeitgeist"
 
 date: 2026-09-21
+summary: Our machine-learning search for coherent quantum-defect hosts has been featured by *Quantum Zeitgeist*.
 profile: false
 tags: [highlight]
 ---
