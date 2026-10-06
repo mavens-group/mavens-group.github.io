@@ -2,6 +2,9 @@
 title: Contact
 date: 2022-10-24
 view: card
+banner:
+  caption: ''
+  image: 'group.webp'
 ---
 
 I welcome inquiries about **research collaborations**, **graduate opportunities in computational materials science**, and discussions on **DFT methodology**.

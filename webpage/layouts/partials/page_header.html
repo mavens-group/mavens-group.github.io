@@ -1,6 +1,7 @@
 {{ $page := . }}
 {{ $featured := partial "blox-core/functions/get_featured_image.html" $page }}
 {{ $show_featured := and $featured (not .Params.image.preview_only) }}
+{{ $show_banner := and .Params.banner.image (not $show_featured) }}
 
 {{/* Set default titles for node pages */}}
 {{ $title := .Title }}
@@ -14,9 +15,41 @@
   {{end}}
 {{end}}
 
-{{/* One header for every page: title, an optional one-line lede (`subtitle`),
-     then metadata and links, on the same 720px column as the body. Section
-     banners (`banner.image`) are no longer rendered. */}}
+{{/* Banner image (`banner.image`), with the title over it, as on main */}}
+{{ if $show_banner }}
+<div class="article-header">
+  {{- $img := "" -}}
+  {{ $alt := (.Params.banner.caption | default "") | plainify }}
+  {{ $destination := .Params.banner.image }}
+  {{ $is_remote := strings.HasPrefix $destination "http" }}
+  {{- if not $is_remote -}}
+    {{- $img = (.Page.Resources.ByType "image").GetMatch $destination -}}
+    {{- if not $img -}}
+      {{- $img = resources.Get (path.Join "media" $destination) -}}
+    {{- end -}}
+  {{- end -}}
+  <div class="position-absolute d-flex w-100 h-100 justify-content-center align-items-center">
+      {{/* To prevent control overlap, margins are based on $carousel-control-* in bootstrap-variables.scss */}}
+      <h2 class="hero-title" style="color: #fff">
+            {{ with .Params.title }}{{ . | markdownify | emojify }}{{ end }}
+          </h2>
+    </div>
+  {{ if $img }}
+    <img src="{{$img.RelPermalink}}" width="{{$img.Width}}" height="{{$img.Height}}" class="article-banner" alt="{{$alt}}">
+  {{ else }}
+    <img src="{{ .Params.banner.image }}" class="article-banner" alt="{{$alt}}">
+  {{ end }}
+</div>
+{{ if not .IsNode }}
+<div class="article-container pt-3">
+  {{ partial "page_metadata" (dict "page" $page "is_list" 0 "share" true) }}
+  {{ partial "page_links_div.html" $page }}
+</div>
+{{ end }}
+
+{{ else }}
+{{/* Pages without a banner: title, an optional one-line lede (`subtitle`),
+     then metadata and links, on the same 720px column as the body. */}}
 <header class="article-container mv-page-header">
   <h1 class="mv-page-title">{{ $title }}</h1>
 
@@ -29,6 +62,7 @@
     {{ partial "page_links_div.html" $page }}
   {{end}}
 </header>
+{{ end }}
 
 {{ if $show_featured }}
 

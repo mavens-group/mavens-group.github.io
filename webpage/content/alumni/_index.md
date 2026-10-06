@@ -1,6 +1,8 @@
 ---
 title: Alumni
 type: landing
+banner:
+  image: group.png
 sections:
   - block: people
     content:

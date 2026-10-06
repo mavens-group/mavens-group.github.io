@@ -3,6 +3,8 @@ title: People
 date: 2022-10-24
 type: landing
 summary: MAVENs present and past group members
+banner:
+  image: group.png
 sections:
   - block: people
     content:

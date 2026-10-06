@@ -504,6 +504,31 @@ body.dark .mv-hero-img-dark  { display: block; }
 
 
 /* ==========================================================================
+   SECTION BANNER (as on main)
+   Title pinned to the bottom of the banner image over a gradient scrim, only
+   on pages with a direct <img class="article-banner"> child.
+   ========================================================================== */
+.article-header:has(> img.article-banner) > div:first-child {
+  position: absolute !important;
+  bottom: 0 !important;
+  top: auto !important;
+  height: auto !important;
+  align-items: flex-end !important;
+  padding-bottom: 2rem;
+  width: 100%;
+  background: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.3));
+}
+
+/* Caps banner height at 70vh and centres the focal point */
+.article-header .article-banner {
+  width: 100%;
+  max-height: 70vh;
+  object-fit: cover;
+  object-position: center 50%;
+}
+
+
+/* ==========================================================================
    PAGE HEADER AND READING COLUMN
    Every page opens the same way (layouts/partials/page_header.html): a light
    title, an optional one-line lede, then the body. List pages
