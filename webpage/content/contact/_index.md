@@ -16,15 +16,15 @@ We welcome inquiries regarding **research collaborations**, **postdoctoral & PhD
 <h3>Direct Inquiries</h3>
 <ul class="mv-contact-list">
 <li>
-<span class="mv-contact-label">Email</span>
+<span class="mv-contact-icon"><i class="fas fa-envelope" aria-hidden="true"></i></span>
 <span class="mv-contact-value"><a href="mailto:rudrab@srmist.edu.in">rudrab@srmist.edu.in</a></span>
 </li>
 <li>
-<span class="mv-contact-label">Phone</span>
+<span class="mv-contact-icon"><i class="fas fa-phone" aria-hidden="true"></i></span>
 <span class="mv-contact-value"><a href="tel:+919674448326">+91 96744 48326</a></span>
 </li>
 <li>
-<span class="mv-contact-label">Office Hours</span>
+<span class="mv-contact-icon"><i class="fas fa-clock" aria-hidden="true"></i></span>
 <span class="mv-contact-value">Mon–Fri: 10:00 AM – 5:00 PM IST</span>
 </li>
 </ul>
@@ -33,15 +33,15 @@ We welcome inquiries regarding **research collaborations**, **postdoctoral & PhD
 <h3>Office & Address</h3>
 <ul class="mv-contact-list">
 <li>
-<span class="mv-contact-label">Location</span>
+<span class="mv-contact-icon"><i class="fas fa-door-open" aria-hidden="true"></i></span>
 <span class="mv-contact-value">Room UB-619, 6th Floor, University Building</span>
 </li>
 <li>
-<span class="mv-contact-label">Department</span>
+<span class="mv-contact-icon"><i class="fas fa-graduation-cap" aria-hidden="true"></i></span>
 <span class="mv-contact-value">Department of Physics and Nanotechnology</span>
 </li>
 <li>
-<span class="mv-contact-label">Institution</span>
+<span class="mv-contact-icon"><i class="fas fa-map-marker-alt" aria-hidden="true"></i></span>
 <span class="mv-contact-value">SRM Institute of Science and Technology<br>Kattankulathur, Tamil Nadu 603 203, India</span>
 </li>
 </ul>
