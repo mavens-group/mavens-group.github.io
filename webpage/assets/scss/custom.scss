@@ -810,12 +810,12 @@ body.dark .mv-hero-img-dark  { display: block; }
     width: 78vw;
     max-width: 300px;
 
-    background: var(--m-surface);
+    background: var(--m-surface-low);       /* M3 surface-container-low */
     color: var(--m-on-surface);
-    border-right: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 0 16px 16px 0;            /* M3 modal drawer: rounded trailing edge, no border */
     box-shadow: 2px 0 12px rgba(0, 0, 0, 0.08);
 
-    padding: 72px 0 24px;
+    padding: 64px 0 16px;                    /* clears the 56px bar above it */
     overflow-y: auto;
     z-index: 2001;          /* well above scrim and any body stacking */
 
@@ -833,33 +833,37 @@ body.dark .mv-hero-img-dark  { display: block; }
                   visibility 0s linear 0s;
     }
 
-    /* ── Nav links: list-like ── */
-    .nav-item {
-      border-bottom: 1px solid rgba(0, 0, 0, 0.06);
-    }
+    /* ── Items: M3 navigation-drawer pills, inset 12px, no dividers ── */
+    .navbar-nav { padding: 0 12px; }
+
     .nav-link {
-      padding: 14px 24px !important;
+      display: flex !important;
+      align-items: center;
+      min-height: 56px;
       font-size: 1rem;
       color: var(--m-on-surface) !important;
-      border-radius: 0 !important;
-      border-left: 3px solid transparent;
-      transition: background 0.15s ease, border-left-color 0.15s ease;
+      border-radius: 28px !important;
+      transition: background 0.15s ease;
 
-      &:hover { background: rgba(0, 0, 0, 0.03); }
+      &:hover { background: color-mix(in srgb, var(--m-on-surface) 8%, transparent); }
+      &:focus-visible { outline: 2px solid var(--m-primary); outline-offset: -2px; }
       &.active {
-        border-left-color: var(--m-primary);
-        background: rgba(0, 0, 0, 0.02);
-        font-weight: 500;
+        background: var(--m-primary-container);
+        color: var(--m-on-primary-container) !important;
       }
     }
 
-    /* ── Dropdown submenus ── */
+    /* Caret sits at the end of the pill */
+    .nav-item.dropdown > .nav-link::after { margin-left: auto; }
+
+    /* ── Submenus: indented pills. Backgrounds need !important to beat the
+       theme's `.dropdown-menu` and our `.dark .dropdown-item` (both !important) ── */
     .dropdown-menu {
       position: static !important;
       float: none !important;
       box-shadow: none !important;
       border: none !important;
-      background: rgba(0, 0, 0, 0.025);
+      background: transparent !important;
       padding: 0;
       margin: 0;
       border-radius: 0;
@@ -867,50 +871,41 @@ body.dark .mv-hero-img-dark  { display: block; }
       &.show { display: block; }
 
       .dropdown-item {
-        padding: 11px 24px 11px 40px;
+        display: flex;
+        align-items: center;
+        min-height: 48px;
+        padding: 0 24px 0 32px;
         font-size: 0.94rem;
         color: var(--m-on-surface) !important;
-        background: transparent;
-        border-bottom: 1px solid rgba(0, 0, 0, 0.04);
-        border-left: 3px solid transparent;
-        transition: background 0.15s ease, border-left-color 0.15s ease;
+        background: transparent !important;
+        border-radius: 24px;
+        transition: background 0.15s ease;
 
-        &:last-child { border-bottom: none; }
-        &:hover, &:focus { background: rgba(0, 0, 0, 0.05); }
-
-        /* Active submenu item highlight */
+        &:hover, &:focus { background: color-mix(in srgb, var(--m-on-surface) 8%, transparent) !important; }
+        &:focus-visible { outline: 2px solid var(--m-primary); outline-offset: -2px; }
         &.active {
-          border-left-color: var(--m-primary);
-          background: color-mix(in srgb, var(--m-primary) 8%, transparent);
-          font-weight: 500;
-          color: var(--m-primary) !important;
+          background: var(--m-primary-container) !important;
+          color: var(--m-on-primary-container) !important;
         }
       }
     }
-
-    .nav-item.dropdown > .nav-link::after {
-      float: right;
-      margin-top: 6px;
-    }
   }
 
-  /* ── Dark mode drawer: colours come from tokens; only overlays flip to white ── */
+  /* The theme pads drawer items with ID-level !important rules (10px 15px on
+     each li, 5px 15px on each link) and forces the active link colour; only
+     the same #navbar-main specificity overrides them. */
+  #navbar-main .main-menu-item .nav-item { padding: 0 !important; }
+  #navbar-main .main-menu-item .nav-item .nav-link { padding: 0 24px 0 16px !important; }
+  #navbar-main .navbar-collapse .nav-link.active,
+  #navbar-main .navbar-collapse .dropdown-item.active {
+    color: var(--m-on-primary-container) !important;
+  }
+
+  /* ── Dark drawer: colours flip with the body.dark tokens; only the shadow deepens ── */
   .dark .navbar-collapse,
   .navbar-collapse.drawer-dark {
-    background: var(--m-surface); /* beats Hugo Blox's .dark .navbar-collapse */
-    border-right: 1px solid rgba(255, 255, 255, 0.12);
+    background: var(--m-surface-low); /* beats Hugo Blox's .dark .navbar-collapse */
     box-shadow: 4px 0 24px rgba(0, 0, 0, 0.7);
-
-    .nav-item { border-bottom-color: rgba(255, 255, 255, 0.07); }
-    .nav-link {
-      &:hover  { background: rgba(255, 255, 255, 0.04); }
-      &.active { background: rgba(255, 255, 255, 0.04); }
-    }
-    .dropdown-menu { background: rgba(255, 255, 255, 0.04); }
-    .dropdown-item {
-      border-bottom-color: rgba(255, 255, 255, 0.05);
-      &:hover, &:focus { background: rgba(255, 255, 255, 0.07); }
-    }
   }
 
   /* ── Scrim ── */
