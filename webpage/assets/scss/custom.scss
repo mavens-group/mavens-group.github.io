@@ -528,6 +528,11 @@ body.dark .mv-hero-img-dark  { display: block; }
   line-height: 1.15;
 }
 
+/* Room between the banner and the first line of the page (it sat flush) */
+.article-header:has(> img.article-banner) {
+  margin-bottom: clamp(1.75rem, 4vw, 3rem);
+}
+
 /* Caps banner height at 70vh and centres the focal point */
 .article-header .article-banner {
   width: 100%;
