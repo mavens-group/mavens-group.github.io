@@ -32,7 +32,7 @@ publication_types:
 publication: '*Physica B: Condensed Matter*'
 publication_short: ''
 
-doi: 'http://dx.doi.org/10.1016/j.physb.2024.416694'
+doi: '10.1016/j.physb.2024.416694'
 
 abstract: 'Polymer nanocomposites play a critical role in various industries, including pack-
 aging, sensors, biomedicine, sports equipment, and automotive manufacturing, due to their unique

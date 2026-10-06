@@ -12,7 +12,7 @@ date: '2020-01-01'
 publishDate: '2024-06-27T16:20:24.430409Z'
 publication_types:
 - article-journal
-publication: '*J. Phys. Chem. Lett.*'
+publication: '*The Journal of Physical Chemistry Letters*'
 doi: 10.1021/acs.jpclett.0c00710
 abstract: "Temperature dependence of the magnetocrystalline anisotropy energy and magnetization of
 the prototypical rare-earth magnet YCo5 is calculated from first principles, utilizing the

@@ -1,5 +1,5 @@
 ---
-title: Electronic structure engineering of Zr-doped Ti3C2 and Ti3CN MXenes for efficient
+title: Electronic structure engineering of Zr-doped Ti$_3$C$_2$ and Ti$_3$CN MXenes for efficient
   hydrogen evolution reaction
 
 # Authors

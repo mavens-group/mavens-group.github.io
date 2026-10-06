@@ -1,5 +1,5 @@
 ---
-title: Will there be a third COVID-19 wave? A SVEIRD model based study of India's situation
+title: Will there be a third COVID-19 wave? A SVEIRD model-based study of India's situation
 authors:
 - Dwarakesh
 - Guru
@@ -23,6 +23,6 @@ calculation shows COVID-19 will remain endemic for the foreseeable future unless
 our vaccination rate manifold."
 publication_types:
 - article-journal
-publication: '*Indian J Phys*'
+publication: '*Indian Journal of Physics*'
 doi: 10.1007/s12648-021-02196-w
 ---

@@ -1,5 +1,5 @@
 ---
-title: A microscopic description of the magnetic behaviour of AuFe and NiMo alloys.
+title: Magnetic behaviour of AuFe and NiMo alloys
 authors:
 - P. Singh
 - Rudra

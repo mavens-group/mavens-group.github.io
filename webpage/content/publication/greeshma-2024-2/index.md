@@ -1,6 +1,6 @@
 ---
-title: Self-rechargeable aqueous Zn2+/K+ electrochromic energy storage device via
-  scalable spray-coating integrated with marangoni flow
+title: Self-rechargeable aqueous Zn$^{2+}$/K$^{+}$ electrochromic energy storage device via
+  scalable spray-coating integrated with Marangoni flow
 
 # Authors
 # A YAML list of author names
@@ -31,7 +31,7 @@ publication_types:
 publication: '*Energy Storage Materials*'
 publication_short: ''
 
-doi: https://doi.org/10.1016/j.ensm.2024.103680
+doi: 10.1016/j.ensm.2024.103680
 
 abstract: 'Electrochromic batteries (ECBs) represent a novel integration of energy storage and
 optical modulation technologies, offering versatile applications from smart windows to portable

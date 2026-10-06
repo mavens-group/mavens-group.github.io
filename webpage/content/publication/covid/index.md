@@ -1,5 +1,5 @@
 ---
-title: Analyses and Forecast for COVID-19 epidemic in India
+title: A study of the COVID-19 epidemic in India using the SEIRD model
 authors:
 - Rudra
 - Srijit Bhattacharjee
@@ -15,6 +15,6 @@ abstract: "**Background:** The coronavirus pandemic (COVID-19) is causing a havo
 **Conclusion:** After comparing our calculations using India’s data to the real life dynamics observed in Italy and Russia, we can conclude that the SEIRD model can predict the dynamics of COVID-19 with sufficient accuracy."
 publication_types:
 - article-journal
-publication: '*Quant. Biol.*'
+publication: '*Quantitative Biology*'
 doi: 10.15302/J-QB-021-0260
 ---

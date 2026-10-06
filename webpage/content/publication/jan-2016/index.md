@@ -25,6 +25,6 @@ entropy change (due to the first order transition) and a large adiabatic tempera
 the second order transition)."
 publication_types:
 - article-journal
-publication: '*Phys. Rev. B*'
+publication: '*Physical Review B*'
 doi: 10.1103/PhysRevB.95.184438
 ---
