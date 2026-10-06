@@ -10,8 +10,6 @@ sections:
     content:
       title: Meet the MAVENs
       subtitle: Computational materials physics at SRMIST, Kattankulathur.
-      image: group.webp
-      image_alt: Five members of the MAVENs group
       # 🚨 ORDER IS NOW CORRECTED TO PRIORITIZE CURRENT MEMBERS 🚨
       user_groups:
           - Group Head             # 1. PI / Highest Priority
