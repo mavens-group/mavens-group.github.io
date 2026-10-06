@@ -1467,24 +1467,49 @@ body.dark .mv-hero-img-dark  { display: block; }
   }
 }
 
-/* People > Researchers: two side-by-side cards a row from tablet width, laid
-   out like the PI card (photo left; name, role, topic, links right) so the
-   research topic reads on one or two lines. Phones keep two stacked cards. */
+/* People > Researchers: photo as a panel at the card's edge instead of a
+   circle. Phones: photo full width on top, text below (two cards a row).
+   From 768px: two cards a row, photo filling the left ~40% of the card at
+   full card height, text on the right. */
+.mv-people-group--researchers .mv-people-grid > .mv-person {
+  padding: 0;
+  overflow: hidden;                        /* the card's radius clips the photo */
+  align-items: stretch;
+}
+
+.mv-people-group--researchers .mv-person-photo {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1 / 1;
+  margin: 0;
+  border-radius: 0;
+  object-fit: cover;
+  object-position: 50% 25%;                /* keep heads in frame */
+}
+
+.mv-people-group--researchers .mv-person-text {
+  padding: 0.9rem 0.75rem 0.75rem;
+}
+
 @media (min-width: 768px) {
   .mv-people-group--researchers .mv-people-grid > .mv-person {
     flex-basis: calc((100% - 1rem) / 2);
     flex-direction: row;
-    align-items: center;
-    gap: 1.25rem;
-    padding: 1.25rem;
     text-align: left;
   }
 
   .mv-people-group--researchers .mv-person-photo {
-    flex: 0 0 112px;
-    width: 112px;
-    height: 112px;
-    margin: 0;
+    flex: 0 0 40%;
+    width: 40%;
+    height: auto;
+    min-height: 100%;
+    aspect-ratio: auto;
+  }
+
+  .mv-people-group--researchers .mv-person-text {
+    align-self: center;
+    padding: 1.25rem 1.25rem 1rem;
   }
 
   .mv-people-group--researchers .mv-person-social {

@@ -76,7 +76,8 @@
         {{ with site.GetPage (printf "/authors/%s" (path.Base .File.Dir)) }}
           {{ $link = .RelPermalink }}
         {{ end }}
-        {{ $size := cond $is_lead 320 270 }}
+        {{/* Researchers show the photo as a large panel, so they get a bigger source */}}
+        {{ $size := cond $is_lead 320 (cond (eq $group "Researchers") 560 270) }}
 
         <article class="mv-person{{ if $is_lead }} mv-person--lead{{ end }}{{ with .Params.css_class }} {{ . }}{{ end }}">
           {{ if $avatar }}
