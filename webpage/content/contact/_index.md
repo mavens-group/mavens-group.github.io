@@ -3,9 +3,6 @@ title: Contact
 subtitle: Direct communication and office location.
 date: 2022-10-24
 view: card
-banner:
-  caption: ''
-  image: 'group.webp'
 ---
 
 We welcome inquiries regarding **research collaborations**, **postdoctoral & PhD opportunities** in computational materials physics, and academic visits. Reach out directly or visit our lab at SRMIST.
