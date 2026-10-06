@@ -6,7 +6,10 @@
     }
   });
 </script>
-{{/* Publications search and reduced-motion video handling */}}
-{{ with resources.Get "js/mv-site.js" | minify | fingerprint }}
+{{/* custom.js: mobile drawer (scrim, tap-outside and Escape to close, scroll
+     lock). mv-site.js: publications search, reduced-motion video. */}}
+{{ range slice "js/custom.js" "js/mv-site.js" }}
+{{ with resources.Get . | minify | fingerprint }}
 <script src="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" defer></script>
+{{ end }}
 {{ end }}

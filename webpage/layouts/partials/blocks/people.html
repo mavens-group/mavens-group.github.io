@@ -80,7 +80,7 @@
 
         <article class="mv-person{{ if $is_lead }} mv-person--lead{{ end }}{{ with .Params.css_class }} {{ . }}{{ end }}">
           {{ if $avatar }}
-            {{ $img := $avatar.Fill (printf "%dx%d Smart webp" $size $size) }}
+            {{ $img := $avatar.Fill (printf "%dx%d Center webp" $size $size) }}{{/* Center as on main: Smart zoomed into square photos */}}
             <img class="mv-person-photo" src="{{ $img.RelPermalink }}" width="{{ $img.Width }}" height="{{ $img.Height }}" alt="" loading="lazy">
           {{ else }}
             {{ $initials := "" }}

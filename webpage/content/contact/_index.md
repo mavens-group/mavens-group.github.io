@@ -11,7 +11,7 @@ I welcome inquiries about **research collaborations**, **graduate opportunities 
 
 
 <div class="row align-items-start" style="margin-top: 2rem;">
-  <div class="col-md-7">
+  <div class="col-md-6">
     <h3>Contact</h3>
     <ul class="fa-ul">
       <li><span class="fa-li"><i class="fa-solid fa-envelope"></i></span>
@@ -28,7 +28,7 @@ I welcome inquiries about **research collaborations**, **graduate opportunities 
     </ul>
   </div>
 
-  <div class="col-md-5">
+  <div class="col-md-6">
     <h3>Office Hours</h3>
     <ul class="fa-ul">
       <li><span class="fa-li"><i class="fa-solid fa-clock"></i></span>

@@ -40,14 +40,14 @@
 }
 @font-face {
   font-family: 'Fira Code';
-  src: url('/fonts/fira-code-400.woff2') format('woff2');
+  src: url('/fonts/fira-code-400.woff') format('woff');   /* static/fonts has .woff, not .woff2 */
   font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
 @font-face {
   font-family: 'Fira Code';
-  src: url('/fonts/fira-code-600.woff2') format('woff2');
+  src: url('/fonts/fira-code-600.woff') format('woff');
   font-weight: 600;
   font-style: normal;
   font-display: swap;
@@ -843,6 +843,13 @@ body.dark .mv-hero-img-dark  { display: block; }
     &.is-dark {
       background: rgba(0, 0, 0, 0.65);
     }
+  }
+
+  /* The sticky .page-header (z-index 10) is the drawer's stacking context, so
+     the scrim (2000, on <html>) covered drawer and hamburger alike. While the
+     drawer is open, lift the whole header above the scrim. */
+  .page-header:has(.navbar-collapse.show) {
+    z-index: 2003;
   }
 
   /* ── Navbar + hamburger above drawer ── */
