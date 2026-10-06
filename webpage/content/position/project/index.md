@@ -10,8 +10,6 @@ profile: false
 show_date: false
 image:
   focal_point: "Center"
-banner:
-  image: group.webp
 ---
 ## BSc/MSc Project Positions
 

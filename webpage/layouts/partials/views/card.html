@@ -1,7 +1,10 @@
 {{ $item := .item }}
 
-{{/* Dynamic view adjusts to content type. */}}
+{{/* Grid card: 16:9 image on top, then title, summary and links. The whole card
+     is one link (stretched over it by CSS). A section turns the images off
+     with `card_images: false` in its _index.md. */}}
 {{ $has_attachments := partial "functions/has_attachments" $item }}
+{{ $show_image := ne .page.Params.card_images false }}
 
 {{ $link := $item.RelPermalink }}
 {{ $target := "" }}
@@ -20,35 +23,29 @@
   {{ $summary = $item.Summary }}
 {{ end }}
 
-<div class="card-simple view-card">
-  <div class="section-subheading article-title mb-2">
-    <a href="{{ $link }}" {{ $target | safeHTMLAttr }}>{{ $item.Title }}</a>
-  </div>
+<article class="card-simple view-card mv-card">
+  {{ if $show_image }}
   {{ $resource := partial "blox-core/functions/get_featured_image.html" $item }}
   {{ $anchor := $item.Params.image.focal_point | default "Smart" }}
   {{ with $resource }}
     {{ $image := .Fill (printf "808x455 %s" $anchor) }}
     {{ if ne $image.MediaType.SubType "gif" }}{{ $image = $image.Process "webp" }}{{ end }}
-    <a href="{{ $link }}" {{ $target | safeHTMLAttr }}>
-      <div class="img-hover-zoom">
-        <img src="{{ $image.RelPermalink }}" height="{{ $image.Height }}" width="{{ $image.Width }}"
-            class="article-banner" alt="{{ $item.Title }}" loading="lazy">
-      </div>
-    </a>
-  {{end}}
+    <img class="mv-card-img" src="{{ $image.RelPermalink }}" height="{{ $image.Height }}" width="{{ $image.Width }}" alt="" loading="lazy">
+  {{ end }}
+  {{ end }}
 
-  {{ with $summary }}
-  <a href="{{ $link }}" {{ $target | safeHTMLAttr }} class="summary-link">
-    <div class="article-style">
-      <p>{{.}}</p>
+  <div class="mv-card-body">
+    <h3 class="mv-card-title">
+      <a class="mv-card-link" href="{{ $link }}" {{ $target | safeHTMLAttr }}>{{ $item.Title }}</a>
+    </h3>
+    {{ with $summary }}
+    <div class="mv-card-summary">{{ . }}</div>
+    {{ end }}
+
+    {{ if $has_attachments }}
+    <div class="btn-links">
+      {{ partial "page_links" (dict "page" $item "is_list" 1) }}
     </div>
-  </a>
-  {{ end }}
-
-  {{ if $has_attachments }}
-  <div class="btn-links">
-    {{ partial "page_links" (dict "page" $item "is_list" 1) }}
+    {{ end }}
   </div>
-  {{ end }}
-
-</div>
+</article>

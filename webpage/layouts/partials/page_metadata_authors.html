@@ -1,40 +1,21 @@
-{{/* Display author list. */}}
+{{/* Display author list. Group members (authors with a profile page) are links
+     with class `author-member`; everyone else is plain text. Whitespace is
+     trimmed throughout so names read "A, B" (it used to render "A , B"). */}}
 
-{{- $taxonomy := "authors" }}
-{{ if .Param $taxonomy }}
-  {{ range $index, $value := (.GetTerms $taxonomy) }}
-    {{- /* Highlight the author's name? */ -}}
-    {{- $highlight_name := .Page.Params.highlight_name | default false -}}
-
-    {{/* --- MODIFICATION START: Get Display Name --- */}}
-    {{ $display_name := $value.LinkTitle }}
-    {{ with .Page }}
-      {{ if .Params.display_name_short }}
-        {{ $display_name = .Params.display_name_short }}
-      {{ end }}
-    {{ end }}
-    {{/* --- MODIFICATION END: Get Display Name --- */}}
-
+{{- $taxonomy := "authors" -}}
+{{- if .Param $taxonomy -}}
+  {{- range $index, $value := (.GetTerms $taxonomy) -}}
+    {{- $display_name := $value.LinkTitle -}}
+    {{- with .Page.Params.display_name_short }}{{ $display_name = . }}{{ end -}}
     {{- if gt $index 0 }}, {{ end -}}
-
-    {{/* --- FIX START: Correctly applying 'author-highlighted' class --- */}}
-
-    {{ if $highlight_name }}<span class="author-highlighted">{{ end }}
-
-      {{/* Effectively check the page's `_build` option as `_build` is not exposed in Hugo's Page object. */}}
-      {{- if .RelPermalink -}}
-        <a href="{{.RelPermalink}}">{{ $display_name }}</a>
-      {{- else -}}
-        {{ $display_name }}
-      {{- end -}}
-
-    {{ if $highlight_name }}</span>{{ end }}
-
-    {{/* --- FIX END: Correctly applying 'author-highlighted' class --- */}}
-
+    {{- if .RelPermalink -}}
+      <a class="author-member" href="{{ .RelPermalink }}">{{ $display_name }}</a>
+    {{- else -}}
+      <span class="author-other">{{ $display_name }}</span>
+    {{- end -}}
     {{- if isset $.Params "author_notes" -}}
       {{- with (index $.Params.author_notes $index) -}}
-        <i class="author-notes fas fa-info-circle" data-toggle="tooltip" title="{{.}}"></i>
+        <i class="author-notes fas fa-info-circle" data-toggle="tooltip" title="{{ . }}"></i>
       {{- end -}}
     {{- end -}}
   {{- end -}}

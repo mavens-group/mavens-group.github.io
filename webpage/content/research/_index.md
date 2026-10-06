@@ -2,8 +2,6 @@
 title: Research
 type: research
 view: card
-banner:
-    image: 'group.webp'
 sections:
   - block: collection
     id: posts

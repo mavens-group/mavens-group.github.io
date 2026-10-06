@@ -6,3 +6,7 @@
     }
   });
 </script>
+{{/* Publications search and reduced-motion video handling */}}
+{{ with resources.Get "js/mv-site.js" | minify | fingerprint }}
+<script src="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" defer></script>
+{{ end }}

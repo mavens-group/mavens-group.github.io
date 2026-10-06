@@ -166,13 +166,11 @@
 
 /* ==========================================================================
    GLOBAL TYPOGRAPHY
-   Sets Roboto Condensed as the site-wide typeface for body and headings.
-   Also resets the CSS counter used by the publication list.
+   Sets Fira Sans Extra Condensed as the site-wide typeface for body and headings.
    ========================================================================== */
 body {
   font-family: 'Fira Sans Extra Condensed', sans-serif;
   font-weight: 300;
-  counter-reset: pub-counter; /* Reset publication counter once per page */
 }
 
 h1, h2, h3, h4 {
@@ -192,28 +190,13 @@ h2, h3, h4 {
   margin-bottom: 0.9rem;
 }
 
-/* Page title on banner-less single pages (h2 from layouts/partials/page_header.html):
-   sized like the other page titles rather than a section heading */
-.article > .article-container > h2:first-child {
-  font-size: 2.25rem;
-  font-weight: 300;
-  line-height: 1.2;
-  margin: 1.5rem 0 0.25rem;
-}
-
-/* The metadata block under it is empty on research posts; drop its spacing */
-.article > .article-container > h2:first-child + .article-container.pt-3 {
-  padding-top: 0 !important;
-}
-
 .article-metadata:empty {
   display: none;
 }
 
-/* Centre the heading inside the universal (research page) content wrapper */
-.universal-wrapper h1 {
-  text-align: center;
-  vertical-align: baseline;
+/* Theme's `.section-subheading` is bold, which read heavy beside 300 body text */
+.section-subheading {
+  font-weight: 400;
 }
 
 /* Centre CTA button groups site-wide */
@@ -360,28 +343,13 @@ a:focus,
   box-shadow: 0 0 0 0.2rem color-mix(in srgb, var(--m-primary) 40%, transparent);
 }
 
-/* ── Cards (research pillars on /research) ── */
+/* ── Cards (card view: research pillars, lectures, positions) ── */
 .card-simple,
 .dark .card-simple {
   background: var(--m-surface-low);
   border: none;
   border-radius: var(--m-radius);
   box-shadow: none;
-}
-
-.card-simple .img-hover-zoom {
-  border-radius: calc(var(--m-radius) / 2);
-}
-
-/* Theme gives the title a 1rem top margin on top of the card's 15px padding,
-   leaving ~36px above the title against 20px at the sides */
-.card-simple .section-subheading.article-title {
-  margin-top: 0;
-}
-
-/* Summary sat 2px under the image; give it the same breathing room as the title */
-.card-simple .summary-link .article-style {
-  margin-top: 0.5rem;
 }
 
 
@@ -426,81 +394,6 @@ a:focus,
 }
 
 
-/* ==========================================================================
-   PUBLICATION LIST COUNTER
-   Auto-numbers publication entries on the /publications page using a CSS
-   counter. Counter is reset on <body> (see GLOBAL TYPOGRAPHY above).
-   ========================================================================== */
-.pub-list-item.view-citation {
-  counter-increment: pub-counter;
-  position: relative;
-  padding-left: 2em;
-}
-
-.pub-list-item.view-citation::before {
-  content: counter(pub-counter) ".";
-  position: absolute;
-  left: 0;
-  font-weight: 200;
-}
-
-/* Alternating rows on /publication. Isotope filtering hides items in place, so stripes can repeat while a filter is active. */
-#container-publications {
-  .pub-list-item.view-citation {
-    margin-bottom: 0 !important; /* inline 1rem gap would break the stripes */
-    padding: 0.6rem 0.75rem 0.6rem 2.75em;
-    border-radius: var(--m-radius);
-
-    &::before {
-      left: 0.75rem;
-    }
-  }
-
-  > .isotope-item:nth-child(even) .pub-list-item.view-citation {
-    background: var(--m-surface-mid);
-  }
-}
-
-
-/* ==========================================================================
-   ALUMNI GRAD CARDS
-   Smaller cards (130px avatar) that flow naturally based on available space.
-   ========================================================================== */
-
-.people-person.alumni-grad {
-  /* Override Bootstrap col-12 which forces 100% width on mobile */
-  flex: 0 0 auto !important;
-  width: auto !important;
-  max-width: none !important;
-
-  /* Smaller avatar: 130px instead of default 270px */
-  .avatar {
-    width: 130px !important;
-    height: 130px !important;
-  }
-
-  /* Smaller fonts than current students (default h2 is ~1.5-1.75rem) */
-  .portrait-title h2 {
-    font-size: 0.95rem !important;
-  }
-
-  .portrait-title h3 {
-    font-size: 0.7rem !important; /* same as the theme's role size on full-size cards */
-  }
-
-  .people-interests {
-    font-size: 0.8rem !important;
-  }
-}
-
-/* Hide role and social icons on mobile screens */
-@media (max-width: 768px) {
-  .people-person.alumni-grad {
-    .portrait-title h3 { display: none !important; }
-    ul.network-icon    { display: none !important; }
-  }
-}
-
 
 /* ==========================================================================
    HOME HERO
@@ -522,11 +415,13 @@ a:focus,
     margin: 0 0 0.35rem;
   }
 
+  /* Phones: title and actions first, so the first screen says who we are;
+     the lattice follows as the illustration */
   @media (max-width: 820px) {
     grid-template-columns: 1fr;
-    gap: 1.5rem;
+    gap: 2rem;
 
-    .mv-hero-art { order: -1; max-width: 420px; }
+    .mv-hero-art { max-width: 360px; }
     .mv-hero-art figcaption { text-align: left; }
   }
 }
@@ -609,64 +504,44 @@ body.dark .mv-hero-img-dark  { display: block; }
 
 
 /* ==========================================================================
-   ARTICLE / SUBPAGE BANNER
+   PAGE HEADER AND READING COLUMN
+   Every page opens the same way (layouts/partials/page_header.html): a light
+   title, an optional one-line lede, then the body. List pages
+   (.universal-wrapper) use the same 720px column as single pages
+   (.article-container), so headers, prose and lists share one left edge and
+   lines stay near 70 characters.
    ========================================================================== */
-
-/* ------------------------------------------------------------------
-   Title overlay position
-   Pins the title block to the bottom of the banner image, with a
-   gradient scrim, but ONLY on top-level section pages that have a
-   direct <img class="article-banner"> child (e.g. /research,
-   /publications). Deeper subpages (/research/post/hea) are unaffected.
-
-   NOTE: The broader selector below (commented out) applied to ALL
-   article headers and was replaced by the :has() version.
-   ------------------------------------------------------------------ */
-
-// .article-header > div:first-child {
-//   position: absolute !important;
-//   bottom: 0 !important;
-//   top: auto !important;
-//   height: auto !important;
-//   align-items: flex-end !important;
-//   padding-bottom: 2rem;
-//   width: 100%;
-//   background: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.3));
-// }
-
-.article-header:has(> img.article-banner) > div:first-child {
-  position: absolute !important;
-  bottom: 0 !important;
-  top: auto !important;
-  height: auto !important;
-  align-items: flex-end !important;
-  padding-bottom: 2rem;
-  width: 100%;
-  background: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.3));
+.universal-wrapper {
+  max-width: 760px;
+  padding: 0 20px;
 }
 
-/* ------------------------------------------------------------------
-   Content width on large screens
-   Narrows the research page text column to 80% for readability.
-   ------------------------------------------------------------------ */
-@include media-breakpoint-up(lg) {
-  .universal-wrapper {
-    max-width: 80%;
-    width: 80%;
-  }
+.mv-page-header {
+  padding-top: clamp(2rem, 6vw, 3.5rem);
+  margin-bottom: 2rem;
+
+  .article-metadata { margin: 1rem 0 0; }
+  .btn-links { margin-top: 1rem; }
 }
 
-/* ------------------------------------------------------------------
-   Banner image constraints
-   Caps banner height at 70vh and centres the focal point.
-   The <img> is constrained directly (not its parent) to avoid
-   breaking the bottom-pinned title overlay on subpages.
-   ------------------------------------------------------------------ */
-.article-header .article-banner {
-  width: 100%;
-  max-height: 70vh;
-  object-fit: cover;
-  object-position: center 50%;
+.mv-page-title {
+  font-size: clamp(2rem, 5vw, 2.75rem);
+  font-weight: 300;
+  line-height: 1.15;
+  margin: 0;
+}
+
+.mv-page-lede {
+  max-width: 60ch;
+  margin: 0.6rem 0 0;
+  font-size: 1.1rem;
+  line-height: 1.5;
+  opacity: 0.75;
+}
+
+/* Featured images take the card radius */
+.featured-image-wrapper .featured-image {
+  border-radius: var(--m-radius);
 }
 
 
@@ -1086,7 +961,7 @@ body.dark .mv-hero-img-dark  { display: block; }
   // max-width: 42rem;
   // margin: 2rem auto;
   margin-top:-0.75rem;
-  padding: 1.0rem .5rem;
+  padding: 1.0rem 0;                       /* flush with the paragraphs (was indented 0.5rem) */
   // border-top: 1px solid rgba(128, 128, 128, 0.25);
   // border-bottom: 1px solid rgba(128, 128, 128, 0.25);
   // font-family: 'Source Serif 4', 'Source Serif Pro', Georgia, serif;
@@ -1102,7 +977,7 @@ body.dark .mv-hero-img-dark  { display: block; }
   .callout-question {
     font-size: 0.95rem;
     // margin: 1.5rem auto;
-    padding: 1rem 0.5rem;
+    padding: 1rem 0;
   }
 }
 
@@ -1254,4 +1129,480 @@ body.dark .mv-hero-img-dark  { display: block; }
       grid-column: 2;
     }
   }
+}
+
+/* ==========================================================================
+   LIST VIEWS
+   layouts/_default/list.html wraps items in .mv-list--<view>.
+   Card view: two-column grid, 16:9 image on top, whole card is the link
+   (stretched title link), same surface and radius as the home theme cards.
+   Compact view (News, Software): rows with a fixed 4:3 thumbnail.
+   ========================================================================== */
+.mv-list--card {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  margin: 1.5rem 0 2rem;
+}
+
+@media (max-width: 575.98px) {
+  .mv-list--card { grid-template-columns: 1fr; }
+}
+
+.mv-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  margin: 0;                               /* theme spaces cards with margin-top; the grid gap does it now */
+  padding: 0;
+  overflow: hidden;
+  transition: background 0.15s;
+
+  &:hover { background: var(--m-surface-mid); }
+  &:focus-within { outline: 2px solid var(--m-primary); outline-offset: 2px; }
+
+  .btn-links { position: relative; z-index: 1; margin-top: 0.25rem; }   /* above the stretched link */
+}
+
+.dark .mv-card:hover { background: var(--m-surface-mid); }
+
+.mv-card-img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+}
+
+.mv-card-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  padding: 0.9rem 1rem 1rem;               /* same as .theme-card on the home page */
+}
+
+.mv-card-title {
+  margin: 0;
+  font-size: 1.05rem;
+  font-weight: 400;
+  line-height: 1.3;
+}
+
+.mv-card-link {
+  text-decoration: none;
+
+  &::after {                               /* stretch the link over the card */
+    content: "";
+    position: absolute;
+    inset: 0;
+  }
+  &:focus-visible { outline: none; }       /* the card shows the ring (:focus-within) */
+}
+
+.mv-card-summary {
+  font-size: 0.88rem;
+  line-height: 1.5;
+  opacity: 0.8;
+
+  p { margin: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mv-card { transition: none; }
+}
+
+.mv-list--compact {
+  margin: 1.5rem 0 2rem;
+
+  .media.stream-item {
+    margin: 0;
+    padding: 1.1rem 0;
+    border-top: 1px solid color-mix(in srgb, var(--m-outline) 20%, transparent);
+
+    &:first-child { border-top: none; padding-top: 0; }
+  }
+
+  .article-title {
+    font-size: 1.1rem;
+    line-height: 1.3;
+  }
+
+  .article-style {
+    margin-top: 0.3rem;
+    font-size: 0.9rem;
+    line-height: 1.5;
+  }
+}
+
+.mv-thumb img {
+  display: block;
+  width: 150px;
+  max-width: none;
+  height: auto;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: 8px;
+  background: #fff;                        /* logos with transparency stay legible in dark mode */
+}
+
+.mv-thumb--contain img {
+  object-fit: contain;
+  padding: 0.75rem;
+  background: #fff;
+  border: 1px solid color-mix(in srgb, var(--m-outline) 20%, transparent);
+}
+
+@media (max-width: 767.98px) {
+  .mv-thumb img { width: 88px; }
+  .mv-thumb--contain img { padding: 0.4rem; }
+}
+
+
+/* ==========================================================================
+   PUBLICATIONS
+   layouts/section/publication.html + layouts/partials/views/citation.html:
+   year headings, then title / authors / journal / links per entry. Group
+   members (authors with a profile) are in the text colour, others muted, in
+   both themes.
+   ========================================================================== */
+.mv-pub-tools {
+  margin: 0 0 2rem;
+}
+
+.mv-pub-search {
+  max-width: 24rem;
+  border-radius: var(--m-radius);
+  border-color: color-mix(in srgb, var(--m-outline) 45%, transparent);
+  background: var(--m-surface);
+  color: var(--m-on-surface);
+  font-weight: 300;
+
+  &:focus {
+    border-color: var(--m-primary);
+    box-shadow: 0 0 0 0.2rem color-mix(in srgb, var(--m-primary) 25%, transparent);
+    background: var(--m-surface);
+    color: var(--m-on-surface);
+  }
+}
+
+.mv-pub-year {
+  margin-bottom: 2rem;
+}
+
+.mv-pub-year-title {
+  margin: 0;
+  padding-bottom: 0.4rem;
+  font-size: 1.15rem;
+  font-weight: 400;
+  color: color-mix(in srgb, var(--m-on-surface) 65%, transparent);
+  border-bottom: 1px solid color-mix(in srgb, var(--m-outline) 25%, transparent);
+}
+
+.mv-pub {
+  padding: 0.85rem 0 0.25rem;
+}
+
+.mv-pub-title {
+  margin: 0 0 0.25rem;
+  font-size: 1.05rem;
+  font-weight: 400;
+  line-height: 1.35;
+
+  a { color: var(--m-on-surface); }
+  a:hover, a:focus { color: var(--m-primary); }
+}
+
+.mv-pub-authors,
+.mv-pub-venue {
+  font-size: 0.9rem;
+  line-height: 1.45;
+  color: color-mix(in srgb, var(--m-on-surface) 65%, transparent);
+}
+
+.mv-pub .btn-links {
+  margin-top: -0.1rem;                     /* the buttons carry the theme's 8px tap-target margin */
+}
+
+.mv-pub-empty {
+  opacity: 0.7;
+}
+
+.mv-pub-authors .author-member,
+.article-metadata .author-member {
+  color: var(--m-on-surface);
+  font-weight: 400;
+
+  &:hover { color: var(--m-primary); }
+}
+
+/* Single publication page: field labels were bold, and the rows sat inside a
+   1/12 offset that indented them from the abstract */
+.pub-row-heading {
+  font-weight: 400;
+  opacity: 0.7;
+}
+
+.pub .row > .col-md-1 { display: none; }
+.pub .row > .col-md-10 { flex: 0 0 100%; max-width: 100%; }
+
+/* Paper titles run long; a step down from the section page titles */
+.pub .mv-page-title {
+  font-size: clamp(1.75rem, 4vw, 2.25rem);
+  line-height: 1.2;
+}
+
+
+/* ==========================================================================
+   PEOPLE AND ALUMNI
+   layouts/partials/blocks/people.html. Same header as other pages, optional
+   group photo, then a card grid per group. Each card: photo, name, role and
+   one line in a fixed slot (research topic, or next position for alumni).
+   The lead group (the PI) is one wide card with the short bio.
+   ========================================================================== */
+.mv-people {
+  max-width: 960px;                        /* five cards a row; photo, PI card and grid share one width */
+  margin: 0 auto;
+  padding-bottom: 3rem;
+
+  .mv-page-header { margin-bottom: 1.75rem; }
+}
+
+.mv-people-photo {
+  margin: 0 0 2.5rem;
+
+  img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: var(--m-radius);
+  }
+}
+
+.mv-people-group {
+  margin-bottom: 2.5rem;
+}
+
+.mv-people-group-title {
+  margin: 0 0 1rem;
+  font-size: 1.35rem;
+  font-weight: 400;
+}
+
+.mv-people-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+  gap: 1rem;
+}
+
+.mv-person {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 1.25rem 1rem 1rem;
+  background: var(--m-surface-low);
+  border-radius: var(--m-radius);
+  transition: background 0.15s;
+
+  &:hover { background: var(--m-surface-mid); }
+  &:focus-within { outline: 2px solid var(--m-primary); outline-offset: 2px; }
+}
+
+.mv-person-photo {
+  width: 128px;
+  height: 128px;
+  margin-bottom: 0.85rem;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.mv-person-initials {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--m-primary-container);
+  color: var(--m-on-primary-container);
+  font-size: 2.25rem;
+  font-weight: 300;
+}
+
+.mv-person-text {
+  min-width: 0;
+}
+
+.mv-person-name {
+  text-wrap: balance;
+  margin: 0 0 0.15rem;
+  font-size: 1.05rem;
+  font-weight: 400;
+  line-height: 1.3;
+}
+
+.mv-person .mv-person-link {               /* outranks `.dark a` */
+  color: var(--m-on-surface);
+  text-decoration: none;
+
+  &::after {                               /* whole card opens the profile */
+    content: "";
+    position: absolute;
+    inset: 0;
+  }
+  &:hover { color: var(--m-primary); }
+  &:focus-visible { outline: none; }       /* the card shows the ring (:focus-within) */
+}
+
+.mv-person-role,
+.mv-person-note {
+  margin: 0;
+  font-size: 0.85rem;
+  line-height: 1.4;
+}
+
+.mv-person-role { opacity: 0.7; }
+
+.mv-person-note { margin-top: 0.5rem; }
+
+.mv-person-note-label { opacity: 0.7; }
+
+.mv-person-social {
+  position: relative;                      /* above the stretched card link */
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  gap: 0.15rem;
+  margin: 0.6rem 0 0;
+  padding: 0;
+  list-style: none;
+
+  a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;                           /* 32px tap targets (were ~14px icons) */
+    height: 32px;
+    border-radius: 50%;
+    font-size: 1.05rem;
+    color: var(--m-primary);
+
+    &:hover, &:focus-visible { background: color-mix(in srgb, var(--m-primary) 12%, transparent); }
+  }
+}
+
+/* PI: one wide card, photo beside name, role and bio */
+.mv-people-grid--lead {
+  grid-template-columns: 1fr;
+}
+
+.mv-person--lead {
+  flex-direction: row;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 1.5rem;
+  text-align: left;
+
+  .mv-person-photo { flex: 0 0 160px; width: 160px; height: 160px; margin: 0; }
+  .mv-person-name { font-size: 1.35rem; }
+  .mv-person-social { justify-content: flex-start; margin-left: -6px; }
+}
+
+.mv-person-bio {
+  margin: 0.6rem 0 0;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+/* Alumni project students: denser grid, smaller photos */
+.mv-people-grid:has(.alumni-grad) {
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+}
+
+.mv-person.alumni-grad .mv-person-photo {
+  width: 104px;
+  height: 104px;
+}
+
+.mv-people-footer {
+  text-align: center;
+}
+
+@media (max-width: 575.98px) {
+  .mv-people-grid:not(.mv-people-grid--lead),
+  .mv-people-grid:has(.alumni-grad) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.75rem;
+  }
+
+  .mv-person { padding: 1rem 0.6rem 0.75rem; }
+  .mv-person-photo,
+  .mv-person.alumni-grad .mv-person-photo { width: 96px; height: 96px; }
+
+  .mv-person--lead {
+    flex-direction: column;
+    text-align: center;
+
+    .mv-person-photo { flex-basis: auto; width: 128px; height: 128px; }
+    .mv-person-social { justify-content: center; margin-left: 0; }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mv-person { transition: none; }
+}
+
+
+/* ==========================================================================
+   PROFILE PAGES (layouts/partials/blocks/v1/about.html, authors/list.html)
+   ========================================================================== */
+
+/* Label over the research topic / next position under the role */
+.mv-profile-label {
+  margin: 1.25rem 0 0.15rem;
+  font-size: 0.8rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  opacity: 0.6;
+}
+
+#profile .mv-person-initials {
+  font-size: 4.5rem;
+}
+
+.mv-profile-pubs {
+  padding-left: 1.1rem;
+
+  li {
+    margin-bottom: 0.7rem;
+    line-height: 1.45;
+  }
+}
+
+.mv-profile-pub-meta {
+  display: block;
+  font-size: 0.88rem;
+  opacity: 0.75;
+}
+
+
+/* ==========================================================================
+   MEDIA AND CODE IN ARTICLES
+   ========================================================================== */
+video.mv-video {
+  display: block;
+  width: 100%;
+  max-width: 420px;
+  height: auto;
+  margin: 1.5rem auto;
+  border-radius: var(--m-radius);
+}
+
+/* Inline code was Bootstrap pink in a fallback monospace; use the site's
+   Fira Code on a neutral chip */
+.article-style :not(pre) > code {
+  padding: 0.1em 0.35em;
+  font-family: 'Fira Code', monospace;
+  font-size: 0.85em;
+  color: var(--m-on-surface);
+  background: var(--m-surface-mid);
+  border-radius: 4px;
 }

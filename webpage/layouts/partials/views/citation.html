@@ -1,41 +1,15 @@
 {{ $item := .item }}
 {{ $has_attachments := partial "functions/has_attachments" $item }}
 
-<div class="pub-list-item view-citation" style="margin-bottom: 1rem">
-  {{/* APA Style */}}
-  {{ if eq (site.Params.publications.citation_style | default "apa") "apa" }}
-
-  <span class="article-metadata li-cite-author">
-    {{ partial "page_metadata_authors" $item }}
-  </span>
-  <a href="{{ $item.RelPermalink }}">{{ $item.Title }}</a>.
-  {{ if $item.Params.publication_short }}
-    {{- $item.Params.publication_short | markdownify -}}.
-  {{ else if $item.Params.publication }}
-    {{- $item.Params.publication | markdownify -}}
+{{/* One publication: title, authors (group members emphasised), journal,
+     links. The year is the heading above it (layouts/section/publication.html). */}}
+<article class="mv-pub">
+  <h3 class="mv-pub-title"><a href="{{ $item.RelPermalink }}">{{ $item.Title }}</a></h3>
+  <div class="mv-pub-authors">{{ partial "page_metadata_authors" $item }}</div>
+  {{ with or $item.Params.publication_short $item.Params.publication }}
+  <div class="mv-pub-venue">{{ . | markdownify }}</div>
   {{ end }}
-  ({{- $item.Date.Format "2006" -}}).
-  <p>{{ partial "page_links" (dict "page" $item "is_list" 1) }}</p>
-
-  {{/* MLA Style */}}
-  {{ else }}
-
-  <span class="article-metadata li-cite-author">
-    {{ partial "page_metadata_authors" $item }}.
-  </span>
-  <a href="{{ $item.RelPermalink }}">{{ $item.Title }}</a>.
-  {{ if $item.Params.publication_short }}
-    {{- $item.Params.publication_short | markdownify -}},
-  {{ else if $item.Params.publication }}
-    {{- $item.Params.publication | markdownify -}},
-  {{ end }}
-  {{- $item.Date.Format "2006" -}}.
-
   {{ if $has_attachments }}
-  <div class="btn-links">
-    {{ partial "page_links" (dict "page" $item "is_list" 1) }}
-  </div>
+  <div class="btn-links">{{ partial "page_links" (dict "page" $item "is_list" 1) }}</div>
   {{ end }}
-
-  {{ end }}
-</div>
+</article>

@@ -1,11 +1,10 @@
 ---
 title: Open Positions
 summary: Project, PhD, and joining information for MAVENs.
+subtitle: PhD and project positions, and what to expect when you join.
 view: card
-banner:
-  caption: ''
-  image: 'group.webp'
-  title: "Open Positions"
+# Text-only cards: the four illustrations were near-duplicates
+card_images: false
 
 sections:
   - block: markdown

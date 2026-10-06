@@ -1,0 +1,36 @@
+{{- define "main" -}}
+
+{{/* Publications grouped under year headings, newest first. Replaces the
+     theme's Isotope list: its type filter had one value (journal article) and
+     the year filter is the headings now. The search box is wired up in
+     assets/js/custom.js and hides empty years. */}}
+
+{{ partial "page_header.html" . }}
+
+<div class="universal-wrapper">
+
+  {{ with .Content }}
+  <div class="article-style">{{ . }}</div>
+  {{ end }}
+
+  <div class="mv-pub-tools">
+    <input type="search" class="form-control mv-pub-search" placeholder="Search titles, authors, journals"
+           aria-label="Search publications" aria-controls="mv-publications"
+           autocapitalize="off" autocomplete="off" autocorrect="off" spellcheck="false">
+  </div>
+
+  <div id="mv-publications">
+    {{ range .Pages.ByDate.Reverse.GroupByDate "2006" }}
+    <section class="mv-pub-year" aria-labelledby="y{{ .Key }}">
+      <h2 class="mv-pub-year-title" id="y{{ .Key }}">{{ .Key }}</h2>
+      {{ range $index, $item := .Pages }}
+        {{ partial "functions/render_view" (dict "page" $ "item" . "view" ($.Params.view | default "citation") "index" $index) }}
+      {{ end }}
+    </section>
+    {{ end }}
+    <p class="mv-pub-empty" role="status" hidden>No publications match that search.</p>
+  </div>
+
+</div>
+
+{{- end -}}

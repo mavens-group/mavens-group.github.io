@@ -1,7 +1,6 @@
 {{ $page := . }}
 {{ $featured := partial "blox-core/functions/get_featured_image.html" $page }}
-
-{{ $anchor := $page.Params.image.focal_point | default "Smart" }}
+{{ $show_featured := and $featured (not .Params.image.preview_only) }}
 
 {{/* Set default titles for node pages */}}
 {{ $title := .Title }}
@@ -15,35 +14,23 @@
   {{end}}
 {{end}}
 
-{{/* Banner image */}}
-{{ if and .Params.banner.image (not (and $featured (not .Params.image.preview_only))) }}
-<div class="article-header">
-  {{- $img := "" -}}
-  {{ $alt := (.Params.banner.caption | default "") | plainify }}
-  {{ $destination := .Params.banner.image }}
-  {{ $is_remote := strings.HasPrefix $destination "http" }}
-  {{- if not $is_remote -}}
-    {{- $img = (.Page.Resources.ByType "image").GetMatch $destination -}}
-    {{- if not $img -}}
-      {{- $img = resources.Get (path.Join "media" $destination) -}}
-    {{- end -}}
-  {{- end -}}
-  <div class="position-absolute d-flex w-100 h-100 justify-content-center align-items-center">
-      {{/* To prevent control overlap, margins are based on $carousel-control-* in bootstrap-variables.scss */}}
-      <h2 class="hero-title" style="color: #fff">
-            {{ with .Params.title }}{{ . | markdownify | emojify }}{{ end }}
-          </h2>
-    </div>
-  {{ if $img }}
-    <img src="{{$img.RelPermalink}}" width="{{$img.Width}}" height="{{$img.Height}}" class="article-banner" alt="{{$alt}}">
-  {{ else }}
-    <img src="{{ .Params.banner.image }}" class="article-banner" alt="{{$alt}}">
-  {{ end }}
-</div>
-{{end}}
+{{/* One header for every page: title, an optional one-line lede (`subtitle`),
+     then metadata and links, on the same 720px column as the body. Section
+     banners (`banner.image`) are no longer rendered. */}}
+<header class="article-container mv-page-header">
+  <h1 class="mv-page-title">{{ $title }}</h1>
 
-{{/* Featured image layout */}}
-{{ if and $featured (not .Params.image.preview_only) }}
+  {{ with $page.Params.subtitle }}
+  <p class="mv-page-lede">{{ . | markdownify | emojify }}</p>
+  {{end}}
+
+  {{ if or $show_featured (not .IsNode) }}
+    {{ partial "page_metadata" (dict "page" $page "is_list" 0 "share" true) }}
+    {{ partial "page_links_div.html" $page }}
+  {{end}}
+</header>
+
+{{ if $show_featured }}
 
 {{/* Fit image within max size. */}}
 {{ $image := $featured }}
@@ -64,42 +51,11 @@
 {{end}}
 {{ if ne $image.MediaType.SubType "gif" }}{{ $image = $image.Process "webp" }}{{ end }}
 
-<div class="article-container pt-3">
-  <h1>{{ $title }}</h1>
-
-  {{ with $page.Params.subtitle }}
-  <p class="page-subtitle">{{ . | markdownify | emojify }}</p>
-  {{end}}
-
-  {{ partial "page_metadata" (dict "page" $page "is_list" 0 "share" true) }}
-  {{ partial "page_links_div.html" $page }}
-</div>
-
 {{/* Featured image */}}
-<div class="article-header {{$image_container}} featured-image-wrapper mt-4 mb-4" style="max-width: {{$image.Width}}px; max-height: {{$image.Height}}px;">
+<div class="article-header {{$image_container}} featured-image-wrapper mb-4" style="max-width: {{$image.Width}}px; max-height: {{$image.Height}}px;">
   <div style="position: relative">
     <img src="{{ $image.RelPermalink }}" width="{{ $image.Width }}" height="{{ $image.Height }}" alt="{{ with $.Params.image.alt_text }}{{.}}{{ end }}" class="featured-image">
     {{ with $.Params.image.caption }}<span class="article-header-caption">{{ . | markdownify | emojify }}</span>{{ end }}
   </div>
-</div>
-{{else}}
-  {{/* Case when page has no image */}}
-
-  {{/* Wider container for nodes */}}
-  {{ $ctnr := "article-container" }}
-  {{ if $page.IsNode }}
-    {{ $ctnr = "universal-wrapper" }}
-  {{end}}
-
-{{ if not .Params.banner }}
-<div class="{{$ctnr}} pt-3">
-  <h2>{{ $title }}</h2>
-  {{end}}
-
-<div class="{{$ctnr}} pt-3">
-  {{ if not .IsNode }}
-    {{ partial "page_metadata" (dict "page" $page "is_list" 0 "share" true) }}
-    {{ partial "page_links_div.html" $page }}
-  {{end}}
 </div>
 {{end}}

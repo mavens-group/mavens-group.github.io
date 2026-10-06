@@ -1,0 +1,47 @@
+{{/* Video shortcode: the theme's, plus the attributes it dropped.
+
+    src       file in the page bundle or assets/media/, or a URL
+    poster    preview image; defaults to {src without extension}.jpg if present
+    controls  show controls (no autoplay)
+    id        custom id "video-{id}"
+
+    Without `controls` the video autoplays, looped and muted. `muted` and
+    `playsinline` are required for autoplay on iOS and mobile Chrome (the theme
+    emitted only `autoplay loop`). Autoplaying videos carry
+    `data-mv-autoplay`; assets/js/custom.js pauses them for visitors who ask
+    for reduced motion. */}}
+
+{{ $destination := .Get "src" }}
+{{ $video_ext_with_dot := path.Ext (.Get "src") }}
+{{ $video_type := strings.TrimPrefix "." $video_ext_with_dot }}
+{{ $destination_preview := (.Get "poster") | default (replace $destination $video_ext_with_dot ".jpg") }}
+{{ $is_remote := strings.HasPrefix $destination "http" }}
+{{- $asset := "" -}}
+{{- $asset_preview := "" -}}
+{{- if not $is_remote -}}
+  {{- $asset = (.Page.Resources.ByType "video").GetMatch $destination -}}
+  {{- $asset_preview = (.Page.Resources.ByType "image").GetMatch $destination_preview -}}
+  {{- if not $asset -}}
+    {{- $asset = resources.Get (path.Join "media" $destination) -}}
+    {{- $asset_preview = resources.Get (path.Join "media" $destination_preview) -}}
+  {{- end -}}
+  {{ $video_type = $asset.MediaType.SubType }}
+{{- end -}}
+
+{{ if $asset }}
+  {{ $destination = $asset.RelPermalink }}
+{{ else }}
+  {{ $destination = $destination | safeURL }}
+{{ end }}
+
+{{ $poster := (.Get "poster") | default "" }}
+{{ if $asset_preview }}
+  {{ $poster = $asset_preview.RelPermalink }}
+{{ end }}
+
+{{ $controls := .Get "controls" }}
+{{ if eq $controls "false" }}{{ $controls = false }}{{ end }}
+
+<video class="mv-video" {{ if $controls }}controls preload="metadata"{{ else }}autoplay loop muted playsinline data-mv-autoplay{{ end }} {{ with $poster }}poster="{{ . }}"{{ end }} {{ with (.Get "id") }}id="video-{{ . | anchorize }}"{{ end }}>
+  <source src="{{ $destination }}" type="video/{{ $video_type }}">
+</video>
