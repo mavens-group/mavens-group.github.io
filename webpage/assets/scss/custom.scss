@@ -1460,12 +1460,36 @@ body.dark .mv-hero-img-dark  { display: block; }
   > .mv-person { flex: 0 0 160px; }
 }
 
-/* People > Researchers and Alumni > PhD: three cards a row on desktop
-   (phones keep two) */
+/* Alumni > PhD: three cards a row on desktop (phones keep two) */
 @media (min-width: 576px) {
-  .mv-people-group--researchers .mv-people-grid > .mv-person,
   .mv-people-group--alumni-researchers .mv-people-grid > .mv-person {
     flex-basis: calc((100% - 2rem) / 3);
+  }
+}
+
+/* People > Researchers: two side-by-side cards a row from tablet width, laid
+   out like the PI card (photo left; name, role, topic, links right) so the
+   research topic reads on one or two lines. Phones keep two stacked cards. */
+@media (min-width: 768px) {
+  .mv-people-group--researchers .mv-people-grid > .mv-person {
+    flex-basis: calc((100% - 1rem) / 2);
+    flex-direction: row;
+    align-items: center;
+    gap: 1.25rem;
+    padding: 1.25rem;
+    text-align: left;
+  }
+
+  .mv-people-group--researchers .mv-person-photo {
+    flex: 0 0 112px;
+    width: 112px;
+    height: 112px;
+    margin: 0;
+  }
+
+  .mv-people-group--researchers .mv-person-social {
+    justify-content: flex-start;
+    margin-left: -6px;                     /* icon hit-area padding, so the glyph lines up with the text */
   }
 }
 
