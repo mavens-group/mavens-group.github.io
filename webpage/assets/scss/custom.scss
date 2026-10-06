@@ -1460,9 +1460,11 @@ body.dark .mv-hero-img-dark  { display: block; }
   > .mv-person { flex: 0 0 160px; }
 }
 
-/* People > Researchers: three cards a row on desktop (phones keep two) */
+/* People > Researchers and Alumni > PhD: three cards a row on desktop
+   (phones keep two) */
 @media (min-width: 576px) {
-  .mv-people-group--researchers .mv-people-grid > .mv-person {
+  .mv-people-group--researchers .mv-people-grid > .mv-person,
+  .mv-people-group--alumni-researchers .mv-people-grid > .mv-person {
     flex-basis: calc((100% - 2rem) / 3);
   }
 }
