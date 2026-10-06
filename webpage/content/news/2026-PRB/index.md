@@ -17,7 +17,7 @@ Key highlights of the study include:
  - Universality Class: The extracted Fisher exponent of $\tau = 2.09 \pm 0.03$ confirms that this electronic phase transition belongs strictly to the 2D percolation universality class.
 
 This research establishes geometric connectivity as a quantitative design principle for defect-engineered van der Waals materials, shifting the focus from simple defect density to network topology.
-Congratulations to Shrestha on this exceptional computational physics milestone. I invite colleagues and researchers in condensed matter physics to read the full analytical methodology in our paper.
+Congratulations to Shrestha on this exceptional computational physics milestone. We invite colleagues and researchers in condensed matter physics to explore the full analytical methodology in our paper.
 
 Read the Paper:
 - <a href="https://journals.aps.org/prb/abstract/10.1103/nt5p-5n1p"><i class="ai ai-closed-access"></i> Phys Rev B</a>
