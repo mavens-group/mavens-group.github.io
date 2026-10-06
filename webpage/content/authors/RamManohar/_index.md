@@ -20,7 +20,7 @@ authors:
 superuser: false
 
 # Role/position
-role: PG Project (2023-24)
+role: PG Project (2023–24)
 
 # Organizations/Affiliations
 organizations:
@@ -28,7 +28,7 @@ organizations:
     url: 'https://www.srmist.edu.in'
 
 # Short bio (displayed in user profile at end of posts)
-bio: Project in  topic the ab initio DFT study of PMMA/TiO
+bio: Project on an ab initio DFT study of PMMA/TiO₂
  nanocomposite.
 
 interests:

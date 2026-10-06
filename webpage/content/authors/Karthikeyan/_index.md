@@ -19,7 +19,7 @@ authors:
 superuser: false
 
 # Role/position
-role: PG Project (2025-26)
+role: PG Project (2025–26)
 
 # Organizations/Affiliations
 organizations:

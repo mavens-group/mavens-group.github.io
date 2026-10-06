@@ -19,7 +19,7 @@ authors:
 superuser: false
 
 # Role/position
-role: UG Project (2025-27)
+role: UG Project (2025–27)
 
 # Organizations/Affiliations
 organizations:
@@ -27,7 +27,7 @@ organizations:
     url: 'https://www.srmist.edu.in/'
 
 # Short bio (displayed in user profile at end of posts)
-bio: I work on Monte Carlo methods on Bravis Lattice.
+bio: I work on Monte Carlo methods on Bravais lattices.
 
 interests:
  - Materials Science

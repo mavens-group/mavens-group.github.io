@@ -14,7 +14,7 @@ authors:
 # Is this the primary user of the site?
 superuser: false
 # Role/position
-role: UG Project Student (2023-27)
+role: UG Project (2023–27)
 # Organizations/Affiliations
 organizations:
   - name: SRM Institute of Science and Technology

@@ -1,12 +1,15 @@
 ---
 title: Alumni
 type: landing
-banner:
-  image: group.png
 sections:
   - block: people
     content:
-      title: Past Lab Members
+      title: Alumni
+      subtitle: Former PhD and project students, and where they went next.
+      group_labels:
+        Alumni (Researchers): PhD
+        Alumni: Researchers
+        Alumni (Grad): Project students
       # Choose which groups to display on this specific page
       user_groups:
           - Alumni (Researchers)   # 5. Past Scholars

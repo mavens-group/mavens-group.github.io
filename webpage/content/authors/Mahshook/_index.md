@@ -20,6 +20,8 @@ superuser: false
 
 # Role/position
 role: Research Scholar
+# One line, shown on the People card and under the role on the profile
+topic: Machine learning for quantum-defect host materials
 
 # Organizations/Affiliations
 organizations:

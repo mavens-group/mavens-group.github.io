@@ -37,10 +37,15 @@
     </a>
   {{ end }}
 </h3>
-      <ul>
+      <ul class="mv-profile-pubs">
         {{ range $limitedQuery }}
+        {{ $authors := .GetTerms "authors" }}
         <li>
-          {{ index .Params.authors 0 }} et. al., {{ .Params.publication | markdownify }}, {{ .Params.date.Format "2006" }}, <a href="{{ .RelPermalink }}">{{ .Params.doi }}</a>
+          <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+          <span class="mv-profile-pub-meta">
+            {{- with index $authors 0 }}{{ .LinkTitle }}{{ end }}{{ if gt (len $authors) 1 }} et al.{{ end -}}
+            {{- with .Params.publication }}, {{ . | markdownify }}{{ end }}, {{ .Date.Format "2006" -}}
+          </span>
         </li>
         {{ end }}
       </ul>

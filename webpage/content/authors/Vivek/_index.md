@@ -20,7 +20,7 @@ authors:
 superuser: false
 
 # Role/position
-role: Masters Project (2023-24)
+role: PG Project (2023–24)
 mrole: Accenture
 # Organizations/Affiliations
 organizations:

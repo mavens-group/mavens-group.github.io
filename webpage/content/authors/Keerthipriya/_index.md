@@ -7,7 +7,7 @@ build:
 title: Keerthipriya T
 
 # Full name (for SEO)
-first_name: Keerthirpriya
+first_name: Keerthipriya
 last_name: Thirunavukkarasu
 join: 2024
 
@@ -19,7 +19,7 @@ authors:
 superuser: false
 
 # Role/position
-role: PG Project (2024-25)
+role: PG Project (2024–25)
 
 # Organizations/Affiliations
 organizations:
@@ -27,7 +27,7 @@ organizations:
     url: 'https://www.srmist.edu.in'
 
 # Short bio (displayed in user profile at end of posts)
-bio: My study interest covers Machine Learning and Artificial Intelligence and visualization to interprete the insights from the data.
+bio: My study interest covers Machine Learning and Artificial Intelligence and visualization to interpret the insights from the data.
 
 interests:
   - Machine Learning

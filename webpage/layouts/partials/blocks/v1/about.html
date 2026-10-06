@@ -34,6 +34,11 @@
       <img class="avatar {{if eq $avatar_shape "square"}}avatar-square{{else}}avatar-circle{{end}}"
            width="{{ $avatar_image.Width }}" height="{{ $avatar_image.Height }}"
            src="{{ $avatar_image.RelPermalink }}" alt="{{$person_page.Title}}">
+      {{ else }}
+      {{/* No photo: initials, as on the People cards */}}
+      {{ $initials := "" }}
+      {{ range first 2 (split $person_page.Title " ") }}{{ $initials = printf "%s%s" $initials (substr . 0 1) }}{{ end }}
+      <span class="avatar avatar-circle mv-person-initials" aria-hidden="true">{{ $initials }}</span>
       {{ end }}
 
       <div class="portrait-title">
@@ -50,8 +55,15 @@
         </h2>
 
         {{ with $person.role }}<h3>{{ . | markdownify | emojify }}</h3>{{ end }}
-        {{ with $person.mrole }} <h2><b><small>Next Position</small></b></h2>
-          {{ with $person.mrole }}<h3>{{ . | markdownify | emojify }}</h3>{{ end }}
+        {{/* One slot under the role: research topic (current members, `topic`)
+             or next position (alumni, `mrole`) */}}
+        {{ with $person.topic }}
+          <p class="mv-profile-label">Research topic</p>
+          <h3>{{ . | markdownify | emojify }}</h3>
+        {{ end }}
+        {{ with $person.mrole }}
+          <p class="mv-profile-label">Next position</p>
+          <h3>{{ . | markdownify | emojify }}</h3>
         {{ end }}
         {{ range $person.organizations }}
         <h3>
@@ -62,7 +74,7 @@
         {{ end }}
       </div>
 
-      <ul class="network-icon" aria-hidden="true">
+      <ul class="network-icon">
         {{ range $person.social }}
         {{ $pack := or .icon_pack "fas" }}
         {{ $pack_prefix := $pack }}

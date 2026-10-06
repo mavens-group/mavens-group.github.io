@@ -12,14 +12,14 @@ last_name: R
 join: 2021
 
 # Username (this should match the folder name)
-authors: Gurusriram
-  -
+authors:
+  - Gurusriram
 
 # Is this the primary user of the site?
 superuser: false
 
 # Role/position
-role: UG Project (2020-2021)
+role: UG Project (2020–21)
 mrole: SRMIST
 
 # Organizations/Affiliations

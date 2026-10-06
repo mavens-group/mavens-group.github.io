@@ -19,7 +19,7 @@ authors:
 superuser: false
 
 # Role/position
-role: UG Project (2025 - 2026)
+role: UG Project (2025–26)
 
 # Organizations/Affiliations
 organizations:
@@ -32,7 +32,7 @@ bio:
 interests:
   - Computational Physics
   - Quantum Mechanics
-  - Fluid dynamic simnulations
+  - Fluid dynamics simulations
   - Numerical Methods and Algorithms
 
 education:

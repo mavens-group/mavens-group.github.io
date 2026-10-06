@@ -15,6 +15,8 @@ authors:
 superuser: false
 # Role/position
 role: Research Scholar
+# One line, shown on the People card and under the role on the profile
+topic: Point defects in 2D materials; MXene catalysts for hydrogen evolution
 # Organizations/Affiliations
 organizations:
   - name: SRM Institute of Science and Technology

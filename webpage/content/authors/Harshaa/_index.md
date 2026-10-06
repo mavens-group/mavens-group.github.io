@@ -19,8 +19,8 @@ authors:
 superuser: false
 
 # Role/position
-role: PG Project (2025-26)
-mrole: Reanult Nissan
+role: PG Project (2025–26)
+mrole: Renault Nissan
 # Organizations/Affiliations
 organizations:
   - name: Intern (AI and Computer Vision)
@@ -28,7 +28,7 @@ organizations:
 
 
 # Short bio (displayed in user profile at end of posts)
-bio: I work on Monte Carlo methods on Bravis Lattice.
+bio: I work on Monte Carlo methods on Bravais lattices.
 
 interests:
  - Astrophysics

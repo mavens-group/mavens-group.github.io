@@ -9,7 +9,7 @@ last_name: Sharma
 join: 2024
 
 # Role / position
-role: UG Project (2024-25)
+role: UG Project (2024–25)
 
 organizations:
   - name: SRM Institute of Science and Technology

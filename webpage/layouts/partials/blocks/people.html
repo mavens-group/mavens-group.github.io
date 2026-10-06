@@ -1,94 +1,137 @@
-{{/* Hugo Blox: People */}}
+{{/* Hugo Blox: People (MAVENs layout) */}}
 {{/* Documentation: https://hugoblox.com/blocks/ */}}
 {{/* License: https://github.com/HugoBlox/hugo-blox-builder/blob/main/LICENSE.md */}}
 
-{{/* Initialise */}}
+{{/* Page header like every other page, an optional group photo, then one grid
+     per user group. Each card: photo, name, role, then one line in the same
+     slot for everyone: the research topic (`topic`) for current members, or
+     the next position (`mrole`) for alumni. Block options:
+       content.subtitle      lede under the title
+       content.image         photo under the header (file in assets/media/)
+       content.group_labels  map of user group -> heading shown on the page
+       design.lead_group     group shown as one wide card with bio (the PI) */}}
+
 {{ $page := .wcPage }}
 {{ $block := .wcBlock }}
 {{ $show_social := $block.design.show_social | default false }}
-{{ $show_interests := $block.design.show_interests | default true }}
-{{ $show_organizations := $block.design.show_organizations | default false }}
 {{ $show_role := $block.design.show_role | default true }}
+{{ $lead_group := $block.design.lead_group | default "" }}
+{{ $labels := $block.content.group_labels | default dict }}
+{{ $groups := $block.content.user_groups }}
 
-<div class="row justify-content-center people-widget">
+{{ $social_names := dict
+  "envelope-square" "Email" "envelope" "Email"
+  "linkedin" "LinkedIn" "orcid-square" "ORCID" "orcid" "ORCID"
+  "google-scholar-square" "Google Scholar" "google-scholar" "Google Scholar"
+  "github-square" "GitHub" "github" "GitHub" }}
+
+<div class="mv-people">
   {{ with $block.content.title }}
-    <div class="section-heading col-12 mb-3 text-center">
-      <h1 class="mb-0">{{ . | markdownify | emojify }}</h1>
-      {{ with $block.content.subtitle }}<p class="mt-1">{{ . | markdownify | emojify }}</p>{{ end }}
-    </div>
+  <header class="mv-page-header">
+    <h1 class="mv-page-title">{{ . | markdownify | emojify }}</h1>
+    {{ with $block.content.subtitle }}<p class="mv-page-lede">{{ . | markdownify | emojify }}</p>{{ end }}
+  </header>
+  {{ end }}
+
+  {{ with $block.content.image }}
+    {{ $img := resources.Get (printf "media/%s" .) }}
+    {{ if not $img }}{{ errorf "people block: image `%s` not found in assets/media/" . }}{{ end }}
+    {{ $img = $img.Fill "1600x900 Bottom webp" }}
+    <figure class="mv-people-photo">
+      <img src="{{ $img.RelPermalink }}" width="{{ $img.Width }}" height="{{ $img.Height }}"
+           alt="{{ $block.content.image_alt | default "" }}" loading="eager">
+    </figure>
   {{ end }}
 
   {{ with $block.content.text }}
-    <div class="col-md-12">
-      {{ . | emojify | $page.RenderString }}
-    </div>
+    <div class="article-style">{{ . | emojify | $page.RenderString }}</div>
   {{ end }}
 
-  {{ range $block.content.user_groups }}
-    {{ $query := where (where site.Pages "Section" "authors") ".Params.user_groups" "intersect" (slice .) }}
+  {{ range $groups }}
+    {{ $group := . }}
+    {{ $query := where (where site.Pages "Section" "authors") ".Params.user_groups" "intersect" (slice $group) }}
 
     {{/* Sort */}}
     {{ $sort_by := $block.content.sort_by | default "Params.last_name" }}
     {{ $sort_by = partial "blox-core/functions/get_sort_by_parameter" $sort_by }}
     {{ $sort_ascending := $block.content.sort_ascending | default true }}
-    {{ $sort_order := cond $sort_ascending "asc" "desc" }}
-    {{ $query = sort $query $sort_by $sort_order }}
-    {{/* Alumni groups: override sort to join date descending (most recent first) */}}
-    {{ if in . "Alumni" }}
+    {{ $query = sort $query $sort_by (cond $sort_ascending "asc" "desc") }}
+    {{/* Alumni groups: join date descending (most recent first) */}}
+    {{ if in $group "Alumni" }}
       {{ $query = sort $query "Params.join" "desc" }}
     {{ end }}
 
-    {{if $query | and (gt (len $block.content.user_groups) 1) }}
-      <div class="col-md-12">
-        <h2 class="mb-4">{{ . | markdownify }}</h2>
-      </div>
-    {{end}}
+    {{ $is_lead := eq $group $lead_group }}
 
-    {{ range $query }}
-      {{ $avatar := (.Resources.ByType "image").GetMatch "*avatar*" }}
-      {{/* Get link to user's profile page. */}}
-      {{ $link := "" }}
-      {{ with site.GetPage (printf "/authors/%s" (path.Base .File.Dir)) }}
-        {{ $link = .RelPermalink }}
+    {{ with $query }}
+    <section class="mv-people-group">
+      {{ if gt (len $groups) 1 }}
+        <h2 class="mv-people-group-title">{{ index $labels $group | default (index $labels (lower $group)) | default $group | markdownify }}</h2>
       {{ end }}
-      {{/* <div class="col-12 col-sm-auto people-person"> */}}
-      <div class="col-12 col-sm-auto people-person {{ with .Params.css_class }}{{ . }}{{ end }}">
-        {{ $src := "" }}
-        {{ if site.Params.features.avatar.gravatar }}
-          {{ $src = printf "https://s.gravatar.com/avatar/%s?s=150" (md5 .Params.email) }}
-        {{ else if $avatar }}
-          {{ $avatar_image := $avatar.Fill "270x270 Center" }}
-          {{ $src = $avatar_image.RelPermalink }}
-        {{ end }}
-        {{ if $src }}
-          {{ $avatar_shape := site.Params.features.avatar.shape | default "circle" }}
-          {{with $link}}<a href="{{.}}">{{end}}<img width="270" height="270" loading="lazy" class="avatar {{if eq $avatar_shape "square"}}avatar-square{{else}}avatar-circle{{end}}" src="{{ $src }}" alt="Avatar">{{if $link}}</a>{{end}}
-        {{ end }}
 
-        <div class="portrait-title">
-          <h2>{{with $link}}<a href="{{.}}">{{end}}{{ .Title }}{{if $link}}</a>{{end}}</h2>
-          {{ if and $show_organizations .Params.organizations }}{{ range .Params.organizations }}<h3>{{ .name }}</h3>{{ end }}{{ end }}
-          {{ if and $show_role .Params.role }}<h3>{{ .Params.role | markdownify | emojify }}</h3>{{ end }}
-          {{ if $show_social }}{{ partial "social_links" . }}{{ end }}
-          {{ if and $show_interests .Params.interests }}<p class="people-interests">{{ delimit .Params.interests ", " | markdownify | emojify }}</p>{{ end }}
-          {{ if and $show_interests .Params.teaching }}<p class="people-interests">{{ delimit
-          .Params.teaching ", " | markdownify | emojify }}</p>{{ end }}
-        </div>
+      <div class="mv-people-grid{{ if $is_lead }} mv-people-grid--lead{{ end }}">
+      {{ range . }}
+        {{ $avatar := (.Resources.ByType "image").GetMatch "*avatar*" }}
+        {{ $link := "" }}
+        {{ with site.GetPage (printf "/authors/%s" (path.Base .File.Dir)) }}
+          {{ $link = .RelPermalink }}
+        {{ end }}
+        {{ $size := cond $is_lead 320 270 }}
+
+        <article class="mv-person{{ if $is_lead }} mv-person--lead{{ end }}{{ with .Params.css_class }} {{ . }}{{ end }}">
+          {{ if $avatar }}
+            {{ $img := $avatar.Fill (printf "%dx%d Smart webp" $size $size) }}
+            <img class="mv-person-photo" src="{{ $img.RelPermalink }}" width="{{ $img.Width }}" height="{{ $img.Height }}" alt="" loading="lazy">
+          {{ else }}
+            {{ $initials := "" }}
+            {{ range first 2 (split .Title " ") }}{{ $initials = printf "%s%s" $initials (substr . 0 1) }}{{ end }}
+            <span class="mv-person-photo mv-person-initials" aria-hidden="true">{{ $initials }}</span>
+          {{ end }}
+
+          <div class="mv-person-text">
+            <h3 class="mv-person-name">
+              {{ with $link }}<a class="mv-person-link" href="{{ . }}">{{ end }}{{ .Title }}{{ if $link }}</a>{{ end }}
+            </h3>
+            {{ if and $show_role .Params.role }}<p class="mv-person-role">{{ .Params.role | markdownify | emojify }}</p>{{ end }}
+
+            {{ if $is_lead }}
+              {{ with .Params.bio }}<p class="mv-person-bio">{{ . | markdownify | emojify }}</p>{{ end }}
+            {{ else if .Params.topic }}
+              <p class="mv-person-note">{{ .Params.topic | markdownify | emojify }}</p>
+            {{ else if .Params.mrole }}
+              <p class="mv-person-note"><span class="mv-person-note-label">Next:</span> {{ .Params.mrole | markdownify | emojify }}</p>
+            {{ end }}
+
+            {{ if and $show_social .Params.social }}
+            <ul class="mv-person-social">
+              {{ range .Params.social }}
+                {{ $pack := or .icon_pack "fas" }}
+                {{ $pack_prefix := cond (in (slice "fab" "fas" "far" "fal") $pack) "fa" $pack }}
+                {{ $href := .link }}
+                {{ $scheme := (urls.Parse $href).Scheme }}
+                {{ $target := "" }}
+                {{ if not $scheme }}
+                  {{ $href = .link | relLangURL }}
+                {{ else if in (slice "http" "https") $scheme }}
+                  {{ $target = "target=\"_blank\" rel=\"noopener\"" }}
+                {{ end }}
+                <li><a href="{{ $href | safeURL }}" {{ $target | safeHTMLAttr }} aria-label="{{ index $social_names .icon | default .icon }}"><i class="{{ $pack }} {{ $pack_prefix }}-{{ .icon }}" aria-hidden="true"></i></a></li>
+              {{ end }}
+            </ul>
+            {{ end }}
+          </div>
+        </article>
+      {{ end }}
       </div>
+    </section>
     {{ end }}
   {{ end }}
-</div>
 
-<div class="col-12 mt-5 mb-3 text-center">
-  {{ if in $page.RelPermalink "/alumni/" }}
-    {{/* If we are on the Alumni page, show the button to go back to the current team */}}
-    <a href="/people/" class="btn btn-primary btn-lg px-3 py-3">
-      <strong>⬅ View Current MAVENs Team</strong>
-    </a>
-  {{ else }}
-    {{/* If we are on ANY other page (like the main People page), show the button for Alumni */}}
-    <a href="/alumni/" class="btn btn-primary btn-lg px-3 py-3">
-      <strong>View Alumni of the Group ➔</strong>
-    </a>
-  {{ end }}
+  <div class="mv-people-footer">
+    {{ if in $page.RelPermalink "/alumni/" }}
+      <a href="{{ "people/" | relURL }}" class="btn btn-outline-primary">Current members</a>
+    {{ else }}
+      <a href="{{ "alumni/" | relURL }}" class="btn btn-outline-primary">Alumni</a>
+    {{ end }}
+  </div>
 </div>

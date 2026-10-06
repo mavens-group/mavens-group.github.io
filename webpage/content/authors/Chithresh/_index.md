@@ -20,6 +20,8 @@ superuser: false
 
 # Role/position
 role: Research Scholar
+# One line, shown on the People card and under the role on the profile
+topic: Spin coherence of defect qubits in solid hosts
 
 # Organizations/Affiliations
 organizations:
@@ -31,7 +33,7 @@ bio: My research focuses on computational simulations including Density Function
 
 interests:
   - Quantum Materials
-  - DFT-peripherial code development
+  - DFT-peripheral code development
 
 education:
   courses:

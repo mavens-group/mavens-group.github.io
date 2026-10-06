@@ -18,7 +18,7 @@ authors:
 superuser: false
 
 # Role/position
-role: UG Project (2020-2021)
+role: UG Project (2020–21)
 mrole: Vellore Institute of Technology
 
 # Organizations/Affiliations
@@ -39,7 +39,7 @@ education:
       institution: CKS College
       year: on going
     - course: MSc in Physics
-      institution: Vellore Institute of Science and Technology
+      institution: Vellore Institute of Technology
       year: 2021-2023
     - course: BSc (PCM)
       institution: SRM Institute of Science and Technology

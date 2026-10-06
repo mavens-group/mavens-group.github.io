@@ -19,7 +19,7 @@ authors:
 superuser: false
 
 # Role/position
-role: Defended thesis on 28/11/2025
+role: PhD, defended November 2025
 mrole: Post Doc
 
 # Organizations/Affiliations

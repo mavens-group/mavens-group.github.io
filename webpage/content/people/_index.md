@@ -3,12 +3,13 @@ title: People
 date: 2022-10-24
 type: landing
 summary: MAVENs present and past group members
-banner:
-  image: group.png
 sections:
   - block: people
     content:
       title: Meet the MAVENs
+      subtitle: Computational materials physics at SRMIST, Kattankulathur.
+      image: group.webp
+      image_alt: Five members of the MAVENs group
       # 🚨 ORDER IS NOW CORRECTED TO PRIORITIZE CURRENT MEMBERS 🚨
       user_groups:
           - Group Head             # 1. PI / Highest Priority
@@ -18,6 +19,7 @@ sections:
       sort_by: Params.join
       sort_ascending: true
     design:
+      lead_group: Group Head
       show_interests: false
       show_role: true
       show_social: true
