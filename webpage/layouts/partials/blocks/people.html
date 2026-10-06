@@ -64,7 +64,7 @@
     {{ $is_lead := eq $group $lead_group }}
 
     {{ with $query }}
-    <section class="mv-people-group">
+    <section class="mv-people-group mv-people-group--{{ $group | urlize }}">
       {{ if gt (len $groups) 1 }}
         <h2 class="mv-people-group-title">{{ index $labels $group | default (index $labels (lower $group)) | default $group | markdownify }}</h2>
       {{ end }}
