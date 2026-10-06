@@ -519,6 +519,15 @@ body.dark .mv-hero-img-dark  { display: block; }
   background: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.3));
 }
 
+/* Banner title: same type as the page titles without a banner (.mv-page-title);
+   as an h2 it otherwise took the h2 weight and the theme's 2.7rem */
+.article-header .hero-title {
+  font-family: 'Fira Sans Extra Condensed', sans-serif;
+  font-size: clamp(2rem, 5vw, 2.75rem);
+  font-weight: 300;
+  line-height: 1.15;
+}
+
 /* Caps banner height at 70vh and centres the focal point */
 .article-header .article-banner {
   width: 100%;
@@ -1385,7 +1394,7 @@ body.dark .mv-hero-img-dark  { display: block; }
    The lead group (the PI) is one wide card with the short bio.
    ========================================================================== */
 .mv-people {
-  max-width: 760px;                        /* same 720px column as every other page (+20px padding) */
+  max-width: 960px;                        /* five scholars a row (+20px padding) */
   margin: 0 auto;
   padding: 0 20px 3rem;
 
