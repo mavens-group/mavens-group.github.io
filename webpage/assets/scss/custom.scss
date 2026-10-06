@@ -225,7 +225,9 @@ h2, h3, h4 {
 /* ==========================================================================
    M3 TOKENS
    Seed #1565c0 via @material/material-color-utilities 0.3.0 (one-off script).
-   Dark surfaces lifted to neutral N12/N15/N17 to keep the existing dark-page lightness.
+   Dark surfaces follow M3 tone-based elevation: page = surface (N6), cards =
+   surface-container-high (N17), hover/stripes = surface-container-highest (N22).
+   (They were N12/N15/N17: a 3-tone step left cards barely visible.)
    ========================================================================== */
 :root {
   --m-primary: #005db7;
@@ -257,10 +259,10 @@ body.dark {
   --m-on-primary: #003063;
   --m-primary-container: #00468c;
   --m-on-primary-container: #d6e3ff;
-  --m-surface: #1d2025;
+  --m-surface: #111318;        /* N6  surface */
   --m-on-surface: #e1e2ea;
-  --m-surface-low: #23262c;
-  --m-surface-mid: #272a30;
+  --m-surface-low: #282a2f;    /* N17 surface-container-high */
+  --m-surface-mid: #33353a;    /* N22 surface-container-highest */
   --m-outline: #8c919d;
 
   background-color: var(--m-surface);
