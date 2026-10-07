@@ -1505,7 +1505,11 @@ body.dark .mv-hero-img-dark  { display: block; }
     padding: 1.25rem 1.25rem 1rem;
   }
 
-  .mv-person--panel .mv-person-social {
+  .mv-people-grid > .mv-person--stack { flex-direction: column; text-align: center; }
+  .mv-person--stack .mv-person-photo { flex: none; width: 100%; min-height: 0; aspect-ratio: 1 / 1; }
+  .mv-person--stack .mv-person-text { align-self: stretch; padding: 0.75rem 0.5rem 0.6rem; }
+
+  .mv-person--panel:not(.mv-person--stack) .mv-person-social {
     justify-content: flex-start;
     margin-left: -4px;                     /* (hit area - icon) / 2, so the icon lines up with the text */
   }
@@ -1714,19 +1718,38 @@ body.dark .mv-hero-img-dark  { display: block; }
   line-height: 1.5;
 }
 
-/* Alumni project students: denser grid, smaller photos */
+/* Alumni project students (.mv-person--stack): compact panel cards, five a
+   row on desktop, photo flush across the top at every width, text below */
 .mv-people-grid > .mv-person.alumni-grad {
-  flex-basis: 165px;                       /* 4 a row in the 720px column */
+  flex-basis: 165px;
 }
 
-.mv-person.alumni-grad {
-  padding-left: 0.5rem;                    /* room for "PG Project (2023–24)" on one line */
-  padding-right: 0.5rem;
+.mv-people-grid > .mv-person--stack {
+  flex-direction: column;
+  text-align: center;
 }
 
-.mv-person.alumni-grad .mv-person-photo {
-  width: 104px;
-  height: 104px;
+.mv-person--stack .mv-person-photo {
+  flex: none;
+  width: 100%;
+  min-height: 0;
+  aspect-ratio: 1 / 1;
+}
+
+.mv-person--stack .mv-person-text {
+  align-self: stretch;
+  padding: 0.75rem 0.5rem 0.6rem;          /* room for "PG Project (2023–24)" on one line */
+}
+
+.mv-person--stack .mv-person-social {
+  justify-content: center;
+  margin-left: 0;
+}
+
+/* Initials stand in for a missing photo; as a panel they fill the photo area */
+.mv-person--panel .mv-person-initials {
+  display: flex;
+  font-size: 3rem;
 }
 
 .mv-people-footer {
