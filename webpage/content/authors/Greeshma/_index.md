@@ -20,7 +20,7 @@ superuser: false
 # Role/position
 role: Research Scholar
 # One line, shown on the People card and under the role on the profile
-topic: Magnetism and ultrafast dynamics in alloys, molecules and oxides
+topic: Magnetism in alloys, molecules and oxides
 
 # Organizations/Affiliations
 organizations:
