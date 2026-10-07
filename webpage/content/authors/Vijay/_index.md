@@ -24,8 +24,8 @@ topic: Spin-orbit-torque-driven skyrmion dynamics in synthetic ferrimagnets
 
 # Organizations/Affiliations
 organizations:
-  - name: SRM Institute of Science and Technology
-    url: 'https://www.srmist.edu.in'
+  - name: Department of Physics and Nanotechnology, SRMIST
+    url: 'https://www.srmist.edu.in/department/department-of-physics-and-nanotechnology/'
 
 # Short bio (displayed in user profile at end of posts)
 bio: My research uses micromagnetic simulations to study spin-orbit torque-driven
@@ -66,6 +66,4 @@ social:
 user_groups:
   - Researchers
 ---
-Vijay R is a Research Scholar in the MAVENs group at the [Department of Physics and Nanotechnology, SRMIST, KTR](https://www.srmist.edu.in/department/department-of-physics-and-nanotechnology/).
-
-His work addresses how spin-orbit torque drives the motion of topological spin textures in layered magnets. Using micromagnetic simulations, he studies skyrmion dynamics in synthetic ferrimagnetic multilayers — mobility, the skyrmion Hall angle, and the conditions under which skyrmion motion can be guided along defined paths.
+Vijay's work addresses how spin-orbit torque drives the motion of topological spin textures in layered magnets. Using micromagnetic simulations, he studies skyrmion dynamics in synthetic ferrimagnetic multilayers — mobility, the skyrmion Hall angle, and the conditions under which skyrmion motion can be guided along defined paths.

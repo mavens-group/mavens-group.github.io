@@ -19,8 +19,8 @@ role: Research Scholar
 topic: Point defects in 2D materials; MXene catalysts for hydrogen evolution
 # Organizations/Affiliations
 organizations:
-  - name: SRM Institute of Science and Technology
-    url: 'https://www.srmist.edu.in'
+  - name: Department of Physics and Nanotechnology, SRMIST
+    url: 'https://www.srmist.edu.in/department/department-of-physics-and-nanotechnology/'
 # Short bio (displayed in user profile at end of posts)
 bio: Computational screening of 2D MXenes for hydrogen evolution catalysis using DFT to identify noble-metal-free alternatives for water splitting.
 interests:
@@ -67,9 +67,7 @@ social:
 user_groups:
   - Researchers
 ---
-Shrestha Dutta is a Research Scholar in the MAVENs group at the [Department of Physics and Nanotechnology, SRMIST](https://www.srmist.edu.in/department/department-of-physics-and-nanotechnology/).
-
-Her work addresses what controls catalytic activity at a compositionally disordered surface. Hydrogen evolution requires an adsorption free energy near thermoneutral, and on MXene surfaces that quantity is set by the local chemical environment of each site — the mix of surface terminations, the arrangement of substituted metal atoms — rather than by the nominal composition.
+Shrestha's work addresses what controls catalytic activity at a compositionally disordered surface. Hydrogen evolution requires an adsorption free energy near thermoneutral, and on MXene surfaces that quantity is set by the local chemical environment of each site — the mix of surface terminations, the arrangement of substituted metal atoms — rather than by the nominal composition.
 
 She uses plane-wave density functional theory to compute site-resolved electronic structure and hydrogen adsorption energies across MXene and ceramic compositions, targeting noble-metal-free alternatives to platinum.
 

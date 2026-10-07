@@ -24,8 +24,8 @@ topic: Magnetism and ultrafast dynamics in alloys, molecules and oxides
 
 # Organizations/Affiliations
 organizations:
-  - name: SRM Institute of Science and Technology
-    url: 'https://www.srmist.edu.in'
+  - name: Department of Physics and Nanotechnology, SRMIST
+    url: 'https://www.srmist.edu.in/department/department-of-physics-and-nanotechnology/'
 
 # Short bio (displayed in user profile at end of posts)
 bio: My research interest includes the study of alloys, molecules and oxides.
@@ -60,7 +60,4 @@ social:
 user_groups:
   - Researchers
 ---
-
-Greeshma R is a Research Scholar in the [Department of Physics and Nanotechnology](https://www.srmist.edu.in/department/department-of-physics-and-nanotechnology/) at [SRMIST](https://www.srmist.edu.in).
-
-She is exploring the electronic and magnetic properties and ultrafast dynamics of solids, molecules and oxides using DFT and rt-TDDFT.
+Greeshma is exploring the electronic and magnetic properties and ultrafast dynamics of solids, molecules and oxides using DFT and rt-TDDFT.

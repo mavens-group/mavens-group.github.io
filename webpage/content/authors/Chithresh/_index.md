@@ -24,8 +24,8 @@ topic: Spin coherence of defect qubits in solid hosts
 
 # Organizations/Affiliations
 organizations:
-  - name: SRM Institute of Science and Technology
-    url: 'https://www.srmist.edu.in/'
+  - name: Department of Physics and Nanotechnology, SRMIST
+    url: 'https://www.srmist.edu.in/department/department-of-physics-and-nanotechnology/'
 
 # Short bio (displayed in user profile at end of posts)
 bio: My research focuses on what limits the spin coherence of defect qubits in solids, using density functional theory and density functional perturbation theory to find hosts that sustain long coherence.
@@ -66,8 +66,6 @@ social:
 user_groups:
   - Researchers
 ---
-Chithresh T M is a Research Scholar in the MAVENs Group at the [Department of Physics and Nanotechnology, SRMIST, KTR](https://www.srmist.edu.in/department/department-of-physics-and-nanotechnology/).
-
-His work addresses what limits the lifetime of a spin state in a solid. A defect spin used as a qubit loses coherence through coupling to its surroundings — lattice vibrations, nearby nuclear spins, and the local disorder of the host lattice. The resulting coherence time T₂ is therefore a property of the host material as much as of the defect itself.
+Chithresh's work addresses what limits the lifetime of a spin state in a solid. A defect spin used as a qubit loses coherence through coupling to its surroundings — lattice vibrations, nearby nuclear spins, and the local disorder of the host lattice. The resulting coherence time T₂ is therefore a property of the host material as much as of the defect itself.
 
 He uses density functional theory and density functional perturbation theory to compute the electronic and vibrational structure that governs these relaxation channels, with the aim of predicting which hosts sustain long coherence.

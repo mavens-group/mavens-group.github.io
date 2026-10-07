@@ -25,8 +25,8 @@ topic: Machine learning for quantum-defect host materials
 
 # Organizations/Affiliations
 organizations:
-  - name: SRM Institute of Science and Technology
-    url: 'https://www.srmist.edu.in'
+  - name: Department of Physics and Nanotechnology, SRMIST
+    url: 'https://www.srmist.edu.in/department/department-of-physics-and-nanotechnology/'
 
 # Short bio (displayed in user profile at end of posts)
 bio: My research interest includes using machine learning for material property prediction and accelerated materials discovery.
@@ -72,8 +72,6 @@ social:
 user_groups:
   - Researchers
 ---
-Md Mahshook A is a Research Scholar in the MAVENs group at the [Department of Physics and Nanotechnology, SRMIST, KTR](https://www.srmist.edu.in/department/department-of-physics-and-nanotechnology/).
-
-His work addresses which host–defect combinations produce usable quantum states. A deep-level centre — a point defect whose electronic states sit isolated within the bandgap — can act as a spin qubit, but only a small fraction of possible defect–host pairs satisfy the requirements on level position, charge-state stability, and spin multiplicity at once. The combinatorial space is far too large to search by direct calculation.
+Mahshook's work addresses which host–defect combinations produce usable quantum states. A deep-level centre — a point defect whose electronic states sit isolated within the bandgap — can act as a spin qubit, but only a small fraction of possible defect–host pairs satisfy the requirements on level position, charge-state stability, and spin multiplicity at once. The combinatorial space is far too large to search by direct calculation.
 
 He builds predictive models trained on computed and experimental data to identify candidate pairs and to isolate the structural and electronic features that determine whether a defect level falls in the useful range.
