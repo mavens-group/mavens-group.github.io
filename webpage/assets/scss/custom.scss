@@ -1507,7 +1507,7 @@ body.dark .mv-hero-img-dark  { display: block; }
 
   .mv-person--panel .mv-person-social {
     justify-content: flex-start;
-    margin-left: -6px;                     /* icon hit-area padding, so the glyph lines up with the text */
+    margin-left: -4px;                     /* (hit area - icon) / 2, so the icon lines up with the text */
   }
 }
 
@@ -1582,6 +1582,25 @@ body.dark .mv-hero-img-dark  { display: block; }
 
 .mv-person-note-label { opacity: 0.7; }
 
+/* Social icons take the shape of the photo beside them (layouts/partials/
+   mv-social-icon.html): rounded squares on the cards (rectangular photo
+   panels), circles on profile pages (round photo). Shape, size and the
+   hover halo come from three variables. */
+.mv-person-social,
+#profile .network-icon {
+  --ico: 24px;                             /* icon size */
+  --ico-r: 6px;                            /* icon corner radius */
+  --ico-halo-r: 10px;                      /* hover halo corner radius */
+  --ico-hit: 32px;                         /* tap target */
+}
+
+#profile .network-icon {
+  --ico: 32px;
+  --ico-r: 50%;
+  --ico-halo-r: 50%;
+  --ico-hit: 40px;
+}
+
 .mv-person-social {
   position: relative;                      /* above the stretched card link */
   z-index: 1;
@@ -1591,35 +1610,40 @@ body.dark .mv-hero-img-dark  { display: block; }
   margin: 0.6rem 0 0;
   padding: 0;
   list-style: none;
-
-  li { display: flex; }                    /* no baseline alignment: glyphs differ in baseline */
-
-  a {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 32px;                           /* 32px tap targets (were ~14px icons) */
-    height: 32px;
-    border-radius: 50%;
-    color: var(--m-primary);
-    text-decoration: none;                 /* no link underline under the icon on hover */
-    transition: background 0.15s;
-
-    /* Round icon + round state layer: a circle around a circle */
-    &:hover, &:focus-visible { background: color-mix(in srgb, var(--m-primary) 14%, transparent); }
-    &:focus-visible { outline: 2px solid var(--m-primary); outline-offset: 1px; }
-  }
 }
 
-/* Social icons: all circles, same size. Round glyphs (ORCID, GitHub) fill the
-   circle themselves; mail, Scholar and LinkedIn sit in a filled circle with a
-   reversed glyph. */
+.mv-person-social li,
+#profile .network-icon li { display: flex; }   /* no baseline alignment: glyphs differ in baseline */
+
+.mv-person-social a,
+#profile .network-icon a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--ico-hit);
+  height: var(--ico-hit);
+  border-radius: var(--ico-halo-r);
+  color: var(--m-primary);
+  text-decoration: none;                   /* no link underline under the icon on hover */
+  transition: background 0.15s;
+
+  /* The halo has the icon's own shape, so a round icon gets a round halo and
+     a rounded square gets a rounded-square one */
+  &:hover, &:focus-visible { background: color-mix(in srgb, var(--m-primary) 14%, transparent); }
+  &:focus-visible { outline: 2px solid var(--m-primary); outline-offset: 1px; }
+}
+
+#profile .network-icon {
+  gap: 0.25rem;
+  li:hover { transform: none; }            /* theme scaled the icon on hover; the halo does that job */
+}
+
 .mv-ico {
   display: block;
-  width: 24px;
-  height: 24px;
-  font-size: 24px;
-  line-height: 24px;
+  width: var(--ico);
+  height: var(--ico);
+  font-size: var(--ico);
+  line-height: var(--ico);
   text-align: center;
 }
 
@@ -1627,16 +1651,18 @@ body.dark .mv-hero-img-dark  { display: block; }
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 50%;
+  border-radius: var(--ico-r);
   background: var(--m-primary);
   color: var(--m-on-primary);
-  font-size: 12px;
+  font-size: calc(var(--ico) * 0.5);
 
-  .ai { font-size: 15px; }                 /* Academicons glyphs sit smaller in their box */
+  .ai { font-size: calc(var(--ico) * 0.62); }   /* Academicons glyphs sit smaller in their box */
+  .mv-ico-disc { font-size: calc(var(--ico) * 0.78); }   /* ORCID's and GitHub's round badges, on the chip */
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .mv-person-social a { transition: none; }
+  .mv-person-social a,
+  #profile .network-icon a { transition: none; }
 }
 
 /* PI: one wide panel card, photo panel left, name, role and bio right.

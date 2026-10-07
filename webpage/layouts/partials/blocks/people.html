@@ -19,12 +19,6 @@
 {{ $labels := $block.content.group_labels | default dict }}
 {{ $groups := $block.content.user_groups }}
 
-{{ $social_names := dict
-  "envelope-square" "Email" "envelope" "Email"
-  "linkedin" "LinkedIn" "orcid-square" "ORCID" "orcid" "ORCID"
-  "google-scholar-square" "Google Scholar" "google-scholar" "Google Scholar"
-  "github-square" "GitHub" "github" "GitHub" }}
-
 <div class="mv-people">
   {{ with $block.content.title }}
   <header class="mv-page-header">
@@ -109,29 +103,7 @@
             {{ if and $show_social .Params.social }}
             <ul class="mv-person-social">
               {{ range .Params.social }}
-                {{ $pack := or .icon_pack "fas" }}
-                {{ $pack_prefix := cond (in (slice "fab" "fas" "far" "fal") $pack) "fa" $pack }}
-                {{ $href := .link }}
-                {{ $scheme := (urls.Parse $href).Scheme }}
-                {{ $target := "" }}
-                {{ if not $scheme }}
-                  {{ $href = .link | relLangURL }}
-                {{ else if in (slice "http" "https") $scheme }}
-                  {{ $target = "target=\"_blank\" rel=\"noopener\"" }}
-                {{ end }}
-                {{/* Every icon is a circle: ORCID and GitHub have round glyphs (the
-                     "-square" suffix is dropped); mail, Scholar, LinkedIn and anything
-                     else sit in a filled circle of the same size. */}}
-                {{ $name := strings.TrimSuffix "-square" .icon }}
-                {{ $round := in (slice "orcid" "github") $name }}
-                {{ if eq $name "linkedin" }}{{ $name = "linkedin-in" }}{{ end }}
-                <li><a href="{{ $href | safeURL }}" {{ $target | safeHTMLAttr }} aria-label="{{ index $social_names .icon | default .icon }}">
-                  {{- if $round -}}
-                    <i class="{{ $pack }} {{ $pack_prefix }}-{{ $name }} mv-ico" aria-hidden="true"></i>
-                  {{- else -}}
-                    <span class="mv-ico mv-ico--chip" aria-hidden="true"><i class="{{ $pack }} {{ $pack_prefix }}-{{ $name }}"></i></span>
-                  {{- end -}}
-                </a></li>
+                <li>{{ partial "mv-social-icon.html" (dict "icon" .icon "pack" .icon_pack "link" .link "shape" "square") }}</li>
               {{ end }}
             </ul>
             {{ end }}

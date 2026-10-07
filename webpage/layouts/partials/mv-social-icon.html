@@ -1,0 +1,32 @@
+{{/* One social icon, in the shape of the photo next to it.
+     Input: dict "icon" "pack" "link" "shape".
+       shape "round"  (profile pages, round photo): ORCID and GitHub use their
+                      round glyphs; the rest sit in a filled circle.
+       shape "square" (People cards, rectangular photo): every icon is a filled
+                      rounded square; ORCID and GitHub show their round badge on it.
+     Sizes, radius and colours come from CSS (.mv-ico, --ico, --ico-r). */}}
+{{ $names := dict
+  "envelope" "Email" "linkedin" "LinkedIn" "orcid" "ORCID"
+  "google-scholar" "Google Scholar" "github" "GitHub" }}
+{{ $pack := or .pack "fas" }}
+{{ $prefix := cond (in (slice "fab" "fas" "far" "fal") $pack) "fa" $pack }}
+{{ $name := strings.TrimSuffix "-square" .icon }}
+{{ $label := index $names $name | default .icon }}
+{{ $href := .link }}
+{{ $target := "" }}
+{{ $scheme := (urls.Parse $href).Scheme }}
+{{ if not $scheme }}
+  {{ $href = $href | relLangURL }}
+{{ else if in (slice "http" "https") $scheme }}
+  {{ $target = "target=\"_blank\" rel=\"noopener\"" }}
+{{ end }}
+{{ $round := eq .shape "round" }}
+<a href="{{ $href | safeURL }}" {{ $target | safeHTMLAttr }} aria-label="{{ $label }}">
+  {{- if and $round (in (slice "orcid" "github") $name) -}}
+    <i class="{{ $pack }} {{ $prefix }}-{{ $name }} mv-ico" aria-hidden="true"></i>
+  {{- else -}}
+    {{- $glyph := $name -}}
+    {{- if eq $name "linkedin" }}{{ $glyph = "linkedin-in" }}{{ end -}}
+    <span class="mv-ico mv-ico--chip" aria-hidden="true"><i class="{{ $pack }} {{ $prefix }}-{{ $glyph }}{{ if in (slice "github" "orcid") $name }} mv-ico-disc{{ end }}"></i></span>
+  {{- end -}}
+</a>
