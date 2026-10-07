@@ -1756,6 +1756,13 @@ body.dark .mv-hero-img-dark  { display: block; }
   margin-left: 0;
 }
 
+/* Smaller type on these compact cards, in three steps: name, then the next
+   position, then the project type and years smallest */
+.mv-person--stack .mv-person-name { font-size: 0.95rem; }
+/* CSS max() passed through as-is: Sass's own max() can't mix rem and px */
+.mv-person--stack .mv-person-note { font-size: #{"max(0.78rem, 13px)"}; }
+.mv-person--stack .mv-person-role { font-size: #{"max(0.7rem, 12px)"}; }   /* floor keeps phones readable */
+
 /* Initials stand in for a missing photo; as a panel they fill the photo area */
 .mv-person--panel .mv-person-initials {
   display: flex;
