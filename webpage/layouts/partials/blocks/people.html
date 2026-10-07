@@ -119,11 +119,53 @@
     {{ end }}
   {{ end }}
 
-  <div class="mv-people-footer">
+  <nav class="mv-people-wayfinding" aria-label="People navigation">
     {{ if in $page.RelPermalink "/alumni/" }}
-      <a href="{{ "people/" | relURL }}" class="btn btn-outline-primary">Current members</a>
+      <a class="mv-wayfinding-card" href="{{ "people/" | relURL }}">
+        <div class="mv-wayfinding-header">
+          <span class="mv-wayfinding-icon" aria-hidden="true"><i class="fas fa-users"></i></span>
+          <h3 class="mv-wayfinding-title">Current Members</h3>
+        </div>
+        <p class="mv-wayfinding-desc">Active research scholars, graduate students, and project researchers in the MAVENs lab.</p>
+        <div class="mv-wayfinding-action">
+          <span>Meet the team</span>
+          <i class="fas fa-arrow-right" aria-hidden="true"></i>
+        </div>
+      </a>
+      <a class="mv-wayfinding-card" href="{{ "position/" | relURL }}">
+        <div class="mv-wayfinding-header">
+          <span class="mv-wayfinding-icon" aria-hidden="true"><i class="fas fa-compass"></i></span>
+          <h3 class="mv-wayfinding-title">Join the Group</h3>
+        </div>
+        <p class="mv-wayfinding-desc">Information on PhD calls, project positions, and research expectations for new members.</p>
+        <div class="mv-wayfinding-action">
+          <span>Explore open positions</span>
+          <i class="fas fa-arrow-right" aria-hidden="true"></i>
+        </div>
+      </a>
     {{ else }}
-      <a href="{{ "alumni/" | relURL }}" class="btn btn-outline-primary">Alumni</a>
+      <a class="mv-wayfinding-card" href="{{ "alumni/" | relURL }}">
+        <div class="mv-wayfinding-header">
+          <span class="mv-wayfinding-icon" aria-hidden="true"><i class="fas fa-graduation-cap"></i></span>
+          <h3 class="mv-wayfinding-title">Lab Alumni</h3>
+        </div>
+        <p class="mv-wayfinding-desc">Former PhD scholars and project students, and where their research careers took them next.</p>
+        <div class="mv-wayfinding-action">
+          <span>View alumni directory</span>
+          <i class="fas fa-arrow-right" aria-hidden="true"></i>
+        </div>
+      </a>
+      <a class="mv-wayfinding-card" href="{{ "position/" | relURL }}">
+        <div class="mv-wayfinding-header">
+          <span class="mv-wayfinding-icon" aria-hidden="true"><i class="fas fa-compass"></i></span>
+          <h3 class="mv-wayfinding-title">Join the Group</h3>
+        </div>
+        <p class="mv-wayfinding-desc">Information on PhD calls, project positions, and research expectations for new members.</p>
+        <div class="mv-wayfinding-action">
+          <span>Explore open positions</span>
+          <i class="fas fa-arrow-right" aria-hidden="true"></i>
+        </div>
+      </a>
     {{ end }}
-  </div>
+  </nav>
 </div>
