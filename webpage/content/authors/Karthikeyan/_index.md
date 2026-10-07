@@ -26,7 +26,7 @@ organizations:
     url: 'https://www.srmist.edu.in/'
 
 # Short bio (displayed in user profile at end of posts)
-bio: I work electronic and magnetic structure of 2D materials
+bio: I worked on the electronic and magnetic structure of 2D materials.
 
 interests:
  - Condensed Matter Physics
@@ -49,11 +49,11 @@ social:
 user_groups: ["Alumni (Grad)"]
 css_class: alumni-grad
 ---
-Karthikeyan is a Master's student in the [Department of Physics and
+Karthikeyan was a Master's student in the [Department of Physics and
 Nanotechnology](https://www.srmist.edu.in/department/department-of-physics-and-nanotechnology/) at
 [SRM Institute of Science and Technology](https://www.srmist.edu.in/).
 
 
-His project work focuses on the investigation of 2D materials using DFT. This work aims to explore
+His project work focused on the investigation of 2D materials using DFT. This work aimed to explore
 the electronic, magnetic, and structural properties of these materials, contributing to
 advancements in nanotechnology and materials science.

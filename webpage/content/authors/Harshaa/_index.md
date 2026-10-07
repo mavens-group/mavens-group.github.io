@@ -27,7 +27,7 @@ organizations:
 
 
 # Short bio (displayed in user profile at end of posts)
-bio: I work on Monte Carlo methods on Bravais lattices.
+bio: I worked on Monte Carlo methods on Bravais lattices.
 
 interests:
  - Astrophysics
@@ -50,12 +50,12 @@ social:
 user_groups: ["Alumni (Grad)"]
 css_class: alumni-grad    # ← ADD THIS LINE
 ---
-Harshaa is a Master's student in the [Department of Physics and
+Harshaa was a Master's student in the [Department of Physics and
 Nanotechnology](https://www.srmist.edu.in/department/department-of-physics-and-nanotechnology/) at
 [SRM Institute of Science and Technology](https://www.srmist.edu.in/).
 
-Her research focuses on employing advanced computational techniques to investigate Monte Carlo
-methods applied to the various Bravis lattice structures like Heusler alloys, perovskites etc. Her work encompasses
+Her research focused on employing advanced computational techniques to investigate Monte Carlo
+methods applied to the various Bravais lattice structures like Heusler alloys, perovskites etc. Her work encompassed
 the simulation of physical systems and data analysis within the realm of materials science, with
-potential implications for astrophysics. The study aligns with the broader objective of applying
+potential implications for astrophysics. The study aligned with the broader objective of applying
 computational and analytical methodologies to address complex problems in computational physics.

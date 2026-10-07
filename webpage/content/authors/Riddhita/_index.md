@@ -20,7 +20,7 @@ organizations:
   - name: SRM Institute of Science and Technology
     url: 'https://www.srmist.edu.in/'
 # Short bio (displayed in user profile at end of posts)
-bio: Developing Monte Carlo simulations to study magnetic phase transitions in Heusler alloys, bridging computer science and computational physics.
+bio: Developed Monte Carlo simulations to study magnetic phase transitions in Heusler alloys, bridging computer science and computational physics.
 interests:
  - Machine Learning and Deep Learning
  - Data Analytics and Statistical Methods
@@ -58,6 +58,6 @@ css_class: alumni-grad
 ---
 Riddhita is a B.Tech student in the [Department of Computer Science](https://www.srmist.edu.in/department/department-of-computing-technologies/) at [SRM Institute of Science and Technology](https://www.srmist.edu.in/) with a strong interest in applying computational methods to interdisciplinary problems. Her work lies at the intersection of computer science, data-driven techniques, and scientific computing.
 
-At MAVENs, she is working on Monte Carlo simulations to study magnetic phase transitions in Heusler alloys using the Heisenberg Model, developing skills in simulation design, algorithmic thinking, and statistical analysis.
+At MAVENs, she worked on Monte Carlo simulations to study magnetic phase transitions in Heusler alloys using the Heisenberg Model, developing skills in simulation design, algorithmic thinking, and statistical analysis.
 
-Alongside her research, she is actively exploring Machine Learning, Deep Learning, and Data Analytics, with an interest in applying these approaches to scientific and real-world problems.
+Alongside her research, she actively explored Machine Learning, Deep Learning, and Data Analytics, with an interest in applying these approaches to scientific and real-world problems.

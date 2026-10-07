@@ -27,7 +27,7 @@ organizations:
     url: 'https://www.tcs.com'
 
 # Short bio (displayed in user profile at end of posts)
-bio: My study interest covers Machine Learning and Artificial Intelligence and visualization to interpret the insights from the data.
+bio: My study interests covered Machine Learning and Artificial Intelligence and visualization to interpret the insights from the data.
 
 interests:
   - Machine Learning
@@ -54,12 +54,12 @@ social:
 user_groups: ["Alumni (Grad)"]
 css_class: alumni-grad
 ---
-Keerthipriya is a post graduate student at [Department of Computer
+Keerthipriya was a postgraduate student at [Department of Computer
 Applications](https://www.srmist.edu.in/department/department-of-computer-applications/) at
 [SRMIST](https://www.srmist.edu.in) with a specialization in data science.
 
-Her academic focus is on the development and refinement of predictive models through the
-application of machine learning methodologies. Utilizing Python as a primary tool, she delves into
-various algorithmic approaches for model optimization. Her research involves a rigorous exploration
+Her academic focus was on the development and refinement of predictive models through the
+application of machine learning methodologies. Utilizing Python as a primary tool, she explored
+various algorithmic approaches for model optimization. Her research involved a rigorous exploration
 of theoretical foundations and their practical implementation within the field of materials
 science.

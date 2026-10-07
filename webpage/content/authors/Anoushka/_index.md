@@ -34,11 +34,11 @@ social:
 user_groups: ["Alumni (Grad)"]
 css_class: alumni-grad    # ← ADD THIS LINE
 ---
-Anoushka is a bachelor's  student in the [Department of Physics and Nanotechnology](https://www.srmist.edu.in/department/department-of-physics-and-nanotechnology/) at [SRM Institute of Science and Technology](https://www.srmist.edu.in/).
+Anoushka was a bachelor's student in the [Department of Physics and Nanotechnology](https://www.srmist.edu.in/department/department-of-physics-and-nanotechnology/) at [SRM Institute of Science and Technology](https://www.srmist.edu.in/).
 
-At MAVENs, Anoushka's work focuses on simulating magnetic materials to uncover atomic-level
-interactions, exploring phenomena such as spin dynamics and phase transitions.  Anoushka is
-developing a Fortran code to simulate the Ising model, emphasizing its role in exploring magnetic
-phase transitions and spin dynamics. Her work combines computational precision with theoretical
+At MAVENs, Anoushka's work focused on simulating magnetic materials to uncover atomic-level
+interactions, exploring phenomena such as spin dynamics and phase transitions.  Anoushka
+developed a Fortran code to simulate the Ising model, emphasizing its role in exploring magnetic
+phase transitions and spin dynamics. Her work combined computational precision with theoretical
 rigor, contributing to the understanding of fundamental interactions in magnetic materials and
 complex systems.

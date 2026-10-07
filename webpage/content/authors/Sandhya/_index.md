@@ -27,7 +27,7 @@ organizations:
     url: 'https://www.srmist.edu.in/'
 
 # Short bio (displayed in user profile at end of posts)
-bio: My research focuses on exploring the electronic and magnetic properties of disordered Heusler alloys.
+bio: My research focused on exploring the electronic and magnetic properties of disordered Heusler alloys.
 
 interests:
   - Computational physics
@@ -54,4 +54,4 @@ css_class: alumni-grad    # ← ADD THIS LINE
 ---
  Thulluri Sandhya was a Master student in the department of Physics and Nanotechnology at SRM Institute of Science and Technology.
 <br>
- Her research includes electronic and magnetic properties of Heusler alloys using DFT.
+ Her research covered electronic and magnetic properties of Heusler alloys using DFT.

@@ -41,4 +41,4 @@ education:
 user_groups: ["Alumni (Grad)"]
 css_class: alumni-grad
 ---
-Guru has worked on the SVEIRD model of COVID-19 pandemic.
+Guru worked on the SVEIRD model of COVID-19 pandemic.

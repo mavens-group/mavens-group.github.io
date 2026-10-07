@@ -27,7 +27,7 @@ organizations:
     url: ''
 
 # Short bio (displayed in user profile at end of posts)
-bio: My research interest covers the study of 2D energy materials like halides and carbides.
+bio: My research covered the study of 2D energy materials like halides and carbides.
 
 interests:
   - Perovskites
@@ -56,4 +56,4 @@ user_groups: ["Alumni (Grad)"]
 css_class: alumni-grad
 ---
 
-Vivek is a master's student in the Department of Physics and Nanotechnology at SRM Institute of Science and Technology. He is investigating the properties and applications of metal-free perovskites. 
+Vivek was a master's student in the Department of Physics and Nanotechnology at SRM Institute of Science and Technology. He investigated the properties and applications of metal-free perovskites. 

@@ -27,7 +27,7 @@ organizations:
     url: 'https://sru.edu.in/'
 
 # Short bio (displayed in user profile at end of posts)
-bio: My research focuses on exploring the electronic and magnetic properties of disordered Heusler alloys.
+bio: My PhD research focused on exploring the electronic and magnetic properties of disordered Heusler alloys.
 
 interests:
   - Electronic and magnetic properties
