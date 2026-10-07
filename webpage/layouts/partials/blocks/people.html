@@ -119,7 +119,19 @@
                 {{ else if in (slice "http" "https") $scheme }}
                   {{ $target = "target=\"_blank\" rel=\"noopener\"" }}
                 {{ end }}
-                <li><a href="{{ $href | safeURL }}" {{ $target | safeHTMLAttr }} aria-label="{{ index $social_names .icon | default .icon }}"><i class="{{ $pack }} {{ $pack_prefix }}-{{ .icon }}" aria-hidden="true"></i></a></li>
+                {{/* Every icon is a circle: ORCID and GitHub have round glyphs (the
+                     "-square" suffix is dropped); mail, Scholar, LinkedIn and anything
+                     else sit in a filled circle of the same size. */}}
+                {{ $name := strings.TrimSuffix "-square" .icon }}
+                {{ $round := in (slice "orcid" "github") $name }}
+                {{ if eq $name "linkedin" }}{{ $name = "linkedin-in" }}{{ end }}
+                <li><a href="{{ $href | safeURL }}" {{ $target | safeHTMLAttr }} aria-label="{{ index $social_names .icon | default .icon }}">
+                  {{- if $round -}}
+                    <i class="{{ $pack }} {{ $pack_prefix }}-{{ $name }} mv-ico" aria-hidden="true"></i>
+                  {{- else -}}
+                    <span class="mv-ico mv-ico--chip" aria-hidden="true"><i class="{{ $pack }} {{ $pack_prefix }}-{{ $name }}"></i></span>
+                  {{- end -}}
+                </a></li>
               {{ end }}
             </ul>
             {{ end }}
