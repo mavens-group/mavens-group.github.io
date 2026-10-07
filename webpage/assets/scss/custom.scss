@@ -1769,33 +1769,38 @@ body.dark .mv-hero-img-dark  { display: block; }
   font-size: 3rem;
 }
 
-/* ── People Wayfinding Grid (M3 Sibling Navigation Cards) ── */
+/* ── People Wayfinding (Compact M3 Navigation Strip) ── */
 .mv-people-wayfinding {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 1.25rem;
-  margin-top: 3rem;
-  padding-top: 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+  max-width: 680px;
+  margin: 2.5rem auto 0;
+  padding-top: 1.75rem;
   border-top: 1px solid color-mix(in srgb, var(--m-outline) 15%, transparent);
 }
 
-.mv-wayfinding-card {
+.mv-wayfinding-item {
   display: flex;
-  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  flex: 1 1 280px;
   background: var(--m-surface-low);
-  border: 1px solid color-mix(in srgb, var(--m-outline) 20%, transparent);
+  border: 1px solid color-mix(in srgb, var(--m-outline) 18%, transparent);
   border-radius: var(--m-radius);
-  padding: 1.35rem 1.4rem 1.25rem;
+  padding: 0.65rem 1rem;
   text-decoration: none !important;
   color: inherit !important;
-  transition: background 0.18s ease, border-color 0.18s ease;
+  transition: background 0.15s ease, border-color 0.15s ease;
 
   &:hover {
     background: var(--m-surface-mid);
     border-color: color-mix(in srgb, var(--m-primary) 35%, transparent);
 
-    .mv-wayfinding-action i {
-      transform: translateX(4px);
+    .mv-wayfinding-arrow {
+      transform: translateX(3px);
+      color: var(--m-primary);
     }
   }
 
@@ -1805,51 +1810,42 @@ body.dark .mv-hero-img-dark  { display: block; }
   }
 }
 
-.mv-wayfinding-header {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  margin-bottom: 0.6rem;
-
-  .mv-wayfinding-icon {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 1.75rem;
-    font-size: 1.2rem;
-    color: var(--m-primary);
-    flex-shrink: 0;
-  }
-
-  .mv-wayfinding-title {
-    margin: 0;
-    font-size: 1.12rem;
-    font-weight: 500;
-    color: var(--m-on-surface);
-    line-height: 1.3;
-  }
-}
-
-.mv-wayfinding-desc {
-  margin: 0 0 1rem;
-  font-size: 0.9rem;
-  line-height: 1.5;
-  color: color-mix(in srgb, var(--m-on-surface) 75%, transparent);
-  flex-grow: 1;
-}
-
-.mv-wayfinding-action {
+.mv-wayfinding-icon {
   display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
-  font-size: 0.88rem;
-  font-weight: 500;
+  justify-content: center;
+  font-size: 1.05rem;
   color: var(--m-primary);
+  flex-shrink: 0;
+}
 
-  i {
-    font-size: 0.8rem;
-    transition: transform 0.18s ease;
+.mv-wayfinding-text {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  min-width: 0;
+  line-height: 1.25;
+
+  .mv-wayfinding-title {
+    font-size: 0.92rem;
+    font-weight: 500;
+    color: var(--m-on-surface);
   }
+
+  .mv-wayfinding-sub {
+    font-size: 0.78rem;
+    color: color-mix(in srgb, var(--m-on-surface) 65%, transparent);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
+
+.mv-wayfinding-arrow {
+  font-size: 0.75rem;
+  color: color-mix(in srgb, var(--m-on-surface) 40%, transparent);
+  flex-shrink: 0;
+  transition: transform 0.15s ease, color 0.15s ease;
 }
 
 @media (max-width: 575.98px) {
