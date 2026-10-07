@@ -1,4 +1,4 @@
-﻿---
+---
 build:
   render: always
   list: always
@@ -71,6 +71,6 @@ Shrestha's work addresses what controls catalytic activity at a compositionally 
 
 She uses plane-wave density functional theory to compute site-resolved electronic structure and hydrogen adsorption energies across MXene and ceramic compositions, targeting noble-metal-free alternatives to platinum.
 
-Her recent work identified Zr-doped Ti₃C₂ and Ti₃CN as HER catalysts with near-thermoneutral adsorption energies, outperforming pristine Ti₃C₂. She also showed how anion identity and d-band asymmetry make early-d-metal Janus MXenes near-thermoneutral electrocatalysts. Current projects examine how surface functionalisation and bimetallic substitution tune activity, with machine learning applied to extend screening beyond what direct calculation covers.
+Across MXene and carbonitride compositions, she identified Zr-doped Ti₃C₂ and Ti₃CN as catalysts with near-thermoneutral adsorption energies, outperforming pristine Ti₃C₂. She also showed how anion identity and d-band asymmetry make early-d-metal Janus MXenes near-thermoneutral electrocatalysts. Current work examines how surface functionalisation and bimetallic substitution tune site-resolved activity, combining first-principles mapping with statistical screening.
 
 Beyond catalysis, she studies how point defects shape the electronic and magnetic properties of 2D materials: in vacancy-doped monolayer TiS₂, she showed that half-metallicity emerges only once the vacancy network percolates.
