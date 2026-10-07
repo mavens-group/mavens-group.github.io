@@ -23,7 +23,7 @@ organizations:
     url: 'https://www.srmist.edu.in/'
 
 # Short bio (displayed in user profile at end of posts)
-bio: "Designing next-generation magnetic, catalytic, and quantum materials from first principles — bridging atomic-scale disorder to device-relevant function."
+bio: "Predicting how atomic-scale disorder and chemical complexity govern magnetic, catalytic, and quantum phenomena, from first principles."
 
 interests:
   - interest: Disordered & High-Entropy Alloys
@@ -97,10 +97,8 @@ seo:
   description: "Dr. Rudra Banerjee is a computational physicist leading the MAVENs group at SRMIST. His research uses DFT, Monte Carlo, and machine learning to design materials for quantum, energy, and magnetic applications."
   keywords: ["Computational Materials Science", "DFT", "Quantum Materials", "Spintronics", "Machine Learning", "Heusler Alloys", "Green Energy", "Qubit Materials", "Monte Carlo", "Magnetocaloric Materials", "SRMIST"]
 ---
-At the intersection of quantum physics and materials design, Dr Rudra Banerjee leads the **M**aterials **A**dvancing a **V**iable **EN**ergy future (MAVENs) Group in the [Department of Physics and Nanotechnology](https://www.srmist.edu.in/department/department-of-physics-and-nanotechnology/) at [SRMIST, Kattankulathur](https://www.srmist.edu.in) — using computation to answer a deceptively simple question: _why do some materials behave the way they do, and how can we design better ones?_
+Rudra Banerjee leads the **M**aterials **A**dvancing a **V**iable **EN**ergy future (MAVENs) Group in the [Department of Physics and Nanotechnology](https://www.srmist.edu.in/department/department-of-physics-and-nanotechnology/) at [SRMIST, Kattankulathur](https://www.srmist.edu.in). His research investigates how atomic-scale disorder, chemical mixing, and point defects govern collective material behaviour — examining the physical mechanisms by which microscopic structure dictates macroscopic magnetic, catalytic, and quantum response.
 
-His work uses *ab-initio* DFT and Monte Carlo simulations to compute electronic structure, revealing how atomic-scale disorder governs magnetic, catalytic, and quantum properties in bulk systems (Heusler alloys, perovskites, Fe-based alloys), 2D materials (MXenes, TMDCs), and defect-based quantum systems — with machine learning accelerating materials discovery.
+His group combines density functional theory, Green's-function methods (KKR-CPA), classical Monte Carlo, and spin-dynamics simulations to model electronic structure, magnetic phase transitions, and catalytic adsorption across disordered Heusler alloys, two-dimensional MXenes, and transition-metal dichalcogenides. For large compositional spaces, he develops physically interpretable machine-learning workflows to guide first-principles defect screening.
 
-He leads a group of PhD researchers and project students, with work spanning Heusler alloys, 2D catalysis, and qubit materials design.
-
-He teaches classical mechanics, mathematical methods, computational physics, nuclear and particle physics, and computational materials science (PhD), and has developed a graduate-level monograph on [Density Functional Theory](../../blog/2024-07-dft) for PhD coursework — covering everything from the Hohenberg–Kohn theorem to practical implementation.
+Beyond research, he teaches classical mechanics, mathematical methods, computational physics, and graduate-level computational materials science, having developed an open graduate monograph on [Density Functional Theory](../../blog/2024-07-dft) for PhD coursework.
