@@ -19,10 +19,10 @@ superuser: false
 
 # Role/position
 role: PG Project (2025–26)
-mrole: Renault Nissan
+mrole: Intern (AI and Computer Vision)
 # Organizations/Affiliations
 organizations:
-  - name: Intern (AI and Computer Vision)
+  - name: Renault Nissan
     url: ''
 
 

@@ -1793,7 +1793,7 @@ body.dark .mv-hero-img-dark  { display: block; }
   font-size: 0.8rem;
   letter-spacing: 0.04em;
   text-transform: uppercase;
-  opacity: 0.6;
+  opacity: 0.8;                            /* 0.6 gave 3.7:1 in light mode; AA needs 4.5:1 */
 }
 
 #profile .mv-person-initials {

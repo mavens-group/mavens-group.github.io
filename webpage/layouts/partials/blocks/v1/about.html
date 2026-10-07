@@ -62,15 +62,22 @@
           <h3>{{ . | markdownify | emojify }}</h3>
         {{ end }}
         {{ with $person.mrole }}
+          {{/* "<mrole> @ <first organisation, linked>"; screen readers hear "at" */}}
           <p class="mv-profile-label">Next position</p>
-          <h3>{{ . | markdownify | emojify }}</h3>
-        {{ end }}
-        {{ range $person.organizations }}
-        <h3>
-          {{ with .url }}<a href="{{ . }}" target="_blank" rel="noopener">{{ end }}
-          <span>{{ .name }}</span>
-          {{ if .url }}</a>{{ end }}
-        </h3>
+          <h3>{{ . | markdownify | emojify }}
+            {{- with $person.organizations }}{{ with index . 0 }}
+              <span aria-hidden="true">@</span><span class="sr-only">at</span>
+              {{ with .url }}<a href="{{ . }}" target="_blank" rel="noopener">{{ end }}{{ .name }}{{ if .url }}</a>{{ end }}
+            {{- end }}{{ end -}}
+          </h3>
+        {{ else }}
+          {{ range $person.organizations }}
+          <h3>
+            {{ with .url }}<a href="{{ . }}" target="_blank" rel="noopener">{{ end }}
+            <span>{{ .name }}</span>
+            {{ if .url }}</a>{{ end }}
+          </h3>
+          {{ end }}
         {{ end }}
       </div>
 

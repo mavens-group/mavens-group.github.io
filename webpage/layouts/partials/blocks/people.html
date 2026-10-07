@@ -99,7 +99,9 @@
             {{ else if .Params.topic }}
               <p class="mv-person-note">{{ .Params.topic | markdownify | emojify }}</p>
             {{ else if .Params.mrole }}
-              <p class="mv-person-note"><span class="mv-person-note-label">Next:</span> {{ .Params.mrole | markdownify | emojify }}</p>
+              {{/* "<mrole> @ <first organisation>"; screen readers hear "Next position: … at …" */}}
+              {{ $org := "" }}{{ with .Params.organizations }}{{ $org = (index . 0).name }}{{ end }}
+              <p class="mv-person-note"><span class="mv-person-note-label">Next<span class="sr-only"> position</span>:</span> {{ .Params.mrole | markdownify | emojify }}{{ with $org }} <span aria-hidden="true">@</span><span class="sr-only">at</span> {{ . }}{{ end }}</p>
             {{ end }}
 
             {{ if and $show_social .Params.social }}

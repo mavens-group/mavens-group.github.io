@@ -20,10 +20,10 @@ superuser: false
 
 # Role/position
 role: PG Project (2023–24)
-mrole: Accenture
+mrole: Packaged Application Developer
 # Organizations/Affiliations
 organizations:
-  - name: Packaged Application Developer
+  - name: Accenture
     url: ''
 
 # Short bio (displayed in user profile at end of posts)

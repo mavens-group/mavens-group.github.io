@@ -19,11 +19,11 @@ superuser: false
 
 # Role/position
 role: UG Project (2020–21)
-mrole: SRMIST
+mrole: MSc (Physics)
 
 # Organizations/Affiliations
 organizations:
-  - name: MSc (Physics)
+  - name: SRMIST
     url: ''
 
 # Short bio (displayed in user profile at end of posts)

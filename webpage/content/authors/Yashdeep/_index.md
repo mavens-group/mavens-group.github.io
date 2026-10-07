@@ -19,11 +19,11 @@ superuser: false
 
 # Role/position
 role: UG Project (2023–24)
-mrole: Institute of Science, Nagpur
+mrole: MSc (Physics)
 
 # Organizations/Affiliations
 organizations:
-  - name: MSc (Physics)
+  - name: Institute of Science, Nagpur
     url: ''
 
 # Short bio (displayed in user profile at end of posts)
