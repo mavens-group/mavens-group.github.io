@@ -38,7 +38,7 @@
       {{/* No photo: initials, as on the People cards */}}
       {{ $initials := "" }}
       {{ range first 2 (split $person_page.Title " ") }}{{ $initials = printf "%s%s" $initials (substr . 0 1) }}{{ end }}
-      <span class="avatar avatar-circle mv-person-initials" aria-hidden="true">{{ $initials }}</span>
+      <span class="avatar {{ if eq $avatar_shape "square" }}avatar-square{{ else }}avatar-circle{{ end }} mv-person-initials" aria-hidden="true">{{ $initials }}</span>
       {{ end }}
 
       <div class="portrait-title">
@@ -76,7 +76,7 @@
 
       <ul class="network-icon">
         {{ range $person.social }}
-        <li>{{ partial "mv-social-icon.html" (dict "icon" .icon "pack" .icon_pack "link" .link "shape" "round") }}</li>
+        <li>{{ partial "mv-social-icon.html" (dict "icon" .icon "pack" .icon_pack "link" .link "shape" "square") }}</li>
         {{ end }}
       </ul>
 

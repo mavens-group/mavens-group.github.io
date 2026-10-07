@@ -1530,7 +1530,7 @@ body.dark .mv-hero-img-dark  { display: block; }
   width: 128px;
   height: 128px;
   margin-bottom: 0.85rem;
-  border-radius: 50%;
+  border-radius: var(--m-radius);          /* M3 medium, as the cards (was a circle) */
   object-fit: cover;
 }
 
@@ -1596,9 +1596,20 @@ body.dark .mv-hero-img-dark  { display: block; }
 
 #profile .network-icon {
   --ico: 32px;
-  --ico-r: 50%;
-  --ico-halo-r: 50%;
+  --ico-r: 8px;                            /* same 25% corner as the 24px card icons */
+  --ico-halo-r: 12px;
   --ico-hit: 40px;
+}
+
+/* Avatars (features.avatar.shape: square). M3 shape scale: the large profile
+   portrait takes extra-large (28px); small avatars (author cards under papers)
+   take medium (12px), as the cards. The theme's .avatar-square was 3px. */
+.avatar-square {
+  border-radius: var(--m-radius);
+}
+
+#profile .avatar-square {
+  border-radius: 28px;
 }
 
 .mv-person-social {
