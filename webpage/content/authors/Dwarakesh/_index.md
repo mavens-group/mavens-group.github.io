@@ -8,8 +8,7 @@ title: Dwarakesh Kannan R
 # Full name (for SEO)
 first_name: Dwarakesh Kannan
 last_name: R
-join: 2021
-
+join: "2021"
 # Username (this should match the folder name)
 authors:
   - Dwarakesh kannan
@@ -37,7 +36,7 @@ education:
   courses:
     - course: B.Ed in Physics
       institution: CKS College
-      year: on going
+      year: ongoing
     - course: MSc in Physics
       institution: Vellore Institute of Technology
       year: 2021-2023

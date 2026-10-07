@@ -9,8 +9,7 @@ title: Agnivo Bhattacharjee
 # Full name (for SEO)
 first_name: Agnivo
 last_name: Bhattacharjee
-join: 2025
-
+join: "2025"
 # Username (this should match the folder name)
 authors:
   - Agnivo

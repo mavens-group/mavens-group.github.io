@@ -6,8 +6,7 @@ build:
 title: Anoushka Sharma
 first_name: Anoushka
 last_name: Sharma
-join: 2024
-
+join: "2024"
 # Role / position
 role: UG Project (2024–25)
 

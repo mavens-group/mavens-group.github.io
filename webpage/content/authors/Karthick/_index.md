@@ -9,8 +9,7 @@ title: Karthick L
 # Full name (for SEO)
 first_name: Karthick
 last_name: L
-join: 2025
-
+join: "2025"
 # Username (this should match the folder name)
 authors:
   - Karthick

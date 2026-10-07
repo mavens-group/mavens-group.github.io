@@ -9,7 +9,7 @@ title: Vijay R
 # Full name (for SEO)
 first_name: Vijay
 last_name: R
-join: 2025 Jan
+join: "2025-01"
 # Username (this should match the folder name)
 authors:
   - Vijay

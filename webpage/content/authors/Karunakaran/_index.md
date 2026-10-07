@@ -9,8 +9,7 @@ display_name_short: Karunakaran M
 # Full name (for SEO)
 first_name: Karunakaran
 last_name: M
-join: 2021 Jan
-
+join: "2021-01"
 # Username (this should match the folder name)
 authors:
   - Karunakaran

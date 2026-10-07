@@ -43,7 +43,7 @@
         <li>
           <a href="{{ .RelPermalink }}">{{ .Title }}</a>
           <span class="mv-profile-pub-meta">
-            {{- with index $authors 0 }}{{ .LinkTitle }}{{ end }}{{ if gt (len $authors) 1 }} et al.{{ end -}}
+            {{- with index $authors 0 }}{{ with .Page.Params.display_name_short }}{{ . }}{{ else }}{{ .LinkTitle }}{{ end }}{{ end }}{{ if gt (len $authors) 1 }} et al.{{ end -}}
             {{- with .Params.publication }}, {{ . | markdownify }}{{ end }}, {{ .Date.Format "2006" -}}
           </span>
         </li>

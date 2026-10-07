@@ -7,7 +7,7 @@ title: Riddhita Banerjee
 # Full name (for SEO)
 first_name: Riddhita
 last_name: Banerjee
-join: 2026
+join: "2026"
 # Username (this should match the folder name)
 authors:
   - Riddhita

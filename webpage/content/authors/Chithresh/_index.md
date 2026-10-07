@@ -9,8 +9,7 @@ title: Chithresh T M
 # Full name (for SEO)
 first_name: Chithresh
 last_name: T M
-join: 2025 June
-
+join: "2025-06"
 # Username (this should match the folder name)
 authors:
   - chithresh
@@ -41,7 +40,7 @@ education:
   courses:
     - course: PhD in Physics
       institution: SRM Institute of Science and Technology
-      year: on going
+      year: ongoing
     - course: M.Sc in Physics
       institution: NMS S.Vellaichamy Nadar College
       year: 2023-2025

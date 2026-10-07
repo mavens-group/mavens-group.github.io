@@ -43,16 +43,16 @@ experience:
   courses:
     - course: Assistant Professor
       institution: SRM Institute of Science and Technology
-      year: 2020 - Present
+      year: 2020–Present
     - course: Guest Scientist
-      institution: Harish-chandra Research Institute
-      year: 2017 - 2019
+      institution: Harish-Chandra Research Institute
+      year: 2017–2019
     - course: Postdoctoral Researcher
       institution: Uppsala University
-      year: 2015 - 2017
+      year: 2015–2017
     - course: Research Associate
       institution: University of Warwick
-      year: 2012 - 2015
+      year: 2012–2015
 
 teaching:
   courses:
@@ -101,6 +101,6 @@ At the intersection of quantum physics and materials design, Dr Rudra Banerjee l
 
 His work uses *ab-initio* DFT and Monte Carlo simulations to compute electronic structure, revealing how atomic-scale disorder governs magnetic, catalytic, and quantum properties in bulk systems (Heusler alloys, perovskites, Fe-based alloys), 2D materials (MXenes, TMDCs), and defect-based quantum systems — with machine learning accelerating materials discovery.
 
-He currently leads a group of four PhD researchers and three project students, and has graduated one PhD and eight MSc/BSc project students — with work spanning Heusler alloys, 2D catalysis, and qubit materials design.
+He leads a group of PhD researchers and project students, with work spanning Heusler alloys, 2D catalysis, and qubit materials design.
 
-He teaches classical mechanics, mathematical physics, and computational physics at BSc/MSc level, and has developed a graduate-level monograph on [Density Functional Theory](../../blog/2024-07-dft) for PhD coursework — covering everything from the Hohenberg–Kohn theorem to practical implementation.
+He teaches classical mechanics, mathematical methods, computational physics, nuclear and particle physics, and computational materials science (PhD), and has developed a graduate-level monograph on [Density Functional Theory](../../blog/2024-07-dft) for PhD coursework — covering everything from the Hohenberg–Kohn theorem to practical implementation.

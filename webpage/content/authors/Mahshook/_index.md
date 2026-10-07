@@ -10,7 +10,7 @@ title: Md Mahshook A
 # Full name (for SEO)
 first_name: Mohammed
 last_name: Mahshook
-join: 2024 Jan
+join: "2024-01"
 # Username (this should match the folder name)
 authors:
   - Mahshook
@@ -40,7 +40,7 @@ education:
   courses:
     - course: PhD in Physics
       institution: SRM Institute of Science and Technology
-      year: on going
+      year: ongoing
     - course: MSc in Physics
       institution: Government Arts and Science College, Gudalur
       year: 2020
@@ -72,7 +72,7 @@ social:
 user_groups:
   - Researchers
 ---
-Mohammed Mahshook is a Research Scholar in the MAVENs group at the [Department of Physics and Nanotechnology, SRMIST, KTR](https://www.srmist.edu.in/department/department-of-physics-and-nanotechnology/).
+Md Mahshook A is a Research Scholar in the MAVENs group at the [Department of Physics and Nanotechnology, SRMIST, KTR](https://www.srmist.edu.in/department/department-of-physics-and-nanotechnology/).
 
 His work addresses which host–defect combinations produce usable quantum states. A deep-level centre — a point defect whose electronic states sit isolated within the bandgap — can act as a spin qubit, but only a small fraction of possible defect–host pairs satisfy the requirements on level position, charge-state stability, and spin multiplicity at once. The combinatorial space is far too large to search by direct calculation.
 

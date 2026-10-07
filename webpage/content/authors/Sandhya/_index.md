@@ -10,8 +10,7 @@ title: Thulluri Sandhya
 # Full name (for SEO)
 first_name: Sandhya
 last_name: Thulluri
-join: 2022
-
+join: "2022"
 # Username (this should match the folder name)
 authors:
   - Thulluri Sandhya
