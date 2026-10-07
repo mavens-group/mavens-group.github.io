@@ -29,10 +29,12 @@ organizations:
     url: 'https://www.srmist.edu.in/'
 
 # Short bio (displayed in user profile at end of posts)
-bio: My research focuses on computational simulations including Density Functional Theory (DFT) and Machine Learning (ML) applications in materials science
+bio: My research focuses on what limits the spin coherence of defect qubits in solids, using density functional theory and density functional perturbation theory to find hosts that sustain long coherence.
 
 interests:
+  - Spin coherence of defect qubits
   - Quantum Materials
+  - Density functional (perturbation) theory
   - DFT-peripheral code development
 
 education:
