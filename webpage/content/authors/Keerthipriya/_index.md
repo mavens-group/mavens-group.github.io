@@ -19,11 +19,12 @@ superuser: false
 
 # Role/position
 role: PG Project (2024–25)
+mrole: Intern
 
 # Organizations/Affiliations
 organizations:
-  - name: SRM Institute of Science and Technology
-    url: 'https://www.srmist.edu.in'
+  - name: TCS
+    url: 'https://www.tcs.com'
 
 # Short bio (displayed in user profile at end of posts)
 bio: My study interest covers Machine Learning and Artificial Intelligence and visualization to interpret the insights from the data.
