@@ -1482,7 +1482,17 @@ body.dark .mv-hero-img-dark  { display: block; }
 }
 
 .mv-person--panel .mv-person-text {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;                          /* fills the card, so the icons can sit at its bottom */
   padding: 0.9rem 0.75rem 0.75rem;
+}
+
+/* Icons pinned to the bottom of the card: they line up across a row however
+   long the name, topic or "Next:" line is */
+.mv-person--panel .mv-person-social {
+  margin-top: auto;
+  padding-top: 0.6rem;
 }
 
 @media (min-width: 768px) {
@@ -1501,7 +1511,7 @@ body.dark .mv-hero-img-dark  { display: block; }
   }
 
   .mv-person--panel .mv-person-text {
-    align-self: center;
+    align-self: stretch;                   /* full card height (was centred), icons at the bottom */
     padding: 1.25rem 1.25rem 1rem;
   }
 
