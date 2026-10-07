@@ -27,7 +27,7 @@ organizations:
     url: ''
 
 # Short bio (displayed in user profile at end of posts)
-bio: My research focused on Synthesis and characterization Natural biodegradable polymer electrolyte
+bio: At MAVENs, I worked on the SVEIRD model of the COVID-19 pandemic in India.
 
 education:
   courses:
