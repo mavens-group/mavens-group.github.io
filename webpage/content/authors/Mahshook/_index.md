@@ -75,3 +75,5 @@ user_groups:
 Mahshook's work addresses which host–defect combinations produce usable quantum states. A deep-level centre — a point defect whose electronic states sit isolated within the bandgap — can act as a spin qubit, but only a small fraction of possible defect–host pairs satisfy the requirements on level position, charge-state stability, and spin multiplicity at once. The combinatorial space is far too large to search by direct calculation.
 
 He builds predictive models trained on computed and experimental data to identify candidate pairs and to isolate the structural and electronic features that determine whether a defect level falls in the useful range.
+
+His first paper (Physical Review Materials, 2026) screened about 45,000 stable compounds from composition alone. By comparing what seven different classifiers learned, he extracted shared design rules, such as filled valence shells and low chemical heterogeneity. The screen recovered every experimentally known host (diamond, SiC, ZnO, ZnS) and predicted 122 high-confidence candidates, including TiO₂, PbWO₄ and the layered HfS₂ and ZrS₂.
