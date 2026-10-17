@@ -28,8 +28,7 @@ organizations:
     url: 'https://www.srmist.edu.in/department/department-of-physics-and-nanotechnology/'
 
 # Short bio (displayed in user profile at end of posts)
-bio: My research uses micromagnetic simulations to study spin-orbit torque-driven
-  skyrmion dynamics in synthetic ferrimagnetic multilayers.
+bio: Micromagnetic modelling of spin–orbit-torque-driven skyrmion dynamics and Hall-angle suppression in synthetic ferrimagnetic multilayers.
 
 interests:
   - Skyrmions

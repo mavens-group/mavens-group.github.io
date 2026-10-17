@@ -101,4 +101,4 @@ Rudra Banerjee leads the **M**aterials **A**dvancing a **V**iable **EN**ergy fut
 
 His group combines density functional theory, Green's-function methods (KKR-CPA), classical Monte Carlo, and spin-dynamics simulations to model electronic structure, magnetic phase transitions, and catalytic adsorption across disordered Heusler alloys, two-dimensional MXenes, and transition-metal dichalcogenides. For large compositional spaces, he develops physically interpretable machine-learning workflows to guide first-principles defect screening.
 
-Beyond research, he teaches classical mechanics, mathematical methods, computational physics, and graduate-level computational materials science, having developed an open graduate monograph on [Density Functional Theory](../../blog/2024-07-dft) for PhD coursework.
+Beyond research, he teaches classical mechanics, mathematical methods, computational physics, and graduate-level computational materials science, having developed an open graduate monograph on [Density Functional Theory](/lectures/2024-07-dft/) for PhD coursework.

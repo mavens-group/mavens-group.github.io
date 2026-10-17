@@ -28,7 +28,7 @@ organizations:
     url: 'https://www.srmist.edu.in/department/department-of-physics-and-nanotechnology/'
 
 # Short bio (displayed in user profile at end of posts)
-bio: My research interest includes the study of alloys, molecules and oxides.
+bio: First-principles investigation of electronic structure, magnetism, and ultrafast dynamics in alloys, molecular magnets, and oxides.
 
 interests:
   - Magnetic Properties

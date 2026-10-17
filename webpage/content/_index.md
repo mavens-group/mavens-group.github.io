@@ -96,7 +96,7 @@ sections:
       text: |
         ### Open Positions
 
-        We welcome M.Sc. and PhD students in physics, chemistry, or materials science. Projects span _ab-initio_ [DFT](blog/2024-07-dft), Monte Carlo, and ML-driven screening.
+        We welcome M.Sc. and PhD students in physics, chemistry, or materials science. Projects span _ab-initio_ [DFT](/lectures/2024-07-dft/), Monte Carlo, and ML-driven screening.
 
         {{% cta cta_link="./position/" cta_text="See Open Projects" %}}
 

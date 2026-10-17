@@ -29,7 +29,7 @@ organizations:
     url: 'https://www.srmist.edu.in/department/department-of-physics-and-nanotechnology/'
 
 # Short bio (displayed in user profile at end of posts)
-bio: My research interest includes using machine learning for material property prediction and accelerated materials discovery.
+bio: Machine-learning screening and feature analysis to identify solid-state host materials for deep-level quantum defect qubits.
 
 interests:
   - Materials Informatics

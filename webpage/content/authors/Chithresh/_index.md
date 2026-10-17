@@ -28,7 +28,7 @@ organizations:
     url: 'https://www.srmist.edu.in/department/department-of-physics-and-nanotechnology/'
 
 # Short bio (displayed in user profile at end of posts)
-bio: My research focuses on what limits the spin coherence of defect qubits in solids, using density functional theory and density functional perturbation theory to find hosts that sustain long coherence.
+bio: First-principles modelling of spin-coherence limits and defect–host interactions in solid-state quantum materials using DFT and DFPT.
 
 interests:
   - Spin coherence of defect qubits

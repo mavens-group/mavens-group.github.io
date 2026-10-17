@@ -21,6 +21,8 @@ image:
 type: post
 listing:
   id: none
+aliases:
+  - /blog/2026-05-mc/
 ---
 
 **Monte Carlo (MC) methods** are among the most broadly applicable computational techniques in all of physics and physical chemistry. They are used to study phase transitions in magnetic materials, compute free energies of proteins, simulate particle detector responses, model surface catalysis, and sample posterior distributions in data analysis. This course develops both the theoretical foundations and the practical computational skill needed to apply MC methods to real research problems.

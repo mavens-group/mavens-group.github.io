@@ -4,6 +4,8 @@ date: 2024-07-21
 Summary: A PBS job submission tutorial.
 image:
   focal_point: 'top'
+aliases:
+  - /blog/2024-07-pbs/
 ---
 
 ## Introduction

@@ -20,6 +20,8 @@ image:
 type: post
 listing:
   id: none
+aliases:
+  - /blog/2024-07-dft/
 ---
 
 **Density Functional Theory (DFT)** is one of the most powerful theoretical frameworks for studying the electronic structure of atoms, molecules, and solids. It is widely used in condensed matter physics, quantum chemistry, and computational materials science to accurately predict the structural, electronic, magnetic, and optical properties of complex materials.
