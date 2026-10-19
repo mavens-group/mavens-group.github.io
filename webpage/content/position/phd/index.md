@@ -11,8 +11,6 @@ show_date: false
 image:
   focal_point: "Center"
   preview_only: true
-banner:
-  image: group.webp
 ---
 {{< inline-svg "figure.svg" >}}
 

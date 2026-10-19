@@ -18,7 +18,7 @@ Welcome to MAVENs. This page is for you if you are about to start a project or P
 
 You will spend a lot of time not knowing what to do next. This is not a sign that something is wrong — it is what research feels like from the inside, for everyone, almost all the time. Calculations will fail. Code will give nonsense. Things you were sure of will turn out to be wrong. None of this means you are not cut out for it.
 
-What helps when you are stuck: read more widely than your specific topic, talk to senior students before bringing it to me, write down what you have tried and where exactly it broke, and let a problem sit overnight before deciding it is hopeless. Most things that feel like dead ends in the evening look different the next morning.
+What helps when you are stuck: read more widely than your specific topic, talk to senior students before bringing it to me, write down what you have tried and where exactly it broke, and let a problem sit overnight before deciding it is hopeless. Most things that feel like dead ends in the evening look different the next morning. Some need longer — weeks, even months, while you work on something else — and that is normal too.
 
 Richard Hamming's lecture [*You and Your Research*](http://www.youtube.com/watch?v=a1zDuOPkMSw) is worth watching early on, and again every couple of years. It is about taste in problems and the habits of people who do good work over long careers.
 

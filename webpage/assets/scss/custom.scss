@@ -1244,12 +1244,14 @@ body.dark .mv-hero-img-dark  { display: block; }
 .mv-card-fig {
   --fig-bg: var(--fig-media);              /* media area is its own surface, apart from the card's surface-low text area */
   background: var(--fig-bg);
+  display: flex;                           /* figures are cropped to their content; centre them in the 16:9 area */
+  align-items: center;
 
   svg { display: block; width: 100%; height: auto; }
 }
 
-.mv-fig-page {
-  margin: 0 0 1.5rem;
+.article-style .mv-fig-page {
+  margin: 0 0 1.5rem;             /* the theme's figure margin-top (42px) left a gap under the title */
   --fig-bg: var(--m-surface-low);
   border-radius: var(--m-radius);
   overflow: hidden;
