@@ -1835,11 +1835,22 @@ body.dark .mv-hero-img-dark  { display: block; }
       transform: translateX(3px);
       color: var(--m-primary);
     }
+    .mv-wayfinding-arrow--back { transform: translateX(-3px); }   /* alumni lead to the past */
   }
 
   &:focus-visible {
     outline: 2px solid var(--m-primary);
     outline-offset: 2px;
+  }
+}
+
+/* Alumni lead to the past: mirror the card so the arrow sits on the left and the icon on the right */
+.mv-wayfinding-item--back {
+  flex-direction: row-reverse;
+
+  .mv-wayfinding-text {
+    align-items: flex-end;
+    text-align: right;
   }
 }
 
