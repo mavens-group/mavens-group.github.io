@@ -28,7 +28,7 @@ What decides whether a local feature survives into a macroscopic response is usu
 <div class="callout-question">This intermediate scale — the physical bridge between local structure and collective response — is the central focus of our research.</div>
 
 
-{{< video src="research.mp4" controls=false autoplay=true loop=true muted=true >}}
+<!-- {{< video src="research.mp4" controls=false autoplay=true loop=true muted=true >}} -->
 
 ## Isolating the Intermediate Scale
 
