@@ -25,12 +25,17 @@
 
 <article class="card-simple view-card mv-card">
   {{ if $show_image }}
+  {{ with $item.Resources.GetMatch "figure.svg" }}
+  {{/* Inline SVG so the figure follows the light/dark tokens; featured.webp stays for og:image */}}
+  <div class="mv-card-img mv-card-fig" aria-hidden="true">{{ .Content | safeHTML }}</div>
+  {{ else }}
   {{ $resource := partial "blox-core/functions/get_featured_image.html" $item }}
   {{ $anchor := $item.Params.image.focal_point | default "Smart" }}
   {{ with $resource }}
     {{ $image := .Fill (printf "808x455 %s" $anchor) }}
     {{ if ne $image.MediaType.SubType "gif" }}{{ $image = $image.Process "webp" }}{{ end }}
     <img class="mv-card-img" src="{{ $image.RelPermalink }}" height="{{ $image.Height }}" width="{{ $image.Width }}" alt="" loading="lazy">
+  {{ end }}
   {{ end }}
   {{ end }}
 

@@ -11,9 +11,7 @@ image:
   focal_point: "Center"
   preview_only: true
 ---
-<video autoplay loop muted playsinline style="width: 100%; border-radius: 8px;">
-  <source src="catalysis.mp4" type="video/mp4">
-</video>
+{{< inline-svg "figure.svg" >}}
 
 ### Scientific Challenge
 Catalytic screening reports one number per composition: an adsorption free energy, compared against the thermoneutral ideal. For an ordered surface that number is meaningful. For the doped, high-entropy, compositionally complex catalysts that the field is increasingly excited about, it is the wrong object. **In a disordered catalyst no two sites share a local environment, so the adsorption energy is not a value but a distribution — and activity is set by where that distribution sits and how wide it is, not by any single representative site.** A composition reported as thermoneutral on average may have almost no sites actually near the optimum; a composition that looks unpromising on average may have a usable tail. Our position is that screening one number per composition measures the wrong thing, and that the statistics of disorder are what decide catalytic performance.

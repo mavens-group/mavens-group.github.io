@@ -14,9 +14,7 @@ image:
   focal_point: "Center"
   preview_only: true
 ---
-<video autoplay loop muted playsinline style="width: 100%; border-radius: 8px;">
-  <source src="magnetism.mp4" type="video/mp4">
-</video>
+{{< inline-svg "figure.svg" >}}
 
 ### Scientific Challenge
 Magnetism is routinely read off local quantities — the size of a moment, the sign of a single exchange constant, the filling of a band. For an ordered crystal at zero temperature this often suffices. For a real alloy, mixed and substituted and held at finite temperature, it systematically fails: a large local moment can sit in a paramagnet, and a strong nearest-neighbour exchange can be cancelled by competition two shells away. Our position is that **the magnetic transition temperature is never set by the local moment — it is set by the topology of competing exchange pathways, and that is why local descriptors keep mispredicting disordered magnets.** The control variable is not a number attached to a site; it is the structure of the exchange network, and disorder is what reshapes that network.

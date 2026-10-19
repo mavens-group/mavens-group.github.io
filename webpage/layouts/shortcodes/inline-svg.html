@@ -1,0 +1,4 @@
+{{/* Inline a page-bundle SVG so it can use the site's colour tokens
+     (var(--m-*), var(--fig-*)) and inherit the site font; an <img> can't.
+     Usage: {{< inline-svg "figure.svg" >}} */}}
+{{ with .Page.Resources.GetMatch (.Get 0) }}<figure class="mv-fig-page">{{ .Content | safeHTML }}</figure>{{ end }}

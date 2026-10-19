@@ -7,7 +7,11 @@ show_date: false
 profile: true
 weight: 4
 summary: For students joining MAVENs — how things work, the tools we use, and what the first few months look like.
+image:
+  preview_only: true
 ---
+{{< inline-svg "figure.svg" >}}
+
 Welcome to MAVENs. This page is for you if you are about to start a project or PhD with us. It covers what to expect, the tools we use, and how things tend to go in the first few months. Read it once before you arrive, and come back to it when you need to.
 
 ## How Research Tends to Go

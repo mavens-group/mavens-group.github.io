@@ -7,7 +7,11 @@ show_date: false
 profile: true
 weight: 1
 summary: For students considering a project or PhD with MAVENs — what the work involves, what you would gain from it, and what I look for in applicants.
+image:
+  preview_only: true
 ---
+{{< inline-svg "figure.svg" >}}
+
 This page is for students considering a project or PhD with us. It covers what you would actually be doing, what you would come out with, and what we ask of you before applying. A separate [guide for new members](/position/start/) covers the practical side once you have joined.
 
 ## What You Would Be Doing

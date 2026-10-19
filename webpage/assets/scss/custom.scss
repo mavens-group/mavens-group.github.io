@@ -225,6 +225,12 @@ h2, h3, h4 {
   --m-radius: 12px;
 
   --primary: var(--m-primary);
+
+  /* Figure colours (inline SVGs: the figure.svg files in page bundles); the rest are --m-* */
+  --fig-media: color-mix(in srgb, var(--m-primary-container) 70%, var(--m-surface));   /* card media area: tinted, so it differs from both the page and the text area */
+  --fig-line: #c9ceda;
+  --fig-pale: #bdd2f5;
+  --fig-accent: #b5502a;
 }
 
 /* Declaring the scheme stops Chrome's "auto dark mode for web contents" from
@@ -247,6 +253,10 @@ body.dark {
   --m-surface-low: #282a2f;    /* N17 surface-container-high */
   --m-surface-mid: #33353a;    /* N22 surface-container-highest */
   --m-outline: #8c919d;
+  --fig-media: var(--m-surface);
+  --fig-line: #4a4e59;
+  --fig-pale: #1d3a63;
+  --fig-accent: #e8916a;
 
   background-color: var(--m-surface);
 }
@@ -1225,6 +1235,27 @@ body.dark .mv-hero-img-dark  { display: block; }
   height: auto;
   aspect-ratio: 16 / 9;
   object-fit: cover;
+}
+
+.mv-card:has(.mv-card-fig) {
+  border: 1px solid color-mix(in srgb, var(--m-outline) 35%, transparent);   /* the media surface equals the page's, so the outline carries the card edge */
+}
+
+.mv-card-fig {
+  --fig-bg: var(--fig-media);              /* media area is its own surface, apart from the card's surface-low text area */
+  background: var(--fig-bg);
+
+  svg { display: block; width: 100%; height: auto; }
+}
+
+.mv-fig-page {
+  margin: 0 0 1.5rem;
+  --fig-bg: var(--m-surface-low);
+  border-radius: var(--m-radius);
+  overflow: hidden;
+  background: var(--fig-bg);
+
+  svg { display: block; width: 100%; height: auto; }
 }
 
 .mv-card-body {

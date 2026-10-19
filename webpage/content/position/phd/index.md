@@ -10,9 +10,12 @@ profile: false
 show_date: false
 image:
   focal_point: "Center"
+  preview_only: true
 banner:
   image: group.webp
 ---
+{{< inline-svg "figure.svg" >}}
+
 ## PhD in Computational Condensed Matter Physics
 
 A PhD position will open for the **December 2026 intake**, with applications through SRMIST's admission cycle from **September 2026**. The position is described below — if it fits your interests, you are welcome to write to me ahead of the formal call. Early conversations make for stronger applications.

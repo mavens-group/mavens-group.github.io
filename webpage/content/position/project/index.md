@@ -10,9 +10,12 @@ profile: false
 show_date: false
 image:
   focal_point: "Center"
+  preview_only: true
 banner:
   image: group.webp
 ---
+{{< inline-svg "figure.svg" >}}
+
 ## BSc/MSc Project Positions
 
 Project positions are open in the MAVENs group for students in the penultimate years of their BSc or MSc.

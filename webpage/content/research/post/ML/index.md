@@ -11,9 +11,7 @@ image:
   focal_point: "Center"
   preview_only: true
 ---
-<video autoplay loop muted playsinline style="width: 100%; border-radius: 8px;">
-  <source src="ml.mp4" type="video/mp4">
-</video>
+{{< inline-svg "figure.svg" >}}
 
 ### Scientific Challenge
 The compositional space of functional materials is too large for exhaustive *ab initio* screening and too structured for blind data-driven search. Machine learning offers an obvious route through it, but the easy route is not the useful one: a model that predicts a target property accurately while obscuring the physics behind the prediction tells us where to look next time but not why. The question that organises our work here is therefore methodological: **how do we use machine learning to discover materials without surrendering the physical insight that makes a discovery transferable?** A model whose features map to recognisable electronic-structure descriptors can be reasoned about, falsified, and extended to systems outside its training set. A model that achieves the same accuracy through opaque feature combinations can do none of these things. The distinction matters most precisely where the rest of our work lives — in disordered systems, where the quantity that governs behaviour is rarely a single local descriptor and a model that cannot be read cannot be trusted to have found the right one.
