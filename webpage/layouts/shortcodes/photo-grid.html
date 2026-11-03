@@ -1,0 +1,38 @@
+{{- /*
+  photo-grid: a responsive grid of the images inside this page bundle.
+
+  Usage:   {{< photo-grid >}}                     images in gallery/
+           {{< photo-grid dir="photos" cols="2" >}}
+
+  Order:   file name (prefix with 1-, 2-, ... to control it).
+  Caption: the resource `title` set in front matter, e.g.
+             resources:
+               - src: "gallery/1-slide.webp"
+                 title: "Caption text"
+           No title set -> no caption.
+*/ -}}
+{{- $dir := .Get "dir" | default "gallery" -}}
+{{- $cols := .Get "cols" | default "3" -}}
+{{- $imgs := .Page.Resources.Match (printf "%s/*" $dir) -}}
+{{- with $imgs -}}
+<div class="photo-grid" style="--pg-cols: {{ $cols }}">
+  {{- range sort . "Name" -}}
+  {{- if eq .ResourceType "image" -}}
+  {{- $thumb := .Fill "900x600 Smart webp q80" -}}
+  {{- $full := .Fit "1920x1920 webp q85" -}}
+  {{- $cap := "" -}}
+  {{- if ne .Title .Name -}}{{- $cap = .Title -}}{{- end -}}
+  <figure>
+    <a href="{{ $full.RelPermalink }}" target="_blank" rel="noopener">
+      <img src="{{ $thumb.RelPermalink }}" width="{{ $thumb.Width }}" height="{{ $thumb.Height }}" alt="{{ $cap }}" loading="lazy" decoding="async">
+    </a>
+    {{- with $cap }}
+    <figcaption>{{ . | markdownify }}</figcaption>
+    {{- end }}
+  </figure>
+  {{- end -}}
+  {{- end -}}
+</div>
+{{- else -}}
+{{- warnf "photo-grid: no images found in %s/ of %s" $dir .Page.File.Path -}}
+{{- end -}}
