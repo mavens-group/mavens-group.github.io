@@ -173,7 +173,88 @@ Before accepting a Tauc intercept, use the displayed audit rather than $R^2$ alo
 
 A numerical line can be fitted to many parts of a spectrum. The audit makes the modelling assumptions visible before an answer is revealed.
 
-## 6. Limitations of this simulation (state these in any report)
+## 6. Uncertainty and error analysis
+
+### 6.1 Uncertainty of the Tauc intercept
+
+A Tauc line $y=mx+b$ (with $y=(I h\nu)^n$, $x=h\nu$) is extrapolated to $y=0$, giving $E_g=-b/m$. The slope and intercept of a least-squares line are *correlated*, so the uncertainty cannot be obtained from $u_m$ and $u_b$ separately:
+
+$$
+u^2(E_g)=\left(\frac{u_b}{m}\right)^2+\left(\frac{b\,u_m}{m^2}\right)^2-\frac{2b}{m^3}\,\mathrm{cov}(m,b).
+$$
+
+The correlation is removed by fitting about the centre of the window, $y=\bar y+m(x-\bar x)$. The mean $\bar y$ and the slope are then uncorrelated and
+
+$$
+E_g=\bar x-\frac{\bar y}{m},
+\qquad
+u^2(E_g)=\left(\frac{u_{\bar y}}{m}\right)^2+\left(\frac{\bar y\,u_m}{m^2}\right)^2,
+\qquad
+u_{\bar y}=\frac{s}{\sqrt n}.
+$$
+
+Because the intercept is a long extrapolation, $u(E_g)$ **grows as the window narrows or moves further from $E_g$**. A window that is far from the edge gives a small $R^2$ penalty and a large intercept uncertainty.
+
+### 6.2 The fit window is a systematic uncertainty
+
+The regression error assumes that the data are truly linear over the window. In reality the Tauc plot curves at both ends: the lower end is rounded by the Urbach tail and noise, the upper end by band non-parabolicity and by absorption from other transitions. Moving the window changes $E_g$ by an amount that is not captured by any fit statistic. A defensible procedure is:
+
+1. choose a primary window on the straightest part of the edge;
+2. refit with the window shifted by $\pm0.1$ eV and with a narrower window;
+3. report the spread of the resulting $E_g$ values as a separate contribution;
+4. combine it with the regression error in quadrature.
+
+In the sample record the regression error is 0.011 eV but the window spread is 0.015 eV: *the window dominates*. A high $R^2$ is not a substitute.
+
+### 6.3 Noise and the choice of $n$
+
+Raising the signal to the power $n$ amplifies relative noise: for $n=2$ the relative noise on $(I h\nu)^2$ is twice that on $I$, and the noise is largest where the signal is smallest, near the edge. This is one reason why a fit that includes the lowest part of the edge is unreliable. The choice between $n=2$ and $n=1/2$ should rest on the linearity of the plot over a window wider than 0.2 eV and on the physics of the material, not on the larger $R^2$ alone: a short window will often give a high $R^2$ for either transform.
+
+### 6.4 Propagation to particle size
+
+With $R=\sqrt{K_0(1/m_e^*+1/m_h^*)/\Delta E}$ and $\Delta E=E_g-E_g^{\mathrm{bulk}}$:
+
+$$
+\frac{u_R}{R}=\frac12\sqrt{\left(\frac{u(\Delta E)}{\Delta E}\right)^2+\left(\frac{u_\Sigma}{\Sigma}\right)^2},
+\qquad
+u(\Delta E)=\sqrt{u^2(E_g)+u^2(E_g^{\mathrm{bulk}})},
+$$
+
+where $\Sigma=1/m_e^*+1/m_h^*$ and $u_\Sigma$ is its uncertainty from the effective masses (a 10 % error in both masses gives a 10 % error in $\Sigma$, hence 5 % in $R$).
+
+Three observations:
+
+- **The exponent $-1/2$ halves relative errors**, which helps.
+- **$\Delta E$ is a difference.** When the shift is small (large particles), the relative uncertainty of $\Delta E$ diverges and $R$ becomes useless. Size estimates from the optical gap are only meaningful when the shift is several times $u(\Delta E)$.
+- **The bulk gap has its own uncertainty.** Literature values for ZnO span a few hundredths of an eV, which dominates $u(\Delta E)$ for a small shift. State the bulk value used and its source.
+
+### 6.5 Systematic model errors
+
+The confinement model drops the Coulomb term, uses isotropic bulk masses and assumes one size. These are errors of the *model*, not of the measurement; they cannot be reduced by a better fit. State their direction (the omitted Coulomb term makes $R$ too large) and whether the result is meant as an estimate or a measurement.
+
+### 6.6 Cross-checking against PXRD
+
+If a PXRD crystallite diameter $D_{\mathrm{XRD}}$ is available, compare $R_{\mathrm{opt}}$ with $D_{\mathrm{XRD}}/2$ using the combined uncertainty,
+
+$$
+\frac{\big|R_{\mathrm{opt}}-D_{\mathrm{XRD}}/2\big|}{\sqrt{u_{R}^2+u_{D}^2/4}}.
+$$
+
+A value below about 2 means the two are consistent. A larger value is not an error in either technique: it can arise from a size distribution (the optical edge weights the smallest particles, whereas the diffraction size is volume-weighted), from polycrystalline grains, or from the model errors above.
+
+## 7. Check your understanding
+
+1. Derive $E_g=-b/m$ from the Tauc relation. Which of $u_b$ and $u_m$ is more important when the window is far from $E_g$?
+2. Explain why fitting about the window centre removes the covariance between slope and intercept.
+3. A student narrows the Tauc window from 0.4 eV to 0.1 eV and $R^2$ rises from 0.990 to 0.999. Has the fit improved? What happens to $u(E_g)$?
+4. Why does the noise on $(I h\nu)^2$ exceed that on $I$, and where is the amplification largest?
+5. You obtain $E_g=3.742\pm0.019$ eV for ZnO (bulk 3.37 eV, $u=0.03$ eV). Compute $\Delta E$, $u(\Delta E)$ and the relative uncertainty of the radius. Compare your result with the sample record.
+6. Why does the optical size become unreliable for large particles, even if the Tauc fit is excellent?
+7. The Tauc plot for $n=2$ is straight over 0.15 eV and the one for $n=1/2$ over 0.35 eV. Which transform would you choose, and what further evidence would you seek?
+8. Name two reasons why $R_{\mathrm{opt}}$ and $D_{\mathrm{XRD}}/2$ need not agree even for a perfect experiment.
+9. Interference fringes from a thin film modulate the signal. How would they bias a Tauc fit that includes a fringe maximum?
+
+## 8. Limitations of this simulation (state these in any report)
 
 - The core signal is generated directly from the ideal Tauc power law,
   so a perfectly linear region exists for the correct $n$ by

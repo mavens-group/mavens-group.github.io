@@ -221,7 +221,14 @@ function linReg(points) {
   const meanY = sy / n;
   const ssTot = points.reduce((sum, point) => sum + (point.y - meanY) ** 2, 0);
   const ssRes = points.reduce((sum, point) => sum + (point.y - (slope * point.x + intercept)) ** 2, 0);
-  return { slope, intercept, r2: ssTot < 1e-12 ? 0 : 1 - ssRes / ssTot };
+  // Standard errors need at least one residual degree of freedom (n > 2).
+  let slopeErr = null, interceptErr = null;
+  if (n > 2) {
+    const s2 = ssRes / (n - 2);
+    slopeErr = Math.sqrt((n * s2) / denom);
+    interceptErr = Math.sqrt((s2 * sxx) / denom);
+  }
+  return { slope, intercept, slopeErr, interceptErr, dof: n - 2, r2: ssTot < 1e-12 ? 0 : 1 - ssRes / ssTot };
 }
 
 function meanAndStd(values) {
@@ -351,6 +358,10 @@ export default function PXRDLab() {
       points: pts,
       slope: r.slope,
       intercept: r.intercept,
+      // Relative error of D equals relative error of the intercept (D = Kλ/intercept).
+      dErr: r.interceptErr === null ? null : (SCHERRER_K * LAMBDA_NM / r.intercept) * (r.interceptErr / r.intercept),
+      strainErrPct: r.slopeErr === null ? null : r.slopeErr * 100,
+      dof: r.dof,
       r2: r.r2,
     };
   }, [measured]);
@@ -781,11 +792,14 @@ export default function PXRDLab() {
                 <div className="space-y-2 font-data text-sm">
                   <div className="flex justify-between">
                     <span className="text-[var(--text-quaternary)]">D (size, W-H)</span>
-                    <span className="text-[var(--text-primary)]">{whFit.D.toFixed(1)} nm</span>
+                    <span className="text-[var(--text-primary)]">{whFit.D.toFixed(1)}{whFit.dErr !== null && <span className="text-[var(--text-quaternary)]"> ± {whFit.dErr.toFixed(1)}</span>} nm</span>
                   </div>
                   <div className="flex justify-between">
                     <span className="text-[var(--text-quaternary)]">&epsilon; (strain, W-H)</span>
-                    <span className="text-[var(--text-primary)]">{whFit.strainPct.toFixed(3)}%</span>
+                    <span className="text-[var(--text-primary)]">{whFit.strainPct.toFixed(3)}{whFit.strainErrPct !== null && <span className="text-[var(--text-quaternary)]"> ± {whFit.strainErrPct.toFixed(3)}</span>}%</span>
+                  </div>
+                  <div className="text-[10px] leading-relaxed text-[var(--text-quaternary)]">
+                    {whFit.dof > 0 ? `± = 1σ standard error, ${whFit.dof} degree${whFit.dof > 1 ? "s" : ""} of freedom. For a 95 % interval multiply by Student's t (4.30 for 2 dof), not 2.` : "Two points fit any line exactly: no residual degrees of freedom, so no uncertainty can be estimated. Measure a third peak."}
                   </div>
                   <div className="flex justify-between">
                     <span className="text-[var(--text-quaternary)]">linearity R²</span>

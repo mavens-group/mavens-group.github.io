@@ -668,3 +668,79 @@ The vertical displacement and amplitude of the wavefunction on the potential plo
 - The infinite walls are displayed at finite height only for plotting.
 - The known analytic spectra guide the energy brackets in this teaching lab. A general unknown potential would instead require a wider energy scan combined with node counting.
 - The oscillator potential plot intentionally clips energies above its fixed 0–6 teaching scale rather than changing the axis between states.
+
+---
+
+## 10. Convergence, error scaling and uncertainty
+
+### 10.1 Expected order
+
+Eliminating the fourth-derivative term in Section 2 leaves a local truncation error of order $h^6$ per step. Accumulated over $N\sim1/h$ steps this gives a global error of order $h^4$, and an eigenvalue error of the same order:
+
+$$
+\epsilon_E(h)\approx C\,h^4,
+\qquad
+\frac{\epsilon_E(h)}{\epsilon_E(h/2)}\approx2^4=16.
+$$
+
+A convergence check is the only way to know that the code actually achieves this. Agreement with an analytic eigenvalue at *one* grid shows that the answer is close; agreement with the correct *rate* shows that the method is implemented correctly.
+
+### 10.2 Measured convergence of this lab's solver
+
+Relative energy error $\epsilon_E$ against the number of grid intervals $N$, obtained by running the lab's own solver on the unit-width well ($L=1$) and on the oscillator ($\omega=1$):
+
+| Problem | $N=25$ | $N=50$ | $N=100$ | $N=200$ | $N=400$ |
+|---|---:|---:|---:|---:|---:|
+| Well, $n=1$ | $1.0\times10^{-6}$ | $6.5\times10^{-8}$ | $4.1\times10^{-9}$ | $2.6\times10^{-10}$ | $1.4\times10^{-11}$ |
+| Well, $n=6$ | $1.4\times10^{-3}$ | $8.5\times10^{-5}$ | $5.3\times10^{-6}$ | $3.3\times10^{-7}$ | $2.1\times10^{-8}$ |
+
+| Problem | $N=50$ | $N=100$ | $N=200$ | $N=400$ | $N=800$ |
+|---|---:|---:|---:|---:|---:|
+| Oscillator, $n=3$ | $2.7\times10^{-5}$ | $1.7\times10^{-6}$ | $1.1\times10^{-7}$ | $6.6\times10^{-9}$ | $4.1\times10^{-10}$ |
+| Oscillator, $n=0$ | $1.4\times10^{-7}$ | $8.9\times10^{-8}$ | $8.6\times10^{-9}$ | $6.4\times10^{-10}$ | $4.2\times10^{-11}$ |
+
+Observations to be able to explain:
+
+1. **The ratio of successive errors is 16** for the well and for oscillator $n=3$, confirming $O(h^4)$.
+2. **Higher states need finer grids.** For $n=6$ the wavefunction has 5 nodes, so a given $h$ resolves fewer points per wavelength; at $N=25$ the error is a thousand times that of $n=1$. For the well the *absolute* error grows roughly as $n^{6}$ and the *relative* error as $n^{4}$ (the table shows a factor of about 1300 between $n=1$ and $n=6$, close to $6^4=1296$), because the neglected terms scale with the sixth derivative, $\psi^{(6)}\propto n^6$, while $E_n\propto n^2$.
+3. **The $n=0$ oscillator ratio is about 1.6 and then 10 and 14 before reaching 15.** At coarse grids a second, non-$h^4$ error is present. This is consistent with the finite domain and the finite tolerance of the root search, though the lab did not isolate which. It is a reminder not to read one run, or one ratio, as proof.
+4. The lab's default grids (800 intervals for the well, 600 half-intervals for the oscillator) place the discretisation error far below the plotting resolution, of order $10^{-9}$ or smaller for the states offered.
+
+### 10.3 Other error sources
+
+| Source | Effect | How to test |
+|---|---|---|
+| Finite boundary $X_{\max}$ (oscillator) | forces $\psi(X_{\max})=0$ instead of decay; the error shrinks very rapidly as $X_{\max}$ grows | repeat with a larger $X_{\max}$ and see whether $E$ changes |
+| Root-search tolerance | limits $E$ regardless of the grid | tighten the bisection tolerance |
+| Outward-shooting instability | the growing solution contaminates the tail in the forbidden region | compare with shooting from both ends and matching at a turning point |
+| Round-off | negligible at these grids, but grows if $h$ is made extremely small | not an issue for $N\lesssim10^{5}$ |
+
+### 10.4 Richardson extrapolation
+
+Because the error has the known form $Ch^4$, two runs give an improved estimate and an error bar without any analytic value. With $E(h)$ and $E(h/2)$,
+
+$$
+E_{\mathrm{extrap}}=\frac{16\,E(h/2)-E(h)}{15},
+\qquad
+\epsilon\big(E(h/2)\big)\approx\frac{E(h)-E(h/2)}{15}.
+$$
+
+This matters in practice: for a general potential there is no analytic answer, and the difference between two grids is the *only* uncertainty estimate available.
+
+### 10.5 Reporting
+
+Quote a result as $E_n = \ldots \pm \ldots$ where the uncertainty is the Richardson estimate (or the difference between the two finest grids), and state the grid, the domain and the bisection tolerance. A relative error against an analytic value is a validation of the code, not an uncertainty on a result you could not otherwise compute.
+
+---
+
+## 11. Check your understanding
+
+1. In the lab's units, show that the well energies obey $E_n/E_1=n^2$ and that doubling $L$ divides every energy by 4. Which of the two is easier to see on the fixed $E/E_1$ plot, and why?
+2. The harmonic-oscillator level spacing is $\omega$ for every pair of adjacent states, but the well spacing grows with $n$. What does this say about how each potential confines the particle?
+3. The measured error ratio between $N=100$ and $N=200$ is 16. What would you conclude if it were 4? If it were 1?
+4. For the well, the relative error scales as $n^{4}h^{4}$. How many more grid points does $n=6$ need than $n=1$ to reach the same relative error? Check your answer against the table.
+5. Why does the boundary residual go to zero only at an eigenvalue? What does the *sign* of the residual tell the bisection algorithm?
+6. Explain why outward shooting becomes unreliable if you push $X_{\max}$ far into the forbidden region.
+7. For the $n=3$ oscillator you obtain $E(h)=3.499\,905$ (at $N=50$) and $E(h/2)=3.499\,994$ (at $N=100$). Use Richardson extrapolation to estimate the converged energy and the error in $E(h/2)$. Compare with the exact value 3.5.
+8. The oscillator ground state has $\langle x^2\rangle=1/(2\omega)$. Describe how you would verify this numerically from the lab's normalised $\psi$, and which numerical error in the integral you would expect to dominate.
+9. A node is a sign change of $\psi$. Why is the node count, rather than the energy, used to *identify* which eigenstate the root-finder has converged to?

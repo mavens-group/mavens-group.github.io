@@ -22,10 +22,11 @@ export const RECORD_SCHEMAS = {
     ],
     sections: [
       { key: "objective", label: "1. Objective", placeholder: "What are you trying to determine from this sample?" },
-      { key: "whAnalysis", label: "2. Williamson–Hall analysis", placeholder: "Intercept (D) and slope (ε) from your plot..." },
-      { key: "phaseId", label: "3. Phase identification", placeholder: "Any secondary phase peaks observed?" },
-      { key: "conclusion", label: "4. Conclusion", placeholder: "Summarize crystallite size, strain, and phase purity." },
-      { key: "reflection", label: "5. Reflection", placeholder: "What was tricky? What would you do differently?" },
+      { key: "whAnalysis", label: "2. Williamson–Hall analysis", placeholder: "Intercept (D) and slope (ε) from your plot, with their standard errors and the degrees of freedom..." },
+      { key: "uncertainty", label: "3. Uncertainty and error analysis", placeholder: "Fit uncertainty with the matching Student's t factor; effect of the Scherrer constant K; instrumental correction; why Scherrer and W-H sizes differ..." },
+      { key: "phaseId", label: "4. Phase identification", placeholder: "Any secondary phase peaks observed? What detection limit does 'phase-pure' imply?" },
+      { key: "conclusion", label: "5. Conclusion", placeholder: "Summarize crystallite size, strain, and phase purity, each with an uncertainty." },
+      { key: "reflection", label: "6. Reflection", placeholder: "What was tricky? What would you do differently?" },
     ],
   },
   ftir: {
@@ -45,8 +46,9 @@ export const RECORD_SCHEMAS = {
     sections: [
       { key: "objective", label: "1. Objective", placeholder: "What are you trying to identify from this spectrum?" },
       { key: "reasoning", label: "2. Reasoning", placeholder: "Which bands are present/absent, and what does that rule in or out?" },
-      { key: "conclusion", label: "3. Conclusion", placeholder: "Capping agent + metal oxide core identified." },
-      { key: "reflection", label: "4. Reflection", placeholder: "What was tricky? What would you do differently?" },
+      { key: "uncertainty", label: "3. Evidence classification and uncertainty", placeholder: "Position uncertainty by band class, noise level used to call a band absent; each observation classed as diagnostic / supporting / non-diagnostic; the strongest alternative and what rules it out..." },
+      { key: "conclusion", label: "4. Conclusion", placeholder: "Capping agent + metal oxide core identified, with a confidence for each." },
+      { key: "reflection", label: "5. Reflection", placeholder: "What was tricky? What would you do differently?" },
     ],
   },
 };

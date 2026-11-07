@@ -5,18 +5,32 @@ function emptyRow(columns) {
   return Object.fromEntries(columns.map((c) => [c.key, ""]));
 }
 
-function loadInitial(storageKey, schema) {
-  try {
-    const raw = localStorage.getItem(storageKey);
-    if (raw) return JSON.parse(raw);
-  } catch {
-    /* ignore corrupt storage */
-  }
+function defaultState(schema) {
   return {
     meta: Object.fromEntries(schema.meta.map((m) => [m.key, ""])),
     rows: [emptyRow(schema.tableColumns)],
     sections: Object.fromEntries(schema.sections.map((s) => [s.key, ""])),
   };
+}
+
+function loadInitial(storageKey, schema) {
+  const base = defaultState(schema);
+  try {
+    const raw = localStorage.getItem(storageKey);
+    if (raw) {
+      // Merge over the defaults so a record saved before a schema gained new
+      // fields (e.g. an uncertainty section) still renders controlled inputs.
+      const saved = JSON.parse(raw);
+      return {
+        meta: { ...base.meta, ...saved.meta },
+        rows: Array.isArray(saved.rows) && saved.rows.length ? saved.rows : base.rows,
+        sections: { ...base.sections, ...saved.sections },
+      };
+    }
+  } catch {
+    /* ignore corrupt storage */
+  }
+  return base;
 }
 
 function toMarkdown(schema, state) {
