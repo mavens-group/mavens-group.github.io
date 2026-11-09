@@ -99,6 +99,31 @@ jobs:
             --minify \
             --baseURL "https://mavens-group.github.io/"
 
+      # keep_files: true never removes old output, so gh-pages bloats until Pages
+      # sync times out. Remove files absent from this build, but never touch the
+      # subprojects deployed by other workflows.
+      - name: Prune stale files from gh-pages
+        run: |
+          set -euo pipefail
+          PROTECTED='^(dft-notes|mc-notes|vlab)/|^(\.nojekyll|CNAME)$'
+          if git ls-remote --exit-code --heads origin gh-pages >/dev/null; then
+            git fetch origin gh-pages
+            git worktree add "$RUNNER_TEMP/ghp" origin/gh-pages --detach
+            (cd webpage/public && find . -type f | sed 's|^\./||' | sort) > "$RUNNER_TEMP/new.txt"
+            (cd "$RUNNER_TEMP/ghp" && git ls-files | sort) > "$RUNNER_TEMP/old.txt"
+            comm -13 "$RUNNER_TEMP/new.txt" "$RUNNER_TEMP/old.txt" \
+              | grep -Ev "$PROTECTED" > "$RUNNER_TEMP/stale.txt" || true
+            echo "Stale files: $(wc -l < "$RUNNER_TEMP/stale.txt")"
+            if [ -s "$RUNNER_TEMP/stale.txt" ]; then
+              cd "$RUNNER_TEMP/ghp"
+              xargs -d '\n' git rm -q < "$RUNNER_TEMP/stale.txt"
+              git -c user.name="github-actions[bot]" \
+                  -c user.email="41898282+github-actions[bot]@users.noreply.github.com" \
+                  commit -q -m "Prune stale build artifacts"
+              git push origin HEAD:gh-pages
+            fi
+          fi
+
       - name: Deploy to GitHub Pages (Branch Method)
         uses: peaceiris/actions-gh-pages@v4
         with:
