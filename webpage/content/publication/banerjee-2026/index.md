@@ -73,5 +73,3 @@ links:
 - name: URL
   url: http://dx.doi.org/10.1107/S1600576726009003
 ---
-
-Add the **full text** or **supplementary notes** for the publication here using Markdown formatting.
