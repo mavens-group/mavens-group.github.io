@@ -46,6 +46,14 @@ We welcome inquiries regarding **research collaborations**, **postdoctoral & PhD
 </div>
 </div>
 
+<div class="mv-contact-card mv-contact-follow">
+<div class="mv-contact-follow-text">
+<h3>Follow us</h3>
+<p>News, openings and new publications from the group.</p>
+</div>
+<a class="mv-contact-follow-btn" href="https://www.linkedin.com/company/mavensgroup" target="_blank" rel="noopener"><i class="fab fa-linkedin-in" aria-hidden="true"></i> MAVENs Group on LinkedIn</a>
+</div>
+
 <div class="mv-contact-map-card">
 <div class="mv-contact-map-header">
 <span class="mv-contact-map-title"><i class="fas fa-map-pin" aria-hidden="true"></i> Department of Physics and Nanotechnology, SRMIST</span>

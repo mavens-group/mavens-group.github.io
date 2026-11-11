@@ -2035,6 +2035,44 @@ video.mv-video {
   }
 }
 
+.mv-contact-follow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem 1.5rem;
+  margin: 1.5rem 0 0;
+
+  h3 {
+    margin: 0 0 0.25rem;
+    font-size: 1.15rem;
+    font-weight: 500;
+    color: var(--m-on-surface);
+  }
+
+  p {
+    margin: 0;
+    font-size: 0.95rem;
+    color: var(--m-on-surface);
+  }
+}
+
+.mv-contact-follow-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.55rem 1.1rem;
+  border-radius: 999px;
+  background: var(--m-primary);
+  color: var(--m-on-primary, #fff) !important;
+  font-weight: 500;
+  font-size: 0.95rem;
+  text-decoration: none !important;
+  transition: filter 0.2s ease;
+
+  &:hover { filter: brightness(1.1); }
+}
+
 .mv-contact-map-card {
   margin-top: 1.5rem;
   margin-bottom: 2.5rem;
