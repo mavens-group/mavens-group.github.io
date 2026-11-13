@@ -1437,6 +1437,166 @@ body.dark .mv-hero-img-dark  { display: block; }
   line-height: 1.2;
 }
 
+/* ==========================================================================
+   TALKS AND EVENTS
+   Year-grouped entries with type badge, speaker, event, host, location, and
+   action links; shares M3 tokens and typography with .mv-pub.
+   ========================================================================== */
+.mv-talk-tools {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem 1.25rem;
+  margin: 0 0 2rem;
+}
+
+.mv-talk-search {
+  max-width: 24rem;
+  flex: 1 1 16rem;
+  border-radius: var(--m-radius);
+  border-color: color-mix(in srgb, var(--m-outline) 45%, transparent);
+  background: var(--m-surface);
+  color: var(--m-on-surface);
+  font-weight: 300;
+
+  &:focus {
+    border-color: var(--m-primary);
+    box-shadow: 0 0 0 0.2rem color-mix(in srgb, var(--m-primary) 25%, transparent);
+    background: var(--m-surface);
+    color: var(--m-on-surface);
+  }
+}
+
+.mv-talk-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.mv-talk-chip {
+  appearance: none;
+  padding: 0.3rem 0.75rem;
+  border: 1px solid color-mix(in srgb, var(--m-outline) 45%, transparent);
+  border-radius: 999px;
+  background: transparent;
+  color: color-mix(in srgb, var(--m-on-surface) 75%, transparent);
+  font-size: 0.85rem;
+  font-weight: 400;
+  line-height: 1.4;
+  cursor: pointer;
+  transition: background-color 150ms ease, color 150ms ease, border-color 150ms ease;
+
+  &:hover,
+  &:focus-visible {
+    border-color: var(--m-primary);
+    color: var(--m-on-surface);
+  }
+
+  &.is-active {
+    background: color-mix(in srgb, var(--m-primary) 14%, transparent);
+    border-color: var(--m-primary);
+    color: var(--m-primary);
+    font-weight: 600;
+  }
+}
+
+.mv-talk {
+  padding: 0.95rem 0 0.35rem;
+}
+
+.mv-talk-kicker {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.25rem;
+}
+
+.mv-talk-badge {
+  display: inline-block;
+  padding: 0.12rem 0.55rem;
+  border-radius: 999px;
+  font-size: 0.76rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  background: color-mix(in srgb, var(--m-primary) 12%, transparent);
+  color: var(--m-primary);
+}
+
+.mv-talk-badge--organiser {
+  background: color-mix(in srgb, var(--m-secondary, var(--m-primary)) 15%, transparent);
+  color: var(--m-secondary, var(--m-primary));
+}
+
+.mv-talk-badge--contributed-talk {
+  background: color-mix(in srgb, var(--m-on-surface) 10%, transparent);
+  color: color-mix(in srgb, var(--m-on-surface) 85%, transparent);
+}
+
+.mv-talk-badge--poster {
+  background: color-mix(in srgb, var(--m-tertiary, var(--m-primary)) 14%, transparent);
+  color: var(--m-tertiary, var(--m-on-surface));
+}
+
+.mv-talk-badge--award {
+  background: color-mix(in srgb, #d97706 16%, transparent);
+  color: #b45309;
+}
+.dark .mv-talk-badge--award,
+[data-theme="dark"] .mv-talk-badge--award {
+  background: color-mix(in srgb, #fbbf24 18%, transparent);
+  color: #fbbf24;
+}
+
+.mv-talk-date {
+  font-size: 0.85rem;
+  color: color-mix(in srgb, var(--m-on-surface) 60%, transparent);
+}
+
+.mv-talk-title {
+  margin: 0 0 0.25rem;
+  font-size: 1.08rem;
+  font-weight: 400;
+  line-height: 1.35;
+
+  a { color: var(--m-on-surface); }
+  a:hover, a:focus { color: var(--m-primary); }
+}
+
+.mv-talk-details {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.2rem 1rem;
+  margin-top: 0.2rem;
+  font-size: 0.9rem;
+  line-height: 1.45;
+  color: color-mix(in srgb, var(--m-on-surface) 70%, transparent);
+
+  a {
+    color: var(--m-primary);
+    text-decoration: none;
+    &:hover { text-decoration: underline; }
+  }
+}
+
+.mv-talk-label {
+  color: color-mix(in srgb, var(--m-on-surface) 55%, transparent);
+}
+
+.mv-talk .btn-links {
+  margin-top: 0.15rem;
+}
+
+.mv-profile-talk-type {
+  font-weight: 600;
+  color: var(--m-primary);
+}
+
+.mv-profile-talk-award {
+  margin-left: 0.3rem;
+  vertical-align: baseline;
+}
+
 
 /* ==========================================================================
    PEOPLE AND ALUMNI
@@ -1930,14 +2090,23 @@ body.dark .mv-hero-img-dark  { display: block; }
   padding-left: 1.1rem;
 
   li {
-    margin-bottom: 0.7rem;
-    line-height: 1.45;
+    margin-bottom: 0.4rem;
+    line-height: 1.4;
   }
 }
 
 .mv-profile-pub-meta {
-  display: block;
+  display: inline;
+  margin-left: 0.25rem;
   font-size: 0.88rem;
+  opacity: 0.75;
+}
+
+.pub-view-all-count {
+  font-size: 0.82rem;
+  font-weight: 400;
+  margin-left: 0.35rem;
+  margin-right: 0.1rem;
   opacity: 0.75;
 }
 

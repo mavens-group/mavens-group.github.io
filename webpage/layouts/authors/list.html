@@ -18,34 +18,72 @@
       {{ partial $widget $params }}
     {{ end }}
 
-    {{ $query := where .Pages ".IsNode" false }}
-    {{ $sortedQuery := sort $query "Params.date" "desc" }}
-    {{ $limitedQuery := first 10 $sortedQuery }}
-    {{ $totalPublications := len $query }}
+    {{ $allPages := where .Pages ".IsNode" false }}
+    {{ $pubQuery := where $allPages "Section" "publication" }}
+    {{ $sortedQuery := sort $pubQuery "Params.date" "desc" }}
+    {{ $limitedQuery := first 5 $sortedQuery }}
+    {{ $totalPublications := len $pubQuery }}
     {{ $count := len $limitedQuery }}
 
     {{ if $count }}
     <div class="article-widget content-widget-hr">
-<h3>
-  Publications
-  {{ if gt $totalPublications (len $limitedQuery) }}
-    <a href="../../publication/"
-       class="pub-view-all"
-       aria-label="View all publications"
-       title="View all publications">
-      <i data-feather="chevron-right"></i>
-    </a>
-  {{ end }}
-</h3>
+      <h3>
+        Publications
+        <a href="../../publication/"
+           class="pub-view-all"
+           aria-label="View all {{ $totalPublications }} publications"
+           title="View all {{ $totalPublications }} publications">
+          {{- if gt $totalPublications $count }}<span class="pub-view-all-count">View all ({{ $totalPublications }})</span>{{ end -}}
+          <i data-feather="chevron-right"></i>
+        </a>
+      </h3>
       <ul class="mv-profile-pubs">
         {{ range $limitedQuery }}
         {{ $authors := .GetTerms "authors" }}
+        {{ $nAuthors := len $authors }}
         <li>
-          <a href="{{ .RelPermalink }}">{{ .Title }}</a>
-          <span class="mv-profile-pub-meta">
-            {{- with index $authors 0 }}{{ with .Page.Params.display_name_short }}{{ . }}{{ else }}{{ .LinkTitle }}{{ end }}{{ end }}{{ if gt (len $authors) 1 }} et al.{{ end -}}
+          <a href="{{ .RelPermalink }}" title="{{ .Title }}">
+            {{- range $i, $a := first 2 $authors -}}
+              {{- if gt $i 0 }}, {{ end -}}
+              {{- with $a.Page.Params.display_name_short }}{{ . }}{{ else }}{{ $a.LinkTitle }}{{ end -}}
+            {{- end -}}
+            {{- if gt $nAuthors 2 }} et al.{{ end -}}
             {{- with .Params.publication }}, {{ . | markdownify }}{{ end }}, {{ .Date.Format "2006" -}}
-          </span>
+          </a>
+        </li>
+        {{ end }}
+      </ul>
+    </div>
+    {{ end }}
+
+    {{ $talkQuery := where $allPages "Section" "talks" }}
+    {{ $sortedTalks := sort $talkQuery "Params.date" "desc" }}
+    {{ $limitedTalks := first 5 $sortedTalks }}
+    {{ $totalTalks := len $talkQuery }}
+    {{ $talkCount := len $limitedTalks }}
+
+    {{ if $talkCount }}
+    <div class="article-widget content-widget-hr">
+      <h3>
+        Talks and Events
+        <a href="../../talks/"
+           class="pub-view-all"
+           aria-label="View all {{ $totalTalks }} talks and events"
+           title="View all {{ $totalTalks }} talks and events">
+          {{- if gt $totalTalks $talkCount }}<span class="pub-view-all-count">View all ({{ $totalTalks }})</span>{{ end -}}
+          <i data-feather="chevron-right"></i>
+        </a>
+      </h3>
+      <ul class="mv-profile-pubs mv-profile-talks">
+        {{ range $limitedTalks }}
+        <li>
+          <a href="{{ .RelPermalink }}" title="{{ .Title }}">
+            {{- with .Params.talk_type }}<span class="mv-profile-talk-type">{{ if reflect.IsSlice . }}{{ delimit . " & " }}{{ else }}{{ . }}{{ end }}</span>, {{ end -}}
+            {{- with or .Params.event_short .Params.event }}{{ . }}, {{ end -}}
+            {{- with or .Params.host_short .Params.host }}{{ . }}, {{ end -}}
+            {{- .Date.Format "2006" -}}
+            {{- with or .Params.award_short .Params.award }} <span class="mv-talk-badge mv-talk-badge--award mv-profile-talk-award">{{ . }}</span>{{ end -}}
+          </a>
         </li>
         {{ end }}
       </ul>

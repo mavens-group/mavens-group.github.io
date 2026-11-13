@@ -1,0 +1,106 @@
+{{- define "main" -}}
+
+{{/* Talks and Events grouped under year headings, newest first, with search
+     and talk-type filter chips wired up in assets/js/mv-site.js. */}}
+
+{{ partial "page_header.html" . }}
+
+<div class="universal-wrapper">
+
+  {{ with .Content }}
+  <div class="article-style">{{ . }}</div>
+  {{ end }}
+
+  {{ $canonicalTypes := slice "Invited Talk" "Organiser" "Contributed Talk" "Poster" }}
+
+  <div class="mv-talk-tools">
+    <input type="search" class="form-control mv-talk-search" placeholder="Search titles, speakers, events, hosts, locations"
+           aria-label="Search talks and events" aria-controls="mv-talks"
+           autocapitalize="off" autocomplete="off" autocorrect="off" spellcheck="false">
+    <div class="mv-talk-filters" role="group" aria-label="Filter by talk or event type">
+      <button type="button" class="mv-talk-chip is-active" data-talk-filter="all" aria-pressed="true">All</button>
+      {{ range $canonicalTypes }}
+      <button type="button" class="mv-talk-chip" data-talk-filter="{{ . | urlize }}" aria-pressed="false">{{ . }}</button>
+      {{ end }}
+    </div>
+  </div>
+
+  <div id="mv-talks">
+    {{ range .Pages.ByDate.Reverse.GroupByDate "2006" }}
+    <section class="mv-pub-year mv-talk-year" aria-labelledby="ty{{ .Key }}">
+      <h2 class="mv-pub-year-title" id="ty{{ .Key }}">{{ .Key }}</h2>
+      {{ range .Pages }}
+      {{ $item := . }}
+      {{ $rawType := .Params.talk_type }}
+      {{ $types := slice }}
+      {{ if $rawType }}
+        {{ if reflect.IsSlice $rawType }}
+          {{ $types = $rawType }}
+        {{ else }}
+          {{ $types = slice $rawType }}
+        {{ end }}
+      {{ end }}
+      {{ $typeSlugs := slice }}
+      {{ range $types }}
+        {{ $typeSlugs = $typeSlugs | append (. | urlize) }}
+      {{ end }}
+      <article class="mv-talk" data-talk-type="{{ delimit $typeSlugs " " }}">
+        <div class="mv-talk-kicker">
+          {{ range $types }}
+          <span class="mv-talk-badge mv-talk-badge--{{ . | urlize }}">{{ . }}</span>
+          {{ end }}
+          {{ with .Params.award }}
+          <span class="mv-talk-badge mv-talk-badge--award">{{ . }}</span>
+          {{ end }}
+          {{ with or .Params.date_display (.Date.Format "2006") }}
+          <span class="mv-talk-date">{{ . }}</span>
+          {{ end }}
+        </div>
+
+        <h3 class="mv-talk-title"><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
+
+        {{ if .Params.authors }}
+        <div class="mv-pub-authors">{{ partial "page_metadata_authors" . }}</div>
+        {{ end }}
+
+        <div class="mv-talk-details">
+          {{ with .Params.event }}
+          <span class="mv-talk-detail">
+            <span class="mv-talk-label">Event:</span>
+            {{ if $item.Params.event_url }}
+              <a href="{{ $item.Params.event_url }}" target="_blank" rel="noopener">{{ . }}</a>
+            {{ else }}
+              {{ . }}
+            {{ end }}
+          </span>
+          {{ end }}
+          {{ with .Params.host }}
+          <span class="mv-talk-detail"><span class="mv-talk-label">Host:</span> {{ . }}</span>
+          {{ end }}
+          {{ with .Params.location }}
+          <span class="mv-talk-detail"><span class="mv-talk-label">Location:</span> {{ . }}</span>
+          {{ end }}
+        </div>
+
+        {{ with .Params.links }}
+        <div class="btn-links">
+          {{ range . }}
+            {{ $isExt := strings.HasPrefix .url "http" }}
+            <a class="btn btn-outline-primary btn-page-header btn-sm"
+               href="{{ .url | relURL }}"
+               {{ if $isExt }}target="_blank" rel="noopener"{{ end }}>
+              {{ .name }}
+            </a>
+          {{ end }}
+        </div>
+        {{ end }}
+      </article>
+      {{ end }}
+    </section>
+    {{ end }}
+    <p class="mv-pub-empty mv-talk-empty" role="status" hidden>No talks or events match that filter.</p>
+  </div>
+
+</div>
+
+{{- end -}}
