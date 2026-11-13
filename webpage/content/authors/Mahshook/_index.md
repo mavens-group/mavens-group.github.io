@@ -48,6 +48,12 @@ education:
       institution: Government Arts College (Autonomous), Coimbatore
       year: 2018
 
+accolade:
+  courses:
+    - course: "First Prize (Track 04: Quantum Systems)"
+      year: 2026
+      institution: QtHack (Quantum Technologies Hackathon), SRMIST
+
 skills:
   - icon: linux
     icon_pack: fab
