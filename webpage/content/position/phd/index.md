@@ -35,7 +35,7 @@ Open problems in magnetism, disorder, and coherence, approached with density fun
 <div class="research-themes-grid research-themes-grid--two">
   <div class="theme-card">
     <a class="theme-title" href="/research/post/quantum/">Exchange Interactions and T<sub>c</sub> in Disordered Magnets</a>
-    <span class="theme-desc">How does chemical disorder reshape exchange pathways — and with them, the magnetic transition temperature — in metallic alloys? The goal is a validated first-principles pipeline from composition to T<sub>c</sub>: KKR-CPA → Lichtenstein J<sub>ij</sub> → Monte Carlo. This is the group's methodology flagship and the highest-leverage project on the current plan.</span>
+    <span class="theme-desc">How does chemical disorder reshape exchange pathways — and with them, the magnetic transition temperature — in metallic alloys? The goal is a validated first-principles pipeline from composition to T<sub>c</sub>: KKR-CPA → Liechtenstein J<sub>ij</sub> → Monte Carlo. This is the group's methodology flagship and the highest-leverage project on the current plan.</span>
   </div>
   <div class="theme-card">
     <a class="theme-title" href="/research/post/energy/">Finite-Temperature Magnetism and Magnetocaloric Response</a>

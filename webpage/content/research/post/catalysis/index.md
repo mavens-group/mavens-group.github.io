@@ -28,6 +28,14 @@ We can already resolve catalysis at the level the statistical programme demands 
 These results show that we can isolate the descriptor that governs adsorption and identify where a single-site picture fails — the two things a statistical treatment of disorder must be built on.
 
 ### Outlook
-The next step is the one the field has largely not taken: treating the adsorption energy of a high-entropy or heavily doped catalyst as a distribution to be predicted, and asking which compositions centre that distribution on the catalytic optimum. The aim is to design a disordered catalyst by the *shape* of its site statistics rather than by a misleading average — to say not "this composition is thermoneutral" but "this composition places the most sites where catalysis happens." The descriptor-resolution above is what makes that achievable; the open work is to carry it from the clean surface to the full configurational ensemble, where disorder stops being a complication and becomes the variable being engineered.
+The next step is the one the field has largely not taken: treating the adsorption energy of a high-entropy or heavily doped catalyst as a distribution to be predicted, and asking which compositions centre that distribution on the catalytic optimum. The aim is to design a disordered catalyst by the *shape* of its site statistics rather than by a misleading average — to say not "this composition is thermoneutral" but "this composition places the most sites where catalysis happens." The descriptor-resolution above is what makes that achievable; the open work is to carry it from the clean surface to the full configurational ensemble, where disorder stops being a complication and becomes the variable being engineered. The ensemble approach is being extended to two-dimensional transition-metal sulfide monolayers.
+
+### Selected publications
+
+{{< cite page="/publication/dutta-2026-a" view="4" >}}
+
+{{< cite page="/publication/shrestha-2025" view="4" >}}
+
+{{< cite page="/publication/mt-tc" view="4" >}}
 
 {{% cta cta_link="../../" cta_text="← Go back to Research" %}}

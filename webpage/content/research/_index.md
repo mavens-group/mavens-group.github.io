@@ -16,19 +16,26 @@ sections:
     design:
       view: card
 ---
-At [MAVENs](../), we study how local electronic structure evolves into collective material behaviour — and why that transition so often determines whether a material ultimately functions.
+At [MAVENs](../), we study how local electronic structure evolves into collective material behaviour — and how chemical disorder decides whether that transition delivers a material that functions. The through-line of our current work is how disorder — random or short-range ordered — limits the lifetimes of collective and single-spin excitations, from magnetic excitations in alloys to spin centres in oxides.
 
-A magnetic moment may produce a paramagnet rather than a ferromagnet. A chemically ideal adsorption site may sit in a matrix that suppresses catalytic turnover. A defect with the correct spin state may still lose its coherence if the disorder around it is arranged the wrong way.
+A magnetic moment may produce a paramagnet rather than a ferromagnet. A chemically ideal adsorption site may sit in a matrix that suppresses catalytic turnover. A defect with the correct spin state may still lose its coherence if the disorder around it is arranged the wrong way. Local electronic features are necessary for functionality, but they are rarely sufficient for it.
 
-Local electronic features are necessary for functionality, but they are rarely sufficient for it.
-
-What decides whether a local feature survives into a macroscopic response is usually not the feature itself, but the larger physical structure it inhabits — and most often, the disorder within it: the topology of exchange pathways, the statistics of substitution, the geometry of a defect network, the way randomness reshapes a coupling. Disorder is not noise to be averaged away in this picture. It is frequently the variable that decides the outcome.
+What decides whether a local feature survives into a macroscopic response is usually the disorder around it: the topology of exchange pathways, the statistics of substitution, the geometry of a defect network. Disorder is not noise to be averaged away; it is frequently the variable that decides the outcome.
 
 
 <div class="callout-question">This intermediate scale — the physical bridge between local structure and collective response — is the central focus of our research.</div>
 
 
 <!-- {{< video src="research.mp4" controls=false autoplay=true loop=true muted=true >}} -->
+
+## What We Have Shown
+
+One result from each:
+
+- **[Disorder and magnetism](post/magnetism/).** In vacancy-doped monolayer TiS₂, every defect carries a local moment, yet half-metallic ferromagnetism appears only once the defect network percolates ([*Physical Review B*, 2026](../publication/dutta-2026/)).
+- **[Disorder and coherence](post/coherence/).** In oxygen-deficient CeO₂, we have computed the hyperfine tensors and exchange couplings that a first-principles coherence-time calculation requires ([arXiv:2607.12080, preprint](../publication/chithresh-2026/)).
+- **[Disorder and catalysis](post/catalysis/).** In bimetallic Janus MXenes, site-resolved d-band asymmetry, not an averaged descriptor, controls hydrogen adsorption near thermoneutrality ([*RSC Advances*, 2026](../publication/dutta-2026-a/)).
+- **[Machine learning](post/ml/), across all three.** Consensus design rules from interpretable classifiers recover every experimentally verified quantum-defect host ([*Physical Review Materials*, 2026](../publication/mahshook-2026/)).
 
 ## Isolating the Intermediate Scale
 
@@ -37,18 +44,6 @@ We choose systems — substitutional magnetic alloys, defect-bearing oxides, dis
 
 <div class="callout-question">When does a local descriptor remain predictive, and when does an intermediate scale become decisive?</div>
 
-
-## Methods Chosen by the Question
-
-Methods enter only when a question requires them.
-
-We use:
-
-- **Density functional theory** for electronic and magnetic structure, primarily through plane wave and Green's-function coherent potential approximation based methods.
-- **First-principles exchange interactions** extracted through the Lichtenstein formalism, preserving the topology of competing magnetic pathways when mapping finite-temperature behaviour onto effective spin models.
-- **Classical Monte Carlo simulations** to study ordering temperatures, phase competition, and magnetocaloric response.
-- **Spin-dynamics and coherence modelling**, carrying first-principles hyperfine and exchange couplings into cluster-correlation-expansion estimates of coherence times.
-- **Machine learning constrained by physically interpretable descriptors** when compositional spaces become too large for direct first-principles exploration.
 
 Part of what we report is where local descriptors succeed — and where they fail. That boundary is often where the intermediate scale becomes physically important.
 
@@ -71,3 +66,5 @@ Current collaborations include:
 - [Dr Pralay K. Santra, CeNS](https://www.santragroup.in/group/pralay-k-santra) — two-dimensional materials
 
 ## Research Pillars
+
+Three disorder pillars, and machine learning as a method that serves all three.

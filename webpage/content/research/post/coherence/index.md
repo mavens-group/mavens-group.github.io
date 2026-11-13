@@ -32,6 +32,12 @@ We have computed the complete hyperfine and magnetic characterisation that any f
 These establish, on a real chemically generated host, that we can compute how concentration and geometry reshape the couplings that govern coherence. It is deliberately the input to a coherence time, not yet the coherence time itself.
 
 ### Outlook
-The programme is to close the chain. With the hyperfine and exchange couplings in hand, the next step propagates them through the cluster-correlation expansion to a predicted coherence time — and, further, to coherence as an explicit function of disorder geometry, so that the arrangement of defects becomes a design parameter for the coherence time rather than an uncontrolled property of the sample. Almost no group runs this entire chain — chemically generated spin centre, first-principles couplings, disorder-resolved coherence — under one roof. Building it is the work; the characterisation above is the evidence that its hardest computational link is already in place.
+The programme is to close the chain. With the hyperfine and exchange couplings in hand, the next step propagates them through the cluster-correlation expansion to a predicted coherence time — and, further, to coherence as an explicit function of disorder geometry, so that the arrangement of defects becomes a design parameter for the coherence time rather than an uncontrolled property of the sample. Almost no group runs this entire chain — chemically generated spin centre, first-principles couplings, disorder-resolved coherence — under one roof. Building it is the work; the characterisation above is the evidence that its hardest computational link is already in place. The host's own disorder-generated spins also act as a magnetic bath for other spin qubits placed in the same host, so defect concentration and arrangement set coherence beyond the defect centre itself. A coherence time is a lifetime set by disorder — the same quantity the group studies for [magnetic excitations](../magnetism/).
+
+### Selected publications
+
+{{< cite page="/publication/chithresh-2026" view="4" >}}
+
+{{< cite page="/publication/mahshook-2026" view="4" >}}
 
 {{% cta cta_link="../../" cta_text="← Go back to Research" %}}
