@@ -56,7 +56,19 @@
     </div>
     {{ end }}
 
-    {{ $talkQuery := where $allPages "Section" "talks" }}
+    {{ $authorKey := "" }}
+    {{ if .File }}{{ $authorKey = lower (path.Base .File.Dir) }}{{ end }}
+    {{ $talkQuery := slice }}
+    {{ with site.GetPage "/talks" }}
+      {{ range .Pages }}
+        {{ $talkPage := . }}
+        {{ range .Params.authors }}
+          {{ if eq (lower .) $authorKey }}
+            {{ $talkQuery = $talkQuery | append $talkPage }}
+          {{ end }}
+        {{ end }}
+      {{ end }}
+    {{ end }}
     {{ $sortedTalks := sort $talkQuery "Params.date" "desc" }}
     {{ $limitedTalks := first 5 $sortedTalks }}
     {{ $totalTalks := len $talkQuery }}
@@ -77,7 +89,7 @@
       <ul class="mv-profile-pubs mv-profile-talks">
         {{ range $limitedTalks }}
         <li>
-          <a href="{{ .RelPermalink }}" title="{{ .Title }}">
+          <a href="{{ printf "/talks/#%s" .File.ContentBaseName | relURL }}" title="{{ .Title }}">
             {{- with .Params.talk_type }}<span class="mv-profile-talk-type">{{ if reflect.IsSlice . }}{{ delimit . " & " }}{{ else }}{{ . }}{{ end }}</span>, {{ end -}}
             {{- with or .Params.event_short .Params.event }}{{ . }}, {{ end -}}
             {{- with or .Params.host_short .Params.host }}{{ . }}, {{ end -}}

@@ -4,9 +4,9 @@ build:
   list: always
 cascade:
   build:
-    render: always
+    render: never
     list: always
 
 title: Talks and Events
-subtitle: Invited talks, workshops, and symposia organised or delivered by group members, newest first.
+subtitle: Invited talks, workshops, and presentations by group members, newest first.
 ---

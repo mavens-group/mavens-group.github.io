@@ -10,6 +10,8 @@ location: "Rupnagar, India"
 authors:
   - Rudra
 summary: "From an interpretable ML screen of 45,000 compounds for nuclear-spin-quiet qubit hosts to the ¹⁷O hyperfine bath of Ce³⁺ polarons in CeO₂."
+papers:
+  - mahshook-2026
 links:
   - name: "Event Website"
     url: "https://sites.google.com/iitrpr.ac.in/issmd2026/home"

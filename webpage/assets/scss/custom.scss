@@ -1502,6 +1502,14 @@ body.dark .mv-hero-img-dark  { display: block; }
 
 .mv-talk {
   padding: 0.95rem 0 0.35rem;
+  scroll-margin-top: 5rem;
+
+  &:target {
+    padding-left: 0.75rem;
+    border-left: 3px solid var(--m-primary);
+    background: color-mix(in srgb, var(--m-primary) 5%, transparent);
+    border-radius: 0 var(--m-radius) var(--m-radius) 0;
+  }
 }
 
 .mv-talk-kicker {
@@ -1581,6 +1589,23 @@ body.dark .mv-hero-img-dark  { display: block; }
 
 .mv-talk-label {
   color: color-mix(in srgb, var(--m-on-surface) 55%, transparent);
+}
+
+.mv-talk-papers {
+  margin-top: 0.25rem;
+  font-size: 0.9rem;
+  line-height: 1.45;
+  color: color-mix(in srgb, var(--m-on-surface) 75%, transparent);
+
+  a {
+    color: var(--m-primary);
+    text-decoration: none;
+    &:hover { text-decoration: underline; }
+  }
+}
+
+.mv-talk-paper-venue {
+  color: color-mix(in srgb, var(--m-on-surface) 60%, transparent);
 }
 
 .mv-talk .btn-links {

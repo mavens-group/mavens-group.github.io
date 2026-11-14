@@ -11,9 +11,8 @@ location: "Pune, Maharashtra, India"
 authors:
   - Shrestha
 summary: "Poster presentation on the electronic and magnetic properties of transition metal trihalides at IISER Pune and I-HUB Quantum Technology Foundation."
-links:
-  - name: "Related Paper"
-    url: "/publication/shrestha-2024/"
+papers:
+  - shrestha-2024
 ---
 
 Poster presentation by [Shrestha Dutta](/author/shrestha-dutta/) and [Rudra Banerjee](/author/rudra-banerjee/) on *"A Study of Electronic and Magnetic Properties of Transition Metal Trihalides"* at **Quantum Technologies – Introduction, Materials and Devices** (10–14 July 2023), organized by the Department of Physics, IISER Pune and I-HUB Quantum Technology Foundation, Maharashtra, India.

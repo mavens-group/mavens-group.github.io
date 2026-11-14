@@ -12,6 +12,8 @@ location: "Mumbai, Maharashtra, India"
 authors:
   - Shrestha
 summary: "Poster presentation by Shrestha Dutta and Rudra Banerjee at ESTESODP-2024, organized by the Department of MEMS, IIT Bombay."
+papers:
+  - dutta-2026
 links:
   - name: "Event Website"
     url: "https://www.mems.iitb.ac.in/estesodp-2024/"

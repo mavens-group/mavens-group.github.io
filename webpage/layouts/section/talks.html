@@ -44,7 +44,7 @@
       {{ range $types }}
         {{ $typeSlugs = $typeSlugs | append (. | urlize) }}
       {{ end }}
-      <article class="mv-talk" data-talk-type="{{ delimit $typeSlugs " " }}">
+      <article class="mv-talk" id="{{ .File.ContentBaseName }}" data-talk-type="{{ delimit $typeSlugs " " }}">
         <div class="mv-talk-kicker">
           {{ range $types }}
           <span class="mv-talk-badge mv-talk-badge--{{ . | urlize }}">{{ . }}</span>
@@ -57,10 +57,19 @@
           {{ end }}
         </div>
 
-        <h3 class="mv-talk-title"><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
+        <h3 class="mv-talk-title">{{ .Title }}</h3>
 
-        {{ if .Params.authors }}
-        <div class="mv-pub-authors">{{ partial "page_metadata_authors" . }}</div>
+        {{ with .Params.authors }}
+        <div class="mv-pub-authors">
+          {{- range $i, $a := . -}}
+            {{- if gt $i 0 }}, {{ end -}}
+            {{- with site.GetPage (printf "/authors/%s" $a) -}}
+              <a class="author-member" href="{{ .RelPermalink }}">{{ with .Params.display_name_short }}{{ . }}{{ else }}{{ .Title }}{{ end }}</a>
+            {{- else -}}
+              <span class="author-other">{{ $a }}</span>
+            {{- end -}}
+          {{- end -}}
+        </div>
         {{ end }}
 
         <div class="mv-talk-details">
@@ -81,6 +90,19 @@
           <span class="mv-talk-detail"><span class="mv-talk-label">Location:</span> {{ . }}</span>
           {{ end }}
         </div>
+
+        {{ with .Params.papers }}
+        <div class="mv-talk-papers">
+          <span class="mv-talk-label">{{ if gt (len .) 1 }}Related papers:{{ else }}Related paper:{{ end }}</span>
+          {{ range $i, $slug := . }}
+            {{ with site.GetPage (printf "/publication/%s" $slug) }}
+              {{- if gt $i 0 }}; {{ end -}}
+              <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+              <span class="mv-talk-paper-venue">({{ with .Params.publication }}{{ . | markdownify }}, {{ end }}{{ .Date.Format "2006" }})</span>
+            {{ end }}
+          {{ end }}
+        </div>
+        {{ end }}
 
         {{ with .Params.links }}
         <div class="btn-links">

@@ -10,6 +10,8 @@ location: "Mumbai, India"
 authors:
   - Rudra
 summary: "Invited talk showcasing data-driven machine-learning frameworks to identify suitable wide-bandgap semiconductor hosts for NV-like spin defects."
+papers:
+  - mahshook-2026
 links:
   - name: "Event Website"
     url: "https://www.mems.iitb.ac.in/estesodp-2024/"
