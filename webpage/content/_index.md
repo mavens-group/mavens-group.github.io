@@ -37,7 +37,7 @@ sections:
       text: |
         Every real material is imperfect. Atoms swap places, atoms go missing, two metals share one lattice.
 
-        These imperfections are not noise. They can make a magnet or break it, create a spin centre or shorten its life, and make a surface bind hydrogen too strongly or too weakly.
+        These imperfections are not noise. They can make a magnet or break it, create a spin centre or kill it, and make a surface bind hydrogen too strongly or too weakly.
 
         We start from quantum mechanics: we compute the electronic structure of the disordered material, the magnetic interactions it produces, and the temperature up to which order survives. When there are too many compositions to compute one by one, machine learning narrows the search. And we work with experimental groups, so our predictions meet real samples.
     design:
