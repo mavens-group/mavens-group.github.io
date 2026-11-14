@@ -24,7 +24,7 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      HUGO_VERSION: 0.153.2
+      HUGO_VERSION: 0.167.0
       HUGO_ENVIRONMENT: production
       HUGO_ENV: production
       DART_SASS_VERSION: 1.97.3
