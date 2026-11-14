@@ -18,7 +18,7 @@
       {{ partial $widget $params }}
     {{ end }}
 
-    {{ $allPages := where .Pages ".IsNode" false }}
+    {{ $allPages := where .Pages ".IsPage" true }}
     {{ $pubQuery := where $allPages "Section" "publication" }}
     {{ $sortedQuery := sort $pubQuery "Params.date" "desc" }}
     {{ $limitedQuery := first 5 $sortedQuery }}
