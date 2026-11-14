@@ -7,8 +7,8 @@ profile: false
 Congratulations to Mrs. Shrestha Dutta for winning the best poster prize at ICAMS-2023
 
 <!--more-->
-Mrs Shrestha Dutta won the best poster prize at _International Conference on Advanced Materials
-for Sustainability_ organized by _School of Physical Science, University of Calicut_ during 21-23
+Mrs Shrestha Dutta won the best poster prize at [_International Conference on Advanced Materials
+for Sustainability_ (ICAMS-2023)](https://technologycentre.co.in/icams) organized by _School of Physical Science, University of Calicut_ during 21-23
 Dec, 2023. She was chosen by the _Royal Society of Chemistry_.
 
 MAVENs wishes many more laurels to come on her way.
