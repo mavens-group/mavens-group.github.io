@@ -12,7 +12,7 @@ sections:
     content:
       title: MAVENs
       tagline: Materials Advancing a Viable ENergy future
-      thesis: Disorder decides how a material works. We predict it from first principles.
+      thesis: Disorder decides what a material can do. We explain how.
       text: |
         Led by [Dr. Rudra Banerjee](/author/rudra-banerjee/), [Department of Physics and Nanotechnology](https://www.srmist.edu.in/department/department-of-physics-and-nanotechnology/), [SRM Institute of Science and Technology](https://srmist.edu.in).
       buttons:
@@ -37,7 +37,7 @@ sections:
       text: |
         Every real material is imperfect. Atoms swap places, atoms go missing, two metals share one lattice.
 
-        These imperfections are not noise. They can make a magnet or break it, create a spin centre or shorten its life, and set how strongly a surface binds hydrogen. We work out which, and why.
+        These imperfections are not noise. They can make a magnet or break it, create a spin centre or shorten its life, and make a surface bind hydrogen too strongly or too weakly.
 
         We start from quantum mechanics: we compute the electronic structure of the disordered material, the magnetic interactions it produces, and the temperature up to which order survives. When there are too many compositions to compute one by one, machine learning narrows the search. And we work with experimental groups, so our predictions meet real samples.
     design:
