@@ -12,7 +12,7 @@ sections:
     content:
       title: MAVENs
       tagline: Materials Advancing a Viable ENergy future
-      thesis: Predicting how disorder controls functional behaviour, from first principles.
+      thesis: Disorder decides how a material works. We predict it from first principles.
       text: |
         Led by [Dr. Rudra Banerjee](/author/rudra-banerjee/), [Department of Physics and Nanotechnology](https://www.srmist.edu.in/department/department-of-physics-and-nanotechnology/), [SRM Institute of Science and Technology](https://srmist.edu.in).
       buttons:
@@ -35,9 +35,11 @@ sections:
     content:
       title:
       text: |
-        Bloch's theorem rewards a perfect crystal with clean, classifiable states — and almost no real material obliges. Substitution, vacancies, and chemical mixing are not blemishes on an ideal lattice; they are what the material actually is. Disorder is intrinsic, and it is often the thing that decides whether a material works.
+        Every real material is imperfect. Atoms swap places, atoms go missing, two metals share one lattice.
 
-        We combine DFT, Monte Carlo, spin-dynamics, and [machine learning](/research/post/ml/) — using each where the physics demands it: DFT for electronic structure, Monte Carlo and spin dynamics for finite-temperature collective behaviour, ML where compositional spaces become too large for direct first-principles study.
+        These imperfections are not noise. They can make a magnet or break it, create a spin centre or shorten its life, and set how strongly a surface binds hydrogen. We work out which, and why.
+
+        We start from quantum mechanics: we compute the electronic structure of the disordered material, the magnetic interactions it produces, and the temperature up to which order survives. When there are too many compositions to compute one by one, machine learning narrows the search. And we work with experimental groups, so our predictions meet real samples.
     design:
       columns: '1'
 
@@ -48,24 +50,24 @@ sections:
       text: |
         ### Research Themes
 
-        <p class="section-lede">Three questions about what disorder does to a material, and the machine learning we use when there are too many compositions to compute directly.</p>
+        <p class="section-lede">Three things disorder decides, and machine learning for when there are too many compositions to compute.</p>
 
         <div class="research-themes-grid research-themes-grid--two">
           <div class="theme-card">
             <a class="theme-title" href="/research/post/magnetism/">Disorder and Magnetism</a>
-            <span class="theme-desc">How does chemical disorder decide whether a magnet orders, at what temperature, and how much magnetisation survives?</span>
+            <span class="theme-desc">When does a disordered alloy become a magnet, and at what temperature?</span>
           </div>
           <div class="theme-card">
             <a class="theme-title" href="/research/post/coherence/">Disorder and Coherence</a>
-            <span class="theme-desc">What lets a chemically generated spin centre hold quantum phase information, and how does the disorder around it set the limit?</span>
+            <span class="theme-desc">Can a spin made by a missing atom hold quantum information?</span>
           </div>
           <div class="theme-card">
             <a class="theme-title" href="/research/post/catalysis/">Disorder and Catalysis</a>
-            <span class="theme-desc">In a compositionally complex catalyst no two sites are alike — so what sets the distribution of adsorption energies, and where it sits?</span>
+            <span class="theme-desc">When no two surface sites are alike, which ones bind hydrogen?</span>
           </div>
           <div class="theme-card">
             <a class="theme-title" href="/research/post/ml/">Machine Learning Driven Discovery</a>
-            <span class="theme-desc">Machine-learning discovery that keeps the physical insight which makes a prediction transferable.</span>
+            <span class="theme-desc">Design rules from data, with the physics left in.</span>
           </div>
         </div>
 
