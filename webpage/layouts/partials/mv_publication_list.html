@@ -1,15 +1,28 @@
-{{/* Year-grouped publication list with search, shared by /publication/ and
-     the per-pillar lists at /pillars/<term>/. The search box is wired up in
-     assets/js/mv-site.js and hides empty years.
-     Params: page (the list page), pages (publications to show), view. */}}
+{{/* Year-grouped publication list with a filter bar, shared by /publication/
+     and the per-pillar lists at /pillars/<term>/.
+     Params: page (the list page), pages (publications to show), view,
+     chips (true for pillar filter chips; the per-pillar lists leave it off). */}}
 {{ $page := .page }}
 {{ $view := .view | default "citation" }}
 
-<div class="mv-pub-tools">
-  <input type="search" class="form-control mv-pub-search" placeholder="Search titles, authors, journals"
-         aria-label="Search publications" aria-controls="mv-publications"
-         autocapitalize="off" autocomplete="off" autocorrect="off" spellcheck="false">
-</div>
+{{ $chips := slice }}
+{{ if .chips }}
+  {{ $defs := slice
+      (dict "value" "magnetism" "label" "Magnetism")
+      (dict "value" "coherence" "label" "Coherence")
+      (dict "value" "catalysis" "label" "Catalysis")
+      (dict "value" "ml" "label" "Machine learning") }}
+  {{ range $def := $defs }}
+    {{ with index site.Taxonomies.pillars $def.value }}
+      {{ $chips = $chips | append (merge $def (dict "count" (len .))) }}
+    {{ end }}
+  {{ end }}
+{{ end }}
+
+{{ partial "mv_filter_bar.html" (dict
+    "list" "mv-publications" "item" ".mv-pub" "group" ".mv-pub-year"
+    "chips" $chips "chips_label" "Filter by research pillar"
+    "search_label" "Search publications" "placeholder" "Search titles, authors, journals") }}
 
 <div id="mv-publications">
   {{ range .pages.ByDate.Reverse.GroupByDate "2006" }}
@@ -20,5 +33,5 @@
     {{ end }}
   </section>
   {{ end }}
-  <p class="mv-pub-empty" role="status" hidden>No publications match that search.</p>
+  <p class="mv-pub-empty mv-filter-empty" role="status" hidden>No publications match.</p>
 </div>

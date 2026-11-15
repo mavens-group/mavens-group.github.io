@@ -1,7 +1,7 @@
 {{- define "main" -}}
 
-{{/* Talks and Events grouped under year headings, newest first, with search
-     and talk-type filter chips wired up in assets/js/mv-site.js. */}}
+{{/* Talks and Events grouped under year headings, newest first, with talk-type
+     filter chips and search (layouts/partials/mv_filter_bar.html). */}}
 
 {{ partial "page_header.html" . }}
 
@@ -13,17 +13,21 @@
 
   {{ $canonicalTypes := slice "Invited Talk" "Organiser" "Contributed Talk" "Poster" }}
 
-  <div class="mv-talk-tools">
-    <input type="search" class="form-control mv-talk-search" placeholder="Search titles, speakers, events, hosts, locations"
-           aria-label="Search talks and events" aria-controls="mv-talks"
-           autocapitalize="off" autocomplete="off" autocorrect="off" spellcheck="false">
-    <div class="mv-talk-filters" role="group" aria-label="Filter by talk or event type">
-      <button type="button" class="mv-talk-chip is-active" data-talk-filter="all" aria-pressed="true">All</button>
-      {{ range $canonicalTypes }}
-      <button type="button" class="mv-talk-chip" data-talk-filter="{{ . | urlize }}" aria-pressed="false">{{ . }}</button>
-      {{ end }}
-    </div>
-  </div>
+  {{ $chips := slice }}
+  {{ range $type := $canonicalTypes }}
+    {{ $n := 0 }}
+    {{ range $.Pages }}
+      {{ $raw := .Params.talk_type }}
+      {{ $ts := cond (reflect.IsSlice $raw) $raw (slice $raw) }}
+      {{ if in $ts $type }}{{ $n = add $n 1 }}{{ end }}
+    {{ end }}
+    {{ if $n }}{{ $chips = $chips | append (dict "value" ($type | urlize) "label" $type "count" $n) }}{{ end }}
+  {{ end }}
+
+  {{ partial "mv_filter_bar.html" (dict
+      "list" "mv-talks" "item" ".mv-talk" "group" ".mv-talk-year"
+      "chips" $chips "chips_label" "Filter by talk or event type"
+      "search_label" "Search talks and events" "placeholder" "Search titles, speakers, events, hosts, locations") }}
 
   <div id="mv-talks">
     {{ range .Pages.ByDate.Reverse.GroupByDate "2006" }}
@@ -44,7 +48,7 @@
       {{ range $types }}
         {{ $typeSlugs = $typeSlugs | append (. | urlize) }}
       {{ end }}
-      <article class="mv-talk" id="{{ .File.ContentBaseName }}" data-talk-type="{{ delimit $typeSlugs " " }}">
+      <article class="mv-talk" id="{{ .File.ContentBaseName }}" data-filter-tags="{{ delimit $typeSlugs " " }}">
         <div class="mv-talk-kicker">
           {{ range $types }}
           <span class="mv-talk-badge mv-talk-badge--{{ . | urlize }}">{{ . }}</span>
@@ -120,7 +124,7 @@
       {{ end }}
     </section>
     {{ end }}
-    <p class="mv-pub-empty mv-talk-empty" role="status" hidden>No talks or events match that filter.</p>
+    <p class="mv-pub-empty mv-talk-empty mv-filter-empty" role="status" hidden>No talks or events match.</p>
   </div>
 
 </div>

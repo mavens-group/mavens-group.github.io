@@ -1,75 +1,100 @@
 /* ============================================================
    MAVENs page behaviour, loaded from layouts/partials/custom_js.html.
 
-   Publications search (layouts/section/publication.html)
-   Hides entries that don't contain the query, then any year
-   left empty; shows a note when nothing matches.
+   Filter bars on Publications and Talks (chips + collapsible
+   search), and reduced-motion handling for autoplaying video.
    ============================================================ */
 (function () {
   'use strict';
 
-  function setupPubSearch() {
-    var input = document.querySelector('.mv-pub-search');
-    var list = document.getElementById('mv-publications');
-    if (!input || !list) return;
+  function toArray(nodes) { return Array.prototype.slice.call(nodes); }
 
-    var pubs = Array.prototype.slice.call(list.querySelectorAll('.mv-pub'));
-    var years = Array.prototype.slice.call(list.querySelectorAll('.mv-pub-year'));
-    var empty = list.querySelector('.mv-pub-empty');
+  /* Filter bars (layouts/partials/mv_filter_bar.html) on Publications,
+     the per-pillar lists and Talks. An entry shows when it carries the
+     active chip in data-filter-tags (or the chip is "All") and contains the
+     query; years left empty are hidden, and a note shows when nothing
+     matches. Text is read per keystroke: MathJax rewrites titles after load. */
+  function setupFilterBars() {
+    toArray(document.querySelectorAll('.mv-filter-bar[data-filter-for]')).forEach(function (bar) {
+      var list = document.getElementById(bar.getAttribute('data-filter-for'));
+      if (!list) return;
 
-    /* Text is read per keystroke: MathJax rewrites the titles after load */
-    input.addEventListener('input', function () {
-      var q = input.value.trim().toLowerCase();
-      pubs.forEach(function (el) { el.hidden = q !== '' && el.textContent.toLowerCase().indexOf(q) === -1; });
-      var any = false;
-      years.forEach(function (sec) {
-        var shown = sec.querySelector('.mv-pub:not([hidden])') !== null;
-        sec.hidden = !shown;
-        any = any || shown;
+      var itemSel = bar.getAttribute('data-filter-item');
+      var items = toArray(list.querySelectorAll(itemSel));
+      var groups = toArray(list.querySelectorAll(bar.getAttribute('data-filter-group')));
+      var empty = list.querySelector('.mv-filter-empty');
+      var input = bar.querySelector('.mv-search-input');
+      var chips = toArray(bar.querySelectorAll('.mv-chip'));
+      var active = 'all';
+
+      function apply() {
+        var q = input ? input.value.trim().toLowerCase() : '';
+        items.forEach(function (el) {
+          var tags = (el.getAttribute('data-filter-tags') || '').split(/\s+/);
+          var tagOk = active === 'all' || tags.indexOf(active) !== -1;
+          var textOk = q === '' || el.textContent.toLowerCase().indexOf(q) !== -1;
+          el.hidden = !(tagOk && textOk);
+        });
+        var any = false;
+        groups.forEach(function (sec) {
+          var shown = sec.querySelector(itemSel + ':not([hidden])') !== null;
+          sec.hidden = !shown;
+          any = any || shown;
+        });
+        if (empty) empty.hidden = any;
+      }
+
+      if (input) input.addEventListener('input', apply);
+      chips.forEach(function (chip) {
+        chip.addEventListener('click', function () {
+          active = chip.getAttribute('data-filter') || 'all';
+          chips.forEach(function (c) {
+            var on = c === chip;
+            c.classList.toggle('is-active', on);
+            c.setAttribute('aria-pressed', on ? 'true' : 'false');
+          });
+          apply();
+        });
       });
-      if (empty) empty.hidden = any;
+
+      setupCollapsibleSearch(bar.querySelector('.mv-search'), input, apply);
     });
   }
 
-  function setupTalkFilter() {
-    var list = document.getElementById('mv-talks');
-    if (!list) return;
+  /* The search box hides behind its icon button until clicked. It closes
+     again on Escape (clearing the query) or when focus leaves it empty. */
+  function setupCollapsibleSearch(box, input, apply) {
+    var toggle = box && box.querySelector('.mv-search-toggle');
+    if (!toggle || !input) return;
 
-    var input = document.querySelector('.mv-talk-search');
-    var chips = Array.prototype.slice.call(document.querySelectorAll('.mv-talk-chip'));
-    var talks = Array.prototype.slice.call(list.querySelectorAll('.mv-talk'));
-    var years = Array.prototype.slice.call(list.querySelectorAll('.mv-talk-year'));
-    var empty = list.querySelector('.mv-talk-empty');
-    var activeType = 'all';
-
-    function applyFilter() {
-      var q = input ? input.value.trim().toLowerCase() : '';
-      talks.forEach(function (el) {
-        var matchesText = q === '' || el.textContent.toLowerCase().indexOf(q) !== -1;
-        var types = (el.getAttribute('data-talk-type') || '').split(/\s+/);
-        var matchesType = activeType === 'all' || types.indexOf(activeType) !== -1;
-        el.hidden = !(matchesText && matchesType);
-      });
-      var any = false;
-      years.forEach(function (sec) {
-        var shown = sec.querySelector('.mv-talk:not([hidden])') !== null;
-        sec.hidden = !shown;
-        any = any || shown;
-      });
-      if (empty) empty.hidden = any;
+    function collapse() {
+      box.classList.add('is-collapsed');
+      toggle.hidden = false;
+      toggle.setAttribute('aria-expanded', 'false');
+    }
+    function expand() {
+      box.classList.remove('is-collapsed');
+      toggle.setAttribute('aria-expanded', 'true');
+      input.focus();          /* before hiding the button, which holds focus */
+      toggle.hidden = true;
     }
 
-    if (input) input.addEventListener('input', applyFilter);
-    chips.forEach(function (chip) {
-      chip.addEventListener('click', function () {
-        activeType = chip.getAttribute('data-talk-filter') || 'all';
-        chips.forEach(function (c) {
-          var isOn = c === chip;
-          c.classList.toggle('is-active', isOn);
-          c.setAttribute('aria-pressed', isOn ? 'true' : 'false');
-        });
-        applyFilter();
-      });
+    collapse();
+    toggle.addEventListener('click', expand);
+    input.addEventListener('keydown', function (e) {
+      if (e.key !== 'Escape') return;
+      input.value = '';
+      apply();
+      collapse();
+      toggle.focus();
+    });
+    /* Checked after the browser settles focus, so moving it between the
+       button and the box does not count as leaving */
+    box.addEventListener('focusout', function () {
+      setTimeout(function () {
+        if (box.contains(document.activeElement)) return;
+        if (input.value.trim() === '') collapse();
+      }, 0);
     });
   }
 
@@ -85,8 +110,7 @@
   }
 
   function init() {
-    setupPubSearch();
-    setupTalkFilter();
+    setupFilterBars();
     respectReducedMotion();
   }
 
