@@ -2,6 +2,7 @@
 title: "MkBib: Bibliography Manager"
 summary: "The automated solution for cleaning, formatting, and managing BibTeX databases for academic writing."
 date: "2026-01-26"
+weight: 2
 featured: false
 
 tags:

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg
+   width="256"
+   height="256"
+   viewBox="0 0 256 256"
+   version="1.1"
+   id="svg_ptbl"
+   xmlns="http://www.w3.org/2000/svg">
+  <defs id="defs1" />
+  
+  <!-- Material 3 / GNOME HIG duo-tone chemistry circular base -->
+  <path
+     id="bg_top"
+     style="fill:#00897b;fill-opacity:1;stroke:none;stroke-width:8.40421;stroke-linejoin:round"
+     d="M 256,-128 A 128,128 0 0 1 192,-17.148747 128,128 0 0 1 63.999997,-17.14875 128,128 0 0 1 0,-128 h 128 z"
+     transform="scale(1,-1)" />
+  <path
+     id="bg_bottom"
+     style="fill:#26a69a;fill-opacity:1;stroke:none;stroke-width:8.40421;stroke-linejoin:round"
+     d="m 256,128 a 128,128 0 0 1 -64,110.85125 128,128 0 0 1 -128.000003,0 A 128,128 0 0 1 0,128 h 128 z" />
+     
+  <!-- Stepped Periodic Table Architecture in Pure White (#ffffff) -->
+  <g id="periodic_table_blocks" style="fill:#ffffff;fill-opacity:1">
+    <!-- Period 1: Hydrogen & Helium towers -->
+    <rect id="h_block" x="46" y="52" width="28" height="24" rx="6" />
+    <rect id="he_block" x="182" y="52" width="28" height="24" rx="6" />
+    
+    <!-- Periods 2-7: s-block (left) and p-block (right) main columns -->
+    <rect id="s_column" x="46" y="82" width="28" height="74" rx="6" />
+    <rect id="p_column" x="182" y="82" width="28" height="74" rx="6" />
+    
+    <!-- Periods 4-7: d-block Transition Metals bridge -->
+    <rect id="d_bridge" x="80" y="114" width="96" height="42" rx="6" />
+    
+    <!-- f-block: Lanthanides and Actinides foundation bar -->
+    <rect id="f_foundation" x="68" y="164" width="120" height="22" rx="6" />
+    
+    <!-- Atom Nucleus in the central periodic valley -->
+    <circle id="nucleus" cx="128" cy="78" r="6.5" />
+    
+    <!-- Electron Nodes on Orbits -->
+    <circle id="electron_1" cx="158" cy="78" r="2.8" />
+    <circle id="electron_2" cx="113" cy="52" r="2.8" />
+    <circle id="electron_3" cx="113" cy="104" r="2.8" />
+  </g>
+  
+  <!-- Atom Electron Orbitals (3.6px stroke matching cview/mkbib weight) -->
+  <g id="orbitals" style="stroke:#ffffff;stroke-width:3.6;stroke-linecap:round;stroke-linejoin:round;fill:none;opacity:0.95">
+    <ellipse cx="128" cy="78" rx="30" ry="10" />
+    <ellipse cx="128" cy="78" rx="30" ry="10" transform="rotate(60 128 78)" />
+    <ellipse cx="128" cy="78" rx="30" ry="10" transform="rotate(-60 128 78)" />
+  </g>
+  
+  <!-- Subtle Internal Periodic Table Grid Slits in the d-block and s/p columns -->
+  <g id="grid_slits" style="fill:#00897b;opacity:0.8">
+    <!-- Horizontal period dividers in s and p columns -->
+    <rect x="46" y="114" width="28" height="3" rx="1.5" />
+    <rect x="182" y="114" width="28" height="3" rx="1.5" />
+    
+    <!-- Vertical group divider lines in d-block -->
+    <rect x="110" y="122" width="3" height="26" rx="1.5" />
+    <rect x="143" y="122" width="3" height="26" rx="1.5" />
+    
+    <!-- f-block subtle divider slits -->
+    <rect x="106" y="170" width="3" height="10" rx="1.5" style="fill:#26a69a" />
+    <rect x="147" y="170" width="3" height="10" rx="1.5" style="fill:#26a69a" />
+  </g>
+</svg>

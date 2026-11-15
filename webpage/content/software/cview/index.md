@@ -2,6 +2,7 @@
 title: "CView: Crystal Structure Visualization & Analysis"
 summary: "A high-performance tool for visualizing and analyzing complex crystallographic data seamlessly."
 date: "2026-01-26"
+weight: 1
 featured: true
 
 tags:
@@ -15,6 +16,10 @@ image:
     preview_only: true
 
 links:
+  - icon: book
+    icon_pack: fas
+    name: Website
+    url: https://mavensgroup.github.io/cview/
   - icon: github
     icon_pack: fab
     name: Source Code

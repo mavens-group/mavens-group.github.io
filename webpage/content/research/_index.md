@@ -16,7 +16,7 @@ sections:
     design:
       view: card
 ---
-A perfect crystal is easy to compute. Bloch's theorem turns 10²³ atoms into one unit cell and a set of sharp states.
+A perfect crystal is easy to compute. Bloch's theorem turns an infinite crystal into one unit cell and a set of sharp states.
 
 No real material is a perfect crystal. At [MAVENs](../), we start from the material as it is: its symmetry broken by substitution, vacancies, or design.
 
@@ -38,9 +38,15 @@ No real material is a perfect crystal. At [MAVENs](../), we start from the mater
 
 We compute random alloys directly with the coherent potential approximation, and individual defects with density functional theory. From the electronic structure we obtain the magnetic exchange interactions, and from those the temperature up to which magnetic order survives. When there are too many compositions to compute, interpretable machine learning narrows the search.
 
-## Tools and Collaborators
+## Research Software
 
-We build [**cview**](https://github.com/mavensgroup/cview), an open-source crystallographic interface ([paper](../publication/banerjee-2026/)), and test our predictions with experimental groups:
+[**cview**](https://mavensgroup.github.io/cview/) is our free, open-source crystal-structure viewer, built for disordered materials. Alongside CIF, VASP and Quantum ESPRESSO files, it reads the occupation blocks that describe a random alloy, so a structure can go from screen to calculation in one step.
+
+[Website](https://mavensgroup.github.io/cview/) · [GitHub](https://github.com/mavensgroup/cview) · [Paper](../publication/banerjee-2026/) · [Methods and software publications](../pillars/development/) · [All our open-source tools →](../software/)
+
+## Experimental Collaborations
+
+We test our predictions with experimental groups:
 
 - [Dr Ashutosh Kumar Singh, CeNS](https://sites.google.com/view/ashutoshksingh-cens/team/dr-ashutosh-k-singh) — quantum materials
 - [Dr Payel Bandyopadhyay, SRMIST](https://sites.google.com/srmist.edu.in/primelab/) — polymers and soft materials
