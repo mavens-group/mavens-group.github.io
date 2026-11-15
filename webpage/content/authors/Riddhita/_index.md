@@ -7,14 +7,14 @@ title: Riddhita Banerjee
 # Full name (for SEO)
 first_name: Riddhita
 last_name: Banerjee
-join: "2025"
+join: "2024"
 # Username (this should match the folder name)
 authors:
   - Riddhita
 # Is this the primary user of the site?
 superuser: false
 # Role/position
-role: UG Project (2025–27)
+role: UG Project (2024–26)
 # Organizations/Affiliations
 organizations:
   - name: SRM Institute of Science and Technology
@@ -42,7 +42,7 @@ skills:
    skill: Data Analysis and Machine Learning
  - icon: random
    icon_pack: fas
-   skill: Monte Caarlo Simulation
+   skill: Monte Carlo Simulation
 
    #+
    #+ Monte Carlo Simulation

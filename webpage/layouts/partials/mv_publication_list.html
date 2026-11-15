@@ -11,11 +11,19 @@
       (dict "value" "magnetism" "label" "Magnetism")
       (dict "value" "coherence" "label" "Coherence")
       (dict "value" "catalysis" "label" "Catalysis")
-      (dict "value" "ml" "label" "Machine learning") }}
+      (dict "value" "ml" "label" "Machine learning")
+      (dict "value" "development" "label" "Methods and software") }}
   {{ range $def := $defs }}
     {{ with index site.Taxonomies.pillars $def.value }}
       {{ $chips = $chips | append (merge $def (dict "count" (len .))) }}
     {{ end }}
+  {{ end }}
+  {{/* Papers with no pillar (collaborations outside the group's research
+       lines) get "other" in views/citation.html, so every paper has a chip. */}}
+  {{ $other := 0 }}
+  {{ range .pages }}{{ if not .Params.pillars }}{{ $other = add $other 1 }}{{ end }}{{ end }}
+  {{ with $other }}
+    {{ $chips = $chips | append (dict "value" "other" "label" "Other collaborations" "count" .) }}
   {{ end }}
 {{ end }}
 

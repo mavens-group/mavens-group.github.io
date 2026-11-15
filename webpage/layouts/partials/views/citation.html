@@ -3,7 +3,7 @@
 
 {{/* One publication: title, authors (group members emphasised), journal,
      links. The year is the heading above it (layouts/section/publication.html). */}}
-<article class="mv-pub"{{ with $item.Params.pillars }} data-filter-tags="{{ delimit . " " }}"{{ end }}>
+<article class="mv-pub" data-filter-tags="{{ with $item.Params.pillars }}{{ delimit . " " }}{{ else }}other{{ end }}">
   <h3 class="mv-pub-title"><a href="{{ $item.RelPermalink }}">{{ $item.Title }}</a></h3>
   <div class="mv-pub-authors">{{ partial "page_metadata_authors" $item }}</div>
   {{ with or $item.Params.publication_short $item.Params.publication }}

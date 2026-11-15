@@ -1,15 +1,16 @@
 ---
 title: "MkBib: Bibliography Manager"
-summary: "The automated solution for cleaning, formatting, and managing BibTeX databases for academic writing."
-date: "2026-01-26"
+summary: "A desktop BibTeX manager that opens large .bib libraries instantly and checks entries against BibLaTeX before they reach your LaTeX build."
+date: "2026-11-15"
 weight: 2
 featured: false
 
 tags:
-  - Automation
   - BibTeX
   - Academic Writing
-  - Python
+  - Desktop App
+  - GTK4
+  - Rust
 
 image:
     preview_only: true
@@ -20,25 +21,25 @@ links:
     url: https://github.com/mavens-group/mkbib
 ---
 
-## Why mkbib?
+## What it does
 
-Managing citations is often the bottleneck of academic writing. Inconsistent formatting, missing fields, and duplicate entries can clutter your `.bib` files and cause compilation errors.
+**MkBib** is a desktop manager for BibTeX bibliographies, written in Rust with GTK 4 and libadwaita. It is built for the `.bib` files that grow over years of writing papers and theses.
 
-**mkbib** solves this by automating the hygiene of your bibliography. It ensures your references are publication-ready so you can focus on the content, not the metadata.
-
-## Key Capabilities
-
-* **Automated Cleaning**: Standardizes entry formats and corrects common syntax errors automatically.
-* **Duplicate Detection**: Intelligently identifies and merges or flags duplicate citations.
-* **Pipeline Ready**: Designed to fit into Makefiles or CI/CD pipelines for automated LaTeX document generation.
+* **Large libraries**: opens databases of more than 10,000 entries without delay.
+* **Search**: filter entries by author, year or title as you type.
+* **Edit**: double-click an entry to change its fields.
+* **Validation**: checks entries against the fields BibLaTeX requires, so a missing field shows up in MkBib rather than as a LaTeX compilation error.
+* **Safe saving**: writes the file atomically, so an interrupted save cannot corrupt your library.
 
 ## Quick Start
 
-Integrate `mkbib` into your writing workflow:
+MkBib needs Rust and the GTK 4 and libadwaita development files (on Fedora: `sudo dnf install gtk4-devel libadwaita-devel gcc`).
 
 ```bash
 git clone https://github.com/mavens-group/mkbib.git
 cd mkbib
-# Install command (You mostly need rust and gtk4-devel)
-cargo run --release
+cargo install --path . --root ~/.local
+mkbib-rs library.bib
 ```
+
+The [README](https://github.com/mavens-group/mkbib#installation) gives the packages for Debian, Ubuntu and Arch Linux.

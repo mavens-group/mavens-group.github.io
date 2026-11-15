@@ -1,7 +1,7 @@
 ---
 title: "Monte Carlo Methods for Physicists: Lecture Notes"
 linkTitle: Monte Carlo Methods Course
-date: 2024-07-26
+date: 2026-05-24
 summary: "Master Monte Carlo (MC) methods with this comprehensive graduate course. Learn sampling, MCMC, the Metropolis algorithm, the Ising and Heisenberg models, Kinetic Monte Carlo, and free energy methods through hands-on Python labs."
 tags:
   - Monte Carlo Methods
