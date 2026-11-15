@@ -23,20 +23,21 @@ organizations:
     url: 'https://www.srmist.edu.in/'
 
 # Short bio (displayed in user profile at end of posts)
-bio: "Predicting how atomic-scale disorder and chemical complexity govern magnetic, catalytic, and quantum phenomena, from first principles."
+bio: "Explaining how disorder (substitution, vacancies and mixing) decides the magnetic, catalytic and quantum behaviour of materials, from first principles."
 
+# One per research pillar
 interests:
-  - interest: Disordered & High-Entropy Alloys
-    icon: box
-    icon_pack: feather
-  - interest: 2D and Layered Materials
-    icon: hexagon
-    icon_pack: feather
-  - interest: Qubit & Quantum Materials Design
-    icon: aiml
-    icon_pack: custom
-  - interest: Magnetocaloric & Spintronic Materials
+  - interest: Disordered Magnetic Alloys
     icon: magnet
+    icon_pack: custom
+  - interest: Spin Centres & Quantum Coherence
+    icon: activity
+    icon_pack: feather
+  - interest: Hydrogen-Evolution Catalysis
+    icon: droplet
+    icon_pack: feather
+  - interest: Interpretable Machine Learning
+    icon: aiml
     icon_pack: custom
 
 experience:
@@ -94,11 +95,11 @@ user_groups:
   - Group Head
 seo:
   site_type: Person
-  description: "Dr. Rudra Banerjee is a computational physicist leading the MAVENs group at SRMIST. His research uses DFT, Monte Carlo, and machine learning to design materials for quantum, energy, and magnetic applications."
-  keywords: ["Computational Materials Science", "DFT", "Quantum Materials", "Spintronics", "Machine Learning", "Heusler Alloys", "Green Energy", "Qubit Materials", "Monte Carlo", "Magnetocaloric Materials", "SRMIST"]
+  description: "Dr Rudra Banerjee leads the MAVENs group at SRMIST. He studies how disorder decides the magnetic, catalytic and quantum behaviour of materials, using first-principles electronic-structure methods and interpretable machine learning."
+  keywords: ["Disordered Materials", "Computational Materials Science", "DFT", "Coherent Potential Approximation", "Magnetism", "Heusler Alloys", "Spin Qubits", "Quantum Coherence", "Hydrogen Evolution", "Machine Learning", "SRMIST"]
 ---
-Rudra Banerjee leads the **M**aterials **A**dvancing a **V**iable **EN**ergy future (MAVENs) Group in the [Department of Physics and Nanotechnology](https://www.srmist.edu.in/department/department-of-physics-and-nanotechnology/) at [SRMIST, Kattankulathur](https://www.srmist.edu.in). His research investigates how atomic-scale disorder, chemical mixing, and point defects govern collective material behaviour — examining the physical mechanisms by which microscopic structure dictates macroscopic magnetic, catalytic, and quantum response.
+Rudra Banerjee leads the **M**aterials **A**dvancing a **V**iable **EN**ergy future (MAVENs) Group in the [Department of Physics and Nanotechnology](https://www.srmist.edu.in/department/department-of-physics-and-nanotechnology/) at [SRMIST, Kattankulathur](https://www.srmist.edu.in). His research asks how disorder decides what a material can do. Substitution, vacancies and chemical mixing break a crystal's symmetry: they can create a magnet or a spin centre, and they set the limits on both. His group works out when the local picture still predicts a material's behaviour, and when the disorder around it decides.
 
-His group combines density functional theory, Green's-function methods (KKR-CPA), classical Monte Carlo, and spin-dynamics simulations to model electronic structure, magnetic phase transitions, and catalytic adsorption across disordered Heusler alloys, two-dimensional MXenes, and transition-metal dichalcogenides. For large compositional spaces, he develops physically interpretable machine-learning workflows to guide first-principles defect screening.
+The group treats random alloys with the coherent potential approximation and individual defects with density functional theory, computes magnetic exchange interactions and ordering temperatures from first principles, and uses interpretable machine learning when there are too many compositions to compute. Its systems include disordered Heusler and FeRh alloys, vacancy-doped two-dimensional materials, oxygen-deficient ceria and Janus MXenes.
 
-Beyond research, he teaches classical mechanics, mathematical methods, computational physics, and graduate-level computational materials science, having developed an open graduate monograph on [Density Functional Theory](/lectures/2024-07-dft/) for PhD coursework.
+Beyond research, he teaches classical mechanics, mathematical methods, computational physics, and graduate-level computational materials science, having developed open graduate monographs on [Density Functional Theory](/lectures/2024-07-dft/) and [Monte Carlo methods](/lectures/2026-05-mc/) for PhD coursework.
