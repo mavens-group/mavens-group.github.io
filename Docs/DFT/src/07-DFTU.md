@@ -586,7 +586,9 @@ of correlation runs through DFT+DMFT and ultimately many-body Green's function m
 GW+DMFT, vertex corrections).
 
 The chapters that follow turn from the *physics* of the XC functional to the *numerical
-methods* needed to solve the Kohn–Sham equations in practice: self-consistent field iteration
-and density mixing (Chapter 8), Brillouin zone integration and smearing (Chapter 9), and
-iterative diagonalisation of the KS Hamiltonian (Chapter 10).
+methods* needed to solve the Kohn–Sham equations in practice, ordered from the innermost
+computational loop outward: iterative diagonalisation of the KS Hamiltonian (Chapter 8),
+Brillouin zone integration and smearing (Chapter 9), self-consistent field iteration and
+density mixing (Chapter 10), and structural optimisation and ab initio molecular dynamics
+(Chapter 11).
 

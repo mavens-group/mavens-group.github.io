@@ -200,7 +200,7 @@ KS equations for the orbitals, and (iii) summing the orbital densities. The map 
 **non-linear** in \\(\rho\\) — \\(V\_{\rm H}\\) and \\(V\_{\rm xc}\\) are non-linear functionals of the
 density — so the fixed point cannot be found by direct linear algebra. Instead it is found by
 iteration: \\(\rho^{(n+1)} = F[\rho^{(n)}]\\), possibly with mixing to ensure convergence (Chapter
-8). The number of SCF iterations is typically 20–80 for a converged calculation.
+10). The number of SCF iterations is typically 20–80 for a converged calculation.
 
 **The eigenvalue solver is a linear iterative method.** Inside step (ii) of each SCF iteration,
 the **linear** problem
@@ -211,7 +211,7 @@ must be solved at fixed \\(V\_{\rm eff}\\). This is a standard generalised eigen
 the matrix dimension \\(N\_{\rm PW} \sim 10^4\\)–\\(10^5\\) is too large for direct diagonalisation
 when only the lowest \\(N\_{\rm bands} \sim 10^2\\)–\\(10^3\\) eigenpairs are needed. The practical
 algorithms — Davidson, RMM-DIIS, conjugate gradients — are **iterative subspace methods**
-(Chapter 10) that build up the desired eigenspace through successive matrix-vector products
+(Chapter 8) that build up the desired eigenspace through successive matrix-vector products
 \\(\hat{h}\_{\rm KS}|\psi\rangle\\). They typically converge in 3–8 inner iterations per SCF step.
 
 The two iterations are **nested**: the outer SCF loop calls the inner eigenvalue solver as a
@@ -223,7 +223,7 @@ plots, but they solve different mathematical problems with different convergence
 | Mathematical problem | Non-linear fixed point \\(\rho = F[\rho]\\) | Linear eigenvalue \\(A\mathbf{x} = \lambda\mathbf{x}\\) |
 | Variable | Density \\(\rho(\mathbf{r})\\) | Orbital coefficients \\(\\{c\_{\mathbf{G},i}\\}\\) |
 | Convergence theory | Banach fixed-point + spectral analysis of Jacobian | Krylov subspace / Rayleigh–Ritz |
-| Acceleration | Pulay/Broyden mixing (Chapter 8) | Davidson/RMM-DIIS subspace expansion (Chapter 10) |
+| Acceleration | Pulay/Broyden mixing (Chapter 10) | Davidson/RMM-DIIS subspace expansion (Chapter 8) |
 | Diagnostic | "SCF iteration N: ΔE = ..." | "RMM-DIIS: rms = ..."  per band |
 | Failure mode | Charge sloshing, oscillation | Band mixing, eigenvalue stalling |
 | Typical iter. count | 20–80 | 3–8 per SCF step |
@@ -245,7 +245,7 @@ In practice, the SCF procedure is:
 3. **Solve KS equations (inner loop)**: Diagonalise the KS Hamiltonian at each
    \\(\mathbf{k}\\)-point via an iterative subspace method (Davidson, RMM-DIIS), obtaining
    the orbitals \\(\phi\_i^{(n+1)}(\mathbf{r})\\) and energies \\(\epsilon\_i\\). This step is
-   itself iterative — see the "inner loop" terminology above.
+   itself iterative — see the "inner loop" terminology above (Chapter 8).
 4. **Construct new density**: Determine occupations \\(f\_i\\) from the Fermi level (Chapter 9
    smearing), and form
    \\(\rho\_{\rm out}^{(n+1)}(\mathbf{r}) = \sum\_i f\_i\\,|\phi\_i^{(n+1)}(\mathbf{r})|^2\\).
@@ -255,7 +255,7 @@ In practice, the SCF procedure is:
    state.
 6. **Mix** (if not converged): Construct the input density for the next SCF iteration as a
    weighted combination of input and output densities using Pulay, Broyden, or Kerker mixing
-   (Chapter 8), then return to step 2.
+   (Chapter 10), then return to step 2.
 
 This procedure is shown schematically in Figure 3.1.
 
@@ -277,10 +277,11 @@ convergence test.
 </figcaption>
 </figure>
 
-The details of the mixing algorithms in step 6 and the inner eigenvalue solver in step 3 are
-sufficiently involved that they receive their own chapters: Chapter 8 develops density mixing
-schemes (linear, Kerker, Pulay/DIIS, Broyden), and Chapter 10 develops iterative
-diagonalisation (Davidson, RMM-DIIS, conjugate gradients).
+The details of the inner eigenvalue solver in step 3, Brillouin-zone occupation sums in step 4,
+and mixing algorithms in step 6 each receive their own chapter in Part II, ordered from the
+innermost loop outward: Chapter 8 develops iterative diagonalisation (Davidson, RMM-DIIS,
+conjugate gradients), Chapter 9 treats Brillouin-zone integration and smearing, and Chapter 10
+develops SCF density mixing schemes (linear, Kerker, Pulay/DIIS, Broyden).
 
 
 ## Physical Meaning of Kohn–Sham Quantities

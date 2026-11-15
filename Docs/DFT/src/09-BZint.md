@@ -1,14 +1,15 @@
 # Brillouin Zone Integration
 
-Chapter 8 addressed the outer loop of the SCF cycle: how to update the density from one
-iteration to the next so that the fixed-point equation \\(F[\rho^\*] = \rho^\*\\) is satisfied
-efficiently. This chapter addresses two pieces of numerical machinery that operate *within*
-each SCF step: how the BZ integral is discretised onto a finite \\(\mathbf{k}\\)-point mesh
-(Section: Monkhorst–Pack Sampling), and how the occupation function near the Fermi level is
-regularised to achieve rapid convergence for metals (Section: Smearing). The eigenvalue solver
-that produces the orbitals and energies at each \\(\mathbf{k}\\)-point is treated separately in
-Chapter 10. BZ integration is covered first because the choice of \\(\mathbf{k}\\)-mesh and
-smearing scheme affects the effective smoothness of the energy landscape seen by the SCF cycle.
+Chapter 8 developed the innermost loop of a plane-wave DFT calculation: solving the Kohn–Sham
+eigenvalue equation at each \\(\mathbf{k}\\)-point for a fixed effective potential
+\\(V\_{\rm eff}(\mathbf{r})\\) to obtain the band energies \\(\epsilon\_{i\mathbf{k}}\\) and
+orbitals \\(\phi\_{i\mathbf{k}}(\mathbf{r})\\). Before the outer electronic cycle can update the
+density toward self-consistency (Chapter 10), two pieces of numerical machinery must operate within
+each SCF step to assemble the output density \\(\rho\_{\rm out}(\mathbf{r})\\) and total energy:
+discretising the BZ integral onto a finite \\(\mathbf{k}\\)-point mesh (Section: Monkhorst–Pack
+Sampling), and regularising the occupation function near the Fermi level for metals (Section:
+Smearing). Together with Chapter 8, these determine the smoothness of the effective energy
+landscape seen by the self-consistent field cycle in Chapter 10.
 
 
 ## Monkhorst–Pack \\(k\\)-Point Sampling
@@ -552,3 +553,18 @@ Marzari–Vanderbilt cold smearing is accessed via `smearing = 'marzari-vanderbi
   Section II.D.
 
 </details>
+
+---
+
+## Outlook
+
+Combining the inner iterative eigensolver (Chapter 8) with Monkhorst–Pack \\(\mathbf{k}\\)-point
+sampling and Fermi-surface smearing (this chapter) completes one full evaluation of the Kohn–Sham
+map \\(\rho\_{\rm in} \mapsto \rho\_{\rm out} = F[\rho\_{\rm in}]\\) and defines the smooth
+variational Mermin free energy \\(F = E - TS\\).
+
+With \\(F[\rho\_{\rm in}]\\) well defined at fixed nuclear coordinates, the remaining computational
+task is to drive the non-linear fixed-point equation \\(F[\rho^\*] = \rho^\*\\) to convergence
+without triggering long-wavelength charge-sloshing instabilities in metals. **Chapter 10** develops
+the density-mixing machinery—linear mixing, Kerker preconditioning, Pulay/DIIS, and Broyden
+updates—along with a unified SCF diagnostic toolkit and worked example tying together Chapters 8–10.

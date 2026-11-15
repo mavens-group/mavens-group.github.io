@@ -1,26 +1,32 @@
 # Eigenvalue Solvers
 
-The Kohn–Sham SCF loop developed in Chapter 8 has three computational hot spots, each handled
-by a specialised algorithm:
+Part II opens the black box of practical Kohn–Sham DFT by proceeding **from the innermost
+computational loop outward** across the three nested numerical stages introduced in Chapter 3
+(Section 3.4):
 
-1. **Density mixing** (Chapter 8) — converges the outer self-consistency cycle.
-2. **Brillouin zone integration** (Chapter 9) — assembles the density from band energies and
-   occupations at each \\(\mathbf{k}\\)-point.
-3. **Eigenvalue solver** — at every SCF iteration and every \\(\mathbf{k}\\)-point, solves
-   \\(\hat{h}\_{\rm KS}\phi\_i = \epsilon\_i\phi\_i\\) for the lowest \\(N\_{\rm bands}\\) eigenpairs.
+1. **Eigenvalue solver (Inner loop — this chapter)** — at every SCF iteration and every
+   \\(\mathbf{k}\\)-point, solves \\(\hat{h}\_{\rm KS}\phi\_i = \epsilon\_i\phi\_i\\) for the
+   lowest \\(N\_{\rm bands}\\) eigenpairs at fixed effective potential \\(V\_{\rm eff}(\mathbf{r})\\).
+2. **Brillouin zone integration and smearing (Chapter 9)** — integrates over the Brillouin zone
+   and assigns partial occupancies \\(f\_{i\mathbf{k}}\\) across the Fermi surface to assemble the
+   output density
+   \\(\rho\_{\rm out}(\mathbf{r}) = \sum\_{i\mathbf{k}} w\_{\mathbf{k}} f\_{i\mathbf{k}} |\phi\_{i\mathbf{k}}(\mathbf{r})|^2\\).
+3. **Density mixing and SCF convergence (Chapter 10)** — updates
+   \\(\rho\_{\rm in} \to \rho\_{\rm in}^{(n+1)}\\) via Kerker, Pulay/DIIS, and Broyden schemes to
+   converge the outer electronic fixed-point loop \\(\rho^\* = F[\rho^\*]\\).
 
-This chapter develops the third. The Kohn–Sham eigenvalue problem is the *inner* loop of DFT:
-it is called \\(N\_{\rm SCF} \times N\_{\mathbf{k}}\\) times per total-energy evaluation, so even
-factor-of-two improvements in its cost translate into substantial wall-clock savings. Because
-the matrix is too large to diagonalise directly (\\(N\_{\rm PW} \sim 10^4\\)–\\(10^5\\)) but only
-the lowest \\(N\_{\rm bands} \sim 10^2\\)–\\(10^3\\) eigenpairs are needed, the methods used in
-practice are **iterative subspace algorithms**: Davidson, RMM-DIIS, and conjugate-gradient
-minimisation. These trade off robustness, memory, and convergence rate, and the choice depends
-on system size and band-structure character.
+The Kohn–Sham eigenvalue problem developed in this chapter is called
+\\(N\_{\rm SCF} \times N\_{\mathbf{k}}\\) times per total-energy evaluation, so even factor-of-two
+improvements in its cost translate into substantial wall-clock savings. Because the Hamiltonian
+matrix is far too large to diagonalise directly (\\(N\_{\rm PW} \sim 10^4\\)–\\(10^5\\)) while
+only the lowest \\(N\_{\rm bands} \sim 10^2\\)–\\(10^3\\) eigenpairs are needed, practical codes
+use **iterative subspace algorithms**: Davidson, RMM-DIIS, and conjugate-gradient minimisation.
+These trade off robustness, memory, and convergence rate, and the optimal choice depends on
+system size and electronic band structure.
 
-The chapter concludes with a section on **parallelisation**, which is essential for any
-production calculation, and with the diagnostic toolkit and worked-example workflow on bcc Fe
-that ties together everything from Chapters 8–10.
+The chapter concludes with a section on **multi-level parallelisation** across
+\\(\mathbf{k}\\)-points, bands, and plane waves, which governs the scalability of every
+production DFT calculation.
 
 
 ## Iterative Diagonalisation
@@ -121,9 +127,9 @@ In reciprocal space, this simply divides each plane-wave component of the residu
 difference between its kinetic energy and the current eigenvalue estimate. The effect is to
 rotate the residual toward the true eigenspace: components that are far from the eigenvalue
 (large \\(|\frac{1}{2}G^2 - \epsilon\_i|\\)) are suppressed, while components near the eigenvalue
-are amplified. This is the same principle as Kerker preconditioning for density mixing
-(Chapter 8), applied here to the eigenvalue problem rather than the fixed-point
-problem.
+are amplified. This reciprocal-space preconditioning philosophy — rescaling Fourier components by
+an approximate inverse operator — will reappear in Chapter 10 as Kerker preconditioning for
+long-wavelength charge-density mixing.
 
 In practice, a regularisation is applied to prevent the denominator from vanishing when
 \\(\frac{1}{2}G^2 \approx \epsilon\_i\\). The standard choice is:
@@ -160,34 +166,40 @@ reciprocal space — can be batched over all vectors in the block.
 
 The **Residual Minimisation Method — Direct Inversion in the Iterative Subspace (RMM-DIIS)**
 (Pulay, 1980; Wood and Zunger, 1985; Kresse and Furthmüller, 1996) takes a different approach:
-instead of expanding a subspace and projecting, it directly minimises the residual norm
-\\(\\|(\hat{h}\_{\rm KS} - \epsilon\_i)|\phi\_i\rangle\\|^2\\) for each band individually, using the
-DIIS extrapolation from Chapter 8.
+instead of expanding a global orthogonal subspace and projecting, it directly minimises the
+residual norm \\(\\|(\hat{h}\_{\rm KS} - \epsilon\_i)|\phi\_i\rangle\\|^2\\) for each band
+individually using Pulay's DIIS subspace extrapolation.
 
 **The method.** For each band \\(i\\), maintain a history of trial vectors and their residuals from
-the last \\(m\\) iterations: \\(\\{|\phi\_i^{(n)}\rangle, |r\_i^{(n)}\rangle\\}\\). Construct the optimal
-linear combination:
+the last \\(m\\) iterations: \\(\\{|\phi\_i^{(n)}\rangle, |r\_i^{(n)}\rangle\\}\\). Because
+\\(\hat{h}\_{\rm KS}\\) acts nearly linearly on small orbital variations near an eigenpair, an
+affine combination of the stored iterates
 
 <div>
 \begin{equation}
     |\bar{\phi}_i\rangle = \sum_{k=1}^{m} c_k |\phi_i^{(n-m+k)}\rangle,
+    \qquad
+    \sum_{k=1}^{m} c_k = 1,
     \label{eq:rmm-trial}
 \end{equation}
 </div>
 
-where the coefficients \\(\\{c\_k\\}\\) minimise the residual norm, exactly as in the density-mixing
-DIIS of Chapter 8:
+has residual \\(|\bar{r}\_i\rangle \approx \sum\_{k=1}^m c\_k |r\_i^{(n-m+k)}\rangle\\). Choosing the
+weights \\(\\{c\_k\\}\\) to minimise the squared residual norm yields the constrained least-squares
+problem:
 
 <div>
 \begin{equation}
-    \min_{\{c_k\}} \left\|\sum_k c_k |r_i^{(n-m+k)}\rangle\right\|^2, \qquad \sum_k c_k = 1.
+    \min_{\{c_k\}} \left\|\sum_{k=1}^m c_k |r_i^{(n-m+k)}\rangle\right\|^2, \qquad \sum_{k=1}^m c_k = 1.
     \label{eq:rmm-minimise}
 \end{equation}
 </div>
 
-This leads to the same small linear system with the overlap matrix
-\\(B\_{jk} = \langle r\_i^{(j)} | r\_i^{(k)} \rangle\\) as in the DIIS linear system of Chapter 8. The
-optimal trial vector is then updated by applying the preconditioned residual:
+Introducing a Lagrange multiplier \\(\mu\\) for the normalisation constraint \\(\sum\_k c\_k = 1\\)
+produces a small \\((m+1) \times (m+1)\\) linear system built from the residual overlap matrix
+\\(B\_{jk} = \langle r\_i^{(j)} | r\_i^{(k)} \rangle\\) (the same DIIS subspace machinery that
+Chapter 10 will apply to the global charge-density residual in Pulay mixing). The optimal trial
+vector is then updated by applying the preconditioned residual:
 
 <div>
 \begin{equation}
@@ -391,202 +403,21 @@ band parallelism is dominant.
 
 ---
 
-## Convergence Diagnostics and Practical Workflow
-
-### Reading the SCF Output
-
-A converging SCF calculation produces a characteristic pattern in its output: the total energy
-decreases monotonically (or nearly so) toward a limiting value, the energy change per iteration
-\\(\Delta E^{(n)} = E^{(n)} - E^{(n-1)}\\) decreases geometrically, and the density residual norm
-\\(\\|R^{(n)}\\|\\) decreases in parallel. Understanding what each output quantity means is essential
-for diagnosing problems.
-
-**Total energy.** The KS total energy \\(E^{(n)}\\) at iteration \\(n\\) is *not* variational with
-respect to the density — it is only variational at self-consistency. During the SCF cycle,
-\\(E^{(n)}\\) can increase between iterations (especially in the first few steps when the density
-is far from self-consistent). A sustained increase after \\(\sim 10\\) iterations is a sign of
-divergence.
-
-**The Harris–Foulkes energy.** An alternative energy estimate that *is* variational at each
-step. It uses the input density \\(\rho\_{\rm in}^{(n)}\\) rather than the self-consistent density
-to evaluate the XC and Hartree contributions, giving an upper bound to the true ground-state
-energy. The difference between the Harris–Foulkes energy and the KS energy provides a measure
-of how far the current density is from self-consistency. When both agree to within the
-convergence threshold, the SCF cycle has converged.
-
-**Energy change \\(\Delta E\\).** This is the primary convergence indicator. A converged calculation
-shows \\(|\Delta E|\\) decreasing by roughly one order of magnitude every \\(2\\)–\\(5\\) iterations
-(for Pulay/Broyden mixing). If \\(|\Delta E|\\) stalls at a plateau or oscillates, see
-"Common Failure Modes and Remedies" below.
-
-**Density residual.** Some codes report the norm of the density residual
-\\(\\|R^{(n)}\\| = \\|\rho\_{\rm out}^{(n)} - \rho\_{\rm in}^{(n)}\\|\\) or the RMS change in the
-charge density. This should decrease in tandem with \\(|\Delta E|\\). A large residual at
-apparent energy convergence indicates that the energy is accidentally stationary (a saddle
-point of the SCF map) rather than truly self-consistent — increase the maximum number of
-SCF iterations and tighten the convergence threshold.
-
-### Convergence Thresholds
-
-The required SCF convergence depends on the property being computed:
-
-| Target property | Required energy convergence | Rationale |
-|---|---|---|
-| Qualitative band structure | \\(10^{-4}\\) eV | Band positions change by \\(\leq 10\\) meV |
-| Total energy differences | \\(10^{-6}\\) eV | Formation energies accurate to \\(\sim 1\\) meV/atom |
-| Magnetic moments | \\(10^{-6}\\) eV | Moment stable to \\(\leq 0.01\\,\mu\_B\\) |
-| Forces (geometry optimisation) | \\(10^{-7}\\) eV | Forces accurate to \\(\sim 1\\) meV/Å |
-| Stress tensor / elastic constants | \\(10^{-8}\\) eV | Stress accurate to \\(\sim 0.1\\) kbar |
-| Phonons (DFPT / finite differences) | \\(10^{-8}\\) eV | Force constants require tight force convergence |
-
-**Why tighter is not always better.** Beyond a certain point, tightening the SCF threshold does
-not improve results because other sources of error dominate: finite \\(\mathbf{k}\\)-mesh,
-finite \\(E\_{\rm cut}\\), pseudopotential transferability, and the XC functional approximation
-itself. A calculation converged to \\(10^{-10}\\) eV is not more accurate than one converged to
-\\(10^{-7}\\) eV if the \\(\mathbf{k}\\)-mesh introduces \\(1\\,\\)meV/atom errors. Additionally,
-round-off errors in double-precision arithmetic set a floor at \\(\sim 10^{-12}\\)–\\(10^{-14}\\) eV
-for typical system sizes.
-
-### Common Failure Modes and Remedies
-
-Here we catalogue the most important SCF and eigensolver failure modes with their underlying causes and systematic remedies.
-
-**Failure 1: Total energy oscillates without decreasing.**
-The density is sloshing between iterations — the mixing parameter \\(\alpha\\) is too large for
-the system's dielectric response (Chapter 8). Reduce \\(\alpha\\) by a factor of
-\\(2\\)–\\(5\\). If Kerker preconditioning is not active, enable it. If the system is a metal or
-small-gap semiconductor, ensure that an appropriate smearing is used (Chapter 9) — sharp
-occupations exacerbate charge sloshing by making the density response discontinuous.
-
-**Failure 2: SCF converges slowly then stalls.**
-The DIIS/Broyden subspace is contaminated by poor early iterates. Increase the number of
-initial non-DIIS steps (simple mixing with small \\(\alpha\\)) to bring the density into the basin
-of convergence before the subspace extrapolation takes over. Alternatively, increase the
-subspace size to allow more history, or clear the subspace and restart the mixing.
-
-**Failure 3: Spin channels oscillate out of phase.**
-In spin-polarised calculations, the up and down densities can trade magnitude between
-iterations, producing an apparent antiferromagnetic oscillation that prevents convergence.
-This usually indicates either an incorrect initial magnetic configuration or a genuine
-competition between ferromagnetic and antiferromagnetic solutions. Fix the initial moments
-to match the expected ground state. Use a more robust diagonaliser (Davidson rather than
-RMM-DIIS) for the first \\(\sim 10\\) SCF steps to prevent subspace collapse from coupling
-to the spin oscillation. If both FM and AFM solutions converge, compare their total energies
-to determine the ground state.
-
-**Failure 4: Eigenvalue solver converges to wrong states.**
-RMM-DIIS has lost track of one or more bands due to subspace collapse. The symptom is a sudden
-jump in the total energy mid-SCF, often accompanied by a change in the number of occupied
-states or the magnetic moment. Switch to Davidson for the problematic calculation. If the
-problem persists, increase the number of bands to provide a larger buffer between occupied and
-unoccupied states.
-
-**Failure 5: Energy converged but forces are noisy.**
-The SCF threshold is too loose for the force accuracy required. Forces depend on the density
-through the Hellmann–Feynman theorem, and small density errors that do not affect
-the total energy can produce significant force errors. Tighten the energy convergence by one
-to two orders of magnitude. Also check that the smearing is appropriate — tetrahedron method
-forces contain discontinuities for metals (Chapter 9).
-
-### Worked Example: SCF Convergence for bcc Fe
-
-To tie the chapter together, consider the SCF convergence of ferromagnetic bcc Fe — a
-system that exercises every piece of machinery developed in Chapters 8 and 9.
-
-**System:** bcc Fe, \\(a = 2.87\\,\\)Å, \\(1\\)-atom primitive cell, ferromagnetic with initial moment
-\\(5.0\\,\mu\_B\\), \\(E\_{\rm cut} = 500\\,\\)eV, \\(12 \times 12 \times 12\\) \\(\mathbf{k}\\)-mesh.
-
-**Smearing:** Methfessel–Paxton \\(N = 1\\) with \\(\sigma = 0.2\\,\\)eV — this is a metal, so the
-tetrahedron method would give discontinuous forces, and Gaussian smearing would require the
-\\(\sigma \to 0\\) extrapolation.
-
-**Mixing:** Pulay/DIIS with Kerker preconditioning (\\(\alpha = 0.05\\), \\(k\_0 \sim 1.5\\,\\)Å\\(^{-1}\\))
-— a small \\(\alpha\\) because Fe is a magnetic metal with both charge-sloshing and spin-oscillation
-risks.
-
-**Diagonalisation:** Davidson for the first \\(5\\) steps to establish a clean eigenspace, then
-RMM-DIIS for speed.
-
-**Expected convergence behaviour:**
-
-Iterations \\(1\\)–\\(5\\): The total energy drops rapidly (by \\(\sim 1\\) eV) as the initial atomic
-superposition density relaxes toward the crystalline density. The magnetic moment adjusts from
-\\(5.0\\,\mu\_B\\) toward the converged value of \\(\sim 2.2\\,\mu\_B\\). Davidson diagonalisation ensures
-the correct band ordering is established.
-
-Iterations \\(5\\)–\\(15\\): The energy change decreases geometrically, roughly one order of magnitude
-every \\(3\\)–\\(4\\) iterations. The DIIS extrapolation begins to accelerate convergence. The switch
-to RMM-DIIS at iteration \\(5\\) speeds up each step by \\(\sim 40\\%\\).
-
-Iterations \\(15\\)–\\(25\\): Final convergence to \\(10^{-7}\\) eV. The magnetic moment is stable at
-\\(2.17\\)–\\(2.22\\,\mu\_B\\) (depending on the functional). The entropy correction
-\\(TS \approx 0.3\\,\\)meV/atom confirms that \\(\sigma = 0.2\\,\\)eV is acceptable.
-
-**What would go wrong with poor settings:**
-With simple mixing (\\(\alpha = 0.3\\), no Kerker), the same system would oscillate for \\(\gt 200\\)
-iterations without converging — the charge-sloshing modes at small \\(\mathbf{G}\\) are barely
-damped. With Gaussian smearing (rather than MP \\(N=1\\)), the total energy
-would converge but the \\(\sigma \to 0\\) extrapolation would introduce an additional \\(\sim 5\\,\\)meV
-error. With RMM-DIIS from the start (no initial Davidson), there is a risk of subspace collapse
-in the \\(d\\)-bands, which are nearly five-fold degenerate and prone to mixing.
-
-<details>
-<summary><b>Code Notes: VASP and Quantum ESPRESSO Parameters — Full Reference</b></summary>
-
-**VASP — Complete SCF parameter list:**
-
-| Parameter | Controls | Recommended | Notes |
-|---|---|---|---|
-| `ALGO` | Diagonalisation | `Fast` (default) | `All` for difficult systems |
-| `NELM` | Max SCF iterations | \\(60\\)–\\(200\\) | Increase for slabs, defects |
-| `NELMIN` | Min SCF iterations | \\(2\\)–\\(6\\) | Prevents premature exit |
-| `NELMDL` | Initial non-DIIS steps | \\(-5\\) to \\(-12\\) | Negative = auto |
-| `EDIFF` | Energy convergence (eV) | \\(10^{-6}\\)–\\(10^{-8}\\) | Match to target property |
-| `ISMEAR` | Smearing method | \\(1\\) (MP) for metals; \\(-5\\) (tet) for DOS | See Chapter 9 |
-| `SIGMA` | Smearing width (eV) | \\(0.1\\)–\\(0.2\\) | Check `EENTRO` \\(\lt 1\\) meV/atom |
-| `AMIX` | Charge mixing \\(\alpha\\) | \\(0.02\\)–\\(0.4\\) | Small for metals |
-| `BMIX` | Kerker \\(k\_0\\) | \\(0.5\\)–\\(3.0\\) | Enable for metals |
-| `AMIX_MAG` | Spin mixing \\(\alpha\\) | \\(2\\)–\\(4 \times\\) `AMIX` | Often larger than charge mixing |
-| `BMIX_MAG` | Kerker for spin | \\(\sim\\) `BMIX` | |
-| `MAXMIX` | Mixing history size | \\(20\\)–\\(60\\) | Increase for slabs |
-| `IMIX` | Mixing scheme | \\(4\\) (Broyden, default) | |
-| `NBANDS` | Number of bands | Auto + padding | Increase for metals |
-| `LREAL` | Real-space projection | `.FALSE.` for small cells | `.TRUE.` for \\(\gt 20\\) atoms |
-
-**Quantum ESPRESSO — Complete SCF parameter list:**
-
-| Parameter | Controls | Recommended | Notes |
-|---|---|---|---|
-| `diagonalization` | Algorithm | `'david'` (default) | `'cg'` for robustness |
-| `electron_maxstep` | Max SCF iterations | \\(100\\)–\\(200\\) | |
-| `conv_thr` | Energy convergence (Ry) | \\(10^{-8}\\)–\\(10^{-10}\\) | Note: Ry units |
-| `occupations` | Occupation scheme | `'smearing'` or `'tetrahedra_opt'` | |
-| `smearing` | Smearing function | `'methfessel-paxton'` for metals | |
-| `degauss` | Smearing width (Ry) | \\(0.005\\)–\\(0.02\\) | \\(1\\,\\)Ry \\(= 13.6\\,\\)eV |
-| `mixing_beta` | Mixing parameter | \\(0.1\\)–\\(0.7\\) | Small for metals |
-| `mixing_mode` | Preconditioning | `'local-TF'` for metals | |
-| `mixing_ndim` | Mixing history | \\(4\\)–\\(12\\) | |
-| `nbnd` | Number of bands | Auto | Increase for metals |
-| `diago_david_ndim` | Davidson subspace | \\(2\\)–\\(8\\) | |
-
-</details>
-
----
-
 ## Outlook
 
-Chapters 8–10 together provide the complete numerical machinery for solving the Kohn–Sham
-equations self-consistently: density mixing drives the outer SCF loop to convergence
-(Chapter 8), smearing regularises the BZ integrals (Chapter 9), and iterative diagonalisation
-makes the eigenvalue problem tractable (this chapter). With a converged, self-consistent
-ground-state density in hand, the next step is to extract physical observables.
+Iterative subspace diagonalisation (`Davidson`, `RMM-DIIS`, and `CG`) together with multi-level MPI
+parallelisation across \\(\mathbf{k}\\)-points, bands, and plane waves form the **innermost engine**
+of plane-wave Kohn–Sham DFT: for any trial effective potential \\(V\_{\rm eff}(\mathbf{r})\\), they
+deliver the lowest \\(N\_{\rm bands}\\) eigenpairs
+\\(\\{(\epsilon\_{i\mathbf{k}}, |\phi\_{i\mathbf{k}}\rangle)\\}\\) at each \\(\mathbf{k}\\)-point
+without ever constructing or storing the full \\(N\_{\rm PW} \times N\_{\rm PW}\\) Hamiltonian.
 
-The most immediate observable beyond the total energy is the **force** on each atom — the
-negative gradient of the total energy with respect to atomic positions. The Hellmann–Feynman
-theorem provides an exact expression for this force, but its practical evaluation requires
-careful treatment of the Pulay corrections that arise when the basis set depends on atomic
-positions. Forces, in turn, enable **geometry optimisation** (finding the equilibrium structure)
-and **ab initio molecular dynamics** (following the time evolution of the nuclei on the DFT
-potential energy surface). These topics form the natural next step beyond ground-state
-total-energy calculations; the next chapter concludes the notes with a collection of M.Sc.-level
-examination problems and structured answer hints covering Parts I and II.
+Turning those eigenpairs into a new electron density
+\\(\rho\_{\rm out}(\mathbf{r}) = \sum\_{i\mathbf{k}} w\_{\mathbf{k}} f\_{i\mathbf{k}} |\phi\_{i\mathbf{k}}(\mathbf{r})|^2\\)
+and total energy, however, requires integrating over the first Brillouin zone and assigning partial
+occupancies \\(f\_{i\mathbf{k}}\\) across metallic Fermi surfaces without introducing discontinuous
+jumps—the subject of **Chapter 9**. Once one complete evaluation of
+\\(\rho\_{\rm out} = F[\rho\_{\rm in}]\\) is defined by combining Chapters 8 and 9, **Chapter 10**
+tackles the outer electronic SCF loop itself: how to mix input and output densities using Kerker
+preconditioning, Pulay/DIIS, and Broyden schemes to suppress charge sloshing and achieve smooth
+self-consistency.
