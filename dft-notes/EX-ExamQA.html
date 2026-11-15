@@ -83,10 +83,10 @@
             const path_to_root = "";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "searchindex-72308093.js";
+            window.path_to_searchindex_js = "searchindex-e9347d85.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="toc-3c9b9cd1.js"></script>
+        <script src="toc-7051d784.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -713,44 +713,30 @@ limitation of DFT+U.</p>
 <hr>
 <h2 id="part-ii-numerical-implementation"><a class="header" href="#part-ii-numerical-implementation">Part II: Numerical Implementation</a></h2>
 <hr>
-<h3 id="chapter-8--scf-convergence-and-density-mixing"><a class="header" href="#chapter-8--scf-convergence-and-density-mixing">Chapter 8 — SCF Convergence and Density Mixing</a></h3>
-<p><strong>Q8.1 [S]</strong> What is charge sloshing in a metallic DFT calculation? Identify the physical origin
-of the instability and state which mixing scheme was designed to suppress it.</p>
+<h3 id="chapter-8--eigenvalue-solvers"><a class="header" href="#chapter-8--eigenvalue-solvers">Chapter 8 — Eigenvalue Solvers</a></h3>
+<p><strong>Q8.1 [S]</strong> Why is the full diagonalisation of the KS Hamiltonian impractical for large
+systems? What is the computational scaling of full diagonalisation, and how do iterative methods
+improve on this?</p>
 <div class="remark">
-<p><strong>Answer Hint.</strong> In metals, a small perturbation of the density at long wavelength (small
-\(\mathbf{G}\)) produces a large response (diverging dielectric screening as \(G \to 0\)). Simple
-linear mixing \(\rho^{\rm in}_{n+1} = \rho^{\rm in}_n + \alpha(\rho^{\rm out}_n - \rho^{\rm in}_n)\)
-amplifies these long-wavelength modes: the correction at small \(G\) is too large, causing the
-density to oscillate between iterations. <strong>Kerker preconditioning</strong> suppresses this by
-multiplying the residual by \(G^2/(G^2 + k_0^2)\), damping corrections at \(G \lt k_0\), where
-\(k_0\) is the Thomas–Fermi screening wavevector.</p>
+<p><strong>Answer Hint.</strong> The KS Hamiltonian has dimension \(N_{\rm PW} \times N_{\rm PW}\), where
+\(N_{\rm PW}\) grows with the system size and \(E_{\rm cut}\). Full diagonalisation (e.g., LAPACK)
+scales as \(\mathcal{O}(N_{\rm PW}^3)\), which becomes prohibitive for \(N_{\rm PW} \sim 10^5\)–\(10^6\).
+Iterative methods (Davidson, RMM-DIIS) exploit the fact that only the \(N_{\rm occ} \ll N_{\rm PW}\)
+lowest eigenpairs are needed. They build a small Krylov/Rayleigh–Ritz subspace, diagonalise
+within it, and refine — achieving \(\mathcal{O}(N_{\rm PW} \times N_{\rm occ})\) per iteration.</p>
 </div>
 
-<p><strong>Q8.2 [M]</strong> Describe the Pulay (DIIS) mixing scheme. What quantity is minimised, and how does
-it use information from previous iterations?</p>
+<p><strong>Q8.2 [M]</strong> Describe the Davidson diagonalisation algorithm. What is the subspace expansion
+step, and how does it avoid recomputing the full Hamiltonian?</p>
 <div class="remark">
-<p><strong>Answer Hint.</strong> DIIS (Direct Inversion in the Iterative Subspace) stores the last \(m\) input
-densities \(\{\rho_n^{\rm in}\}\) and residuals \(\{R_n = \rho_n^{\rm out} - \rho_n^{\rm in}\}\).
-The next input is a linear combination</p>
-<p>\[
-\rho^{\rm in}_{n+1} = \sum_{i=1}^m \alpha_i \rho_i^{\rm in}
-\]</p>
-<p>where the coefficients \(\{\alpha_i\}\) minimise \(\|\sum_i \alpha_i R_i\|^2\) subject to
-\(\sum_i \alpha_i = 1\). This is solved by a small linear system. The method is quasi-Newton: it
-builds a model of the Jacobian of the residual from the stored history, achieving superlinear
-convergence near the fixed point, compared to linear convergence for simple mixing.</p>
-</div>
-
-<p><strong>Q8.3 [S]</strong> A VASP calculation for a metallic slab fails to converge after 200 iterations with
-<code>AMIX = 0.4</code>. Suggest three modifications to the INCAR and explain the physical reasoning for
-each.</p>
-<div class="remark">
-<p><strong>Answer Hint.</strong> (1) <strong>Reduce <code>AMIX</code></strong> (e.g. to 0.02–0.1): smaller mixing step damps the
-sloshing, at the cost of slower convergence per iteration. (2) <strong>Set <code>BMIX = 1.0</code>–<code>3.0</code></strong>:
-enables Kerker preconditioning, directly targeting the long-wavelength instability in the metal.
-(3) <strong>Increase <code>MAXMIX</code></strong> (e.g. to 40–60): gives Broyden/DIIS a larger history to build a
-better Jacobian model, which is important for slabs that have many degrees of freedom in the
-charge distribution. Optionally: switch to <code>ALGO = All</code> to use subspace rotation.</p>
+<p><strong>Answer Hint.</strong> Starting from a trial subspace \(\{|\psi_i\rangle\}\): (1) Compute the Rayleigh
+quotient \(\epsilon_i = \langle\psi_i|\hat{H}|\psi_i\rangle/\langle\psi_i|\psi_i\rangle\) — only
+matrix-vector products \(\hat{H}|\psi_i\rangle\) are needed, not matrix elements. In a plane-wave
+code this is done via FFT in \(\mathcal{O}(N_{\rm PW}\log N_{\rm PW})\). (2) Compute residuals
+\(|r_i\rangle = (\hat{H} - \epsilon_i)|\psi_i\rangle\). (3) Apply a <strong>preconditioner</strong>
+\(\hat{D}^{-1}\) (diagonal in \(\mathbf{G}\)-space: \(D_{\mathbf{G}} = \lvert\mathbf{k}+\mathbf{G}\rvert^2/2 + \epsilon_0\)) to obtain search directions that are steepest-descent steps in kinetic-energy-weighted
+distance. (4) Orthogonalise and add to the subspace; diagonalise the small projected Hamiltonian;
+iterate. Convergence is quadratic near the solution.</p>
 </div>
 
 <hr>
@@ -794,35 +780,181 @@ surface topology</strong>. Do <em>not</em> use for structural relaxations (force
 </div>
 
 <hr>
-<h3 id="chapter-10--eigenvalue-solvers"><a class="header" href="#chapter-10--eigenvalue-solvers">Chapter 10 — Eigenvalue Solvers</a></h3>
-<p><strong>Q10.1 [S]</strong> Why is the full diagonalisation of the KS Hamiltonian impractical for large
-systems? What is the computational scaling of full diagonalisation, and how do iterative methods
-improve on this?</p>
+<h3 id="chapter-10--scf-convergence-and-density-mixing"><a class="header" href="#chapter-10--scf-convergence-and-density-mixing">Chapter 10 — SCF Convergence and Density Mixing</a></h3>
+<p><strong>Q10.1 [S]</strong> What is charge sloshing in a metallic DFT calculation? Identify the physical origin
+of the instability and state which mixing scheme was designed to suppress it.</p>
 <div class="remark">
-<p><strong>Answer Hint.</strong> The KS Hamiltonian has dimension \(N_{\rm PW} \times N_{\rm PW}\), where
-\(N_{\rm PW}\) grows with the system size and \(E_{\rm cut}\). Full diagonalisation (e.g., LAPACK)
-scales as \(\mathcal{O}(N_{\rm PW}^3)\), which becomes prohibitive for \(N_{\rm PW} \sim 10^5\)–\(10^6\).
-Iterative methods (Davidson, RMM-DIIS) exploit the fact that only the \(N_{\rm occ} \ll N_{\rm PW}\)
-lowest eigenpairs are needed. They build a small Krylov/Rayleigh–Ritz subspace, diagonalise
-within it, and refine — achieving \(\mathcal{O}(N_{\rm PW} \times N_{\rm occ})\) per iteration.</p>
+<p><strong>Answer Hint.</strong> In metals, a small perturbation of the density at long wavelength (small
+\(\mathbf{G}\)) produces a large response (diverging dielectric screening as \(G \to 0\)). Simple
+linear mixing \(\rho^{\rm in}_{n+1} = \rho^{\rm in}_n + \alpha(\rho^{\rm out}_n - \rho^{\rm in}_n)\)
+amplifies these long-wavelength modes: the correction at small \(G\) is too large, causing the
+density to oscillate between iterations. <strong>Kerker preconditioning</strong> suppresses this by
+multiplying the residual by \(G^2/(G^2 + k_0^2)\), damping corrections at \(G \lt k_0\), where
+\(k_0\) is the Thomas–Fermi screening wavevector.</p>
 </div>
 
-<p><strong>Q10.2 [M]</strong> Describe the Davidson diagonalisation algorithm. What is the subspace expansion
-step, and how does it avoid recomputing the full Hamiltonian?</p>
+<p><strong>Q10.2 [M]</strong> Describe the Pulay (DIIS) mixing scheme. What quantity is minimised, and how does
+it use information from previous iterations?</p>
 <div class="remark">
-<p><strong>Answer Hint.</strong> Starting from a trial subspace \(\{|\psi_i\rangle\}\): (1) Compute the Rayleigh
-quotient \(\epsilon_i = \langle\psi_i|\hat{H}|\psi_i\rangle/\langle\psi_i|\psi_i\rangle\) — only
-matrix-vector products \(\hat{H}|\psi_i\rangle\) are needed, not matrix elements. In a plane-wave
-code this is done via FFT in \(\mathcal{O}(N_{\rm PW}\log N_{\rm PW})\). (2) Compute residuals
-\(|r_i\rangle = (\hat{H} - \epsilon_i)|\psi_i\rangle\). (3) Apply a <strong>preconditioner</strong>
-\(\hat{D}^{-1}\) (diagonal in \(\mathbf{G}\)-space: \(D_{\mathbf{G}} = |\mathbf{k}+\mathbf{G}|^2/2 + \epsilon_0\)) to obtain search directions that are steepest-descent steps in kinetic-energy-weighted
-distance. (4) Orthogonalise and add to the subspace; diagonalise the small projected Hamiltonian;
-iterate. Convergence is quadratic near the solution.</p>
+<p><strong>Answer Hint.</strong> DIIS (Direct Inversion in the Iterative Subspace) stores the last \(m\) input
+densities \(\{\rho_n^{\rm in}\}\) and residuals \(\{R_n = \rho_n^{\rm out} - \rho_n^{\rm in}\}\).
+The next input is a linear combination</p>
+<p>\[
+\rho^{\rm in}_{n+1} = \sum_{i=1}^m \alpha_i \rho_i^{\rm in}
+\]</p>
+<p>where the coefficients \(\{\alpha_i\}\) minimise \(\|\sum_i \alpha_i R_i\|^2\) subject to
+\(\sum_i \alpha_i = 1\). This is solved by a small linear system. The method is quasi-Newton: it
+builds a model of the Jacobian of the residual from the stored history, achieving superlinear
+convergence near the fixed point, compared to linear convergence for simple mixing.</p>
+</div>
+
+<p><strong>Q10.3 [S]</strong> A VASP calculation for a metallic slab fails to converge after 200 iterations with
+<code>AMIX = 0.4</code>. Suggest three modifications to the INCAR and explain the physical reasoning for
+each.</p>
+<div class="remark">
+<p><strong>Answer Hint.</strong> (1) <strong>Reduce <code>AMIX</code></strong> (e.g. to 0.02–0.1): smaller mixing step damps the
+sloshing, at the cost of slower convergence per iteration. (2) <strong>Set <code>BMIX = 1.0</code>–<code>3.0</code></strong>:
+enables Kerker preconditioning, directly targeting the long-wavelength instability in the metal.
+(3) <strong>Increase <code>MAXMIX</code></strong> (e.g. to 40–60): gives Broyden/DIIS a larger history to build a
+better Jacobian model, which is important for slabs that have many degrees of freedom in the
+charge distribution. Optionally: switch to <code>ALGO = All</code> to use subspace rotation.</p>
+</div>
+
+<hr>
+<h3 id="chapter-11--structural-optimisation-and-ab-initio-molecular-dynamics"><a class="header" href="#chapter-11--structural-optimisation-and-ab-initio-molecular-dynamics">Chapter 11 — Structural Optimisation and Ab Initio Molecular Dynamics</a></h3>
+<p><strong>Q11.1 [S]</strong> State the Hellmann–Feynman theorem. Define <strong>Pulay forces</strong> and explain why a pure
+plane-wave basis has zero ionic Pulay force at fixed cell geometry, whereas plane-wave stress
+calculations suffer from <strong>Pulay stress</strong>.</p>
+<div class="remark">
+<p><strong>Answer Hint.</strong> The Hellmann–Feynman theorem states that for any exact eigenstate or variational
+stationary state \(|\Psi(\lambda)\rangle\) of \(\hat{H}(\lambda)\),
+\(\mathrm{d}E/\mathrm{d}\lambda = \langle\Psi|\partial\hat{H}/\partial\lambda|\Psi\rangle\)
+(terms from \(\partial\Psi/\partial\lambda\) cancel because
+\(E\,\partial\langle\Psi|\Psi\rangle/\partial\lambda = 0\)). In a finite atom-centred basis
+\(\{\chi_\mu(\mathbf{r};\mathbf{R}_I)\}\), the basis functions move with the ions and are
+not varied with respect to \(\mathbf{R}_I\), generating the incomplete-basis-set <strong>Pulay force</strong>
+proportional to \(\langle\partial\chi_\mu/\partial\mathbf{R}_I|\hat{h}_{\rm KS}-\epsilon_i|\phi_i\rangle\).
+Plane waves \(\Omega^{-1/2}e^{i(\mathbf{k}+\mathbf{G})\cdot\mathbf{r}}\) depend only on the
+lattice matrix \(\mathbf{h}\), not on \(\mathbf{R}_I\), so their ionic Pulay force vanishes.
+When the cell volume \(\Omega\) varies at fixed basis set \(N_{\rm PW}\), however, the
+effective cutoff scales as \(E_{\rm cut}^{\rm eff}\propto \Omega^{-2/3}\), creating a spurious
+negative <strong>Pulay stress</strong> \(P_{\rm Pulay} \approx \frac{2}{3\Omega}(\partial E/\partial\ln E_{\rm cut}) \lt 0\)
+that underestimates equilibrium volumes unless \(E_{\rm cut}\) is raised well above nominal
+completeness or a fixed-volume equation of state is fitted (in VASP: raise <code>ENCUT</code> to
+\(\gtrsim 1.3\times\) <code>ENMAX</code> or fit <code>ISIF = 2</code> points).</p>
+</div>
+
+<p><strong>Q11.2 [M]</strong> Decompose the coupled ionic–cell relaxation manifold into internal, volumetric, and
+deviatoric degrees of freedom. Why must variable-cell (volume + shape) relaxation never be applied
+to surface slabs containing a vacuum layer?</p>
+<div class="remark">
+<p><strong>Answer Hint.</strong> The full configuration space comprises \(3N\) internal atomic coordinates (less
+3 rigid translations) and \(6\) symmetric strain components: <strong>1 isotropic volume trace</strong>
+(\(\mathrm{Tr}\,\boldsymbol{\varepsilon} = \Delta\Omega/\Omega\), conjugate to pressure \(P\))
+and <strong>5 volume-preserving deviatoric shear modes</strong> (conjugate to traceless stress). Three standard
+constraint regimes follow: (i) <strong>ions only at fixed cell</strong> (\(3N\) DOFs; VASP <code>ISIF = 2</code>, QE
+<code>'relax'</code>), (ii) <strong>unconstrained variable-cell</strong> (\(3N+6\) DOFs; VASP <code>ISIF = 3</code>, QE
+<code>'vc-relax'</code>), and (iii) <strong>constant-volume ion + shape relaxation</strong> (\(3N+5\) DOFs; VASP
+<code>ISIF = 4</code>, QE <code>cell_dofree = 'shape'</code>). In a slab model with vacuum, residual Pulay or
+dispersion stress across the vacuum gap exerts an unphysical normal stress perpendicular to the
+surface, collapsing or stretching the vacuum layer under full variable-cell relaxation; slabs, 2D
+sheets, and isolated molecules must therefore keep the vacuum cell vector fixed (<code>ISIF = 2</code> or
+<code>cell_dofree = '2Dxy'</code>).</p>
+</div>
+
+<p><strong>Q11.3 [M]</strong> Contrast nonlinear <strong>conjugate gradient</strong> and <strong>quasi-Newton (BFGS / RMM-DIIS)</strong>
+algorithms for ionic relaxation. Why must the electronic SCF energy tolerance be tightened by 1–2
+orders of magnitude when relaxing structures compared to computing static total energies?</p>
+<div class="remark">
+<p><strong>Answer Hint.</strong> (1) Nonlinear conjugate gradient constructs \(\mathbf{H}\)-conjugate search
+directions paired with a 1D line search (costing \(\ge 2\) SCF evaluations per step); it
+guarantees downhill progress far from equilibrium where forces are large, but its line search can
+stall near tight convergence (<code>ZBRENT</code> failure in VASP) when forces contain SCF noise.
+Quasi-Newton methods (BFGS / RMM-DIIS) build an iterative inverse-Hessian or DIIS force-residual
+model using only <strong>1 SCF evaluation per geometry step</strong>, achieving rapid superlinear convergence
+near the harmonic minimum, though they can overshoot if started far from equilibrium. (In VASP:
+<code>IBRION = 2</code> vs. <code>IBRION = 1</code>; in QE: <code>'bfgs'</code>.) (2) By the variational principle, the total energy
+error is <strong>second-order</strong> in the SCF density residual (\(\delta E = \mathcal{O}(|\delta\rho|^2)\)),
+whereas the Hellmann–Feynman force error is <strong>first-order</strong>
+(\(\delta\mathbf{F}_I = -\int \delta\rho\,\nabla_{\mathbf{R}_I}V_{\rm ext}\,d\mathbf{r} = \mathcal{O}(|\delta\rho|)\)),
+requiring tight SCF convergence (e.g. <code>EDIFF</code> \(\le 10^{-6}\text{–}10^{-7}\) eV) for smooth forces.</p>
+</div>
+
+<p><strong>Q11.4 [M]</strong> Distinguish Born–Oppenheimer MD (BOMD) from Car–Parrinello MD (CPMD). Why is the
+<strong>Velocity Verlet</strong> integrator preferred over higher-order Runge–Kutta schemes in AIMD, and how
+is the maximum safe timestep \(\Delta t\) chosen?</p>
+<div class="remark">
+<p><strong>Answer Hint.</strong> In BOMD, the Kohn–Sham ground state is converged self-consistently at every
+nuclear timestep and ions move on the exact Born–Oppenheimer surface. In CPMD, orbitals evolve
+dynamically alongside ions via a fictitious electron mass \(\mu\); adiabatic decoupling requires
+\(\omega_e^{\min}\propto\sqrt{E_g/\mu} \gg \omega_{\rm ion}^{\max}\), which breaks down in
+metals (\(E_g=0\)). Velocity Verlet is <strong>time-reversible</strong> and <strong>symplectic</strong> (phase-space
+Jacobian \(\det J = 1\)), preserving a nearby shadow Hamiltonian with zero secular energy drift
+over long trajectories—unlike non-symplectic Runge–Kutta schemes. The timestep \(\Delta t\)
+(VASP <code>POTIM</code>, QE <code>dt</code>) must resolve the fastest vibrational period \(T_{\min} = 2\pi/\omega_{\max}\)
+via \(\Delta t \lesssim T_{\min}/20\) (typically \(0.5\) fs for O–H/H\(_2\),
+\(1.0\text{–}1.5\) fs for oxides, and \(2.0\) fs for heavy metals).</p>
+</div>
+
+<p><strong>Q11.5 [L]</strong> Outline a complete, code-independent plane-wave DFT protocol to compute (a) the
+high-accuracy \(0\text{ K}\) equilibrium volume and bulk modulus \(B_0\), and (b) the
+\(1000\text{ K}\) Li\(^+\) diffusivity of a crystalline solid-state electrolyte (e.g.
+\(\text{Li}_3\text{PS}_4\)), noting key VASP/QE control settings and diagnostic checks.</p>
+<div class="remark">
+<p><strong>Answer Hint.</strong></p>
+<ol>
+<li><strong>Static relaxation &amp; EOS (eliminating Pulay stress):</strong> Raise \(E_{\rm cut}\) well above
+pseudopotential hardness (\(\ge 1.3\times\) nominal max) with fine augmentation/FFT grids and
+tight SCF tolerance (\(\Delta E_{\rm SCF} \le 10^{-7}\) eV). Perform a two-step variable-cell
+relaxation (CG coarse relaxation followed by quasi-Newton polish after restarting so the plane-wave
+sphere and FFT grid are rebuilt at the converged cell), or fit 7–9 constant-volume runs
+(\(\pm 5\text{–}8\%\) around \(V_0\)) to the 3rd-order Birch–Murnaghan EOS for \(B_0\).
+<em>(VASP: two-step <code>ISIF = 3</code> or <code>ISIF = 4</code>/<code>2</code> EOS with <code>EDIFF = 1E-7</code>, <code>EDIFFG = -0.005</code>; QE: <code>'vc-relax'</code> / <code>'relax'</code>.)</em></li>
+<li><strong>AIMD supercell &amp; timestep:</strong> Build a supercell (lattice vectors \(\gtrsim 10\) Å) for
+\(\Gamma\)-only sampling at fixed cell (<code>ISIF = 0</code> / <code>'md'</code>), disable spatial symmetry, enable
+multi-step wavefunction/density extrapolation, and set \(\Delta t = 1.0\text{–}1.5\) fs
+(<code>POTIM</code>) to resolve P–S vibrations with tight SCF forces (<code>EDIFF = 1E-6</code>, <code>NELMIN = 4</code>).</li>
+<li><strong>\(NVE\) validation &amp; \(NVT\) equilibration:</strong> Run a 1 ps \(NVE\) benchmark confirming
+total-energy drift \(\lt 1\) meV/atom/ps. Equilibrate at \(1000\) K under a canonical
+thermostat (Nosé–Hoover, VASP <code>MDALGO = 2</code>, <code>SMASS = 0</code>; or QE <code>ion_temperature = 'svr'</code>) for
+2–5 ps until \(T\) and \(\mathcal{F}\) plateau and the conserved extended Hamiltonian shows zero
+secular drift.</li>
+<li><strong>Production &amp; MSD analysis:</strong> Discard equilibration frames, run 20–50 ps, unwrap periodic
+trajectories, compute \(\mathrm{MSD}_{\rm Li}(t)\) averaged over time origins \(t_0\),
+confirm diffusive linearity (\(\mathrm{MSD} \gg\) hop distance\(^2\), log–log slope
+\(\approx 1\)), and extract \(D_{\rm Li} = \lim_{t\to\infty}\mathrm{MSD}_{\rm Li}(t)/(6t)\).</li>
+</ol>
+</div>
+
+<p><strong>Q11.6 [M]</strong> Explain why automated geometry optimisation and AIMD are routine in plane-wave
+pseudopotential/PAW codes, whereas they are severely constrained or absent in all-electron
+<strong>FP-LAPW</strong>, <strong>LMTO-ASA</strong>, and multiple-scattering Green’s function (<strong>KKR / KKR-CPA</strong>) codes.</p>
+<div class="remark">
+<p><strong>Answer Hint.</strong></p>
+<ul>
+<li><strong>Plane-wave PAW:</strong> Basis functions \(\Omega^{-1/2}e^{i(\mathbf{k}+\mathbf{G})\cdot\mathbf{r}}\)
+do not depend on atomic coordinates \(\mathbf{R}_I\) (zero ionic Pulay force), space is not
+partitioned into moving domains, and atoms can displace arbitrarily without geometric collisions.</li>
+<li><strong>FP-LAPW / APW+lo:</strong> Space is partitioned into non-overlapping muffin-tin (MT) spheres
+\(\Omega_{\rm MT}^I\) and interstitial \(\Omega_{\rm int}\). Displacing an atom shifts the
+MT basis and boundary matching conditions—generating huge Pulay forces and moving-boundary
+surface integrals \(\oint_{\partial\Omega_{\rm MT}^I}[\epsilon_{\rm int}-\epsilon_{\rm MT}]\,\hat{n}\,dS\)—while
+fixed radii forbid sphere overlap (\(\lvert\mathbf{R}_I-\mathbf{R}_J\rvert \gt R_{\rm MT}^I+R_{\rm MT}^J\)),
+preventing large distortions or AIMD, and making analytical stress tensors very complex.</li>
+<li><strong>LMTO-ASA:</strong> Replaces the interstitial by overlapping spheres with spherically averaged
+potentials, missing non-spherical multipole and interstitial shear terms required for bond-bending
+or cell-shape derivatives.</li>
+<li><strong>KKR / KKR-CPA:</strong> Avoids eigenstates via complex-contour Green’s functions. Finite angular-momentum
+truncation (\(\ell_{\max}\sim 3\text{–}4\)) breaks variational stationarity and leaves
+incomplete-basis structure-constant derivatives, FP-KKR requires differentiating shifting Voronoi
+polyhedron shape functions \(\Theta_I(\mathbf{r})\), and single-site CPA averages disorder on an
+ideal periodic lattice without local species-dependent atomic displacements.</li>
+</ul>
 </div>
 
 <hr>
 <h2 id="cross-cutting-conceptual-questions"><a class="header" href="#cross-cutting-conceptual-questions">Cross-Cutting Conceptual Questions</a></h2>
-<p><strong>Q11.1 [M]</strong> A colleague applies DFT+GGA to a cobalt oxide (CoO) surface and reports a magnetic
+<p><strong>Q12.1 [M]</strong> A colleague applies DFT+GGA to a cobalt oxide (CoO) surface and reports a magnetic
 moment of 0 \(\mu_B\) per Co, which contradicts experiment. Walk through the chain of possible
 failures, from theory choice to numerical implementation.</p>
 <div class="remark">
@@ -836,7 +968,7 @@ oxide surface may smear out the magnetic splitting. (5) <em>Surface vs. bulk:</e
 quenched moments; compare to bulk CoO first.</p>
 </div>
 
-<p><strong>Q11.2 [S]</strong> Rank the following functionals in increasing computational cost for a periodic
+<p><strong>Q12.2 [S]</strong> Rank the following functionals in increasing computational cost for a periodic
 solid with 100 atoms: LDA, PBE, SCAN, PBE0, HSE06. Briefly justify each step.</p>
 <div class="remark">
 <p><strong>Answer Hint.</strong></p>
@@ -853,7 +985,7 @@ impractical for 100-atom periodic cells.</li>
 </ul>
 </div>
 
-<p><strong>Q11.3 [L]</strong> A student is computing the vacancy formation energy in rutile TiO\(_2\) using VASP.
+<p><strong>Q12.3 [L]</strong> A student is computing the vacancy formation energy in rutile TiO\(_2\) using VASP.
 List <em>all</em> the numerical convergence parameters that must be checked, the order in which to
 check them, and a physically motivated reason for each.</p>
 <div class="remark">
@@ -901,6 +1033,10 @@ derive each from first principles.</p>
 <tr><td>Plane-wave cutoff condition</td><td>\(\frac{1}{2}\lvert\mathbf{k}+\mathbf{G}\rvert^2 \leq E_{\rm cut}\)</td></tr>
 <tr><td>Kerker preconditioner</td><td>\(G^2/(G^2 + k_0^2)\)</td></tr>
 <tr><td>PAW density</td><td>\(\rho = \tilde{\rho} + \rho^1 - \tilde{\rho}^1\)</td></tr>
+<tr><td>Hellmann–Feynman force</td><td>\(\mathbf{F}_I = -\int \rho(\mathbf{r})\,\nabla_{\mathbf{R}_I}V_{\rm ext}\,d\mathbf{r} - \nabla_{\mathbf{R}_I}E_{\rm II}\)</td></tr>
+<tr><td>Cauchy stress tensor</td><td>\(\sigma_{\alpha\beta} = -\frac{1}{\Omega}\left(\frac{\partial E}{\partial \varepsilon_{\alpha\beta}}\right)_{\mathbf{s}_I}\)</td></tr>
+<tr><td>Velocity Verlet position step</td><td>\(\mathbf{R}_I(t+\Delta t) = \mathbf{R}_I(t) + \mathbf{v}_I(t)\Delta t + \frac{\mathbf{F}_I(t)}{2M_I}\Delta t^2\)</td></tr>
+<tr><td>Nosé–Hoover conserved energy</td><td>\(H_{\rm NH} = K_{\rm ion} + \mathcal{F}_{\rm KS} + \frac{1}{2}Q\zeta^2 + g k_B T \ln s\)</td></tr>
 </tbody>
 </table>
 </div>
@@ -909,7 +1045,7 @@ derive each from first principles.</p>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="10-Eigen.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="11-OptAIMD.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
                             </a>
 
@@ -920,7 +1056,7 @@ derive each from first principles.</p>
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="10-Eigen.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="11-OptAIMD.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
                     </a>
 

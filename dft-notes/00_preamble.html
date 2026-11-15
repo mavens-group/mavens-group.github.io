@@ -83,10 +83,10 @@
             const path_to_root = "";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "searchindex-72308093.js";
+            window.path_to_searchindex_js = "searchindex-e9347d85.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="toc-3c9b9cd1.js"></script>
+        <script src="toc-7051d784.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -229,7 +229,7 @@
 <h3 id="part-i-theoretical-foundations-of-dft"><a class="header" href="#part-i-theoretical-foundations-of-dft">Part I: Theoretical Foundations of DFT</a></h3>
 <p>Starting from the <strong>quantum many-body problem</strong>, we detail the exact mathematical proofs behind the <strong>Hohenberg–Kohn theorems</strong> and the derivation of the effective single-particle <strong>Kohn–Sham equations</strong>. With the exact theory established, you will systematically unpack the approximations required for real-world materials. This includes navigating the hierarchy of <strong>exchange-correlation functionals</strong> (from LDA to hybrids), constructing exact <strong>basis sets and pseudopotentials</strong> (such as PAW methods), and treating magnetic ordering via <strong>Spin-Polarised DFT</strong>. Finally, we address the self-interaction error in strongly correlated \(d\) and \(f\) electron systems using the <strong>DFT+U (Hubbard)</strong> method.</p>
 <h3 id="part-ii-numerical-implementations--practical-dft"><a class="header" href="#part-ii-numerical-implementations--practical-dft">Part II: Numerical Implementations &amp; Practical DFT</a></h3>
-<p>Theoretical knowledge is only half the battle. The second half of the course opens the black box of industry-standard DFT codes like <strong>VASP</strong> and <strong>Quantum ESPRESSO</strong>. You will learn how to translate continuous mathematics into robust iterative algorithms by mastering <strong>Self-Consistent Field (SCF) Convergence</strong>—including how to diagnose charge sloshing in metals and apply advanced density mixing schemes (Pulay/DIIS, Broyden). We also cover rigorous <strong>Brillouin Zone Integration</strong>, detailing \(k\)-point sampling and the specific smearing methods (Methfessel-Paxton, tetrahedron) required to stabilise metallic Fermi surfaces, and conclude with <strong>iterative eigenvalue solvers</strong> (Davidson, RMM-DIIS, and conjugate gradient) used to diagonalise the Kohn–Sham Hamiltonian at large plane-wave cutoffs.</p>
+<p>Theoretical knowledge is only half the battle. The second half of the course opens the black box of industry-standard DFT codes like <strong>VASP</strong> and <strong>Quantum ESPRESSO</strong>, ordered from the innermost computational loop outward. You will begin with <strong>iterative eigenvalue solvers</strong> (Davidson, RMM-DIIS, and conjugate gradient) used to diagonalise the Kohn–Sham Hamiltonian at large plane-wave cutoffs, advance to rigorous <strong>Brillouin Zone Integration</strong> detailing \(k\)-point sampling and the smearing methods (Methfessel-Paxton, tetrahedron) required to stabilise metallic Fermi surfaces, master <strong>Self-Consistent Field (SCF) Convergence</strong>—diagnosing charge sloshing in metals and applying Kerker, Pulay/DIIS, and Broyden density mixing schemes—and conclude with <strong>Structural Optimisation and Ab Initio Molecular Dynamics</strong>—deriving Hellmann–Feynman forces, Pulay corrections, the Cauchy stress tensor, constrained and variable-cell optimisation algorithms, and finite-temperature Verlet, Nosé–Hoover, and Langevin dynamics (together with why plane-wave PAW codes dominate these workflows over muffin-tin and Green’s-function methods).</p>
 <p>By the end of this course, you will possess the practical expertise to run, troubleshoot, and analyze high-accuracy simulations for contemporary materials science research.</p>
 <hr>
 <h2 id="meet-your-instructor"><a class="header" href="#meet-your-instructor">Meet your instructor</a></h2>
@@ -249,7 +249,7 @@
 <li>Learn the derivation and significance of the <strong>Hohenberg–Kohn theorems</strong></li>
 <li>Understand the <strong>Kohn–Sham formalism</strong> and its practical implementation</li>
 <li>Become familiar with common <strong>exchange–correlation functionals</strong></li>
-<li>Learn how to perform and analyze <strong>DFT calculations</strong></li>
+<li>Learn how to perform, converge, and analyse <strong>DFT calculations</strong> (SCF, geometry/cell optimisation, and AIMD)</li>
 <li>Explore extensions for magnetism and strong correlation via <strong>Spin-Polarised DFT and DFT+U</strong></li>
 </ul>
 <h2 id="target-audience"><a class="header" href="#target-audience">Target Audience</a></h2>
