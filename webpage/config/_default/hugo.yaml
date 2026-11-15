@@ -43,9 +43,10 @@ imaging:
     quality: 75
   anchor: smart
 timeout: 600000
+# No tag/category taxonomies: their pages were thin and unlinked from the
+# menus. Front-matter `tags` still exist as plain params (the home page's
+# Research Highlights read the "highlight" tag).
 taxonomies:
-  tag: tags
-  category: categories
   publication_type: publication_types
   author: authors
   pillar: pillars

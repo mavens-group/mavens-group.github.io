@@ -11,7 +11,7 @@ We worked across electrocatalysis, 2D materials, and magnetic alloys, asking how
 
 **The Research:** Beyond publication metrics, the group focused on careful, physics-driven ab initio work in an era increasingly dominated by speed.
 
-**The Mentorship:** On the mentoring side, this year marked a historic milestone for the lab. [Dr. Karunakaran M](../../author/dr-karunakaran-m) completed and successfully defended his PhD thesis, marking MAVENs' first doctoral graduate.
+**The Mentorship:** On the mentoring side, this year marked a historic milestone for the lab. [Dr. Karunakaran M](/author/dr-karunakaran-m) completed and successfully defended his PhD thesis, marking MAVENs' first doctoral graduate.
 
 **New Directions:** The group has also begun moving deliberately into an interdisciplinary regime, where condensed-matter physics meets materials chemistry, catalysis, and data-driven methods. Exploring these interfaces is where the most compelling materials problems lie.
 

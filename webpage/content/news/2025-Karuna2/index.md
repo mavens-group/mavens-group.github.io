@@ -5,7 +5,7 @@ date: 2025-11-28
 profile: false
 tags: [highlight]
 ---
-The MAVENs group is thrilled and proud to announce that [Karunakaran M](../../author/dr-karunakaran-m) has successfully defended his doctoral thesis, becoming the group's first PhD graduate!
+The MAVENs group is thrilled and proud to announce that [Karunakaran M](/author/dr-karunakaran-m) has successfully defended his doctoral thesis, becoming the group's first PhD graduate!
 <!--more-->
 This is a major milestone and a true highlight for the MAVENs group. Karunakaran’s research focuses on the electronic, magnetic, and thermodynamic properties of Heusler alloys.
 

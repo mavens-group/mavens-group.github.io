@@ -11,7 +11,7 @@ image:
   focal_point: "Center"
   preview_only: true
 ---
-It is a pleasure to congratulate [Md Mahshook A](../../author/md-mahshook-a) and [Chithresh TM](../../author/chithresh-t-m) — _Team IonVis_ — on winning Track 04 (Quantum Systems) at QtHack,<!--more--> the Quantum Technologies Hackathon organised by the Faculty of Engineering and Technology, SRMIST Kattankulathur (April 30–31, 2026).
+It is a pleasure to congratulate [Md Mahshook A](/author/md-mahshook-a) and [Chithresh TM](/author/chithresh-t-m) — _Team IonVis_ — on winning Track 04 (Quantum Systems) at QtHack,<!--more--> the Quantum Technologies Hackathon organised by the Faculty of Engineering and Technology, SRMIST Kattankulathur (April 30–31, 2026).
 
 <video autoplay loop muted playsinline style="width: 100%; border-radius: 8px;">
   <source src="ionviz.mp4" type="video/mp4">

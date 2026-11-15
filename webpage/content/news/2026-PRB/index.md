@@ -5,7 +5,7 @@ date: 2026-05-14
 profile: false
 tags: [highlight]
 ---
-Huge congratulations to [Shrestha Dutta](../../author/shrestha-dutta) on our latest paper, just published in Physical Review B!
+Huge congratulations to [Shrestha Dutta](/author/shrestha-dutta) on our latest paper, just published in Physical Review B!
 <!--more-->
 In the field of two-dimensional (2D) spintronics, defect engineering of transition metal dichalcogenides (TMDCs) routinely produces local magnetic moments. However, itinerant half-metallic ferromagnetism has remained a significant challenge, with experimental realizations frequently yielding paramagnetic insulators instead of the predicted half-metals.
 
@@ -24,4 +24,4 @@ Read the Paper:
 - <a href="https://arxiv.org/abs/2605.01754"><i class="ai ai-arxiv"></i> arXiv </a>
 
 
-More about this in the [Publications](../../publication/dutta-2026)
+More about this in the [Publications](/publication/dutta-2026)

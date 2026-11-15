@@ -6,7 +6,7 @@ summary: Md Mahshook A's first paper, on interpretable machine learning for quan
 profile: false
 tags: [highlight]
 ---
-Congratulations to [Md Mahshook A](../../author/md-mahshook-a) on the publication of his first paper in Physical Review Materials:<!--more-->"Beyond Diamond: Interpretable Machine Learning Reveals Design Principles for Quantum Defect Host Materials."
+Congratulations to [Md Mahshook A](/author/md-mahshook-a) on the publication of his first paper in Physical Review Materials:<!--more-->"Beyond Diamond: Interpretable Machine Learning Reveals Design Principles for Quantum Defect Host Materials."
 
 
 The work combines interpretable machine learning with first-principles DFT calculations to accelerate discovery of quantum hosts. Using Rashomon set ensembles, the work identifies 122 promising candidates from ~45,000 compounds—a powerful demonstration of how machine learning and physics-based reasoning complement one another.
@@ -18,4 +18,4 @@ Read the Paper:
 - <a href="https://arxiv.org/abs/2506.03844"><i class="ai ai-arxiv"></i> arXiv </a>
 
 
-More about this in the [Publications](../../publication/mahshook-2026)
+More about this in the [Publications](/publication/mahshook-2026)
