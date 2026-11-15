@@ -62,8 +62,8 @@
         <link rel="icon" href="favicon-de23e50b.svg">
         <link rel="shortcut icon" href="favicon-8114d1fc.png">
         <link rel="stylesheet" href="css/variables-8adf115d.css">
-        <link rel="stylesheet" href="css/general-0392ca55.css">
-        <link rel="stylesheet" href="css/chrome-fc474251.css">
+        <link rel="stylesheet" href="css/general-e96d0476.css">
+        <link rel="stylesheet" href="css/chrome-d279d366.css">
         <link rel="stylesheet" href="css/print-9e4910d8.css" media="print">
 
         <!-- Fonts -->
@@ -75,7 +75,7 @@
         <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="ayu-highlight-3fdfc3ac.css">
 
         <!-- Custom theme stylesheets -->
-        <link rel="stylesheet" href="src/custom-5f363160.css">
+        <link rel="stylesheet" href="src/custom-ee915ece.css">
 
 
         <!-- Provide site root and default themes to javascript -->
@@ -83,10 +83,10 @@
             const path_to_root = "";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "searchindex-23f86b14.js";
+            window.path_to_searchindex_js = "searchindex-72308093.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="toc-06779d97.js"></script>
+        <script src="toc-3c9b9cd1.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -239,8 +239,8 @@ the natural next step.</p>
 factors familiar from undergraduate quantum mechanics. From Chapter 3 onward we switch to
 <strong>Hartree atomic units</strong> (\(\hbar = m_e = e = 4\pi\varepsilon_0 = 1\)), in which
 \(-\tfrac{\hbar^2}{2m_e}\nabla^2 \to -\tfrac{1}{2}\nabla^2\) and the Coulomb repulsion is
-simply \(1/|\mathbf{r}_i - \mathbf{r}_j|\). Conversions: \(1,\mathrm{Ha} = 27.2114,\mathrm{eV}
-= 2,\mathrm{Ry}\); \(1,\mathrm{bohr} = 0.52918,\text{Å}\).</p>
+simply \(1/|\mathbf{r}_i - \mathbf{r}_j|\). Conversions: \(1\,\mathrm{Ha} = 27.2114\,\mathrm{eV}
+= 2\,\mathrm{Ry}\); \(1\,\mathrm{bohr} = 0.52918\,\text{Å}\).</p>
 </blockquote>
 <h2 id="schrödingers-equation-revisited-for-many-particle-systems"><a class="header" href="#schrödingers-equation-revisited-for-many-particle-systems">Schrödinger’s Equation: Revisited for Many-Particle Systems</a></h2>
 <p>The Schrödinger equation is the governing equation for quantum mechanical systems:</p>
@@ -302,8 +302,8 @@ approximation scheme we will meet: the <strong>variational principle</strong>.</
 this chapter (Hartree, Hartree–Fock), the entire Kohn–Sham framework of Chapter 3, and the
 proof of the Hohenberg–Kohn theorems in Chapter 2 all rest on it.</p>
 <div class="theorem">
-For any normalised trial state \(|\tilde{\Psi}\rangle\) in the Hilbert space of the system,
-the expectation value of the Hamiltonian is an upper bound on the ground-state energy:
+<p>For any normalised trial state \(|\tilde{\Psi}\rangle\) in the Hilbert space of the system,
+the expectation value of the Hamiltonian is an upper bound on the ground-state energy:</p>
 <p>\[
 E_0 \leq \langle\tilde{\Psi}|\hat{H}|\tilde{\Psi}\rangle,
 \]</p>
@@ -313,7 +313,7 @@ E_0 \leq \langle\tilde{\Psi}|\hat{H}|\tilde{\Psi}\rangle,
 <h4 id="proof-by-completeness"><a class="header" href="#proof-by-completeness">Proof (by completeness)</a></h4>
 <div class="proof">
 <p>Expand the trial state in the complete orthonormal set of energy eigenstates
-\({|\Psi_n\rangle}\) of \(\hat{H}\) with eigenvalues \(E_n\) (ordered \(E_0 \leq E_1 \leq E_2 \leq \cdots\)):</p>
+\(\{|\Psi_n\rangle\}\) of \(\hat{H}\) with eigenvalues \(E_n\) (ordered \(E_0 \leq E_1 \leq E_2 \leq \cdots\)):</p>
 <p>\[
 |\tilde{\Psi}\rangle = \sum_n c_n |\Psi_n\rangle, \qquad \sum_n |c_n|^2 = 1.
 \]</p>
@@ -336,7 +336,7 @@ The narrower the family, the looser the bound; the richer the family, the closer
 greater computational cost.</p>
 <h3 id="worked-example-hydrogen-atom-with-a-gaussian-trial-wavefunction"><a class="header" href="#worked-example-hydrogen-atom-with-a-gaussian-trial-wavefunction">Worked Example: Hydrogen Atom with a Gaussian Trial Wavefunction</a></h3>
 <p>The hydrogen atom is the natural test case because the exact answer is known
-(\(E_0^{\rm exact} = -\tfrac{1}{2},\mathrm{Ha} = -13.606,\mathrm{eV}\), with ground state
+(\(E_0^{\rm exact} = -\tfrac{1}{2}\,\mathrm{Ha} = -13.606\,\mathrm{eV}\), with ground state
 \(\psi_0(r) = \pi^{-1/2}e^{-r}\) in atomic units). The exact ground state is exponential, not
 Gaussian, so a Gaussian trial wavefunction cannot reach \(E_0\) exactly — making it a clean
 example of how the variational principle bounds without saturating.</p>
@@ -347,16 +347,16 @@ example of how the variational principle bounds without saturating.</p>
 \]</p>
 <p>with \(\alpha\) the width parameter. The hydrogen-atom Hamiltonian (atomic units, \(Z=1\)) is
 \(\hat{H} = -\tfrac{1}{2}\nabla^2 - 1/r\).</p>
-<p><strong>Kinetic energy.</strong> Using \(\langle\hat{T}\rangle = \tfrac{1}{2}\int|\nabla\tilde\psi|^2,d\mathbf{r}\)
+<p><strong>Kinetic energy.</strong> Using \(\langle\hat{T}\rangle = \tfrac{1}{2}\int|\nabla\tilde\psi|^2\,d\mathbf{r}\)
 and the standard Gaussian integral:</p>
 <p>\[
 \langle\hat{T}\rangle_\alpha = \frac{3\alpha}{2}.
 \]</p>
 <p><strong>Potential energy.</strong> Performing the angular integration and using
-\(\int_0^\infty r,e^{-2\alpha r^2},dr = 1/(4\alpha)\):</p>
+\(\int_0^\infty r\,e^{-2\alpha r^2}\,dr = 1/(4\alpha)\):</p>
 <p>\[
-\langle\hat{V}\rangle_\alpha = -\left(\frac{2\alpha}{\pi}\right)^{3/2}!
-\int e^{-2\alpha r^2},\frac{1}{r},d\mathbf{r}
+\langle\hat{V}\rangle_\alpha = -\left(\frac{2\alpha}{\pi}\right)^{3/2}\!
+\int e^{-2\alpha r^2}\,\frac{1}{r}\,d\mathbf{r}
 = -2\sqrt{\frac{2\alpha}{\pi}}.
 \]</p>
 <p><strong>Total energy.</strong></p>
@@ -371,10 +371,10 @@ E(\alpha) = \frac{3\alpha}{2} - 2\sqrt{\frac{2\alpha}{\pi}}.
 \]</p>
 <p>Substituting back:</p>
 <p>\[
-E_{\rm var} = E(\alpha_{\rm opt}) = -\frac{4}{3\pi},\mathrm{Ha} \approx -0.4244,\mathrm{Ha} \approx -11.5,\mathrm{eV}.
+E_{\rm var} = E(\alpha_{\rm opt}) = -\frac{4}{3\pi}\,\mathrm{Ha} \approx -0.4244\,\mathrm{Ha} \approx -11.5\,\mathrm{eV}.
 \]</p>
-<p>Compare with the exact \(E_0 = -0.5,\mathrm{Ha} = -13.6,\mathrm{eV}\): the Gaussian trial gives
-a variational bound \(E_{\rm var} &gt; E_0\), with an error of \(\sim 15%\). The bound is loose
+<p>Compare with the exact \(E_0 = -0.5\,\mathrm{Ha} = -13.6\,\mathrm{eV}\): the Gaussian trial gives
+a variational bound \(E_{\rm var} &gt; E_0\), with an error of \(\sim 15\%\). The bound is loose
 because the Gaussian lacks the cusp at \(r=0\) and the exponential tail of the exact eigenstate
 — but the principle worked: minimising the energy expectation value over a parameter family
 produces the best estimate within that family.</p>
@@ -401,7 +401,7 @@ simple product of single-particle orbitals,</p>
 <p>and minimise \(\langle\tilde\Psi_{\rm H}|\hat{H}|\tilde\Psi_{\rm H}\rangle\) with respect to each
 orbital \(\phi_i\) subject to the normalisation constraint \(\langle\phi_i|\phi_i\rangle = 1\).</p>
 <p>The electron–electron repulsion felt by electron \(i\) is replaced by the electrostatic potential
-of the continuous charge density \(\rho(\mathbf{r}’)\) of all other electrons:</p>
+of the continuous charge density \(\rho(\mathbf{r}')\) of all other electrons:</p>
 <div>
 \begin{align*}
 \frac{1}{2}\sum_{i\neq j}\frac{e^2}{|\mathbf{r}_i-\mathbf{r}_j|}
@@ -410,7 +410,7 @@ E_{\rm H}[\rho] &amp;= \frac{1}{2}\iint\frac{e^2\,\rho(\mathbf{r})\rho(\mathbf{r
 \end{align*}
 </div>
 
-<p>where \(\rho(\mathbf{r}‘) = \sum_j |\phi_j(\mathbf{r}’)|^2\) is the electron number density. The
+<p>where \(\rho(\mathbf{r}') = \sum_j |\phi_j(\mathbf{r}')|^2\) is the electron number density. The
 quantity \(E_{\rm H}[\rho]\) is the <strong>Hartree energy</strong> — the classical electrostatic self-energy
 of the charge distribution. The corresponding single-electron potential \(V_{\rm H}(\mathbf{r}_i)\) enters the effective single-particle Hamiltonian.</p>
 <p>The full Hartree Hamiltonian then reads:</p>
@@ -483,8 +483,8 @@ Hartree–Fock equations</strong>:</p>
 <p>\[
 \hat{F} = \hat{h}_0 + \sum_j\left[\hat{J}_j - \hat{K}_j\right],
 \]</p>
-<p>with the Coulomb operator \(\hat{J}_j\psi_i = \left(\int |\psi_j(\mathbf{x}‘)|^2/|\mathbf{r}-\mathbf{r}’|,d\mathbf{x}‘\right)\psi_i\) and the exchange operator
-\(\hat{K}_j\psi_i = \left(\int \psi_j^*(\mathbf{x}’)\psi_i(\mathbf{x}‘)/|\mathbf{r}-\mathbf{r}’|,d\mathbf{x}’\right)\psi_j\). The exchange operator is <strong>non-local</strong>: it mixes the values of
+<p>with the Coulomb operator \(\hat{J}_j\psi_i = \left(\int |\psi_j(\mathbf{x}')|^2/|\mathbf{r}-\mathbf{r}'|\,d\mathbf{x}'\right)\psi_i\) and the exchange operator
+\(\hat{K}_j\psi_i = \left(\int \psi_j^*(\mathbf{x}')\psi_i(\mathbf{x}')/|\mathbf{r}-\mathbf{r}'|\,d\mathbf{x}'\right)\psi_j\). The exchange operator is <strong>non-local</strong>: it mixes the values of
 \(\psi_i\) at different points through \(\psi_j\), in contrast to the local multiplicative Coulomb
 operator \(\hat{J}_j\). This non-locality is what makes evaluating exact exchange computationally
 expensive — a recurring issue in Chapter 4.</p>
@@ -515,7 +515,7 @@ experiment is exactly the correlation energy that DFT will need to recover.</p>
 \(\alpha\) (rather than \(Z = 2\)) — the parameter that captures <em>screening</em>: each electron sees a
 nucleus partially shielded by the other. Spin-singlet, so the spatial part is symmetric:</p>
 <p>\[
-\tilde\Psi(\mathbf{r}<em>1,\mathbf{r}<em>2) = \phi</em>\alpha(r_1)\phi</em>\alpha(r_2),
+\tilde\Psi(\mathbf{r}_1,\mathbf{r}_2) = \phi_\alpha(r_1)\phi_\alpha(r_2),
 \qquad
 \phi_\alpha(r) = \left(\frac{\alpha^3}{\pi}\right)^{1/2}e^{-\alpha r}.
 \]</p>
@@ -532,7 +532,7 @@ properly antisymmetrised closed-shell Slater determinant for this two-electron s
 \]</p>
 <p><strong>Electron–electron repulsion.</strong> This is the non-trivial integral:</p>
 <p>\[
-\langle V_{ee}\rangle = \iint \frac{|\phi_\alpha(r_1)|^2 |\phi_\alpha(r_2)|^2}{|\mathbf{r}_1-\mathbf{r}_2|},d\mathbf{r}_1,d\mathbf{r}_2.
+\langle V_{ee}\rangle = \iint \frac{|\phi_\alpha(r_1)|^2 |\phi_\alpha(r_2)|^2}{|\mathbf{r}_1-\mathbf{r}_2|}\,d\mathbf{r}_1\,d\mathbf{r}_2.
 \]</p>
 <p>Evaluating using the multipole expansion of \(1/|\mathbf{r}_1-\mathbf{r}_2|\) (only the \(\ell = 0\) term survives for spherical \(\phi\)) gives the classical result:</p>
 <p>\[
@@ -555,7 +555,7 @@ nuclear charge reduced from 2 to 1.6875, the <strong>screening</strong> by the o
 <p>Substituting back:</p>
 <p>\[
 E_{\rm var}(He) = -\left(Z - \frac{5}{16}\right)^2 = -\left(\frac{27}{16}\right)^2
-\approx -2.848,\mathrm{Ha} \approx -77.49,\mathrm{eV}.
+\approx -2.848\,\mathrm{Ha} \approx -77.49\,\mathrm{eV}.
 \]</p>
 <p><strong>Comparison with experiment and full HF.</strong></p>
 <div class="table-wrapper">
@@ -564,17 +564,18 @@ E_{\rm var}(He) = -\left(Z - \frac{5}{16}\right)^2 = -\left(\frac{27}{16}\right)
 <tr><th>Method</th><th>Ground-state energy</th><th>Comment</th></tr>
 </thead>
 <tbody>
-<tr><td>Non-interacting (\(\alpha = Z\))</td><td>\(-2.750,\mathrm{Ha} = -74.83,\mathrm{eV}\)</td><td>Ignores \(V_{ee}\) entirely</td></tr>
-<tr><td>Hartree (product, no exchange)</td><td>\(\sim -77.5,\mathrm{eV}\)</td><td>Mean-field, no Pauli</td></tr>
-<tr><td>Variational (single-\(\zeta\), \(\alpha\) optimised)</td><td>\(-77.49,\mathrm{eV}\)</td><td>The calculation above</td></tr>
-<tr><td>Full HF (numerically exact orbital)</td><td>\(-77.87,\mathrm{eV}\)</td><td>Best single-determinant</td></tr>
-<tr><td>Experiment</td><td>\(-79.01,\mathrm{eV}\)</td><td>True ground-state energy</td></tr>
+<tr><td>Non-interacting (\(V_{ee} = 0\))</td><td>\(-4.000\,\mathrm{Ha} = -108.85\,\mathrm{eV}\)</td><td>Ignores \(V_{ee}\) entirely</td></tr>
+<tr><td>Unscreened 1st-order (\(\alpha = Z = 2\))</td><td>\(-2.750\,\mathrm{Ha} = -74.83\,\mathrm{eV}\)</td><td>Includes \(\langle V_{ee}\rangle\) without screening</td></tr>
+<tr><td>Hartree (product, no exchange)</td><td>\(\sim -77.5\,\mathrm{eV}\)</td><td>Mean-field, no Pauli</td></tr>
+<tr><td>Variational (single-\(\zeta\), \(\alpha\) optimised)</td><td>\(-77.49\,\mathrm{eV}\)</td><td>The calculation above</td></tr>
+<tr><td>Full HF (numerically exact orbital)</td><td>\(-77.87\,\mathrm{eV}\)</td><td>Best single-determinant</td></tr>
+<tr><td>Experiment</td><td>\(-79.01\,\mathrm{eV}\)</td><td>True ground-state energy</td></tr>
 </tbody>
 </table>
 </div>
 <p>The <strong>correlation energy</strong> for helium is therefore:</p>
 <p>\[
-E_{\rm corr} = E_{\rm exact} - E_{\rm HF} \approx -1.14,\mathrm{eV}.
+E_{\rm corr} = E_{\rm exact} - E_{\rm HF} \approx -1.14\,\mathrm{eV}.
 \]</p>
 <p>Though small in absolute terms, this gap is the magnitude of typical chemical bond energies —
 and it is precisely what was lost when we restricted the wavefunction to a <em>product</em> (or
@@ -592,7 +593,7 @@ construction of Chapter 3 must restore.</p>
 of the density. For a UEG of density \(\rho\), the kinetic energy per unit volume is
 (derivation deferred to Chapter 4):</p>
 <p>\[
-t^{\rm UEG}(\rho) = \frac{3}{10}(3\pi^2)^{2/3},\rho^{5/3}.
+t^{\rm UEG}(\rho) = \frac{3}{10}(3\pi^2)^{2/3}\,\rho^{5/3}.
 \]</p>
 <p>The TF ansatz applies this <em>locally</em>:</p>
 <div>
@@ -605,9 +606,9 @@ t^{\rm UEG}(\rho) = \frac{3}{10}(3\pi^2)^{2/3},\rho^{5/3}.
 <p>Combined with the classical Hartree energy and the external potential interaction, the TF total
 energy functional is:</p>
 <p>\[
-E^{\rm TF}[\rho] = T^{\rm TF}[\rho] + \int V_{\rm ext}\rho,d\mathbf{r} + E_{\rm H}[\rho].
+E^{\rm TF}[\rho] = T^{\rm TF}[\rho] + \int V_{\rm ext}\rho\,d\mathbf{r} + E_{\rm H}[\rho].
 \]</p>
-<p>Minimising with respect to \(\rho\) subject to \(\int\rho,d\mathbf{r} = N\) yields the
+<p>Minimising with respect to \(\rho\) subject to \(\int\rho\,d\mathbf{r} = N\) yields the
 <strong>Thomas–Fermi equation</strong>:</p>
 <p>\[
 \frac{5}{3}\cdot\frac{3}{10}(3\pi^2)^{2/3}\rho^{2/3}(\mathbf{r}) + V_{\rm ext}(\mathbf{r}) + V_{\rm H}(\mathbf{r}) = \mu,
@@ -623,7 +624,7 @@ theorem, not a numerical artifact.</li>
 than exponentially as required for bound states.</li>
 <li><strong>No shell structure.</strong> The TF density is smooth and structureless; it does not show the
 atomic shell oscillations seen in Hartree–Fock calculations or experiment.</li>
-<li><strong>Kinetic energy errors of \(\sim 10%\).</strong> Even with the Dirac exchange correction added
+<li><strong>Kinetic energy errors of \(\sim 10\%\).</strong> Even with the Dirac exchange correction added
 (TF+D, also called Thomas–Fermi–Dirac), atomic energies are off by tens of eV.</li>
 </ol>
 <p>The root cause is the kinetic energy \eqref{eq:TFkin}. The UEG-based local form is fine for
@@ -733,7 +734,7 @@ small correction term \(E_{\rm xc}[\rho]\) that we will spend Chapter 4 learning
 
         <script src="clipboard-1626706a.min.js"></script>
         <script src="highlight-abc7f01d.js"></script>
-        <script src="book-c22b7243.js"></script>
+        <script src="book-609e4cb8.js"></script>
 
         <!-- Custom JS scripts -->
         <script src="src/custom-cd58eebe.js"></script>

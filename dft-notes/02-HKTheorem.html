@@ -62,8 +62,8 @@
         <link rel="icon" href="favicon-de23e50b.svg">
         <link rel="shortcut icon" href="favicon-8114d1fc.png">
         <link rel="stylesheet" href="css/variables-8adf115d.css">
-        <link rel="stylesheet" href="css/general-0392ca55.css">
-        <link rel="stylesheet" href="css/chrome-fc474251.css">
+        <link rel="stylesheet" href="css/general-e96d0476.css">
+        <link rel="stylesheet" href="css/chrome-d279d366.css">
         <link rel="stylesheet" href="css/print-9e4910d8.css" media="print">
 
         <!-- Fonts -->
@@ -75,7 +75,7 @@
         <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="ayu-highlight-3fdfc3ac.css">
 
         <!-- Custom theme stylesheets -->
-        <link rel="stylesheet" href="src/custom-5f363160.css">
+        <link rel="stylesheet" href="src/custom-ee915ece.css">
 
 
         <!-- Provide site root and default themes to javascript -->
@@ -83,10 +83,10 @@
             const path_to_root = "";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "searchindex-23f86b14.js";
+            window.path_to_searchindex_js = "searchindex-72308093.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="toc-06779d97.js"></script>
+        <script src="toc-3c9b9cd1.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -261,62 +261,61 @@ can be found at \(\mathbf{r}\):</p>
 \end{equation}
 </div>
 
-<p>By construction \(\int \rho(\mathbf{r}),d\mathbf{r} = N\): the density integrates to the total
+<p>By construction \(\int \rho(\mathbf{r})\,d\mathbf{r} = N\): the density integrates to the total
 number of electrons, not unity. \(\rho(\mathbf{r})\) is the central variable of DFT.</p>
 <h3 id="the-first-hohenbergkohn-theorem"><a class="header" href="#the-first-hohenbergkohn-theorem">The First Hohenberg–Kohn Theorem</a></h3>
 <div class="theorem">
-For any system of interacting particles in an external potential \(V_{\rm ext}(r)\),
+<p>For any system of interacting particles in an external potential \(V_{\rm ext}(r)\),
 the external potential is uniquely determined — up to a constant — by the ground-state electron
-density \\(\rho_0(r)\\).
+density \(\rho_0(r)\).</p>
 </div>
 
 <p>Because \(V_{\rm ext}(r)\) uniquely determines \(\hat{H}\) (and hence all eigenstates and
 eigenvalues), the ground-state density \(\rho_0(r)\) alone determines everything about the system.
 The wavefunction \(\Psi_0\) is therefore a functional of \(\rho_0\), written \(\Psi_0 = \Psi[\rho_0]\).</p>
 <h4 id="proof-by-contradiction"><a class="header" href="#proof-by-contradiction">Proof (by contradiction)</a></h4>
-<div class="proof" title="by contradiction">
-<p>Assume the contrary: suppose there exist two <strong>different</strong> external potentials
-\(V_{\rm ext}(\mathbf{r})\) and \(V’_{\rm ext}(\mathbf{r})\), differing by more than a constant,</p>
+<div class="proof" data-title="by contradiction">
+<p>Assume a non-degenerate ground state, and assume the contrary: suppose there exist two <strong>different</strong> external potentials
+\(V_{\rm ext}(\mathbf{r})\) and \(V'_{\rm ext}(\mathbf{r})\), differing by more than a constant,</p>
 <div>
 \begin{equation}
 V_{\rm ext}(\mathbf{r}) \neq V'_{\rm ext}(\mathbf{r}) + \text{const.},
 \end{equation}
 </div>
 
-<p>that nevertheless yield the <strong>same</strong> ground-state density: \(\rho(\mathbf{r})=\rho’(\mathbf{r}) \equiv \rho(\mathbf{r})\).</p>
+<p>that nevertheless yield the <strong>same</strong> ground-state density: \(\rho(\mathbf{r})=\rho'(\mathbf{r}) \equiv \rho_0(\mathbf{r})\).</p>
 <p>Let the two Hamiltonians and their ground states be:</p>
 <p>\[
 \begin{aligned}
 \hat{H}  &amp; = \hat{T} + \hat{V}_{\rm ee} + \hat{V}_{\rm ext},  &amp; \hat{H}|\Psi\rangle = E_0|\Psi\rangle,   \\
-\hat{H}’ &amp; = \hat{T} + \hat{V}_{\rm ee} + \hat{V}‘_{\rm ext}, &amp; \hat{H}’|\Psi’\rangle = E’_0|\Psi’\rangle.
+\hat{H}' &amp; = \hat{T} + \hat{V}_{\rm ee} + \hat{V}'_{\rm ext}, &amp; \hat{H}'|\Psi'\rangle = E'_0|\Psi'\rangle.
 \end{aligned}
 \]</p>
-<p>We apply the <strong>Rayleigh–Ritz variational principle</strong> (Chapter 1.4), which states that the true
-ground-state energy minimises the energy expectation value: any trial state
-\(|\tilde{\Psi}\rangle \neq |\Psi_0\rangle\) satisfies
+<p>Since \(V_{\rm ext}\) and \(V'_{\rm ext}\) differ by more than a constant, the Schrödinger equations imply \(|\Psi'\rangle \neq |\Psi\rangle\) (they cannot even differ by a constant phase alone, since subtracting the two equations would yield \((V_{\rm ext} - V'_{\rm ext})\Psi = (E_0 - E'_0)\Psi\)). We apply the <strong>Rayleigh–Ritz variational principle</strong> (Section 1.3), which states that for a non-degenerate ground state, any trial state
+\(|\tilde{\Psi}\rangle \neq |\Psi_0\rangle\) strictly exceeds the ground-state energy:
 \(\langle\tilde{\Psi}|\hat{H}|\tilde{\Psi}\rangle &gt; E_0\).</p>
-<p>Using \(\Psi’\) as a trial state for \(\hat{H}\):</p>
+<p>Using \(\Psi'\) as a trial state for \(\hat{H}\):</p>
 <div>
 \begin{align}
-    E_0 \leq&amp; \langle \Psi' | \hat{H} | \Psi' \rangle
-       = \langle \Psi' | \hat{H}' | \Psi' \rangle + \langle \Psi' | \hat{H} - \hat{H}' | \Psi' \rangle \notag\\\\
-    =&amp; \; E'\_0 + \int \left[ V\_{\rm ext}(\mathbf{r}) - V'\_{\rm ext}(\mathbf{r}) \right] \rho(\mathbf{r}) \, d\mathbf{r}. \label{eq:ineq1}
+    E_0 \lt&amp; \langle \Psi' | \hat{H} | \Psi' \rangle
+       = \langle \Psi' | \hat{H}' | \Psi' \rangle + \langle \Psi' | \hat{H} - \hat{H}' | \Psi' \rangle \notag\\
+    =&amp; \; E'_0 + \int \left[ V_{\rm ext}(\mathbf{r}) - V'_{\rm ext}(\mathbf{r}) \right] \rho_0(\mathbf{r}) \, d\mathbf{r}. \label{eq:ineq1}
 \end{align}
 </div>
 
-<p>Symmetrically, using \(\Psi\) as a trial state for \(\hat{H}’\):</p>
+<p>Symmetrically, using \(\Psi\) as a trial state for \(\hat{H}'\):</p>
 <div>
 \begin{equation}
-	E'\_0 \leq \langle \Psi | \hat{H}' | \Psi \rangle
-    = E\_0 + \int \left[ V'\_{\rm ext}(\mathbf{r}) - V\_{\rm ext}(\mathbf{r}) \right] \rho(\mathbf{r}) \, d\mathbf{r}. \label{eq:ineq2}
+	E'_0 \lt \langle \Psi | \hat{H}' | \Psi \rangle
+    = E_0 + \int \left[ V'_{\rm ext}(\mathbf{r}) - V_{\rm ext}(\mathbf{r}) \right] \rho_0(\mathbf{r}) \, d\mathbf{r}. \label{eq:ineq2}
 \end{equation}
 </div>
 
-<p>Adding the two inequalities \eqref{eq:ineq1} and \eqref{eq:ineq2}:</p>
+<p>Adding the two strict inequalities \eqref{eq:ineq1} and \eqref{eq:ineq2}:</p>
 <p>\[
 \begin{align}
-E_0 + E’_0 &amp; \leq E’_0 + E_0 + \int \underbrace{\left[ V_{\rm ext} - V’_{\rm ext} + V’_{\rm ext} - V_{\rm ext} \right]}_{=,0} \rho(\mathbf{r}) , d\mathbf{r}, \\
-E_0 + E’_0 &amp; \leq E_0 + E’_0.
+E_0 + E'_0 &amp; \lt E'_0 + E_0 + \int \underbrace{\left[ V_{\rm ext} - V'_{\rm ext} + V'_{\rm ext} - V_{\rm ext} \right]}_{=\,0} \rho_0(\mathbf{r}) \, d\mathbf{r}, \\
+E_0 + E'_0 &amp; \lt E_0 + E'_0.
 \end{align}
 \]</p>
 <p>This is a <strong>contradiction</strong>. Our assumption must therefore be false: no two different external
@@ -326,12 +325,12 @@ potentials (differing by more than a constant) can share the same ground-state d
 
 <h4 id="consequence-the-universal-energy-functional"><a class="header" href="#consequence-the-universal-energy-functional">Consequence: the universal energy functional</a></h4>
 <div class="lemma">
-Since \(\rho_0 \to V_{\rm ext} \to \hat{H} \to \Psi_0\), the ground-state energy can be written as
-a functional of the density:
+<p>Since \(\rho_0 \to V_{\rm ext} \to \hat{H} \to \Psi_0\), the ground-state energy can be written as
+a functional of the density:</p>
 <p>\[
 \begin{align*}
-E[\rho] =&amp; F[\rho]+\int V_{\rm ext}(r)\rho(r),dr\\
-F[\rho] =&amp; \langle\Psi[\rho]|, \hat{T}+\hat{V}_{ee},| \Psi[\rho]\rangle
+E[\rho] =&amp; F[\rho]+\int V_{\rm ext}(r)\rho(r)\,dr\\
+F[\rho] =&amp; \langle\Psi[\rho]|\, \hat{T}+\hat{V}_{ee}\,| \Psi[\rho]\rangle
 \end{align*}
 \]</p>
 <p>The quantity \(F[\rho]\) is called the <strong>universal functional</strong> of the density. It is “universal”
@@ -342,8 +341,8 @@ making it, in principle, applicable to any system of interacting electrons.</p>
 <hr>
 <h3 id="the-second-hohenbergkohn-theorem"><a class="header" href="#the-second-hohenbergkohn-theorem">The Second Hohenberg–Kohn Theorem</a></h3>
 <div class="theorem">
-The true ground-state density \(\rho_0(\mathbf{r})\) minimises the total energy functional
-\(E[\rho]\).
+<p>The true ground-state density \(\rho_0(\mathbf{r})\) minimises the total energy functional
+\(E[\rho]\).</p>
 </div>
 
 <p>That is, for any trial density \(\tilde{\rho}(\mathbf{r})\) satisfying</p>
@@ -375,13 +374,13 @@ The true ground-state density \(\rho_0(\mathbf{r})\) minimises the total energy 
 <p>\[
 E[\tilde{\rho}] = \langle \tilde{\Psi}[\tilde{\rho}] | \hat{T} + \hat{V}_{ee} + \hat{V}_{\rm ext} | \tilde{\Psi}[\tilde{\rho}] \rangle = F[\tilde{\rho}] + \int V_{\rm ext}(\mathbf{r})\tilde{\rho}(\mathbf{r}) d\mathbf{r}
 \]</p>
-<p>Now consider the true ground state \(|\Psi_0\rangle\) with density \(\rho_0\) and energy \(E_0\). For any trial density \(\tilde{\rho} \neq \rho_0\), the associated wavefunction \(\tilde{\Psi}\) is <em>different</em> from \(\Psi_0\) (again by the First HK Theorem). Since \(\Psi_0\) is the true ground state of \(\hat{H}\), the <strong>Rayleigh–Ritz variational principle</strong> (Chapter 1.4) gives:</p>
+<p>Now consider the true ground state \(|\Psi_0\rangle\) with density \(\rho_0\) and energy \(E_0\). For any trial density \(\tilde{\rho} \neq \rho_0\), the associated wavefunction \(\tilde{\Psi}\) is <em>different</em> from \(\Psi_0\) (again by the First HK Theorem). Since \(\Psi_0\) is the true ground state of \(\hat{H}\), the <strong>Rayleigh–Ritz variational principle</strong> (Section 1.3) gives:</p>
 <p>\[
 E_0 = \langle \Psi_0 | \hat{H} | \Psi_0 \rangle \leq \langle \tilde{\Psi} | \hat{H} | \tilde{\Psi} \rangle.
 \]</p>
 <p>The right-hand side is precisely \(E[\tilde{\rho}]\) as defined above (using \(\hat{V}_{\rm ext}\) of the <em>original</em> system). Therefore:</p>
 <p>\[
-E_0 \leq E[\tilde{\rho}], \quad \forall, \tilde{\rho} \neq \rho_0,
+E_0 \leq E[\tilde{\rho}], \quad \forall\, \tilde{\rho} \neq \rho_0,
 \]</p>
 <p>with equality if and only if \(\tilde{\Psi} = \Psi_0\), i.e. \(\tilde{\rho} = \rho_0\). \(\blacksquare\)</p>
 </div>
@@ -403,7 +402,7 @@ electron–electron interaction \(V_{ee}[\rho]\) are unknown functionals of \(\r
 <p><strong>The Levy constrained-search formulation.</strong> The original HK derivation defines \(F[\rho]\)
 only for densities that are ground-state densities of <em>some</em> external potential — the
 <strong>\(v\)-representable</strong> densities. Not every smooth non-negative \(\rho\) with
-\(\int\rho,d\mathbf{r} = N\) satisfies this; characterising the set of \(v\)-representable
+\(\int\rho\,d\mathbf{r} = N\) satisfies this; characterising the set of \(v\)-representable
 densities is in fact an open problem. Levy (1979) and Lieb (1983) eliminated this concern by
 recasting the universal functional as a <em>constrained search</em> over wavefunctions:</p>
 <div>
@@ -420,7 +419,7 @@ make this definition powerful:</p>
 <li>It is well-defined for <strong>any</strong> non-negative \(\rho\) integrating to \(N\) — the larger class of
 <em>\(N\)-representable</em> densities — sidestepping the \(v\)-representability question entirely.</li>
 <li>The minimisation principle of the second HK theorem follows directly: for any trial density
-\(\tilde\rho\), \(E[\tilde\rho] = F[\tilde\rho] + \int V_{\rm ext}\tilde\rho,d\mathbf{r} \geq E_0\), because the inner search over \(\Psi\) is itself a Rayleigh–Ritz minimisation.</li>
+\(\tilde\rho\), \(E[\tilde\rho] = F[\tilde\rho] + \int V_{\rm ext}\tilde\rho\,d\mathbf{r} \geq E_0\), because the inner search over \(\Psi\) is itself a Rayleigh–Ritz minimisation.</li>
 </ul>
 <p>In the Kohn–Sham scheme (Chapter 3), an analogous <em>non-interacting</em> constrained search defines
 \(T_s[\rho] = \min_{\Psi \to \rho}\langle\Psi|\hat{T}|\Psi\rangle\) over Slater determinants
@@ -481,7 +480,7 @@ ground-state density — sidestepping the need to evaluate \(F[\rho]\) directly.
 
         <script src="clipboard-1626706a.min.js"></script>
         <script src="highlight-abc7f01d.js"></script>
-        <script src="book-c22b7243.js"></script>
+        <script src="book-609e4cb8.js"></script>
 
         <!-- Custom JS scripts -->
         <script src="src/custom-cd58eebe.js"></script>

@@ -62,8 +62,8 @@
         <link rel="icon" href="favicon-de23e50b.svg">
         <link rel="shortcut icon" href="favicon-8114d1fc.png">
         <link rel="stylesheet" href="css/variables-8adf115d.css">
-        <link rel="stylesheet" href="css/general-0392ca55.css">
-        <link rel="stylesheet" href="css/chrome-fc474251.css">
+        <link rel="stylesheet" href="css/general-e96d0476.css">
+        <link rel="stylesheet" href="css/chrome-d279d366.css">
         <link rel="stylesheet" href="css/print-9e4910d8.css" media="print">
 
         <!-- Fonts -->
@@ -75,7 +75,7 @@
         <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="ayu-highlight-3fdfc3ac.css">
 
         <!-- Custom theme stylesheets -->
-        <link rel="stylesheet" href="src/custom-5f363160.css">
+        <link rel="stylesheet" href="src/custom-ee915ece.css">
 
 
         <!-- Provide site root and default themes to javascript -->
@@ -83,10 +83,10 @@
             const path_to_root = "";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "searchindex-23f86b14.js";
+            window.path_to_searchindex_js = "searchindex-72308093.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="toc-06779d97.js"></script>
+        <script src="toc-3c9b9cd1.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -243,8 +243,8 @@ plane-wave or PAW framework.</p>
 between kinetic energy (electron hopping, bandwidth \(W\)) and on-site Coulomb repulsion:</p>
 <div>
 \begin{equation}
-    \hat{H}\_{\rm Hub} = -t\sum\_{\langle i,j\rangle,\sigma}\hat{c}\_{i\sigma}^\dagger\hat{c}\_{j\sigma}
-    + U\sum\_i \hat{n}\_{i\uparrow}\hat{n}\_{i\downarrow},
+    \hat{H}_{\rm Hub} = -t\sum_{\langle i,j\rangle,\sigma}\hat{c}_{i\sigma}^\dagger\hat{c}_{j\sigma}
+    + U\sum_i \hat{n}_{i\uparrow}\hat{n}_{i\downarrow},
     \label{eq:Hubbard}
 \end{equation}
 </div>
@@ -281,7 +281,7 @@ over-delocalise \(d\) and \(f\) electrons is a direct consequence.</p>
 at integer electron numbers \(N\):</p>
 <div>
 \begin{equation}
-    \Delta\_{\rm xc} = V\_{\rm xc}^+(N) - V\_{\rm xc}^-(N) &gt; 0,
+    \Delta_{\rm xc} = V_{\rm xc}^+(N) - V_{\rm xc}^-(N) &gt; 0,
     \label{eq:disc}
 \end{equation}
 </div>
@@ -297,13 +297,13 @@ fractional occupations and introduces a step-like potential that mimics the deri
 discontinuity.</p>
 <h2 id="the-dftu-energy-functional"><a class="header" href="#the-dftu-energy-functional">The DFT+U Energy Functional</a></h2>
 <h3 id="occupation-matrix"><a class="header" href="#occupation-matrix">Occupation Matrix</a></h3>
-<p>The central object in DFT+U is the <strong>occupation matrix</strong> \(n_{mm’}^\sigma\) of the correlated
+<p>The central object in DFT+U is the <strong>occupation matrix</strong> \(n_{mm'}^\sigma\) of the correlated
 subspace on each atom \(I\):</p>
 <div>
 \begin{equation}
-    n\_{mm'}^{I\sigma} = \sum\_{\mathbf{k},\nu} f\_{\mathbf{k}\nu\sigma}
-    \langle\phi\_{\mathbf{k}\nu\sigma}|\hat{P}\_{m'}^{I}\rangle
-    \langle\hat{P}\_m^{I}|\phi\_{\mathbf{k}\nu\sigma}\rangle,
+    n_{mm'}^{I\sigma} = \sum_{\mathbf{k},\nu} f_{\mathbf{k}\nu\sigma}
+    \langle\phi_{\mathbf{k}\nu\sigma}|\hat{P}_{m'}^{I}\rangle
+    \langle\hat{P}_m^{I}|\phi_{\mathbf{k}\nu\sigma}\rangle,
     \label{eq:occmat}
 \end{equation}
 </div>
@@ -313,21 +313,21 @@ are the KS spinor states, and \(\hat{P}_m^I = |\chi_m^I\rangle\langle\chi_m^I|\)
 onto the localised orbital \(|\chi_m^I\rangle\) (e.g. the \(d_{m}\) orbital on atom \(I\), with
 \(m = -l, \ldots, l\)). In PAW, these projectors are the on-site partial waves; in LCAO codes,
 they are the basis functions themselves.</p>
-<p>The occupation matrix is Hermitian (\(n_{mm’}^{I\sigma} = (n_{m’m}^{I\sigma})^*\)) and its trace
+<p>The occupation matrix is Hermitian (\(n_{mm'}^{I\sigma} = (n_{m'm}^{I\sigma})^*\)) and its trace
 gives the total occupation of spin channel \(\sigma\) on site \(I\):</p>
 <div>
 \begin{equation}
-    N^{I\sigma} = \sum\_m n\_{mm}^{I\sigma} = \mathrm{Tr}[\mathbf{n}^{I\sigma}].
+    N^{I\sigma} = \sum_m n_{mm}^{I\sigma} = \mathrm{Tr}[\mathbf{n}^{I\sigma}].
 \end{equation}
 </div>
 
-<p>The eigenvalues \({f_\alpha^{I\sigma}}\) of \(\mathbf{n}^{I\sigma}\) lie in \([0,1]\) and are the
+<p>The eigenvalues \(\{f_\alpha^{I\sigma}\}\) of \(\mathbf{n}^{I\sigma}\) lie in \([0,1]\) and are the
 natural orbital occupation numbers of the correlated subspace.</p>
 <h3 id="the-full-dftu-functional"><a class="header" href="#the-full-dftu-functional">The Full DFT+U Functional</a></h3>
 <p>The total DFT+U energy is:</p>
 <div>
 \begin{equation}
-    E\_{\rm DFT+U} = E\_{\rm DFT}[\rho] + E\_U[\{n\_{mm'}^{I\sigma}\}] - E\_{\rm dc}[\{N^{I\sigma}\}],
+    E_{\rm DFT+U} = E_{\rm DFT}[\rho] + E_U[\{n_{mm'}^{I\sigma}\}] - E_{\rm dc}[\{N^{I\sigma}\}],
     \label{eq:DFTU-total}
 \end{equation}
 </div>
@@ -343,9 +343,9 @@ rotationally invariant Coulomb interaction characterised by two parameters: the 
 Coulomb repulsion \(U\) and the average exchange interaction \(J\):</p>
 <div>
 \begin{equation}
-    E\_U^{\rm Lich} = \frac{1}{2}\sum\_{I,\sigma}\sum\_{\{m\}}
-    \left[U\_{m\_1m\_3}^{m\_2m\_4} - \delta\_{\sigma\sigma'}J\_{m\_1m\_3}^{m\_2m\_4}\right]
-    n\_{m\_1m\_2}^{I\sigma}\,n\_{m\_3m\_4}^{I\sigma'},
+    E_U^{\rm Lich} = \frac{1}{2}\sum_{I,\sigma}\sum_{\{m\}}
+    \left[U_{m_1m_3}^{m_2m_4} - \delta_{\sigma\sigma'}J_{m_1m_3}^{m_2m_4}\right]
+    n_{m_1m_2}^{I\sigma}\,n_{m_3m_4}^{I\sigma'},
 \end{equation}
 </div>
 
@@ -360,11 +360,11 @@ radial integrals \(F^0, F^2, F^4\) (for \(d\) orbitals) related to \(U\) and \(J
 \end{equation}
 </div>
 
-<p>The double-counting correction in the Liechtenstein scheme uses the <strong>around mean-field (AMF)</strong>
+<p>The double-counting correction in the standard Liechtenstein scheme uses the <strong>fully localised limit (FLL)</strong>
 form:</p>
 <div>
 \begin{equation}
-    E\_{\rm dc}^{\rm AMF} = \frac{U}{2}N(N-1) - \frac{J}{2}\sum\_\sigma N^\sigma(N^\sigma - 1),
+    E_{\rm dc}^{\rm FLL} = \frac{U}{2}N(N-1) - \frac{J}{2}\sum_\sigma N^\sigma(N^\sigma - 1),
 \end{equation}
 </div>
 
@@ -375,7 +375,7 @@ preferred. It collapses \(U\) and \(J\) into a single effective parameter \(U_{\
 writes the correction as a penalty on fractional orbital occupations:</p>
 <div>
 \begin{equation}
-    \boxed{E\_U^{\rm Dur} = \frac{U\_{\rm eff}}{2}\sum\_{I,\sigma}
+    \boxed{E_U^{\rm Dur} = \frac{U_{\rm eff}}{2}\sum_{I,\sigma}
     \mathrm{Tr}\!\left[\mathbf{n}^{I\sigma}\!\left(\mathbf{1} - \mathbf{n}^{I\sigma}\right)\right].}
     \label{eq:Dudarev}
 \end{equation}
@@ -390,7 +390,7 @@ stabilise unphysical non-integer occupations.</p>
 <p>The corresponding correction to the KS potential is:</p>
 <div>
 \begin{equation}
-    V\_{mm'}^{I\sigma,\rm DFT+U} = \frac{U\_{\rm eff}}{2}\left(\delta\_{mm'} - 2n\_{mm'}^{I\sigma}\right),
+    V_{mm'}^{I\sigma,\rm DFT+U} = \frac{U_{\rm eff}}{2}\left(\delta_{mm'} - 2n_{mm'}^{I\sigma}\right),
     \label{eq:Vpot}
 \end{equation}
 </div>
@@ -421,7 +421,7 @@ double-counting absorbed algebraically. No separate choice of double-counting sc
 <p><strong>Conditions under which Dudarev and Liechtenstein are equivalent.</strong> The Dudarev functional is obtained from the Liechtenstein functional by making two approximations:</p>
 <ol>
 <li>
-<p><strong>Isotropic (spherically averaged) Coulomb interaction</strong>: replace the full Slater integrals \(U_{m_1m_3}^{m_2m_4}\) by their spherical average \(U,\delta_{m_1m_2}\delta_{m_3m_4} - J,\delta_{m_1m_4}\delta_{m_2m_3}\).</p>
+<p><strong>Isotropic (spherically averaged) Coulomb interaction</strong>: replace the full Slater integrals \(U_{m_1m_3}^{m_2m_4}\) by their spherical average \(U\,\delta_{m_1m_2}\delta_{m_3m_4} - J\,\delta_{m_1m_4}\delta_{m_2m_3}\).</p>
 </li>
 <li>
 <p><strong>FLL double-counting with \(J = 0\) in the double-counting term</strong>: when the FLL double-counting correction is applied and the exchange term \(J\) is absorbed into \(U_{\rm eff}\), the Liechtenstein energy reduces exactly to the Dudarev form.</p>
@@ -439,22 +439,20 @@ subspace and the rest. Two schemes are in common use:</p>
 <p><strong>Fully localised limit (FLL)</strong>, also called the atomic limit:</p>
 <div>
 \begin{equation}
-    E\_{\rm dc}^{\rm FLL} = \frac{U}{2}N(N-1) - \frac{J}{2}\left[\frac{N}{2}\!\left(\frac{N}{2}-1\right) + \frac{N}{2}\!\left(\frac{N}{2}-1\right)\right],
+    E_{\rm dc}^{\rm FLL} = \frac{U}{2}N(N-1) - \frac{J}{2}\sum_\sigma N^\sigma(N^\sigma - 1),
     \label{eq:FLL}
 \end{equation}
 </div>
 
-<p>valid when the correlated orbital is nearly fully occupied or nearly empty (close to the atomic
-limit). This is appropriate for \(f\)-electron systems and late transition metal oxides.</p>
+<p>which reduces to \(\frac{U}{2}N(N-1) - \frac{J}{2}N\left(\frac{N}{2}-1\right)\) in the spin-unpolarised limit (\(N^\uparrow = N^\downarrow = N/2\)), valid when the correlated orbital is nearly fully occupied or nearly empty (close to the atomic limit). This is appropriate for \(f\)-electron systems and late transition metal oxides.</p>
 <p><strong>Around mean-field (AMF):</strong></p>
 <div>
 \begin{equation}
-    E\_{\rm dc}^{\rm AMF} = \frac{U}{2}\bar{n}(N-1) - \frac{J}{2}\sum\_\sigma\bar{n}^\sigma(N^\sigma - 1),
+    E_{\rm dc}^{\rm AMF} = \frac{U}{2}N^2 - \frac{U + 2lJ}{2(2l+1)}\sum_\sigma (N^\sigma)^2,
 \end{equation}
 </div>
 
-<p>where \(\bar{n} = N/(2l+1)\) is the average occupation per orbital. This is appropriate when the
-occupations are close to the average (near the itinerant limit).</p>
+<p>where \(l\) is the angular momentum quantum number of the correlated shell (degeneracy \(2l+1\) per spin). This corresponds to evaluating the mean-field interaction at the uniform orbital occupancy \(\bar{n}^\sigma = N^\sigma/(2l+1)\) and is appropriate when the occupations are close to the average (near the itinerant limit).</p>
 <p>The FLL correction gives a larger energy shift for occupied orbitals and is the standard choice
 in most codes. However, the double-counting error is a fundamental limitation of DFT+U: since
 it cannot be derived from first principles, it introduces an uncontrolled approximation that
@@ -493,7 +491,7 @@ localised perturbation potential \(\alpha^I\) applied to site \(I\) (Cococcioni 
 2005):</p>
 <div>
 \begin{equation}
-    U^I = \left(\chi\_0^{-1} - \chi^{-1}\right)^{II},
+    U^I = \left(\chi_0^{-1} - \chi^{-1}\right)^{II},
     \label{eq:LR-U}
 \end{equation}
 </div>
@@ -516,7 +514,7 @@ the partially screened Coulomb interaction \(W(\omega)\) by excluding the screen
 correlated subspace itself (to avoid double counting):</p>
 <div>
 \begin{equation}
-    U(\omega) = \langle\chi\_m\chi\_{m'}|W\_r(\omega)|\chi\_m\chi\_{m'}\rangle,
+    U(\omega) = \langle\chi_m\chi_{m'}|W_r(\omega)|\chi_m\chi_{m'}\rangle,
 \end{equation}
 </div>
 
@@ -537,14 +535,14 @@ DFT+U with \(U_{\rm eff} \approx 5\) eV correctly gives an insulating gap \(\sim
 manganites and other Jahn–Teller active systems.</p>
 <p><strong>Magnetic moments.</strong> By localising the \(d/f\) electrons, DFT+U increases the local spin moment
 towards the ionic limit. For Fe\(^{3+}\) in an oxide (half-filled \(3d\), \(S = 5/2\)), GGA gives
-moments of \(\sim 3.5,\mu_B\); DFT+U with appropriate \(U\) gives \(\sim 4.2,\mu_B\), closer to
-the ionic value of \(5.0,\mu_B\).</p>
+moments of \(\sim 3.5\,\mu_B\); DFT+U with appropriate \(U\) gives \(\sim 4.2\,\mu_B\), closer to
+the ionic value of \(5.0\,\mu_B\).</p>
 <p><strong>Exchange coupling \(J\).</strong> The exchange coupling constants extracted from DFT+U are generally
 more reliable than from GGA for Mott insulators, because the localised occupations improve the
 description of the superexchange mechanism. For half-metallic Heusler alloys, DFT+U may be
 needed when one or more magnetic sublattice contains strongly correlated \(d\) states.</p>
 <p><strong>Lattice parameters and forces.</strong> The occupation-dependent potential modifies the forces on
-ions, generally increasing bond lengths for correlated oxides by \(\sim 0.5\)–\(2%\) towards
+ions, generally increasing bond lengths for correlated oxides by \(\sim 0.5\)–\(2\%\) towards
 experiment.</p>
 <h2 id="multiple-correlated-sites-and-inter-site-u"><a class="header" href="#multiple-correlated-sites-and-inter-site-u">Multiple Correlated Sites and Inter-Site \(U\)</a></h2>
 <p>When a material contains more than one type of correlated atom (e.g. both Fe and Co in a double
@@ -552,7 +550,7 @@ perovskite, or both \(3d\) transition metal and \(4f\) rare earth), separate \(U
 applied to each:</p>
 <div>
 \begin{equation}
-    E\_U^{\rm multi} = \sum\_{I \in \{ \rm correlated\}} \frac{U\_{\rm eff}^{(I)}}{2}\sum\_\sigma\mathrm{Tr}\!\left[\mathbf{n}^{I\sigma}(\mathbf{1} - \mathbf{n}^{I\sigma})\right],
+    E_U^{\rm multi} = \sum_{I \in \{ \rm correlated\}} \frac{U_{\rm eff}^{(I)}}{2}\sum_\sigma\mathrm{Tr}\!\left[\mathbf{n}^{I\sigma}(\mathbf{1} - \mathbf{n}^{I\sigma})\right],
     \label{eq:multi-U}
 \end{equation}
 </div>
@@ -560,9 +558,7 @@ applied to each:</p>
 <p>with each \(U_{\rm eff}^{(I)}\) chosen from linear-response, cRPA, or empirical fitting on the
 corresponding sublattice. In VASP this is done by providing per-element <code>LDAUL</code> (target \(\ell\))
 and <code>LDAUU</code>/<code>LDAUJ</code> arrays; in Quantum ESPRESSO, by listing <code>Hubbard_U(itype)</code> per atomic species.
-A worked example is LaMnO\(_3\) with both Mn (\(3d\), \(U_{\rm eff} \approx 4\) eV) and La (\(4f\),
-\(U_{\rm eff} \approx 7\) eV) treated explicitly — necessary in the rare-earth manganites where
-the \(4f\) shell is partially filled and hybridises with the Mn states.</p>
+A worked example is a rare-earth manganite \(R\text{MnO}_3\) (such as \(\text{NdMnO}_3\) or \(\text{PrMnO}_3\)), where both Mn (\(3d\), \(U_{\rm eff} \approx 4\) eV) and the rare-earth ion (\(4f\), \(U_{\rm eff} \approx 7\) eV) have partially filled shells that hybridise with oxygen states. (Even in \(\text{LaMnO}_3\), where \(\text{La}^{3+}\) is nominally \(4f^0\), a Hubbard \(U\) is sometimes applied to empty La \(4f\) states to shift spurious DFT \(4f\) resonances above the conduction band edge.)</p>
 <h3 id="dftuv-inter-site-hubbard-term"><a class="header" href="#dftuv-inter-site-hubbard-term">DFT+U+V: Inter-Site Hubbard Term</a></h3>
 <p>The Hubbard \(U\) corrects on-site Coulomb repulsion but ignores the residual <em>inter-site</em>
 electron–electron interaction \(V_{IJ}\) between neighbouring correlated atoms. This nearest-neighbour
@@ -571,10 +567,10 @@ hybridisation competes with on-site localisation — e.g. transition-metal oxide
 \(p\text{–}d\) covalency such as NiO, MnO, the cuprates, and topological materials at the boundary
 between band insulators and Mott insulators.</p>
 <p>The <strong>DFT+U+V</strong> extension (Campo and Cococcioni, 2010) adds a Hubbard-like penalty for inter-site
-occupation matrices \(n_{mm’}^{IJ\sigma} = \sum_{\mathbf{k}\nu} f_{\mathbf{k}\nu\sigma}\langle\phi_{\mathbf{k}\nu\sigma}|\hat{P}_{m’}^J\rangle\langle\hat{P}_m^I|\phi_{\mathbf{k}\nu\sigma}\rangle\):</p>
+occupation matrices \(n_{mm'}^{IJ\sigma} = \sum_{\mathbf{k}\nu} f_{\mathbf{k}\nu\sigma}\langle\phi_{\mathbf{k}\nu\sigma}|\hat{P}_{m'}^J\rangle\langle\hat{P}_m^I|\phi_{\mathbf{k}\nu\sigma}\rangle\):</p>
 <div>
 \begin{equation}
-    E\_{U+V} = E\_U - \sum\_{\langle I,J\rangle, \sigma} \frac{V\_{IJ}}{2}\,\mathrm{Tr}\!\left[\mathbf{n}^{IJ\sigma}\mathbf{n}^{JI\sigma}\right],
+    E_{U+V} = E_U - \sum_{\langle I,J\rangle, \sigma} \frac{V_{IJ}}{2}\,\mathrm{Tr}\!\left[\mathbf{n}^{IJ\sigma}\mathbf{n}^{JI\sigma}\right],
     \label{eq:DFT-U-V}
 \end{equation}
 </div>
@@ -592,20 +588,20 @@ available in Quantum ESPRESSO (<code>Hubbard_V</code>) and in development for VA
 <h2 id="worked-example-nio-from-gga-to-dftu"><a class="header" href="#worked-example-nio-from-gga-to-dftu">Worked Example: NiO from GGA to DFT+U</a></h2>
 <p>NiO is the canonical test case for DFT+U. Its experimental ground state is an antiferromagnetic
 (AFM-II ordering) insulator with a charge-transfer gap of \(\sim 4.0\) eV and a Ni magnetic
-moment of \(1.6\)–\(1.9,\mu_B\). The Ni\(^{2+}\) ion has the \(3d^8\) configuration with \(S = 1\),
+moment of \(1.6\)–\(1.9\,\mu_B\). The Ni\(^{2+}\) ion has the \(3d^8\) configuration with \(S = 1\),
 in an octahedral O environment that splits the \(d\) shell into \(t_{2g}\) (fully occupied,
 6 electrons) and \(e_g\) (half occupied, 2 electrons spin-polarised).</p>
 <p><strong>Standard GGA (PBE).</strong> A standard PBE calculation of antiferromagnetic NiO predicts:</p>
 <ul>
 <li>A <strong>metallic</strong> ground state (or, depending on cell setup, a tiny gap of \(0.2\)–\(0.4\) eV).</li>
-<li>A Ni moment of \(\sim 1.3,\mu_B\), much smaller than experiment.</li>
+<li>A Ni moment of \(\sim 1.3\,\mu_B\), much smaller than experiment.</li>
 <li>A density of states (DOS) at the Fermi level dominated by Ni \(e_g\) states hybridised with
 O \(2p\), with no separation between the upper and lower Hubbard subbands.</li>
 </ul>
 <p>Both errors trace back to the same cause: PBE overdelocalises the Ni \(3d\) electrons because
 the SIE artificially lowers their on-site energy.</p>
 <p><strong>DFT+U with \(U_{\rm eff} = 5.0\) eV.</strong> Applying the Dudarev correction to the Ni \(3d\) orbitals
-opens a gap of \(\sim 3.0\)–\(3.5\) eV and increases the Ni moment to \(\sim 1.7,\mu_B\) — in good
+opens a gap of \(\sim 3.0\)–\(3.5\) eV and increases the Ni moment to \(\sim 1.7\,\mu_B\) — in good
 agreement with experiment. Schematically, the projected DOS reorganises as follows:</p>
 <pre><code>  Energy ↑
   ────────────────────────────────────────
@@ -680,7 +676,7 @@ photoemission features.</p>
 2006), which treats the local correlated subspace exactly by solving an effective Anderson
 impurity problem self-consistently with the DFT band structure. The Hubbard \(U\) becomes a
 matrix in occupation space rather than a single number, and the resulting self-energy
-\(\Sigma_{mm’}(\omega)\) is fully frequency-dependent. DFT+DMFT captures all four phenomena
+\(\Sigma_{mm'}(\omega)\) is fully frequency-dependent. DFT+DMFT captures all four phenomena
 listed above and is the de-facto standard for compounds like V\(_2\)O\(_3\), SrVO\(_3\), heavy
 fermions (CeRu\(_2\)Si\(_2\), URu\(_2\)Si\(_2\)), and iron pnictides. The computational cost is
 substantial — an impurity solver (continuous-time QMC, NRG, exact diagonalisation) is called
@@ -696,7 +692,7 @@ many times per DFT iteration — and the implementations are still less mature t
 <tr><td>Hybrid (HSE06)</td><td>Partial via exact exchange</td><td>Static, non-local</td><td>Partially</td><td>No</td><td>\(\mathcal{O}(N^3\)–\(N^4)\)</td></tr>
 <tr><td>DFT+U</td><td>Static, on-site</td><td>Static, orbital-dependent</td><td>Yes</td><td>No</td><td>\(\mathcal{O}(N^3)\)</td></tr>
 <tr><td>DFT+DMFT</td><td>Dynamical, on-site</td><td>\(\Sigma(\omega)\), local</td><td>Yes</td><td>Yes</td><td>\(\mathcal{O}(N^3)\times N_{\rm imp}\)</td></tr>
-<tr><td>DFT+GW</td><td>Non-local, dynamical</td><td>\(\Sigma(\mathbf{r},\mathbf{r}’,\omega)\)</td><td>Yes (qualitatively)</td><td>Yes (qualitatively)</td><td>\(\mathcal{O}(N^4)\)</td></tr>
+<tr><td>DFT+GW</td><td>Non-local, dynamical</td><td>\(\Sigma(\mathbf{r},\mathbf{r}',\omega)\)</td><td>Yes (qualitatively)</td><td>Yes (qualitatively)</td><td>\(\mathcal{O}(N^4)\)</td></tr>
 </tbody>
 </table>
 </div>
@@ -736,7 +732,7 @@ different structures or configurations using the <em>same</em> \(U\) value and p
 </li>
 <li>
 <p><strong>Forces and relaxation.</strong> DFT+U forces include the derivative of the Hubbard term and are
-well-defined, but bond lengths typically increase by \(0.5\)–\(2%\). Re-relax structures
+well-defined, but bond lengths typically increase by \(0.5\)–\(2\%\). Re-relax structures
 with DFT+U if the geometry depends on the correlated-electron localisation.</p>
 </li>
 </ol>
@@ -810,7 +806,7 @@ iterative diagonalisation of the KS Hamiltonian (Chapter 10).</p>
 
         <script src="clipboard-1626706a.min.js"></script>
         <script src="highlight-abc7f01d.js"></script>
-        <script src="book-c22b7243.js"></script>
+        <script src="book-609e4cb8.js"></script>
 
         <!-- Custom JS scripts -->
         <script src="src/custom-cd58eebe.js"></script>

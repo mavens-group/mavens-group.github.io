@@ -62,8 +62,8 @@
         <link rel="icon" href="favicon-de23e50b.svg">
         <link rel="shortcut icon" href="favicon-8114d1fc.png">
         <link rel="stylesheet" href="css/variables-8adf115d.css">
-        <link rel="stylesheet" href="css/general-0392ca55.css">
-        <link rel="stylesheet" href="css/chrome-fc474251.css">
+        <link rel="stylesheet" href="css/general-e96d0476.css">
+        <link rel="stylesheet" href="css/chrome-d279d366.css">
         <link rel="stylesheet" href="css/print-9e4910d8.css" media="print">
 
         <!-- Fonts -->
@@ -75,7 +75,7 @@
         <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="ayu-highlight-3fdfc3ac.css">
 
         <!-- Custom theme stylesheets -->
-        <link rel="stylesheet" href="src/custom-5f363160.css">
+        <link rel="stylesheet" href="src/custom-ee915ece.css">
 
 
         <!-- Provide site root and default themes to javascript -->
@@ -83,10 +83,10 @@
             const path_to_root = "";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "searchindex-23f86b14.js";
+            window.path_to_searchindex_js = "searchindex-72308093.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="toc-06779d97.js"></script>
+        <script src="toc-3c9b9cd1.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -238,7 +238,7 @@ exchange coupling constants \(J\), and magnetic anisotropy energies (MAE).</p>
 fundamental variable is replaced by the <strong>spin-resolved density</strong>:</p>
 <div>
 \begin{equation}
-    \rho\_\sigma(\mathbf{r}) = \sum\_{i} f\_{i\sigma}\,|\phi\_{i\sigma}(\mathbf{r})|^2, \qquad \sigma \in \{\uparrow, \downarrow\},
+    \rho_\sigma(\mathbf{r}) = \sum_{i} f_{i\sigma}\,|\phi_{i\sigma}(\mathbf{r})|^2, \qquad \sigma \in \{\uparrow, \downarrow\},
 \end{equation}
 </div>
 
@@ -246,9 +246,9 @@ fundamental variable is replaced by the <strong>spin-resolved density</strong>:<
 spin \(\sigma\). The total and magnetisation densities are:</p>
 <div>
 \begin{equation}
-    \rho(\mathbf{r}) = \rho\_\uparrow(\mathbf{r}) + \rho\_\downarrow(\mathbf{r}),
+    \rho(\mathbf{r}) = \rho_\uparrow(\mathbf{r}) + \rho_\downarrow(\mathbf{r}),
     \qquad
-    m(\mathbf{r}) = \rho\_\uparrow(\mathbf{r}) - \rho\_\downarrow(\mathbf{r}).
+    m(\mathbf{r}) = \rho_\uparrow(\mathbf{r}) - \rho_\downarrow(\mathbf{r}).
 \end{equation}
 </div>
 
@@ -257,14 +257,14 @@ spin \(\sigma\). The total and magnetisation densities are:</p>
 The total energy functional becomes:</p>
 <div>
 \begin{equation}
-    E[\rho\_\uparrow, \rho\_\downarrow] = T\_s[\rho\_\uparrow, \rho\_\downarrow] + E\_{\rm H}[\rho] + E\_{\rm xc}[\rho\_\uparrow, \rho\_\downarrow] + \int V\_{\rm ext}(\mathbf{r})\,\rho(\mathbf{r})\,d\mathbf{r}.
+    E[\rho_\uparrow, \rho_\downarrow] = T_s[\rho_\uparrow, \rho_\downarrow] + E_{\rm H}[\rho] + E_{\rm xc}[\rho_\uparrow, \rho_\downarrow] + \int V_{\rm ext}(\mathbf{r})\,\rho(\mathbf{r})\,d\mathbf{r}.
 \end{equation}
 </div>
 
 <p>The two sets of spin-channel KS equations decouple:</p>
 <div>
 \begin{equation}
-    \left[-\frac{1}{2}\nabla^2 + V\_{\rm eff}^\sigma(\mathbf{r})\right]\phi\_{i\sigma}(\mathbf{r}) = \epsilon\_{i\sigma}\,\phi\_{i\sigma}(\mathbf{r}),
+    \left[-\frac{1}{2}\nabla^2 + V_{\rm eff}^\sigma(\mathbf{r})\right]\phi_{i\sigma}(\mathbf{r}) = \epsilon_{i\sigma}\,\phi_{i\sigma}(\mathbf{r}),
     \label{eq:SDFT-KS}
 \end{equation}
 </div>
@@ -272,8 +272,8 @@ The total energy functional becomes:</p>
 <p>with spin-dependent effective potentials:</p>
 <div>
 \begin{equation}
-    V\_{\rm eff}^\sigma(\mathbf{r}) = V\_{\rm ext}(\mathbf{r}) + V\_{\rm H}(\mathbf{r}) + V\_{\rm xc}^\sigma(\mathbf{r}),
-    \qquad V\_{\rm xc}^\sigma = \frac{\delta E\_{\rm xc}}{\delta \rho\_\sigma(\mathbf{r})}.
+    V_{\rm eff}^\sigma(\mathbf{r}) = V_{\rm ext}(\mathbf{r}) + V_{\rm H}(\mathbf{r}) + V_{\rm xc}^\sigma(\mathbf{r}),
+    \qquad V_{\rm xc}^\sigma = \frac{\delta E_{\rm xc}}{\delta \rho_\sigma(\mathbf{r})}.
 \end{equation}
 </div>
 
@@ -286,7 +286,7 @@ origin of the <strong>exchange splitting</strong> that drives ferromagnetism.</p
 arguments. For the LDA, the <strong>local spin-density approximation (LSDA)</strong> uses the XC energy of a
 spin-polarised uniform electron gas:</p>
 <p>\[
-E_{\rm xc}^{\rm LSDA}[\rho_\uparrow, \rho_\downarrow] = \int \varepsilon_{\rm xc}^{\rm UEG}(\rho_\uparrow(\mathbf{r}), \rho_\downarrow(\mathbf{r})),\rho(\mathbf{r}),d\mathbf{r}.
+E_{\rm xc}^{\rm LSDA}[\rho_\uparrow, \rho_\downarrow] = \int \varepsilon_{\rm xc}^{\rm UEG}(\rho_\uparrow(\mathbf{r}), \rho_\downarrow(\mathbf{r}))\,\rho(\mathbf{r})\,d\mathbf{r}.
 \]</p>
 <p><strong>The Oliver–Perdew spin-scaling relation for exchange.</strong> For exchange, the spin-polarised
 energy can be written exactly in terms of the spin-unpolarised functional. Note first that a
@@ -295,7 +295,7 @@ exchange energy as a spin-unpolarised gas of density \(2\rho\) per spin channel 
 spin channel separately is a closed UEG, and exchange only acts between same-spin electrons.
 This gives the <strong>spin-scaling relation</strong> (Oliver and Perdew, 1979):</p>
 <p>\[
-E_{\rm x}[\rho_\uparrow, \rho_\downarrow] = \frac{1}{2}!\left( E_{\rm x}[2\rho_\uparrow] + E_{\rm x}[2\rho_\downarrow] \right),
+E_{\rm x}[\rho_\uparrow, \rho_\downarrow] = \frac{1}{2}\!\left( E_{\rm x}[2\rho_\uparrow] + E_{\rm x}[2\rho_\downarrow] \right),
 \]</p>
 <p>where \(E_{\rm x}[\rho]\) on the right is the spin-unpolarised exchange functional evaluated at
 twice the density of each spin channel. Substituting the Dirac form \(\varepsilon_{\rm x}^{\rm UEG}(\rho) = -\tfrac{3}{4}(3/\pi)^{1/3}\rho^{1/3}\) and writing \(\zeta = (\rho_\uparrow - \rho_\downarrow)/\rho\), the result simplifies to:</p>
@@ -327,7 +327,7 @@ interpolations parametrised against UEG data.</p>
 <p>The <strong>local magnetic moment</strong> on site \(A\) is:</p>
 <div>
 \begin{equation}
-    \mu\_A = \int\_{\Omega\_A} m(\mathbf{r})\,d\mathbf{r} = \int\_{\Omega\_A} [\rho\_\uparrow(\mathbf{r}) - \rho\_\downarrow(\mathbf{r})]\,d\mathbf{r},
+    \mu_A = \int_{\Omega_A} m(\mathbf{r})\,d\mathbf{r} = \int_{\Omega_A} [\rho_\uparrow(\mathbf{r}) - \rho_\downarrow(\mathbf{r})]\,d\mathbf{r},
 \end{equation}
 </div>
 
@@ -335,29 +335,29 @@ interpolations parametrised against UEG data.</p>
 magnetisation is:</p>
 <div>
 \begin{equation}
-    M = \int m(\mathbf{r})\,d\mathbf{r} = N\_\uparrow - N\_\downarrow,
+    M = \int m(\mathbf{r})\,d\mathbf{r} = N_\uparrow - N_\downarrow,
 \end{equation}
 </div>
 
-<p>where \(N_\sigma = \int \rho_\sigma,d\mathbf{r}\) is the total number of electrons of spin
+<p>where \(N_\sigma = \int \rho_\sigma\,d\mathbf{r}\) is the total number of electrons of spin
 \(\sigma\).</p>
-<p>For elemental ferromagnets, SDFT recovers the experimental moments well: Fe (\(2.2,\mu_B\) exp.,
-\(2.1\)–\(2.3,\mu_B\) DFT), Co (\(1.7,\mu_B\)), Ni (\(0.6,\mu_B\)). Orbital contributions (from
+<p>For elemental ferromagnets, SDFT recovers the experimental moments well: Fe (\(2.2\,\mu_B\) exp.,
+\(2.1\)–\(2.3\,\mu_B\) DFT), Co (\(1.7\,\mu_B\)), Ni (\(0.6\,\mu_B\)). Orbital contributions (from
 spin–orbit coupling) are not included at the collinear SDFT level.</p>
 <h3 id="the-stoner-criterion"><a class="header" href="#the-stoner-criterion">The Stoner Criterion</a></h3>
 <p>A natural question is: <em>when</em> will SDFT spontaneously break spin symmetry to produce a magnetic
 ground state? The answer is given by the <strong>Stoner criterion</strong> — the microscopic condition for
 itinerant ferromagnetism, derivable from SDFT in the linear-response limit.</p>
 <p>Consider a small spin polarisation \(\delta m\) imposed on a non-magnetic metal. The exchange
-splitting that develops is approximately \(\Delta_{\rm xc} = I,\delta m\), where \(I\) is the
+splitting that develops is approximately \(\Delta_{\rm xc} = I\,\delta m\), where \(I\) is the
 <strong>Stoner exchange integral</strong> — essentially the magnitude of the spin-asymmetric XC potential per
 unit magnetisation. The number of electrons that flip from \(\downarrow\) to \(\uparrow\) in response
-to this splitting is \(\delta m = N(\epsilon_F) \Delta_{\rm xc} = N(\epsilon_F) I,\delta m\), where
+to this splitting is \(\delta m = N(\epsilon_F) \Delta_{\rm xc} = N(\epsilon_F) I\,\delta m\), where
 \(N(\epsilon_F)\) is the density of states at the Fermi level per spin channel. Self-consistency
-\(\delta m = N(\epsilon_F) I,\delta m\) admits a non-trivial solution \(\delta m \neq 0\) only when:</p>
+\(\delta m = N(\epsilon_F) I\,\delta m\) admits a non-trivial solution \(\delta m \neq 0\) only when:</p>
 <div>
 \begin{equation}
-    I \, N(\epsilon\_F) &gt; 1.
+    I \, N(\epsilon_F) &gt; 1.
     \label{eq:Stoner}
 \end{equation}
 </div>
@@ -401,30 +401,32 @@ and compare: \(\Delta E = E_{\rm AFM} - E_{\rm FM}\).</p>
 Hamiltonian</strong>:</p>
 <div>
 \begin{equation}
-    \hat{\mathcal{H}}\_{\rm Heis} = -\sum\_{\langle i,j\rangle} J\_{ij}\,\hat{\mathbf{S}}\_i \cdot \hat{\mathbf{S}}\_j,
+    \hat{\mathcal{H}}_{\rm Heis} = -\sum_{\langle i,j\rangle} J_{ij}\,\hat{\mathbf{S}}_i \cdot \hat{\mathbf{S}}_j,
 \end{equation}
 </div>
 
-<p>where \(\hat{\mathbf{S}}_i\) is the spin operator on site \(i\) and \(J_{ij}\) is the <strong>exchange
+<p>where \(\hat{\mathbf{S}}_i\) is the spin operator on site \(i\), the sum \(\sum_{\langle i,j\rangle}\) counts each distinct interacting pair once, and \(J_{ij}\) is the <strong>exchange
 coupling constant</strong> between sites \(i\) and \(j\). The sign convention: \(J &gt; 0\) favours FM
 alignment; \(J \lt 0\) favours AFM.</p>
 <h3 id="extraction-of-j-from-total-energies"><a class="header" href="#extraction-of-j-from-total-energies">Extraction of \(J\) from Total Energies</a></h3>
-<p>For a two-sublattice system with spin \(S\) per site, the energy difference between FM and AFM
-configurations (with \(z\) equivalent nearest-neighbour pairs per formula unit) is:</p>
+<p>For a two-sublattice system (two magnetic sites per formula unit, each with \(z\) nearest neighbours on the opposite sublattice, i.e. \(z\) distinct nearest-neighbour pairs per formula unit) with spin \(S\) per site, the energy difference per formula unit between AFM and FM configurations is:</p>
 <div>
 \begin{equation}
-    \Delta E = E\_{\rm AFM} - E\_{\rm FM} = 2J\,z\,S^2.
+    \Delta E = E_{\rm AFM} - E_{\rm FM} = 2J\,z\,S^2,
     \label{eq:J-extraction}
 \end{equation}
 </div>
 
-<p>Hence:</p>
+<p>(equivalently \(J z S^2\) per magnetic atom). Hence:</p>
 <div>
 \begin{equation}
-    J = \frac{E\_{\rm AFM} - E\_{\rm FM}}{2\,z\,S^2}.
+    J = \frac{E_{\rm AFM} - E_{\rm FM}}{2\,z\,S^2}.
 \end{equation}
 </div>
 
+<blockquote>
+<p><strong>Convention warning:</strong> Published values of \(J\) often differ by a factor of 2 (or \(S^2\)) depending on whether the Heisenberg sum counts each bond once (\(-\sum_{\langle i,j\rangle} J_{ij}\mathbf{S}_i\cdot\mathbf{S}_j\)) or sums over ordered pairs (\(-\frac{1}{2}\sum_{i\neq j} J_{ij}\mathbf{S}_i\cdot\mathbf{S}_j\) or \(-\sum_{i\neq j} J_{ij}\mathbf{S}_i\cdot\mathbf{S}_j\)), and whether spins are normalised to unit vectors \(\hat{\mathbf{e}}_i\). Always state the Hamiltonian convention alongside extracted \(J\) values.</p>
+</blockquote>
 <p>For more complex magnetic structures with multiple shells of neighbours, the <strong>four-state
 method</strong> (Xiang et al.) or the <strong>spin-spiral approach</strong> (Section below) provides a systematic
 way to disentangle \(J_1, J_2, J_3, \ldots\)</p>
@@ -433,7 +435,7 @@ way to disentangle \(J_1, J_2, J_3, \ldots\)</p>
 computes \(J_{ij}\) directly from the Green’s function:</p>
 <div>
 \begin{equation}
-    J\_{ij} = \frac{1}{4\pi}\int\_{-\infty}^{E\_F} {\rm Im}\,{\rm Tr}\_L\left[\Delta\_i G\_{ij}^\uparrow(E)\,\Delta\_j G\_{ji}^\downarrow(E)\right]\,dE,
+    J_{ij} = \frac{1}{4\pi}\int_{-\infty}^{E_F} {\rm Im}\,{\rm Tr}_L\left[\Delta_i G_{ij}^\uparrow(E)\,\Delta_j G_{ji}^\downarrow(E)\right]\,dE,
 \end{equation}
 </div>
 
@@ -460,7 +462,7 @@ present, and it may vary in space.</li>
 (\(J &gt; 0\)) or antiparallel (\(J &lt; 0\)) configurations. Its form is:</p>
 <div>
 \begin{equation}
-    \hat{\mathcal{H}}\_{\rm DMI} = \sum\_{\langle i,j\rangle} \mathbf{D}\_{ij}\cdot\left(\hat{\mathbf{S}}\_i \times \hat{\mathbf{S}}\_j\right),
+    \hat{\mathcal{H}}_{\rm DMI} = \sum_{\langle i,j\rangle} \mathbf{D}_{ij}\cdot\left(\hat{\mathbf{S}}_i \times \hat{\mathbf{S}}_j\right),
     \label{eq:DMI}
 \end{equation}
 </div>
@@ -487,7 +489,7 @@ generalised to the off-diagonal spin-flip channels.</p>
 matrix in spin space:</p>
 <div>
 \begin{equation}
-    n\_{\alpha\beta}(\mathbf{r}) = \sum\_i f\_i\,\phi\_i^\alpha(\mathbf{r})\left(\phi\_i^\beta(\mathbf{r})\right)^*,
+    n_{\alpha\beta}(\mathbf{r}) = \sum_i f_i\,\phi_i^\alpha(\mathbf{r})\left(\phi_i^\beta(\mathbf{r})\right)^*,
     \qquad \alpha,\beta \in \{\uparrow,\downarrow\},
 \end{equation}
 </div>
@@ -495,7 +497,7 @@ matrix in spin space:</p>
 <p>which is related to the magnetisation density vector \(\mathbf{m}(\mathbf{r})\) via:</p>
 <div>
 \begin{equation}
-    n\_{\alpha\beta} = \frac{1}{2}\left[\rho\,\delta\_{\alpha\beta} + \mathbf{m}\cdot\boldsymbol{\sigma}\_{\alpha\beta}\right],
+    n_{\alpha\beta} = \frac{1}{2}\left[\rho\,\delta_{\alpha\beta} + \mathbf{m}\cdot\boldsymbol{\sigma}_{\alpha\beta}\right],
 \end{equation}
 </div>
 
@@ -503,15 +505,15 @@ matrix in spin space:</p>
 <p>The KS orbitals become two-component <strong>spinors</strong> \(\boldsymbol{\phi}_i = (\phi_i^\uparrow, \phi_i^\downarrow)^T\), and the KS equations take the matrix form:</p>
 <div>
 \begin{equation}
-    \left[-\frac{1}{2}\nabla^2\,\mathbf{I} + \mathbf{V}\_{\rm eff}(\mathbf{r})\right]\boldsymbol{\phi}\_i(\mathbf{r}) = \epsilon\_i\,\boldsymbol{\phi}\_i(\mathbf{r}),
+    \left[-\frac{1}{2}\nabla^2\,\mathbf{I} + \mathbf{V}_{\rm eff}(\mathbf{r})\right]\boldsymbol{\phi}_i(\mathbf{r}) = \epsilon_i\,\boldsymbol{\phi}_i(\mathbf{r}),
 \end{equation}
 </div>
 
 <p>with the \(2\times 2\) effective potential:</p>
 <div>
 \begin{equation}
-    \mathbf{V}\_{\rm eff}(\mathbf{r}) = \left[V\_{\rm ext} + V\_{\rm H} + V\_{\rm xc}^{(0)}\right]\mathbf{I}
-    - \mathbf{B}\_{\rm xc}(\mathbf{r})\cdot\boldsymbol{\sigma},
+    \mathbf{V}_{\rm eff}(\mathbf{r}) = \left[V_{\rm ext} + V_{\rm H} + V_{\rm xc}^{(0)}\right]\mathbf{I}
+    - \mathbf{B}_{\rm xc}(\mathbf{r})\cdot\boldsymbol{\sigma},
 \end{equation}
 </div>
 
@@ -524,7 +526,7 @@ magnetic moment with the magnetic field it experiences due to its orbital motion
 nucleus. In the Pauli approximation it takes the form:</p>
 <div>
 \begin{equation}
-    \hat{H}\_{\rm SOC} = \frac{\hbar^2}{4m\_e^2c^2}\frac{1}{r}\frac{dV}{dr}\,\hat{\mathbf{L}}\cdot\hat{\mathbf{S}},
+    \hat{H}_{\rm SOC} = \frac{\hbar^2}{4m_e^2c^2}\frac{1}{r}\frac{dV}{dr}\,\hat{\mathbf{L}}\cdot\hat{\mathbf{S}},
 \end{equation}
 </div>
 
@@ -543,7 +545,7 @@ nuclei (scales as \(Z^4\)), making it important for \(4d\), \(5d\), \(4f\), and 
 oriented along the easy axis and a hard axis:</p>
 <div>
 \begin{equation}
-    {\rm MAE} = E(\hat{\mathbf{n}}\_{\rm hard}) - E(\hat{\mathbf{n}}\_{\rm easy}),
+    {\rm MAE} = E(\hat{\mathbf{n}}_{\rm hard}) - E(\hat{\mathbf{n}}_{\rm easy}),
 \end{equation}
 </div>
 
@@ -562,7 +564,7 @@ breaks down when SOC significantly modifies the density.</li>
 <p>The MAE is dominated by the <strong>band energy</strong> contribution (summed KS eigenvalue difference):</p>
 <div>
 \begin{equation}
-    {\rm MAE} \approx \sum\_i (f\_i^{\rm hard}\,\epsilon\_i^{\rm hard} - f\_i^{\rm easy}\,\epsilon\_i^{\rm easy}),
+    {\rm MAE} \approx \sum_i (f_i^{\rm hard}\,\epsilon_i^{\rm hard} - f_i^{\rm easy}\,\epsilon_i^{\rm easy}),
 \end{equation}
 </div>
 
@@ -573,7 +575,7 @@ systems.</p>
 <p>The connection between MAE and orbital moments was derived by Bruno (1989) using second-order
 perturbation theory in the SOC strength \(\xi\). The SOC Hamiltonian is:</p>
 <p>\[
-\hat{H}_{\rm SOC} = \xi,\hat{\mathbf{L}}\cdot\hat{\mathbf{S}}.
+\hat{H}_{\rm SOC} = \xi\,\hat{\mathbf{L}}\cdot\hat{\mathbf{S}}.
 \]</p>
 <p>For a system with spin quantised along \(\hat{\mathbf{n}}\), the second-order energy correction is:</p>
 <p>\[
@@ -620,7 +622,7 @@ ferrimagnetic) and compare final energies. Collinear SDFT can get trapped in loc
 <li><strong>For MAE</strong>: Use a non-collinear calculation with SOC; converge the \(k\)-mesh carefully
 (MAE is extremely sensitive to \(k\)-point density).</li>
 <li><strong>For \(J\)</strong>: Cross-check total-energy and Green’s function methods; the two should agree
-within \(\sim 10\)–\(20%\).</li>
+within \(\sim 10\)–\(20\%\).</li>
 <li><strong>Report orbital moments</strong>: When SOC is included, report both spin and orbital magnetic
 moments for comparison with XMCD experiments.</li>
 </ol>
@@ -680,7 +682,7 @@ subject of the next chapter.</p>
 
         <script src="clipboard-1626706a.min.js"></script>
         <script src="highlight-abc7f01d.js"></script>
-        <script src="book-c22b7243.js"></script>
+        <script src="book-609e4cb8.js"></script>
 
         <!-- Custom JS scripts -->
         <script src="src/custom-cd58eebe.js"></script>

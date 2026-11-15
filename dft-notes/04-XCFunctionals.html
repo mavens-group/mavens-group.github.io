@@ -62,8 +62,8 @@
         <link rel="icon" href="favicon-de23e50b.svg">
         <link rel="shortcut icon" href="favicon-8114d1fc.png">
         <link rel="stylesheet" href="css/variables-8adf115d.css">
-        <link rel="stylesheet" href="css/general-0392ca55.css">
-        <link rel="stylesheet" href="css/chrome-fc474251.css">
+        <link rel="stylesheet" href="css/general-e96d0476.css">
+        <link rel="stylesheet" href="css/chrome-d279d366.css">
         <link rel="stylesheet" href="css/print-9e4910d8.css" media="print">
 
         <!-- Fonts -->
@@ -75,7 +75,7 @@
         <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="ayu-highlight-3fdfc3ac.css">
 
         <!-- Custom theme stylesheets -->
-        <link rel="stylesheet" href="src/custom-5f363160.css">
+        <link rel="stylesheet" href="src/custom-ee915ece.css">
 
 
         <!-- Provide site root and default themes to javascript -->
@@ -83,10 +83,10 @@
             const path_to_root = "";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "searchindex-23f86b14.js";
+            window.path_to_searchindex_js = "searchindex-72308093.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="toc-06779d97.js"></script>
+        <script src="toc-3c9b9cd1.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -287,10 +287,10 @@ the right class of problem, but no rung is uniformly best.</p>
 E_{\rm xc}[\rho] = (T[\rho] - T_s[\rho]) + (V_{ee}[\rho] - E_{\rm H}[\rho]).
 \]</p>
 <p>An equivalent and physically transparent form expresses \(E_{\rm xc}\) in terms of the
-<strong>exchange-correlation hole</strong> \(n_{\rm xc}(\mathbf{r}, \mathbf{r}‘)\) — the depletion of electron
-density at \(\mathbf{r}’\) caused by the presence of an electron at \(\mathbf{r}\):</p>
+<strong>exchange-correlation hole</strong> \(n_{\rm xc}(\mathbf{r}, \mathbf{r}')\) — the depletion of electron
+density at \(\mathbf{r}'\) caused by the presence of an electron at \(\mathbf{r}\):</p>
 <p>\[
-E_{\rm xc}[\rho] = \frac{1}{2}\iint \frac{\rho(\mathbf{r}),n_{\rm xc}(\mathbf{r},\mathbf{r}‘)}{|\mathbf{r}-\mathbf{r}’|},d\mathbf{r},d\mathbf{r}’.
+E_{\rm xc}[\rho] = \frac{1}{2}\iint \frac{\rho(\mathbf{r})\,n_{\rm xc}(\mathbf{r},\mathbf{r}')}{|\mathbf{r}-\mathbf{r}'|}\,d\mathbf{r}\,d\mathbf{r}'.
 \]</p>
 <p>The exact XC hole satisfies two rigorous constraints:</p>
 <div>
@@ -309,11 +309,11 @@ which explains the surprising accuracy of LDA despite its crude derivation.</p>
 <figure>
 <img src="images/xc_hole.svg" alt="Schematic of the exchange hole, correlation hole, and XC hole as a function of electron-electron separation" style="max-width:660px; display:block; margin:1.5em auto;" />
 <figcaption style="text-align:center; font-size:0.9em; color:#555;">
-<p><strong>Figure 4.2.</strong> Schematic XC hole \(n_{\rm xc}(\mathbf{r},\mathbf{r}‘)\) as a function of
-\(|\mathbf{r}’-\mathbf{r}|\). The exchange hole (blue dashed) has a cusp at \(r’=r\) and
+<p><strong>Figure 4.2.</strong> Schematic XC hole \(n_{\rm xc}(\mathbf{r},\mathbf{r}')\) as a function of
+\(|\mathbf{r}'-\mathbf{r}|\). The exchange hole (blue dashed) has a cusp at \(r'=r\) and
 a long \(-1/r\) tail for finite systems. The correlation hole (terracotta dotted) deepens the
 total hole at short range and integrates to zero. The XC hole (plum solid) satisfies the exact
-sum rule \(\int n_{\rm xc},d\mathbf{r}’ = -1\).</p>
+sum rule \(\int n_{\rm xc}\,d\mathbf{r}' = -1\).</p>
 </figcaption>
 </figure>
 ### The Two Exactly-Known Limits
@@ -339,21 +339,21 @@ scales the electron–electron interaction from zero (the KS system) to its phys
 \(\lambda\). At \(\lambda = 0\), \(\Psi^0\) is the KS Slater determinant and
 \(W_{\rm xc}^0 = E_{\rm x}^{\rm exact}\) is known analytically. This is the natural anchor for a
 Taylor series in <em>interaction strength</em>.</p>
-<p><strong>Derivation.</strong> Define a one-parameter family of Hamiltonians \(\hat{H}^\lambda = \hat{T} + \lambda\hat{V}<em>{ee} + \hat{V}</em>{\rm ext}^\lambda\), where the external potential \(V_{\rm ext}^\lambda\) is adjusted at each \(\lambda\) so that the ground-state density remains fixed at the physical \(\rho(\mathbf{r})\). The endpoints are the KS system (\(\lambda=0\)) and the physical system (\(\lambda=1\)). Applying the Hellmann–Feynman theorem to \(E^\lambda = \langle\Psi^\lambda|\hat{H}^\lambda|\Psi^\lambda\rangle\):</p>
+<p><strong>Derivation.</strong> Define a one-parameter family of Hamiltonians \(\hat{H}^\lambda = \hat{T} + \lambda\hat{V}_{ee} + \hat{V}_{\rm ext}^\lambda\), where the external potential \(V_{\rm ext}^\lambda\) is adjusted at each \(\lambda\) so that the ground-state density remains fixed at the physical \(\rho(\mathbf{r})\). The endpoints are the KS system (\(\lambda=0\)) and the physical system (\(\lambda=1\)). Applying the Hellmann–Feynman theorem to \(E^\lambda = \langle\Psi^\lambda|\hat{H}^\lambda|\Psi^\lambda\rangle\):</p>
 <p>\[
-\frac{dE^\lambda}{d\lambda} = \langle\Psi^\lambda|\hat{V}<em>{ee}|\Psi^\lambda\rangle
-+ \int \frac{dV</em>{\rm ext}^\lambda}{d\lambda},\rho(\mathbf{r}),d\mathbf{r}.
+\frac{dE^\lambda}{d\lambda} = \langle\Psi^\lambda|\hat{V}_{ee}|\Psi^\lambda\rangle
++ \int \frac{dV_{\rm ext}^\lambda}{d\lambda}\,\rho(\mathbf{r})\,d\mathbf{r}.
 \]</p>
-<p>Integrating from \(\lambda = 0\) to \(\lambda = 1\) gives \(E^1 - E^0 = \int_0^1\langle\hat{V}<em>{ee}\rangle^\lambda,d\lambda + \int(V</em>{\rm ext}^1 - V_{\rm ext}^0)\rho,d\mathbf{r}\). Using \(E^1 = T + V_{ee} + \int V_{\rm ext}\rho\) and \(E^0 = T_s + \int V_{\rm KS}\rho\), and the KS decomposition \(V_{ee} = E_{\rm H} + E_{\rm xc} - (T - T_s)\), the external-potential boundary terms cancel exactly, leaving:</p>
+<p>Integrating from \(\lambda = 0\) to \(\lambda = 1\) gives \(E^1 - E^0 = \int_0^1\langle\hat{V}_{ee}\rangle^\lambda\,d\lambda + \int(V_{\rm ext}^1 - V_{\rm ext}^0)\rho\,d\mathbf{r}\). Using \(E^1 = T + V_{ee} + \int V_{\rm ext}\rho\) and \(E^0 = T_s + \int V_{\rm KS}\rho\), and the KS decomposition \(V_{ee} = E_{\rm H} + E_{\rm xc} - (T - T_s)\), the external-potential boundary terms cancel exactly, leaving:</p>
 <p>\[
-E_{\rm xc} = \int_0^1 \left(\langle\Psi^\lambda|\hat{V}<em>{ee}|\Psi^\lambda\rangle - E</em>{\rm H}[\rho]\right)d\lambda \equiv \int_0^1 W_{\rm xc}^\lambda,d\lambda,
+E_{\rm xc} = \int_0^1 \left(\langle\Psi^\lambda|\hat{V}_{ee}|\Psi^\lambda\rangle - E_{\rm H}[\rho]\right)d\lambda \equiv \int_0^1 W_{\rm xc}^\lambda\,d\lambda,
 \]</p>
 <p>which is \eqref{eq:adiabatic}. The kinetic energy correction \(T - T_s\) is absorbed into the integral by the way the external potential is adjusted along the path — this is what makes \(W_{\rm xc}^\lambda\), rather than just \(\langle V_{ee}\rangle^\lambda\), the right quantity to integrate.</p>
 <h2 id="the-first-taylor-series-gradient-expansion-and-semi-local-functionals"><a class="header" href="#the-first-taylor-series-gradient-expansion-and-semi-local-functionals">The First Taylor Series: Gradient Expansion and Semi-Local Functionals</a></h2>
 <h3 id="the-dimensionless-gradient-and-the-gea"><a class="header" href="#the-dimensionless-gradient-and-the-gea">The Dimensionless Gradient and the GEA</a></h3>
 <p>For a slowly varying density, we measure spatial variation by the <strong>reduced density gradient</strong>:</p>
 <p>\[
-s(\mathbf{r}) = \frac{|\nabla\rho(\mathbf{r})|}{2k_F(\mathbf{r}),\rho(\mathbf{r})},
+s(\mathbf{r}) = \frac{|\nabla\rho(\mathbf{r})|}{2k_F(\mathbf{r})\,\rho(\mathbf{r})},
 \qquad k_F(\mathbf{r}) = (3\pi^2\rho(\mathbf{r}))^{1/3},
 \]</p>
 <p>where \(k_F\) is the local Fermi wavevector. The parameter \(s\) measures the density gradient in
@@ -374,11 +374,11 @@ the systematic Taylor series in \(s^2\) (odd powers vanish by symmetry):</p>
 <h3 id="rung-0-lda--zeroth-order"><a class="header" href="#rung-0-lda--zeroth-order">Rung 0: LDA — Zeroth Order</a></h3>
 <p>Truncating \eqref{eq:GEA} at zeroth order (\(s^0\)) gives the <strong>local density approximation</strong>:</p>
 <p>\[
-\boxed{E_{\rm xc}^{\rm LDA}[\rho] = \int \varepsilon_{\rm xc}^{\rm UEG}(\rho(\mathbf{r})),\rho(\mathbf{r}),d\mathbf{r}.}
+\boxed{E_{\rm xc}^{\rm LDA}[\rho] = \int \varepsilon_{\rm xc}^{\rm UEG}(\rho(\mathbf{r}))\,\rho(\mathbf{r})\,d\mathbf{r}.}
 \]</p>
 <p>The exchange part is analytic (Dirac, 1930):</p>
 <p>\[
-\varepsilon_{\rm x}^{\rm UEG}(\rho) = -\frac{3}{4}!\left(\frac{3}{\pi}\right)^{!1/3}!\rho^{1/3}.
+\varepsilon_{\rm x}^{\rm UEG}(\rho) = -\frac{3}{4}\!\left(\frac{3}{\pi}\right)^{\!1/3}\!\rho^{1/3}.
 \]</p>
 <p>The correlation \(\varepsilon_{\rm c}(\rho)\) is parameterised from QMC data: the Perdew–Wang
 (PW92) and Vosko–Wilk–Nusair (VWN) parameterisations are most common.</p>
@@ -388,12 +388,12 @@ detailed angular shape of the hole is wrong, the <em>spherically averaged</em> h
 determines \(E_{\rm xc}\) via a radial integral — is described well. This is systematic error
 cancellation rooted in constraint satisfaction, not coincidence.</p>
 <p><strong>Known systematic errors:</strong> overbinds (cohesive energies \(+1\)–\(2\) eV/atom); underestimates
-lattice constants (\(-1\)–\(3%\)); underestimates band gaps (\(-40%\)); no dispersion.</p>
+lattice constants (\(-1\)–\(3\%\)); underestimates band gaps (\(-40\%\)); no dispersion.</p>
 <p><strong>When to use LDA:</strong> Phonons and structural properties of simple and alkali metals, where the
 electron gas is nearly uniform and the error cancellation is most favourable.</p>
 <h3 id="why-the-raw-gea-fails"><a class="header" href="#why-the-raw-gea-fails">Why the Raw GEA Fails</a></h3>
 <p>The \(\mathcal{O}(s^2)\) term in \eqref{eq:GEA} does not improve on LDA — it makes things worse.
-The GEA correction introduces oscillations in the XC hole at large \(|\mathbf{r}-\mathbf{r}’|\)
+The GEA correction introduces oscillations in the XC hole at large \(|\mathbf{r}-\mathbf{r}'|\)
 (where \(s\) is large), causing the hole to become positive and violating \(n_{\rm xc} \leq 0\) and
 the \(-1\) sum rule in the density tails. This is a classical example of a Taylor series that
 diverges when the expansion parameter is not uniformly small: \(s \to \infty\) in the tail of any
@@ -402,7 +402,7 @@ finite system.</p>
 <p>Rather than truncating \eqref{eq:GEA}, the <strong>generalised gradient approximation</strong> writes the XC
 energy in the <strong>enhancement factor</strong> form:</p>
 <p>\[
-\boxed{E_{\rm xc}^{\rm GGA}[\rho] = \int \varepsilon_{\rm xc}^{\rm UEG}(\rho),F_{\rm xc}(\rho, s),\rho,d\mathbf{r},}
+\boxed{E_{\rm xc}^{\rm GGA}[\rho] = \int \varepsilon_{\rm xc}^{\rm UEG}(\rho)\,F_{\rm xc}(\rho, s)\,\rho\,d\mathbf{r},}
 \]</p>
 <p>where \(F_{\rm xc}(\rho, s)\) is a dimensionless enhancement factor. GGA is not the
 \(\mathcal{O}(s^2)\) truncation — it is a <em>constrained resummation</em> that reproduces the correct
@@ -413,9 +413,9 @@ energy in the <strong>enhancement factor</strong> form:</p>
 <li>\(\partial F_{\rm xc}/\partial(s^2)|_0 = \mu\): matches the GEA gradient coefficient, ensuring
 consistency with perturbation theory at small \(s\).</li>
 <li><strong>Cutoff at large \(s\)</strong>: \(F_{\rm xc}\) saturates rather than growing without bound, enforcing
-the sum rule \(\int n_{\rm x}^{\rm GGA},d\mathbf{r}’ = -1\) even in the density tails. This
+the sum rule \(\int n_{\rm x}^{\rm GGA}\,d\mathbf{r}' = -1\) even in the density tails. This
 is precisely the correction to the GEA failure above.</li>
-<li><strong>Lieb–Oxford bound</strong>: \(E_{\rm xc}^{\rm GGA} \geq -1.679\int\rho^{4/3},d\mathbf{r}\), a
+<li><strong>Lieb–Oxford bound</strong>: \(E_{\rm xc}^{\rm GGA} \geq -1.679\int\rho^{4/3}\,d\mathbf{r}\), a
 rigorous lower bound satisfied for all \(s\).</li>
 </ol>
 <p>The explicit PBE exchange enhancement factor is:</p>
@@ -432,9 +432,9 @@ parameters.</p>
 <tr><th>Property</th><th>LDA</th><th>PBE</th></tr>
 </thead>
 <tbody>
-<tr><td>Lattice constants</td><td>\(-1\) to \(-3%\)</td><td>\(+1\) to \(+2%\)</td></tr>
+<tr><td>Lattice constants</td><td>\(-1\) to \(-3\%\)</td><td>\(+1\) to \(+2\%\)</td></tr>
 <tr><td>Atomisation energies</td><td>\(+30\) kcal/mol</td><td>\(+10\) kcal/mol</td></tr>
-<tr><td>Band gaps</td><td>\(-40%\)</td><td>\(-40%\)</td></tr>
+<tr><td>Band gaps</td><td>\(-40\%\)</td><td>\(-40\%\)</td></tr>
 <tr><td>Hydrogen bonds</td><td>Reasonable</td><td>Good</td></tr>
 <tr><td>Van der Waals</td><td>Very poor</td><td>Poor</td></tr>
 </tbody>
@@ -445,16 +445,16 @@ gradient expansion but in the missing <strong>derivative discontinuity</strong> 
 integer electron number, which no semi-local functional can capture.</p>
 <p><strong>Lieb–Oxford bound.</strong> A rigorous lower bound on \(E_{\rm xc}\) for any \(N\)-electron density follows from the Lieb–Oxford inequality (Lieb and Oxford, 1981):</p>
 <p>\[
-E_{\rm xc}[\rho] \geq -C_{\rm LO}\int \rho(\mathbf{r})^{4/3},d\mathbf{r}, \qquad C_{\rm LO} \leq 1.679.
+E_{\rm xc}[\rho] \geq -C_{\rm LO}\int \rho(\mathbf{r})^{4/3}\,d\mathbf{r}, \qquad C_{\rm LO} \leq 1.679.
 \]</p>
 <p>Physically this bound says that the XC energy cannot be more negative than a multiple of the exchange energy of a fully spin-polarised UEG at the same density — it bounds how much the XC hole can deepen the energy. The numerical constant \(C_{\rm LO} = 1.679\) was obtained by Lieb and Oxford from analysis of the indirect part of the Coulomb energy. PBE’s exchange enhancement factor is explicitly constructed to satisfy this bound for all \(s\), which is one of its 11 exact constraints. LDA satisfies the bound locally; GEA violates it at large \(s\).</p>
 <h3 id="rung-2-meta-gga--encoding-mathcalos4-through-tau"><a class="header" href="#rung-2-meta-gga--encoding-mathcalos4-through-tau">Rung 2: Meta-GGA — Encoding \(\mathcal{O}(s^4)\) Through \(\tau\)</a></h3>
 <p>The gradient expansion can in principle be extended to \(\mathcal{O}(s^4)\), which involves second spatial derivatives \(\nabla^2\rho\). However, \(\nabla^2\rho\) included directly reintroduces oscillatory behaviour in the density tails. The <strong>kinetic energy density</strong>:</p>
 <p>\[
-\tau(\mathbf{r}) = \frac{1}{2}\sum_i f_i,|\nabla\phi_i(\mathbf{r})|^2
+\tau(\mathbf{r}) = \frac{1}{2}\sum_i f_i\,|\nabla\phi_i(\mathbf{r})|^2
 \]</p>
 <p>encodes the same fourth-order gradient information without the oscillation pathology. To see why, consider the two limiting forms of \(\tau\).</p>
-<p><strong>The von Weizsäcker kinetic energy density</strong> \(\tau^W\) is the exact \(\tau\) for a system described by a single orbital \(\phi = \sqrt{\rho},e^{i\theta}\). For a real, nodeless orbital, \(\phi = \sqrt{\rho}\), so:</p>
+<p><strong>The von Weizsäcker kinetic energy density</strong> \(\tau^W\) is the exact \(\tau\) for a system described by a single orbital \(\phi = \sqrt{\rho}\,e^{i\theta}\). For a real, nodeless orbital, \(\phi = \sqrt{\rho}\), so:</p>
 <p>\[
 \tau^W = \frac{1}{2}|\nabla\sqrt{\rho}|^2 = \frac{1}{2}\left|\frac{\nabla\rho}{2\sqrt{\rho}}\right|^2 = \frac{|\nabla\rho|^2}{8\rho}.
 \]</p>
@@ -462,23 +462,23 @@ E_{\rm xc}[\rho] \geq -C_{\rm LO}\int \rho(\mathbf{r})^{4/3},d\mathbf{r}, \qquad
 <p>\[
 \tau^{\rm UEG}(\rho) = \frac{3}{10}(3\pi^2)^{2/3}\rho^{5/3},
 \]</p>
-<p>which is the Thomas–Fermi kinetic energy density. The gradient expansion then gives:</p>
+<p>which is the Thomas–Fermi kinetic energy density. The Kirzhnits second-order gradient expansion of the kinetic energy density is:</p>
 <p>\[
-\tau = \tau^W + \tau^{\rm UEG} + \mathcal{O}(\nabla^4\rho),
+\tau^{\rm GEA} = \tau^{\rm UEG} + \frac{1}{9}\tau^W + \frac{1}{6}\nabla^2\rho + \mathcal{O}(\nabla^4\rho),
 \]</p>
-<p>showing that \(\tau - \tau^W\) measures the deviation from single-orbital character, i.e. the degree of multi-orbital kinetic energy. The <strong>meta-GGA</strong> uses this through the <strong>iso-orbital indicator</strong>:</p>
+<p>while in general we can decompose \(\tau = \tau^W + \tau_{\rm Pauli}\) with Pauli kinetic energy density \(\tau_{\rm Pauli} \geq 0\). Thus \(\tau - \tau^W\) directly measures the excess kinetic energy arising from multi-orbital (Pauli) character. The <strong>meta-GGA</strong> uses this through the <strong>iso-orbital indicator</strong>:</p>
 <p>\[
 \alpha(\mathbf{r}) = \frac{\tau(\mathbf{r}) - \tau^W(\mathbf{r})}{\tau^{\rm UEG}(\mathbf{r})},
 \]</p>
 <p>whose physical content follows directly:</p>
 <ul>
 <li>\(\alpha = 0\): \(\tau = \tau^W\), exact for a single orbital — covalent bonds, core regions.</li>
-<li>\(\alpha = 1\): \(\tau = \tau^W + \tau^{\rm UEG}\), the UEG limit — metallic regions, LDA should be recovered.</li>
+<li>\(\alpha = 1\): \(\tau - \tau^W = \tau^{\rm UEG}\) (in the UEG limit \(\nabla\rho = 0\), \(\tau^W = 0\) and \(\tau = \tau^{\rm UEG}\)) — metallic regions, LDA should be recovered.</li>
 <li>\(\alpha \gg 1\): many orbitals, slowly varying density — van der Waals region between closed-shell fragments.</li>
 </ul>
 <p>The meta-GGA energy functional is:</p>
 <p>\[
-E_{\rm xc}^{\rm mGGA}[\rho] = \int \varepsilon_{\rm xc}(\rho,,s,,\alpha),\rho,d\mathbf{r}.
+E_{\rm xc}^{\rm mGGA}[\rho] = \int \varepsilon_{\rm xc}(\rho,\,s,\,\alpha)\,\rho\,d\mathbf{r}.
 \]</p>
 <p><strong>SCAN</strong> (Strongly Constrained and Appropriately Normed; Sun, Ruzsinszky, Perdew, 2015)
 satisfies all 17 known exact constraints applicable to a semi-local functional simultaneously
@@ -524,8 +524,8 @@ fundamentally local: \(\varepsilon_{\rm xc}\) at \(\mathbf{r}\) depends only on 
 
 <p>The zeroth-order term is exactly known:</p>
 <p>\[
-W_{\rm xc}^0 = E_{\rm x}^{\rm exact}[{\phi_i}]
-= -\frac{1}{2}\sum_{i,j}\iint\frac{\phi_i^<em>(\mathbf{r})\phi_j(\mathbf{r})\phi_j^</em>(\mathbf{r}‘)\phi_i(\mathbf{r}’)}{|\mathbf{r}-\mathbf{r}‘|},d\mathbf{r},d\mathbf{r}’.
+W_{\rm xc}^0 = E_{\rm x}^{\rm exact}[\{\phi_i\}]
+= -\frac{1}{2}\sum_{i,j}\iint\frac{\phi_i^*(\mathbf{r})\phi_j(\mathbf{r})\phi_j^*(\mathbf{r}')\phi_i(\mathbf{r}')}{|\mathbf{r}-\mathbf{r}'|}\,d\mathbf{r}\,d\mathbf{r}'.
 \]</p>
 <p>The first derivative is identified by Görling–Levy (GL) perturbation theory as twice the
 second-order GL correlation energy \(E_{\rm c}^{\rm GL2}\):</p>
@@ -572,7 +572,7 @@ semi-local component:</p>
 E_{\rm xc}^{\rm PBE0} = \frac{1}{4}E_{\rm x}^{\rm exact} + \frac{3}{4}E_{\rm x}^{\rm PBE} + E_{\rm c}^{\rm PBE}.
 \]</p>
 <p>PBE0 has no empirical parameters. In the limit \(a \to 0\) it recovers PBE exactly. Band gaps
-improve from \(-40%\) (PBE) to \(\sim -20%\) (PBE0), and reaction barriers improve substantially.
+improve from \(-40\%\) (PBE) to \(\sim -20\%\) (PBE0), and reaction barriers improve substantially.
 The cost in a periodic code scales as \(\mathcal{O}(N^3)\) with density fitting, making it
 expensive for large unit cells.</p>
 <h4 id="b3lyp"><a class="header" href="#b3lyp">B3LYP</a></h4>
@@ -580,8 +580,8 @@ expensive for large unit cells.</p>
 its three parameters \((a_0, a_x, a_c)\) <em>empirically</em> by fitting to the G2 molecular
 thermochemistry database rather than from perturbation theory:</p>
 <p>\[
-E_{\rm xc}^{\rm B3LYP} = (1-a_0)E_{\rm x}^{\rm LSDA} + a_0,E_{\rm x}^{\rm exact}
-+ a_x\Delta E_{\rm x}^{\rm B88} + (1-a_c)E_{\rm c}^{\rm VWN} + a_c,E_{\rm c}^{\rm LYP},
+E_{\rm xc}^{\rm B3LYP} = (1-a_0)E_{\rm x}^{\rm LSDA} + a_0\,E_{\rm x}^{\rm exact}
++ a_x\Delta E_{\rm x}^{\rm B88} + (1-a_c)E_{\rm c}^{\rm VWN} + a_c\,E_{\rm c}^{\rm LYP},
 \]</p>
 <p>with \(a_0 = 0.20\), \(a_x = 0.72\), \(a_c = 0.81\). The LYP correlation (Lee–Yang–Parr) is derived
 from the Colle–Salvetti helium atom expression, not from the UEG, so it does not reduce to
@@ -594,11 +594,11 @@ coupling-constant ladder, but PBE0 is constraint-derived and transferable while 
 empirically optimal within its training domain.</p>
 <h3 id="the-spatial-structure-of-the-exchange-hole-motivating-range-separation"><a class="header" href="#the-spatial-structure-of-the-exchange-hole-motivating-range-separation">The Spatial Structure of the Exchange Hole: Motivating Range Separation</a></h3>
 <p>Global hybrids apply the same fraction \(a\) of exact exchange uniformly at all length scales.
-But the exchange hole \(n_{\rm x}(\mathbf{r},\mathbf{r}’)\) behaves fundamentally differently at
+But the exchange hole \(n_{\rm x}(\mathbf{r},\mathbf{r}')\) behaves fundamentally differently at
 short and long range.</p>
-<p>At <strong>short range</strong> (\(|\mathbf{r}-\mathbf{r}’| \to 0\)): the hole is deep, localised, and
+<p>At <strong>short range</strong> (\(|\mathbf{r}-\mathbf{r}'| \to 0\)): the hole is deep, localised, and
 cusp-like. Semi-local functionals describe this region reasonably well.</p>
-<p>At <strong>long range</strong> (\(|\mathbf{r}-\mathbf{r}’| \to \infty\)): the exact exchange hole of a finite
+<p>At <strong>long range</strong> (\(|\mathbf{r}-\mathbf{r}'| \to \infty\)): the exact exchange hole of a finite
 system must decay as \(-1/r\) to satisfy the \(-1\) sum rule. This \(-1/r\) tail implies that the
 exchange potential \(V_{\rm x}(\mathbf{r}) \to -1/r\) asymptotically — a non-local behaviour that
 only exact exchange can reproduce; semi-local functionals decay exponentially instead.</p>
@@ -611,9 +611,9 @@ logarithmic divergence of the exchange potential at the Fermi surface.</p>
 parts using the error function:</p>
 <p>\[
 \frac{1}{r_{12}} =
-\underbrace{\frac{\mathrm{erfc}(\omega r_{12})}{r_{12}}}<em>{\mathrm{SR}: ;\to 0\text{ as }r</em>{12}\to\infty}
+\underbrace{\frac{\mathrm{erfc}(\omega r_{12})}{r_{12}}}_{\mathrm{SR}: \;\to 0\text{ as }r_{12}\to\infty}
 +
-\underbrace{\frac{\mathrm{erf}(\omega r_{12})}{r_{12}}}<em>{\mathrm{LR}: ;\to 1/r</em>{12}\text{ as }r_{12}\to\infty},
+\underbrace{\frac{\mathrm{erf}(\omega r_{12})}{r_{12}}}_{\mathrm{LR}: \;\to 1/r_{12}\text{ as }r_{12}\to\infty},
 \]</p>
 <p>where \(\omega\) controls the crossover: \(r_c \approx 1/\omega\). Different exact exchange fractions
 \(a_{\rm SR}\) and \(a_{\rm LR}\) are then applied to each part.</p>
@@ -630,7 +630,7 @@ metals). At \(\omega = 0.11\) bohr\(^{-1}\), HSE06 describes the screened exchan
 semiconductor. Computational advantages are significant: the short-range Fock operator decays
 exponentially in real space, enabling \(\mathcal{O}(N)\) scaling, making HSE06 tractable for
 unit cells of hundreds of atoms.</p>
-<p><strong>Performance:</strong> band gaps within \(\sim 10\)–\(15%\) of experiment for most semiconductors;
+<p><strong>Performance:</strong> band gaps within \(\sim 10\)–\(15\%\) of experiment for most semiconductors;
 correct metallic behaviour where PBE0 fails; standard functional for band gap calculations in
 periodic solids.</p>
 <h4 id="lc-omegapbe-and-omegab97x-v--long-range-exact-exchange-for-molecules"><a class="header" href="#lc-omegapbe-and-omegab97x-v--long-range-exact-exchange-for-molecules">LC-\(\omega\)PBE and \(\omega\)B97X-V — Long-Range Exact Exchange for Molecules</a></h4>
@@ -668,8 +668,8 @@ while improving excited states.</p>
 <p>Retaining both the zeroth- and first-order terms of \eqref{eq:AC-integrated} and approximating
 the GGA remainder for the higher orders gives the <strong>double-hybrid</strong>:</p>
 <p>\[
-\boxed{E_{\rm xc}^{\rm DH} = a,E_{\rm x}^{\rm exact} + (1-a),E_{\rm x}^{\rm GGA}
-+ b,E_{\rm c}^{\rm GL2} + (1-b),E_{\rm c}^{\rm GGA},}
+\boxed{E_{\rm xc}^{\rm DH} = a\,E_{\rm x}^{\rm exact} + (1-a)\,E_{\rm x}^{\rm GGA}
++ b\,E_{\rm c}^{\rm GL2} + (1-b)\,E_{\rm c}^{\rm GGA},}
 \]</p>
 <p>where \(E_{\rm c}^{\rm GL2}\) is the second-order Görling–Levy correlation \eqref{eq:GL2}.
 This costs \(\mathcal{O}(N^5)\) in system size due to the four-index two-electron integrals,
@@ -802,7 +802,7 @@ the subject of a later chapter.</p>
 
         <script src="clipboard-1626706a.min.js"></script>
         <script src="highlight-abc7f01d.js"></script>
-        <script src="book-c22b7243.js"></script>
+        <script src="book-609e4cb8.js"></script>
 
         <!-- Custom JS scripts -->
         <script src="src/custom-cd58eebe.js"></script>

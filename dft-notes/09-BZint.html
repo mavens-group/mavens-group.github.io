@@ -3,29 +3,29 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Brilloun Zone Integration - Density Functional Theory</title>
+        <title>Brillouin Zone Integration - Density Functional Theory</title>
 
 
         <!-- Custom HTML head -->
         <!-- ===========================================================
              SEO / social meta — injected into <head> on every page.
-             Brilloun Zone Integration = current chapter name (from SUMMARY.md).
+             Brillouin Zone Integration = current chapter name (from SUMMARY.md).
              =========================================================== -->
-        <meta name="description" content="Brilloun Zone Integration — open graduate DFT lecture notes with full derivations and worked VASP/QE examples. MAVENs course, SRMIST.">
+        <meta name="description" content="Brillouin Zone Integration — open graduate DFT lecture notes with full derivations and worked VASP/QE examples. MAVENs course, SRMIST.">
         <meta name="author" content="Rudra Banerjee, SRMIST">
         
         <meta property="og:type" content="article">
         <meta property="og:url" content="https://mavens-group.github.io/dft-notes/">
-        <meta property="og:title" content="Brilloun Zone Integration | MAVENs DFT Course">
-        <meta property="og:description" content="Brilloun Zone Integration — open graduate lecture notes in computational physics and DFT.">
+        <meta property="og:title" content="Brillouin Zone Integration | MAVENs DFT Course">
+        <meta property="og:description" content="Brillouin Zone Integration — open graduate lecture notes in computational physics and DFT.">
         <meta property="og:image" content="https://mavens-group.github.io/dft-notes/images/mavens-card.jpg">
         <meta property="og:image:width" content="4535">
         <meta property="og:image:height" content="2381">
         <meta property="article:published_time" content="2024-01-01T00:00:00Z">
         
         <meta name="twitter:card" content="summary_large_image">
-        <meta name="twitter:title" content="Brilloun Zone Integration | MAVENs DFT Course">
-        <meta name="twitter:description" content="Brilloun Zone Integration — open graduate DFT lecture notes.">
+        <meta name="twitter:title" content="Brillouin Zone Integration | MAVENs DFT Course">
+        <meta name="twitter:description" content="Brillouin Zone Integration — open graduate DFT lecture notes.">
         <meta name="twitter:image" content="https://mavens-group.github.io/dft-notes/images/mavens-card.jpg">
         
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
@@ -62,8 +62,8 @@
         <link rel="icon" href="favicon-de23e50b.svg">
         <link rel="shortcut icon" href="favicon-8114d1fc.png">
         <link rel="stylesheet" href="css/variables-8adf115d.css">
-        <link rel="stylesheet" href="css/general-0392ca55.css">
-        <link rel="stylesheet" href="css/chrome-fc474251.css">
+        <link rel="stylesheet" href="css/general-e96d0476.css">
+        <link rel="stylesheet" href="css/chrome-d279d366.css">
         <link rel="stylesheet" href="css/print-9e4910d8.css" media="print">
 
         <!-- Fonts -->
@@ -75,7 +75,7 @@
         <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="ayu-highlight-3fdfc3ac.css">
 
         <!-- Custom theme stylesheets -->
-        <link rel="stylesheet" href="src/custom-5f363160.css">
+        <link rel="stylesheet" href="src/custom-ee915ece.css">
 
 
         <!-- Provide site root and default themes to javascript -->
@@ -83,10 +83,10 @@
             const path_to_root = "";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "searchindex-23f86b14.js";
+            window.path_to_searchindex_js = "searchindex-72308093.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="toc-06779d97.js"></script>
+        <script src="toc-3c9b9cd1.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -224,7 +224,7 @@
                     <main>
                         <h1 id="brillouin-zone-integration"><a class="header" href="#brillouin-zone-integration">Brillouin Zone Integration</a></h1>
 <p>Chapter 8 addressed the outer loop of the SCF cycle: how to update the density from one
-iteration to the next so that the fixed-point equation \(F[\rho^<em>] = \rho^</em>\) is satisfied
+iteration to the next so that the fixed-point equation \(F[\rho^*] = \rho^*\) is satisfied
 efficiently. This chapter addresses two pieces of numerical machinery that operate <em>within</em>
 each SCF step: how the BZ integral is discretised onto a finite \(\mathbf{k}\)-point mesh
 (Section: Monkhorst–Pack Sampling), and how the occupation function near the Fermi level is
@@ -272,9 +272,9 @@ integral as rapidly as possible?</p>
 \end{equation}
 </div>
 
-<p>where \(\mathbf{b}<em>i\) are the primitive reciprocal lattice vectors. For an odd \(N_i\), the grid
+<p>where \(\mathbf{b}_i\) are the primitive reciprocal lattice vectors. For an odd \(N_i\), the grid
 includes \(\Gamma\); for even \(N_i\), it is shifted by half a grid spacing and avoids \(\Gamma\).
-The total number of \(\mathbf{k}\)-points in the full BZ is \(N</em>{\rm tot} = N_1 N_2 N_3\).</p>
+The total number of \(\mathbf{k}\)-points in the full BZ is \(N_{\rm tot} = N_1 N_2 N_3\).</p>
 <p><strong>Reducing by symmetry.</strong> The crystal point group \(G\) maps each \(\mathbf{k}\) to a set of
 symmetry-equivalent points. Only the <strong>irreducible \(\mathbf{k}\)-points</strong> — one representative
 from each equivalence class — need to be computed explicitly; the rest contribute through their
@@ -319,18 +319,6 @@ energy differences and phase stability).</li>
 with an \(N\times N\times N\) mesh is equivalent in k-point density to an
 \((N/2)\times(N/2)\times(N/2)\) mesh of the primitive cell. Always compare meshes at the same
 <strong>k-point density</strong> (points per unit length in reciprocal space), not the same grid indices.</p>
-<figure>
-<img src="figures/mp_mesh.svg" alt="Monkhorst-Pack k-point mesh in the Brillouin zone and smearing of the Fermi level" style="max-width:700px; display:block; margin:1.5em auto;" />
-<figcaption style="text-align:center; font-size:0.9em; color:#555;">
-<p><strong>Figure 9.1.</strong> <em>(a)</em> A 6×6 Monkhorst–Pack mesh on a 2D square Brillouin zone. Green points
-are the irreducible \(\mathbf{k}\)-points; blue points are symmetry-equivalent images.
-The irreducible wedge (shaded) reduces the number of SCF diagonalisations by the order of
-the point group. <em>(b)</em> Occupation function \(f(\epsilon)\) near \(\epsilon_F\) for a metal.
-The ideal step function (grey dashed) converges slowly; Fermi–Dirac (terracotta) and
-Methfessel–Paxton \(N=1\) (plum) smearings regularise the integral at the cost of a
-broadening \(\sigma\) that must be converged or corrected.</p>
-</figcaption>
-</figure>
 <details>
 <summary><b>Code Notes: k-point setup in VASP and Quantum ESPRESSO</b></summary>
 <p><strong>VASP</strong> — the <code>KPOINTS</code> file controls the mesh. The most common format for an automatic MP grid:</p>
@@ -364,8 +352,8 @@ well-converged insulator calculation.</p>
 function at the Fermi energy:</p>
 <div>
 \begin{equation}
-    f_i(\mathbf{k}) = \theta(\epsilon_F - \epsilon_i(\mathbf{k})),
-    \label{eq:step-occupation}
+    f_i(\mathbf{k}) = \theta(\epsilon_F - \epsilon_i(\mathbf{k})),
+    \label{eq:step-occupation}
 \end{equation}
 </div>
 
@@ -391,13 +379,13 @@ systematic error that must be controlled or corrected.</p>
 complementary error function:</p>
 <div>
 \begin{equation}
-    \boxed{f_i = \frac{1}{2}\,\mathrm{erfc}\!\left(\frac{\epsilon_i - \epsilon_F}{\sigma}\right),}
-    \label{eq:gaussian-occ}
+    \boxed{f_i = \frac{1}{2}\,\mathrm{erfc}\!\left(\frac{\epsilon_i - \epsilon_F}{\sigma}\right),}
+    \label{eq:gaussian-occ}
 \end{equation}
 </div>
 
 <p>where \(\sigma \gt 0\) is the <strong>smearing width</strong> and \(\mathrm{erfc}(x) = 1 - \mathrm{erf}(x) =
-\frac{2}{\sqrt{\pi}}\int_x^\infty e^{-t^2},dt\). This corresponds to convolving the step
+\frac{2}{\sqrt{\pi}}\int_x^\infty e^{-t^2}\,dt\). This corresponds to convolving the step
 function with a Gaussian of width \(\sigma\): states more than \(\sim 2\sigma\) below \(\epsilon_F\)
 have \(f_i \approx 1\); states more than \(\sim 2\sigma\) above have \(f_i \approx 0\); and states
 within \(\sim \sigma\) of \(\epsilon_F\) have fractional occupations.</p>
@@ -405,8 +393,8 @@ within \(\sim \sigma\) of \(\epsilon_F\) have fractional occupations.</p>
 varying density of states near \(\epsilon_F\), the error scales as:</p>
 <div>
 \begin{equation}
-    E[\sigma] - E_0 = \mathcal{O}(\sigma^2),
-    \label{eq:gaussian-error}
+    E[\sigma] - E_0 = \mathcal{O}(\sigma^2),
+    \label{eq:gaussian-error}
 \end{equation}
 </div>
 
@@ -416,16 +404,16 @@ small \(\sigma\) (which reintroduces the convergence problem) or extrapolate.</p
 as a fictitious finite-temperature ensemble with an electronic entropy:</p>
 <div>
 \begin{equation}
-    S = -k_B \sum_{i,\mathbf{k}} w_\mathbf{k}\left[f_i \ln f_i + (1 - f_i)\ln(1 - f_i)\right],
-    \label{eq:entropy}
+    S = -k_B \sum_{i,\mathbf{k}} w_\mathbf{k}\left[f_i \ln f_i + (1 - f_i)\ln(1 - f_i)\right],
+    \label{eq:entropy}
 \end{equation}
 </div>
 
 <p>where \(w_\mathbf{k}\) is the \(\mathbf{k}\)-point weight. The corresponding <strong>free energy</strong> is:</p>
 <div>
 \begin{equation}
-    F[\sigma] = E[\sigma] - \sigma\, S.
-    \label{eq:free-energy}
+    F[\sigma] = E[\sigma] - \sigma\, S.
+    \label{eq:free-energy}
 \end{equation}
 </div>
 
@@ -433,17 +421,17 @@ as a fictitious finite-temperature ensemble with an electronic entropy:</p>
 simple metals), the total energy and free energy bracket the true \(E_0\):</p>
 <div>
 \begin{equation}
-    E[\sigma] = E_0 + a\sigma^2 + \mathcal{O}(\sigma^4), \qquad
-    F[\sigma] = E_0 - a\sigma^2 + \mathcal{O}(\sigma^4),
-    \label{eq:E-F-expansion}
+    E[\sigma] = E_0 + a\sigma^2 + \mathcal{O}(\sigma^4), \qquad
+    F[\sigma] = E_0 - a\sigma^2 + \mathcal{O}(\sigma^4),
+    \label{eq:E-F-expansion}
 \end{equation}
 </div>
 
 <p>with the <em>same</em> coefficient \(a\) but opposite signs. Averaging eliminates the \(\sigma^2\) error:</p>
 <div>
 \begin{equation}
-    \boxed{E_0 \approx \frac{1}{2}\left(E[\sigma] + F[\sigma]\right) + \mathcal{O}(\sigma^4).}
-    \label{eq:sigma-extrapolation}
+    \boxed{E_0 \approx \frac{1}{2}\left(E[\sigma] + F[\sigma]\right) + \mathcal{O}(\sigma^4).}
+    \label{eq:sigma-extrapolation}
 \end{equation}
 </div>
 
@@ -458,8 +446,8 @@ approximation breaks down and larger errors can persist even after extrapolation
 <p>A physically motivated alternative uses the Fermi–Dirac distribution directly:</p>
 <div>
 \begin{equation}
-    \boxed{f_i = \frac{1}{1 + \exp\!\left(\frac{\epsilon_i - \epsilon_F}{k_B T}\right)},}
-    \label{eq:FD-occ}
+    \boxed{f_i = \frac{1}{1 + \exp\!\left(\frac{\epsilon_i - \epsilon_F}{k_B T}\right)},}
+    \label{eq:FD-occ}
 \end{equation}
 </div>
 
@@ -469,13 +457,13 @@ corresponds to the <em>exact</em> equilibrium occupation at temperature \(T\). T
 is the <strong>Mermin free energy</strong>:</p>
 <div>
 \begin{equation}
-    \Omega = E - TS,
-    \label{eq:mermin}
+    \Omega = E - TS,
+    \label{eq:mermin}
 \end{equation}
 </div>
 
 <p>where \(S\) is the exact Fermi–Dirac entropy. For genuine finite-temperature calculations — ab
-initio molecular dynamics above \(\sim 1000,\)K, warm dense matter, or the electronic
+initio molecular dynamics above \(\sim 1000\,\)K, warm dense matter, or the electronic
 contribution to free energies — Fermi–Dirac smearing is the physically correct choice.</p>
 <p>For ground-state calculations at \(T = 0\), Fermi–Dirac smearing has a disadvantage: the
 occupation function has exponential tails extending to \(\pm\infty\), meaning that states far
@@ -490,37 +478,37 @@ total energy. <strong>Methfessel–Paxton (MP) smearing</strong> (Methfessel and
 reduces this error by expanding the \(\delta\)-function approximation in a complete set of
 Hermite polynomials, achieving \(\mathcal{O}(\sigma^{2N+2})\) accuracy at order \(N\).</p>
 <p>The construction starts from the identity: the step function \(\theta(x)\) can be written as
-\(\frac{1}{2},\mathrm{erfc}(x)\) plus a correction expressible as a series in Hermite
+\(\frac{1}{2}\,\mathrm{erfc}(x)\) plus a correction expressible as a series in Hermite
 polynomials \(H_n(x)\). The key mathematical result is that the Hermite polynomials, weighted by
 the Gaussian \(e^{-x^2}\), form a complete orthogonal set on \((-\infty, \infty)\). Expanding the
-difference \(\theta(x) - \frac{1}{2},\mathrm{erfc}(x)\) in this basis and truncating at order
+difference \(\theta(x) - \frac{1}{2}\,\mathrm{erfc}(x)\) in this basis and truncating at order
 \(N\) gives the MP approximation to the \(\delta\)-function:</p>
 <div>
 \begin{equation}
-    \tilde{\delta}_N(x) = \frac{e^{-x^2}}{\sqrt{\pi}} \sum_{n=0}^{N} A_n H_{2n}(x),
-    \label{eq:MP-delta}
+    \tilde{\delta}_N(x) = \frac{e^{-x^2}}{\sqrt{\pi}} \sum_{n=0}^{N} A_n H_{2n}(x),
+    \label{eq:MP-delta}
 \end{equation}
 </div>
 
 <p>where \(x = (\epsilon_i - \epsilon_F)/\sigma\) and the coefficients are
-\(A_n = (-1)^n / (n!, 4^n\sqrt{\pi})\). The corresponding occupation function is obtained by
+\(A_n = (-1)^n / (n!\, 4^n\sqrt{\pi})\). The corresponding occupation function is obtained by
 integration:</p>
 <div>
 \begin{equation}
-    f_N(x) = \int_x^\infty \tilde{\delta}_N(t)\,dt.
-    \label{eq:MP-occupation-general}
+    f_N(x) = \int_x^\infty \tilde{\delta}_N(t)\,dt.
+    \label{eq:MP-occupation-general}
 \end{equation}
 </div>
 
 <p><strong>The \(N = 0\) case</strong> recovers Gaussian smearing: \(\tilde{\delta}_0(x) = e^{-x^2}/\sqrt{\pi}\),
-\(f_0(x) = \frac{1}{2},\mathrm{erfc}(x)\), with error \(\mathcal{O}(\sigma^2)\).</p>
+\(f_0(x) = \frac{1}{2}\,\mathrm{erfc}(x)\), with error \(\mathcal{O}(\sigma^2)\).</p>
 <p><strong>The \(N = 1\) case</strong> is derived explicitly. The first Hermite polynomial correction adds
 \(A_1 H_2(x) = -\frac{1}{4\sqrt{\pi}}(4x^2 - 2)\) to the \(\delta\)-function. Integrating gives:</p>
 <div>
 \begin{equation}
-    \boxed{f_1(x) = \frac{1}{2}\,\mathrm{erfc}(x) + \frac{1}{\sqrt{\pi}}\,x\,e^{-x^2},
-    \qquad x = \frac{\epsilon_i - \epsilon_F}{\sigma}.}
-    \label{eq:MP-N1}
+    \boxed{f_1(x) = \frac{1}{2}\,\mathrm{erfc}(x) + \frac{1}{\sqrt{\pi}}\,x\,e^{-x^2},
+    \qquad x = \frac{\epsilon_i - \epsilon_F}{\sigma}.}
+    \label{eq:MP-N1}
 \end{equation}
 </div>
 
@@ -533,8 +521,8 @@ mathematical weights designed to minimise the BZ integration error. The total el
 \(\mathcal{O}(\sigma^2)\):</p>
 <div>
 \begin{equation}
-    E_{N=1}[\sigma] = E_0 + \mathcal{O}(\sigma^4).
-    \label{eq:MP-N1-error}
+    E_{N=1}[\sigma] = E_0 + \mathcal{O}(\sigma^4).
+    \label{eq:MP-N1-error}
 \end{equation}
 </div>
 
@@ -544,7 +532,7 @@ computed and should still be used, but the correction it applies is much smaller
 Gaussian smearing at the same \(\sigma\).</p>
 <p><strong>The \(N = 2\) case</strong> adds the next Hermite correction, achieving
 \(\mathcal{O}(\sigma^6)\) accuracy. For most applications, \(N = 1\) is sufficient; \(N = 2\)
-provides a useful cross-check but rarely changes results by more than \(\sim 0.1,\)meV/atom at
+provides a useful cross-check but rarely changes results by more than \(\sim 0.1\,\)meV/atom at
 typical smearing widths.</p>
 <p><strong>Why not \(N \gt 2\)?</strong> Higher-order MP approximations produce occupation functions with
 increasingly large oscillations outside \([0,1]\), which can cause numerical instabilities in
@@ -562,7 +550,7 @@ of the mesh is subdivided into six congruent tetrahedra (the natural simplicial 
 of a 3D cell). Within each tetrahedron \(T\) with vertices \(\mathbf{k}_1,\ldots,\mathbf{k}_4\)
 and band energies \(\epsilon_n = \epsilon_i(\mathbf{k}_n)\) (sorted so \(\epsilon_1 \leq \epsilon_2 \leq \epsilon_3 \leq \epsilon_4\)), the band energy is <strong>linearly interpolated</strong>:</p>
 <p>\[
-\tilde\epsilon_i(\mathbf{k}) = \sum_{n=1}^{4} \alpha_n(\mathbf{k}),\epsilon_n,
+\tilde\epsilon_i(\mathbf{k}) = \sum_{n=1}^{4} \alpha_n(\mathbf{k})\,\epsilon_n,
 \qquad \mathbf{k} \in T,
 \]</p>
 <p>where \(\alpha_n(\mathbf{k})\) are the barycentric coordinates of \(\mathbf{k}\) in \(T\), with
@@ -599,7 +587,7 @@ within each tetrahedron. The dominant correction is the second-derivative contri
 arises from the Taylor expansion of the true band energy around the tetrahedron centroid.
 Blöchl, Jepsen, and Andersen (1994) showed that adding the correction</p>
 <p>\[
-\Delta w_n = \frac{1}{40}\sum_T D_T(\epsilon_F)!\sum_{m=1}^4 (\epsilon_m - \epsilon_n),
+\Delta w_n = \frac{1}{40}\sum_T D_T(\epsilon_F)\!\sum_{m=1}^4 (\epsilon_m - \epsilon_n),
 \]</p>
 <p>where \(D_T(\epsilon_F)\) is the density of states from tetrahedron \(T\) at \(\epsilon_F\),
 restores fourth-order accuracy: the integration error scales as \(\mathcal{O}(N_k^{-4})\) rather
@@ -640,14 +628,14 @@ calculation:</p>
 <tr><td>Single-point energy</td><td>Metal</td><td>Tetrahedron (Blöchl)</td><td>—</td></tr>
 <tr><td>Single-point energy</td><td>Insulator</td><td>Tetrahedron (Blöchl)</td><td>—</td></tr>
 <tr><td>DOS / optical properties</td><td>Any</td><td>Tetrahedron (Blöchl)</td><td>—</td></tr>
-<tr><td>AIMD (\(T \gt 1000,\)K)</td><td>Metal</td><td>Fermi–Dirac</td><td>\(k_BT\)</td></tr>
+<tr><td>AIMD (\(T \gt 1000\,\)K)</td><td>Metal</td><td>Fermi–Dirac</td><td>\(k_BT\)</td></tr>
 <tr><td>Phonons (DFPT)</td><td>Metal</td><td>MP \(N=1\)</td><td>\(0.1\)–\(0.2\) eV</td></tr>
 </tbody>
 </table>
 </div>
 <p><strong>Choosing \(\sigma\):</strong> The smearing width must be large enough to smooth the Fermi surface
 sufficiently for the given \(\mathbf{k}\)-mesh, but small enough that the smearing error is
-acceptable. A useful diagnostic: if the entropy term \(TS\) exceeds \(\sim 1,\)meV/atom, the
+acceptable. A useful diagnostic: if the entropy term \(TS\) exceeds \(\sim 1\,\)meV/atom, the
 smearing is too large and either \(\sigma\) should be reduced or the \(\mathbf{k}\)-mesh should be
 made denser.</p>
 <p><strong>The interdependence of \(\sigma\) and \(\mathbf{k}\)-mesh:</strong> These two parameters are not
@@ -695,8 +683,8 @@ relaxation.</p>
 </tbody>
 </table>
 </div>
-<p>Note that QE uses Rydberg units for <code>degauss</code> (\(1,\)Ry \(= 13.606,\)eV), while VASP uses eV for
-<code>SIGMA</code>. A common source of error is confusing the two: <code>degauss = 0.02</code> Ry \(\approx 0.27,\)eV,
+<p>Note that QE uses Rydberg units for <code>degauss</code> (\(1\,\)Ry \(= 13.606\,\)eV), while VASP uses eV for
+<code>SIGMA</code>. A common source of error is confusing the two: <code>degauss = 0.02</code> Ry \(\approx 0.27\,\)eV,
 which is a reasonable smearing for metals; <code>SIGMA = 0.02</code> eV is extremely small and may cause
 convergence problems on a coarse \(\mathbf{k}\)-mesh.</p>
 <p>Marzari–Vanderbilt cold smearing is accessed via <code>smearing = 'marzari-vanderbilt'</code> or
@@ -707,33 +695,33 @@ convergence problems on a coarse \(\mathbf{k}\)-mesh.</p>
 <ul>
 <li>
 <p><strong>Methfessel–Paxton smearing:</strong> M. Methfessel and A. T. Paxton, <em>High-precision sampling for
-  Brillouin-zone integration in metals</em>, Phys. Rev. B <strong>40</strong>, 3616 (1989). The original paper
-  deriving the Hermite polynomial expansion and the error scaling \(\mathcal{O}(\sigma^{2N+2})\).</p>
+Brillouin-zone integration in metals</em>, Phys. Rev. B <strong>40</strong>, 3616 (1989). The original paper
+deriving the Hermite polynomial expansion and the error scaling \(\mathcal{O}(\sigma^{2N+2})\).</p>
 </li>
 <li>
 <p><strong>Tetrahedron method with Blöchl correction:</strong> P. E. Blöchl, O. Jepsen, and O. K. Andersen,
-  <em>Improved tetrahedron method for Brillouin-zone integrations</em>, Phys. Rev. B <strong>49</strong>, 16223
-  (1994). Derives the quadratic correction that improves convergence from
-  \(\mathcal{O}(1/N_k^2)\) to \(\mathcal{O}(1/N_k^4)\).</p>
+<em>Improved tetrahedron method for Brillouin-zone integrations</em>, Phys. Rev. B <strong>49</strong>, 16223
+(1994). Derives the quadratic correction that improves convergence from
+\(\mathcal{O}(1/N_k^2)\) to \(\mathcal{O}(1/N_k^4)\).</p>
 </li>
 <li>
 <p><strong>Original tetrahedron method:</strong> O. Jepsen and O. K. Andersen, <em>The electronic structure of
-  h.c.p. ytterbium</em>, Solid State Commun. <strong>9</strong>, 1763 (1971).</p>
+h.c.p. ytterbium</em>, Solid State Commun. <strong>9</strong>, 1763 (1971).</p>
 </li>
 <li>
 <p><strong>Marzari–Vanderbilt cold smearing:</strong> N. Marzari, D. Vanderbilt, A. De Vita, and M. C. Payne,
-  <em>Thermal contraction and disordering of the Al(110) surface</em>, Phys. Rev. Lett. <strong>82</strong>, 3296
-  (1999). Introduces the cold smearing function with improved convergence properties for metals.</p>
+<em>Thermal contraction and disordering of the Al(110) surface</em>, Phys. Rev. Lett. <strong>82</strong>, 3296
+(1999). Introduces the cold smearing function with improved convergence properties for metals.</p>
 </li>
 <li>
 <p><strong>Mermin finite-temperature DFT:</strong> N. D. Mermin, <em>Thermal properties of the inhomogeneous
-  electron gas</em>, Phys. Rev. <strong>137</strong>, A1441 (1965). The formal foundation for Fermi–Dirac
-  smearing as a finite-temperature variational principle.</p>
+electron gas</em>, Phys. Rev. <strong>137</strong>, A1441 (1965). The formal foundation for Fermi–Dirac
+smearing as a finite-temperature variational principle.</p>
 </li>
 <li>
 <p><strong>General discussion:</strong> The interplay between \(\mathbf{k}\)-mesh density and smearing is
-  discussed clearly in G. Kresse and J. Furthmüller, Phys. Rev. B <strong>54</strong>, 11169 (1996),
-  Section II.D.</p>
+discussed clearly in G. Kresse and J. Furthmüller, Phys. Rev. B <strong>54</strong>, 11169 (1996),
+Section II.D.</p>
 </li>
 </ul>
 </details>
@@ -786,7 +774,7 @@ convergence problems on a coarse \(\mathbf{k}\)-mesh.</p>
 
         <script src="clipboard-1626706a.min.js"></script>
         <script src="highlight-abc7f01d.js"></script>
-        <script src="book-c22b7243.js"></script>
+        <script src="book-609e4cb8.js"></script>
 
         <!-- Custom JS scripts -->
         <script src="src/custom-cd58eebe.js"></script>

@@ -62,8 +62,8 @@
         <link rel="icon" href="favicon-de23e50b.svg">
         <link rel="shortcut icon" href="favicon-8114d1fc.png">
         <link rel="stylesheet" href="css/variables-8adf115d.css">
-        <link rel="stylesheet" href="css/general-0392ca55.css">
-        <link rel="stylesheet" href="css/chrome-fc474251.css">
+        <link rel="stylesheet" href="css/general-e96d0476.css">
+        <link rel="stylesheet" href="css/chrome-d279d366.css">
         <link rel="stylesheet" href="css/print-9e4910d8.css" media="print">
 
         <!-- Fonts -->
@@ -75,7 +75,7 @@
         <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="ayu-highlight-3fdfc3ac.css">
 
         <!-- Custom theme stylesheets -->
-        <link rel="stylesheet" href="src/custom-5f363160.css">
+        <link rel="stylesheet" href="src/custom-ee915ece.css">
 
 
         <!-- Provide site root and default themes to javascript -->
@@ -83,10 +83,10 @@
             const path_to_root = "";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "searchindex-23f86b14.js";
+            window.path_to_searchindex_js = "searchindex-72308093.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="toc-06779d97.js"></script>
+        <script src="toc-3c9b9cd1.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -235,7 +235,7 @@ This chapter develops the theory behind the most common approaches and provides 
 on convergence.</p>
 <h2 id="basis-set-expansion"><a class="header" href="#basis-set-expansion">Basis Set Expansion</a></h2>
 <p>The KS orbital \(\phi_i(\mathbf{r})\) is an element of an infinite-dimensional Hilbert space. In
-practice, it is expanded in a finite basis \({f_\mu(\mathbf{r})}\):</p>
+practice, it is expanded in a finite basis \(\{f_\mu(\mathbf{r})\}\):</p>
 <div>
 \begin{equation}
     \phi_i(\mathbf{r}) = \sum_\mu c_{i\mu}\, f_\mu(\mathbf{r}),
@@ -243,7 +243,7 @@ practice, it is expanded in a finite basis \({f_\mu(\mathbf{r})}\):</p>
 </div>
 
 <p>where the coefficients \(c_{i\mu}\) are determined by diagonalising the KS Hamiltonian in this
-basis. The KS eigenvalue problem \eqref{eq:KS-eqn} becomes the generalised matrix eigenvalue
+basis. The KS eigenvalue problem of Chapter 3 becomes the generalised matrix eigenvalue
 problem:</p>
 <div>
 \begin{equation}
@@ -251,7 +251,7 @@ problem:</p>
 \end{equation}
 </div>
 
-<p>where \(H_{\rm KS,\mu\nu} = \langle f_\mu | \hat{h}<em>{\rm KS} | f</em>\nu\rangle\) and
+<p>where \(H_{\rm KS,\mu\nu} = \langle f_\mu | \hat{h}_{\rm KS} | f_\nu\rangle\) and
 \(S_{\mu\nu} = \langle f_\mu | f_\nu\rangle\) is the overlap matrix. The two dominant choices are
 <strong>plane waves</strong> and <strong>localised (atomic-like) basis functions</strong>.</p>
 <h2 id="plane-wave-basis-sets"><a class="header" href="#plane-wave-basis-sets">Plane-Wave Basis Sets</a></h2>
@@ -278,9 +278,9 @@ in <strong>plane waves</strong> labelled by reciprocal lattice vectors \(\mathbf
 <p>equivalently \(\frac{\hbar^2}{2m_e}|\mathbf{k}+\mathbf{G}|^2 \leq E_{\rm cut}\) in SI notation.
 Codes quote \(E_{\rm cut}\) in different units: <strong>VASP</strong> uses eV, <strong>Quantum ESPRESSO</strong> uses Ry,
 and the underlying expressions assume Hartree. Conversions:
-\(1,\mathrm{Ha} = 27.2114,\mathrm{eV} = 2,\mathrm{Ry}\), so a VASP input of \(\texttt{ENCUT}=500\) eV
-corresponds to \(\sim 18.4,\mathrm{Ha}\), while \(\texttt{ecutwfc}=60\) Ry in QE corresponds to
-\(30,\mathrm{Ha} = 816,\mathrm{eV}\). When evaluating \(\tfrac{1}{2}|\mathbf{G}|^2\) by hand,
+\(1\,\mathrm{Ha} = 27.2114\,\mathrm{eV} = 2\,\mathrm{Ry}\), so a VASP input of \(\texttt{ENCUT}=500\) eV
+corresponds to \(\sim 18.4\,\mathrm{Ha}\), while \(\texttt{ecutwfc}=60\) Ry in QE corresponds to
+\(30\,\mathrm{Ha} = 816\,\mathrm{eV}\). When evaluating \(\tfrac{1}{2}|\mathbf{G}|^2\) by hand,
 keep \(\mathbf{G}\) in inverse bohr and \(E_{\rm cut}\) in Hartree to avoid factor-of-13.6 errors.</p>
 <p><strong>Advantages of plane waves:</strong></p>
 <ul>
@@ -427,7 +427,7 @@ nodeless function.</p>
 \end{equation}
 </div>
 
-<p>where \(\rho_{nm}^a = \sum_i \langle\tilde{\phi}_i|\tilde{p}_n^a\rangle\langle\tilde{p}_m^a|\tilde{\phi}<em>i\rangle\) are the <strong>occupancy matrices</strong> for atom \(a\), and \(Q</em>{nm}^a(\mathbf{r})\) are localised functions inside the augmentation sphere that carry the missing charge. The generalised eigenvalue problem that results from USPP differs from the standard KS equation, requiring a modified orthonormality condition; however, this adds negligible overhead in practice.</p>
+<p>where \(\rho_{nm}^a = \sum_i \langle\tilde{\phi}_i|\tilde{p}_n^a\rangle\langle\tilde{p}_m^a|\tilde{\phi}_i\rangle\) are the <strong>occupancy matrices</strong> for atom \(a\), and \(Q_{nm}^a(\mathbf{r})\) are localised functions inside the augmentation sphere that carry the missing charge. The generalised eigenvalue problem that results from USPP differs from the standard KS equation, requiring a modified orthonormality condition; however, this adds negligible overhead in practice.</p>
 <p>USPP is available in Quantum ESPRESSO and CASTEP and offers an excellent cost-to-accuracy ratio
 for most elements.</p>
 <h3 id="projector-augmented-wave-paw-method"><a class="header" href="#projector-augmented-wave-paw-method">Projector Augmented Wave (PAW) Method</a></h3>
@@ -444,9 +444,9 @@ where the on-site corrections are computed inside the augmentation sphere from t
 PS partial waves.</p>
 </figcaption>
 </figure>
-The **PAW method** (Blöchl, 1994) is the most rigorous of the pseudopotential-like approaches
+<p>The <strong>PAW method</strong> (Blöchl, 1994) is the most rigorous of the pseudopotential-like approaches
 and is now the default in most major plane-wave codes. It can be understood as a generalisation
-of USPP that is formally equivalent to an all-electron calculation.
+of USPP that is formally equivalent to an all-electron calculation.</p>
 <h4 id="the-paw-transformation"><a class="header" href="#the-paw-transformation">The PAW Transformation</a></h4>
 <p>PAW introduces a <strong>linear transformation operator</strong> \(\hat{\mathcal{T}}\) that maps smooth,
 computationally convenient <strong>pseudo-wavefunctions</strong> \(|\tilde{\Psi}_i\rangle\) onto the true
@@ -477,20 +477,20 @@ equation for the isolated atom \(a\) at reference energies, labelled by \(n = (l
 <li>\(|\tilde{\phi}_n^a\rangle\) are <strong>smooth pseudo partial waves</strong> that match \(|\phi_n^a\rangle\)
 outside \(r_c^a\) but are nodeless and smooth inside.</li>
 <li>\(\langle\tilde{p}_n^a|\) are <strong>projector functions</strong> localised inside \(r_c^a\), dual to the
-pseudo partial waves: \(\langle\tilde{p}_n^a|\tilde{\phi}<em>m^a\rangle = \delta</em>{nm}\).</li>
+pseudo partial waves: \(\langle\tilde{p}_n^a|\tilde{\phi}_m^a\rangle = \delta_{nm}\).</li>
 </ul>
 <p><strong>Constructing the projectors.</strong> The duality relation does not uniquely fix
 \(|\tilde{p}_n^a\rangle\); it is a <em>biorthogonality condition</em> with the pseudo partial waves.
 The standard construction (Blöchl 1994; Kresse–Joubert 1999) starts from auxiliary functions
 \(|\chi_n^a\rangle\) that are localised inside \(r_c^a\) and have the same angular character as
-\(|\tilde{\phi}_n^a\rangle\) — typically obtained by acting on \(|\tilde{\phi}<em>n^a\rangle\) with
-the operator \((\epsilon</em>{\rm ref} - \hat{T} - \tilde{V})\), which annihilates the pseudo partial
+\(|\tilde{\phi}_n^a\rangle\) — typically obtained by acting on \(|\tilde{\phi}_n^a\rangle\) with
+the operator \((\epsilon_{\rm ref} - \hat{T} - \tilde{V})\), which annihilates the pseudo partial
 wave outside the sphere. The projectors are then <strong>biorthogonalised</strong>:</p>
 <p>\[
-|\tilde{p}<em>n^a\rangle = \sum_m |\chi_m^a\rangle (B^{-1})</em>{mn},
+|\tilde{p}_n^a\rangle = \sum_m |\chi_m^a\rangle (B^{-1})_{mn},
 \qquad B_{mn} = \langle\chi_m^a|\tilde{\phi}_n^a\rangle,
 \]</p>
-<p>which guarantees \(\langle\tilde{p}_n^a|\tilde{\phi}<em>m^a\rangle = \delta</em>{nm}\) by construction.
+<p>which guarantees \(\langle\tilde{p}_n^a|\tilde{\phi}_m^a\rangle = \delta_{nm}\) by construction.
 The construction is performed once per element during PAW dataset generation; the user only sees
 the finished projector–partial-wave set in the POTCAR (VASP) or UPF (QE) file.</p>
 <p>The transformation acts as follows: when \(\hat{\mathcal{T}}\) is applied to \(|\tilde{\Psi}_i\rangle\),
@@ -509,19 +509,19 @@ spheres, \(\hat{\mathcal{T}}^a = 0\) and the smooth wavefunction is used directl
 <p>where each term has a specific role:</p>
 <ul>
 <li>
-<p>\(\tilde{\rho}(\mathbf{r}) = \sum_i f_i,|\tilde{\Psi}_i(\mathbf{r})|^2\) is the <strong>smooth
+<p>\(\tilde{\rho}(\mathbf{r}) = \sum_i f_i\,|\tilde{\Psi}_i(\mathbf{r})|^2\) is the <strong>smooth
 pseudo-density</strong>, computed from the plane-wave-expanded pseudo-wavefunctions throughout the
 entire cell. This is the computationally cheap term, evaluated with FFTs.</p>
 </li>
 <li>
-<p>\(\rho^1(\mathbf{r}) = \sum_a\sum_{nm}\rho_{nm}^a,\phi_n^a(\mathbf{r})\phi_m^a(\mathbf{r})\)
+<p>\(\rho^1(\mathbf{r}) = \sum_a\sum_{nm}\rho_{nm}^a\,\phi_n^a(\mathbf{r})\phi_m^a(\mathbf{r})\)
 is the <strong>on-site all-electron density</strong>, reconstructed analytically from the all-electron
 partial waves inside the augmentation spheres. Here \(\rho_{nm}^a = \sum_i f_i\langle\tilde{\Psi}_i|\tilde{p}_n^a\rangle\langle\tilde{p}_m^a|\tilde{\Psi}_i\rangle\) are the
 <strong>occupation matrices</strong> that quantify the partial-wave character of each KS orbital at each
 atom.</p>
 </li>
 <li>
-<p>\(\tilde{\rho}^1(\mathbf{r}) = \sum_a\sum_{nm}\rho_{nm}^a,\tilde{\phi}_n^a(\mathbf{r})\tilde{\phi}_m^a(\mathbf{r})\) is the <strong>on-site pseudo-density</strong>, which subtracts the
+<p>\(\tilde{\rho}^1(\mathbf{r}) = \sum_a\sum_{nm}\rho_{nm}^a\,\tilde{\phi}_n^a(\mathbf{r})\tilde{\phi}_m^a(\mathbf{r})\) is the <strong>on-site pseudo-density</strong>, which subtracts the
 smooth-wavefunction contribution inside the augmentation spheres so it is not double-counted
 with \(\tilde{\rho}\).</p>
 </li>
@@ -550,7 +550,7 @@ this functional take the form of a <strong>generalised eigenvalue problem</stron
 </div>
 
 <p>where \(\hat{\tilde{H}}\) is the smooth KS Hamiltonian (including on-site corrections) and
-\(\hat{S} = \mathbf{1} + \sum_a\sum_{nm}({\langle\tilde{p}<em>n^a|\tilde{p}<em>m^a\rangle</em>{\rm AE} - \delta</em>{nm}})|\tilde{p}_m^a\rangle\langle\tilde{p}_n^a|\) is the <strong>overlap operator</strong> that enforces
+\(\hat{S} = \mathbf{1} + \sum_a\sum_{nm}({\langle\tilde{p}_n^a|\tilde{p}_m^a\rangle_{\rm AE} - \delta_{nm}})|\tilde{p}_m^a\rangle\langle\tilde{p}_n^a|\) is the <strong>overlap operator</strong> that enforces
 the correct normalisation of the all-electron wavefunctions.</p>
 <h4 id="frozen-core-and-semi-core-states"><a class="header" href="#frozen-core-and-semi-core-states">Frozen Core and Semi-Core States</a></h4>
 <p>A PAW dataset (or any pseudopotential) requires a decision about which electrons are “core”
@@ -596,7 +596,7 @@ explicitly recommends the semi-core variant for your element.</p>
 <li><strong>Formally all-electron</strong>: The full all-electron density is available in the augmentation
 spheres through equation \eqref{eq:PAW-density}. This gives direct access to hyperfine
 parameters, electric field gradients, NMR chemical shifts, and core-level binding energies.</li>
-<li><strong>Low \(E_{\rm cut}\)</strong>: The smooth part \(|\tilde{\Psi}<em>i\rangle\) requires \(E</em>{\rm cut} \sim
+<li><strong>Low \(E_{\rm cut}\)</strong>: The smooth part \(|\tilde{\Psi}_i\rangle\) requires \(E_{\rm cut} \sim
 400\)–\(600\) eV (VASP), similar to USPP, far below what a true all-electron plane-wave
 calculation would need.</li>
 <li><strong>Transferability</strong>: The partial waves are atom-specific but not system-specific; the same PAW
@@ -611,7 +611,7 @@ smooth; if too large, augmentation spheres on adjacent atoms overlap, invalidati
 non-overlapping sphere assumption. Standard VASP PAW datasets are designed to avoid overlap
 for typical bond lengths, but this must be verified under compression.</li>
 <li><strong>Linearisation of the partial wave expansion</strong>: PAW is exact only if the partial wave basis
-\({|\phi_n^a\rangle}\) is complete within the augmentation sphere. For highly ionic environments
+\(\{|\phi_n^a\rangle\}\) is complete within the augmentation sphere. For highly ionic environments
 or unusual oxidation states, a larger partial wave set or scattering energies closer to the
 occupied states may be needed. VASP provides both standard and “hard” PAW datasets for such
 cases.</li>
@@ -712,7 +712,7 @@ materials and the study of exchange coupling in Heusler alloys and related compo
 
         <script src="clipboard-1626706a.min.js"></script>
         <script src="highlight-abc7f01d.js"></script>
-        <script src="book-c22b7243.js"></script>
+        <script src="book-609e4cb8.js"></script>
 
         <!-- Custom JS scripts -->
         <script src="src/custom-cd58eebe.js"></script>

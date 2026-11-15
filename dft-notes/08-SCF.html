@@ -62,8 +62,8 @@
         <link rel="icon" href="favicon-de23e50b.svg">
         <link rel="shortcut icon" href="favicon-8114d1fc.png">
         <link rel="stylesheet" href="css/variables-8adf115d.css">
-        <link rel="stylesheet" href="css/general-0392ca55.css">
-        <link rel="stylesheet" href="css/chrome-fc474251.css">
+        <link rel="stylesheet" href="css/general-e96d0476.css">
+        <link rel="stylesheet" href="css/chrome-d279d366.css">
         <link rel="stylesheet" href="css/print-9e4910d8.css" media="print">
 
         <!-- Fonts -->
@@ -75,7 +75,7 @@
         <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="ayu-highlight-3fdfc3ac.css">
 
         <!-- Custom theme stylesheets -->
-        <link rel="stylesheet" href="src/custom-5f363160.css">
+        <link rel="stylesheet" href="src/custom-ee915ece.css">
 
 
         <!-- Provide site root and default themes to javascript -->
@@ -83,10 +83,10 @@
             const path_to_root = "";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "searchindex-23f86b14.js";
+            window.path_to_searchindex_js = "searchindex-72308093.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="toc-06779d97.js"></script>
+        <script src="toc-3c9b9cd1.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -223,12 +223,11 @@
                 <div id="mdbook-content" class="content">
                     <main>
                         <h1 id="scf-convergence-and-density-mixing"><a class="header" href="#scf-convergence-and-density-mixing">SCF Convergence and Density Mixing</a></h1>
-<p>The Part II overview described the SCF cycle as a sequence of six steps and catalogued the
-common failure modes. This chapter addresses the most fundamental of those steps: the
+<p>Chapter 3 (Section 3.4) introduced the SCF cycle as a sequence of six steps and contrasted the outer density iteration with the inner eigenvalue solver. This chapter addresses the most fundamental of those steps: the
 <strong>density update</strong> — how the output density from one KS cycle is combined with the input
 density to produce the next iterate, and under what conditions this process converges.</p>
 <p>Consider a concrete example. A spin-polarised calculation on a \(4 \times 4 \times 4\) supercell
-of bcc Fe (\(128\) atoms, \(\sim 50,000\) plane waves per \(\mathbf{k}\)-point) will not converge
+of bcc Fe (\(128\) atoms, \(\sim 50\,000\) plane waves per \(\mathbf{k}\)-point) will not converge
 with naive density iteration at any mixing parameter. The total energy oscillates indefinitely,
 swinging by several eV per iteration, because long-wavelength charge fluctuations slosh back
 and forth across the metallic Fermi surface with no restoring force. The same system converges
@@ -242,39 +241,39 @@ derive the main mixing schemes — linear, Kerker-preconditioned, Pulay/DIIS, an
 progressively more sophisticated strategies for reaching the fixed point.</p>
 <h2 id="the-self-consistency-problem-revisited"><a class="header" href="#the-self-consistency-problem-revisited">The Self-Consistency Problem Revisited</a></h2>
 <h3 id="the-fixed-point-formulation"><a class="header" href="#the-fixed-point-formulation">The Fixed-Point Formulation</a></h3>
-<p>The SCF cycle of Chapter 3 (Section 3.3) consists of three computational steps: constructing
-\(V_{\rm eff}[\rho]\) from the Kohn–Sham equation \eqref{eq:KS-eqn}, diagonalising
+<p>The SCF cycle of Chapter 3 (Section 3.4) consists of three computational steps: constructing
+\(V_{\rm eff}[\rho]\) in the Kohn–Sham equations, diagonalising
 \(\hat{h}_{\rm KS}\), and assembling
 \(\rho_{\rm out} = \sum_i f_i |\phi_i|^2\). We now recast this cycle as a <strong>fixed-point
 problem</strong> whose convergence properties can be analysed rigorously. Define the map \(F\) that takes
 an input density \(\rho_{\rm in}\) and returns the output density obtained by one full KS cycle:</p>
 <div>
 \begin{equation}
-    \rho_{\rm in} \;\xrightarrow{V_{\rm eff}[\rho_{\rm in}]}\;
-    \hat{h}_{\rm KS} \;\xrightarrow{\text{diagonalise}}\;
-    \{\phi_i, \epsilon_i\} \;\xrightarrow{\sum_i f_i|\phi_i|^2}\;
-    \rho_{\rm out} = F[\rho_{\rm in}].
-    \label{eq:F-map}
+    \rho_{\rm in} \;\xrightarrow{V_{\rm eff}[\rho_{\rm in}]}\;
+    \hat{h}_{\rm KS} \;\xrightarrow{\text{diagonalise}}\;
+    \{\phi_i, \epsilon_i\} \;\xrightarrow{\sum_i f_i|\phi_i|^2}\;
+    \rho_{\rm out} = F[\rho_{\rm in}].
+    \label{eq:F-map}
 \end{equation}
 </div>
 
 <p>Self-consistency means finding the density \(\rho^*\) that is a fixed point of \(F\):</p>
 <div>
 \begin{equation}
-    \boxed{F[\rho^*] = \rho^*.}
-    \label{eq:fixed-point}
+    \boxed{F[\rho^*] = \rho^*.}
+    \label{eq:fixed-point}
 \end{equation}
 </div>
 
 <p>The <strong>residual</strong> at iteration \(n\) measures the distance from self-consistency:</p>
 <div>
 \begin{equation}
-    R^{(n)} = F[\rho_{\rm in}^{(n)}] - \rho_{\rm in}^{(n)} = \rho_{\rm out}^{(n)} - \rho_{\rm in}^{(n)}.
-    \label{eq:residual}
+    R^{(n)} = F[\rho_{\rm in}^{(n)}] - \rho_{\rm in}^{(n)} = \rho_{\rm out}^{(n)} - \rho_{\rm in}^{(n)}.
+    \label{eq:residual}
 \end{equation}
 </div>
 
-<p>All mixing schemes can be understood as strategies to drive \(|R^{(n)}| \to 0\) as efficiently
+<p>All mixing schemes can be understood as strategies to drive \(\|R^{(n)}\| \to 0\) as efficiently
 as possible. The simplest strategy — feeding the output density directly back as the next
 input, \(\rho_{\rm in}^{(n+1)} = \rho_{\rm out}^{(n)}\) — corresponds to a naive fixed-point
 iteration. Whether this converges depends on the properties of \(F\).</p>
@@ -282,8 +281,8 @@ iteration. Whether this converges depends on the properties of \(F\).</p>
 <p>Linearising \(F\) around the fixed point \(\rho^*\), the residual evolves as:</p>
 <div>
 \begin{equation}
-    R^{(n+1)} \approx J \cdot R^{(n)}, \qquad J_{ij} = \left.\frac{\delta F[\rho]_i}{\delta \rho_j}\right|_{\rho = \rho^*},
-    \label{eq:jacobian}
+    R^{(n+1)} \approx J \cdot R^{(n)}, \qquad J_{ij} = \left.\frac{\delta F[\rho]_i}{\delta \rho_j}\right|_{\rho = \rho^*},
+    \label{eq:jacobian}
 \end{equation}
 </div>
 
@@ -292,8 +291,8 @@ discretisation of the density (e.g., plane-wave coefficients \(\rho(\mathbf{G})\
 converges if and only if the <strong>spectral radius</strong> of \(J\) is less than unity:</p>
 <div>
 \begin{equation}
-    \boxed{|\lambda_{\rm max}(J)| \lt 1,}
-    \label{eq:convergence-condition}
+    \boxed{|\lambda_{\rm max}(J)| \lt 1,}
+    \label{eq:convergence-condition}
 \end{equation}
 </div>
 
@@ -306,19 +305,19 @@ homogeneous electron gas, the density response to a perturbation of wavevector \
 governed by the <strong>Lindhard dielectric function</strong>:</p>
 <div>
 \begin{equation}
-    \varepsilon(\mathbf{G}) = 1 - \frac{4\pi e^2}{G^2}\chi_0(\mathbf{G}),
-    \label{eq:lindhard}
+    \varepsilon(\mathbf{G}) = 1 - \frac{4\pi e^2}{G^2}\chi_0(\mathbf{G}),
+    \label{eq:lindhard}
 \end{equation}
 </div>
 
 <p>where \(\chi_0(\mathbf{G})\) is the non-interacting density–density response function of the KS
 system. The KS map \(F\) relates the output density perturbation to the input perturbation
 through the inverse dielectric function: \(\delta\rho_{\rm out}(\mathbf{G}) =
-\varepsilon^{-1}(\mathbf{G}),\delta\rho_{\rm in}(\mathbf{G})\). For the Jacobian, this means:</p>
+\varepsilon^{-1}(\mathbf{G})\,\delta\rho_{\rm in}(\mathbf{G})\). For the Jacobian, this means:</p>
 <div>
 \begin{equation}
-    J(\mathbf{G}) \approx 1 - \varepsilon^{-1}(\mathbf{G}).
-    \label{eq:J-dielectric}
+    J(\mathbf{G}) \approx 1 - \varepsilon^{-1}(\mathbf{G}).
+    \label{eq:J-dielectric}
 \end{equation}
 </div>
 
@@ -331,8 +330,8 @@ is finite, so \(\chi_0(\mathbf{G}) \to -N(\epsilon_F)\) as \(G \to 0\) (the stat
 limit). The dielectric function diverges as:</p>
 <div>
 \begin{equation}
-    \varepsilon(\mathbf{G}) \approx 1 + \frac{k_{\rm TF}^2}{G^2}, \qquad G \to 0,
-    \label{eq:eps-metal}
+    \varepsilon(\mathbf{G}) \approx 1 + \frac{k_{\rm TF}^2}{G^2}, \qquad G \to 0,
+    \label{eq:eps-metal}
 \end{equation}
 </div>
 
@@ -341,8 +340,8 @@ This means \(\varepsilon^{-1}(\mathbf{G}) \to 0\) for small \(G\), and from equa
 \eqref{eq:J-dielectric}:</p>
 <div>
 \begin{equation}
-    J(\mathbf{G}) \to 1 \quad \text{as} \quad G \to 0 \quad \text{(metals)}.
-    \label{eq:charge-sloshing}
+    J(\mathbf{G}) \to 1 \quad \text{as} \quad G \to 0 \quad \text{(metals)}.
+    \label{eq:charge-sloshing}
 \end{equation}
 </div>
 
@@ -356,11 +355,11 @@ has no restoring force to drive them toward the self-consistent solution.</p>
 components of the density converge slowly or not at all, while large-\(G\) components (short
 wavelength, within the screening cloud) converge quickly. An effective mixing scheme must
 therefore treat different Fourier components differently.</p>
-<p>To make this concrete: for fcc Al (a simple metal with \(k_{\rm TF} \approx 1.6,\)Å\(^{-1}\)),
+<p>To make this concrete: for fcc Al (a simple metal with \(k_{\rm TF} \approx 1.6\,\)Å\(^{-1}\)),
 the Jacobian eigenvalue for the smallest accessible \(\mathbf{G}\) in a conventional cell is
 \(\lambda \approx 0.97\). With simple mixing at \(\alpha = 0.3\), the convergence rate for this
 mode is \(|1 - 0.3(1 - 0.97)| = 0.991\) — meaning each iteration reduces the error by less
-than \(1%\). Reaching \(10^{-6}\) convergence in this mode alone would require \(\sim 1400\)
+than \(1\%\). Reaching \(10^{-6}\) convergence in this mode alone would require \(\sim 1400\)
 iterations. For bcc Fe with a denser Fermi surface, the situation is worse. By contrast, an
 insulator like MgO has \(\varepsilon(0) \approx 10\), giving \(\lambda \approx 0.9\) for the
 slowest mode and convergence in \(\sim 50\) iterations even with simple mixing — and much faster
@@ -374,8 +373,8 @@ a sequence of input–output pairs \((\rho_{\rm in}^{(n)}, \rho_{\rm out}^{(n)})
 <p>The simplest improvement over naive iteration is to mix the input and output densities:</p>
 <div>
 \begin{equation}
-    \boxed{\rho_{\rm in}^{(n+1)} = \rho_{\rm in}^{(n)} + \alpha\, R^{(n)},}
-    \label{eq:linear-mixing}
+    \boxed{\rho_{\rm in}^{(n+1)} = \rho_{\rm in}^{(n)} + \alpha\, R^{(n)},}
+    \label{eq:linear-mixing}
 \end{equation}
 </div>
 
@@ -385,8 +384,8 @@ a sequence of input–output pairs \((\rho_{\rm in}^{(n)}, \rho_{\rm out}^{(n)})
 <p>Linearising around the fixed point, the residual evolves as:</p>
 <div>
 \begin{equation}
-    R^{(n+1)} = [1 - \alpha(1 - J)]\,R^{(n)}.
-    \label{eq:linear-residual}
+    R^{(n+1)} = [1 - \alpha(1 - J)]\,R^{(n)}.
+    \label{eq:linear-residual}
 \end{equation}
 </div>
 
@@ -395,8 +394,8 @@ a sequence of input–output pairs \((\rho_{\rm in}^{(n)}, \rho_{\rm out}^{(n)})
 \(|\mu| \lt 1\) for all eigenvalues, which gives the condition:</p>
 <div>
 \begin{equation}
-    \alpha \lt \frac{2}{1 + \lambda_{\rm max}}.
-    \label{eq:alpha-bound}
+    \alpha \lt \frac{2}{1 + \lambda_{\rm max}}.
+    \label{eq:alpha-bound}
 \end{equation}
 </div>
 
@@ -420,8 +419,8 @@ multiplies the residual in reciprocal space by a filter that suppresses the prob
 small-\(G\) components:</p>
 <div>
 \begin{equation}
-    \boxed{\tilde{R}^{(n)}(\mathbf{G}) = \frac{G^2}{G^2 + k_0^2}\,R^{(n)}(\mathbf{G}),}
-    \label{eq:kerker}
+    \boxed{\tilde{R}^{(n)}(\mathbf{G}) = \frac{G^2}{G^2 + k_0^2}\,R^{(n)}(\mathbf{G}),}
+    \label{eq:kerker}
 \end{equation}
 </div>
 
@@ -430,8 +429,8 @@ small-\(G\) components:</p>
 mixing formula:</p>
 <div>
 \begin{equation}
-    \rho_{\rm in}^{(n+1)} = \rho_{\rm in}^{(n)} + \alpha\,\tilde{R}^{(n)}.
-    \label{eq:kerker-mixing}
+    \rho_{\rm in}^{(n+1)} = \rho_{\rm in}^{(n)} + \alpha\,\tilde{R}^{(n)}.
+    \label{eq:kerker-mixing}
 \end{equation}
 </div>
 
@@ -461,13 +460,13 @@ Subspace (DIIS)</strong>, exploits this history to construct a much better estim
 self-consistent density.</p>
 <p>The idea is to form a linear combination of the \(m\) most recent input densities and find the
 coefficients that minimise the norm of the corresponding residual. Suppose we have stored the
-last \(m\) residuals \({R^{(n)}, R^{(n-1)}, \ldots, R^{(n-m+1)}}\) and the corresponding input
-densities \({\rho_{\rm in}^{(n)}, \ldots, \rho_{\rm in}^{(n-m+1)}}\). Construct a trial
+last \(m\) residuals \(\{R^{(n)}, R^{(n-1)}, \ldots, R^{(n-m+1)}\}\) and the corresponding input
+densities \(\{\rho_{\rm in}^{(n)}, \ldots, \rho_{\rm in}^{(n-m+1)}\}\). Construct a trial
 input density as:</p>
 <div>
 \begin{equation}
-    \bar{\rho}_{\rm in} = \sum_{i=1}^{m} c_i\, \rho_{\rm in}^{(n-m+i)},
-    \label{eq:pulay-trial}
+    \bar{\rho}_{\rm in} = \sum_{i=1}^{m} c_i\, \rho_{\rm in}^{(n-m+i)},
+    \label{eq:pulay-trial}
 \end{equation}
 </div>
 
@@ -476,35 +475,35 @@ the map \(F\) is approximately linear near the fixed point, the residual of this
 is approximately:</p>
 <div>
 \begin{equation}
-    \bar{R} \approx \sum_{i=1}^{m} c_i\, R^{(n-m+i)}.
-    \label{eq:pulay-residual}
+    \bar{R} \approx \sum_{i=1}^{m} c_i\, R^{(n-m+i)}.
+    \label{eq:pulay-residual}
 \end{equation}
 </div>
 
-<p>DIIS minimises \(|\bar{R}|^2 = \sum_{ij} c_i c_j \langle R^{(i)} | R^{(j)} \rangle\) subject
+<p>DIIS minimises \(\|\bar{R}\|^2 = \sum_{ij} c_i c_j \langle R^{(i)} | R^{(j)} \rangle\) subject
 to the constraint \(\sum_i c_i = 1\). Introducing a Lagrange multiplier \(\mu\), the stationarity
 conditions give the \((m+1) \times (m+1)\) linear system:</p>
 <div>
 \begin{equation}
-    \begin{pmatrix}
-        B_{11} &amp; B_{12} &amp; \cdots &amp; B_{1m} &amp; 1 \\
-        B_{21} &amp; B_{22} &amp; \cdots &amp; B_{2m} &amp; 1 \\
-        \vdots &amp; \vdots &amp; \ddots &amp; \vdots &amp; \vdots \\
-        B_{m1} &amp; B_{m2} &amp; \cdots &amp; B_{mm} &amp; 1 \\
-        1 &amp; 1 &amp; \cdots &amp; 1 &amp; 0
-    \end{pmatrix}
-    \begin{pmatrix} c_1 \\ c_2 \\ \vdots \\ c_m \\ -\mu \end{pmatrix}
-    =
-    \begin{pmatrix} 0 \\ 0 \\ \vdots \\ 0 \\ 1 \end{pmatrix},
-    \label{eq:DIIS-system}
+    \begin{pmatrix}
+        B_{11} &amp; B_{12} &amp; \cdots &amp; B_{1m} &amp; 1 \\
+        B_{21} &amp; B_{22} &amp; \cdots &amp; B_{2m} &amp; 1 \\
+        \vdots &amp; \vdots &amp; \ddots &amp; \vdots &amp; \vdots \\
+        B_{m1} &amp; B_{m2} &amp; \cdots &amp; B_{mm} &amp; 1 \\
+        1 &amp; 1 &amp; \cdots &amp; 1 &amp; 0
+    \end{pmatrix}
+    \begin{pmatrix} c_1 \\ c_2 \\ \vdots \\ c_m \\ -\mu \end{pmatrix}
+    =
+    \begin{pmatrix} 0 \\ 0 \\ \vdots \\ 0 \\ 1 \end{pmatrix},
+    \label{eq:DIIS-system}
 \end{equation}
 </div>
 
 <p>where the <strong>DIIS matrix</strong> is:</p>
 <div>
 \begin{equation}
-    \boxed{B_{ij} = \langle R^{(i)} | R^{(j)} \rangle = \int R^{(i)}(\mathbf{r})\, R^{(j)}(\mathbf{r})\, d\mathbf{r}.}
-    \label{eq:DIIS-matrix}
+    \boxed{B_{ij} = \langle R^{(i)} | R^{(j)} \rangle = \int R^{(i)}(\mathbf{r})\, R^{(j)}(\mathbf{r})\, d\mathbf{r}.}
+    \label{eq:DIIS-matrix}
 \end{equation}
 </div>
 
@@ -514,11 +513,11 @@ the extrapolation lacks sufficient information to capture the curvature of the S
 many (\(m \gt 10\)–\(12\)) and the stored residuals become nearly linearly dependent, causing the
 DIIS matrix \(B_{ij}\) to become ill-conditioned and the coefficients \(c_i\) to develop large,
 oscillatory values. In practice, \(m = 6\)–\(8\) is a robust default for most systems.
-The optimal coefficients \({c_i}\) are then used to form the next input density:</p>
+The optimal coefficients \(\{c_i\}\) are then used to form the next input density:</p>
 <div>
 \begin{equation}
-    \rho_{\rm in}^{(n+1)} = \sum_{i=1}^{m} c_i \left[\rho_{\rm in}^{(n-m+i)} + \alpha\, R^{(n-m+i)}\right],
-    \label{eq:pulay-update}
+    \rho_{\rm in}^{(n+1)} = \sum_{i=1}^{m} c_i \left[\rho_{\rm in}^{(n-m+i)} + \alpha\, R^{(n-m+i)}\right],
+    \label{eq:pulay-update}
 \end{equation}
 </div>
 
@@ -540,8 +539,8 @@ input–output history, then use it to compute a quasi-Newton update. This is <s
 <p>The Newton step for the fixed-point equation \(\rho - F[\rho] = 0\) would be:</p>
 <div>
 \begin{equation}
-    \rho^{(n+1)} = \rho^{(n)} - (1 - J)^{-1} R^{(n)} = \rho^{(n)} + G\, R^{(n)},
-    \label{eq:newton-step}
+    \rho^{(n+1)} = \rho^{(n)} - (1 - J)^{-1} R^{(n)} = \rho^{(n)} + G\, R^{(n)},
+    \label{eq:newton-step}
 \end{equation}
 </div>
 
@@ -553,9 +552,9 @@ last observed input–residual relationship exactly.</p>
 <p>Define the changes between successive iterations:</p>
 <div>
 \begin{equation}
-    \Delta\rho^{(n)} = \rho_{\rm in}^{(n)} - \rho_{\rm in}^{(n-1)}, \qquad
-    \Delta R^{(n)} = R^{(n)} - R^{(n-1)}.
-    \label{eq:broyden-deltas}
+    \Delta\rho^{(n)} = \rho_{\rm in}^{(n)} - \rho_{\rm in}^{(n-1)}, \qquad
+    \Delta R^{(n)} = R^{(n)} - R^{(n-1)}.
+    \label{eq:broyden-deltas}
 \end{equation}
 </div>
 
@@ -564,38 +563,38 @@ satisfying this condition, the <strong>Broyden rank-1 update</strong> chooses th
 in the Frobenius norm:</p>
 <div>
 \begin{equation}
-    \boxed{G_n = G_{n-1} + \frac{(\Delta\rho^{(n)} - G_{n-1}\,\Delta R^{(n)})\,(\Delta R^{(n)})^T}{(\Delta R^{(n)})^T \Delta R^{(n)}}.}
-    \label{eq:broyden-update}
+    \boxed{G_n = G_{n-1} + \frac{(\Delta\rho^{(n)} - G_{n-1}\,\Delta R^{(n)})\,(\Delta R^{(n)})^T}{(\Delta R^{(n)})^T \Delta R^{(n)}}.}
+    \label{eq:broyden-update}
 \end{equation}
 </div>
 
 <p>This is a rank-1 correction to the previous approximate Jacobian inverse. Starting from an
-initial guess \(G_0 = -\alpha, \mathbf{1}\) (equivalent to simple mixing), each iteration adds
+initial guess \(G_0 = -\alpha\, \mathbf{1}\) (equivalent to simple mixing), each iteration adds
 one rank-1 correction. After \(n\) iterations, \(G_n\) has rank at most \(n\) plus the rank of \(G_0\),
 and the update step is:</p>
 <div>
 \begin{equation}
-    \rho_{\rm in}^{(n+1)} = \rho_{\rm in}^{(n)} + G_n\, R^{(n)}.
-    \label{eq:broyden-step}
+    \rho_{\rm in}^{(n+1)} = \rho_{\rm in}^{(n)} + G_n\, R^{(n)}.
+    \label{eq:broyden-step}
 \end{equation}
 </div>
 
 <p><strong>Storage:</strong> The rank-1 structure means that \(G_n\) never needs to be stored as a full matrix.
-Instead, one stores the \(n\) vectors \({\Delta\rho^{(k)}, \Delta R^{(k)}}\) and applies \(G_n\)
+Instead, one stores the \(n\) vectors \(\{\Delta\rho^{(k)}, \Delta R^{(k)}\}\) and applies \(G_n\)
 via a sequence of inner products and vector additions. For \(m\) stored iterations, this requires
 \(\mathcal{O}(m \cdot N_{\rm PW})\) storage and \(\mathcal{O}(m \cdot N_{\rm PW})\) operations per
 update — negligible compared to the KS diagonalisation.</p>
 <p><strong>Broyden’s second method</strong> (the “good Broyden” update) modifies the update formula to ensure
 that \(G_n\) remains symmetric. The physical motivation is that the true inverse Jacobian \(G\) of
 the SCF map inherits the symmetry of the density–density response function \(\chi\), which
-satisfies \(\chi(\mathbf{r}, \mathbf{r}‘) = \chi(\mathbf{r}’, \mathbf{r})\) by time-reversal
+satisfies \(\chi(\mathbf{r}, \mathbf{r}') = \chi(\mathbf{r}', \mathbf{r})\) by time-reversal
 symmetry. A non-symmetric \(G_n\) can develop spurious antisymmetric components that couple
 charge and magnetisation modes or mix unrelated \(\mathbf{G}\)-vectors, leading to erratic
 convergence. The symmetric Broyden-2 update avoids this:</p>
 <div>
 \begin{equation}
-    G_n = G_{n-1} + \frac{(\Delta\rho^{(n)} - G_{n-1}\,\Delta R^{(n)})\,(\Delta\rho^{(n)})^T G_{n-1}}{(\Delta\rho^{(n)})^T G_{n-1}\,\Delta R^{(n)}}.
-    \label{eq:broyden2}
+    G_n = G_{n-1} + \frac{(\Delta\rho^{(n)} - G_{n-1}\,\Delta R^{(n)})\,(\Delta\rho^{(n)})^T G_{n-1}}{(\Delta\rho^{(n)})^T G_{n-1}\,\Delta R^{(n)}}.
+    \label{eq:broyden2}
 \end{equation}
 </div>
 
@@ -641,7 +640,7 @@ to bring the density into the basin of convergence before DIIS takes over.</p>
 <p><strong>Spin channels oscillating out of phase.</strong> In spin-polarised calculations, the up and down
 spin densities may trade magnitude between iterations. This signals an antiferromagnetic
 instability or an incorrect initial magnetic configuration. Fix the initial moments and consider
-using a more robust diagonalisation algorithm (Section 8.4) for the first few iterations to
+using a more robust diagonalisation algorithm (Chapter 10) for the first few iterations to
 stabilise the spin order.</p>
 <details>
 <summary><b>Code Notes: VASP and Quantum ESPRESSO Parameters</b></summary>
@@ -666,7 +665,7 @@ stabilise the spin order.</p>
 select Pulay/DIIS. The sign convention is code-specific; consult the VASP manual for the
 version in use.</p>
 <p><strong>Note on <code>ALGO</code>:</strong> The <code>ALGO</code> tag primarily controls the <em>diagonalisation</em> method
-(Section 8.4), but it also affects mixing behaviour indirectly. <code>ALGO = All</code> forces a full
+(Chapter 10), but it also affects mixing behaviour indirectly. <code>ALGO = All</code> forces a full
 Davidson diagonalisation at every SCF step, which is more robust for difficult cases —
 particularly spin-polarised metals where the RMM-DIIS default (<code>ALGO = Fast</code>) can lose track
 of the correct eigenstate ordering, causing spin channels to oscillate. For systems that fail
@@ -695,36 +694,36 @@ metallic or small-gap systems.</p>
 <ul>
 <li>
 <p><strong>Pulay mixing (DIIS):</strong> P. Pulay, <em>Convergence acceleration of iterative sequences. The case
-  of SCF iteration</em>, Chem. Phys. Lett. <strong>73</strong>, 393 (1980). The paper that introduced the DIIS
-  method in the context of Hartree–Fock calculations; the adaptation to DFT density mixing is
-  straightforward.</p>
+of SCF iteration</em>, Chem. Phys. Lett. <strong>73</strong>, 393 (1980). The paper that introduced the DIIS
+method in the context of Hartree–Fock calculations; the adaptation to DFT density mixing is
+straightforward.</p>
 </li>
 <li>
 <p><strong>Kerker preconditioning:</strong> G. P. Kerker, <em>Efficient iteration scheme for self-consistent
-  pseudopotential calculations</em>, Phys. Rev. B <strong>23</strong>, 3082 (1981). Derives the \(G^2/(G^2+k_0^2)\)
-  preconditioner from the Thomas–Fermi dielectric function.</p>
+pseudopotential calculations</em>, Phys. Rev. B <strong>23</strong>, 3082 (1981). Derives the \(G^2/(G^2+k_0^2)\)
+preconditioner from the Thomas–Fermi dielectric function.</p>
 </li>
 <li>
 <p><strong>Broyden mixing:</strong> C. G. Broyden, <em>A class of methods for solving nonlinear simultaneous
-  equations</em>, Math. Comp. <strong>19</strong>, 577 (1965). The general quasi-Newton framework. The adaptation
-  to DFT is described in: D. D. Johnson, <em>Modified Broyden’s method for accelerating convergence
-  in self-consistent calculations</em>, Phys. Rev. B <strong>38</strong>, 12807 (1988).</p>
+equations</em>, Math. Comp. <strong>19</strong>, 577 (1965). The general quasi-Newton framework. The adaptation
+to DFT is described in: D. D. Johnson, <em>Modified Broyden’s method for accelerating convergence
+in self-consistent calculations</em>, Phys. Rev. B <strong>38</strong>, 12807 (1988).</p>
 </li>
 <li>
 <p><strong>Vanderbilt–Louie scheme:</strong> D. Vanderbilt and S. G. Louie, <em>Total energies of diamond (111)
-  surface reconstructions by a linear combination of bulk bands</em>, Phys. Rev. B <strong>30</strong>, 6118
-  (1984). Early application of Broyden-type mixing to plane-wave DFT.</p>
+surface reconstructions by a linear combination of bulk bands</em>, Phys. Rev. B <strong>30</strong>, 6118
+(1984). Early application of Broyden-type mixing to plane-wave DFT.</p>
 </li>
 <li>
 <p><strong>VASP implementation details:</strong> G. Kresse and J. Furthmüller, <em>Efficient iterative schemes
-  for ab initio total-energy calculations using a plane-wave basis set</em>, Phys. Rev. B <strong>54</strong>,
-  11169 (1996). Sections III–IV describe the mixing and diagonalisation machinery used in VASP.</p>
+for ab initio total-energy calculations using a plane-wave basis set</em>, Phys. Rev. B <strong>54</strong>,
+11169 (1996). Sections III–IV describe the mixing and diagonalisation machinery used in VASP.</p>
 </li>
 <li>
 <p><strong>General review of SCF convergence:</strong> The treatment in R. M. Martin, <em>Electronic Structure:
-  Basic Theory and Practical Methods</em> (Cambridge, 2004), Chapter 9, gives an accessible overview.
-  A more mathematical treatment is in E. Cancès, <em>SCF algorithms for Hartree–Fock electronic
-  calculations</em>, Lecture Notes in Chemistry <strong>74</strong>, 17 (2000).</p>
+Basic Theory and Practical Methods</em> (Cambridge, 2004), Chapter 9, gives an accessible overview.
+A more mathematical treatment is in E. Cancès, <em>SCF algorithms for Hartree–Fock electronic
+calculations</em>, Lecture Notes in Chemistry <strong>74</strong>, 17 (2000).</p>
 </li>
 </ul>
 </details>
@@ -791,7 +790,7 @@ example on bcc Fe that ties together all the numerical machinery developed in Ch
 
         <script src="clipboard-1626706a.min.js"></script>
         <script src="highlight-abc7f01d.js"></script>
-        <script src="book-c22b7243.js"></script>
+        <script src="book-609e4cb8.js"></script>
 
         <!-- Custom JS scripts -->
         <script src="src/custom-cd58eebe.js"></script>
