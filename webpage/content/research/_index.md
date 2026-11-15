@@ -40,7 +40,7 @@ We compute random alloys directly with the coherent potential approximation, and
 
 ## Research Software
 
-[**cview**](https://mavensgroup.github.io/cview/) is our free, open-source crystal-structure viewer, built for disordered materials. Alongside CIF, VASP and Quantum ESPRESSO files, it reads the occupation blocks that describe a random alloy, so a structure can go from screen to calculation in one step.
+[**CView**](https://mavensgroup.github.io/cview/) is our free, open-source crystal-structure viewer, built for disordered materials. Alongside CIF, VASP and Quantum ESPRESSO files, it reads the occupation blocks that describe a random alloy, so a structure can go from screen to calculation in one step.
 
 [Website](https://mavensgroup.github.io/cview/) · [GitHub](https://github.com/mavensgroup/cview) · [All our open-source tools →](../software/)
 

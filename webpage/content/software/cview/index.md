@@ -34,7 +34,7 @@ links:
 
 In computational materials science, visualizing large supercells or complex lattice structures often requires heavy GUI-based software that breaks the terminal-based workflow.
 
-**cview** bridges this gap. It is built to be lightweight, fast, and integrable directly into your command-line environment, allowing you to inspect structures without leaving your terminal.
+**CView** bridges this gap. It is built to be lightweight, fast, and integrable directly into your command-line environment, allowing you to inspect structures without leaving your terminal.
 
 ## Key Capabilities
 
