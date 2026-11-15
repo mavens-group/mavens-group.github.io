@@ -15,7 +15,7 @@ authors:
   - Shrestha
 summary: "Best Poster Prize (Royal Society of Chemistry) awarded to Shrestha Dutta at ICAMS-2023, University of Calicut."
 papers:
-  - dutta-2026-a
+  - shrestha-2025
 links:
   - name: "Event Website"
     url: "https://technologycentre.co.in/icams"

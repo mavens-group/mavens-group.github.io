@@ -10,7 +10,7 @@ title: Thulluri Sandhya
 # Full name (for SEO)
 first_name: Sandhya
 last_name: Thulluri
-join: "2022"
+join: "2021"
 # Username (this should match the folder name)
 authors:
   - Thulluri Sandhya
@@ -19,7 +19,7 @@ authors:
 superuser: false
 
 # Role/position
-role: PG Project (2020–22)
+role: PG Project (2021–22)
 
 # Organizations/Affiliations
 organizations:

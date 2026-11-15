@@ -1,9 +1,9 @@
 ---
 title: "Beyond Diamond: Finding and understanding nuclear-spin-quiet hosts for solid-state spin qubits"
-date: 2026-10-23
-date_display: "23–25 October 2026"
+date: 2026-10-24
+date_display: "24 October 2026"
 talk_type: "Invited Talk"
-event: "ISSMD 2026"
+event: "ISSMD 2026, 23–25 October"
 event_url: "https://sites.google.com/iitrpr.ac.in/issmd2026/home"
 host: "IIT Ropar"
 location: "Rupnagar, India"
