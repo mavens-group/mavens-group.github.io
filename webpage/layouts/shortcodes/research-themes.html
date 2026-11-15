@@ -1,0 +1,24 @@
+{{/* Research-theme cards for the home page, one per pillar page that sets
+     `landing_question` in its front matter, in pillar weight order.
+     Each card: a square thumbnail cut from the pillar's featured image (its
+     right-hand plot panel: x 820-1560, y 80-820 of the 1600x900 figure),
+     then the pillar title and the question. The whole card is the link.
+     Usage: {{< research-themes >}} */}}
+{{- $pillars := where (where site.RegularPages "Section" "research") "Params.landing_question" "!=" nil -}}
+<div class="research-themes-grid research-themes-grid--two">
+  {{- range $pillars.ByWeight }}
+  {{- $thumb := false }}
+  {{- with .Resources.GetMatch "featured*" }}
+    {{- $thumb = ((.Crop "1560x900 Left").Crop "740x740 Right").Resize "240x240 webp q85" }}
+  {{- end }}
+  <a class="theme-card theme-card--media" href="{{ .RelPermalink }}">
+    {{- with $thumb }}
+    <span class="theme-thumb"><img src="{{ .RelPermalink }}" width="{{ .Width }}" height="{{ .Height }}" alt="" loading="lazy" decoding="async"></span>
+    {{- end }}
+    <span class="theme-text">
+      <span class="theme-title">{{ .Title }}</span>
+      <span class="theme-desc">{{ .Params.landing_question }}</span>
+    </span>
+  </a>
+  {{- end }}
+</div>

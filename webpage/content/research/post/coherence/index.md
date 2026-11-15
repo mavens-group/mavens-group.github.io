@@ -2,6 +2,8 @@
 # research/post/coherence
 title: Disorder and Coherence
 summary: What lets a chemically generated spin centre hold quantum phase information, and how does the disorder around it set the limit?
+# One-line question on this pillar's card on the home page (research-themes shortcode).
+landing_question: "Can a spin made by a missing atom hold quantum information?"
 show_date: false
 profile: false
 weight: 2

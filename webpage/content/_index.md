@@ -52,24 +52,7 @@ sections:
 
         <p class="section-lede">Three things disorder decides, and machine learning for when there are too many compositions to compute.</p>
 
-        <div class="research-themes-grid research-themes-grid--two">
-          <div class="theme-card">
-            <a class="theme-title" href="/research/post/magnetism/">Disorder and Magnetism</a>
-            <span class="theme-desc">When does a disordered alloy become a magnet, and at what temperature?</span>
-          </div>
-          <div class="theme-card">
-            <a class="theme-title" href="/research/post/coherence/">Disorder and Coherence</a>
-            <span class="theme-desc">Can a spin made by a missing atom hold quantum information?</span>
-          </div>
-          <div class="theme-card">
-            <a class="theme-title" href="/research/post/catalysis/">Disorder and Catalysis</a>
-            <span class="theme-desc">When no two surface sites are alike, which ones bind hydrogen?</span>
-          </div>
-          <div class="theme-card">
-            <a class="theme-title" href="/research/post/ml/">Machine Learning Driven Discovery</a>
-            <span class="theme-desc">Design rules from data, with the physics left in.</span>
-          </div>
-        </div>
+        {{< research-themes >}}
 
         {{% cta cta_link="./research/" cta_text="Explore Our Research" %}}
     design:

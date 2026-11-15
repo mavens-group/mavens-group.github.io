@@ -2,6 +2,8 @@
 # research/post/magnetism
 title: Disorder and Magnetism
 summary: How does chemical disorder decide whether a magnet orders, at what temperature, and how much magnetisation survives?
+# One-line question on this pillar's card on the home page (research-themes shortcode).
+landing_question: "Which disordered alloys become magnets, and at what temperature?"
 show_date: false
 profile: false
 weight: 1

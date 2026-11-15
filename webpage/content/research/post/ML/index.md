@@ -2,6 +2,8 @@
 # research/post/ml
 title: Machine Learning Across the Pillars
 summary: "A cross-cutting method serving the three disorder pillars: how do we use machine learning to discover materials without surrendering the physical insight that makes a discovery transferable?"
+# One-line question on this pillar's card on the home page (research-themes shortcode).
+landing_question: "Design rules from data, with the physics left in."
 show_date: false
 profile: false
 weight: 4

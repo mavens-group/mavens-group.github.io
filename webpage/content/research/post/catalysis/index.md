@@ -2,6 +2,8 @@
 # research/post/catalysis
 title: Disorder and Catalysis
 summary: In a compositionally complex catalyst no two sites are alike — so what sets the distribution of adsorption energies, and where it sits?
+# One-line question on this pillar's card on the home page (research-themes shortcode).
+landing_question: "When no two surface sites are alike, which ones bind hydrogen?"
 show_date: false
 profile: false
 weight: 3

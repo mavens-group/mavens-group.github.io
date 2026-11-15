@@ -917,6 +917,70 @@ body.dark .mv-hero-img-dark  { display: block; }
   }
 }
 
+/* Home-page theme card with a thumbnail (layouts/shortcodes/research-themes.html):
+   the whole card is the link; a square crop of the pillar figure sits flush
+   on the left, as wide as the card is tall, so the cards keep their height. */
+.theme-card--media {
+  --theme-thumb: 98px;
+  flex-direction: row;
+  align-items: stretch;
+  gap: 0;
+  padding: 0;
+  overflow: hidden;
+  color: inherit;
+  text-decoration: none;
+  transition: background-color 150ms ease;
+
+  &:hover,
+  &:focus-visible {
+    color: inherit;
+    text-decoration: none;
+    background: var(--m-surface-mid);
+
+    .theme-title { text-decoration: underline; }
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--m-primary);
+    outline-offset: 2px;
+  }
+
+  .theme-thumb {
+    flex: 0 0 var(--theme-thumb);
+    background: var(--fig-media);
+
+    img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  .theme-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.35rem;
+    min-width: 0;
+    padding: 0.9rem 1rem;
+  }
+
+  .theme-title { color: var(--m-primary); }
+
+  /* No one-word last lines ("…left / in.") when a question wraps */
+  .theme-desc { text-wrap: pretty; }
+
+  /* Tablet: one-line questions, 75px cards. Phone: two-line questions,
+     96px cards, so a 96px square */
+  @media (max-width: 991.98px) {
+    --theme-thumb: 75px;
+  }
+  @media (max-width: 575.98px) {
+    --theme-thumb: 96px;
+  }
+}
+
 .research-themes-grid--two {
   grid-template-columns: repeat(2, 1fr);
 }
