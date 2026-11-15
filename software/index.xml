@@ -1,34 +1,36 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Open Source Tools | MAVENs</title><link>https://mavens-group.github.io/software/</link><atom:link href="https://mavens-group.github.io/software/index.xml" rel="self" type="application/rss+xml"/><description>Open Source Tools</description><generator>Hugo Blox Builder (https://hugoblox.com)</generator><language>en-US</language><lastBuildDate>Thu, 05 Nov 2026 00:00:00 +0000</lastBuildDate><image><url>https://mavens-group.github.io/media/logo.svg</url><title>Open Source Tools</title><link>https://mavens-group.github.io/software/</link></image><item><title>CView: Crystal Structure Visualization &amp; Analysis</title><link>https://mavens-group.github.io/software/cview/</link><pubDate>Mon, 26 Jan 2026 00:00:00 +0000</pubDate><guid>https://mavens-group.github.io/software/cview/</guid><description>&lt;h2 id="why-cview"&gt;Why CView?&lt;/h2&gt;
-&lt;p&gt;In computational materials science, visualizing large supercells or complex lattice structures often requires heavy GUI-based software that breaks the terminal-based workflow.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;CView&lt;/strong&gt; bridges this gap. It is built to be lightweight, fast, and integrable directly into your command-line environment, allowing you to inspect structures without leaving your terminal.&lt;/p&gt;
-&lt;h2 id="key-capabilities"&gt;Key Capabilities&lt;/h2&gt;
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Open Source Tools | MAVENs</title><link>https://mavens-group.github.io/software/</link><atom:link href="https://mavens-group.github.io/software/index.xml" rel="self" type="application/rss+xml"/><description>Open Source Tools</description><generator>Hugo Blox Builder (https://hugoblox.com)</generator><language>en-US</language><lastBuildDate>Sun, 15 Nov 2026 00:00:00 +0000</lastBuildDate><image><url>https://mavens-group.github.io/media/logo.svg</url><title>Open Source Tools</title><link>https://mavens-group.github.io/software/</link></image><item><title>CView: Crystal Structure Visualization &amp; Analysis</title><link>https://mavens-group.github.io/software/cview/</link><pubDate>Sun, 15 Nov 2026 00:00:00 +0000</pubDate><guid>https://mavens-group.github.io/software/cview/</guid><description>&lt;h2 id="what-it-does"&gt;What it does&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;CView&lt;/strong&gt; is a desktop crystal-structure viewer, written in Rust with GTK 4. It sits between looking at a structure and setting up a calculation on it: you open a file, check and modify the structure, and write the input for the next calculation. It is built for disordered materials — alongside ordered structures it handles the site occupations that describe a random alloy, and exports them to SPR-KKR for coherent-potential calculations.&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;High-Fidelity Rendering&lt;/strong&gt;: Optimized for clarity, even with dense atomic structures.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Workflow Integration&lt;/strong&gt;: works alongside standard tools (like VASP, Quantum ESPRESSO) to visualize outputs instantly.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Lightweight Footprint&lt;/strong&gt;: No heavy GUI overhead; designed for speed and efficiency on clusters and local machines.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Read and write the common formats&lt;/strong&gt;: VASP, Quantum ESPRESSO (including the final structure of a &lt;code&gt;vc-relax&lt;/code&gt; run), SPR-KKR, CIF, XYZ and extended XYZ, PDB, and LAMMPS trajectories.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Symmetry&lt;/strong&gt;: space-group detection, and conversion between primitive and conventional cells.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Build structures&lt;/strong&gt;: supercells, surface slabs for any Miller plane, and searches for voids and intercalation sites.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Reciprocal space&lt;/strong&gt;: the first Brillouin zone and its standard high-symmetry k-path, drawn in 3D.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Simulated X-ray diffraction&lt;/strong&gt;, to compare a model structure with a measured pattern.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Figures&lt;/strong&gt;: export the view as PDF or transparent PNG for papers.&lt;/li&gt;
 &lt;/ul&gt;
+&lt;p&gt;The main view draws on the CPU, so it runs on an ordinary laptop. Only the charge-density isosurface and trajectory player windows use OpenGL.&lt;/p&gt;
+&lt;p&gt;The method and its validation are described in the paper in the &lt;a href="https://mavens-group.github.io/publication/banerjee-2026/"&gt;&lt;em&gt;Journal of Applied Crystallography&lt;/em&gt;&lt;/a&gt;.&lt;/p&gt;
 &lt;h2 id="quick-start"&gt;Quick Start&lt;/h2&gt;
-&lt;p&gt;Get up and running in seconds. Clone the repository and install dependencies:&lt;/p&gt;
+&lt;p&gt;CView runs on Linux, Windows and macOS. Ready-to-install packages are on the &lt;a href="https://github.com/mavensgroup/cview/releases/latest" target="_blank" rel="noopener"&gt;Releases page&lt;/a&gt;. To build from source, you need Rust and the GTK 4 development files (on Fedora: &lt;code&gt;sudo dnf install gtk4-devel&lt;/code&gt;):&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;git clone https://github.com/mavensgroup/cview.git
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nb"&gt;cd&lt;/span&gt; cview
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# Install command (You mostly need rust and gtk4-devel)&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;cargo run --release
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description></item><item><title>MkBib: Bibliography Manager</title><link>https://mavens-group.github.io/software/mkbib/</link><pubDate>Mon, 26 Jan 2026 00:00:00 +0000</pubDate><guid>https://mavens-group.github.io/software/mkbib/</guid><description>&lt;h2 id="why-mkbib"&gt;Why mkbib?&lt;/h2&gt;
-&lt;p&gt;Managing citations is often the bottleneck of academic writing. Inconsistent formatting, missing fields, and duplicate entries can clutter your &lt;code&gt;.bib&lt;/code&gt; files and cause compilation errors.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;mkbib&lt;/strong&gt; solves this by automating the hygiene of your bibliography. It ensures your references are publication-ready so you can focus on the content, not the metadata.&lt;/p&gt;
-&lt;h2 id="key-capabilities"&gt;Key Capabilities&lt;/h2&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;The &lt;a href="https://mavensgroup.github.io/cview/" target="_blank" rel="noopener"&gt;documentation&lt;/a&gt; covers installation on every platform and each tool in detail.&lt;/p&gt;</description></item><item><title>MkBib: Bibliography Manager</title><link>https://mavens-group.github.io/software/mkbib/</link><pubDate>Sun, 15 Nov 2026 00:00:00 +0000</pubDate><guid>https://mavens-group.github.io/software/mkbib/</guid><description>&lt;h2 id="what-it-does"&gt;What it does&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;MkBib&lt;/strong&gt; is a desktop manager for BibTeX bibliographies, written in Rust with GTK 4 and libadwaita. It is built for the &lt;code&gt;.bib&lt;/code&gt; files that grow over years of writing papers and theses.&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;Automated Cleaning&lt;/strong&gt;: Standardizes entry formats and corrects common syntax errors automatically.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Duplicate Detection&lt;/strong&gt;: Intelligently identifies and merges or flags duplicate citations.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Pipeline Ready&lt;/strong&gt;: Designed to fit into Makefiles or CI/CD pipelines for automated LaTeX document generation.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Large libraries&lt;/strong&gt;: opens databases of more than 10,000 entries without delay.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Search&lt;/strong&gt;: filter entries by author, year or title as you type.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Edit&lt;/strong&gt;: double-click an entry to change its fields.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Validation&lt;/strong&gt;: checks entries against the fields BibLaTeX requires, so a missing field shows up in MkBib rather than as a LaTeX compilation error.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Safe saving&lt;/strong&gt;: writes the file atomically, so an interrupted save cannot corrupt your library.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 id="quick-start"&gt;Quick Start&lt;/h2&gt;
-&lt;p&gt;Integrate &lt;code&gt;mkbib&lt;/code&gt; into your writing workflow:&lt;/p&gt;
+&lt;p&gt;MkBib needs Rust and the GTK 4 and libadwaita development files (on Fedora: &lt;code&gt;sudo dnf install gtk4-devel libadwaita-devel gcc&lt;/code&gt;).&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;git clone https://github.com/mavens-group/mkbib.git
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nb"&gt;cd&lt;/span&gt; mkbib
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# Install command (You mostly need rust and gtk4-devel)&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;cargo run --release
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description></item><item><title>Ptbl: Periodic Table</title><link>https://mavens-group.github.io/software/ptbl/</link><pubDate>Thu, 05 Nov 2026 00:00:00 +0000</pubDate><guid>https://mavens-group.github.io/software/ptbl/</guid><description>&lt;h2 id="what-it-does"&gt;What it does&lt;/h2&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;cargo install --path . --root ~/.local
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;mkbib-rs library.bib
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;The &lt;a href="https://github.com/mavens-group/mkbib#installation" target="_blank" rel="noopener"&gt;README&lt;/a&gt; gives the packages for Debian, Ubuntu and Arch Linux.&lt;/p&gt;</description></item><item><title>Ptbl: Periodic Table</title><link>https://mavens-group.github.io/software/ptbl/</link><pubDate>Thu, 05 Nov 2026 00:00:00 +0000</pubDate><guid>https://mavens-group.github.io/software/ptbl/</guid><description>&lt;h2 id="what-it-does"&gt;What it does&lt;/h2&gt;
 &lt;p&gt;&lt;strong&gt;Ptbl&lt;/strong&gt; is a periodic table for the Linux desktop, built with GTK 4 and libadwaita. It works offline.&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;Browse&lt;/strong&gt; all 118 elements, coloured by category, with up to 40 properties per element on six tabs.&lt;/li&gt;
