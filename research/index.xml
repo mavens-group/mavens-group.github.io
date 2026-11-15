@@ -32,20 +32,6 @@ URL&lt;/a&gt;
 &lt;/div&gt;
 &lt;/article&gt;
 &lt;article class="mv-pub"&gt;
-&lt;h3 class="mv-pub-title"&gt;&lt;a href="https://mavens-group.github.io/publication/karuna-2025/"&gt;Doping-induced enhancement of Curie temperature in Zn$_2$Ru$_{1−x}$A$_x$Mn (A = Ti, Mn, Co, Zr, and Rh) Heusler alloys: An ab initio investigation&lt;/a&gt;&lt;/h3&gt;
-&lt;div class="mv-pub-authors"&gt;&lt;a class="author-member" href="https://mavens-group.github.io/author/dr-karunakaran-m/"&gt;Karunakaran M&lt;/a&gt;, &lt;a class="author-member" href="https://mavens-group.github.io/author/rudra-banerjee/"&gt;Rudra Banerjee&lt;/a&gt;&lt;/div&gt;
-&lt;div class="mv-pub-venue"&gt;&lt;em&gt;Applied Physics Letters&lt;/em&gt;&lt;/div&gt;
-&lt;div class="btn-links"&gt;
-&lt;a href="#" class="btn btn-outline-primary btn-page-header btn-sm js-cite-modal"
-data-filename="/publication/karuna-2025/cite.bib"&gt;
-Cite
-&lt;/a&gt;
-&lt;a class="btn btn-outline-primary btn-page-header btn-sm" href="https://doi.org/10.1063/5.0238199" target="_blank" rel="noopener"&gt;
-DOI
-&lt;/a&gt;
-&lt;/div&gt;
-&lt;/article&gt;
-&lt;article class="mv-pub"&gt;
 &lt;h3 class="mv-pub-title"&gt;&lt;a href="https://mavens-group.github.io/publication/dutta-2026/"&gt;Geometric percolation threshold defines half-metallic window in vacancy-doped TiS$_2$&lt;/a&gt;&lt;/h3&gt;
 &lt;div class="mv-pub-authors"&gt;&lt;a class="author-member" href="https://mavens-group.github.io/author/shrestha-dutta/"&gt;Shrestha Dutta&lt;/a&gt;, &lt;a class="author-member" href="https://mavens-group.github.io/author/rudra-banerjee/"&gt;Rudra Banerjee&lt;/a&gt;&lt;/div&gt;
 &lt;div class="mv-pub-venue"&gt;&lt;em&gt;Physical Review B&lt;/em&gt;&lt;/div&gt;
@@ -59,6 +45,20 @@ DOI
 &lt;/a&gt;
 &lt;a class="btn btn-outline-primary btn-page-header btn-sm" href="http://dx.doi.org/10.1103/nt5p-5n1p" target="_blank" rel="noopener"&gt;
 URL&lt;/a&gt;
+&lt;/div&gt;
+&lt;/article&gt;
+&lt;article class="mv-pub"&gt;
+&lt;h3 class="mv-pub-title"&gt;&lt;a href="https://mavens-group.github.io/publication/karuna-2025/"&gt;Doping-induced enhancement of Curie temperature in Zn$_2$Ru$_{1−x}$A$_x$Mn (A = Ti, Mn, Co, Zr, and Rh) Heusler alloys: An ab initio investigation&lt;/a&gt;&lt;/h3&gt;
+&lt;div class="mv-pub-authors"&gt;&lt;a class="author-member" href="https://mavens-group.github.io/author/dr-karunakaran-m/"&gt;Karunakaran M&lt;/a&gt;, &lt;a class="author-member" href="https://mavens-group.github.io/author/rudra-banerjee/"&gt;Rudra Banerjee&lt;/a&gt;&lt;/div&gt;
+&lt;div class="mv-pub-venue"&gt;&lt;em&gt;Applied Physics Letters&lt;/em&gt;&lt;/div&gt;
+&lt;div class="btn-links"&gt;
+&lt;a href="#" class="btn btn-outline-primary btn-page-header btn-sm js-cite-modal"
+data-filename="/publication/karuna-2025/cite.bib"&gt;
+Cite
+&lt;/a&gt;
+&lt;a class="btn btn-outline-primary btn-page-header btn-sm" href="https://doi.org/10.1063/5.0238199" target="_blank" rel="noopener"&gt;
+DOI
+&lt;/a&gt;
 &lt;/div&gt;
 &lt;/article&gt;
 &lt;article class="mv-pub"&gt;
@@ -117,20 +117,7 @@ DOI
 &lt;/a&gt;
 &lt;/div&gt;
 &lt;/article&gt;
-&lt;article class="mv-pub"&gt;
-&lt;h3 class="mv-pub-title"&gt;&lt;a href="https://mavens-group.github.io/publication/rb-02/"&gt;Augmented space recursion code and application in simple binary metallic alloy&lt;/a&gt;&lt;/h3&gt;
-&lt;div class="mv-pub-authors"&gt;&lt;a class="author-member" href="https://mavens-group.github.io/author/rudra-banerjee/"&gt;Rudra Banerjee&lt;/a&gt;, &lt;span class="author-other"&gt;Abhijit Mookerjee&lt;/span&gt;&lt;/div&gt;
-&lt;div class="mv-pub-venue"&gt;&lt;em&gt;International Journal of Modern Physics C&lt;/em&gt;&lt;/div&gt;
-&lt;div class="btn-links"&gt;
-&lt;a href="#" class="btn btn-outline-primary btn-page-header btn-sm js-cite-modal"
-data-filename="/publication/rb-02/cite.bib"&gt;
-Cite
-&lt;/a&gt;
-&lt;a class="btn btn-outline-primary btn-page-header btn-sm" href="https://doi.org/10.1142/S0129183110015051" target="_blank" rel="noopener"&gt;
-DOI
-&lt;/a&gt;
-&lt;/div&gt;
-&lt;/article&gt;
+&lt;p class="mv-pillar-all"&gt;&lt;a href="https://mavens-group.github.io/pillars/magnetism/"&gt;All 21 publications in this pillar →&lt;/a&gt;&lt;/p&gt;
 &lt;ul class="cta-group"&gt;
 &lt;li&gt;
 &lt;a href="../../" class="btn btn-primary px-3 py-3"&gt;← Go back to Research&lt;/a&gt;
@@ -244,6 +231,7 @@ DOI
 &lt;/a&gt;
 &lt;/div&gt;
 &lt;/article&gt;
+&lt;p class="mv-pillar-all"&gt;&lt;a href="https://mavens-group.github.io/pillars/catalysis/"&gt;All 4 publications in this pillar →&lt;/a&gt;&lt;/p&gt;
 &lt;ul class="cta-group"&gt;
 &lt;li&gt;
 &lt;a href="../../" class="btn btn-primary px-3 py-3"&gt;← Go back to Research&lt;/a&gt;
