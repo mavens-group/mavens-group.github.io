@@ -23,4 +23,8 @@ a disordered alloy, the situation becomes more complicated, as the exchange inte
 atoms is environment dependent. We shall compare and contrast their magnetic behaviour using robust
 electronic structure techniques. In all three alloy systems conjectures are made to explain
 experimental data. In this paper we shall examine whether there is any basis to these conjectures."
+
+# Research pillars this paper belongs to (lists on the pillar pages).
+pillars:
+  - magnetism
 ---

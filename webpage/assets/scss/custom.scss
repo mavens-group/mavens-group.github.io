@@ -2344,3 +2344,12 @@ video.mv-video {
     grid-template-columns: 1fr;
   }
 }
+
+/* "All N publications in this pillar →" under a pillar's selected list */
+.mv-pillar-all {
+  margin-top: 0.75rem;
+  font-weight: 500;
+
+  a { color: var(--m-primary); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+}

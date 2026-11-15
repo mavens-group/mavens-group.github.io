@@ -36,20 +36,6 @@ Most first-principles magnetism is still done on ordered crystals, and most fini
 
 ### Selected publications
 
-{{< cite page="/publication/greeshma-2026" view="4" >}}
-
-{{< cite page="/publication/karuna-2025" view="4" >}}
-
-{{< cite page="/publication/dutta-2026" view="4" >}}
-
-{{< cite page="/publication/karuna-2024-1" view="4" >}}
-
-{{< cite page="/publication/karuna-2023" view="4" >}}
-
-{{< cite page="/publication/fe-rh" view="4" >}}
-
-{{< cite page="/publication/rb-10" view="4" >}}
-
-{{< cite page="/publication/rb-02" view="4" >}}
+{{< pillar-publications pillar="magnetism" >}}
 
 {{% cta cta_link="../../" cta_text="← Go back to Research" %}}

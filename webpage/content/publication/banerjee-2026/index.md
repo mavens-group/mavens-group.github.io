@@ -72,4 +72,8 @@ projects: []
 links:
 - name: URL
   url: http://dx.doi.org/10.1107/S1600576726009003
+
+# Research pillars this paper belongs to (lists on the pillar pages).
+pillars:
+  - development
 ---

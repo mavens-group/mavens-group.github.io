@@ -17,4 +17,8 @@ abstract: "In this communication we carry out experimental investigation of the 
 magnetization with temperature and magnetic field of six samples at different compositions of the
 disordered ternary alloy NiFeMo. We analyze the data using a fist-principles density functional
 based electronic structure method and a mean-field phase diagram study."
+
+# Research pillars this paper belongs to (lists on the pillar pages).
+pillars:
+  - magnetism
 ---

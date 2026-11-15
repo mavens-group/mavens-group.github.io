@@ -20,4 +20,8 @@ We have used the tight-binding linear muffin-tin orbitals-based augmented space 
 mapping the problems onto equivalent Ising models and then discuss the magnetic phase diagrams
 using the calculated pair energies. All three phases: paramagnetic, random ferromagnetic and spin
 glass, have been studied. © Indian Academy of Sciences."
+
+# Research pillars this paper belongs to (lists on the pillar pages).
+pillars:
+  - magnetism
 ---

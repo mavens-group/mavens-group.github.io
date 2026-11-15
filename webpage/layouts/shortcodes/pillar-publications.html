@@ -1,0 +1,22 @@
+{{/* Publications for one research pillar, for the pillar pages.
+     Usage: {{< pillar-publications pillar="magnetism" >}}
+     Shows the papers tagged with that pillar that carry `pillar_featured: true`
+     (a private flag: nothing else reads it), newest first; with none flagged,
+     the newest `limit` (default 5). Links to the full list when it holds more. */}}
+{{- $pillar := .Get "pillar" -}}
+{{- $limit := int (.Get "limit" | default "5") -}}
+{{- $page := .Page -}}
+{{- with index site.Taxonomies.pillars $pillar -}}
+  {{- $all := .Pages.ByDate.Reverse -}}
+  {{- $picked := where $all "Params.pillar_featured" true -}}
+  {{- $show := $picked -}}
+  {{- if not $picked }}{{ $show = first $limit $all }}{{ end -}}
+  {{- range $i, $p := $show }}
+{{ partial "functions/render_view" (dict "page" $page "item" $p "view" 4 "index" $i) }}
+  {{- end }}
+  {{- if gt (len $all) (len $show) }}{{ with site.GetPage (printf "/pillars/%s" $pillar) }}
+<p class="mv-pillar-all"><a href="{{ .RelPermalink }}">All {{ len $all }} publications in this pillar →</a></p>
+  {{- end }}{{ end -}}
+{{- else -}}
+  {{- warnf "pillar-publications: no publications tagged %q (%s)" $pillar $page.File.Path -}}
+{{- end -}}

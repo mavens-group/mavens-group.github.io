@@ -35,6 +35,6 @@ The direction is to turn interpretation into prediction across the group's disor
 
 ### Selected publications
 
-{{< cite page="/publication/mahshook-2026" view="4" >}}
+{{< pillar-publications pillar="ml" >}}
 
 {{% cta cta_link="../../" cta_text="← Go back to Research" %}}

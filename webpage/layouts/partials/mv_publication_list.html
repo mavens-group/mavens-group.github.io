@@ -1,0 +1,24 @@
+{{/* Year-grouped publication list with search, shared by /publication/ and
+     the per-pillar lists at /pillars/<term>/. The search box is wired up in
+     assets/js/mv-site.js and hides empty years.
+     Params: page (the list page), pages (publications to show), view. */}}
+{{ $page := .page }}
+{{ $view := .view | default "citation" }}
+
+<div class="mv-pub-tools">
+  <input type="search" class="form-control mv-pub-search" placeholder="Search titles, authors, journals"
+         aria-label="Search publications" aria-controls="mv-publications"
+         autocapitalize="off" autocomplete="off" autocorrect="off" spellcheck="false">
+</div>
+
+<div id="mv-publications">
+  {{ range .pages.ByDate.Reverse.GroupByDate "2006" }}
+  <section class="mv-pub-year" aria-labelledby="y{{ .Key }}">
+    <h2 class="mv-pub-year-title" id="y{{ .Key }}">{{ .Key }}</h2>
+    {{ range $index, $item := .Pages }}
+      {{ partial "functions/render_view" (dict "page" $page "item" . "view" $view "index" $index) }}
+    {{ end }}
+  </section>
+  {{ end }}
+  <p class="mv-pub-empty" role="status" hidden>No publications match that search.</p>
+</div>

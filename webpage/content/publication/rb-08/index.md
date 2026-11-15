@@ -21,4 +21,8 @@ rather differently. This is because of the fragility of the local magnetic momen
 NiW do not show any spin-glass phase. However, addition of Fe can bolster the moment on Ni. We wish
 to study whether the alloy Fe3.3Ni83.2Mo13.5, chosen near a composition where mean-field estimates
 suggest there could be a spin-glass phase, shows such a phase or not."
+
+# Research pillars this paper belongs to (lists on the pillar pages).
+pillars:
+  - magnetism
 ---

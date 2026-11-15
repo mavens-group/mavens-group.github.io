@@ -32,10 +32,6 @@ The next step is the one the field has largely not taken: treating the adsorptio
 
 ### Selected publications
 
-{{< cite page="/publication/dutta-2026-a" view="4" >}}
-
-{{< cite page="/publication/shrestha-2025" view="4" >}}
-
-{{< cite page="/publication/mt-tc" view="4" >}}
+{{< pillar-publications pillar="catalysis" >}}
 
 {{% cta cta_link="../../" cta_text="← Go back to Research" %}}

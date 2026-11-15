@@ -86,4 +86,11 @@ projects: []
 links:
 - name: URL
   url: http://dx.doi.org/10.1103/bt3b-hp18
+
+# Research pillars this paper belongs to (lists on the pillar pages).
+pillars:
+  - coherence
+  - ml
+# Private: list this paper on its pillar pages (not shown anywhere).
+pillar_featured: true
 ---

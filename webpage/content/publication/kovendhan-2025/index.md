@@ -55,4 +55,8 @@ publication: '*Journal of the Taiwan Institute of Chemical Engineers*'
 publication_short: ''
 
 doi: '10.1016/j.jtice.2025.106214'
+
+# Research pillars this paper belongs to (lists on the pillar pages).
+pillars:
+  - catalysis
 ---

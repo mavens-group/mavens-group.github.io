@@ -22,4 +22,8 @@ calculated DOS plot, we have showed trichlorides and tribromides of V and Cr app
 semi-metallic and insulators respectively. Through this study we have also arrived at the
 conclusion that VCl3 and VBr3 appear to be favorable in designing better spintronic devices ...'
 doi: 10.1063/5.0215800
+
+# Research pillars this paper belongs to (lists on the pillar pages).
+pillars:
+  - magnetism
 ---

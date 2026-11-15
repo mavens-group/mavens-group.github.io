@@ -36,8 +36,6 @@ The programme is to close the chain. With the hyperfine and exchange couplings i
 
 ### Selected publications
 
-{{< cite page="/publication/chithresh-2026" view="4" >}}
-
-{{< cite page="/publication/mahshook-2026" view="4" >}}
+{{< pillar-publications pillar="coherence" >}}
 
 {{% cta cta_link="../../" cta_text="← Go back to Research" %}}

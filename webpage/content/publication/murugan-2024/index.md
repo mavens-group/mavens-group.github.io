@@ -25,4 +25,8 @@ strength is of long-range order. Further, the magnetic entropy change (ΔSm) and
 power for an applied field of 70 kOe are −0.89 J kg−1 K−1 and 184.84 J kg−1 at 308 K. The system
 exhibits almost constant ΔSm over a broad temperature range with negligible hysteresis, a favorable
 feature for solid-state regenerators."
+
+# Research pillars this paper belongs to (lists on the pillar pages).
+pillars:
+  - magnetism
 ---

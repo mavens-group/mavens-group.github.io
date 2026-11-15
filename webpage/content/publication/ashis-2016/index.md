@@ -13,4 +13,8 @@ publication_types:
 - article-journal
 publication: '*Scientific Reports*'
 doi: 10.1038/s41598-017-01782-5
+
+# Research pillars this paper belongs to (lists on the pillar pages).
+pillars:
+  - magnetism
 ---

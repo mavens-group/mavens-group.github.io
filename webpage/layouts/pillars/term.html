@@ -1,0 +1,25 @@
+{{- define "main" -}}
+
+{{/* All publications tagged with one research pillar (front matter
+     `pillars: [<term>]`). The term's _index.md under content/pillars/ sets the
+     title and `pillar_page`, the pillar this list belongs to. */}}
+
+{{ partial "page_header.html" . }}
+
+<div class="universal-wrapper">
+
+  {{ with .Content }}
+  <div class="article-style">{{ . }}</div>
+  {{ end }}
+
+  {{ partial "mv_publication_list.html" (dict "page" . "pages" .Pages "view" "citation") }}
+
+</div>
+
+{{ with .Params.pillar_page }}{{ with site.GetPage . }}
+<ul class="cta-group">
+  <li><a href="{{ .RelPermalink }}" class="btn btn-primary px-3 py-3">← Back to {{ .Title }}</a></li>
+</ul>
+{{ end }}{{ end }}
+
+{{- end -}}

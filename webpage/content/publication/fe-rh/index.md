@@ -14,4 +14,10 @@ publication_types:
 - article-journal
 publication: '*Physical Review B*'
 doi: 10.1103/PhysRevB.89.054427
+
+# Research pillars this paper belongs to (lists on the pillar pages).
+pillars:
+  - magnetism
+# Private: list this paper on its pillar pages (not shown anywhere).
+pillar_featured: true
 ---

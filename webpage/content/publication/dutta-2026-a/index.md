@@ -68,4 +68,10 @@ image:
 #   E.g. `projects: ['internal-project']` links to `content/project/internal-project/index.md`.
 #   Otherwise, set `projects: []`.
 projects: []
+
+# Research pillars this paper belongs to (lists on the pillar pages).
+pillars:
+  - catalysis
+# Private: list this paper on its pillar pages (not shown anywhere).
+pillar_featured: true
 ---
