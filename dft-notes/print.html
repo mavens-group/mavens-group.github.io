@@ -84,10 +84,10 @@
             const path_to_root = "";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "searchindex-e9347d85.js";
+            window.path_to_searchindex_js = "searchindex-a9c1688a.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="toc-7051d784.js"></script>
+        <script src="toc-e92732f5.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -339,6 +339,12 @@ nuclear degrees of freedom and solve only for the electronic structure at fixed 
 \omega_{\rm el} \gg \omega_{\rm nuc}, \qquad \frac{\omega_{\rm nuc}}{\omega_{\rm el}} \sim \left(\frac{m_e}{M}\right)^{1/2} \approx 10^{-2}.
 \]</p>
 <p>This ratio is small for all atoms, which is why BO works so broadly. It breaks down near <strong>conical intersections</strong> — geometries where two electronic potential energy surfaces become degenerate — leading to non-adiabatic dynamics that are important in photochemistry and certain charge-transfer processes. These are beyond the scope of ground-state DFT.</p>
+<figure>
+<img src="images/bo_pes.svg" alt="Born-Oppenheimer adiabatic potential energy surfaces showing ground and excited electronic states and a conical intersection" style="width:100%; max-width:640px; height:auto; display:block; margin:1.5em auto;" />
+<figcaption style="text-align:center; font-size:0.9em; color:#555;">
+<p><strong>Figure 1.1.</strong> Adiabatic Born–Oppenheimer potential energy surfaces. Because \(\hbar\omega_{\rm el} \gg \hbar\omega_{\rm nuc}\), electrons relax instantaneously to the ground-state surface \(E_0(R)\) at clamped nuclear positions; the adiabatic approximation breaks down only where surfaces approach each other near a conical intersection (\(\omega_{\rm el} \approx \omega_{\rm nuc}\)).</p>
+</figcaption>
+</figure>
 <p>Under this approximation:</p>
 <ul>
 <li>The nuclear kinetic energy term vanishes: \(\frac{\hbar^2}{2M_j}\sum_j^N\nabla^2_j = 0\).</li>
@@ -799,6 +805,12 @@ density \(\rho_0(r)\).</p>
 <p>Because \(V_{\rm ext}(r)\) uniquely determines \(\hat{H}\) (and hence all eigenstates and
 eigenvalues), the ground-state density \(\rho_0(r)\) alone determines everything about the system.
 The wavefunction \(\Psi_0\) is therefore a functional of \(\rho_0\), written \(\Psi_0 = \Psi[\rho_0]\).</p>
+<figure>
+<img src="images/hk_mapping.svg" alt="Schematic diagram of the Hohenberg-Kohn bijection connecting external potential, many-body ground state, and electron density" style="width:100%; max-width:640px; height:auto; display:block; margin:1.5em auto;" />
+<figcaption style="text-align:center; font-size:0.9em; color:#555;">
+<p><strong>Figure 2.1.</strong> The Hohenberg–Kohn bijection. The Schrödinger equation maps \(V_{\rm ext}(\mathbf{r}) \mapsto |\Psi_0\rangle\), and contraction maps \(|\Psi_0\rangle \mapsto \rho_0(\mathbf{r})\). The First HK Theorem proves that the inverse arrow exists uniquely (up to an additive constant in \(V_{\rm ext}\)), making every ground-state observable a functional of the 3D density \(\rho_0(\mathbf{r})\).</p>
+</figcaption>
+</figure>
 <h4 id="proof-by-contradiction"><a class="header" href="#proof-by-contradiction">Proof (by contradiction)</a></h4>
 <div class="proof" data-title="by contradiction">
 <p>Assume a non-degenerate ground state, and assume the contrary: suppose there exist two <strong>different</strong> external potentials
@@ -2426,6 +2438,12 @@ energy cost). For the elemental \(3d\) ferromagnets, calculated values are:</p>
 amplified spin susceptibility — sometimes called “nearly magnetic.” This single inequality
 captures, at the mean-field SDFT level, why Fe/Co/Ni are ferromagnetic and Pd/Pt are not,
 despite all five elements having narrow \(d\) bands.</p>
+<figure>
+<img src="images/stoner_dos.svg" alt="Spin-resolved density of states showing Stoner exchange splitting between majority and minority d bands" style="width:100%; max-width:640px; height:auto; display:block; margin:1.5em auto;" />
+<figcaption style="text-align:center; font-size:0.9em; color:#555;">
+<p><strong>Figure 6.1.</strong> Stoner exchange splitting of a transition-metal \(d\) band. When \(I\,N(\epsilon_F) \gt 1\), it becomes energetically favourable to shift the majority-spin DOS \(D_\uparrow(\epsilon)\) downward and the minority-spin DOS \(D_\downarrow(\epsilon)\) upward by the exchange splitting \(\Delta_{\rm xc} = I\,m\), producing a spontaneous magnetic moment \(m = N_\uparrow - N_\downarrow \gt 0\).</p>
+</figcaption>
+</figure>
 <h2 id="magnetic-ordering-ferro--antiferro--and-ferrimagnetic-states"><a class="header" href="#magnetic-ordering-ferro--antiferro--and-ferrimagnetic-states">Magnetic Ordering: Ferro-, Antiferro-, and Ferrimagnetic States</a></h2>
 <p>By setting up different initial spin configurations in the SCF cycle, collinear SDFT can target
 different magnetic orderings:</p>
@@ -2749,6 +2767,12 @@ physical gap.</p>
 <p>DFT+U corrects both deficiencies for the targeted orbitals: the Hubbard \(U\) term penalises
 fractional occupations and introduces a step-like potential that mimics the derivative
 discontinuity.</p>
+<figure>
+<img src="images/dftu_en_curve.svg" alt="Piecewise linear exact energy versus electron number compared with convex LDA/GGA curve and DFT+U restoration" style="width:100%; max-width:640px; height:auto; display:block; margin:1.5em auto;" />
+<figcaption style="text-align:center; font-size:0.9em; color:#555;">
+<p><strong>Figure 7.1.</strong> Total energy \(E(N)\) as a function of fractional electron number \(N\). Exact DFT is piecewise linear with a derivative discontinuity \(\Delta_{\rm xc}\) at integers, whereas semi-local LDA/GGA yields a convex curve due to self-interaction error. Adding the Hubbard penalty \(+\frac{1}{2}U_{\rm eff}\,n(1-n)\) restores linearity and recovers integer orbital localisation.</p>
+</figcaption>
+</figure>
 <h2 id="the-dftu-energy-functional"><a class="header" href="#the-dftu-energy-functional">The DFT+U Energy Functional</a></h2>
 <h3 id="occupation-matrix"><a class="header" href="#occupation-matrix">Occupation Matrix</a></h3>
 <p>The central object in DFT+U is the <strong>occupation matrix</strong> \(n_{mm'}^\sigma\) of the correlated
@@ -3304,6 +3328,12 @@ This small diagonalisation costs \(\mathcal{O}(m^3)\), which is negligible.</p>
 \end{equation}
 </div>
 
+<figure>
+<img src="images/davidson_subspace.svg" alt="Flowchart of the iterative subspace diagonalisation cycle for Davidson and RMM-DIIS eigenvalue solvers" style="width:100%; max-width:640px; height:auto; display:block; margin:1.5em auto;" />
+<figcaption style="text-align:center; font-size:0.9em; color:#555;">
+<p><strong>Figure 8.1.</strong> Iterative subspace diagonalisation cycle. Instead of constructing and inverting the \(N_{\rm PW} \times N_{\rm PW}\) Hamiltonian, Davidson and RMM-DIIS solve only a small \(m \times m\) projected eigenproblem inside \(\mathcal{V}_m\), evaluate residuals via FFTs, and refine the subspace using the kinetic-energy preconditioner \(P(\mathbf{G})\).</p>
+</figcaption>
+</figure>
 <p>If \(\|r_i\| \leq \delta\) for all desired eigenpairs, the algorithm has converged. The threshold
 \(\delta\) is typically set to \(10^{-2}\)–\(10^{-3}\) times the SCF energy convergence criterion,
 since the eigenvalues need not be converged more tightly than the density at each SCF step.</p>
@@ -4356,6 +4386,12 @@ and restoring uniform convergence across all wavevectors.</p>
 <p>Computationally, the Kerker preconditioner is very cheap: one forward FFT to go to reciprocal
 space, a pointwise multiplication by \(G^2/(G^2 + k_0^2)\), and one inverse FFT to return to
 real space. No additional KS cycles or matrix operations are required.</p>
+<figure>
+<img src="images/kerker_filter.svg" alt="Reciprocal-space Kerker preconditioner K(G) = G^2 / (G^2 + k_0^2) showing suppression of small-G metallic charge sloshing" style="width:100%; max-width:640px; height:auto; display:block; margin:1.5em auto;" />
+<figcaption style="text-align:center; font-size:0.9em; color:#555;">
+<p><strong>Figure 10.1.</strong> The Kerker reciprocal-space filter \(K(G) = G^2/(G^2 + k_0^2)\). Long-wavelength charge-sloshing components (\(G \lt k_0\)), where the metallic dielectric response \(\varepsilon(G) \propto k_{\rm TF}^2/G^2\) diverges, are strongly damped, while short-wavelength density updates (\(G \gg k_0\)) pass through near unity.</p>
+</figcaption>
+</figure>
 <p><strong>Limitation:</strong> Kerker preconditioning is designed for metallic screening and can <em>slow down</em>
 convergence in insulators, where the long-wavelength response is already well-behaved. For
 insulators, the factor \(G^2/(G^2 + k_0^2)\) unnecessarily suppresses the update at small \(G\),
@@ -4806,8 +4842,6 @@ atomic positions and lattice strain—requiring careful control of basis-set <st
 fixed or variable-cell constraints) and <strong>ab initio molecular dynamics</strong> (following nuclear
 trajectories at finite temperature). These topics form the outermost simulation loop in
 <strong>Chapter 11</strong>, which completes Part II.</p>
-<div style="break-before: page; page-break-before: always;"></div>
-<h1 id="structural-optimisation-and-aimd"><a class="header" href="#structural-optimisation-and-aimd">Structural Optimisation and AIMD</a></h1>
 <div style="break-before: page; page-break-before: always;"></div>
 <h1 id="examination-questions-and-answer-hints"><a class="header" href="#examination-questions-and-answer-hints">Examination Questions and Answer Hints</a></h1>
 <p>This chapter collects representative examination questions drawn from all parts of the course,

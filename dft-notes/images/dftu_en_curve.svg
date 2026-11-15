@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="420" viewBox="0 0 640 420" font-family="Georgia, 'Times New Roman', serif" xml:space="preserve">
+
+  <rect width="640" height="420" fill="#fafaf8"/>
+
+  <defs>
+    <marker id="ax-en" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#444"/>
+    </marker>
+    <marker id="u-up" markerWidth="7" markerHeight="5" refX="6" refY="2.5" orient="auto">
+      <polygon points="0 0, 7 2.5, 0 5" fill="#8a6a1a"/>
+    </marker>
+  </defs>
+
+  <!-- Title -->
+  <text x="320" y="30" text-anchor="middle" font-size="16" font-weight="bold" fill="#2c2c2c">Total Energy E(N) vs. Electron Number and DFT+U</text>
+  <text x="320" y="49" text-anchor="middle" font-size="12" fill="#555" font-style="italic">The Hubbard +U penalty removes spurious convexity of semi-local LDA/GGA at fractional N</text>
+
+  <!-- Vertical integer guides -->
+  <line x1="145" y1="115" x2="145" y2="332" stroke="#ccc" stroke-width="1" stroke-dasharray="4,3"/>
+  <line x1="330" y1="265" x2="330" y2="332" stroke="#ccc" stroke-width="1" stroke-dasharray="4,3"/>
+  <line x1="515" y1="185" x2="515" y2="332" stroke="#ccc" stroke-width="1" stroke-dasharray="4,3"/>
+
+  <!-- Axes -->
+  <line x1="78" y1="332" x2="582" y2="332" stroke="#444" stroke-width="1.6" marker-end="url(#ax-en)"/>
+  <line x1="88" y1="340" x2="88" y2="68" stroke="#444" stroke-width="1.6" marker-end="url(#ax-en)"/>
+  <text x="588" y="336" font-size="13.5" fill="#444" font-style="italic">N</text>
+  <text x="80" y="82" text-anchor="end" font-size="13.5" fill="#444" font-style="italic">E(N)</text>
+
+  <!-- X-axis integer ticks -->
+  <text x="145" y="349" text-anchor="middle" font-size="12.5" font-weight="bold" fill="#444">N − 1</text>
+  <text x="330" y="349" text-anchor="middle" font-size="12.5" font-weight="bold" fill="#444">N</text>
+  <text x="515" y="349" text-anchor="middle" font-size="12.5" font-weight="bold" fill="#444">N + 1</text>
+
+  <!-- Shaded DFT+U restoration region between exact linear and convex GGA -->
+  <path d="M 145,115 Q 237.5,274 330,265 L 145,115 Z" fill="#b8963e" fill-opacity="0.18"/>
+  <path d="M 330,265 Q 422.5,311 515,185 L 330,265 Z" fill="#b8963e" fill-opacity="0.18"/>
+
+  <!-- Continuation of left segment slope to show derivative discontinuity kink -->
+  <line x1="330" y1="265" x2="405" y2="326" stroke="#6a9e7a" stroke-width="1.4" stroke-dasharray="4,4"/>
+
+  <!-- Exact piecewise-linear E(N) -->
+  <polyline points="145,115 330,265 515,185" fill="none" stroke="#4a8a5e" stroke-width="3" stroke-linejoin="round"/>
+
+  <!-- Convex LDA/GGA curve (smooth parabola-like under-estimation at fractional N) -->
+  <path d="M 145,115 Q 237.5,274 330,265 Q 422.5,311 515,185" fill="none" stroke="#a0522d" stroke-width="2.6" stroke-dasharray="7,4"/>
+
+  <!-- Integer circles -->
+  <circle cx="145" cy="115" r="4.8" fill="#2c3e50"/>
+  <circle cx="330" cy="265" r="4.8" fill="#2c3e50"/>
+  <circle cx="515" cy="185" r="4.8" fill="#2c3e50"/>
+
+  <!-- DFT+U restoration arrows at half-integer occupancies -->
+  <line x1="237.5" y1="231" x2="237.5" y2="195" stroke="#8a6a1a" stroke-width="2" marker-end="url(#u-up)"/>
+  <line x1="422.5" y1="266" x2="422.5" y2="230" stroke="#8a6a1a" stroke-width="2" marker-end="url(#u-up)"/>
+
+  <!-- Labels -->
+  <text x="242" y="138" text-anchor="start" font-size="12.5" font-weight="bold" fill="#436e50">Exact E(N)</text>
+  <text x="242" y="154" text-anchor="start" font-size="11.5" fill="#436e50">(piecewise linear)</text>
+
+  <text x="210" y="274" text-anchor="middle" font-size="12" font-weight="bold" fill="#a0522d">LDA / GGA (convex SIE)</text>
+  <text x="430" y="295" text-anchor="middle" font-size="12" font-weight="bold" fill="#8a6a1a">+ ½ U<tspan font-size="8.5" dy="2">eff</tspan><tspan dy="-2"> n(1 − n)</tspan></text>
+
+  <!-- Derivative discontinuity annotation at N -->
+  <text x="424" y="317" font-size="11.5" font-weight="bold" fill="#436e50">kink: Δ<tspan font-size="8.5" dy="2">xc</tspan><tspan dy="-2"> = V</tspan><tspan font-size="8.5" dy="-4">+</tspan><tspan dy="4"> − V</tspan><tspan font-size="8.5" dy="-4">−</tspan></text>
+
+  <!-- Legend bar -->
+  <rect x="88" y="365" width="490" height="40" rx="6" fill="#f0eee9" stroke="#d5d0c5" stroke-width="1"/>
+  <line x1="106" y1="385" x2="134" y2="385" stroke="#4a8a5e" stroke-width="3"/>
+  <text x="142" y="389" font-size="11.5" fill="#2c2c2c">Exact DFT</text>
+
+  <line x1="226" y1="385" x2="254" y2="385" stroke="#a0522d" stroke-width="2.5" stroke-dasharray="6,3"/>
+  <text x="262" y="389" font-size="11.5" fill="#2c2c2c">LDA/GGA (delocalisation error)</text>
+
+  <rect x="448" y="378" width="16" height="14" rx="2" fill="#b8963e" fill-opacity="0.35" stroke="#8a6a1a" stroke-width="1"/>
+  <text x="470" y="389" font-size="11.5" fill="#2c2c2c">+U restoration</text>
+
+</svg>

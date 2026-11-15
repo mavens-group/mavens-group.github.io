@@ -83,10 +83,10 @@
             const path_to_root = "";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "searchindex-e9347d85.js";
+            window.path_to_searchindex_js = "searchindex-a9c1688a.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="toc-7051d784.js"></script>
+        <script src="toc-e92732f5.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -295,6 +295,12 @@ physical gap.</p>
 <p>DFT+U corrects both deficiencies for the targeted orbitals: the Hubbard \(U\) term penalises
 fractional occupations and introduces a step-like potential that mimics the derivative
 discontinuity.</p>
+<figure>
+<img src="images/dftu_en_curve.svg" alt="Piecewise linear exact energy versus electron number compared with convex LDA/GGA curve and DFT+U restoration" style="width:100%; max-width:640px; height:auto; display:block; margin:1.5em auto;" />
+<figcaption style="text-align:center; font-size:0.9em; color:#555;">
+<p><strong>Figure 7.1.</strong> Total energy \(E(N)\) as a function of fractional electron number \(N\). Exact DFT is piecewise linear with a derivative discontinuity \(\Delta_{\rm xc}\) at integers, whereas semi-local LDA/GGA yields a convex curve due to self-interaction error. Adding the Hubbard penalty \(+\frac{1}{2}U_{\rm eff}\,n(1-n)\) restores linearity and recovers integer orbital localisation.</p>
+</figcaption>
+</figure>
 <h2 id="the-dftu-energy-functional"><a class="header" href="#the-dftu-energy-functional">The DFT+U Energy Functional</a></h2>
 <h3 id="occupation-matrix"><a class="header" href="#occupation-matrix">Occupation Matrix</a></h3>
 <p>The central object in DFT+U is the <strong>occupation matrix</strong> \(n_{mm'}^\sigma\) of the correlated

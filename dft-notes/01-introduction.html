@@ -83,10 +83,10 @@
             const path_to_root = "";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "searchindex-e9347d85.js";
+            window.path_to_searchindex_js = "searchindex-a9c1688a.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="toc-7051d784.js"></script>
+        <script src="toc-e92732f5.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -277,6 +277,12 @@ nuclear degrees of freedom and solve only for the electronic structure at fixed 
 \omega_{\rm el} \gg \omega_{\rm nuc}, \qquad \frac{\omega_{\rm nuc}}{\omega_{\rm el}} \sim \left(\frac{m_e}{M}\right)^{1/2} \approx 10^{-2}.
 \]</p>
 <p>This ratio is small for all atoms, which is why BO works so broadly. It breaks down near <strong>conical intersections</strong> — geometries where two electronic potential energy surfaces become degenerate — leading to non-adiabatic dynamics that are important in photochemistry and certain charge-transfer processes. These are beyond the scope of ground-state DFT.</p>
+<figure>
+<img src="images/bo_pes.svg" alt="Born-Oppenheimer adiabatic potential energy surfaces showing ground and excited electronic states and a conical intersection" style="width:100%; max-width:640px; height:auto; display:block; margin:1.5em auto;" />
+<figcaption style="text-align:center; font-size:0.9em; color:#555;">
+<p><strong>Figure 1.1.</strong> Adiabatic Born–Oppenheimer potential energy surfaces. Because \(\hbar\omega_{\rm el} \gg \hbar\omega_{\rm nuc}\), electrons relax instantaneously to the ground-state surface \(E_0(R)\) at clamped nuclear positions; the adiabatic approximation breaks down only where surfaces approach each other near a conical intersection (\(\omega_{\rm el} \approx \omega_{\rm nuc}\)).</p>
+</figcaption>
+</figure>
 <p>Under this approximation:</p>
 <ul>
 <li>The nuclear kinetic energy term vanishes: \(\frac{\hbar^2}{2M_j}\sum_j^N\nabla^2_j = 0\).</li>

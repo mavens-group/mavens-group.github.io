@@ -83,10 +83,10 @@
             const path_to_root = "";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "searchindex-e9347d85.js";
+            window.path_to_searchindex_js = "searchindex-a9c1688a.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="toc-7051d784.js"></script>
+        <script src="toc-e92732f5.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -455,6 +455,12 @@ and restoring uniform convergence across all wavevectors.</p>
 <p>Computationally, the Kerker preconditioner is very cheap: one forward FFT to go to reciprocal
 space, a pointwise multiplication by \(G^2/(G^2 + k_0^2)\), and one inverse FFT to return to
 real space. No additional KS cycles or matrix operations are required.</p>
+<figure>
+<img src="images/kerker_filter.svg" alt="Reciprocal-space Kerker preconditioner K(G) = G^2 / (G^2 + k_0^2) showing suppression of small-G metallic charge sloshing" style="width:100%; max-width:640px; height:auto; display:block; margin:1.5em auto;" />
+<figcaption style="text-align:center; font-size:0.9em; color:#555;">
+<p><strong>Figure 10.1.</strong> The Kerker reciprocal-space filter \(K(G) = G^2/(G^2 + k_0^2)\). Long-wavelength charge-sloshing components (\(G \lt k_0\)), where the metallic dielectric response \(\varepsilon(G) \propto k_{\rm TF}^2/G^2\) diverges, are strongly damped, while short-wavelength density updates (\(G \gg k_0\)) pass through near unity.</p>
+</figcaption>
+</figure>
 <p><strong>Limitation:</strong> Kerker preconditioning is designed for metallic screening and can <em>slow down</em>
 convergence in insulators, where the long-wavelength response is already well-behaved. For
 insulators, the factor \(G^2/(G^2 + k_0^2)\) unnecessarily suppresses the update at small \(G\),
@@ -914,7 +920,7 @@ trajectories at finite temperature). These topics form the outermost simulation 
                                 <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
                             </a>
 
-                            <a rel="next prefetch" href="11-OptAIMD.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next prefetch" href="EX-ExamQA.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
                             </a>
 
@@ -928,7 +934,7 @@ trajectories at finite temperature). These topics form the outermost simulation 
                         <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
                     </a>
 
-                    <a rel="next prefetch" href="11-OptAIMD.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next prefetch" href="EX-ExamQA.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
                     </a>
             </nav>

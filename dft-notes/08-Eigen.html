@@ -83,10 +83,10 @@
             const path_to_root = "";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "searchindex-e9347d85.js";
+            window.path_to_searchindex_js = "searchindex-a9c1688a.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="toc-7051d784.js"></script>
+        <script src="toc-e92732f5.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -312,6 +312,12 @@ This small diagonalisation costs \(\mathcal{O}(m^3)\), which is negligible.</p>
 \end{equation}
 </div>
 
+<figure>
+<img src="images/davidson_subspace.svg" alt="Flowchart of the iterative subspace diagonalisation cycle for Davidson and RMM-DIIS eigenvalue solvers" style="width:100%; max-width:640px; height:auto; display:block; margin:1.5em auto;" />
+<figcaption style="text-align:center; font-size:0.9em; color:#555;">
+<p><strong>Figure 8.1.</strong> Iterative subspace diagonalisation cycle. Instead of constructing and inverting the \(N_{\rm PW} \times N_{\rm PW}\) Hamiltonian, Davidson and RMM-DIIS solve only a small \(m \times m\) projected eigenproblem inside \(\mathcal{V}_m\), evaluate residuals via FFTs, and refine the subspace using the kinetic-energy preconditioner \(P(\mathbf{G})\).</p>
+</figcaption>
+</figure>
 <p>If \(\|r_i\| \leq \delta\) for all desired eigenpairs, the algorithm has converged. The threshold
 \(\delta\) is typically set to \(10^{-2}\)–\(10^{-3}\) times the SCF energy convergence criterion,
 since the eigenvalues need not be converged more tightly than the density at each SCF step.</p>

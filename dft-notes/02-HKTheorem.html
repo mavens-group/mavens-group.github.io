@@ -83,10 +83,10 @@
             const path_to_root = "";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "searchindex-e9347d85.js";
+            window.path_to_searchindex_js = "searchindex-a9c1688a.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="toc-7051d784.js"></script>
+        <script src="toc-e92732f5.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -273,6 +273,12 @@ density \(\rho_0(r)\).</p>
 <p>Because \(V_{\rm ext}(r)\) uniquely determines \(\hat{H}\) (and hence all eigenstates and
 eigenvalues), the ground-state density \(\rho_0(r)\) alone determines everything about the system.
 The wavefunction \(\Psi_0\) is therefore a functional of \(\rho_0\), written \(\Psi_0 = \Psi[\rho_0]\).</p>
+<figure>
+<img src="images/hk_mapping.svg" alt="Schematic diagram of the Hohenberg-Kohn bijection connecting external potential, many-body ground state, and electron density" style="width:100%; max-width:640px; height:auto; display:block; margin:1.5em auto;" />
+<figcaption style="text-align:center; font-size:0.9em; color:#555;">
+<p><strong>Figure 2.1.</strong> The Hohenberg–Kohn bijection. The Schrödinger equation maps \(V_{\rm ext}(\mathbf{r}) \mapsto |\Psi_0\rangle\), and contraction maps \(|\Psi_0\rangle \mapsto \rho_0(\mathbf{r})\). The First HK Theorem proves that the inverse arrow exists uniquely (up to an additive constant in \(V_{\rm ext}\)), making every ground-state observable a functional of the 3D density \(\rho_0(\mathbf{r})\).</p>
+</figcaption>
+</figure>
 <h4 id="proof-by-contradiction"><a class="header" href="#proof-by-contradiction">Proof (by contradiction)</a></h4>
 <div class="proof" data-title="by contradiction">
 <p>Assume a non-degenerate ground state, and assume the contrary: suppose there exist two <strong>different</strong> external potentials
