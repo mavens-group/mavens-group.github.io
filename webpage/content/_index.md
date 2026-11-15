@@ -35,7 +35,7 @@ sections:
     content:
       title:
       text: |
-        Every real material is imperfect. Atoms swap places, atoms go missing, two metals share one lattice.
+        Nobody's perfect, and neither is any material. Atoms swap places, atoms go missing, two metals share one lattice.
 
         These imperfections are not noise. They can make a magnet or break it, create a spin centre or silence it, and turn a surface into a source of hydrogen fuel, or leave it idle.
 
