@@ -1,10 +1,10 @@
 # Kohn-Sham Equations
 
-The Hohenberg–Kohn theorems establish that the ground-state density \\(\rho_0(\mathbf{r})\\)
+The Hohenberg–Kohn theorems establish that the ground-state density \\(\rho\_0(\mathbf{r})\\)
 uniquely determines all ground-state properties, and that the total energy \\(E[\rho]\\) is minimised
-by \\(\rho_0\\). However, they say nothing about *how* to compute the universal functional \\(F[\rho]\\),
+by \\(\rho\_0\\). However, they say nothing about *how* to compute the universal functional \\(F[\rho]\\),
 and in particular how to evaluate the kinetic energy \\(T[\rho]\\) as a functional of the density
-alone. As we saw with the Thomas–Fermi model in Chapter 1.6, attempts to write \\(T\\) purely in
+alone. As we saw with the Thomas–Fermi model in Section 1.5, attempts to write \\(T\\) purely in
 terms of \\(\rho\\) using a local UEG ansatz lead to qualitative failures: no molecular binding,
 wrong asymptotic decay, no shell structure.
 
@@ -32,12 +32,12 @@ handled accurately and a remainder that must be approximated:
 
 where each term has a specific physical meaning:
 
-- \\(T_s[\rho]\\) is the **kinetic energy of a fictitious non-interacting system** with the same
+- \\(T\_s[\rho]\\) is the **kinetic energy of a fictitious non-interacting system** with the same
   density \\(\rho(\mathbf{r})\\) as the real interacting system. Unlike the full kinetic energy
   \\(T[\rho]\\), this quantity can be computed exactly from the single-particle orbitals
   (see below).
 
-- \\(E_{\mathrm{H}}[\rho]\\) is the **classical Hartree energy** — the electrostatic self-energy of
+- \\(E\_{\mathrm{H}}[\rho]\\) is the **classical Hartree energy** — the electrostatic self-energy of
   the electron charge distribution, treating it as a classical continuous fluid:
 
 <div>
@@ -48,7 +48,7 @@ where each term has a specific physical meaning:
 
   This is the dominant part of the electron–electron repulsion and is treated exactly.
 
-- \\(E_{\mathrm{xc}}[\rho]\\) is the **exchange-correlation (XC) energy**. It collects everything
+- \\(E\_{\mathrm{xc}}[\rho]\\) is the **exchange-correlation (XC) energy**. It collects everything
   that is missing from the above terms:
 
 <div>
@@ -57,15 +57,15 @@ where each term has a specific physical meaning:
 \end{equation}
 </div>
 
-  This includes the quantum exchange energy (the \\(K_{ij}\\) integrals introduced in
-  Chapter 1.5.2), all Coulomb correlation effects beyond the Hartree level, and the correction
-  to the kinetic energy from the interacting nature of the true system. \\(E_{\mathrm{xc}}\\) is
+  This includes the quantum exchange energy (the \\(K\_{ij}\\) integrals introduced in
+  Section 1.4.2), all Coulomb correlation effects beyond the Hartree level, and the correction
+  to the kinetic energy from the interacting nature of the true system. \\(E\_{\mathrm{xc}}\\) is
   the only term that must be approximated; its exact form is unknown.
 
-- \\(\int V_{\mathrm{ext}}(\mathbf{r})\,\rho(\mathbf{r})\,d\mathbf{r}\\) is the **interaction with
+- \\(\int V\_{\mathrm{ext}}(\mathbf{r})\\,\rho(\mathbf{r})\\,d\mathbf{r}\\) is the **interaction with
   the external potential** (the nuclear attraction and any applied fields), treated exactly.
 
-The Kohn–Sham ansatz reduces the DFT problem to finding a good approximation for \\(E_{\mathrm{xc}}[\rho]\\) — a functional of three-dimensional \\(\rho\\) alone — rather than solving the full
+The Kohn–Sham ansatz reduces the DFT problem to finding a good approximation for \\(E\_{\mathrm{xc}}[\rho]\\) — a functional of three-dimensional \\(\rho\\) alone — rather than solving the full
 \\(3N\\)-dimensional Schrödinger equation.
 
 
@@ -76,9 +76,9 @@ The central assumption of the Kohn–Sham approach is:
 > *There exists a system of non-interacting electrons — the KS reference system — whose
 > ground-state density is identical to that of the true interacting system.*
 
-**Non-interacting \\(v\\)-representability.** This assumption is not trivially guaranteed. It requires that the interacting ground-state density \\(\rho_0(\mathbf{r})\\) can be reproduced as the ground-state density of some non-interacting system moving in a local effective potential \\(V_{\rm eff}(\mathbf{r})\\). Densities for which this holds are called *non-interacting \\(v\\)-representable*. While a general proof is lacking, no physically relevant counterexample has been found, and the assumption is accepted as holding for all practical ground-state densities encountered in electronic structure calculations. The Kohn–Sham equations derived below are exact under this assumption.
+**Non-interacting \\(v\\)-representability.** This assumption is not trivially guaranteed. It requires that the interacting ground-state density \\(\rho\_0(\mathbf{r})\\) can be reproduced as the ground-state density of some non-interacting system moving in a local effective potential \\(V\_{\rm eff}(\mathbf{r})\\). Densities for which this holds are called *non-interacting \\(v\\)-representable*. While a general proof is lacking, no physically relevant counterexample has been found, and the assumption is accepted as holding for all practical ground-state densities encountered in electronic structure calculations. The Kohn–Sham equations derived below are exact under this assumption.
 
-The density is represented in terms of **Kohn–Sham orbitals** \\(\{\phi_i(\mathbf{r})\}\\):
+The density is represented in terms of **Kohn–Sham orbitals** \\(\\{\phi\_i(\mathbf{r})\\}\\):
 
 <div>
 \begin{equation}
@@ -102,7 +102,7 @@ This is the key advantage over orbital-free approaches like Thomas–Fermi: by w
 
 ## Derivation of the Kohn–Sham Equations
 
-We seek the set of orbitals \\(\{\phi_i\}\\) that minimises the total KS energy functional
+We seek the set of orbitals \\(\\{\phi\_i\\}\\) that minimises the total KS energy functional
 \eqref{eq:KS-energy}, subject to the constraint that the orbitals remain orthonormal:
 
 <div>
@@ -120,8 +120,8 @@ We construct the Lagrangian:
 \end{equation}
 </div>
 
-where \\(\epsilon_{ij}\\) are the Lagrange multipliers enforcing orthonormality. Taking the
-functional derivative with respect to \\(\phi_i^*(\mathbf{r})\\) and setting it to zero yields:
+where \\(\epsilon\_{ij}\\) are the Lagrange multipliers enforcing orthonormality. Taking the
+functional derivative with respect to \\(\phi\_i^\*(\mathbf{r})\\) and setting it to zero yields:
 
 <div>
 \begin{equation}
@@ -129,9 +129,9 @@ functional derivative with respect to \\(\phi_i^*(\mathbf{r})\\) and setting it 
 \end{equation}
 </div>
 
-Applying the chain rule to the left-hand side — \\(T_s\\) is an explicit functional of the
-orbitals, while \\(E_{\rm H}\\), \\(E_{\rm xc}\\), and \\(E_{\rm ext}\\) depend on the orbitals only
-through the density \\(\rho(\mathbf{r}') = \sum_j|\phi_j(\mathbf{r}')|^2\\):
+Applying the chain rule to the left-hand side — \\(T\_s\\) is an explicit functional of the
+orbitals, while \\(E\_{\rm H}\\), \\(E\_{\rm xc}\\), and \\(E\_{\rm ext}\\) depend on the orbitals only
+through the density \\(\rho(\mathbf{r}\') = \sum\_j|\phi\_j(\mathbf{r}\')|^2\\):
 
 <div>
 \begin{equation}
@@ -140,11 +140,11 @@ through the density \\(\rho(\mathbf{r}') = \sum_j|\phi_j(\mathbf{r}')|^2\\):
 </div>
 
 Evaluating the individual derivatives:
-1. \\(\frac{\delta T_s}{\delta \phi_i^*(\mathbf{r})} = -\frac{1}{2}\nabla^2 \phi_i(\mathbf{r})\\) — standard variation of \\(T_s = -\tfrac{1}{2}\sum_j \int \phi_j^*\nabla^2\phi_j\,d\mathbf{r}\\).
-2. \\(\frac{\delta \rho(\mathbf{r}')}{\delta \phi_i^*(\mathbf{r})} = \phi_i(\mathbf{r}')\delta(\mathbf{r}-\mathbf{r}')\\) — from \\(\rho(\mathbf{r}') = \sum_j |\phi_j(\mathbf{r}')|^2\\), differentiating with respect to \\(\phi_i^*(\mathbf{r})\\) picks out the \\(j = i\\) term and localises it at \\(\mathbf{r}' = \mathbf{r}\\).
-3. \\(\frac{\delta E_{\mathrm{ext}}}{\delta \rho(\mathbf{r})} = V_{\mathrm{ext}}(\mathbf{r})\\) — from \\(E_{\rm ext} = \int V_{\rm ext}\rho\,d\mathbf{r}\\).
-4. \\(\frac{\delta E_{\mathrm{H}}}{\delta \rho(\mathbf{r})} = \int \frac{\rho(\mathbf{r}')}{|\mathbf{r}-\mathbf{r}'|}\,d\mathbf{r}' \equiv V_{\mathrm{H}}(\mathbf{r})\\) — differentiating the symmetric double integral and exploiting symmetry to cancel the factor \\(\tfrac{1}{2}\\).
-5. \\(\frac{\delta E_{\mathrm{xc}}}{\delta \rho(\mathbf{r})} \equiv V_{\mathrm{xc}}(\mathbf{r})\\) — by definition; this is the *exchange-correlation potential* whose explicit form is the subject of Chapter 4.
+1. \\(\frac{\delta T\_s}{\delta \phi\_i^\*(\mathbf{r})} = -\frac{1}{2}\nabla^2 \phi\_i(\mathbf{r})\\) — standard variation of \\(T\_s = -\tfrac{1}{2}\sum\_j \int \phi\_j^\*\nabla^2\phi\_j\\,d\mathbf{r}\\).
+2. \\(\frac{\delta \rho(\mathbf{r}\')}{\delta \phi\_i^\*(\mathbf{r})} = \phi\_i(\mathbf{r}\')\delta(\mathbf{r}-\mathbf{r}\')\\) — from \\(\rho(\mathbf{r}\') = \sum\_j |\phi\_j(\mathbf{r}\')|^2\\), differentiating with respect to \\(\phi\_i^\*(\mathbf{r})\\) picks out the \\(j = i\\) term and localises it at \\(\mathbf{r}\' = \mathbf{r}\\).
+3. \\(\frac{\delta E\_{\mathrm{ext}}}{\delta \rho(\mathbf{r})} = V\_{\mathrm{ext}}(\mathbf{r})\\) — from \\(E\_{\rm ext} = \int V\_{\rm ext}\rho\\,d\mathbf{r}\\).
+4. \\(\frac{\delta E\_{\mathrm{H}}}{\delta \rho(\mathbf{r})} = \int \frac{\rho(\mathbf{r}\')}{|\mathbf{r}-\mathbf{r}\'|}\\,d\mathbf{r}\' \equiv V\_{\mathrm{H}}(\mathbf{r})\\) — differentiating the symmetric double integral and exploiting symmetry to cancel the factor \\(\tfrac{1}{2}\\).
+5. \\(\frac{\delta E\_{\mathrm{xc}}}{\delta \rho(\mathbf{r})} \equiv V\_{\mathrm{xc}}(\mathbf{r})\\) — by definition; this is the *exchange-correlation potential* whose explicit form is the subject of Chapter 4.
 
 This defines the **Kohn–Sham effective potential**:
 
@@ -162,7 +162,7 @@ The minimisation condition becomes:
 \end{equation}
 </div>
 
-Because the Hamiltonian \\(\hat{h}_{\mathrm{KS}} = -\frac{1}{2}\nabla^2 + V_{\mathrm{eff}}\\) is Hermitian, the matrix of Lagrange multipliers \\(\epsilon_{ij}\\) is also Hermitian and can be diagonalised by a unitary transformation of the orbitals. This transformation leaves the total density \\(\rho(\mathbf{r})\\) unchanged. In this diagonal representation, we obtain the canonical **Kohn–Sham equations**:
+Because the Hamiltonian \\(\hat{h}\_{\mathrm{KS}} = -\frac{1}{2}\nabla^2 + V\_{\mathrm{eff}}\\) is Hermitian, the matrix of Lagrange multipliers \\(\epsilon\_{ij}\\) is also Hermitian and can be diagonalised by a unitary transformation of the orbitals. This transformation leaves the total density \\(\rho(\mathbf{r})\\) unchanged. In this diagonal representation, we obtain the canonical **Kohn–Sham equations**:
 
 <div>
 \begin{equation}
@@ -171,14 +171,14 @@ Because the Hamiltonian \\(\hat{h}_{\mathrm{KS}} = -\frac{1}{2}\nabla^2 + V_{\ma
 \end{equation}
 </div>
 
-These are single-particle Schrödinger-like equations. The eigenvalues \\(\epsilon_i\\) are the Kohn–Sham orbital energies.
+These are single-particle Schrödinger-like equations. The eigenvalues \\(\epsilon\_i\\) are the Kohn–Sham orbital energies.
 
 
 ## The Self-Consistent Field (SCF) Cycle
 
-The Kohn–Sham equations are non-linear: the effective potential \\(V_{\mathrm{eff}}(\mathbf{r})\\)
-depends on \\(V_{\mathrm{H}}\\) and \\(V_{\mathrm{xc}}\\), which in turn depend on the density
-\\(\rho(\mathbf{r})\\), which is computed from the orbitals \\(\phi_i(\mathbf{r})\\) that are the
+The Kohn–Sham equations are non-linear: the effective potential \\(V\_{\mathrm{eff}}(\mathbf{r})\\)
+depends on \\(V\_{\mathrm{H}}\\) and \\(V\_{\mathrm{xc}}\\), which in turn depend on the density
+\\(\rho(\mathbf{r})\\), which is computed from the orbitals \\(\phi\_i(\mathbf{r})\\) that are the
 solutions to the KS equations themselves. There is no way to write down the solution in closed
 form: the equations must be solved **self-consistently** through iteration.
 
@@ -189,15 +189,15 @@ procedures are involved, and distinguishing them is essential for understanding 
 actually runs.
 
 **The SCF cycle is a fixed-point iteration.** The mathematical problem is to find a density
-\\(\rho^*(\mathbf{r})\\) such that
+\\(\rho^\*(\mathbf{r})\\) such that
 
 \\[
-    \rho^* = F[\rho^*], \qquad F[\rho] \equiv \sum_i |\phi_i[\rho](\mathbf{r})|^2,
+    \rho^\* = F[\rho^\*], \qquad F[\rho] \equiv \sum\_i |\phi\_i\[\rho\](\mathbf{r})|^2,
 \\]
 
-where the right-hand side is constructed by (i) building \\(V_{\rm eff}[\rho]\\), (ii) solving the
+where the right-hand side is constructed by (i) building \\(V\_{\rm eff}[\rho]\\), (ii) solving the
 KS equations for the orbitals, and (iii) summing the orbital densities. The map \\(F\\) is
-**non-linear** in \\(\rho\\) — \\(V_{\rm H}\\) and \\(V_{\rm xc}\\) are non-linear functionals of the
+**non-linear** in \\(\rho\\) — \\(V\_{\rm H}\\) and \\(V\_{\rm xc}\\) are non-linear functionals of the
 density — so the fixed point cannot be found by direct linear algebra. Instead it is found by
 iteration: \\(\rho^{(n+1)} = F[\rho^{(n)}]\\), possibly with mixing to ensure convergence (Chapter
 8). The number of SCF iterations is typically 20–80 for a converged calculation.
@@ -205,14 +205,14 @@ iteration: \\(\rho^{(n+1)} = F[\rho^{(n)}]\\), possibly with mixing to ensure co
 **The eigenvalue solver is a linear iterative method.** Inside step (ii) of each SCF iteration,
 the **linear** problem
 \\[
-    \hat{h}_{\rm KS}\,\phi_i = \epsilon_i\,\phi_i, \qquad \hat{h}_{\rm KS} = -\tfrac{1}{2}\nabla^2 + V_{\rm eff}(\mathbf{r}),
+    \hat{h}\_{\rm KS}\\,\phi\_i = \epsilon\_i\\,\phi\_i, \qquad \hat{h}\_{\rm KS} = -\tfrac{1}{2}\nabla^2 + V\_{\rm eff}(\mathbf{r}),
 \\]
-must be solved at fixed \\(V_{\rm eff}\\). This is a standard generalised eigenvalue problem, but
-the matrix dimension \\(N_{\rm PW} \sim 10^4\\)–\\(10^5\\) is too large for direct diagonalisation
-when only the lowest \\(N_{\rm bands} \sim 10^2\\)–\\(10^3\\) eigenpairs are needed. The practical
+must be solved at fixed \\(V\_{\rm eff}\\). This is a standard generalised eigenvalue problem, but
+the matrix dimension \\(N\_{\rm PW} \sim 10^4\\)–\\(10^5\\) is too large for direct diagonalisation
+when only the lowest \\(N\_{\rm bands} \sim 10^2\\)–\\(10^3\\) eigenpairs are needed. The practical
 algorithms — Davidson, RMM-DIIS, conjugate gradients — are **iterative subspace methods**
 (Chapter 10) that build up the desired eigenspace through successive matrix-vector products
-\\(\hat{h}_{\rm KS}|\psi\rangle\\). They typically converge in 3–8 inner iterations per SCF step.
+\\(\hat{h}\_{\rm KS}|\psi\rangle\\). They typically converge in 3–8 inner iterations per SCF step.
 
 The two iterations are **nested**: the outer SCF loop calls the inner eigenvalue solver as a
 subroutine at every step. They share the property of being iterative and producing convergence
@@ -221,7 +221,7 @@ plots, but they solve different mathematical problems with different convergence
 | Feature | SCF (outer) | Eigenvalue solver (inner) |
 |---|---|---|
 | Mathematical problem | Non-linear fixed point \\(\rho = F[\rho]\\) | Linear eigenvalue \\(A\mathbf{x} = \lambda\mathbf{x}\\) |
-| Variable | Density \\(\rho(\mathbf{r})\\) | Orbital coefficients \\(\{c_{\mathbf{G},i}\}\\) |
+| Variable | Density \\(\rho(\mathbf{r})\\) | Orbital coefficients \\(\\{c\_{\mathbf{G},i}\\}\\) |
 | Convergence theory | Banach fixed-point + spectral analysis of Jacobian | Krylov subspace / Rayleigh–Ritz |
 | Acceleration | Pulay/Broyden mixing (Chapter 8) | Davidson/RMM-DIIS subspace expansion (Chapter 10) |
 | Diagnostic | "SCF iteration N: ΔE = ..." | "RMM-DIIS: rms = ..."  per band |
@@ -238,19 +238,19 @@ In practice, the SCF procedure is:
 
 1. **Initial guess**: Provide a starting density \\(\rho^{(0)}(\mathbf{r})\\), typically a
    superposition of atomic densities (VASP `ICHARG = 2`, QE `startingpot = 'atomic'`).
-2. **Construct effective potential**: Calculate \\(V_{\mathrm{H}}[\rho]\\) (via the Poisson
-   equation, usually in reciprocal space) and \\(V_{\mathrm{xc}}[\rho]\\) (by evaluating the XC
+2. **Construct effective potential**: Calculate \\(V\_{\mathrm{H}}[\rho]\\) (via the Poisson
+   equation, usually in reciprocal space) and \\(V\_{\mathrm{xc}}[\rho]\\) (by evaluating the XC
    functional on the real-space grid). Assemble
-   \\(V_{\rm eff}(\mathbf{r}) = V_{\rm ext} + V_{\rm H} + V_{\rm xc}\\).
+   \\(V\_{\rm eff}(\mathbf{r}) = V\_{\rm ext} + V\_{\rm H} + V\_{\rm xc}\\).
 3. **Solve KS equations (inner loop)**: Diagonalise the KS Hamiltonian at each
    \\(\mathbf{k}\\)-point via an iterative subspace method (Davidson, RMM-DIIS), obtaining
-   the orbitals \\(\phi_i^{(n+1)}(\mathbf{r})\\) and energies \\(\epsilon_i\\). This step is
+   the orbitals \\(\phi\_i^{(n+1)}(\mathbf{r})\\) and energies \\(\epsilon\_i\\). This step is
    itself iterative — see the "inner loop" terminology above.
-4. **Construct new density**: Determine occupations \\(f_i\\) from the Fermi level (Chapter 9
+4. **Construct new density**: Determine occupations \\(f\_i\\) from the Fermi level (Chapter 9
    smearing), and form
-   \\(\rho_{\rm out}^{(n+1)}(\mathbf{r}) = \sum_i f_i\,|\phi_i^{(n+1)}(\mathbf{r})|^2\\).
+   \\(\rho\_{\rm out}^{(n+1)}(\mathbf{r}) = \sum\_i f\_i\\,|\phi\_i^{(n+1)}(\mathbf{r})|^2\\).
 5. **Check convergence**: If the total energy change \\(|E^{(n+1)} - E^{(n)}|\\) and the density
-   change \\(\|\rho_{\rm out} - \rho_{\rm in}\|\\) are both below their respective tolerances
+   change \\(\\|\rho\_{\rm out} - \rho\_{\rm in}\\|\\) are both below their respective tolerances
    (typically \\(10^{-5}\\)–\\(10^{-8}\\) eV for energy), stop and report the converged ground
    state.
 6. **Mix** (if not converged): Construct the input density for the next SCF iteration as a
@@ -266,7 +266,7 @@ This procedure is shown schematically in Figure 3.1.
 **Figure 3.1.** The DFT SCF cycle. The **outer loop** (purple dashed border) implements
 density self-consistency: a non-linear fixed-point iteration \\(\rho = F[\rho]\\) accelerated
 by mixing schemes. The **inner loop** (blue dashed border) implements the linear eigenvalue
-solver \\(\hat{h}_{\rm KS}\phi = \epsilon\phi\\) at fixed effective potential, itself an
+solver \\(\hat{h}\_{\rm KS}\phi = \epsilon\phi\\) at fixed effective potential, itself an
 iterative method (Davidson, RMM-DIIS) that builds the eigenspace through matrix-vector
 products. The two iterations are nested: a typical calculation requires 20–80 outer SCF steps,
 each invoking the inner solver for 3–8 iterations per \\(\mathbf{k}\\)-point. The blocks are
@@ -299,7 +299,7 @@ eigenvalues gives:
 \end{equation}
 </div>
 
-Substituting the definition of \\(V_{\mathrm{eff}}\\):
+Substituting the definition of \\(V\_{\mathrm{eff}}\\):
 
 <div>
 \begin{equation}
@@ -319,7 +319,7 @@ reconstructed by subtracting the double-counting terms:
 
 ### The KS Orbitals and Eigenvalues
 
-In exact DFT, the fictitious KS orbitals \\(\phi_i\\) and their energies \\(\epsilon_i\\) have **no
+In exact DFT, the fictitious KS orbitals \\(\phi\_i\\) and their energies \\(\epsilon\_i\\) have **no
 strict physical meaning**, with one exception: the **highest occupied KS eigenvalue** equals
 the negative of the first ionisation energy of the exact many-body system:
 
@@ -331,13 +331,13 @@ the negative of the first ionisation energy of the exact many-body system:
 
 This **IP theorem** was established independently by Almbladh and von Barth (1985) and
 Levy–Perdew–Sahni (1984) using the asymptotic form of the exact density at large \\(|\mathbf{r}|\\). The result is *not* a direct consequence of Janak's theorem (Janak 1978), which states the
-distinct identity \\(\epsilon_i = \partial E/\partial f_i\\) (the KS eigenvalue is the derivative
+distinct identity \\(\epsilon\_i = \partial E/\partial f\_i\\) (the KS eigenvalue is the derivative
 of the total energy with respect to its occupation number). Janak's theorem applied at integer
 \\(N\\) gives the chemical potential, and combined with the long-range behaviour of the exact
-density yields \\(\epsilon_{\rm HOMO} = -I\\); both ingredients are required.
+density yields \\(\epsilon\_{\rm HOMO} = -I\\); both ingredients are required.
 
-The other eigenvalues \\(\epsilon_i\\) do not formally correspond to electron removal or addition
-energies (quasiparticle excitations). The KS "band gap" (\\(\epsilon_{\mathrm{LUMO}} - \epsilon_{\mathrm{HOMO}}\\)) systematically underestimates the true fundamental gap, even if the
+The other eigenvalues \\(\epsilon\_i\\) do not formally correspond to electron removal or addition
+energies (quasiparticle excitations). The KS "band gap" (\\(\epsilon\_{\mathrm{LUMO}} - \epsilon\_{\mathrm{HOMO}}\\)) systematically underestimates the true fundamental gap, even if the
 exact XC functional were used. This is due to the **derivative discontinuity** of the exact XC
 functional with respect to particle number.
 
@@ -357,9 +357,9 @@ The key steps and ideas are:
 
 | Concept | Role |
 |---|---|
-| Non-interacting reference system | Enables exact computation of \\(T_s[\rho]\\) via orbitals |
-| \\(V_{\mathrm{H}}\\) | Classical mean-field Coulomb repulsion, computed exactly |
-| \\(V_{\mathrm{xc}}\\) | All many-body quantum effects, must be approximated |
+| Non-interacting reference system | Enables exact computation of \\(T\_s[\rho]\\) via orbitals |
+| \\(V\_{\mathrm{H}}\\) | Classical mean-field Coulomb repulsion, computed exactly |
+| \\(V\_{\mathrm{xc}}\\) | All many-body quantum effects, must be approximated |
 | SCF loop | Resolves the self-consistency between density and potential |
 | XC approximation (LDA, GGA, …) | The only uncontrolled approximation in the KS framework |
 

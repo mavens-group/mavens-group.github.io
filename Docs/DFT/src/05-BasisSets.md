@@ -1,7 +1,7 @@
 # Basis Sets and Pseudopotentials
 
 Solving the Kohn–Sham equations requires representing the single-particle orbitals
-\\(\phi_i(\mathbf{r})\\) numerically. There are two complementary choices to be made:
+\\(\phi\_i(\mathbf{r})\\) numerically. There are two complementary choices to be made:
 
 1. **How to expand the orbitals** — the choice of *basis set*.
 2. **How to treat the core electrons** — full all-electron treatment, or replace the core with a
@@ -14,8 +14,8 @@ on convergence.
 
 ## Basis Set Expansion
 
-The KS orbital \\(\phi_i(\mathbf{r})\\) is an element of an infinite-dimensional Hilbert space. In
-practice, it is expanded in a finite basis \\(\{f_\mu(\mathbf{r})\}\\):
+The KS orbital \\(\phi\_i(\mathbf{r})\\) is an element of an infinite-dimensional Hilbert space. In
+practice, it is expanded in a finite basis \\(\\{f\_\mu(\mathbf{r})\\}\\):
 
 <div>
 \begin{equation}
@@ -23,8 +23,8 @@ practice, it is expanded in a finite basis \\(\{f_\mu(\mathbf{r})\}\\):
 \end{equation}
 </div>
 
-where the coefficients \\(c_{i\mu}\\) are determined by diagonalising the KS Hamiltonian in this
-basis. The KS eigenvalue problem \eqref{eq:KS-eqn} becomes the generalised matrix eigenvalue
+where the coefficients \\(c\_{i\mu}\\) are determined by diagonalising the KS Hamiltonian in this
+basis. The KS eigenvalue problem of Chapter 3 becomes the generalised matrix eigenvalue
 problem:
 
 <div>
@@ -33,8 +33,8 @@ problem:
 \end{equation}
 </div>
 
-where \\(H_{\rm KS,\mu\nu} = \langle f_\mu | \hat{h}_{\rm KS} | f_\nu\rangle\\) and
-\\(S_{\mu\nu} = \langle f_\mu | f_\nu\rangle\\) is the overlap matrix. The two dominant choices are
+where \\(H\_{\rm KS,\mu\nu} = \langle f\_\mu | \hat{h}\_{\rm KS} | f\_\nu\rangle\\) and
+\\(S\_{\mu\nu} = \langle f\_\mu | f\_\nu\rangle\\) is the overlap matrix. The two dominant choices are
 **plane waves** and **localised (atomic-like) basis functions**.
 
 
@@ -48,7 +48,7 @@ For crystalline solids, Bloch's theorem dictates that KS orbitals have the form:
 \end{equation}
 </div>
 
-where \\(u_{i\mathbf{k}}(\mathbf{r})\\) is lattice-periodic. The periodic part is naturally expanded
+where \\(u\_{i\mathbf{k}}(\mathbf{r})\\) is lattice-periodic. The periodic part is naturally expanded
 in **plane waves** labelled by reciprocal lattice vectors \\(\mathbf{G}\\):
 
 <div>
@@ -58,22 +58,22 @@ in **plane waves** labelled by reciprocal lattice vectors \\(\mathbf{G}\\):
 </div>
 
 where \\(\Omega\\) is the unit cell volume. The basis is truncated at a **kinetic energy cutoff**
-\\(E_{\rm cut}\\). In Hartree atomic units the condition is:
+\\(E\_{\rm cut}\\). In Hartree atomic units the condition is:
 
 \\[
-\frac{1}{2}|\mathbf{k}+\mathbf{G}|^2 \leq E_{\rm cut},
+\frac{1}{2}|\mathbf{k}+\mathbf{G}|^2 \leq E\_{\rm cut},
 \\]
 
-equivalently \\(\frac{\hbar^2}{2m_e}|\mathbf{k}+\mathbf{G}|^2 \leq E_{\rm cut}\\) in SI notation.
-Codes quote \\(E_{\rm cut}\\) in different units: **VASP** uses eV, **Quantum ESPRESSO** uses Ry,
+equivalently \\(\frac{\hbar^2}{2m\_e}|\mathbf{k}+\mathbf{G}|^2 \leq E\_{\rm cut}\\) in SI notation.
+Codes quote \\(E\_{\rm cut}\\) in different units: **VASP** uses eV, **Quantum ESPRESSO** uses Ry,
 and the underlying expressions assume Hartree. Conversions:
-\\(1\,\mathrm{Ha} = 27.2114\,\mathrm{eV} = 2\,\mathrm{Ry}\\), so a VASP input of \\(\texttt{ENCUT}=500\\) eV
-corresponds to \\(\sim 18.4\,\mathrm{Ha}\\), while \\(\texttt{ecutwfc}=60\\) Ry in QE corresponds to
-\\(30\,\mathrm{Ha} = 816\,\mathrm{eV}\\). When evaluating \\(\tfrac{1}{2}|\mathbf{G}|^2\\) by hand,
-keep \\(\mathbf{G}\\) in inverse bohr and \\(E_{\rm cut}\\) in Hartree to avoid factor-of-13.6 errors.
+\\(1\\,\mathrm{Ha} = 27.2114\\,\mathrm{eV} = 2\\,\mathrm{Ry}\\), so a VASP input of \\(\texttt{ENCUT}=500\\) eV
+corresponds to \\(\sim 18.4\\,\mathrm{Ha}\\), while \\(\texttt{ecutwfc}=60\\) Ry in QE corresponds to
+\\(30\\,\mathrm{Ha} = 816\\,\mathrm{eV}\\). When evaluating \\(\tfrac{1}{2}|\mathbf{G}|^2\\) by hand,
+keep \\(\mathbf{G}\\) in inverse bohr and \\(E\_{\rm cut}\\) in Hartree to avoid factor-of-13.6 errors.
 
 **Advantages of plane waves:**
-- **Systematic completeness**: increasing \\(E_{\rm cut}\\) improves the basis in a controlled,
+- **Systematic completeness**: increasing \\(E\_{\rm cut}\\) improves the basis in a controlled,
   unbiased way. Convergence is monitored by a single parameter.
 - **No basis set superposition error (BSSE)**: Plane waves are not centred on atoms, so the
   basis does not artificially lower the energy when two atoms approach.
@@ -84,19 +84,19 @@ keep \\(\mathbf{G}\\) in inverse bohr and \\(E_{\rm cut}\\) in Hartree to avoid 
 
 **Disadvantages:**
 - **All-electron calculations are impractical**: Near the nuclei, KS orbitals oscillate rapidly
-  (due to orthogonality to core states), requiring an extremely large \\(E_{\rm cut}\\). This
+  (due to orthogonality to core states), requiring an extremely large \\(E\_{\rm cut}\\). This
   motivates the use of pseudopotentials or PAW (see below).
 - **Poor for isolated molecules**: A large vacuum supercell is needed to prevent periodic
   images from interacting, wasting computational effort.
 - **Not naturally localised**: Analysis (e.g. Bader charges, wannier functions) requires
   post-processing.
 
-### Convergence with Respect to \\(E_{\rm cut}\\)
+### Convergence with Respect to \\(E\_{\rm cut}\\)
 
 A **convergence test** is mandatory in every plane-wave calculation. The procedure is:
 1. Fix all other parameters (cell, \\(k\\)-points, functional).
-2. Compute the total energy \\(E_{\rm tot}(E_{\rm cut})\\) for a series of cutoff values.
-3. Identify the cutoff where \\(\Delta E_{\rm tot} < \epsilon_{\rm tol}\\) (typically \\(1\\)–\\(5\\) meV/atom).
+2. Compute the total energy \\(E\_{\rm tot}(E\_{\rm cut})\\) for a series of cutoff values.
+3. Identify the cutoff where \\(\Delta E\_{\rm tot} < \epsilon\_{\rm tol}\\) (typically \\(1\\)–\\(5\\) meV/atom).
 
 Typical converged cutoffs: \\(\sim 400\\)–\\(600\\) eV for GGA+PAW; \\(\sim 700\\)–\\(1200\\) eV for
 norm-conserving PPs; transition metal oxides and \\(f\\)-electron systems often require higher
@@ -119,7 +119,7 @@ Physical observables involve BZ integrals, e.g.:
 </div>
 
 In practice, the integral is replaced by a discrete sum over a finite mesh. The standard choice
-is the **Monkhorst–Pack (MP) mesh**: a uniform \\(N_1 \times N_2 \times N_3\\) grid in reciprocal
+is the **Monkhorst–Pack (MP) mesh**: a uniform \\(N\_1 \times N\_2 \times N\_3\\) grid in reciprocal
 space, optionally shifted to include or exclude \\(\Gamma\\). The total number of \\(k\\)-points is
 reduced by the point-group symmetry of the crystal.
 
@@ -131,7 +131,7 @@ reduced by the point-group symmetry of the crystal.
 - A smearing method (Methfessel–Paxton, Fermi–Dirac, or Gaussian) is applied to the
   occupation numbers for metals to accelerate convergence.
 
-The \\(k\\)-point density and \\(E_{\rm cut}\\) must be **converged independently and jointly**: the two
+The \\(k\\)-point density and \\(E\_{\rm cut}\\) must be **converged independently and jointly**: the two
 parameters interact through the density, so a joint convergence test (varying both) is the most
 rigorous approach.
 
@@ -139,13 +139,13 @@ rigorous approach.
 ## Localised Basis Sets
 
 An alternative to plane waves is to expand orbitals in **atom-centred functions** that mimic the
-shape of atomic orbitals. Each basis function \\(f_\mu(\mathbf{r}) = f_\mu(|\mathbf{r}-\mathbf{R}_A|)\\)
+shape of atomic orbitals. Each basis function \\(f\_\mu(\mathbf{r}) = f\_\mu(|\mathbf{r}-\mathbf{R}\_A|)\\)
 is centred on atom \\(A\\).
 
 ### Gaussian-Type Orbitals (GTOs)
 
-GTOs take the form \\(f(r) = r^l e^{-\alpha r^2} Y_l^m(\hat{\mathbf{r}})\\), where \\(\alpha\\) is the
-exponent and \\(Y_l^m\\) is a real spherical harmonic. Multi-Gaussian contractions are used:
+GTOs take the form \\(f(r) = r^l e^{-\alpha r^2} Y\_l^m(\hat{\mathbf{r}})\\), where \\(\alpha\\) is the
+exponent and \\(Y\_l^m\\) is a real spherical harmonic. Multi-Gaussian contractions are used:
 
 <div>
 \begin{equation}
@@ -196,10 +196,10 @@ Examples: FHI-aims (NAO), WIEN2k (LAPW), FLEUR.
 
 ### Norm-Conserving Pseudopotentials (NCPP)
 
-The core electrons are replaced by an **effective potential** \\(V_{\rm PP}(\mathbf{r})\\) that
+The core electrons are replaced by an **effective potential** \\(V\_{\rm PP}(\mathbf{r})\\) that
 reproduces the scattering properties of the full ionic potential in the valence region. The
-pseudo-wavefunction \\(\tilde{\phi}_l(r)\\) agrees with the true all-electron wavefunction
-\\(\phi_l(r)\\) outside a cutoff radius \\(r_c\\):
+pseudo-wavefunction \\(\tilde{\phi}\_l(r)\\) agrees with the true all-electron wavefunction
+\\(\phi\_l(r)\\) outside a cutoff radius \\(r\_c\\):
 
 <div>
 \begin{equation}
@@ -215,23 +215,23 @@ The **norm-conservation condition** requires:
 \end{equation}
 </div>
 
-ensuring that the charge inside \\(r_c\\) is preserved and that the logarithmic derivatives (which
-control scattering) match at \\(r_c\\). The Hamann–Schlüter–Chiang (HSC) and Troullier–Martins (TM)
+ensuring that the charge inside \\(r\_c\\) is preserved and that the logarithmic derivatives (which
+control scattering) match at \\(r\_c\\). The Hamann–Schlüter–Chiang (HSC) and Troullier–Martins (TM)
 schemes are standard constructions.
 
-NCPPs typically require \\(E_{\rm cut} \sim 60\\)–\\(100\\) Ry and are used in codes such as Quantum
+NCPPs typically require \\(E\_{\rm cut} \sim 60\\)–\\(100\\) Ry and are used in codes such as Quantum
 ESPRESSO and ABINIT.
 
 ### Ultrasoft Pseudopotentials (USPP)
 
 The **ultrasoft pseudopotential** (Vanderbilt, 1990) relaxes the norm-conservation condition,
 allowing smoother pseudo-wavefunctions that require much lower plane-wave cutoffs
-(\\(E_{\rm cut} \sim 25\\)–\\(40\\) Ry). The pseudo-wavefunction \\(\tilde{\phi}_l(r)\\) is permitted to
-deviate from the all-electron \\(\phi_l(r)\\) even for \\(r > r_c^{\rm soft}\\), producing a softer
+(\\(E\_{\rm cut} \sim 25\\)–\\(40\\) Ry). The pseudo-wavefunction \\(\tilde{\phi}\_l(r)\\) is permitted to
+deviate from the all-electron \\(\phi\_l(r)\\) even for \\(r > r\_c^{\rm soft}\\), producing a softer
 nodeless function.
 
 The missing charge that would violate the norm-conservation sum rule is compensated by
-**augmentation charges** \\(Q_{nm}(\mathbf{r})\\) added to the density:
+**augmentation charges** \\(Q\_{nm}(\mathbf{r})\\) added to the density:
 
 <div>
 \begin{equation}
@@ -239,7 +239,7 @@ The missing charge that would violate the norm-conservation sum rule is compensa
 \end{equation}
 </div>
 
-where \\(\rho_{nm}^a = \sum_i \langle\tilde{\phi}_i|\tilde{p}_n^a\rangle\langle\tilde{p}_m^a|\tilde{\phi}_i\rangle\\) are the **occupancy matrices** for atom \\(a\\), and \\(Q_{nm}^a(\mathbf{r})\\) are localised functions inside the augmentation sphere that carry the missing charge. The generalised eigenvalue problem that results from USPP differs from the standard KS equation, requiring a modified orthonormality condition; however, this adds negligible overhead in practice.
+where \\(\rho\_{nm}^a = \sum\_i \langle\tilde{\phi}\_i|\tilde{p}\_n^a\rangle\langle\tilde{p}\_m^a|\tilde{\phi}\_i\rangle\\) are the **occupancy matrices** for atom \\(a\\), and \\(Q\_{nm}^a(\mathbf{r})\\) are localised functions inside the augmentation sphere that carry the missing charge. The generalised eigenvalue problem that results from USPP differs from the standard KS equation, requiring a modified orthonormality condition; however, this adds negligible overhead in practice.
 
 USPP is available in Quantum ESPRESSO and CASTEP and offers an excellent cost-to-accuracy ratio
 for most elements.
@@ -252,16 +252,17 @@ for most elements.
 <figcaption style="text-align:center; font-size:0.9em; color:#555;">
 
 **Figure 5.1.** *(a)* All-electron (AE, terracotta) and pseudo (PS, blue dashed) wavefunctions
-as a function of \\(r\\). Inside the augmentation sphere \\(r < r_c\\), the AE wavefunction has
+as a function of \\(r\\). Inside the augmentation sphere \\(r < r\_c\\), the AE wavefunction has
 nodes and a Coulomb singularity at the nucleus; the PS wavefunction is nodeless and smooth.
-Outside \\(r_c\\), they are identical. *(b)* The PAW transformation
-\\(\hat{T} = 1 + \sum_n (|\phi_n\rangle - |\tilde\phi_n\rangle)\langle\tilde{p}_n|\\)
+Outside \\(r\_c\\), they are identical. *(b)* The PAW transformation
+\\(\hat{T} = 1 + \sum\_n (|\phi\_n\rangle - |\tilde\phi\_n\rangle)\langle\tilde{p}\_n|\\)
 maps the smooth PS density \\(\tilde\rho\\) to the full AE density \\(\rho = \tilde\rho + \rho^1 - \tilde\rho^1\\),
 where the on-site corrections are computed inside the augmentation sphere from the AE and
 PS partial waves.
 
 </figcaption>
 </figure>
+
 The **PAW method** (Blöchl, 1994) is the most rigorous of the pseudopotential-like approaches
 and is now the default in most major plane-wave codes. It can be understood as a generalisation
 of USPP that is formally equivalent to an all-electron calculation.
@@ -269,8 +270,8 @@ of USPP that is formally equivalent to an all-electron calculation.
 #### The PAW Transformation
 
 PAW introduces a **linear transformation operator** \\(\hat{\mathcal{T}}\\) that maps smooth,
-computationally convenient **pseudo-wavefunctions** \\(|\tilde{\Psi}_i\rangle\\) onto the true
-all-electron wavefunctions \\(|\Psi_i\rangle\\):
+computationally convenient **pseudo-wavefunctions** \\(|\tilde{\Psi}\_i\rangle\\) onto the true
+all-electron wavefunctions \\(|\Psi\_i\rangle\\):
 
 <div>
 \begin{equation}
@@ -279,7 +280,7 @@ all-electron wavefunctions \\(|\Psi_i\rangle\\):
 \end{equation}
 </div>
 
-Inside the **augmentation sphere** of radius \\(r_c^a\\) centred on each atom \\(a\\), the smooth
+Inside the **augmentation sphere** of radius \\(r\_c^a\\) centred on each atom \\(a\\), the smooth
 pseudo-wavefunction is a poor approximation to the oscillatory all-electron wavefunction. The
 transformation \\(\hat{\mathcal{T}}\\) corrects for this, atom by atom:
 
@@ -293,33 +294,33 @@ transformation \\(\hat{\mathcal{T}}\\) corrects for this, atom by atom:
 </div>
 
 where:
-- \\(|\phi_n^a\rangle\\) are **all-electron partial waves** — solutions of the radial Schrödinger
-  equation for the isolated atom \\(a\\) at reference energies, labelled by \\(n = (l, m, \epsilon_{\rm ref})\\).
-- \\(|\tilde{\phi}_n^a\rangle\\) are **smooth pseudo partial waves** that match \\(|\phi_n^a\rangle\\)
-  outside \\(r_c^a\\) but are nodeless and smooth inside.
-- \\(\langle\tilde{p}_n^a|\\) are **projector functions** localised inside \\(r_c^a\\), dual to the
-  pseudo partial waves: \\(\langle\tilde{p}_n^a|\tilde{\phi}_m^a\rangle = \delta_{nm}\\).
+- \\(|\phi\_n^a\rangle\\) are **all-electron partial waves** — solutions of the radial Schrödinger
+  equation for the isolated atom \\(a\\) at reference energies, labelled by \\(n = (l, m, \epsilon\_{\rm ref})\\).
+- \\(|\tilde{\phi}\_n^a\rangle\\) are **smooth pseudo partial waves** that match \\(|\phi\_n^a\rangle\\)
+  outside \\(r\_c^a\\) but are nodeless and smooth inside.
+- \\(\langle\tilde{p}\_n^a|\\) are **projector functions** localised inside \\(r\_c^a\\), dual to the
+  pseudo partial waves: \\(\langle\tilde{p}\_n^a|\tilde{\phi}\_m^a\rangle = \delta\_{nm}\\).
 
 **Constructing the projectors.** The duality relation does not uniquely fix
-\\(|\tilde{p}_n^a\rangle\\); it is a *biorthogonality condition* with the pseudo partial waves.
+\\(|\tilde{p}\_n^a\rangle\\); it is a *biorthogonality condition* with the pseudo partial waves.
 The standard construction (Blöchl 1994; Kresse–Joubert 1999) starts from auxiliary functions
-\\(|\chi_n^a\rangle\\) that are localised inside \\(r_c^a\\) and have the same angular character as
-\\(|\tilde{\phi}_n^a\rangle\\) — typically obtained by acting on \\(|\tilde{\phi}_n^a\rangle\\) with
-the operator \\((\epsilon_{\rm ref} - \hat{T} - \tilde{V})\\), which annihilates the pseudo partial
+\\(|\chi\_n^a\rangle\\) that are localised inside \\(r\_c^a\\) and have the same angular character as
+\\(|\tilde{\phi}\_n^a\rangle\\) — typically obtained by acting on \\(|\tilde{\phi}\_n^a\rangle\\) with
+the operator \\((\epsilon\_{\rm ref} - \hat{T} - \tilde{V})\\), which annihilates the pseudo partial
 wave outside the sphere. The projectors are then **biorthogonalised**:
 
 \\[
-    |\tilde{p}_n^a\rangle = \sum_m |\chi_m^a\rangle (B^{-1})_{mn},
-    \qquad B_{mn} = \langle\chi_m^a|\tilde{\phi}_n^a\rangle,
+    |\tilde{p}\_n^a\rangle = \sum\_m |\chi\_m^a\rangle (B^{-1})\_{mn},
+    \qquad B\_{mn} = \langle\chi\_m^a|\tilde{\phi}\_n^a\rangle,
 \\]
 
-which guarantees \\(\langle\tilde{p}_n^a|\tilde{\phi}_m^a\rangle = \delta_{nm}\\) by construction.
+which guarantees \\(\langle\tilde{p}\_n^a|\tilde{\phi}\_m^a\rangle = \delta\_{nm}\\) by construction.
 The construction is performed once per element during PAW dataset generation; the user only sees
 the finished projector–partial-wave set in the POTCAR (VASP) or UPF (QE) file.
 
-The transformation acts as follows: when \\(\hat{\mathcal{T}}\\) is applied to \\(|\tilde{\Psi}_i\rangle\\),
-the projectors \\(\langle\tilde{p}_n^a|\\) measure the overlap of the smooth wavefunction with the
-partial waves in each augmentation sphere, and the difference \\((|\phi_n^a\rangle - |\tilde{\phi}_n^a\rangle)\\) restores the all-electron character inside that sphere. Outside all augmentation
+The transformation acts as follows: when \\(\hat{\mathcal{T}}\\) is applied to \\(|\tilde{\Psi}\_i\rangle\\),
+the projectors \\(\langle\tilde{p}\_n^a|\\) measure the overlap of the smooth wavefunction with the
+partial waves in each augmentation sphere, and the difference \\((|\phi\_n^a\rangle - |\tilde{\phi}\_n^a\rangle)\\) restores the all-electron character inside that sphere. Outside all augmentation
 spheres, \\(\hat{\mathcal{T}}^a = 0\\) and the smooth wavefunction is used directly.
 
 #### Reconstruction of the All-Electron Density
@@ -334,17 +335,17 @@ The all-electron charge density is:
 
 where each term has a specific role:
 
-- \\(\tilde{\rho}(\mathbf{r}) = \sum_i f_i\,|\tilde{\Psi}_i(\mathbf{r})|^2\\) is the **smooth
+- \\(\tilde{\rho}(\mathbf{r}) = \sum\_i f\_i\\,|\tilde{\Psi}\_i(\mathbf{r})|^2\\) is the **smooth
   pseudo-density**, computed from the plane-wave-expanded pseudo-wavefunctions throughout the
   entire cell. This is the computationally cheap term, evaluated with FFTs.
 
-- \\(\rho^1(\mathbf{r}) = \sum_a\sum_{nm}\rho_{nm}^a\,\phi_n^a(\mathbf{r})\phi_m^a(\mathbf{r})\\)
+- \\(\rho^1(\mathbf{r}) = \sum\_a\sum\_{nm}\rho\_{nm}^a\\,\phi\_n^a(\mathbf{r})\phi\_m^a(\mathbf{r})\\)
   is the **on-site all-electron density**, reconstructed analytically from the all-electron
-  partial waves inside the augmentation spheres. Here \\(\rho_{nm}^a = \sum_i f_i\langle\tilde{\Psi}_i|\tilde{p}_n^a\rangle\langle\tilde{p}_m^a|\tilde{\Psi}_i\rangle\\) are the
+  partial waves inside the augmentation spheres. Here \\(\rho\_{nm}^a = \sum\_i f\_i\langle\tilde{\Psi}\_i|\tilde{p}\_n^a\rangle\langle\tilde{p}\_m^a|\tilde{\Psi}\_i\rangle\\) are the
   **occupation matrices** that quantify the partial-wave character of each KS orbital at each
   atom.
 
-- \\(\tilde{\rho}^1(\mathbf{r}) = \sum_a\sum_{nm}\rho_{nm}^a\,\tilde{\phi}_n^a(\mathbf{r})\tilde{\phi}_m^a(\mathbf{r})\\) is the **on-site pseudo-density**, which subtracts the
+- \\(\tilde{\rho}^1(\mathbf{r}) = \sum\_a\sum\_{nm}\rho\_{nm}^a\\,\tilde{\phi}\_n^a(\mathbf{r})\tilde{\phi}\_m^a(\mathbf{r})\\) is the **on-site pseudo-density**, which subtracts the
   smooth-wavefunction contribution inside the augmentation spheres so it is not double-counted
   with \\(\tilde{\rho}\\).
 
@@ -376,7 +377,7 @@ this functional take the form of a **generalised eigenvalue problem**:
 </div>
 
 where \\(\hat{\tilde{H}}\\) is the smooth KS Hamiltonian (including on-site corrections) and
-\\(\hat{S} = \mathbf{1} + \sum_a\sum_{nm}({\langle\tilde{p}_n^a|\tilde{p}_m^a\rangle_{\rm AE} - \delta_{nm}})|\tilde{p}_m^a\rangle\langle\tilde{p}_n^a|\\) is the **overlap operator** that enforces
+\\(\hat{S} = \mathbf{1} + \sum\_a\sum\_{nm}({\langle\tilde{p}\_n^a|\tilde{p}\_m^a\rangle\_{\rm AE} - \delta\_{nm}})|\tilde{p}\_m^a\rangle\langle\tilde{p}\_n^a|\\) is the **overlap operator** that enforces
 the correct normalisation of the all-electron wavefunctions.
 
 #### Frozen Core and Semi-Core States
@@ -406,9 +407,9 @@ The most common cases requiring semi-core treatment are:
   are routinely promoted to valence to capture the contraction of the \\(f\\) shell under bonding.
 
 The trade-off is computational: each promoted semi-core state increases the number of bands
-\\(N_{\rm bands}\\) and typically requires a larger \\(E_{\rm cut}\\) because the semi-core
+\\(N\_{\rm bands}\\) and typically requires a larger \\(E\_{\rm cut}\\) because the semi-core
 wavefunctions oscillate more rapidly than valence states. Typical numbers: `Fe` (standard)
-needs \\(E_{\rm cut} = 270\\) eV; `Fe_pv` needs \\(\sim 295\\) eV; `Fe_sv` needs \\(\sim 320\\) eV. The
+needs \\(E\_{\rm cut} = 270\\) eV; `Fe_pv` needs \\(\sim 295\\) eV; `Fe_sv` needs \\(\sim 320\\) eV. The
 accuracy gain is largest for total-energy differences (cohesive energies, phase stability,
 magnetic ordering energies); single-point band structure is less sensitive.
 
@@ -423,31 +424,31 @@ explicitly recommends the semi-core variant for your element.
 - **Formally all-electron**: The full all-electron density is available in the augmentation
   spheres through equation \eqref{eq:PAW-density}. This gives direct access to hyperfine
   parameters, electric field gradients, NMR chemical shifts, and core-level binding energies.
-- **Low \\(E_{\rm cut}\\)**: The smooth part \\(|\tilde{\Psi}_i\rangle\\) requires \\(E_{\rm cut} \sim
+- **Low \\(E\_{\rm cut}\\)**: The smooth part \\(|\tilde{\Psi}\_i\rangle\\) requires \\(E\_{\rm cut} \sim
   400\\)–\\(600\\) eV (VASP), similar to USPP, far below what a true all-electron plane-wave
   calculation would need.
 - **Transferability**: The partial waves are atom-specific but not system-specific; the same PAW
   dataset works well across different chemical environments, unlike empirically fitted NCPP.
-- **Extensibility**: The occupation matrices \\(\rho_{nm}^a\\) are a natural handle for DFT+U and
+- **Extensibility**: The occupation matrices \\(\rho\_{nm}^a\\) are a natural handle for DFT+U and
   hybrid functional implementations.
 
 #### Limitations of PAW
 
-- **Fixed augmentation spheres**: If \\(r_c^a\\) is too small, the smooth part is not genuinely
+- **Fixed augmentation spheres**: If \\(r\_c^a\\) is too small, the smooth part is not genuinely
   smooth; if too large, augmentation spheres on adjacent atoms overlap, invalidating the
   non-overlapping sphere assumption. Standard VASP PAW datasets are designed to avoid overlap
   for typical bond lengths, but this must be verified under compression.
 - **Linearisation of the partial wave expansion**: PAW is exact only if the partial wave basis
-  \\(\{|\phi_n^a\rangle\}\\) is complete within the augmentation sphere. For highly ionic environments
+  \\(\\{|\phi\_n^a\rangle\\}\\) is complete within the augmentation sphere. For highly ionic environments
   or unusual oxidation states, a larger partial wave set or scattering energies closer to the
   occupied states may be needed. VASP provides both standard and "hard" PAW datasets for such
   cases.
 
 **Comparison of core-electron strategies:**
 
-| Method | \\(E_{\rm cut}\\) (typical) | Core accuracy | Access to core density | Cost | Default in |
+| Method | \\(E\_{\rm cut}\\) (typical) | Core accuracy | Access to core density | Cost | Default in |
 |---|---|---|---|---|---|
-| NCPP | \\(60\\)–\\(100\\) Ry | Good (outside \\(r_c\\)) | No | Moderate | QE, ABINIT |
+| NCPP | \\(60\\)–\\(100\\) Ry | Good (outside \\(r\_c\\)) | No | Moderate | QE, ABINIT |
 | USPP | \\(25\\)–\\(40\\) Ry | Good (valence) | No | Low | QE, CASTEP |
 | PAW | \\(30\\)–\\(50\\) Ry | Excellent (AE in spheres) | Yes | Low–moderate | VASP, QE |
 | All-electron | \\(\gg 100\\) Ry | Exact | Yes | High | FHI-aims, WIEN2k |
@@ -457,12 +458,12 @@ explicitly recommends the semi-core variant for your element.
 
 A rigorous DFT calculation requires the following checks, performed in order:
 
-1. **\\(E_{\rm cut}\\) convergence**: Increase the plane-wave cutoff until the total energy changes
+1. **\\(E\_{\rm cut}\\) convergence**: Increase the plane-wave cutoff until the total energy changes
    by less than \\(1\\)–\\(2\\) meV/atom. Use the converged cutoff for all subsequent calculations.
 
 2. **\\(k\\)-mesh convergence**: Increase the Monkhorst–Pack grid density until the total energy and
    the quantity of interest (e.g. magnetic moment, band gap) are converged. Report the converged
-   grid as \\(N_1 \times N_2 \times N_3\\).
+   grid as \\(N\_1 \times N\_2 \times N\_3\\).
 
 3. **Supercell size** (for defects, surfaces, molecules): Increase the cell size until the
    interaction between periodic images is negligible (\\(\Delta E \lt 1\\) meV/defect).

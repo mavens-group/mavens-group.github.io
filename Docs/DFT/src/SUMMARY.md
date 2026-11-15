@@ -13,8 +13,8 @@
 
 # Part II: Implementation
 - [SCF](./08-SCF.md)
-- [Brilloun Zone Integration](./09-BZint.md)
-- [Eigen Value Solver](./10-Eigen.md)
+- [Brillouin Zone Integration](./09-BZint.md)
+- [Eigenvalue Solvers](./10-Eigen.md)
 
 # Part III: Problems
 - [Exercise](./EX-ExamQA.md)

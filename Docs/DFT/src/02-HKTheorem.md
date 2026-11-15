@@ -14,7 +14,7 @@ densities, forming the conceptual basis for all practical implementations of DFT
 ### Assumptions
 
 We consider a system of \\(N\\) interacting electrons subject to an external scalar potential
-\\(V_{\rm ext}(r)\\), at zero temperature, in its ground state, with no time-dependent fields. The
+\\(V\_{\rm ext}(r)\\), at zero temperature, in its ground state, with no time-dependent fields. The
 many-body Hamiltonian is:
 
 \\[
@@ -26,8 +26,8 @@ many-body Hamiltonian is:
 
 where
 * \\(\hat{T}\\) is the kinetic energy operator of the electrons,
-* \\(\hat{V}_{ee}\\) is the Coulomb electron–electron repulsion operator,
-* \\(\hat{V}\_{ext} = \sum_{i=1}^N V_{\rm ext}(r_i) \\) is the external potential due to the nuclei or
+* \\(\hat{V}\_{ee}\\) is the Coulomb electron–electron repulsion operator,
+* \\(\hat{V}\_{ext} = \sum\_{i=1}^N V\_{\rm ext}(r\_i) \\) is the external potential due to the nuclei or
   any applied field — it is the same for all systems considered in the proofs below.
 
 The **electron density** \\(\rho(\mathbf{r})\\) is the **number density** of electrons at
@@ -43,28 +43,30 @@ can be found at \\(\mathbf{r}\\):
 \end{equation}
 </div>
 
-By construction \\(\int \rho(\mathbf{r})\,d\mathbf{r} = N\\): the density integrates to the total
+By construction \\(\int \rho(\mathbf{r})\\,d\mathbf{r} = N\\): the density integrates to the total
 number of electrons, not unity. \\(\rho(\mathbf{r})\\) is the central variable of DFT.
 
 
 ### The First Hohenberg–Kohn Theorem
 
 <div class="theorem">
-For any system of interacting particles in an external potential \(V_{\rm ext}(r)\),
+
+For any system of interacting particles in an external potential \\(V\_{\rm ext}(r)\\),
 the external potential is uniquely determined — up to a constant — by the ground-state electron
-density \\(\rho_0(r)\\).
+density \\(\rho\_0(r)\\).
+
 </div>
 
-Because \\(V_{\rm ext}(r)\\) uniquely determines \\(\hat{H}\\) (and hence all eigenstates and
-eigenvalues), the ground-state density \\(\rho_0(r)\\) alone determines everything about the system.
-The wavefunction \\(\Psi_0\\) is therefore a functional of \\(\rho_0\\), written \\(\Psi_0 = \Psi[\rho_0]\\).
+Because \\(V\_{\rm ext}(r)\\) uniquely determines \\(\hat{H}\\) (and hence all eigenstates and
+eigenvalues), the ground-state density \\(\rho\_0(r)\\) alone determines everything about the system.
+The wavefunction \\(\Psi\_0\\) is therefore a functional of \\(\rho\_0\\), written \\(\Psi\_0 = \Psi[\rho\_0]\\).
 
 #### Proof (by contradiction)
 
-<div class="proof" title="by contradiction">
+<div class="proof" data-title="by contradiction">
 
-Assume the contrary: suppose there exist two **different** external potentials
-\\(V_{\rm ext}(\mathbf{r})\\) and \\(V'_{\rm ext}(\mathbf{r})\\), differing by more than a constant,
+Assume a non-degenerate ground state, and assume the contrary: suppose there exist two **different** external potentials
+\\(V\_{\rm ext}(\mathbf{r})\\) and \\(V\'\_{\rm ext}(\mathbf{r})\\), differing by more than a constant,
 
 <div>
 \begin{equation}
@@ -72,72 +74,73 @@ V_{\rm ext}(\mathbf{r}) \neq V'_{\rm ext}(\mathbf{r}) + \text{const.},
 \end{equation}
 </div>
 
-that nevertheless yield the **same** ground-state density: \\(\rho(\mathbf{r})=\rho'(\mathbf{r}) \equiv \rho(\mathbf{r})\\).
+that nevertheless yield the **same** ground-state density: \\(\rho(\mathbf{r})=\rho\'(\mathbf{r}) \equiv \rho\_0(\mathbf{r})\\).
 
 Let the two Hamiltonians and their ground states be:
 
 \\[
 \begin{aligned}
 	\hat{H}  & = \hat{T} + \hat{V}\_{\rm ee} + \hat{V}\_{\rm ext},  & \hat{H}|\Psi\rangle = E\_0|\Psi\rangle,   \\\\
-	\hat{H}' & = \hat{T} + \hat{V}\_{\rm ee} + \hat{V}'\_{\rm ext}, & \hat{H}'|\Psi'\rangle = E'\_0|\Psi'\rangle.
+	\hat{H}\' & = \hat{T} + \hat{V}\_{\rm ee} + \hat{V}\'\_{\rm ext}, & \hat{H}\'|\Psi\'\rangle = E\'\_0|\Psi\'\rangle.
 \end{aligned}
 \\]
 
-We apply the **Rayleigh–Ritz variational principle** (Chapter 1.4), which states that the true
-ground-state energy minimises the energy expectation value: any trial state
-\\(|\tilde{\Psi}\rangle \neq |\Psi_0\rangle\\) satisfies
-\\(\langle\tilde{\Psi}|\hat{H}|\tilde{\Psi}\rangle > E_0\\).
+Since \\(V\_{\rm ext}\\) and \\(V\'\_{\rm ext}\\) differ by more than a constant, the Schrödinger equations imply \\(|\Psi\'\rangle \neq |\Psi\rangle\\) (they cannot even differ by a constant phase alone, since subtracting the two equations would yield \\((V\_{\rm ext} - V\'\_{\rm ext})\Psi = (E\_0 - E\'\_0)\Psi\\)). We apply the **Rayleigh–Ritz variational principle** (Section 1.3), which states that for a non-degenerate ground state, any trial state
+\\(|\tilde{\Psi}\rangle \neq |\Psi\_0\rangle\\) strictly exceeds the ground-state energy:
+\\(\langle\tilde{\Psi}|\hat{H}|\tilde{\Psi}\rangle > E\_0\\).
 
-Using \\(\Psi'\\) as a trial state for \\(\hat{H}\\):
+Using \\(\Psi\'\\) as a trial state for \\(\hat{H}\\):
 
 <div>
 \begin{align}
-    E_0 \leq& \langle \Psi' | \hat{H} | \Psi' \rangle
-       = \langle \Psi' | \hat{H}' | \Psi' \rangle + \langle \Psi' | \hat{H} - \hat{H}' | \Psi' \rangle \notag\\\\
-    =& \; E'\_0 + \int \left[ V\_{\rm ext}(\mathbf{r}) - V'\_{\rm ext}(\mathbf{r}) \right] \rho(\mathbf{r}) \, d\mathbf{r}. \label{eq:ineq1}
+    E_0 \lt& \langle \Psi' | \hat{H} | \Psi' \rangle
+       = \langle \Psi' | \hat{H}' | \Psi' \rangle + \langle \Psi' | \hat{H} - \hat{H}' | \Psi' \rangle \notag\\
+    =& \; E'_0 + \int \left[ V_{\rm ext}(\mathbf{r}) - V'_{\rm ext}(\mathbf{r}) \right] \rho_0(\mathbf{r}) \, d\mathbf{r}. \label{eq:ineq1}
 \end{align}
 </div>
 
-Symmetrically, using \\(\Psi\\) as a trial state for \\(\hat{H}'\\):
+Symmetrically, using \\(\Psi\\) as a trial state for \\(\hat{H}\'\\):
 
 <div>
 \begin{equation}
-	E'\_0 \leq \langle \Psi | \hat{H}' | \Psi \rangle
-    = E\_0 + \int \left[ V'\_{\rm ext}(\mathbf{r}) - V\_{\rm ext}(\mathbf{r}) \right] \rho(\mathbf{r}) \, d\mathbf{r}. \label{eq:ineq2}
+	E'_0 \lt \langle \Psi | \hat{H}' | \Psi \rangle
+    = E_0 + \int \left[ V'_{\rm ext}(\mathbf{r}) - V_{\rm ext}(\mathbf{r}) \right] \rho_0(\mathbf{r}) \, d\mathbf{r}. \label{eq:ineq2}
 \end{equation}
 </div>
 
-Adding the two inequalities \eqref{eq:ineq1} and \eqref{eq:ineq2}:
+Adding the two strict inequalities \eqref{eq:ineq1} and \eqref{eq:ineq2}:
 
 \\[
 \begin{align}
-	E\_0 + E'\_0 & \leq E'\_0 + E\_0 + \int \underbrace{\left[ V\_{\rm ext} - V'\_{\rm ext} + V'\_{\rm ext} - V\_{\rm ext} \right]}\_{=\,0} \rho(\mathbf{r}) \, d\mathbf{r}, \\\\
-	E\_0 + E'\_0 & \leq E\_0 + E'\_0.
+	E\_0 + E\'\_0 & \lt E\'\_0 + E\_0 + \int \underbrace{\left[ V\_{\rm ext} - V\'\_{\rm ext} + V\'\_{\rm ext} - V\_{\rm ext} \right]}\_{=\\,0} \rho\_0(\mathbf{r}) \\, d\mathbf{r}, \\\\
+	E\_0 + E\'\_0 & \lt E\_0 + E\'\_0.
 \end{align}
 \\]
 
 This is a **contradiction**. Our assumption must therefore be false: no two different external
 potentials (differing by more than a constant) can share the same ground-state density. The map
-\\(\rho_0(r) \mapsto V_{\rm ext}(r)\\) is therefore one-to-one (up to a constant). \\(\blacksquare\\)
+\\(\rho\_0(r) \mapsto V\_{\rm ext}(r)\\) is therefore one-to-one (up to a constant). \\(\blacksquare\\)
 
 </div>
 
 #### Consequence: the universal energy functional
 
 <div class="lemma">
-Since \(\rho_0 \to V_{\rm ext} \to \hat{H} \to \Psi_0\), the ground-state energy can be written as
+
+Since \\(\rho\_0 \to V\_{\rm ext} \to \hat{H} \to \Psi\_0\\), the ground-state energy can be written as
 a functional of the density:
 
 \\[
-\begin{align*}
-  E[\rho] =& F[\rho]+\int V_{\rm ext}(r)\rho(r)\,dr\\\\
-   F[\rho] =& \langle\Psi[\rho]|\, \hat{T}+\hat{V}_{ee}\,| \Psi[\rho]\rangle
-\end{align*}
+\begin{align\*}
+  E[\rho] =& F[\rho]+\int V\_{\rm ext}(r)\rho(r)\\,dr\\\\
+   F[\rho] =& \langle\Psi[\rho]|\\, \hat{T}+\hat{V}\_{ee}\\,| \Psi[\rho]\rangle
+\end{align\*}
 \\]
 
 The quantity \\(F[\rho]\\) is called the **universal functional** of the density. It is "universal"
 because it depends only on the electron density — not on the specific external potential —
 making it, in principle, applicable to any system of interacting electrons.
+
 </div>
 
 ---
@@ -145,8 +148,10 @@ making it, in principle, applicable to any system of interacting electrons.
 ### The Second Hohenberg–Kohn Theorem
 
 <div class="theorem">
-The true ground-state density \(\rho_0(\mathbf{r})\) minimises the total energy functional
-\(E[\rho]\).
+
+The true ground-state density \\(\rho\_0(\mathbf{r})\\) minimises the total energy functional
+\\(E[\rho]\\).
+
 </div>
 
 That is, for any trial density \\(\tilde{\rho}(\mathbf{r})\\) satisfying
@@ -165,7 +170,7 @@ That is, for any trial density \\(\tilde{\rho}(\mathbf{r})\\) satisfying
 \end{equation}
 </div>
 
-*with equality if and only if \\(\tilde{\rho}(\mathbf{r}) = \rho_0(\mathbf{r})\\).*
+*with equality if and only if \\(\tilde{\rho}(\mathbf{r}) = \rho\_0(\mathbf{r})\\).*
 
 The functional is:
 
@@ -181,32 +186,32 @@ where \\(F[\rho]\\) is the universal functional defined above.
 #### Proof of the 2nd HK Theorem
 <div class="proof">
 
-By the First HK Theorem, every *v*-representable density \\(\tilde{\rho}\\) uniquely determines an external potential \\(\tilde{V}_{\rm ext}\\) (up to a constant), and hence a Hamiltonian \\(\tilde{H}\\) and a ground-state wavefunction \\(\tilde{\Psi}\\). The ground-state energy functional is therefore well-defined:
+By the First HK Theorem, every *v*-representable density \\(\tilde{\rho}\\) uniquely determines an external potential \\(\tilde{V}\_{\rm ext}\\) (up to a constant), and hence a Hamiltonian \\(\tilde{H}\\) and a ground-state wavefunction \\(\tilde{\Psi}\\). The ground-state energy functional is therefore well-defined:
 
 \\[
-E[\tilde{\rho}] = \langle \tilde{\Psi}[\tilde{\rho}] | \hat{T} + \hat{V}\_{ee} + \hat{V}\_{\rm ext} | \tilde{\Psi}[\tilde{\rho}] \rangle = F[\tilde{\rho}] + \int V_{\rm ext}(\mathbf{r})\tilde{\rho}(\mathbf{r}) d\mathbf{r}
+E[\tilde{\rho}] = \langle \tilde{\Psi}[\tilde{\rho}] | \hat{T} + \hat{V}\_{ee} + \hat{V}\_{\rm ext} | \tilde{\Psi}[\tilde{\rho}] \rangle = F[\tilde{\rho}] + \int V\_{\rm ext}(\mathbf{r})\tilde{\rho}(\mathbf{r}) d\mathbf{r}
 \\]
 
-Now consider the true ground state \\(|\Psi_0\rangle\\) with density \\(\rho_0\\) and energy \\(E_0\\). For any trial density \\(\tilde{\rho} \neq \rho_0\\), the associated wavefunction \\(\tilde{\Psi}\\) is *different* from \\(\Psi_0\\) (again by the First HK Theorem). Since \\(\Psi_0\\) is the true ground state of \\(\hat{H}\\), the **Rayleigh–Ritz variational principle** (Chapter 1.4) gives:
+Now consider the true ground state \\(|\Psi\_0\rangle\\) with density \\(\rho\_0\\) and energy \\(E\_0\\). For any trial density \\(\tilde{\rho} \neq \rho\_0\\), the associated wavefunction \\(\tilde{\Psi}\\) is *different* from \\(\Psi\_0\\) (again by the First HK Theorem). Since \\(\Psi\_0\\) is the true ground state of \\(\hat{H}\\), the **Rayleigh–Ritz variational principle** (Section 1.3) gives:
 
 \\[
-E_0 = \langle \Psi_0 | \hat{H} | \Psi_0 \rangle \leq \langle \tilde{\Psi} | \hat{H} | \tilde{\Psi} \rangle.
+E\_0 = \langle \Psi\_0 | \hat{H} | \Psi\_0 \rangle \leq \langle \tilde{\Psi} | \hat{H} | \tilde{\Psi} \rangle.
 \\]
 
-The right-hand side is precisely \\(E[\tilde{\rho}]\\) as defined above (using \\(\hat{V}_{\rm ext}\\) of the *original* system). Therefore:
+The right-hand side is precisely \\(E[\tilde{\rho}]\\) as defined above (using \\(\hat{V}\_{\rm ext}\\) of the *original* system). Therefore:
 
 \\[
-E_0 \leq E[\tilde{\rho}], \quad \forall\, \tilde{\rho} \neq \rho_0,
+E\_0 \leq E[\tilde{\rho}], \quad \forall\\, \tilde{\rho} \neq \rho\_0,
 \\]
 
-with equality if and only if \\(\tilde{\Psi} = \Psi_0\\), i.e. \\(\tilde{\rho} = \rho_0\\). \\(\blacksquare\\)
+with equality if and only if \\(\tilde{\Psi} = \Psi\_0\\), i.e. \\(\tilde{\rho} = \rho\_0\\). \\(\blacksquare\\)
 
 </div>
 
 The key logical chain is:
 
-1. The First HK Theorem guarantees the map \\(\tilde{\rho} \mapsto \tilde{\Psi}\\) is one-to-one, so \\(\tilde{\rho} \neq \rho_0 \Rightarrow \tilde{\Psi} \neq \Psi_0\\).
-2. The Rayleigh–Ritz principle then directly delivers the inequality \\(E[\tilde{\rho}] \geq E_0\\).
+1. The First HK Theorem guarantees the map \\(\tilde{\rho} \mapsto \tilde{\Psi}\\) is one-to-one, so \\(\tilde{\rho} \neq \rho\_0 \Rightarrow \tilde{\Psi} \neq \Psi\_0\\).
+2. The Rayleigh–Ritz principle then directly delivers the inequality \\(E[\tilde{\rho}] \geq E\_0\\).
 
 The second theorem transforms the problem of solving the many-body Schrödinger equation into a
 **variational problem over electron densities** — a function in three dimensions rather than \\(3N\\)
@@ -219,12 +224,12 @@ dimensions. This is the promise of DFT.
 While the HK theorems establish that the ground-state density contains all physical information
 and that a universal energy functional \\(E[\rho]\\) exists, they do **not** provide an explicit form
 for the universal functional \\(F[\rho]\\). In particular, the kinetic energy \\(T[\rho]\\) and the
-electron–electron interaction \\(V_{ee}[\rho]\\) are unknown functionals of \\(\rho\\).
+electron–electron interaction \\(V\_{ee}[\rho]\\) are unknown functionals of \\(\rho\\).
 
 **The Levy constrained-search formulation.** The original HK derivation defines \\(F[\rho]\\)
 only for densities that are ground-state densities of *some* external potential — the
 **\\(v\\)-representable** densities. Not every smooth non-negative \\(\rho\\) with
-\\(\int\rho\,d\mathbf{r} = N\\) satisfies this; characterising the set of \\(v\\)-representable
+\\(\int\rho\\,d\mathbf{r} = N\\) satisfies this; characterising the set of \\(v\\)-representable
 densities is in fact an open problem. Levy (1979) and Lieb (1983) eliminated this concern by
 recasting the universal functional as a *constrained search* over wavefunctions:
 
@@ -242,10 +247,10 @@ make this definition powerful:
 - It is well-defined for **any** non-negative \\(\rho\\) integrating to \\(N\\) — the larger class of
   *\\(N\\)-representable* densities — sidestepping the \\(v\\)-representability question entirely.
 - The minimisation principle of the second HK theorem follows directly: for any trial density
-  \\(\tilde\rho\\), \\(E[\tilde\rho] = F[\tilde\rho] + \int V_{\rm ext}\tilde\rho\,d\mathbf{r} \geq E_0\\), because the inner search over \\(\Psi\\) is itself a Rayleigh–Ritz minimisation.
+  \\(\tilde\rho\\), \\(E[\tilde\rho] = F[\tilde\rho] + \int V\_{\rm ext}\tilde\rho\\,d\mathbf{r} \geq E\_0\\), because the inner search over \\(\Psi\\) is itself a Rayleigh–Ritz minimisation.
 
 In the Kohn–Sham scheme (Chapter 3), an analogous *non-interacting* constrained search defines
-\\(T_s[\rho] = \min_{\Psi \to \rho}\langle\Psi|\hat{T}|\Psi\rangle\\) over Slater determinants
+\\(T\_s[\rho] = \min\_{\Psi \to \rho}\langle\Psi|\hat{T}|\Psi\rangle\\) over Slater determinants
 yielding \\(\rho\\). The existence of a Slater determinant for any reasonable \\(\rho\\) is called
 *non-interacting \\(v\\)-representability* and is believed to hold for all physically relevant
 ground-state densities, though a general proof remains an open problem.

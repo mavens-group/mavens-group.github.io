@@ -121,7 +121,7 @@ html:has(#cover-page) .page-wrapper {
   opacity: 0.8;
 
   font-size: 2.5vmin !important;
-  font-size: clamp(2.0rem, 2.5vmin, 1.2rem) !important;
+  font-size: clamp(1.0rem, 2.5vmin, 1.5rem) !important;
 
   /* Force lines to be close together */
   line-height: 1.2 !important;

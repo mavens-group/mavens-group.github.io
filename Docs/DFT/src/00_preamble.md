@@ -9,13 +9,15 @@ This course bridges the gap between rigorous quantum mechanical theory and state
 Starting from the **quantum many-body problem**, we detail the exact mathematical proofs behind the **Hohenberg–Kohn theorems** and the derivation of the effective single-particle **Kohn–Sham equations**. With the exact theory established, you will systematically unpack the approximations required for real-world materials. This includes navigating the hierarchy of **exchange-correlation functionals** (from LDA to hybrids), constructing exact **basis sets and pseudopotentials** (such as PAW methods), and treating magnetic ordering via **Spin-Polarised DFT**. Finally, we address the self-interaction error in strongly correlated \\(d\\) and \\(f\\) electron systems using the **DFT+U (Hubbard)** method.
 
 ### Part II: Numerical Implementations & Practical DFT
-Theoretical knowledge is only half the battle. The second half of the course opens the black box of industry-standard DFT codes like **VASP** and **Quantum ESPRESSO**. You will learn how to translate continuous mathematics into robust iterative algorithms by mastering **Self-Consistent Field (SCF) Convergence**—including how to diagnose charge sloshing in metals and apply advanced density mixing schemes (Pulay/DIIS, Broyden). We also cover rigorous **Brillouin Zone Integration**, detailing \\(k\\)-point sampling and the specific smearing methods (Methfessel-Paxton, tetrahedron) required to stabilise metallic Fermi surfaces.
+Theoretical knowledge is only half the battle. The second half of the course opens the black box of industry-standard DFT codes like **VASP** and **Quantum ESPRESSO**. You will learn how to translate continuous mathematics into robust iterative algorithms by mastering **Self-Consistent Field (SCF) Convergence**—including how to diagnose charge sloshing in metals and apply advanced density mixing schemes (Pulay/DIIS, Broyden). We also cover rigorous **Brillouin Zone Integration**, detailing \\(k\\)-point sampling and the specific smearing methods (Methfessel-Paxton, tetrahedron) required to stabilise metallic Fermi surfaces, and conclude with **iterative eigenvalue solvers** (Davidson, RMM-DIIS, and conjugate gradient) used to diagonalise the Kohn–Sham Hamiltonian at large plane-wave cutoffs.
 
 By the end of this course, you will possess the practical expertise to run, troubleshoot, and analyze high-accuracy simulations for contemporary materials science research.
 
 ---
 
 ## Meet your instructor
+**Dr. Rudra Banerjee** — Department of Physics and Nanotechnology, SRM Institute of Science and Technology (SRMIST).  
+Research focus: computational condensed matter physics, magnetic alloys, and electronic structure theory ([The MAVENs Group](https://mavens-group.github.io/)).
 
 ## Prerequisites
 Participants should be familiar with:
@@ -31,7 +33,7 @@ By the end of this course, participants will:
 - Understand the **Kohn–Sham formalism** and its practical implementation
 - Become familiar with common **exchange–correlation functionals**
 - Learn how to perform and analyze **DFT calculations**
-- Explore advanced extensions such as **DFT+U and time-dependent DFT**
+- Explore extensions for magnetism and strong correlation via **Spin-Polarised DFT and DFT+U**
 
 ## Target Audience
 This course is designed for:
