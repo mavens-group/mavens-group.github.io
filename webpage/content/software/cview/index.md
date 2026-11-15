@@ -24,6 +24,10 @@ links:
     icon_pack: fab
     name: Source Code
     url: https://github.com/mavensgroup/cview
+  - icon: file-alt
+    icon_pack: fas
+    name: Paper
+    url: /publication/banerjee-2026/
 ---
 
 ## Why CView?
