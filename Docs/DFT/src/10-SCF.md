@@ -272,6 +272,15 @@ Computationally, the Kerker preconditioner is very cheap: one forward FFT to go 
 space, a pointwise multiplication by \\(G^2/(G^2 + k\_0^2)\\), and one inverse FFT to return to
 real space. No additional KS cycles or matrix operations are required.
 
+<figure>
+<img src="images/kerker_filter.svg" alt="Reciprocal-space Kerker preconditioner K(G) = G^2 / (G^2 + k_0^2) showing suppression of small-G metallic charge sloshing" style="width:100%; max-width:640px; height:auto; display:block; margin:1.5em auto;"/>
+<figcaption style="text-align:center; font-size:0.9em; color:#555;">
+
+**Figure 10.1.** The Kerker reciprocal-space filter \\(K(G) = G^2/(G^2 + k\_0^2)\\). Long-wavelength charge-sloshing components (\\(G \lt k\_0\\)), where the metallic dielectric response \\(\varepsilon(G) \propto k\_{\rm TF}^2/G^2\\) diverges, are strongly damped, while short-wavelength density updates (\\(G \gg k\_0\\)) pass through near unity.
+
+</figcaption>
+</figure>
+
 **Limitation:** Kerker preconditioning is designed for metallic screening and can *slow down*
 convergence in insulators, where the long-wavelength response is already well-behaved. For
 insulators, the factor \\(G^2/(G^2 + k\_0^2)\\) unnecessarily suppresses the update at small \\(G\\),

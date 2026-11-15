@@ -191,6 +191,15 @@ amplified spin susceptibility — sometimes called "nearly magnetic." This singl
 captures, at the mean-field SDFT level, why Fe/Co/Ni are ferromagnetic and Pd/Pt are not,
 despite all five elements having narrow \\(d\\) bands.
 
+<figure>
+<img src="images/stoner_dos.svg" alt="Spin-resolved density of states showing Stoner exchange splitting between majority and minority d bands" style="width:100%; max-width:640px; height:auto; display:block; margin:1.5em auto;"/>
+<figcaption style="text-align:center; font-size:0.9em; color:#555;">
+
+**Figure 6.1.** Stoner exchange splitting of a transition-metal \\(d\\) band. When \\(I\\,N(\epsilon\_F) \gt 1\\), it becomes energetically favourable to shift the majority-spin DOS \\(D\_\uparrow(\epsilon)\\) downward and the minority-spin DOS \\(D\_\downarrow(\epsilon)\\) upward by the exchange splitting \\(\Delta\_{\rm xc} = I\\,m\\), producing a spontaneous magnetic moment \\(m = N\_\uparrow - N\_\downarrow \gt 0\\).
+
+</figcaption>
+</figure>
+
 
 ## Magnetic Ordering: Ferro-, Antiferro-, and Ferrimagnetic States
 

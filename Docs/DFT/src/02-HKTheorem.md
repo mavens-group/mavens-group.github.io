@@ -61,6 +61,15 @@ Because \\(V\_{\rm ext}(r)\\) uniquely determines \\(\hat{H}\\) (and hence all e
 eigenvalues), the ground-state density \\(\rho\_0(r)\\) alone determines everything about the system.
 The wavefunction \\(\Psi\_0\\) is therefore a functional of \\(\rho\_0\\), written \\(\Psi\_0 = \Psi[\rho\_0]\\).
 
+<figure>
+<img src="images/hk_mapping.svg" alt="Schematic diagram of the Hohenberg-Kohn bijection connecting external potential, many-body ground state, and electron density" style="width:100%; max-width:640px; height:auto; display:block; margin:1.5em auto;"/>
+<figcaption style="text-align:center; font-size:0.9em; color:#555;">
+
+**Figure 2.1.** The Hohenberg–Kohn bijection. The Schrödinger equation maps \\(V\_{\rm ext}(\mathbf{r}) \mapsto |\Psi\_0\rangle\\), and contraction maps \\(|\Psi\_0\rangle \mapsto \rho\_0(\mathbf{r})\\). The First HK Theorem proves that the inverse arrow exists uniquely (up to an additive constant in \\(V\_{\rm ext}\\)), making every ground-state observable a functional of the 3D density \\(\rho\_0(\mathbf{r})\\).
+
+</figcaption>
+</figure>
+
 #### Proof (by contradiction)
 
 <div class="proof" data-title="by contradiction">

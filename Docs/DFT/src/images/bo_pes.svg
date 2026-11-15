@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="420" viewBox="0 0 640 420" font-family="Georgia, 'Times New Roman', serif" xml:space="preserve">
+
+  <rect width="640" height="420" fill="#fafaf8"/>
+
+  <defs>
+    <marker id="ax" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#444"/>
+    </marker>
+    <marker id="arr-gold-up" markerWidth="7" markerHeight="5" refX="6" refY="2.5" orient="auto">
+      <polygon points="0 0, 7 2.5, 0 5" fill="#8a6a1a"/>
+    </marker>
+    <marker id="arr-gold-dn" markerWidth="7" markerHeight="5" refX="1" refY="2.5" orient="auto">
+      <polygon points="7 0, 0 2.5, 7 5" fill="#8a6a1a"/>
+    </marker>
+    <marker id="arr-plum" markerWidth="7" markerHeight="5" refX="6" refY="2.5" orient="auto">
+      <polygon points="0 0, 7 2.5, 0 5" fill="#7a5c8a"/>
+    </marker>
+  </defs>
+
+  <!-- Title -->
+  <text x="320" y="30" text-anchor="middle" font-size="16" font-weight="bold" fill="#2c2c2c">Born–Oppenheimer Adiabatic Potential Energy Surfaces</text>
+  <text x="320" y="49" text-anchor="middle" font-size="12" fill="#555" font-style="italic">Fast electrons adjust instantaneously to slow nuclear motion, except near crossings</text>
+
+  <!-- Conical intersection / avoided crossing highlight -->
+  <circle cx="496" cy="186" r="32" fill="#b8963e" fill-opacity="0.16" stroke="#b8963e" stroke-width="1.5" stroke-dasharray="4,3"/>
+
+  <!-- Axes -->
+  <line x1="68" y1="332" x2="598" y2="332" stroke="#444" stroke-width="1.6" marker-end="url(#ax)"/>
+  <line x1="76" y1="340" x2="76" y2="66" stroke="#444" stroke-width="1.6" marker-end="url(#ax)"/>
+  <text x="605" y="336" font-size="13.5" fill="#444" font-style="italic">R</text>
+  <text x="64" y="80" text-anchor="end" font-size="13.5" fill="#444" font-style="italic">E</text>
+
+  <!-- R_eq dashed marker -->
+  <line x1="215" y1="295" x2="215" y2="332" stroke="#4a7fa5" stroke-width="1.2" stroke-dasharray="4,3"/>
+  <text x="215" y="347" text-anchor="middle" font-size="12.5" fill="#2a5f85" font-style="italic">R<tspan font-size="9" dy="3">eq</tspan></text>
+
+  <!-- Ground-state adiabatic PES E_0(R) -->
+  <path d="M 108,108 C 134,225 168,295 215,295 C 272,295 335,232 428,220 C 464,216 484,202 512,191 C 538,181 558,175 578,172"
+        fill="none" stroke="#4a7fa5" stroke-width="3" stroke-linecap="round"/>
+
+  <!-- Vibrational levels inside well -->
+  <line x1="176" y1="281" x2="255" y2="281" stroke="#6a9e7a" stroke-width="1.6"/>
+  <line x1="163" y1="266" x2="270" y2="266" stroke="#6a9e7a" stroke-width="1.6"/>
+  <line x1="152" y1="251" x2="284" y2="251" stroke="#6a9e7a" stroke-width="1.6"/>
+  <circle cx="215" cy="295" r="3.5" fill="#2a5f85"/>
+
+  <!-- Nuclear vibrational spacing label -->
+  <line x1="290" y1="281" x2="290" y2="266" stroke="#4a7d5a" stroke-width="1.5"/>
+  <text x="298" y="278" font-size="12" font-weight="bold" fill="#4a7d5a">ℏω<tspan font-size="9" dy="3">nuc</tspan></text>
+
+  <!-- Excited-state PES E_1(R) -->
+  <path d="M 125,78 C 154,150 186,166 232,164 C 296,161 365,126 428,144 C 462,155 480,174 500,177 C 524,180 548,165 578,152"
+        fill="none" stroke="#a0522d" stroke-width="2.6" stroke-linecap="round"/>
+
+  <!-- Curve labels -->
+  <text x="348" y="264" font-size="13" font-weight="bold" fill="#2a5f85">Ground-state PES  E<tspan font-size="9.5" dy="3">0</tspan><tspan dy="-3">(R)</tspan></text>
+  <text x="315" y="128" font-size="13" font-weight="bold" fill="#a0522d">Excited-state PES  E<tspan font-size="9.5" dy="3">1</tspan><tspan dy="-3">(R)</tspan></text>
+
+  <!-- Electronic gap arrow hbar omega_el -->
+  <line x1="215" y1="170" x2="215" y2="245" stroke="#8a6a1a" stroke-width="1.8" marker-start="url(#arr-gold-dn)" marker-end="url(#arr-gold-up)"/>
+  <text x="223" y="213" font-size="12.5" font-weight="bold" fill="#8a6a1a">ℏω<tspan font-size="9" dy="3">el</tspan><tspan dy="-3"> ≫ ℏω</tspan><tspan font-size="9" dy="3">nuc</tspan></text>
+
+  <!-- Conical intersection callout -->
+  <line x1="504" y1="112" x2="498" y2="152" stroke="#7a5c8a" stroke-width="1.5" marker-end="url(#arr-plum)"/>
+  <text x="504" y="92" text-anchor="middle" font-size="12" font-weight="bold" fill="#7a5c8a">Conical intersection /</text>
+  <text x="504" y="107" text-anchor="middle" font-size="11.5" fill="#7a5c8a">BO breakdown (ω<tspan font-size="8.5" dy="2">el</tspan><tspan dy="-2"> ≈ ω</tspan><tspan font-size="8.5" dy="2">nuc</tspan><tspan dy="-2">)</tspan></text>
+
+  <!-- Bottom summary box -->
+  <rect x="68" y="362" width="528" height="42" rx="6" fill="#4a7fa5" fill-opacity="0.10" stroke="#4a7fa5" stroke-width="1.3"/>
+  <text x="332" y="381" text-anchor="middle" font-size="12.5" font-weight="bold" fill="#2c3e50">Scale separation:  m<tspan font-size="9" dy="2">e</tspan><tspan dy="-2"> / M</tspan><tspan font-size="9" dy="2">I</tspan><tspan dy="-2"> ~ 10</tspan><tspan font-size="9" dy="-4">−4</tspan><tspan dy="4">   ⇒   ω</tspan><tspan font-size="9" dy="2">nuc</tspan><tspan dy="-2"> / ω</tspan><tspan font-size="9" dy="2">el</tspan><tspan dy="-2"> ~ (m</tspan><tspan font-size="9" dy="2">e</tspan><tspan dy="-2"> / M</tspan><tspan font-size="9" dy="2">I</tspan><tspan dy="-2">)</tspan><tspan font-size="9" dy="-4">1/2</tspan><tspan dy="4"> ≈ 10</tspan><tspan font-size="9" dy="-4">−2</tspan></text>
+  <text x="332" y="397" text-anchor="middle" font-size="11.5" fill="#555">Ground-state DFT propagates nuclei adiabatically on E<tspan font-size="8.5" dy="2">0</tspan><tspan dy="-2">(R) at clamped nuclear positions</tspan></text>
+
+</svg>

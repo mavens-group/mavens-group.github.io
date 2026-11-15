@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="430" viewBox="0 0 640 430" font-family="Georgia, 'Times New Roman', serif" xml:space="preserve">
+
+  <rect width="640" height="430" fill="#fafaf8"/>
+
+  <defs>
+    <marker id="ax-up" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#444"/>
+    </marker>
+    <marker id="gold-up" markerWidth="7" markerHeight="5" refX="6" refY="2.5" orient="auto">
+      <polygon points="0 0, 7 2.5, 0 5" fill="#8a6a1a"/>
+    </marker>
+    <marker id="gold-dn" markerWidth="7" markerHeight="5" refX="1" refY="2.5" orient="auto">
+      <polygon points="7 0, 0 2.5, 7 5" fill="#8a6a1a"/>
+    </marker>
+    <!-- Clip for occupied states below Fermi level y=190 -->
+    <clipPath id="below-ef">
+      <rect x="40" y="190" width="560" height="170"/>
+    </clipPath>
+  </defs>
+
+  <!-- Title -->
+  <text x="320" y="28" text-anchor="middle" font-size="16" font-weight="bold" fill="#2c2c2c">Stoner Exchange Splitting of a Spin-Polarised d-Band</text>
+  <text x="320" y="47" text-anchor="middle" font-size="12" fill="#555" font-style="italic">Exchange splitting Δ<tspan font-size="8.5" dy="2">xc</tspan><tspan dy="-2"> = I m lowers majority-spin states and raises minority-spin states</tspan></text>
+
+  <!-- Channel titles -->
+  <text x="195" y="74" text-anchor="middle" font-size="13.5" font-weight="bold" fill="#2a5f85">← D<tspan font-size="9.5" dy="3">↑</tspan><tspan dy="-3">(ε)   Majority (↑)</tspan></text>
+  <text x="445" y="74" text-anchor="middle" font-size="13.5" font-weight="bold" fill="#a0522d">Minority (↓)   D<tspan font-size="9.5" dy="3">↓</tspan><tspan dy="-3">(ε) →</tspan></text>
+
+  <!-- Horizontal baselines and Fermi level -->
+  <line x1="78" y1="190" x2="562" y2="190" stroke="#2c3e50" stroke-width="1.8" stroke-dasharray="6,4"/>
+  <text x="570" y="194" font-size="13.5" font-weight="bold" fill="#2c3e50" font-style="italic">ε<tspan font-size="9.5" dy="3" font-style="normal">F</tspan></text>
+
+  <!-- Center vertical energy axis -->
+  <line x1="320" y1="342" x2="320" y2="78" stroke="#444" stroke-width="1.6" marker-end="url(#ax-up)"/>
+  <text x="320" y="68" text-anchor="middle" font-size="13" font-weight="bold" fill="#444" font-style="italic">ε</text>
+
+  <!-- Majority spin DOS (LEFT of center x=320), peak around y=248 (below E_F) -->
+  <path d="M 320,332 C 314,304 230,288 150,268 C 110,258 108,240 168,228 C 218,218 148,199 190,184 C 230,169 295,146 320,122 Z"
+        fill="#4a7fa5" fill-opacity="0.24" clip-path="url(#below-ef)"/>
+  <path d="M 320,332 C 314,304 230,288 150,268 C 110,258 108,240 168,228 C 218,218 148,199 190,184 C 230,169 295,146 320,122"
+        fill="none" stroke="#4a7fa5" stroke-width="2.8" stroke-linejoin="round"/>
+
+  <!-- Minority spin DOS (RIGHT of center x=320), shifted UP so top stays clear of channel title -->
+  <path d="M 320,264 C 326,236 410,218 485,198 C 525,188 527,170 468,158 C 420,148 486,130 446,115 C 408,101 346,92 320,94 Z"
+        fill="#a0522d" fill-opacity="0.24" clip-path="url(#below-ef)"/>
+  <path d="M 320,264 C 326,236 410,218 485,198 C 525,188 527,170 468,158 C 420,148 486,130 446,115 C 408,101 346,92 320,94"
+        fill="none" stroke="#a0522d" stroke-width="2.8" stroke-linejoin="round"/>
+
+  <!-- Peak guide lines showing exchange splitting Delta_xc -->
+  <line x1="120" y1="250" x2="320" y2="250" stroke="#8a6a1a" stroke-width="1.1" stroke-dasharray="3,3"/>
+  <line x1="88"  y1="178" x2="515" y2="178" stroke="#8a6a1a" stroke-width="1.1" stroke-dasharray="3,3"/>
+
+  <!-- Exchange splitting indicator bar -->
+  <line x1="88" y1="246" x2="88" y2="182" stroke="#8a6a1a" stroke-width="1.8" marker-start="url(#gold-dn)" marker-end="url(#gold-up)"/>
+  <text x="82" y="218" text-anchor="end" font-size="13" font-weight="bold" fill="#8a6a1a">Δ<tspan font-size="9.5" dy="3">xc</tspan></text>
+
+  <!-- Occupied/unoccupied labels -->
+  <text x="235" y="272" text-anchor="middle" font-size="12.5" font-weight="bold" fill="#2a5f85">N<tspan font-size="9" dy="3">↑</tspan><tspan dy="-3"> (occupied)</tspan></text>
+  <text x="374" y="208" text-anchor="middle" font-size="12.5" font-weight="bold" fill="#a0522d">N<tspan font-size="9" dy="3">↓</tspan><tspan dy="-3"> (occupied)</tspan></text>
+  <text x="530" y="138" text-anchor="middle" font-size="11.5" fill="#777" font-style="italic">unoccupied ↓</text>
+
+  <!-- Bottom summary box -->
+  <rect x="66" y="356" width="508" height="50" rx="6" fill="#7a5c8a" fill-opacity="0.10" stroke="#7a5c8a" stroke-width="1.3"/>
+  <text x="320" y="376" text-anchor="middle" font-size="13" font-weight="bold" fill="#2c2c2c">Stoner criterion:  I · N(ε<tspan font-size="9.5" dy="3">F</tspan><tspan dy="-3">) &gt; 1   ⇒   m = N</tspan><tspan font-size="9.5" dy="3">↑</tspan><tspan dy="-3"> − N</tspan><tspan font-size="9.5" dy="3">↓</tspan><tspan dy="-3"> &gt; 0</tspan></text>
+  <text x="320" y="395" text-anchor="middle" font-size="11.5" fill="#555">Exchange gain (Δ<tspan font-size="8.5" dy="2">xc</tspan><tspan dy="-2"> = I m) outweighs kinetic cost in bcc Fe, hcp Co, fcc Ni; Pd falls just short</tspan></text>
+
+</svg>

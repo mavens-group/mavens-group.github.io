@@ -67,6 +67,15 @@ nuclear degrees of freedom and solve only for the electronic structure at fixed 
 
 This ratio is small for all atoms, which is why BO works so broadly. It breaks down near **conical intersections** — geometries where two electronic potential energy surfaces become degenerate — leading to non-adiabatic dynamics that are important in photochemistry and certain charge-transfer processes. These are beyond the scope of ground-state DFT.
 
+<figure>
+<img src="images/bo_pes.svg" alt="Born-Oppenheimer adiabatic potential energy surfaces showing ground and excited electronic states and a conical intersection" style="width:100%; max-width:640px; height:auto; display:block; margin:1.5em auto;"/>
+<figcaption style="text-align:center; font-size:0.9em; color:#555;">
+
+**Figure 1.1.** Adiabatic Born–Oppenheimer potential energy surfaces. Because \\(\hbar\omega\_{\rm el} \gg \hbar\omega\_{\rm nuc}\\), electrons relax instantaneously to the ground-state surface \\(E\_0(R)\\) at clamped nuclear positions; the adiabatic approximation breaks down only where surfaces approach each other near a conical intersection (\\(\omega\_{\rm el} \approx \omega\_{\rm nuc}\\)).
+
+</figcaption>
+</figure>
+
 Under this approximation:
 - The nuclear kinetic energy term vanishes: \\(\frac{\hbar^2}{2M\_j}\sum\_j^N\nabla^2\_j = 0\\).
 - The nucleus–nucleus repulsion \\(\frac{1}{2}\sum\_{i\neq j}\frac{Z\_iZ\_j e^2}{|{R\_i-R\_j}|}\\) becomes a

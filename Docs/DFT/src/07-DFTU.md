@@ -83,6 +83,15 @@ DFT+U corrects both deficiencies for the targeted orbitals: the Hubbard \\(U\\) 
 fractional occupations and introduces a step-like potential that mimics the derivative
 discontinuity.
 
+<figure>
+<img src="images/dftu_en_curve.svg" alt="Piecewise linear exact energy versus electron number compared with convex LDA/GGA curve and DFT+U restoration" style="width:100%; max-width:640px; height:auto; display:block; margin:1.5em auto;"/>
+<figcaption style="text-align:center; font-size:0.9em; color:#555;">
+
+**Figure 7.1.** Total energy \\(E(N)\\) as a function of fractional electron number \\(N\\). Exact DFT is piecewise linear with a derivative discontinuity \\(\Delta\_{\rm xc}\\) at integers, whereas semi-local LDA/GGA yields a convex curve due to self-interaction error. Adding the Hubbard penalty \\(+\frac{1}{2}U\_{\rm eff}\\,n(1-n)\\) restores linearity and recovers integer orbital localisation.
+
+</figcaption>
+</figure>
+
 
 ## The DFT+U Energy Functional
 

@@ -15,7 +15,6 @@
 - [Eigenvalue Solvers](./08-Eigen.md)
 - [Brillouin Zone Integration](./09-BZint.md)
 - [SCF](./10-SCF.md)
-- [Structural Optimisation and AIMD](./11-OptAIMD.md)
 
 # Part III: Problems
 - [Exercise](./EX-ExamQA.md)
