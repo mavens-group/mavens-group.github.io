@@ -18,7 +18,7 @@ sections:
 ---
 A perfect crystal is easy to compute. Bloch's theorem turns an infinite crystal into one unit cell and a set of sharp states.
 
-No real material is a perfect crystal. At [MAVENs](../), we start from the material as it is: its symmetry broken by substitution, vacancies, or design.
+No real material is a perfect crystal. Without translational symmetry, crystal momentum is no longer a good quantum number: sharp bands broaden, each site sees a different local environment, and a property is no longer fixed by one unit cell but by how those environments are distributed and connected. At [MAVENs](../), we start from the material as it is: its symmetry broken by substitution, vacancies, or design.
 
 ## Broken Symmetry Creates Function
 
